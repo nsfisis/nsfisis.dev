@@ -5,7 +5,7 @@ all: deploy
 deploy: build serve
 
 .PHONY: setup
-setup: certbot
+setup: .nsfisis_dev_shared_network certbot
 	cd vhosts/blog; make setup
 
 .PHONY: build
@@ -30,4 +30,4 @@ clean:
 
 .PHONY: certbot
 certbot:
-	docker-compose run --rm certbot certonly --webroot -w /var/letsencrypt/www -d nsfisis.dev,blog.nsfisis.dev
+	docker-compose run --rm --entrypoint 'certbot certonly --register-unsafely-without-email --webroot -w /var/letsencrypt/www -d nsfisis.dev,blog.nsfisis.dev,www.nsfisis.dev' certbot
