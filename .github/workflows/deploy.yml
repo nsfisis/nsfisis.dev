@@ -1,0 +1,23 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy
+        uses: appleboy/ssh-action@cc051b07ed0666619f6ea5703319edf00d06be13
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd nsfisis.dev
+            git pull origin main
+            git submodule update --init
+            make clean
+            make deploy
