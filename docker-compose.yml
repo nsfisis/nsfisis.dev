@@ -10,6 +10,7 @@ services:
       - 443:443
     environment:
       TZ: Asia/Tokyo
+    command: "/bin/sh -c 'while :; do sleep 36h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     restart: always
 
   acme-challenge:
@@ -21,7 +22,6 @@ services:
       - 80:80
     environment:
       TZ: Asia/Tokyo
-    command: "/bin/sh -c 'while :; do sleep 36h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     restart: always
 
   certbot:
