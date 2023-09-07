@@ -31,9 +31,3 @@ clean:
 .PHONY: certbot
 certbot:
 	docker-compose run --rm --entrypoint 'certbot certonly --register-unsafely-without-email --webroot -w /var/letsencrypt/www -d nsfisis.dev,blog.nsfisis.dev,www.nsfisis.dev' certbot
-
-.PHONY: update_blog
-update_blog:
-	cd vhosts/blog; git fetch --prune origin; git switch -d origin/main
-	git add vhosts/blog
-	git commit -m 'blog.nsfisis.dev: update'
