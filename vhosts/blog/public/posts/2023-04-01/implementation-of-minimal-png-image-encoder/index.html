@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2023 nsfisis">
+    <meta name="description" content="PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>PNG 画像の最小構成エンコーダを実装する | REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=37fff6a2f0eef473abde58e55f28ea69">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/">REPL: Rest-Eat-Program Loop</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">PNG 画像の最小構成エンコーダを実装する</h1>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2023-04-01">2023-04-01</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <p>
+               この記事では、PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。 PNG 画像に対応したビューアであれば読み込めるが、圧縮効率については一切考えない。 また、実装には Go 言語を使うが、Go の標準ライブラリにあるさまざまなアルゴリズム (PNG 画像に関係する範囲だと、zlib や CRC32、Adler-32 など) は使わない。 
+            </p>
+          </section>
+           
+          <section id="section--basic-structure-of-png">
+            <h2><a href="#section--basic-structure-of-png">PNG ファイルの基本構造</a></h2> 
+            <p>
+               PNG ファイルの基本構造は次のようになっている。 
+            </p>
+             
+            <ol>
+              <li>
+                PNG signature
+              </li>
+               
+              <li>
+                IHDR chunk
+              </li>
+               
+              <li>
+                任意個の chunk
+              </li>
+               
+              <li>
+                IEND chunk
+              </li>
+            </ol>
+             
+            <p>
+               Chunk には画像データを入れる IDAT chunk、パレットデータを入れる PLTE chunk、テキストデータを入れる tEXt chunk などがあるが、 今回は最小構成ということで IDAT chunk (と IHDR chunk と IEND chunk) のみを用いる。 
+            </p>
+             
+            <p>
+               次節で、それぞれの具体的な構造を確認しつつ実装していく。 
+            </p>
+          </section>
+           
+          <section id="section--implement-png-encoder">
+            <h2><a href="#section--implement-png-encoder">PNG のエンコーダを実装する</a></h2> 
+            <p>
+               以下のソースコードをベースにする。 今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。 
+            </p>
+             
+            <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">&quot;image&quot;</span>
+	_ <span class="hljs-string">&quot;image/png&quot;</span>
+	<span class="hljs-string">&quot;io&quot;</span>
+	<span class="hljs-string">&quot;os&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	inFile, err := os.Open(<span class="hljs-string">&quot;input.png&quot;</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-built_in">panic</span>(err)
+	}
+	<span class="hljs-keyword">defer</span> inFile.Close()
+
+	img, _, err := image.Decode(inFile)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-built_in">panic</span>(err)
+	}
+
+	outFile, err := os.Create(<span class="hljs-string">&quot;output.png&quot;</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-built_in">panic</span>(err)
+	}
+	<span class="hljs-keyword">defer</span> outFile.Close()
+
+	writePng(outFile, img)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writePng</span><span class="hljs-params">(w io.Writer, img image.Image)</span></span> {
+	width := <span class="hljs-type">uint32</span>(img.Bounds().Dx())
+	height := <span class="hljs-type">uint32</span>(img.Bounds().Dy())
+	writeSignature(w)
+	writeChunkIhdr(w, width, height)
+	writeChunkIdat(w, width, height, img)
+	writeChunkIend(w)
+}</code></pre>
+             
+            <p>
+               以降は、<code>writeSignature</code> や <code>writeChunkIhdr</code> などを実装していく。 
+            </p>
+             
+            <section id="section--implement-png-encoder--png-signature">
+              <h3><a href="#section--implement-png-encoder--png-signature">PNG signature</a></h3> 
+              <p>
+                 PNG signature は、PNG 画像の先頭に固定で付与されるバイト列で、8 バイトからなる。 
+              </p>
+               
+              <ol>
+                <li>
+                  0x89
+                </li>
+                 
+                <li>
+                  0x50 (ASCII コードで「P」)
+                </li>
+                 
+                <li>
+                  0x4E (ASCII コードで「N」)
+                </li>
+                 
+                <li>
+                  0x47 (ASCII コードで「G」)
+                </li>
+                 
+                <li>
+                  0x0D (ASCII コードで CR)
+                </li>
+                 
+                <li>
+                  0x0A (ASCII コードで LF)
+                </li>
+                 
+                <li>
+                  0x1A (ASCII コードで EOF)
+                </li>
+                 
+                <li>
+                  0x0A (ASCII コードで LF)
+                </li>
+              </ol>
+               
+              <p>
+                 CRLF や LF は、送信中に改行コードの変換が誤っておこなわれていないかどうかを検知するのに使われる。 
+              </p>
+               
+              <p>
+                <code>writeSignature</code> の実装はこちら: 
+              </p>
+               
+              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;encoding/binary&quot;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeSignature</span><span class="hljs-params">(w io.Writer)</span></span> {
+	sig := [<span class="hljs-number">8</span>]<span class="hljs-type">uint8</span>{
+		<span class="hljs-number">0x89</span>,
+		<span class="hljs-number">0x50</span>, <span class="hljs-comment">// P</span>
+		<span class="hljs-number">0x4E</span>, <span class="hljs-comment">// N</span>
+		<span class="hljs-number">0x47</span>, <span class="hljs-comment">// G</span>
+		<span class="hljs-number">0x0D</span>, <span class="hljs-comment">// CR</span>
+		<span class="hljs-number">0x0A</span>, <span class="hljs-comment">// LF</span>
+		<span class="hljs-number">0x1A</span>, <span class="hljs-comment">// EOF (^Z)</span>
+		<span class="hljs-number">0x0A</span>, <span class="hljs-comment">// LF</span>
+	}
+	binary.Write(w, binary.BigEndian, sig)
+}</code></pre>
+               
+              <p>
+                <code>encoding/binary</code> パッケージの <code>binary.Write</code> を使い、固定の 8 バイトを書き込む。 
+              </p>
+            </section>
+             
+            <section id="section--implement-png-encoder--structure-of-chunk">
+              <h3><a href="#section--implement-png-encoder--structure-of-chunk">Chunk の構造</a></h3> 
+              <p>
+                 IHDR chunk に進む前に、chunk 一般の構造を確認する。 
+              </p>
+               
+              <ol>
+                <li>
+                  Length: chunk data のバイト長 (符号なし 4 バイト整数)
+                </li>
+                 
+                <li>
+                  Chunk type: chunk の種類を示す 4 バイトからなる名前
+                </li>
+                 
+                <li>
+                  Chunk data: 実際のデータ。0 バイトでもよい
+                </li>
+                 
+                <li>
+                  CRC: chunk type と chunk data の CRC (符号なし 4 バイト整数)
+                </li>
+              </ol>
+               
+              <p>
+                 CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている (<a href="https://www.w3.org/TR/png/#D-CRCAppendix">D. Sample CRC implementation</a>) ので、これを Go に移植する。 
+              </p>
+               
+              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">var</span> (
+	crcTable         [<span class="hljs-number">256</span>]<span class="hljs-type">uint32</span>
+	crcTableComputed <span class="hljs-type">bool</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeCrcTable</span><span class="hljs-params">()</span></span> {
+	<span class="hljs-keyword">for</span> n := <span class="hljs-number">0</span>; n &lt; <span class="hljs-number">256</span>; n++ {
+		c := <span class="hljs-type">uint32</span>(n)
+		<span class="hljs-keyword">for</span> k := <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">8</span>; k++ {
+			<span class="hljs-keyword">if</span> (c &amp; <span class="hljs-number">1</span>) != <span class="hljs-number">0</span> {
+				c = <span class="hljs-number">0xEDB88320</span> ^ (c &gt;&gt; <span class="hljs-number">1</span>)
+			} <span class="hljs-keyword">else</span> {
+				c = c &gt;&gt; <span class="hljs-number">1</span>
+			}
+		}
+		crcTable[n] = c
+	}
+	crcTableComputed = <span class="hljs-literal">true</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateCrc</span><span class="hljs-params">(crc <span class="hljs-type">uint32</span>, buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	<span class="hljs-keyword">if</span> !crcTableComputed {
+		makeCrcTable()
+	}
+
+	c := crc
+	<span class="hljs-keyword">for</span> n := <span class="hljs-number">0</span>; n &lt; <span class="hljs-built_in">len</span>(buf); n++ {
+		c = crcTable[(c^<span class="hljs-type">uint32</span>(buf[n]))&amp;<span class="hljs-number">0xFF</span>] ^ (c &gt;&gt; <span class="hljs-number">8</span>)
+	}
+	<span class="hljs-keyword">return</span> c
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">crc</span><span class="hljs-params">(buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	<span class="hljs-keyword">return</span> updateCrc(<span class="hljs-number">0xFFFFFFFF</span>, buf) ^ <span class="hljs-number">0xFFFFFFFF</span>
+}</code></pre>
+               
+              <p>
+                 できた <code>crc</code> 関数を使って、chunk 一般を書き込む関数も用意しておこう。 
+              </p>
+               
+              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunk</span><span class="hljs-params">(w io.Writer, chunkType <span class="hljs-type">string</span>, data []<span class="hljs-type">byte</span>)</span></span> {
+	typeAndData := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(chunkType)+<span class="hljs-built_in">len</span>(data))
+	typeAndData = <span class="hljs-built_in">append</span>(typeAndData, []<span class="hljs-type">byte</span>(chunkType)...)
+	typeAndData = <span class="hljs-built_in">append</span>(typeAndData, data...)
+
+	binary.Write(w, binary.BigEndian, <span class="hljs-type">uint32</span>(<span class="hljs-built_in">len</span>(data)))
+	binary.Write(w, binary.BigEndian, typeAndData)
+	binary.Write(w, binary.BigEndian, crc(typeAndData))
+}</code></pre>
+               
+              <p>
+                 仕様どおり、<code>chunkType</code> と <code>data</code> から CRC を計算し、<code>data</code> の長さと合わせて書き込んでいる。 PNG では基本的に big endian を使うことに注意する。 
+              </p>
+               
+              <p>
+                 準備ができたところで、具体的な chunk をエンコードしていく。 
+              </p>
+            </section>
+             
+            <section id="section--implement-png-encoder--ihdr-chunk">
+              <h3><a href="#section--implement-png-encoder--ihdr-chunk">IHDR chunk</a></h3> 
+              <p>
+                 IHDR chunk は最初に配置される chunk である。次のようなデータからなる。 
+              </p>
+               
+              <ol>
+                <li>
+                  画像の幅 (符号なし 4 バイト整数)
+                </li>
+                 
+                <li>
+                  画像の高さ (符号なし 4 バイト整数)
+                </li>
+                 
+                <li>
+                   ビット深度 (符号なし 1 バイト整数) 
+                  <ul>
+                    <li>
+                      1 色に使うビット数。1 ピクセルに 24 bit 使う truecolor 画像では 8 になる
+                    </li>
+                  </ul>
+                </li>
+                 
+                <li>
+                   色タイプ (符号なし 1 バイト整数) 
+                  <ul>
+                    <li>
+                      0: グレースケール
+                    </li>
+                     
+                    <li>
+                      2: Truecolor (今回はこれに決め打ち)
+                    </li>
+                     
+                    <li>
+                      3: パレットのインデックス
+                    </li>
+                     
+                    <li>
+                      4: グレースケール + アルファ
+                    </li>
+                     
+                    <li>
+                      6: Truecolor + アルファ
+                    </li>
+                  </ul>
+                </li>
+                 
+                <li>
+                   圧縮方式 (符号なし 1 バイト整数) 
+                  <ul>
+                     PNG の仕様書に 0 しか定義されていないので 0 で固定 
+                  </ul>
+                </li>
+                 
+                <li>
+                   フィルタ方式 (符号なし 1 バイト整数) 
+                  <ul>
+                     PNG の仕様書に 0 しか定義されていないので 0 で固定 
+                  </ul>
+                </li>
+                 
+                <li>
+                   インターレース方式 (符号なし 1 バイト整数) 
+                  <ul>
+                     今回はインターレースしないので 0 
+                  </ul>
+                </li>
+              </ol>
+               
+              <p>
+                 今回ほとんどのデータは決め打ちするので、データに応じて変わるのは width と height だけになる。コードは次のようになる。 
+              </p>
+               
+              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;bytes&quot;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIhdr</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>)</span></span> {
+	<span class="hljs-keyword">var</span> buf bytes.Buffer
+	binary.Write(&amp;buf, binary.BigEndian, width)
+	binary.Write(&amp;buf, binary.BigEndian, height)
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">8</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">2</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+
+	writeChunk(w, <span class="hljs-string">&quot;IHDR&quot;</span>, buf.Bytes())
+}</code></pre>
+            </section>
+             
+            <section id="section--implement-png-encoder--idat-chunk">
+              <h3><a href="#section--implement-png-encoder--idat-chunk">IDAT chunk</a></h3> 
+              <p>
+                 IDAT chunk は、実際の画像データが格納された chunk である。IDAT chunk は deflate アルゴリズムにより圧縮され、zlib 形式で格納される。 
+              </p>
+               
+              <section id="section--implement-png-encoder--idat-chunk--zlib">
+                <h4><a href="#section--implement-png-encoder--idat-chunk--zlib">Zlib</a></h4> 
+                <p>
+                   まずは zlib について確認する。おおよそ次のような構造になっている。 
+                </p>
+                 
+                <ol>
+                  <li>
+                    固定で 0x78 (符号なし 1 バイト整数)
+                  </li>
+                   
+                  <li>
+                    固定で 0x01 (符号なし 1 バイト整数)
+                  </li>
+                   
+                  <li>
+                    データ
+                  </li>
+                   
+                  <li>
+                    データの Adler-32
+                  </li>
+                </ol>
+                 
+                <p>
+                   最初の 2 バイトにも意味はあるが、PNG では固定で構わない。 
+                </p>
+                 
+                <p>
+                   Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている (<a href="https://www.rfc-editor.org/rfc/rfc1950#section-9">9. Appendix: Sample code</a>) ので、Go に移植する。 
+                </p>
+                 
+                <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">const</span> adler32Base = <span class="hljs-number">65521</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateAdler32</span><span class="hljs-params">(adler <span class="hljs-type">uint32</span>, buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	s1 := adler &amp; <span class="hljs-number">0xFFFF</span>
+	s2 := (adler &gt;&gt; <span class="hljs-number">16</span>) &amp; <span class="hljs-number">0xFFFF</span>
+
+	<span class="hljs-keyword">for</span> n := <span class="hljs-number">0</span>; n &lt; <span class="hljs-built_in">len</span>(buf); n++ {
+		s1 = (s1 + <span class="hljs-type">uint32</span>(buf[n])) % adler32Base
+		s2 = (s2 + s1) % adler32Base
+	}
+	<span class="hljs-keyword">return</span> (s2 &lt;&lt; <span class="hljs-number">16</span>) + s1
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">adler32</span><span class="hljs-params">(buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	<span class="hljs-keyword">return</span> updateAdler32(<span class="hljs-number">1</span>, buf)
+}</code></pre>
+                 
+                <p>
+                   「データ」の部分には圧縮したデータが入るのだが、真面目に deflate アルゴリズムを実装する必要はない。Zlib には無圧縮のデータブロックを格納することができるので、これを使う。本来は、データの圧縮効率の悪いランダムなデータをそのまま格納するためのものだが、今回は deflate の実装をサボるために使う。 
+                </p>
+                 
+                <p>
+                   1 つの無圧縮ブロックには 65535 (2<sup>16</sup> - 1) バイトまで格納できる。それぞれのブロックは次のような構成になっている。 
+                </p>
+                 
+                <ol>
+                  <li>
+                    最終ブロックなら 1、そうでなければ 0 (符号なし 1 バイト整数)
+                  </li>
+                   
+                  <li>
+                    ブロックのバイト長 (符号なし 2 バイト整数)
+                  </li>
+                   
+                  <li>
+                    ブロックのバイト長の 1 の補数、あるいはビット反転 (符号なし 2 バイト整数)
+                  </li>
+                   
+                  <li>
+                    データ (最大 65535 バイト)
+                  </li>
+                </ol>
+                 
+                <p>
+                   実際にこの手抜き zlib を実装したものがこちら: 
+                </p>
+                 
+                <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">encodeZlib</span><span class="hljs-params">(data []<span class="hljs-type">byte</span>)</span></span> []<span class="hljs-type">byte</span> {
+	<span class="hljs-keyword">var</span> buf bytes.Buffer
+
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0x78</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0x01</span>))
+	blockSize := <span class="hljs-number">65535</span>
+	isFinalBlock := <span class="hljs-literal">false</span>
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; !isFinalBlock; i++ {
+		<span class="hljs-keyword">var</span> block []<span class="hljs-type">byte</span>
+		<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) &lt;= (i+<span class="hljs-number">1</span>)*blockSize {
+			block = data[i*blockSize:]
+			isFinalBlock = <span class="hljs-literal">true</span>
+		} <span class="hljs-keyword">else</span> {
+			block = data[i*blockSize : (i+<span class="hljs-number">1</span>)*blockSize]
+		}
+		binary.Write(&amp;buf, binary.BigEndian, isFinalBlock)
+		binary.Write(&amp;buf, binary.LittleEndian, <span class="hljs-type">uint16</span>(<span class="hljs-built_in">len</span>(block)))
+		binary.Write(&amp;buf, binary.LittleEndian, <span class="hljs-type">uint16</span>(^<span class="hljs-built_in">len</span>(block)))
+		binary.Write(&amp;buf, binary.LittleEndian, block)
+	}
+	binary.Write(&amp;buf, binary.BigEndian, adler32(data))
+
+	<span class="hljs-keyword">return</span> buf.Bytes()
+}</code></pre>
+              </section>
+               
+              <section id="section--implement-png-encoder--idat-chunk--image-data">
+                <h4><a href="#section--implement-png-encoder--idat-chunk--image-data">画像データ</a></h4> 
+                <p>
+                   では次に、zlib 形式で格納するデータを用意する。PNG 画像は次のような順にスキャンする。 画像の左上のピクセルから同じ行を横にスキャンしていき、一番右まで到達したら次の行の左に向かう。 右下のピクセルまで行けば終わり。要は Z 字型に進んでいく。 
+                </p>
+                 
+                <p>
+                   また、それぞれの行の先頭には、圧縮のためのフィルタタイプを指定する。 ただ、今回はその実装を省略するために、常にフィルタ 0 (何も加工しない) を使う。 
+                </p>
+                 
+                <p>
+                   先ほどの <code>encodeZlib</code> も使って実際に実装したものがこちら: 
+                </p>
+                 
+                <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIdat</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>, img image.Image)</span></span> {
+	<span class="hljs-keyword">var</span> pixels bytes.Buffer
+	<span class="hljs-keyword">for</span> y := <span class="hljs-type">uint32</span>(<span class="hljs-number">0</span>); y &lt; height; y++ {
+		binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+		<span class="hljs-keyword">for</span> x := <span class="hljs-type">uint32</span>(<span class="hljs-number">0</span>); x &lt; width; x++ {
+			r, g, b, _ := img.At(<span class="hljs-type">int</span>(x), <span class="hljs-type">int</span>(y)).RGBA()
+			binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(r))
+			binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(g))
+			binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(b))
+		}
+	}
+
+	writeChunk(w, <span class="hljs-string">&quot;IDAT&quot;</span>, encodeZlib(pixels.Bytes()))
+}</code></pre>
+              </section>
+            </section>
+             
+            <section id="section--implement-png-encoder--iend-chunk">
+              <h3><a href="#section--implement-png-encoder--iend-chunk">IEND chunk</a></h3> 
+              <p>
+                 最後に IEND chunk を書き込む。これは PNG 画像の最後に配置される chunk で、PNG のデコーダはこの chunk に出会うとそこでデコードを停止する。 
+              </p>
+               
+              <p>
+                 特に追加のデータはなく、必要なのは chunk type の <code>IEND</code> くらいなので実装は簡単: 
+              </p>
+               
+              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIend</span><span class="hljs-params">(w io.Writer)</span></span> {
+	writeChunk(w, <span class="hljs-string">&quot;IEND&quot;</span>, <span class="hljs-literal">nil</span>)
+}</code></pre>
+            </section>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2> 
+            <p>
+               最後に全ソースコードを再掲しておく。 
+            </p>
+             
+            <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">&quot;bytes&quot;</span>
+	<span class="hljs-string">&quot;encoding/binary&quot;</span>
+	<span class="hljs-string">&quot;image&quot;</span>
+	_ <span class="hljs-string">&quot;image/png&quot;</span>
+	<span class="hljs-string">&quot;io&quot;</span>
+	<span class="hljs-string">&quot;os&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	inFile, err := os.Open(<span class="hljs-string">&quot;input.png&quot;</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-built_in">panic</span>(err)
+	}
+	<span class="hljs-keyword">defer</span> inFile.Close()
+
+	img, _, err := image.Decode(inFile)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-built_in">panic</span>(err)
+	}
+
+	outFile, err := os.Create(<span class="hljs-string">&quot;output.png&quot;</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-built_in">panic</span>(err)
+	}
+	<span class="hljs-keyword">defer</span> outFile.Close()
+
+	writePng(outFile, img)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writePng</span><span class="hljs-params">(w io.Writer, img image.Image)</span></span> {
+	width := <span class="hljs-type">uint32</span>(img.Bounds().Dx())
+	height := <span class="hljs-type">uint32</span>(img.Bounds().Dy())
+	writeSignature(w)
+	writeChunkIhdr(w, width, height)
+	writeChunkIdat(w, width, height, img)
+	writeChunkIend(w)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeSignature</span><span class="hljs-params">(w io.Writer)</span></span> {
+	sig := [<span class="hljs-number">8</span>]<span class="hljs-type">uint8</span>{
+		<span class="hljs-number">0x89</span>,
+		<span class="hljs-number">0x50</span>, <span class="hljs-comment">// P</span>
+		<span class="hljs-number">0x4E</span>, <span class="hljs-comment">// N</span>
+		<span class="hljs-number">0x47</span>, <span class="hljs-comment">// G</span>
+		<span class="hljs-number">0x0D</span>, <span class="hljs-comment">// CR</span>
+		<span class="hljs-number">0x0A</span>, <span class="hljs-comment">// LF</span>
+		<span class="hljs-number">0x1A</span>, <span class="hljs-comment">// EOF (^Z)</span>
+		<span class="hljs-number">0x0A</span>, <span class="hljs-comment">// LF</span>
+	}
+	binary.Write(w, binary.BigEndian, sig)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIhdr</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>)</span></span> {
+	<span class="hljs-keyword">var</span> buf bytes.Buffer
+	binary.Write(&amp;buf, binary.BigEndian, width)
+	binary.Write(&amp;buf, binary.BigEndian, height)
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">8</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">2</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+
+	writeChunk(w, <span class="hljs-string">&quot;IHDR&quot;</span>, buf.Bytes())
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIdat</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>, img image.Image)</span></span> {
+	<span class="hljs-keyword">var</span> pixels bytes.Buffer
+	<span class="hljs-keyword">for</span> y := <span class="hljs-type">uint32</span>(<span class="hljs-number">0</span>); y &lt; height; y++ {
+		binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
+		<span class="hljs-keyword">for</span> x := <span class="hljs-type">uint32</span>(<span class="hljs-number">0</span>); x &lt; width; x++ {
+			r, g, b, _ := img.At(<span class="hljs-type">int</span>(x), <span class="hljs-type">int</span>(y)).RGBA()
+			binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(r))
+			binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(g))
+			binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(b))
+		}
+	}
+
+	writeChunk(w, <span class="hljs-string">&quot;IDAT&quot;</span>, encodeZlib(pixels.Bytes()))
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">encodeZlib</span><span class="hljs-params">(data []<span class="hljs-type">byte</span>)</span></span> []<span class="hljs-type">byte</span> {
+	<span class="hljs-keyword">var</span> buf bytes.Buffer
+
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0x78</span>))
+	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0x01</span>))
+	blockSize := <span class="hljs-number">65535</span>
+	isFinalBlock := <span class="hljs-literal">false</span>
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; !isFinalBlock; i++ {
+		<span class="hljs-keyword">var</span> block []<span class="hljs-type">byte</span>
+		<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) &lt;= (i+<span class="hljs-number">1</span>)*blockSize {
+			block = data[i*blockSize:]
+			isFinalBlock = <span class="hljs-literal">true</span>
+		} <span class="hljs-keyword">else</span> {
+			block = data[i*blockSize : (i+<span class="hljs-number">1</span>)*blockSize]
+		}
+		binary.Write(&amp;buf, binary.BigEndian, isFinalBlock)
+		binary.Write(&amp;buf, binary.LittleEndian, <span class="hljs-type">uint16</span>(<span class="hljs-built_in">len</span>(block)))
+		binary.Write(&amp;buf, binary.LittleEndian, <span class="hljs-type">uint16</span>(^<span class="hljs-built_in">len</span>(block)))
+		binary.Write(&amp;buf, binary.LittleEndian, block)
+	}
+	binary.Write(&amp;buf, binary.BigEndian, adler32(data))
+
+	<span class="hljs-keyword">return</span> buf.Bytes()
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIend</span><span class="hljs-params">(w io.Writer)</span></span> {
+	writeChunk(w, <span class="hljs-string">&quot;IEND&quot;</span>, <span class="hljs-literal">nil</span>)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunk</span><span class="hljs-params">(w io.Writer, chunkType <span class="hljs-type">string</span>, data []<span class="hljs-type">byte</span>)</span></span> {
+	typeAndData := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(chunkType)+<span class="hljs-built_in">len</span>(data))
+	typeAndData = <span class="hljs-built_in">append</span>(typeAndData, []<span class="hljs-type">byte</span>(chunkType)...)
+	typeAndData = <span class="hljs-built_in">append</span>(typeAndData, data...)
+
+	binary.Write(w, binary.BigEndian, <span class="hljs-type">uint32</span>(<span class="hljs-built_in">len</span>(data)))
+	binary.Write(w, binary.BigEndian, typeAndData)
+	binary.Write(w, binary.BigEndian, crc(typeAndData))
+}
+
+<span class="hljs-keyword">var</span> (
+	crcTable         [<span class="hljs-number">256</span>]<span class="hljs-type">uint32</span>
+	crcTableComputed <span class="hljs-type">bool</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeCrcTable</span><span class="hljs-params">()</span></span> {
+	<span class="hljs-keyword">for</span> n := <span class="hljs-number">0</span>; n &lt; <span class="hljs-number">256</span>; n++ {
+		c := <span class="hljs-type">uint32</span>(n)
+		<span class="hljs-keyword">for</span> k := <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">8</span>; k++ {
+			<span class="hljs-keyword">if</span> (c &amp; <span class="hljs-number">1</span>) != <span class="hljs-number">0</span> {
+				c = <span class="hljs-number">0xEDB88320</span> ^ (c &gt;&gt; <span class="hljs-number">1</span>)
+			} <span class="hljs-keyword">else</span> {
+				c = c &gt;&gt; <span class="hljs-number">1</span>
+			}
+		}
+		crcTable[n] = c
+	}
+	crcTableComputed = <span class="hljs-literal">true</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateCrc</span><span class="hljs-params">(crc <span class="hljs-type">uint32</span>, buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	<span class="hljs-keyword">if</span> !crcTableComputed {
+		makeCrcTable()
+	}
+
+	c := crc
+	<span class="hljs-keyword">for</span> n := <span class="hljs-number">0</span>; n &lt; <span class="hljs-built_in">len</span>(buf); n++ {
+		c = crcTable[(c^<span class="hljs-type">uint32</span>(buf[n]))&amp;<span class="hljs-number">0xFF</span>] ^ (c &gt;&gt; <span class="hljs-number">8</span>)
+	}
+	<span class="hljs-keyword">return</span> c
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">crc</span><span class="hljs-params">(buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	<span class="hljs-keyword">return</span> updateCrc(<span class="hljs-number">0xFFFFFFFF</span>, buf) ^ <span class="hljs-number">0xFFFFFFFF</span>
+}
+
+<span class="hljs-keyword">const</span> adler32Base = <span class="hljs-number">65521</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateAdler32</span><span class="hljs-params">(adler <span class="hljs-type">uint32</span>, buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	s1 := adler &amp; <span class="hljs-number">0xFFFF</span>
+	s2 := (adler &gt;&gt; <span class="hljs-number">16</span>) &amp; <span class="hljs-number">0xFFFF</span>
+
+	<span class="hljs-keyword">for</span> n := <span class="hljs-number">0</span>; n &lt; <span class="hljs-built_in">len</span>(buf); n++ {
+		s1 = (s1 + <span class="hljs-type">uint32</span>(buf[n])) % adler32Base
+		s2 = (s2 + s1) % adler32Base
+	}
+	<span class="hljs-keyword">return</span> (s2 &lt;&lt; <span class="hljs-number">16</span>) + s1
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">adler32</span><span class="hljs-params">(buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
+	<span class="hljs-keyword">return</span> updateAdler32(<span class="hljs-number">1</span>, buf)
+}</code></pre>
+          </section>
+           
+          <section id="section--references">
+            <h2><a href="#section--references">参考</a></h2> 
+            <ul>
+              <li>
+                <a href="https://www.w3.org/TR/png">Portable Network Graphics (PNG) Specification (Third Edition)</a>
+              </li>
+               
+              <li>
+                <a href="https://www.rfc-editor.org/rfc/rfc1950">ZLIB Compressed Data Format Specification version 3.3</a>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

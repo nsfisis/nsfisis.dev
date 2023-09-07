@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2022 nsfisis">
+    <meta name="description" content="PHPerKaigi 2022 で私が作成した PHPer チャレンジ問題を解説する。">
+    <meta name="keywords" content="カンファレンス,PHP,PHPerKaigi">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>PHPerKaigi 2022 トークン問題の解説 | REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=37fff6a2f0eef473abde58e55f28ea69">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/">REPL: Rest-Eat-Program Loop</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">PHPerKaigi 2022 トークン問題の解説</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/conference/">カンファレンス</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/php/">PHP</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/phperkaigi/">PHPerKaigi</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2022-04-09">2022-04-09</time>: 公開
+              </li>
+              <li class="revision">
+                <time datetime="2022-04-16">2022-04-16</time>: 2問目、3問目の解説を追加、1問目に加筆
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <p>
+               本日開始された <a href="https://phperkaigi.jp/2022/">PHPerKaigi 2022</a> の PHPer チャレンジにおいて、弊社 <a href="https://www.dgcircus.com/">デジタルサーカス株式会社</a> の問題を 3問作成した。この記事では、これらの問題の解説をおこなう。 
+            </p>
+             
+            <p>
+               リポジトリはこちら: <a href="https://github.com/nsfisis/PHPerKaigi2022-tokens">https://github.com/nsfisis/PHPerKaigi2022-tokens</a>
+            </p>
+          </section>
+           
+          <section id="section--q1-brainfuck">
+            <h2><a href="#section--q1-brainfuck">第1問 brainf_ck.php</a></h2> 
+            <p>
+               ソースコードはこちら。実行には PHP 8.1 以上が必要なので注意。 
+            </p>
+             
+            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">declare</span>(strict_types=<span class="hljs-number">0O1</span>);
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">Dgcircus</span>\<span class="hljs-title class_">PHPerKaigi</span>\<span class="hljs-title class_">Y2022</span>;
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@todo</span>
+ * Run this program to acquire a PHPer token.
+ */</span>
+
+https:<span class="hljs-comment">//creativecommons.org/publicdomain/zero/1.0/</span>
+
+\<span class="hljs-title function_ invoke__">error_reporting</span>(~+!<span class="hljs-string">&#x27;We are hiring!&#x27;</span>);
+
+<span class="hljs-variable">$z</span> = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$f</span></span>) =&gt;</span> (<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$x</span></span>) =&gt;</span> <span class="hljs-variable">$f</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params">...<span class="hljs-variable">$xs</span></span>) =&gt;</span> <span class="hljs-variable">$x</span>(<span class="hljs-variable">$x</span>)(...<span class="hljs-variable">$xs</span>)))(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$x</span></span>) =&gt;</span> <span class="hljs-variable">$f</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params">...<span class="hljs-variable">$xs</span></span>) =&gt;</span> <span class="hljs-variable">$x</span>(<span class="hljs-variable">$x</span>)(...<span class="hljs-variable">$xs</span>)));
+<span class="hljs-variable">$id</span> = \<span class="hljs-title function_ invoke__">spl_object_id</span>(...);
+<span class="hljs-variable">$put</span> = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$c</span></span>) =&gt;</span> \<span class="hljs-title function_ invoke__">printf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-variable">$c</span>);
+<span class="hljs-variable">$mm</span> = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$p</span>, <span class="hljs-variable">$n</span></span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">\ArrayObject</span>(\<span class="hljs-title function_ invoke__">array_fill</span>(+!![], <span class="hljs-variable">$n</span>, <span class="hljs-variable">$p</span>));
+
+$👉 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> [++<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>];
+$👈 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> [--<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>];
+$👍 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> [<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>, ++<span class="hljs-variable">$m</span>[<span class="hljs-variable">$mp</span>]];
+$👎 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> [<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>, --<span class="hljs-variable">$m</span>[<span class="hljs-variable">$mp</span>]];
+$📝 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> [<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>, <span class="hljs-variable">$put</span>(<span class="hljs-variable">$m</span>[<span class="hljs-variable">$mp</span>])];
+$🤡 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> <span class="hljs-keyword">match</span> (<span class="hljs-variable">$m</span>[<span class="hljs-variable">$mp</span>]) {
+  +!![] =&gt; [<span class="hljs-variable">$mp</span>, <span class="hljs-variable">$z</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$loop</span></span>) =&gt;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$pc</span>, <span class="hljs-variable">$n</span></span>) =&gt;</span> <span class="hljs-keyword">match</span> (<span class="hljs-variable">$id</span>(<span class="hljs-variable">$p</span>[<span class="hljs-variable">$pc</span>])) {
+    <span class="hljs-variable">$b</span> =&gt; <span class="hljs-variable">$loop</span>(++<span class="hljs-variable">$pc</span>, ++<span class="hljs-variable">$n</span>),
+    <span class="hljs-variable">$e</span> =&gt; <span class="hljs-variable">$n</span> === +!![] ? ++<span class="hljs-variable">$pc</span> : <span class="hljs-variable">$loop</span>(++<span class="hljs-variable">$pc</span>, --<span class="hljs-variable">$n</span>),
+    <span class="hljs-keyword">default</span> =&gt; <span class="hljs-variable">$loop</span>(++<span class="hljs-variable">$pc</span>, <span class="hljs-variable">$n</span>),
+  })(<span class="hljs-variable">$pc</span>, -![])],
+  <span class="hljs-keyword">default</span> =&gt; [<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>],
+};
+$🎪 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span> <span class="hljs-keyword">match</span> (<span class="hljs-variable">$m</span>[<span class="hljs-variable">$mp</span>]) {
+  +!![] =&gt; [<span class="hljs-variable">$mp</span>, ++<span class="hljs-variable">$pc</span>],
+  <span class="hljs-keyword">default</span> =&gt; [<span class="hljs-variable">$mp</span>, <span class="hljs-variable">$z</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$loop</span></span>) =&gt;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$pc</span>, <span class="hljs-variable">$n</span></span>) =&gt;</span> <span class="hljs-keyword">match</span> (<span class="hljs-variable">$id</span>(<span class="hljs-variable">$p</span>[<span class="hljs-variable">$pc</span>])) {
+    <span class="hljs-variable">$e</span> =&gt; <span class="hljs-variable">$loop</span>(--<span class="hljs-variable">$pc</span>, ++<span class="hljs-variable">$n</span>),
+    <span class="hljs-variable">$b</span> =&gt; <span class="hljs-variable">$n</span> === +!![] ? <span class="hljs-variable">$pc</span>+![] : <span class="hljs-variable">$loop</span>(--<span class="hljs-variable">$pc</span>, --<span class="hljs-variable">$n</span>),
+    <span class="hljs-keyword">default</span> =&gt; <span class="hljs-variable">$loop</span>(--<span class="hljs-variable">$pc</span>, <span class="hljs-variable">$n</span>),
+  })(<span class="hljs-variable">$pc</span>, -![])],
+};
+$🐘 = <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$p</span></span>) =&gt;</span> <span class="hljs-variable">$z</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$loop</span></span>) =&gt;</span> <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span></span>) =&gt;</span>
+  <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$p</span>[<span class="hljs-variable">$pc</span>]) &amp;&amp; <span class="hljs-variable">$loop</span>(<span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, ...(<span class="hljs-variable">$p</span>[<span class="hljs-variable">$pc</span>](<span class="hljs-variable">$m</span>, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$b</span>, <span class="hljs-variable">$e</span>, <span class="hljs-variable">$mp</span>, <span class="hljs-variable">$pc</span>)))
+)(<span class="hljs-variable">$mm</span>(+!![], +(![].![])), <span class="hljs-variable">$p</span>, <span class="hljs-variable">$id</span>($🤡), <span class="hljs-variable">$id</span>($🎪), +!![], +!![]);
+
+$🐘([
+  $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍,
+  $🤡,
+  $👉, $👍, $👍, $👍,
+  $👉, $👍, $👍, $👍, $👍, $👍,
+  $👉, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍,
+  $👉, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍, $👍,
+  $👈, $👈, $👈, $👈, $👎,
+  $🎪,
+  $👉, $👍, $👍, $👍, $👍, $👍, $📝,
+  $👎, $👎, $📝,
+  $👉, $👎, $👎, $👎, $📝,
+  $👉, $👎, $👎, $👎, $📝,
+  $👎, $👎, $📝,
+  $👎, $📝,
+  $👈, $📝,
+  $👉, $👉, $👎, $👎, $📝,
+  $👍, $👍, $👍, $👍, $👍, $👍, $👍, $📝,
+  $👈, $👎, $👎, $👎, $👎, $📝,
+  $👈, $📝,
+  $👉, $👍, $👍, $📝,
+  $👉, $👎, $📝,
+  $👈, $📝,
+]);</code></pre>
+             
+            <p>
+               この問題は、単に適切なバージョンの PHP で動かせばトークンが得られる。 
+            </p>
+             
+            <section id="section--q1-brainfuck--commentary">
+              <h3><a href="#section--q1-brainfuck--commentary">解説</a></h3> 
+              <section id="section--q1-brainfuck--commentary--emoji">
+                <h4><a href="#section--q1-brainfuck--commentary--emoji">絵文字</a></h4> 
+                <p>
+                   まず目につくのは大量の絵文字だろう。 PHP は識別子に使用できる文字の範囲が広く、絵文字も使うことができる。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--brainfuck">
+                <h4><a href="#section--q1-brainfuck--commentary--brainfuck">プログラム全体</a></h4> 
+                <p>
+                   Brainf*ck のインタプリタとプログラムになっている。 Brainf*ck とは、難解プログラミング言語のひとつであり、ここで説明するよりも Wikipedia の該当ページを読んだ方がよい。 
+                </p>
+                 
+                <p>
+                  <a href="https://ja.wikipedia.org/wiki/Brainfuck">https://ja.wikipedia.org/wiki/Brainfuck</a>
+                </p>
+                 
+                <p>
+                   なお、brainf*ck プログラムを普通の書き方で書くと、次のようになる。 
+                </p>
+                 
+                <pre class="highlight monospaced"><code>+ + + + + + + + + +
+[
+  &gt; + + +
+  &gt; + + + + +
+  &gt; + + + + + + + + + + + +
+  &gt; + + + + + + + + + +
+  &lt; &lt; &lt; &lt; -
+]
+&gt; + + + + + .
+- - .
+&gt; - - - .
+&gt; - - - .
+- - .
+- .
+&lt; .
+&gt; &gt; - - .
++ + + + + + + .
+&lt; - - - - .
+&lt; .
+&gt; + + .
+&gt; - .
+&lt; .</code></pre>
+                 
+                <p>
+                   実行結果はこちら: <a href="https://ideone.com/22VWmb">https://ideone.com/22VWmb</a>
+                </p>
+                 
+                <p>
+                   それぞれの絵文字で表された関数が、各命令に対応している。 
+                </p>
+                 
+                <ul>
+                  <li>
+                    <code>$👉</code>: <code>&gt;</code>
+                  </li>
+                   
+                  <li>
+                    <code>$👈</code>: <code>&lt;</code>
+                  </li>
+                   
+                  <li>
+                    <code>$👍</code>: <code>+</code>
+                  </li>
+                   
+                  <li>
+                    <code>$👎</code>: <code>-</code>
+                  </li>
+                   
+                  <li>
+                    <code>$📝</code>: <code>.</code>
+                  </li>
+                   
+                  <li>
+                    <code>$🤡</code>: <code>[</code>
+                  </li>
+                   
+                  <li>
+                    <code>$🎪</code>: <code>]</code>
+                  </li>
+                </ul>
+                 
+                <p>
+                  <code>,</code> (入力) に対応する関数はない (このプログラムでは使わないので用意していない)。 
+                </p>
+                 
+                <p>
+                   なお、<code>$🐘</code> はいわゆる main 関数であり、プログラムの実行部分である。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--emoji-selection">
+                <h4><a href="#section--q1-brainfuck--commentary--emoji-selection">絵文字の選択</a></h4> 
+                <p>
+                   おおよそ意味に合致するよう選んでいるが、<code>$🤡</code> と <code>$🎪</code> は弊社デジタルサーカスにちなんでいる。 また、<code>$🐘</code> は PHP のマスコットの象に由来する。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--strict-types">
+                <h4><a href="#section--q1-brainfuck--commentary--strict-types">strict_types</a></h4> 
+                <p>
+                  <code>declare</code> 文の <code>strict_types</code> に指定できるのは、<code>0</code> か <code>1</code> の数値リテラルだが、 <code>0x0</code> や <code>0b1</code> のような値も受け付ける。 今回は、PHP 8.1 から追加された、<code>0O</code> または <code>0o</code> から始まる八進数リテラルを使った。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--url">
+                <h4><a href="#section--q1-brainfuck--commentary--url">URL</a></h4> 
+                <p>
+                   ソースコードのライセンスを示したこの部分だが、 
+                </p>
+                 
+                <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight">https:<span class="hljs-comment">//creativecommons.org/publicdomain/zero/1.0/</span></code></pre>
+                 
+                <p>
+                   完全に合法な PHP のコードである。 <code>https:</code> 部分はラベル、<code>//</code> 以降は行コメントになっている。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--numbers">
+                <h4><a href="#section--q1-brainfuck--commentary--numbers">リテラルなしで数値を生成する</a></h4> 
+                <p>
+                   ソースコード中に、ほとんど数値リテラルが書かれていないことにお気づきだろうか。 PHP では、型変換を利用することで任意の整数を作り出すことができる。 
+                </p>
+                 
+                <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> === +!![]);
+<span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">1</span> === +![]);
+<span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">2</span> === ![]+![]);
+<span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">3</span> === ![]+![]+![]);
+<span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">10</span> === +(![].+!![]));</code></pre>
+                 
+                <p>
+                  <code>[]</code> に <code>!</code> を適用すると <code>true</code> が返ってくる。それに <code>+</code> を適用すると、<code>bool</code> から <code>int</code> ヘの型変換が走り、<code>1</code> が生成される。<code>10</code> はさらにトリッキーだ。まず <code>1</code> と <code>0</code> を作り、<code>.</code> で文字列として結合する (<code>&apos;10&apos;</code>)。これに <code>+</code> を適用すると、<code>string</code> から <code>int</code> への型変換が走り、<code>10</code> が生まれる (コード量に頓着しないなら、<code>1</code> を 10 個足し合わせてももちろん 10 が作れる)。 
+                </p>
+                 
+                <p>
+                   また、<code>error_reporting</code> に指定しているのは <code>-1</code> である。 これは、<code>!</code> によって文字列を <code>false</code> にし、<code>+</code> によって <code>false</code> を <code>0</code> にし、さらにビット反転して <code>-1</code> にしている。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--conditionals">
+                <h4><a href="#section--q1-brainfuck--commentary--conditionals"><code>if</code> 文なしで条件分岐</a></h4> 
+                <p>
+                   三項演算子ないし <code>match</code> 式を使うことで、<code>if</code> を一切書かずに条件分岐ができる。 また、<code>&amp;&amp;</code> / <code>||</code> も使えることがある。 遅延評価が不要なケースでは、<code>[$t, $f][$cond]</code> のような形で分岐することもできる。 
+                </p>
+              </section>
+               
+              <section id="section--q1-brainfuck--commentary--loops">
+                <h4><a href="#section--q1-brainfuck--commentary--loops"><code>while</code>、<code>for</code> 文なしでループ</a></h4> 
+                <p>
+                   不動点コンビネータを使って無名再帰する (詳しい説明は省略する。これらの単語で検索してほしい)。 ここでは、一般に Z コンビネータとして知られるものを使った (<code>$z</code>)。 
+                </p>
+                 
+                <p>
+                   実際のところ、<code>$🤡</code> や <code>$🎪</code>、<code>$🐘</code> は、一度 Scheme (Lisp の一種) で書いてから PHP に翻訳する形で記述した。 
+                </p>
+                 
+                <p>
+                   なお、PHP は末尾再帰の最適化をおこなわない (少なくとも今のところは) ので、 あまりに長い brainf*ck プログラムを書くとスタックオーバーフローする。 
+                </p>
+              </section>
+            </section>
+          </section>
+           
+          <section id="section--q2-riddle">
+            <h2><a href="#section--q2-riddle">第2問 riddle.php</a></h2> 
+            <p>
+               ソースコードはこちら。実行には PHP 8.0 以上が必要なので注意。 
+            </p>
+             
+            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-comment">/*********************************************************
+* This program displays a PHPer token.                  *
+* Guess &#x27;N&#x27;.                                            *
+*                                                       *
+* Hints:                                                *
+* - N itself has no special meaning, e.g., 42, 8128,    *
+*   it is selected at random.                           *
+* - Each element of $token represents a single letter.  *
+* - One letter consists of 5x5 cells.                   *
+* - Remember, the output is a complete PHPer token.     *
+*                                                       *
+* License:                                              *
+*   https://creativecommons.org/publicdomain/zero/1.0/  *
+*********************************************************/</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">N</span> = <span class="hljs-number">0</span> <span class="hljs-comment">/* Change it to your answer. */</span>;
+<span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> &lt;= N &amp;&amp; N &lt;= <span class="hljs-number">0b11111_11111_11111_11111_11111</span>);
+
+<span class="hljs-variable">$token</span> = [
+<span class="hljs-number">0x14B499C</span>,
+<span class="hljs-number">0x0BE34CC</span>, <span class="hljs-number">0x01C9C69</span>,
+<span class="hljs-number">0x0ECA069</span>, <span class="hljs-number">0x01C2449</span>, <span class="hljs-number">0x0FDB166</span>, <span class="hljs-number">0x01C9C69</span>,
+<span class="hljs-number">0x01C1C66</span>, <span class="hljs-number">0x0FC1C47</span>, <span class="hljs-number">0x01C1C66</span>,
+<span class="hljs-number">0x10C5858</span>, <span class="hljs-number">0x1E4E3B8</span>, <span class="hljs-number">0x1A2F2F8</span>,
+];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$token</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$x</span>) {
+<span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;
+
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">{$x}</span>\n\n&quot;</span>;
+}</code></pre>
+             
+            <p>
+               さて、この問題はさきほどのように単純に実行しただけでは、謎のブロックが表示されるだけでトークンは得られない。 トークンを得るためには、ソースコードを読み、定数 <code>N</code> を特定する必要がある。 
+            </p>
+             
+            <p>
+               ここでは、私の想定解を解説する。 
+            </p>
+             
+            <section id="section--q2-riddle--code-reading">
+              <h3><a href="#section--q2-riddle--code-reading">読解</a></h3> 
+              <p>
+                 まずはソースコードを読んでいく。 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$token</span> = [
+<span class="hljs-comment">// 略</span>
+];</code></pre>
+               
+              <p>
+                 数値からなる <code>$token</code> があり、各要素をループしている。 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;</code></pre>
+               
+              <p>
+                 まずは排他的論理和 (xor) を取り、 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);</code></pre>
+               
+              <p>
+                 二進数に変換して、 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);</code></pre>
+               
+              <p>
+                 0 を空白に、1 を <code>#</code> にし、 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));</code></pre>
+               
+              <p>
+                 5文字ごとに区切ったあと、改行で結合している。 
+              </p>
+            </section>
+             
+            <section id="section--q2-riddle--hint">
+              <h3><a href="#section--q2-riddle--hint">ヒント</a></h3> 
+              <p>
+                 次に、ソースコードに書いてあるヒントを読んでいく。 
+              </p>
+               
+              <ul>
+                <li>
+                  <code>N</code> それ自体は、42 や 8128 といったような特別な意味を持たず、ランダムに決められている
+                </li>
+                 
+                <li>
+                  <code>$token</code> の各要素は、1文字を表す
+                </li>
+                 
+                <li>
+                  1文字は 5x5 のセルからなる
+                </li>
+                 
+                <li>
+                  出力されるのは、完全な PHPer トークンである
+                </li>
+              </ul>
+               
+              <p>
+                 ここで、PHPer トークンは必ず <code>#</code> 記号から始まることを思いだすと、 <code>$token</code> の最初の数字 <code>0x14B499C</code> は、変換の結果 <code>#</code> になるのではないかと予想される (なお、このことは、リポジトリの README ファイルに追加ヒントとして書かれている)。 
+              </p>
+            </section>
+             
+            <section id="section--q2-riddle--solve">
+              <h3><a href="#section--q2-riddle--solve">解く</a></h3> 
+              <p>
+                 ここまでわかれば、あと一歩で解ける。すなわち、<code>0x14B499C</code> が <code>#</code> に変換されるような <code>N</code> を見つければよい。 
+              </p>
+               
+              <p>
+                <code>N</code> は高々 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> &lt;= N &amp;&amp; N &lt;= <span class="hljs-number">0b11111_11111_11111_11111_11111</span>);</code></pre>
+               
+              <p>
+                 なのでブルートフォースしてもよいが、ここではブルートフォースしない方法を紹介する。 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-variable">$x</span> = <span class="hljs-number">0x14B499C</span>;
+
+<span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;
+
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));
+
+<span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-variable">$x</span> ===
+<span class="hljs-string">&quot; # # \n&quot;</span> .
+<span class="hljs-string">&quot;#####\n&quot;</span> .
+<span class="hljs-string">&quot; # # \n&quot;</span> .
+<span class="hljs-string">&quot;#####\n&quot;</span> .
+<span class="hljs-string">&quot; # # &quot;</span>);</code></pre>
+               
+              <p>
+                 この一連の変換に対する逆変換を考えると、次のようになる。 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-variable">$x</span> =
+<span class="hljs-string">&quot; # # \n&quot;</span> .
+<span class="hljs-string">&quot;#####\n&quot;</span> .
+<span class="hljs-string">&quot; # # \n&quot;</span> .
+<span class="hljs-string">&quot;#####\n&quot;</span> .
+<span class="hljs-string">&quot; # # &quot;</span>;
+
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-variable">$x</span>));
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);
+<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">bindec</span>(<span class="hljs-variable">$x</span>);
+
+<span class="hljs-variable">$n</span> = <span class="hljs-variable">$x</span> ^ <span class="hljs-number">0x14B499C</span>;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;N = <span class="hljs-subst">$n</span>\n&quot;</span>;</code></pre>
+               
+              <p>
+                 これを実行すると、<code>N</code> が得られる。 
+              </p>
+            </section>
+          </section>
+           
+          <section id="section--q3-toquine">
+            <h2><a href="#section--q3-toquine">第3問 toquine.php</a></h2> 
+            <p>
+               ソースコードはこちら。 
+            </p>
+             
+            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-comment">// License: https://creativecommons.org/publicdomain/zero/1.0/</span>
+<span class="hljs-comment">// This is a quine-like program to generate a PHPer token.</span>
+<span class="hljs-comment">// Execute it like this: php toquine.php | php | php | php | ...</span>
+
+<span class="hljs-variable">$s</span> = &lt;&lt;&lt;<span class="hljs-string">&#x27;Q&#x27;</span>
+<span class="hljs-meta">&lt;?</span>cuc
+<span class="hljs-comment">// Yvprafr: uggcf://perngvirpbzzbaf.bet/choyvpqbznva/mreb/1.0/</span>
+<span class="hljs-comment">// Guvf vf n dhvar-yvxr cebtenz gb trarengr n CUCre gbxra.</span>
+<span class="hljs-comment">// Rkrphgr vg yvxr guvf: cuc gbdhvar.cuc | cuc | cuc | cuc | ...</span>
+%f<span class="hljs-variable">$f</span> = %f;
+<span class="hljs-variable">$f</span> = <span class="hljs-title function_ invoke__">fge_ebg13</span>(<span class="hljs-variable">$f</span>); <span class="hljs-variable">$kf</span> = [
+%f,
+];
+<span class="hljs-variable">$g</span> = ahyy.snyfr; <span class="hljs-title function_ invoke__">sbe</span> (<span class="hljs-variable">$v</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$v</span> &lt;= <span class="hljs-title function_ invoke__">vagqvi</span>(__YVAR__-<span class="hljs-number">035</span>,<span class="hljs-number">6</span>); ++<span class="hljs-variable">$v</span>) <span class="hljs-title function_ invoke__">vs</span> (!<span class="hljs-title function_ invoke__">vffrg</span>(<span class="hljs-variable">$kf</span>[<span class="hljs-variable">$v</span>])) oernx; ryfr
+<span class="hljs-variable">$g</span> .= <span class="hljs-title function_ invoke__">vzcybqr</span>(<span class="hljs-string">&quot;\a&quot;</span>, <span class="hljs-title function_ invoke__">fge_fcyvg</span>(<span class="hljs-title function_ invoke__">fge_ercynpr</span>([<span class="hljs-string">&#x27;0&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>], [<span class="hljs-string">&#x27;  &#x27;</span>,<span class="hljs-string">&#x27;##&#x27;</span>], <span class="hljs-title function_ invoke__">fcevags</span>(<span class="hljs-title function_ invoke__">pue</span>(<span class="hljs-number">37</span>) . <span class="hljs-string">&#x27;025o&#x27;</span>, <span class="hljs-variable">$kf</span>[<span class="hljs-variable">$v</span>])), <span class="hljs-number">012</span>)) . <span class="hljs-string">&quot;\a\a&quot;</span>;
+<span class="hljs-variable">$jf</span> = <span class="hljs-title function_ invoke__">neenl_znc</span>(<span class="hljs-title function_ invoke__">sa</span>(<span class="hljs-variable">$j</span>) =&gt; <span class="hljs-title function_ invoke__">vzcybqr</span>(<span class="hljs-string">&#x27;, &#x27;</span>, <span class="hljs-variable">$j</span>), <span class="hljs-title function_ invoke__">neenl_puhax</span>(<span class="hljs-title function_ invoke__">neenl_znc</span>(<span class="hljs-title function_ invoke__">sa</span>(<span class="hljs-variable">$k</span>) =&gt; <span class="hljs-title function_ invoke__">fcevags</span>(<span class="hljs-string">&#x27;0k&#x27;</span> . <span class="hljs-title function_ invoke__">pue</span>(<span class="hljs-number">37</span>) . <span class="hljs-string">&#x27;07K&#x27;</span>, <span class="hljs-variable">$k</span>), <span class="hljs-variable">$kf</span>), <span class="hljs-number">10</span>));
+<span class="hljs-title function_ invoke__">cevags</span>(<span class="hljs-variable">$f</span>, <span class="hljs-variable">$g</span>, <span class="hljs-title function_ invoke__">fge_ebg13</span>(<span class="hljs-string">&quot;&lt;&lt;&lt;&#x27;Q&#x27;\a<span class="hljs-subst">{$f}</span>\aQ&quot;</span>), <span class="hljs-title function_ invoke__">vzcybqr</span>(<span class="hljs-string">&quot;,\a&quot;</span>, <span class="hljs-variable">$jf</span>));
+Q;
+<span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">str_rot13</span>(<span class="hljs-variable">$s</span>); <span class="hljs-variable">$xs</span> = [
+<span class="hljs-number">0x0AFABEA</span>, <span class="hljs-number">0x1F294A7</span>, <span class="hljs-number">0x1F2109F</span>, <span class="hljs-number">0x1F294A7</span>, <span class="hljs-number">0x0002800</span>, <span class="hljs-number">0x1F2109F</span>, <span class="hljs-number">0x0117041</span>, <span class="hljs-number">0x1F294A7</span>, <span class="hljs-number">0x1FAD6B5</span>, <span class="hljs-number">0x1F295B7</span>,
+<span class="hljs-number">0x010FC21</span>, <span class="hljs-number">0x1FAD6B5</span>, <span class="hljs-number">0x1151151</span>, <span class="hljs-number">0x010FC21</span>, <span class="hljs-number">0x1F294A7</span>, <span class="hljs-number">0x1F295B7</span>, <span class="hljs-number">0x1FAD6B5</span>, <span class="hljs-number">0x1F294A7</span>, <span class="hljs-number">0x1F295B7</span>, <span class="hljs-number">0x1F8C63F</span>,
+<span class="hljs-number">0x1F8C631</span>, <span class="hljs-number">0x1FAD6B5</span>, <span class="hljs-number">0x17AD6BD</span>, <span class="hljs-number">0x17AD6BD</span>, <span class="hljs-number">0x1F8C63F</span>, <span class="hljs-number">0x1F295B7</span>,
+];
+<span class="hljs-variable">$t</span> = <span class="hljs-literal">null</span>.<span class="hljs-literal">false</span>; <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt;= <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-keyword">__LINE__</span>-<span class="hljs-number">035</span>,<span class="hljs-number">6</span>); ++<span class="hljs-variable">$i</span>) <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$xs</span>[<span class="hljs-variable">$i</span>])) <span class="hljs-keyword">break</span>; <span class="hljs-keyword">else</span>
+<span class="hljs-variable">$t</span> .= <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-title function_ invoke__">str_replace</span>([<span class="hljs-string">&#x27;0&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>], [<span class="hljs-string">&#x27;  &#x27;</span>,<span class="hljs-string">&#x27;##&#x27;</span>], <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-title function_ invoke__">chr</span>(<span class="hljs-number">37</span>) . <span class="hljs-string">&#x27;025b&#x27;</span>, <span class="hljs-variable">$xs</span>[<span class="hljs-variable">$i</span>])), <span class="hljs-number">012</span>)) . <span class="hljs-string">&quot;\n\n&quot;</span>;
+<span class="hljs-variable">$ws</span> = <span class="hljs-title function_ invoke__">array_map</span>(fn(<span class="hljs-variable">$w</span>) =&gt; <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;, &#x27;</span>, <span class="hljs-variable">$w</span>), <span class="hljs-title function_ invoke__">array_chunk</span>(<span class="hljs-title function_ invoke__">array_map</span>(fn(<span class="hljs-variable">$x</span>) =&gt; <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;0x&#x27;</span> . <span class="hljs-title function_ invoke__">chr</span>(<span class="hljs-number">37</span>) . <span class="hljs-string">&#x27;07X&#x27;</span>, <span class="hljs-variable">$x</span>), <span class="hljs-variable">$xs</span>), <span class="hljs-number">10</span>));
+<span class="hljs-title function_ invoke__">printf</span>(<span class="hljs-variable">$s</span>, <span class="hljs-variable">$t</span>, <span class="hljs-title function_ invoke__">str_rot13</span>(<span class="hljs-string">&quot;&lt;&lt;&lt;&#x27;D&#x27;\n<span class="hljs-subst">{$s}</span>\nD&quot;</span>), <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;,\n&quot;</span>, <span class="hljs-variable">$ws</span>));</code></pre>
+             
+            <p>
+               コメントにもあるとおり、次のようにして実行すれば答えがでてくる。 
+            </p>
+             
+            <pre class="highlight" language="shell-session" linenumbering="unnumbered"><code>$ php toquine.php | php | php | php | ...</code></pre>
+             
+            <p>
+               実際にはもう少しパイプで繋げなければならない。 
+            </p>
+             
+            <section id="section--q3-toquine--commentary">
+              <h3><a href="#section--q3-toquine--commentary">解説</a></h3> 
+              <section id="section--q3-toquine--commentary--quine">
+                <h4><a href="#section--q3-toquine--commentary--quine">プログラム全体</a></h4> 
+                <p>
+                   コメントにもあるとおり、これは quine (風) のプログラムになっている。 Quine とは、自分のソースコードをそっくりそのまま出力するようなプログラムのことである。 
+                </p>
+                 
+                <p>
+                   このプログラムは、実行すると自身とほとんど同じプログラムを出力する。 異なるのはトークンになっている部分のみである。 
+                </p>
+              </section>
+               
+              <section id="section--q3-toquine--commentary--tokens">
+                <h4><a href="#section--q3-toquine--commentary--tokens">トークン</a></h4> 
+                <p>
+                  <code>$xs</code> がトークンに対応している。変換のロジックは <code>riddle.php</code> とほぼ同じなので省略する。 
+                </p>
+              </section>
+               
+              <section id="section--q3-toquine--commentary--states">
+                <h4><a href="#section--q3-toquine--commentary--states">状態保持</a></h4> 
+                <p>
+                   トークンの何文字目まで出力したかを、ソースコードを変えずに (quine なので) 覚えておく必要がある。 このプログラムでは、トークンが出力されるとソースコードがだんだんと長くなっていくのを利用して、<code><em>LINE</em></code> から情報を取得している。 
+                </p>
+              </section>
+               
+              <section id="section--q3-toquine--commentary--rot-13">
+                <h4><a href="#section--q3-toquine--commentary--rot-13">ROT 13</a></h4> 
+                <p>
+                   Quine は、素朴に書くとプログラムの一部が 2回記述されてしまう。 これがあまり美しくないので、<code>toquine.php</code> では、ROT 13 変換を使って難読化した。 
+                </p>
+                 
+                <p>
+                   それにしてもなぜこんなものが標準ライブラリに……。 
+                </p>
+              </section>
+            </section>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2> 
+            <p>
+               解いていただいたみなさん、また、難易度調整につきあっていただいた社内のみなさん、ありがとうございました。 
+            </p>
+             
+            <p>
+               今回は直前に作りはじめたのもあり、3問だけかつ使い古されたネタばかりになってしまいましたが、 来年は 5問、より面白い問題を持っていきます。 
+            </p>
+             
+            <p>
+               実はもう作りはじめているので、どうか来年もありますように……。 
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

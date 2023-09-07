@@ -1,3 +1,0 @@
-[submodule "vhosts/blog"]
-	path = vhosts/blog
-	url = https://github.com/nsfisis/blog.nsfisis.dev.git

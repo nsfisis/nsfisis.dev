@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2021 nsfisis">
+    <meta name="description" content="Python における UnboundLocalError の理由と対処法。">
+    <meta name="keywords" content="Python,Python 3">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>【Python】 クロージャとUnboundLocalError: local variable &apos;x&apos; referenced before assignment | REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=37fff6a2f0eef473abde58e55f28ea69">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/">REPL: Rest-Eat-Program Loop</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">【Python】 クロージャとUnboundLocalError: local variable &apos;x&apos; referenced before assignment</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/python/">Python</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/python3/">Python 3</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2021-10-02">2021-10-02</time>: Qiita から移植
+              </li>
+            </ol>
+          </section>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/5d733703afcb35bbf399">https://qiita.com/nsfisis/items/5d733703afcb35bbf399</a>
+            </div>
+          </div>
+           
+          <p>
+             本記事は Python 3.7.6 の動作結果を元にして書かれている。 
+          </p>
+           
+          <p>
+             Python でクロージャを作ろうと、次のようなコードを書いた。 
+          </p>
+           
+          <pre class="highlight" language="python" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
+    x = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
+        x += <span class="hljs-number">1</span>
+    g()
+
+f()</code></pre>
+           
+          <p>
+             関数 <code>g</code> から 関数 <code>f</code> のスコープ内で定義された変数 <code>x</code> を参照し、それに 1 を足そうとしている。 これを実行すると <code>x += 1</code> の箇所でエラーが発生する。 
+          </p>
+           
+          <blockquote>
+            <p>
+               UnboundLocalError: local variable `x&apos; referenced before assignment 
+            </p>
+          </blockquote>
+           
+          <p>
+             local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code> を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。 前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code> を変数宣言のための構文として擬似的に利用している。 
+          </p>
+           
+          <pre class="highlight" language="python" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment"># 注: var は正しい Python の文法ではない。上記参照のこと</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
+  var x           <span class="hljs-comment">#  f の local変数 &#x27;x&#x27; を宣言</span>
+  x = <span class="hljs-number">0</span>           <span class="hljs-comment">#  x に 0 を代入</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():        <span class="hljs-comment">#  f の内部関数 g を定義</span>
+      var x       <span class="hljs-comment">#  g の local変数 &#x27;x&#x27; を宣言</span>
+      <span class="hljs-comment">#  たまたま f にも同じ名前の変数があるが、それとは別の変数</span>
+      x += <span class="hljs-number">1</span>      <span class="hljs-comment">#  x に 1 を加算 (x = x + 1 の糖衣構文)</span>
+      <span class="hljs-comment">#  加算する前の値を参照しようとするが、まだ代入されていないためエラー</span>
+  g()</code></pre>
+           
+          <p>
+             当初の意図を表現するには、次のように書けばよい。 
+          </p>
+           
+          <pre class="highlight" language="python" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
+    x = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
+        <span class="hljs-keyword">nonlocal</span> x   <span class="hljs-comment">## (*)</span>
+        x += <span class="hljs-number">1</span>
+    g()</code></pre>
+           
+          <p>
+            <code>(*)</code> のように、<code>nonlocal</code> を追加する。これにより一つ外側のスコープ (<code>g</code> の一つ外側 = <code>f</code>) で定義されている <code>x</code> を探しに行くようになる。 
+          </p>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

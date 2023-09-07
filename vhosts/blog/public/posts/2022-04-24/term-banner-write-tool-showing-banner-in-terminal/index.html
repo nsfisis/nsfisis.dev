@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2022 nsfisis">
+    <meta name="description" content="ターミナルに任意の文字のバナーを表示するためのツールを Go で書いた。">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>term-banner: ターミナルにバナーを表示するツールを書いた | REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=37fff6a2f0eef473abde58e55f28ea69">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/">REPL: Rest-Eat-Program Loop</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">term-banner: ターミナルにバナーを表示するツールを書いた</h1>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2022-04-24">2022-04-24</time>: 公開
+              </li>
+              <li class="revision">
+                <time datetime="2022-04-27">2022-04-27</time>: -f オプションについて追記
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <p>
+               こんなものを作った。 
+            </p>
+             
+            <pre class="highlight monospaced"><code>$ term-banner &apos;Hello, World!&apos; &apos;こんにちは、&apos; &apos;世界！&apos;</code></pre>
+             
+            <p>
+               image::https://raw.githubusercontent.com/nsfisis/term-banner/main/screenshot.png[term-banner のスクリーンショット] 
+            </p>
+             
+            <p>
+               コマンドライン引数として渡した文字列をターミナルに大きく表示する。 
+            </p>
+             
+            <p>
+               リポジトリはこちら: <a href="https://github.com/nsfisis/term-banner">https://github.com/nsfisis/term-banner</a>
+            </p>
+          </section>
+           
+          <section id="section--motivation">
+            <h2><a href="#section--motivation">Motivation</a></h2> 
+            <p>
+               以前、https://github.com/nsfisis/big-clock-mode[big-clock-mode] という似たようなプログラムを書いた。 これは tmux の <code>:clock-mode</code> コマンドに着想を得たもので、<code>:clock-mode</code> よりも大きく現在時刻を表示する。 
+            </p>
+             
+            <p>
+              <code>big-clock-mode</code> を開発したのは、次のようなシチュエーションで使うためである。 弊社では現在リモートワークが基本だが、web 会議などで画面共有しているときに、休憩を挟んで特定の時刻から再開する、ということがある。 こういったケースで、画面上に現在の時刻を大きめに表示しておくと、モニタから離れても遠くから時刻がわかるので便利である。 
+            </p>
+             
+            <p>
+               それこそタイマアプリか何かを使えばいいのだが、ターミナルに棲むいきものとしては、住処から離れたくないわけだ。 
+            </p>
+             
+            <p>
+               しばらく便利に使っていたのだが、ひとつ不満点が出てきた。それは、再開する時刻がいつだったかを覚えておかなければならないということだ。 どこかにメモしておいてもいいが、せっかくなら現在時刻とともに表示させておきたい。 
+            </p>
+             
+            <p>
+               そんなわけで、「任意の文字列をターミナルに表示する」プログラムを書く運びとなった。 まあ、作らなくても探せばあると思うが、作りたいものは作りたいので知ったことではない。 
+            </p>
+          </section>
+           
+          <section id="section--program">
+            <h2><a href="#section--program">プログラム</a></h2> 
+            <p>
+               全体の流れは次のようになっている。 
+            </p>
+             
+            <ol numeration="arabic">
+              <li>
+                フォントファイルを読み込む
+              </li>
+               
+              <li>
+                コマンドライン引数を Shift-JIS に変換する (フォントが Shift-JIS 基準で並んでいるため)
+              </li>
+               
+              <li>
+                1文字ずつレンダリングしていく
+              </li>
+            </ol>
+             
+            <p>
+              <code>big-clock-mode</code> が Go 製なので、今回も Go で書いた。 PNG が標準ライブラリにあったり、Shift-JIS のエンコーディングが準標準ライブラリにあったりしたのは助かった。 
+            </p>
+             
+            <p>
+               フォントファイルは <code>go:embed</code> で実行ファイルに埋め込んでいるので、ビルド後はワンバイナリで動く。 仕事ではスクリプト言語ばかり書いているが、やはりコンパイル言語はいい。 
+            </p>
+          </section>
+           
+          <section id="section--font">
+            <h2><a href="#section--font">フォント</a></h2> 
+            <p>
+               フリーの 8x8 ビットマップフォントである、https://littlelimit.net/misaki.htm[美咲フォント 2021-05-05a 版] を使わせていただいた。 
+            </p>
+             
+            <p>
+               はじめは自分でポチポチ打っていたのだが、「き」くらいまでやって挫折した。 同じく 8x8 で作っていたのだが、平仮名でさえも、この小さなキャンバスにはとても収められない。 
+            </p>
+             
+            <p>
+               美咲フォントは、平仮名・片仮名に留まらず、JIS 第一・第二水準の漢字までサポートしている。 第二水準ともなると一生お目にかかることのない字の方が多いくらいだが、これをこの大きさで書くというのは、もはや芸術の域である。 
+            </p>
+             
+            <p>
+               さらに言うと、実のところ美咲フォントは実サイズ 7x7 で作られており、余白が設けられている。 これは、単純にそのまま並べても字間・行間を確保できるようにという配慮である。 おかげでコーディングまで楽になった。 
+            </p>
+             
+            <p>
+               ゴシック体と明朝体があったが、私の好みで明朝体の方にした。 ただ、ゴシック体の方が見やすい気がするので、フォントを選べるように後ほど拡張するかもしれない。 
+            </p>
+             
+            <p>
+               2022-04-27 追記: <code>-f</code> オプションで選べるようにした。 
+            </p>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2> 
+            <p>
+               あなたもターミナルに住んでみませんか？ 
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

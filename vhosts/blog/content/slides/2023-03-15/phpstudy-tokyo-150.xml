@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slide>
+  <info>
+    <title>明日のあなたの役に立たない PHP コーディング技法～細長い FizzBuzz を書く～</title>
+    <event>
+      PHP 勉強会@東京 第150 回
+    </event>
+    <talktype>
+      LT
+    </talktype>
+    <link>/slides/2023-03-15/phpstudy-tokyo-150/slide.pdf</link>
+    <keywordset>
+      <keyword>php</keyword>
+      <keyword>phpstudy-tokyo</keyword>
+    </keywordset>
+    <revhistory>
+      <revision>
+        <date>2023-03-15</date>
+        <revremark>登壇</revremark>
+      </revision>
+      <revision>
+        <date>2023-03-18</date>
+        <revremark>2文字以下の関数が他にもあったので修正</revremark>
+      </revision>
+    </revhistory>
+  </info>
+</slide>

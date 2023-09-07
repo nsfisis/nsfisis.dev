@@ -3,7 +3,26 @@ on:
   push:
     branches: [main]
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Run deno task check
+        run: cd vhosts/blog; deno task check
+
+      - name: Run deno test
+        run: cd vhosts/blog; deno test
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,6 +37,5 @@ jobs:
           script: |
             cd nsfisis.dev
             git pull origin main
-            git submodule update --init
             make clean
             make deploy

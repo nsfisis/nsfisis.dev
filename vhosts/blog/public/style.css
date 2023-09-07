@@ -1,0 +1,269 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Yu Gothic', 'Meiryo', 'Noto Sans JP', sans-serif;
+  color: #000;
+  background-color: #fff;
+  line-height: 1.8;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header.header {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 15%;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  flex-grow: 1;
+}
+
+body > footer {
+  background-color: #f5f5f5;
+  padding: 1rem 20%;
+  text-align: center;
+  box-shadow: 0px -1px 5px rgba(0,0,0,0.1);
+}
+
+nav {
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+nav ul li {
+  margin: 0 1.2rem;
+}
+
+nav ul li:first-child {
+  font-weight: bold;
+  margin-right: auto;
+}
+
+nav ul li a {
+  border: none;
+  color: #000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+
+a:hover {
+  color: #666;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+blockquote {
+  background-color: #f5f5f5;
+  border-left: 5px solid #555;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #f5f5f5;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.tag a {
+  border: none;
+}
+
+code {
+  background-color: #f5f5f5;
+  padding: 2px 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  border-radius: 3px;
+}
+
+pre code {
+  padding: 0;
+}
+
+li.revision {
+  list-style: inside;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  border-bottom: 1px solid #555;
+  margin-bottom: 1.2rem;
+}
+
+.post-content h2 a,
+.post-content h3 a,
+.post-content h4 a,
+.post-content h5 a,
+.post-content h6 a {
+  border: none;
+}
+
+.post-content h2:before {
+  content: "#";
+  padding-right: 0.3rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.post-content h3:before {
+  content: "##";
+  padding-right: 0.3rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.post-content h4:before {
+  content: "###";
+  padding-right: 0.3rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.post-content h5:before {
+  content: "####";
+  padding-right: 0.3rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.post-content h6:before {
+  content: "#####";
+  padding-right: 0.3rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.post-entry {
+  min-width: calc(min(800px, 100vw - 2rem));
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.post-entry header {
+  border: none;
+}
+
+.post-entry header h2 {
+  margin: 0;
+}
+
+.post-entry section {
+  color: #666;
+}
+
+.post-entry footer {
+  background-color: #f5f5f5;
+  padding: 0;
+  text-align: left;
+  color: #666;
+}
+
+.admonition {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.admonition-label {
+  font-weight: bold;
+  color: #333;
+  margin-right: 1rem;
+}
+
+.admonition-content {
+  font-size: 1rem;
+}
+
+.not-found {
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  header.header {
+    padding: 1rem 0;
+  }
+
+  nav ul li:not(:first-child) {
+    display: none;
+  }
+}
+
+.my-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

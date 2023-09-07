@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2021 nsfisis">
+    <meta name="description" content="C++ の属性構文の属性名には、キーワードが使える。ネタ記事。">
+    <meta name="keywords" content="C++,C++ 17">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>【C++】 属性構文の属性名にはキーワードが使える | REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=37fff6a2f0eef473abde58e55f28ea69">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/">REPL: Rest-Eat-Program Loop</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">【C++】 属性構文の属性名にはキーワードが使える</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/cpp/">C++</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/cpp17/">C++ 17</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2021-10-02">2021-10-02</time>: Qiita から移植
+              </li>
+            </ol>
+          </section>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/94090937bcf860cfa93b">https://qiita.com/nsfisis/items/94090937bcf860cfa93b</a>
+            </div>
+          </div>
+           
+          <p>
+             タイトル落ち。まずはこのコードを見て欲しい。 
+          </p>
+           
+          <pre class="highlight" language="cpp" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+[[<span class="hljs-keyword">alignas</span>]] [[<span class="hljs-keyword">alignof</span>]] [[<span class="hljs-keyword">and</span>]] [[<span class="hljs-keyword">and_eq</span>]] [[<span class="hljs-keyword">asm</span>]] [[<span class="hljs-keyword">auto</span>]] [[<span class="hljs-keyword">bitand</span>]]
+[[<span class="hljs-keyword">bitor</span>]] [[<span class="hljs-type">bool</span>]] [[<span class="hljs-keyword">break</span>]] [[<span class="hljs-keyword">case</span>]] [[<span class="hljs-keyword">catch</span>]] [[<span class="hljs-type">char</span>]] [[<span class="hljs-type">char16_t</span>]]
+[[<span class="hljs-type">char32_t</span>]] [[<span class="hljs-keyword">class</span>]] [[<span class="hljs-keyword">compl</span>]] [[<span class="hljs-type">const</span>]] [[<span class="hljs-keyword">const_cast</span>]] [[<span class="hljs-keyword">constexpr</span>]]
+[[<span class="hljs-keyword">continue</span>]] [[<span class="hljs-keyword">decltype</span>]] [[<span class="hljs-keyword">default</span>]] [[<span class="hljs-keyword">delete</span>]] [[<span class="hljs-keyword">do</span>]] [[<span class="hljs-type">double</span>]]
+[[<span class="hljs-keyword">dynamic_cast</span>]] [[<span class="hljs-keyword">else</span>]] [[<span class="hljs-keyword">enum</span>]] [[<span class="hljs-keyword">explicit</span>]] [[<span class="hljs-keyword">export</span>]] [[<span class="hljs-keyword">extern</span>]] [[<span class="hljs-literal">false</span>]]
+[[<span class="hljs-keyword">final</span>]] [[<span class="hljs-type">float</span>]] [[<span class="hljs-keyword">for</span>]] [[<span class="hljs-keyword">friend</span>]] [[<span class="hljs-keyword">goto</span>]] [[<span class="hljs-keyword">if</span>]] [[<span class="hljs-keyword">inline</span>]] [[<span class="hljs-type">int</span>]]
+[[<span class="hljs-type">long</span>]] [[<span class="hljs-keyword">mutable</span>]] [[<span class="hljs-keyword">namespace</span>]] [[<span class="hljs-keyword">new</span>]] [[<span class="hljs-keyword">noexcept</span>]] [[<span class="hljs-keyword">not</span>]] [[<span class="hljs-keyword">not_eq</span>]]
+[[<span class="hljs-literal">nullptr</span>]] [[<span class="hljs-keyword">operator</span>]] [[<span class="hljs-keyword">or</span>]] [[<span class="hljs-keyword">or_eq</span>]] [[<span class="hljs-keyword">override</span>]] [[<span class="hljs-keyword">private</span>]]
+[[<span class="hljs-keyword">protected</span>]] [[<span class="hljs-keyword">public</span>]] [[<span class="hljs-keyword">register</span>]] [[<span class="hljs-keyword">reinterpret_cast</span>]] [[<span class="hljs-keyword">return</span>]] [[<span class="hljs-type">short</span>]]
+[[<span class="hljs-type">signed</span>]] [[<span class="hljs-keyword">sizeof</span>]] [[<span class="hljs-type">static</span>]] [[<span class="hljs-keyword">static_assert</span>]] [[<span class="hljs-keyword">static_cast</span>]] [[<span class="hljs-keyword">struct</span>]]
+[[<span class="hljs-keyword">switch</span>]] [[<span class="hljs-keyword">template</span>]] [[<span class="hljs-keyword">this</span>]] [[<span class="hljs-keyword">thread_local</span>]] [[<span class="hljs-keyword">throw</span>]] [[<span class="hljs-literal">true</span>]] [[<span class="hljs-keyword">try</span>]]
+[[<span class="hljs-keyword">typedef</span>]] [[<span class="hljs-keyword">typeid</span>]] [[<span class="hljs-keyword">typename</span>]] [[<span class="hljs-keyword">union</span>]] [[<span class="hljs-type">unsigned</span>]]
+[[<span class="hljs-keyword">virtual</span>]] [[<span class="hljs-type">void</span>]] [[<span class="hljs-keyword">volatile</span>]] [[<span class="hljs-type">wchar_t</span>]] [[<span class="hljs-keyword">while</span>]] [[<span class="hljs-keyword">xor</span>]] [[<span class="hljs-keyword">xor_eq</span>]]
+<span class="hljs-comment">// [[using]]</span>
+<span class="hljs-type">int</span> <span class="hljs-built_in">main</span>() {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;Hello, World!&quot;</span> &lt;&lt; std::endl;
+}</code></pre>
+           
+          <blockquote>
+            <p>
+               コンパイラのバージョン $ clang++ –version Apple clang version 11.0.0 (clang-1100.0.33.8) Target: x86_64-apple-darwin19.6.0 Thread model: posix InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin 
+            </p>
+             
+            <p>
+               コンパイルコマンド (C17指定) $ clang –std=c++17 hoge.cpp 
+            </p>
+          </blockquote>
+           
+          <p>
+             この記事から得られるものはこれ以上ないので以下は蛇足になる。 
+          </p>
+           
+          <p>
+             別件で cppreference.com の <a href="https://en.cppreference.com/w/cpp/language/identifiers">identifier のページ</a> を読んでいた時、次の文が目に止まった。 
+          </p>
+           
+          <blockquote>
+            <ul>
+              <li>
+                 the identifiers that are keywords cannot be used for other purposes; 
+                <ul>
+                  <li>
+                     The only place they can be used as non-keywords is in an attribute-token. (e.g. [[private]] is a valid attribute) (since C++11) 
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </blockquote>
+           
+          <p>
+             キーワードでも属性として指定する場合は非キーワードとして使えるらしい。 実際にやってみる。 
+          </p>
+           
+          <p>
+             同サイトの <a href="https://en.cppreference.com/w/cpp/keyword">keywords のページ</a> から一覧を拝借し、上のコードが出来上がった (C++17 においてキーワードでないものなど、一部省いている)。 大量の警告 (unknown attribute `〇〇&apos; ignored) がコンパイラから出力されるが、コンパイルできる。 
+          </p>
+           
+          <p>
+             上のコードでは <code>[[using]]</code> をコメントアウトしているが、これは <code>using</code> キーワードのみ属性構文の中で意味を持つからであり、このコメントアウトを外すとコンパイルに失敗する。 
+          </p>
+           
+          <pre class="highlight" language="cpp" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment">// using の例</span>
+[[<span class="hljs-keyword">using</span> foo: attr1, attr2]] <span class="hljs-type">int</span> x; <span class="hljs-comment">// [[foo::attr1, foo::attr2]] の糖衣構文</span></code></pre>
+           
+          <p>
+             C++17 の仕様も見てみる (正確には標準化前のドラフト)。 
+          </p>
+           
+          <p>
+             引用元: <a href="https://timsong-cpp.github.io/cppwp/n4659/dcl.attr#grammar-4">https://timsong-cpp.github.io/cppwp/n4659/dcl.attr#grammar-4</a>
+          </p>
+           
+          <blockquote>
+            <p>
+               If a keyword or an alternative token that satisfies the syntactic requirements of an identifier is contained in an attribute-token, it is considered an identifier. 
+            </p>
+          </blockquote>
+           
+          <p>
+             「<code>identifier</code> の構文上の要件を満たすキーワードまたは代替トークンが <code>attribute-token</code> に含まれている場合、<code>identifier</code> とみなされる」とある。どうやら間違いないようだ。 
+          </p>
+           
+          <p>
+             ところで、代替トークン (alternative token) とは <code>and</code> (<code>&amp;</code>) や <code>bitor</code> (<code>|</code>) などのことだが、<code>identifier</code> の構文上の要件を満たさないような代替トークンなどあるのか？ 疑問に思って調べたところ、代替トークンという語にはダイグラフも含まれるらしい (参考: <a href="https://timsong-cpp.github.io/cppwp/n4659/lex.digraph">同ドラフト</a>) 
+          </p>
+           
+          <ul>
+            <li>
+              <code>&lt;%</code> → <code>{</code>
+            </li>
+             
+            <li>
+              <code>%&gt;</code> → <code>}</code>
+            </li>
+             
+            <li>
+              <code>&lt;:</code> → <code>[</code>
+            </li>
+             
+            <li>
+              <code>:&gt;</code> → <code>]</code>
+            </li>
+             
+            <li>
+              <code>%:</code> → <code>#</code>
+            </li>
+             
+            <li>
+              <code>%:%:</code> → <code>##</code>
+            </li>
+          </ul>
+           
+          <p>
+             「<code>identifier</code> の構文上の要件を満たさないような代替トークン」はこれらが当てはまると思われる。 
+          </p>
+           
+          <p>
+             調べた感想: 字句解析器か構文解析器が辛そう 
+          </p>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

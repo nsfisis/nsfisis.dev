@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0">
+  <info>
+    <title>PHPerKaigi 2021</title>
+    <abstract>
+      2021-03-26 から 2021-03-28 にかけて開催された、PHPerKaigi 2021 に参加した。
+    </abstract>
+    <keywordset>
+      <keyword>conference</keyword>
+      <keyword>php</keyword>
+      <keyword>phperkaigi</keyword>
+    </keywordset>
+    <revhistory>
+      <revision>
+        <date>2021-03-30</date>
+        <revremark>公開</revremark>
+      </revision>
+    </revhistory>
+  </info>
+  <section xml:id="report">
+    <title>PHPerKaigi 2021 参加レポ</title>
+    <para>
+      2021-03-26 から 2021-03-28
+      にかけて開催された、 <link xl:href="https://phperkaigi.jp/2021/">PHPerKaigi 2021</link>
+      に一般参加者として参加した。
+      弊社 <link xl:href="https://www.dgcircus.com/">デジタルサーカス株式会社</link>
+      (今年1月から勤務)
+      はダイヤモンドスポンサーとなっており、スポンサー枠のチケットを使わせていただいた。
+    </para>
+    <para>
+      このようなカンファレンスには初めて参加するのでかねてより心待ちにしていたのだが、生憎2日目から体調を崩してしまい、この記事も途中までとなっている。まだ見ていないセッションも多いが、ひとまず現時点での参加レポを書いておく。
+    </para>
+    <para>
+      発表はトラック A、B に分かれていたのだが、今回はすべて A
+      トラックを視聴している (切り替えるのが面倒だっただけ)。
+    </para>
+    <section xml:id="report-legend">
+      <title>凡例</title>
+      <blockquote>
+        <para>
+          発表・スライドのメモ (引用ではない)
+        </para>
+      </blockquote>
+      <para>
+        感想など
+      </para>
+    </section>
+    <section xml:id="report--day-0">
+      <title>Day 0 前夜祭 (2021/03/27)</title>
+      <section xml:id="report--day-0--1730-a">
+        <title>17:30 [A]</title>
+        <para>
+          PHP で AWS Lambda
+        </para>
+        <blockquote>
+          <para>
+            Rails のプロジェクトを PHPer のメンバのみでメンテ →他のメンバもわかる
+            PHP にリプレースを検討
+          </para>
+          <itemizedlist>
+            <listitem>サーバレス</listitem>
+            <listitem>サーバ・インフラの管理が不要</listitem>
+            <listitem>アプリケーションコードの知識だけで保守可能</listitem>
+          </itemizedlist>
+          <para>
+            ゼロベースで作れる案件が (Railsの件とは別に)
+            あるため、そちらで試験的に導入?
+          </para>
+          <para>
+            AWSの学習 AWS のドキュメント DevelopersIO
+          </para>
+          <para>
+            AWS Lambda のカスタムランタイムで PHP を動かす
+          </para>
+          <para>
+            サーバのセットアップや維持管理を気にしなくて良い サーバーレスで PHP
+            を動かすツールがすでにある サーバーレス構築はすんなり
+          </para>
+          <para>
+            今は Laravel がルーティングしている Laravel Livewire を Lambda
+            に載せられないか？ デプロイ方法は？ バッチ処理は？ (Lambda は
+            15分の制限)
+          </para>
+          <para>
+            Lambda でコンテナイメージがサポートされるように
+          </para>
+          <para>
+            抽象化されたもの「だけ」しか知らないよりも具象の理解は助けになる
+          </para>
+        </blockquote>
+        <para>
+          AWS Lambda のような Function as a Service
+          はマイクロサービス化における一つの到達点に思えるのだが、これを使って実際に
+          web サービスを作る具体的なイメージがまだ見えない (注: すべて for me
+          として書いている)。
+        </para>
+        <para>
+          PHP on AWS Lambda があれだけ簡単に動かせるのには驚いた。
+        </para>
+        <para>
+          勝手に AWS Lambda だとフットプリントの軽さが求められそう (= PHP +
+          Laravel などでは動かなさそう)
+          だという先入観を持っていたのだが、この発表のデモによればそうでもないらしい。
+        </para>
+      </section>
+      <section xml:id="report--day-0--1810-a">
+        <title>18:10 [A]</title>
+        <para>
+          大規模サイトの SEO
+        </para>
+        <blockquote>
+          <para>
+            大規模サイト (100万ページ以上) Google の基準
+          </para>
+          <para>
+            クロールバジェットを意識したSEO
+          </para>
+          <para>
+            大規模サイトでコンテンツが中頻度 (1回/週) で更新 OR 中規模サイト
+            (10,000以上) でコンテンツが目まぐるしく変更される
+            これを満たさないなら、クロールバジェットを考えなくてもいい
+          </para>
+          <para>
+            サーチコンソール 「カバレッジ」の「除外」
+            多すぎるのは問題→クロールバジェットを浪費している
+          </para>
+          <itemizedlist>
+            <listitem>クエリの順番を決める</listitem>
+            <listitem>空の値のルールを決めておく</listitem>
+            <listitem>リダイレクトすればインデックスはうまくいく</listitem>
+            <listitem>リンクが存在する限りクロールはされる</listitem>
+          </itemizedlist>
+          <para>
+            リニューアル前のURL
+          </para>
+          <para>
+            インデックスは移行される
+            リンクのURLが存在する限り、別のURLとしてクロールされる
+            リダイレクトされるとはいえ、リニューアル前のURLは移行した方が良い
+            リニューアルで無視されるようになったパラメータも注意
+          </para>
+          <para>
+            robotes.txt で拒否しているのにクロールされる 一時的に拒否を外して 404 や
+            301 を読ませる 内部リンクを確認する JS でのリンクに書き換え
+          </para>
+          <para>
+            クエリパラメータからURLのパスに <literal>/tokyo?area=HOGE</literal> → <literal>/tokyo/HOGE</literal>
+          </para>
+          <para>
+            URL 設計だいじ
+          </para>
+        </blockquote>
+        <para>
+          SEO (Search Engine Optimization)
+          は大して知らないので新鮮な話が多かった。その分語れることも少ない……。
+        </para>
+      </section>
+      <section xml:id="report--day-0--1850-a">
+        <title>18:50 [A]</title>
+        <blockquote>
+          <para>
+            知覚可能 操作可能 理解可能 堅牢 ちゃんとしたHTMLを書く
+            (閉じタグ・入れ子構造など)
+          </para>
+          <itemizedlist>
+            <listitem>標準の HTML を適切に使う</listitem>
+            <listitem>WAI-ARIA</listitem>
+            <listitem>キーボードフレンドリー</listitem>
+            <listitem>マシンフレンドリー</listitem>
+            <listitem>SEOフレンドリー</listitem>
+          </itemizedlist>
+          <para>
+            button タグ →キーボード h1 タグ →スクリーンリーダー・クローラ a タグ
+          </para>
+          <para>
+            WAI-ARIA HTML では表現できないセマンティクスを追加する
+          </para>
+          <itemizedlist>
+            <listitem>
+              ロール
+              <itemizedlist>
+                <listitem>何をするのか？</listitem>
+                <listitem>ユーザーアクションによって変化しない</listitem>
+              </itemizedlist>
+            </listitem>
+            <listitem>
+              プロパティ
+              <itemizedlist>
+                <listitem>関連づけられたデータ</listitem>
+              </itemizedlist>
+            </listitem>
+            <listitem>
+              ステート
+              <itemizedlist>
+                <listitem>現在の状態</listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist>
+          <para>
+            まずは標準の HTML 要素で解決する 何でもかんでも WAI-ARIA
+            を使えばいいというものではない
+          </para>
+          <para>
+            マウスホバーでツールチップが出てくるが、キーボード操作では出てこない
+          </para>
+          <para>
+            VoiceOver
+          </para>
+          <para>
+            全ての属性を使う必要はない
+            あくまでアクセシビリティを上げるための方法の一つにすぎない
+          </para>
+        </blockquote>
+        <para>
+          つい最近 WAI-ARIA
+          についての記事を読んだばかりだったので個人的にタイムリーな話題だった。(あまりこの言葉を使いたくないのだが)
+          いわゆる「健常者」にとって、こうした問題を普段の生活の中で意識するのは難しい。だからこそ情報へのアンテナは張っておくようにしたい。
+        </para>
+      </section>
+      <section xml:id="report--day-0--1930-a">
+        <title>19:30 [A]</title>
+        <para>
+          PHP で FUSE
+        </para>
+        <para>
+          個人的に楽しみだった発表。
+        </para>
+        <blockquote>
+          <para>
+            VFS (virtual filesystem) vs 具体的なファイルシステム
+          </para>
+          <para>
+            最適な実装方法は状況により異なる
+          </para>
+          <para>
+            アプリケーションに見せるAPIは変えずに実装を隠蔽する→VFS
+          </para>
+          <para>
+            カーネルのプログラムを作るのは難しい
+            * 権限がデカすぎる
+            * システム全体がクラッシュ
+            * セキュリティリスク
+            * 開発サイクルを回しづらい
+            * ネイティブコードにコンパイルされる言語である必要がある
+          </para>
+          <para>
+            Filesystem in USEr space (FUSE)
+          </para>
+          <itemizedlist>
+            <listitem>特定の C の関数を呼ぶことで filesystem が作れる</listitem>
+            <listitem>FFI を持つ言語なら FUSE が使える</listitem>
+          </itemizedlist>
+          <para>
+            SSHFS / s3fs / Docker Desktop
+          </para>
+          <para>
+            Linux 以外でも使える
+          </para>
+          <itemizedlist>
+            <listitem>dokany (on Windows)</listitem>
+            <listitem>osxfuse</listitem>
+          </itemizedlist>
+          <para>
+            VFS: システムコールが呼ばれると、ファイルシステムによってコール FUSE:
+            カーネル空間からユーザ空間へ通信
+          </para>
+          <para>
+            高レベルなラッパで型をつける
+          </para>
+          <para>
+            PHP 以外では Wordpress を FUSE にマウントする実装がある (C, Python など)
+          </para>
+          <itemizedlist>
+            <listitem>grep できる</listitem>
+            <listitem>sed できる</listitem>
+            <listitem>編集できる</listitem>
+          </itemizedlist>
+        </blockquote>
+        <para>
+          期待通りの興味深い発表だった。FUSE
+          自体も今回の発表で知ったのだが、これ本体の実装を見るのも面白そうだ。
+          この発表を聞きながらファイルシステムにマウントできそうなものを考えていたのだが、およそ木構造をしているものすべてと言えそうだ
+          (ハンマーしか持っていないと云々)。何かできそうだがなかなか思いつかない。
+        </para>
+      </section>
+    </section>
+    <section xml:id="report--day-1">
+      <title>Day 1 (2021/03/27)</title>
+      <section xml:id="report--day-1--1050-a">
+        <title>10:50 [A]</title>
+        <para>
+          ATDD
+        </para>
+        <blockquote>
+          <itemizedlist>
+            <listitem>ユーザーストーリー</listitem>
+            <listitem>ユニットテスト</listitem>
+            <listitem>CI/CD</listitem>
+          </itemizedlist>
+          <para>
+            ユーザストーリーの受け入れ条件が曖昧になりがち
+            デグレチェックがユニットレベルでは収まらない場合、手動で同じシナリオをテストしている
+          </para>
+          <para>
+            Q2の強化 アジャイルテストの4象限
+          </para>
+          <para>
+            技術面/ビジネス面
+            開発チーム支援(コーディング前・コーディング中)/製品批評(コーディング後)
+          </para>
+          <itemizedlist>
+            <listitem>
+              Q1: 技術面 &amp; チーム支援
+              <itemizedlist>
+                <listitem>TDD</listitem>
+                <listitem>ユニットテストなど</listitem>
+              </itemizedlist>
+            </listitem>
+            <listitem>
+              Q2: ビジネス面 &amp; チーム支援
+              <itemizedlist>
+                <listitem>ATDD</listitem>
+                <listitem>ビジネス面の受け入れテストで駆動する</listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist>
+          <para>
+            Agile Alliance ユーザストーリーのスキルレベルを高める
+          </para>
+          <para>
+            テストピラミッド
+          </para>
+          <itemizedlist>
+            <listitem>UI Tests</listitem>
+            <listitem>Service Tests</listitem>
+            <listitem>Unit Tests</listitem>
+            <listitem>異なる粒度のテストを書く</listitem>
+            <listitem>
+              高レベルになるほど、持つべきテストは少なくなる
+              <itemizedlist>
+                <listitem>ピラミッド型になる</listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist>
+          <para>
+            高レベルテストが多すぎる→アイスクリームコーン　アンチパターン
+          </para>
+          <para>
+            ATDD (Acceptance TDD) API経由・UI経由での高レベルテスト E2E test
+          </para>
+          <para>
+            ストーリ受け入れテスト
+          </para>
+          <para>
+            入れ子のフィードバックループ ATDD(外側) と TDD(内側)
+          </para>
+          <para>
+            外部品質・内部品質
+          </para>
+          <para>
+            バーティカルスライスのデリバリー
+          </para>
+          <itemizedlist>
+            <listitem>cucumber</listitem>
+            <listitem>gauge</listitem>
+            <listitem>behat</listitem>
+          </itemizedlist>
+          <para>
+            ユビキタス言語 手動テストもspecに書く 自動化は可能だがコスパが悪い
+            失敗することがわかっているテスト(レッドテスト)はCIから外す
+            失敗時の原因究明が難しい 饒舌なエラーメッセージ 状況のスナップショット
+          </para>
+          <para>
+            Continuous Testing
+          </para>
+        </blockquote>
+        <para>
+          User Acceptance Test (UAT)
+          くらいの規模になると個人開発・趣味開発では触れない領域なので、大いに勉強になった。スライドに添付されている資料が相当に充実していたので、これを読むのが本番といった様相すら感じる。
+          高レベルテストの自動化は現在のプロジェクトでも感じており、自動化のチャンスは伺っている。とはいえセッションでも指摘されているように自動化することにコストがかかりすぎる領域があるのも事実で、そのバランスが難しい。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1150-a">
+        <title>11:50 [A]</title>
+        <para>
+          型解析を用いたリファクタリング
+        </para>
+        <para>
+          型のある世界で生きてきた身として大いに楽しみにしていた発表。
+        </para>
+        <blockquote>
+          <itemizedlist>
+            <listitem>PHPStan</listitem>
+            <listitem>Phan</listitem>
+            <listitem>Psalm</listitem>
+          </itemizedlist>
+          <para>
+            autoload も認識できる bootstrapFiles
+          </para>
+          <para>
+            編集箇所と利用箇所を CI でチェック ルールレベルを徐々に引き上げていく
+            警告が多すぎると見落としてしまう・無視されやすくなる
+          </para>
+          <para>
+            型がついていないことによるエラーが多い
+          </para>
+          <para>
+            型よりも詳細な検査 <literal>Util_Assert::min</literal>
+          </para>
+          <para>
+            SQL を静的解析 placeholder の型付け
+          </para>
+          <para>
+            警告レベルを低いレベルから導入 タイプヒントを積極的に書いていく PHPStan
+            の拡張を追加する
+          </para>
+        </blockquote>
+        <para>
+          昨今、動的型付き言語での型宣言・型アノテーション・型ヒントの導入が相次いでいる。長らく静的型付き言語を書いてきた私からすると、ようやく気づいたかといったところだが、ともかく型を導入する言語が増えてきた。
+          今のプロジェクトでも新しく追加するコードには型をつけるよう努めているが、どうしても古いコードには型がついていない。個人的には型のないコードに対してどう型を自動的に付けるかという点に興味があり、その点で
+          Ruby の typeprof には注目している。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1230-a">
+        <title>12:30 [A]</title>
+        <para>
+          昼食をとっていた。事前に何か食料を買っておくべきだった。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1310-a">
+        <title>13:10 [A]</title>
+        <para>
+          Documentation as Code
+        </para>
+        <para>
+          この発表も以前から非常に楽しみにしていた。
+        </para>
+        <blockquote>
+          <para>
+            開発開始までのオーバーヘッド 新規にチームにジョイン
+            担当範囲外の機能を理解 オンボーディングのコスト
+          </para>
+          <para>
+            PHPerKaigi 2020 で発表あり
+          </para>
+          <para>
+            継続的にシステムの理解を助けるドキュメント
+          </para>
+          <para>
+            継続的ドキュメンテーション システムとドキュメントの乖離
+          </para>
+          <para>
+            書いてあることが間違っている・足りない * 徐々にずれていく *
+            システムの更新タイミングとドキュメントの更新タイミングに差がある
+          </para>
+          <para>
+            システムとドキュメントは対応関係がある * 間違ったドキュメント *
+            存在しないドキュメント
+          </para>
+          <para>
+            システムとドキュメントの乖離を定量化する 継続的に
+            システムの更新に近いタイミングで ドキュメントを更新し続ける
+          </para>
+          <para>
+            Documentation as Code
+          </para>
+          <para>
+            コードと同じツールでドキュメントを書く * issue tracker * vcs * plain
+            text markup * automation
+          </para>
+          <para>
+            開発者 システム ドキュメント 構造化データ ソフトウェア
+          </para>
+          <para>
+            システムから構造化データを抽出する PHPDoc OpenAPI
+          </para>
+          <para>
+            ビュー 関心ごとに合わせてアーキテクチャを一つ以上の側面(断面)で説明する
+          </para>
+          <para>
+            ビューの単位でドキュメントに
+          </para>
+          <para>
+            スタックトレースからのドキュメント生成
+          </para>
+        </blockquote>
+        <para>
+          ドキュメントの管理は現プロジェクトでも課題と感じている。作られた当初は正しくても、実態と乖離していくのを止めるのは困難を極める。全体的に興味深い発表だったが、特にスタックトレースからのドキュメント生成というアイデアに惹かれるものを感じた。スタックトレースという実態と不可分な
+          (乖離しない)
+          情報を起点にするのは理にかなっている。問題はトレースをいつ、どう取るかだろうか。それを自動化しなければ、実態との乖離が避けられないだろう。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1410-a">
+        <title>14:10 [A]</title>
+        <para>
+          cookie による session 管理
+        </para>
+        <para>
+          全体的に基本的な話だったので特に触れない。Cookie
+          やセッションの話としては非常に分かりやすくまとめられていたので、知らない人が学ぶにはいい教材だろう。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1450-a">
+        <title>14:50 [A]</title>
+        <para>
+          PHP のエラーと例外
+        </para>
+        <blockquote>
+          <para>
+            エラー PHPエンジンがエラーを通知する 例外 プログラムが投げる
+          </para>
+          <para>
+            PHP7-8とエラー
+          </para>
+          <para>
+            PHPエンジンのエラーの一部が に変換されるようになった → try-catch
+            で捕捉できる
+          </para>
+          <para>
+            は例外とは異なる
+          </para>
+          <para>
+            PHP8 でエラーレベルの引き上げ
+          </para>
+          <itemizedlist>
+            <listitem>
+              捕捉すべきもの
+              <itemizedlist>
+                <listitem>recoverable</listitem>
+              </itemizedlist>
+            </listitem>
+            <listitem>
+              捕捉すべきでないもの
+              <itemizedlist>
+                <listitem>unrecoverable</listitem>
+                <listitem>開発時に対処できるもの</listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist>
+          <para>
+            例外 * 捕捉して事後処理 * 捕捉せず(or 捕捉した上で)さらに上に是非を問う
+          </para>
+          <para>
+            開発段階で例外を把握し、ハンドリングを考えておく
+          </para>
+          <para>
+            と
+          </para>
+          <para>
+            はキャッチすべきでない
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+
+              </para>
+              <itemizedlist>
+                <listitem>本番で起きてはいけない</listitem>
+              </itemizedlist>
+            </listitem>
+            <listitem>
+              <para>
+
+              </para>
+              <itemizedlist>
+                <listitem>本番で起きてはいけない →生じないのだから捕捉もしない</listitem>
+              </itemizedlist>
+            </listitem>
+            <listitem>
+              <para>
+
+              </para>
+              <itemizedlist>
+                <listitem>起こるかもしれないので本番環境でも考慮する</listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist>
+          <para>
+            捕捉して対応するのではなく、未然に防ぐ
+          </para>
+          <para>
+            独自例外を使う を投げてしまうと、 catch ()せざるを得ない →catch
+            範囲が広すぎる
+          </para>
+          <para>
+            SPL の例外を使う
+          </para>
+          <para>
+            例外翻訳
+            上位のレイヤが下位のレイヤの例外を捕捉し、上位レイヤのAPIに「翻訳」する
+            下位レイヤの知識に依存させない
+          </para>
+          <para>
+            @throws 捕捉してほしい例外を書き連ねておく
+          </para>
+          <para>
+            呼び出しもとに負わせたい責任
+          </para>
+        </blockquote>
+        <para>
+          PHP を学んでいる途中の私としては、今まさに聞きたい発表だった (現時点で
+          PHP を書き始めてから 4ヶ月ほどになる)。
+        </para>
+        <para>
+          個人的に例外やエラーを最もうまく扱っているのは Go、Swift、Rust、Haskell
+          などのエラーを「値として」扱う言語だと思っている。try-catch
+          は通常の処理フローを完全に壊してしまう上、構文としても重すぎる。値としてのエラー通知は
+          C言語時代への回帰ともいえるが、その頃と異なるのはエラーを暗黙のうちに握り潰すことがないということだ。これらの言語は型を持っており、静的に検証ができる
+          (C のそれはまともな型付けではない。念のため)。
+        </para>
+        <para>
+          PHP
+          のように、すでに例外が言語システムに根ざしている言語ではどうすればよいか。この場合も同じく静的検証の力を借りることになるだろう。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1530-a">
+        <title>15:30 [A]</title>
+        <para>
+          Laravel のメール認証
+        </para>
+        <para>
+          Laravel
+          の知識がない私にはまったくついていけなかった。また、個人的にタイトルがややミスリーディングに感じた。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1610-a">
+        <title>16:10 [A]</title>
+        <para>
+          gRPC
+        </para>
+        <blockquote>
+          <para>
+            Unary RPCs Server streaming RPCs Client streaming RPCs Bidirectional
+            streaming RPCs
+          </para>
+          <para>
+            Protobuf
+          </para>
+          <para>
+            実装とAPIが乖離しにくい 自動生成 複数言語でも相互に使える
+          </para>
+          <para>
+            マイクロサービスのサービス通信 スマホアプリ ゲームサーバ
+          </para>
+          <para>
+            PHP では？
+          </para>
+          <para>
+            PHP ではストリーミングが難しい リクエストごとにプロセスが使い捨て
+          </para>
+          <para>
+            PHP ではgRPCのクライアントしか対応していない
+          </para>
+          <para>
+            gRPC-Web ブラウザで扱うためのJSライブラリ+プロトコル
+          </para>
+          <para>
+            HTTP/1.1 でも使える Unary RPC と Server streaming RPC のみ
+          </para>
+          <para>
+            Envoy Nginx などで相互に gRPC と gRPC-Web で変換
+          </para>
+          <para>
+            Amp イベント駆動な並行処理のフレームワーク
+          </para>
+          <para>
+            HTTP/2 対応
+          </para>
+          <para>
+            C#のgRPC-Webが楽
+          </para>
+        </blockquote>
+        <para>
+          (発表の中でもまさに同じことをおっしゃっていたが) PHP
+          以外の方が向いているだろう、というのが第一の感想である。gRPC
+          はそれ自体というよりも Protobuf
+          というエコシステムに乗れることのメリットが大きいと感じる。そのエコシステムにうまく乗れない時点で、うーんという感じ。
+        </para>
+      </section>
+      <section xml:id="report--day-1--1650-a">
+        <title>16:50 [A]</title>
+        <para>
+          アーキテクチャテスト
+        </para>
+        <blockquote>
+          <para>
+            Independent Core Layer Pattern
+          </para>
+          <para>
+            開発初期のアーキテクチャが崩れる
+            アーキテクチャ観点のコードレビューができない
+          </para>
+          <para>
+            どこにクラスを置けばよいか？ ドキュメントがない
+          </para>
+          <para>
+            アーキテクチャ設計に関する知識が属人化・暗黙知化
+          </para>
+          <para>
+            ガイドライン * 最初にルールを決めるのは簡単 *
+            ルール通り作り始めるのも簡単 *
+            →維持するのが難しい、人が決めたものゆえ壊れやすい
+          </para>
+          <para>
+            PHP の特性 * クラスは public * 可視性の制御が public / protected /
+            private のみ * 依存関係の制御が困難
+          </para>
+          <para>
+            アーキテクチャテスト
+            クラスの依存関係や実装ルールをコードとして表現し、自動テスト化する
+          </para>
+          <itemizedlist>
+            <listitem>deptrac</listitem>
+            <listitem>phpat</listitem>
+          </itemizedlist>
+          <para>
+            Independent Core Layer Pattern
+          </para>
+          <para>
+            アーキテクチャテストの失敗 * 実装誤り * or アーキテクチャが適切でない *
+            開発の過程でフィードバックしていく
+          </para>
+          <para>
+            モジュラーモノリス→マイクロサービスへ
+          </para>
+        </blockquote>
+      </section>
+    </section>
+    <section xml:id="report--day-2">
+      <title>Day 2 (2021/03/28)</title>
+      <para>
+        冒頭に書いた通り、2日目から体調が悪くまともに聴けていない。途中までは頭痛を我慢しつつ見ていたのだが、まともに入ってこなかった。
+      </para>
+      <para>
+        残念ではあるが、いずれにせよ見られていない発表は他にもあるので、今週末にでもまとめて見ようと思う。
+      </para>
+    </section>
+    <section xml:id="report--comments">
+      <title>全体の感想</title>
+      <para>
+        Day 2
+        にほとんど参加できなかったのは残念だが、イベント自体は大変楽しく、また興味深いものであった。自分がまったく知らない領域の話を聞けるのはこうしたイベントならではだと感じる。オンライン開催ゆえ現地に行く必要がなく、気軽に参加できたのも
+        (特に初参加者として) 嬉しいポイントだった。
+      </para>
+      <para>
+        今回、雑談/登壇者への質問等向けに Discord
+        サーバもあったのだが、こちらは参加こそしたものの ROM
+        のままになってしまった。発表に1ウィンドウ、メモを書くのに1ウィンドウ、Discord
+        表示に
+        1ウィンドウで私にはもう脳のリソースとディスプレイのスペースが追いつかなかった
+        (さらにいうと Zoom
+        でアンカンファレンスもやっていたようだ。こちらはまったく参加していない)。
+      </para>
+      <para>
+        1つ個人的な反省点としては、一つ一つのセッションを真剣に聞き過ぎたというものがある。もっと適当に聞いておけばよかった。これだけだと大変語弊があるのだが、言い方を変えると、Discord
+        しかりアンカンファレンスしかり「このイベントのこの瞬間にしかないコンテンツ」に触れずに、後から見返せる発表やスライドに注力してしまった、ということだ。発表の詳細な見直しはあとからできるのだから、今しかできないことを考えるべきだった。
+        まあ初カンファレンスだし、とお茶を濁しておこう。
+      </para>
+      <para>
+        さて、カンファレンスで一つ気になったことがある。それは、Discord
+        という書き込み場所が増えたことでニコ生のコメントの流量が吸い取られてしまったのではないか、という点だ。ニコニコだけ見ていると過疎っているかのように見えた発表も、Discord
+        の方では盛り上がっている、というのを何度か見かけた。ニコニコのコメント方式は盛り上がりを如実に反映するが、逆もまたしかり。Discord
+        があったこと自体はプラスだったと思うが、この点はマイナスだったのではないかと感じる。
+      </para>
+      <para>
+        <hr/>
+      </para>
+      <para>
+        最後になりましたが、毎年の PHPerKaigi
+        開催にご尽力されている皆様、スピーカーの皆様、楽しい3日間でした。ありがとうございました！
+        (ずっと常体で書いてしまったのでいきなり仏頂面から笑顔になったようで気持ち悪い)
+      </para>
+      <para>
+        ではまた来年。
+      </para>
+    </section>
+  </section>
+</article>

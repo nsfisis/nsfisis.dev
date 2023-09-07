@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slide>
+  <info>
+    <title>言語間で比較するエラーの通知と処理</title>
+    <event>
+      PHP 勉強会@東京 第154 回
+    </event>
+    <talktype>
+      レギュラートーク
+    </talktype>
+    <link>/slides/2023-07-26/phpstudy-tokyo-154/slide.pdf</link>
+    <keywordset>
+      <keyword>php</keyword>
+      <keyword>phpstudy-tokyo</keyword>
+    </keywordset>
+    <revhistory>
+      <revision>
+        <date>2023-07-26</date>
+        <revremark>登壇</revremark>
+      </revision>
+    </revhistory>
+  </info>
+</slide>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2023 nsfisis">
+    <meta name="description" content="来年の PHPerKaigi 2023 でデジタルサーカス株式会社から出題予定のトークン問題のうち、ボツになった問題を公開する (その 3)。">
+    <meta name="keywords" content="PHP,PHPerKaigi">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>PHPerKaigi 2023: ボツになったトークン問題 その 3 | REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=37fff6a2f0eef473abde58e55f28ea69">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/">REPL: Rest-Eat-Program Loop</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">PHPerKaigi 2023: ボツになったトークン問題 その 3</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/php/">PHP</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/phperkaigi/">PHPerKaigi</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2023-01-10">2023-01-10</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <p>
+               2023 年 3 月 23 日から 25 日にかけて開催予定 (記事執筆時点) の <a href="https://phperkaigi.jp/2023/">PHPerKaigi 2023</a> において、 昨年と同様に、弊社 <a href="https://www.dgcircus.com/">デジタルサーカス株式会社</a> からトークン問題を出題予定である。 
+            </p>
+             
+            <p>
+               昨年のトークン問題の記事はこちら: <a href="/posts/2022-04-09/phperkaigi-2022-tokens/">PHPerKaigi 2022 トークン問題の解説</a>
+            </p>
+             
+            <p>
+               すでに 2023 年用の問題は作成済みであるが、その制作過程の中でいくつかボツ問ができた。 せっかくなので、PHPerKaigi 開催を待つ間に紹介しようと思う。 
+            </p>
+             
+            <p>
+               10 月から 2 月まで、毎月 1 記事ずつ公開していく予定 (忘れていなければ → 忘れていたので 12 月公開予定だった記事を今書いている)。 
+            </p>
+             
+            <ul>
+              <li>
+                その 1 はこちら: <a href="/posts/2022-10-23/phperkaigi-2023-unused-token-quiz-1/">PHPerKaigi 2023: ボツになったトークン問題 その 1</a>
+              </li>
+               
+              <li>
+                その 2 はこちら: <a href="/posts/2022-11-19/phperkaigi-2023-unused-token-quiz-2/">PHPerKaigi 2023: ボツになったトークン問題 その 2</a>
+              </li>
+            </ul>
+          </section>
+           
+          <section id="section--quiz">
+            <h2><a href="#section--quiz">問題</a></h2> 
+            <p>
+               注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。 
+            </p>
+             
+            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>);
+} <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Throwable</span> <span class="hljs-variable">$e</span>) {
+  <span class="hljs-keyword">while</span> (<span class="hljs-variable">$e</span> = <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getPrevious</span>()) <span class="hljs-title function_ invoke__">printf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getLine</span>() + <span class="hljs-number">23</span>);
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$i</span></span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$i</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-title function_ invoke__">f</span>();
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">match</span> (<span class="hljs-variable">$i</span>) {
+      <span class="hljs-number">0</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+      <span class="hljs-number">15</span>, <span class="hljs-number">36</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">14</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">37</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+
+
+
+
+
+
+
+      <span class="hljs-number">6</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">5</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">22</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+
+      <span class="hljs-number">34</span>, <span class="hljs-number">35</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+
+
+
+
+
+      <span class="hljs-number">25</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">17</span>, <span class="hljs-number">21</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">24</span>, <span class="hljs-number">32</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+
+
+
+
+      <span class="hljs-number">33</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">16</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+      <span class="hljs-number">18</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+
+
+
+
+
+      <span class="hljs-number">7</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">2</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">1</span>, <span class="hljs-number">20</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">10</span>, <span class="hljs-number">28</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">8</span>, <span class="hljs-number">12</span>, <span class="hljs-number">26</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">13</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+
+
+      <span class="hljs-number">31</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">29</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">11</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+
+      <span class="hljs-number">3</span>, <span class="hljs-number">19</span>, <span class="hljs-number">23</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+
+      <span class="hljs-number">27</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-number">30</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+    };
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-variable">$i</span> - <span class="hljs-number">1</span>);
+  }
+}
+
+
+
+
+
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">g</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">__LINE__</span>;
+}</code></pre>
+             
+            <p>
+               &quot;Catchline&quot; と名付けた作品。実行するとトークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> が得られる。 
+            </p>
+             
+            <p>
+               トークンは PHP の式になっていて、評価すると <code>Hello, World!</code> という文字列になる。PHPer チャレンジのトークンには空白を含められないという制約があるが、こういった形でトークンにすれば回避できる。 
+            </p>
+          </section>
+           
+          <section id="section--commentary">
+            <h2><a href="#section--commentary">解説</a></h2> 
+            <section id="section--commentary--summary">
+              <h3><a href="#section--commentary--summary">概要</a></h3> 
+              <p>
+                 例外が発生した行数にデータをエンコードし、それを <code>catch</code> で捕まえて表示している。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--chain-of-exceptions">
+              <h3><a href="#section--commentary--chain-of-exceptions">例外オブジェクトの連鎖</a></h3> 
+              <p>
+                <a href="https://www.php.net/class.Exception"><code>Exception</code></a> や <a href="https://www.php.net/class.Error"><code>Error</code></a> には <code>$previous</code> というプロパティがあり、コンストラクタの第3引数から渡すことができる。主に 2つの用法がある: 
+              </p>
+               
+              <ul>
+                <li>
+                  エラーを処理している途中に起こった別のエラーに、元のエラー情報を含める
+                </li>
+                 
+                <li>
+                  内部エラーをラップして作られたエラーに、内部エラーの情報を含める
+                </li>
+              </ul>
+               
+              <p>
+                 このうち 1つ目のケースは、 <code>finally</code> 節の中でエラーを投げると PHP 処理系が勝手に <code>$previous</code> を設定してくれる。 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Exception</span>(<span class="hljs-string">&quot;Error 1&quot;</span>);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Exception</span>(<span class="hljs-string">&quot;Error 2&quot;</span>);
+  }
+} <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Exception</span> <span class="hljs-variable">$e</span>) {
+  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getMessage</span>() . PHP_EOL;
+  <span class="hljs-comment">// =&gt; Error 2</span>
+  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getPrevious</span>()-&gt;<span class="hljs-title function_ invoke__">getMessage</span>() . PHP_EOL;
+  <span class="hljs-comment">// =&gt; Error 1</span>
+}</code></pre>
+               
+              <p>
+                 この知識を元に、トークンの出力部を解析してみる。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--output">
+              <h3><a href="#section--commentary--output">出力部の解析</a></h3> 
+              <p>
+                 出力部をコメントや改行を追加して再掲する: 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>);
+} <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Throwable</span> <span class="hljs-variable">$e</span>) {
+  <span class="hljs-keyword">while</span> (<span class="hljs-variable">$e</span> = <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getPrevious</span>()) {
+    <span class="hljs-title function_ invoke__">printf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getLine</span>() + <span class="hljs-number">23</span>);
+  }
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+}</code></pre>
+               
+              <p>
+                 出力をおこなう <code>catch</code> 節を見てみると、 <code>Throwable::getPrevious()</code> を呼び出してエラーチェインを辿り、 <code>Throwable::getLine()</code> でエラーが発生した行数を取得している。その行数に <code>23</code> なるマジックナンバーを足し、フォーマット指定子 <code>%c</code> で出力している。 
+              </p>
+               
+              <p>
+                 フォーマット指定子 <code>%c</code> は、整数を ASCII コード<span></span> と見做して印字する。トークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> の <code>b</code> であれば、ASCII コード <code>98</code> なので、75 行目で発生したエラー、 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-number">1</span>, <span class="hljs-number">20</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,</code></pre>
+               
+              <p>
+                 によって表現されている。エラーを起こす方法はいろいろと考えられるが、今回はゼロ除算を使った。 
+              </p>
+               
+              <p>
+                 それでは、エラーチェインを作る箇所、関数 <code>f()</code> を見ていく。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--data-construction">
+              <h3><a href="#section--commentary--data-construction">データ構成部の解析</a></h3> 
+              <p>
+                <code>f()</code> の定義を再掲する (エラーオブジェクトの行数を利用しているので、一部分だけ抜き出すと値が変わることに注意): 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$i</span></span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$i</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-title function_ invoke__">f</span>();
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">match</span> (<span class="hljs-variable">$i</span>) {
+      <span class="hljs-number">0</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>, <span class="hljs-comment">// 12 行目</span>
+
+
+
+      <span class="hljs-number">15</span>, <span class="hljs-number">36</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">14</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+      <span class="hljs-number">37</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
+
+      <span class="hljs-comment">// (略)</span>
+
+      <span class="hljs-number">30</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>, <span class="hljs-comment">// 97 行目</span>
+    };
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-variable">$i</span> - <span class="hljs-number">1</span>);
+  }
+}</code></pre>
+               
+              <p>
+                 前述のように、 <code>finally</code> 節でエラーを投げると PHP 処理系が <code>$previous</code> を設定する。ここでは、エラーを繋げるために <code>f()</code> を再帰呼び出ししている。最初に <code>f()</code> を呼び出している箇所を確認すると、 
+              </p>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>); <span class="hljs-comment">// 3 行目</span></code></pre>
+               
+              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">g</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">__LINE__</span>; <span class="hljs-comment">// 111 行目</span>
+}</code></pre>
+               
+              <p>
+                <code>f()</code> には <code>111 / 3</code> で <code>37</code> が渡されることがわかる。そこから 1 ずつ減らして再帰呼び出ししていき、0 より小さくなったら <code>f()</code> を引数なしで呼び出す。引数の数が足りないと呼び出しに失敗するので、再帰はここで止まる。 
+              </p>
+               
+              <p>
+                 エラーチェインは、最後に発生したエラーを先頭とした単方向連結リストになっているので、順に 
+              </p>
+               
+              <ol numeration="arabic">
+                <li>
+                  <code>f()</code> の引数が足りないことによる呼び出し失敗
+                </li>
+                 
+                <li>
+                  <code>f(0)</code> の呼び出しで発生したゼロ除算
+                </li>
+                 
+                <li>
+                  <code>f(1)</code> の呼び出しで発生したゼロ除算
+                </li>
+                 
+                <li>
+                  …
+                </li>
+                 
+                <li>
+                  <code>f(37)</code> の呼び出しで発生したゼロ除算
+                </li>
+              </ol>
+               
+              <p>
+                 となっている。出力の際は <code>catch</code> したエラーの <code>getPrevious()</code> から処理を始めるので、1 番目の <code>f()</code> によるエラーは無視され、 <code>f(0)</code> によるエラー、 <code>f(1)</code> によるエラー、 <code>f(2)</code> によるエラー、と出力が進む。 
+              </p>
+               
+              <p>
+                <code>f()</code> に <code>0</code> を渡したときは 12 行目にある <code>match</code> の <code>0</code> でゼロ除算が起こるので、行数が 12 となったエラーが投げられる。出力部ではこれに 23 を足した数を ASCII コードとして表示しているのだった。 <code>12 + 23</code> は <code>35</code>、ASCII コードでは <code>#</code> である。これがトークンの 1文字目にあたる。 
+              </p>
+            </section>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2> 
+            <p>
+               「行数」というのはトークン文字列をデコードする対象として優れている。 
+            </p>
+             
+            <ul>
+              <li>
+                トークンの一部や全部が陽に現れない
+              </li>
+               
+              <li>
+                <code>__LINE__</code> で容易に取得できる
+              </li>
+            </ul>
+             
+            <p>
+               しかし、こういった「変な」プログラムを何度も読んだり書いたりしていると、 <code>__LINE__</code> を使うのはあまりにありきたりで退屈になる。では、他に行数を取得する手段はないか。こうして <code>Throwable</code> を思いつき、続けてエラーオブジェクトには <code>$previous</code> があることを思い出した。 
+            </p>
+             
+            <p>
+               今回エラーを投げるのにゼロ除算を用いたのは、それがエラーを投げる最も短いコードだと考えたからである。もし 3バイト未満で <code>Throwable</code> なオブジェクトを投げる手段をご存じのかたがいらっしゃれば、ぜひご教示いただきたい。……と締める予定だったのだが、<code>0/0</code> のところを存在しない定数にすれば、簡単に 1バイトを達成できた。ゼロ除算している箇所はちょうど 26 箇所あるので、アルファベットにでもしておけば意味ありげで良かったかもしれない。 
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

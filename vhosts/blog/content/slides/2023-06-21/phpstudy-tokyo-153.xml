@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slide>
+  <info>
+    <title>テキストファイルの末尾には改行コードを入れよう</title>
+    <event>
+      PHP 勉強会@東京 第153 回
+    </event>
+    <talktype>
+      LT
+    </talktype>
+    <link>/slides/2023-06-21/phpstudy-tokyo-153/slide.pdf</link>
+    <keywordset>
+      <keyword>php</keyword>
+      <keyword>phpstudy-tokyo</keyword>
+    </keywordset>
+    <revhistory>
+      <revision>
+        <date>2023-06-21</date>
+        <revremark>登壇</revremark>
+      </revision>
+    </revhistory>
+  </info>
+</slide>

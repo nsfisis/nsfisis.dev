@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slide>
+  <info>
+    <title>PHPer チャレンジ解説 (デジタルサーカス株式会社)</title>
+    <event>
+      PHPerKaigi 2023
+    </event>
+    <talktype>
+      トークン解説セッション
+    </talktype>
+    <link>/slides/2023-03-25/phperkaigi-2023-tokens/slide.pdf</link>
+    <keywordset>
+      <keyword>conference</keyword>
+      <keyword>php</keyword>
+      <keyword>phperkaigi</keyword>
+    </keywordset>
+    <revhistory>
+      <revision>
+        <date>2023-03-25</date>
+        <revremark>登壇</revremark>
+      </revision>
+    </revhistory>
+  </info>
+</slide>

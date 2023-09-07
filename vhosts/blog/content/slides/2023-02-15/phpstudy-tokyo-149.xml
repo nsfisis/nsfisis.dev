@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slide>
+  <info>
+    <title>PHPerKaigi 2023 のトークン問題でボツにした問題を供養する</title>
+    <event>
+      PHP 勉強会@東京 第149 回
+    </event>
+    <talktype>
+      LT
+    </talktype>
+    <link>/slides/2023-02-15/phpstudy-tokyo-149/slide.pdf</link>
+    <keywordset>
+      <keyword>php</keyword>
+      <keyword>phpstudy-tokyo</keyword>
+    </keywordset>
+    <revhistory>
+      <revision>
+        <date>2023-02-15</date>
+        <revremark>登壇</revremark>
+      </revision>
+    </revhistory>
+  </info>
+</slide>
