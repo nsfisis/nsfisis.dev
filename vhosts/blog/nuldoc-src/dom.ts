@@ -53,12 +53,6 @@ export function findChildElements(e: Element, name: string): Element[] {
   return cs;
 }
 
-export function removeChildElements(e: Element, name: string) {
-  e.children = e.children.filter((c) =>
-    c.kind !== "element" || c.name !== name
-  );
-}
-
 export function innerText(e: Element): string {
   let t = "";
   forEachChild(e, (c) => {

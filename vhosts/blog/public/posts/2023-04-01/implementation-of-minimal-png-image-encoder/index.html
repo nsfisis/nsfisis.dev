@@ -93,7 +93,7 @@
                以下のソースコードをベースにする。 今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。 
             </p>
              
-            <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">package</span> main
+            <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
 	<span class="hljs-string">&quot;image&quot;</span>
@@ -184,7 +184,7 @@
                 <code>writeSignature</code> の実装はこちら: 
               </p>
                
-              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;encoding/binary&quot;</span>
+              <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;encoding/binary&quot;</span>
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeSignature</span><span class="hljs-params">(w io.Writer)</span></span> {
 	sig := [<span class="hljs-number">8</span>]<span class="hljs-type">uint8</span>{
@@ -233,7 +233,7 @@
                  CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている (<a href="https://www.w3.org/TR/png/#D-CRCAppendix">D. Sample CRC implementation</a>) ので、これを Go に移植する。 
               </p>
                
-              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">var</span> (
+              <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">var</span> (
 	crcTable         [<span class="hljs-number">256</span>]<span class="hljs-type">uint32</span>
 	crcTableComputed <span class="hljs-type">bool</span>
 )
@@ -273,7 +273,7 @@
                  できた <code>crc</code> 関数を使って、chunk 一般を書き込む関数も用意しておこう。 
               </p>
                
-              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunk</span><span class="hljs-params">(w io.Writer, chunkType <span class="hljs-type">string</span>, data []<span class="hljs-type">byte</span>)</span></span> {
+              <pre class="highlight" language="go"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunk</span><span class="hljs-params">(w io.Writer, chunkType <span class="hljs-type">string</span>, data []<span class="hljs-type">byte</span>)</span></span> {
 	typeAndData := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(chunkType)+<span class="hljs-built_in">len</span>(data))
 	typeAndData = <span class="hljs-built_in">append</span>(typeAndData, []<span class="hljs-type">byte</span>(chunkType)...)
 	typeAndData = <span class="hljs-built_in">append</span>(typeAndData, data...)
@@ -367,7 +367,7 @@
                  今回ほとんどのデータは決め打ちするので、データに応じて変わるのは width と height だけになる。コードは次のようになる。 
               </p>
                
-              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;bytes&quot;</span>
+              <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;bytes&quot;</span>
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIhdr</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>)</span></span> {
 	<span class="hljs-keyword">var</span> buf bytes.Buffer
@@ -421,7 +421,7 @@
                    Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている (<a href="https://www.rfc-editor.org/rfc/rfc1950#section-9">9. Appendix: Sample code</a>) ので、Go に移植する。 
                 </p>
                  
-                <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">const</span> adler32Base = <span class="hljs-number">65521</span>
+                <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">const</span> adler32Base = <span class="hljs-number">65521</span>
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateAdler32</span><span class="hljs-params">(adler <span class="hljs-type">uint32</span>, buf []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">uint32</span> {
 	s1 := adler &amp; <span class="hljs-number">0xFFFF</span>
@@ -468,7 +468,7 @@
                    実際にこの手抜き zlib を実装したものがこちら: 
                 </p>
                  
-                <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">encodeZlib</span><span class="hljs-params">(data []<span class="hljs-type">byte</span>)</span></span> []<span class="hljs-type">byte</span> {
+                <pre class="highlight" language="go"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">encodeZlib</span><span class="hljs-params">(data []<span class="hljs-type">byte</span>)</span></span> []<span class="hljs-type">byte</span> {
 	<span class="hljs-keyword">var</span> buf bytes.Buffer
 
 	binary.Write(&amp;buf, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0x78</span>))
@@ -508,7 +508,7 @@
                    先ほどの <code>encodeZlib</code> も使って実際に実装したものがこちら: 
                 </p>
                  
-                <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIdat</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>, img image.Image)</span></span> {
+                <pre class="highlight" language="go"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIdat</span><span class="hljs-params">(w io.Writer, width, height <span class="hljs-type">uint32</span>, img image.Image)</span></span> {
 	<span class="hljs-keyword">var</span> pixels bytes.Buffer
 	<span class="hljs-keyword">for</span> y := <span class="hljs-type">uint32</span>(<span class="hljs-number">0</span>); y &lt; height; y++ {
 		binary.Write(&amp;pixels, binary.BigEndian, <span class="hljs-type">uint8</span>(<span class="hljs-number">0</span>))
@@ -535,7 +535,7 @@
                  特に追加のデータはなく、必要なのは chunk type の <code>IEND</code> くらいなので実装は簡単: 
               </p>
                
-              <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIend</span><span class="hljs-params">(w io.Writer)</span></span> {
+              <pre class="highlight" language="go"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunkIend</span><span class="hljs-params">(w io.Writer)</span></span> {
 	writeChunk(w, <span class="hljs-string">&quot;IEND&quot;</span>, <span class="hljs-literal">nil</span>)
 }</code></pre>
             </section>
@@ -547,7 +547,7 @@
                最後に全ソースコードを再掲しておく。 
             </p>
              
-            <pre class="highlight" language="go" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">package</span> main
+            <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
 	<span class="hljs-string">&quot;bytes&quot;</span>

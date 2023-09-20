@@ -120,7 +120,7 @@
                特に、C言語でこのような試みをおこなったことがあるかたならそう思うだろう。事実、Cでのこの制約はほとんど無意味に等しい。 
             </p>
              
-            <pre class="highlight" language="c" linenumbering="unnumbered"><code class="highlight">#\
+            <pre class="highlight" language="c"><code class="highlight">#\
 i\
 n\
 c\
@@ -245,7 +245,7 @@ c\
                また、2文字だと文字列がまともに書けないのも辛い。<code>&apos;&apos;</code> だけで2文字使うので、 「1文字の文字列リテラル」というものを書くことができない。PHP では文字列リテラル中に生の改行が書けるので 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$a</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$a</span>
 =<span class="hljs-string">&#x27;
 a&#x27;</span>
 ;;</code></pre>
@@ -267,7 +267,7 @@ a&#x27;</span>
                  まずは普通に書くとしよう。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">1</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-number">100</span>; <span class="hljs-variable">$i</span>++) {
   <span class="hljs-keyword">echo</span> ((<span class="hljs-variable">$i</span> % <span class="hljs-number">3</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Fizz&#x27;</span>) . (<span class="hljs-variable">$i</span> % <span class="hljs-number">5</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Buzz&#x27;</span>) ?: <span class="hljs-variable">$i</span>) . <span class="hljs-string">&quot;\n&quot;</span>;
@@ -284,7 +284,7 @@ a&#x27;</span>
                 <code>for</code> は、3文字もある長いキーワードである。 こんなものは使えない。<code>array_</code> 系の関数を使って、適当に置き換えるとしよう。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>);
 <span class="hljs-title function_ invoke__">array_walk</span>(
@@ -304,7 +304,7 @@ fn(<span class="hljs-variable">$i</span>) =&gt;
                 <code>range</code>、<code>array_walk</code>、<code>printf</code> は長すぎるのでどうにかせねばならない。 ここで、PHP の可変関数を使う。可変関数とは、関数名が文字列として入った変数を経由して、関数を呼び出す機能である。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-variable">$r</span> = <span class="hljs-string">&#x27;range&#x27;</span>;
 <span class="hljs-variable">$w</span> = <span class="hljs-string">&#x27;array_walk&#x27;</span>;
@@ -340,7 +340,7 @@ fn(<span class="hljs-variable">$i</span>) =&gt;
                  というルールがない場合、「未定義の定数が評価された場合、その定数の名前が値になる」という PHP 7.x までの仕様が利用できる。 例えば、 <code>Fizz</code> という文字列が欲しければ、次のようにする。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$f</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$f</span>
 =F
 .i
 .z
@@ -351,7 +351,7 @@ fn(<span class="hljs-variable">$i</span>) =&gt;
                  こうして簡単に文字列を作れる。 なお、この仕様は 7.x 時点でも警告を受けるので、<code>@</code> 演算子を使って抑制してやるとよい。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$f</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$f</span>
 =@
 F.
 @i
@@ -376,7 +376,7 @@ F.
                  ずばり、文字列同士のビット演算を使う。 PHP では、文字列同士でビット演算 (<code>&amp;</code>、<code>|</code>、<code>^</code>) をした場合、 文字列の各バイトごとに指定したビット演算がなされ、それを結合したものが演算結果となる。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$a</span> = <span class="hljs-string">&quot;12345&quot;</span>;
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$a</span> = <span class="hljs-string">&quot;12345&quot;</span>;
 <span class="hljs-variable">$b</span> = <span class="hljs-string">&quot;world&quot;</span>;
 
 <span class="hljs-comment">// $a ^ $b は次のコードと同じ</span>
@@ -392,7 +392,7 @@ F.
                  これを踏まえ、次のコードを見てみよう。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-string">&quot;x\nOm\n&quot;</span>;
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-string">&quot;x\nOm\n&quot;</span>;
 <span class="hljs-variable">$y</span> = <span class="hljs-string">&quot;\nk!\no&quot;</span>;
 <span class="hljs-variable">$r</span> = <span class="hljs-variable">$x</span> ^ <span class="hljs-variable">$y</span>;
 <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$r</span>\n&quot;</span>;</code></pre>
@@ -401,7 +401,7 @@ F.
                  実行すると、<code>range</code> が表示される。 さて、PHP では文字列リテラル中に生の改行を直接書いてもよいのだった (「主な障害」の節を参照のこと)。 書きかえてみよう。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span>
 =<span class="hljs-string">&#x27;x
 Om
 &#x27;</span>;
@@ -418,7 +418,7 @@ o&#x27;</span>
                  さらに <code>#</code> を使って適当に調整すると、次のようになる。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span>
 =<span class="hljs-comment">#</span>
 <span class="hljs-string">&#x27;x
 Om
@@ -453,7 +453,7 @@ o&#x27;</span>
                完成したものがこちら。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-variable">$x</span>
 =<span class="hljs-comment">#</span>
@@ -621,7 +621,7 @@ _!
                PHP では、バッククォートを使ってシェルを呼び出せる。 これは <code>shell_exec</code> 関数と等価である。 さて、PHP ではバックスラッシュによる行継続が使えないと書いたが、シェルでは使える (当然だが、呼び出されるシェルに依存する。Bash なら大丈夫だろう。知らんけど)。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-title function_ invoke__">printf</span>(`
 e\
@@ -658,7 +658,7 @@ o\
                もうこれ以上は不可能だと思っていたのだが、この記事の執筆中に解決する方法を思いついたので載せておく。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-variable">$c</span> = <span class="hljs-string">&#x27;chr&#x27;</span>;
 
@@ -692,7 +692,7 @@ ${
                先程と同じく、<code>chr</code> や <code>printf</code> を生成する部分は長くなるので省いた。 
             </p>
              
-            <pre class="highlight monospaced"><code>${
+            <pre class="highlight"><code>${
 &apos;_
 &apos;}</code></pre>
              
@@ -700,7 +700,7 @@ ${
                は変数で、中にはスペースとエスケープが入っている (<code>chr(32) . chr(92)</code>)。 シェルに渡されている文字列は次のようになる。 
             </p>
              
-            <pre class="highlight monospaced"><code>e\
+            <pre class="highlight"><code>e\
 c\
 h\
 o\
@@ -721,7 +721,7 @@ o\
                ちなみに、PHP 8.2 からは、この記法で Warning が出るようになるようだ。 
             </p>
              
-            <pre class="highlight monospaced"><code>${
+            <pre class="highlight"><code>${
 &apos;_
 &apos;}</code></pre>
              

@@ -1,0 +1,83 @@
+---
+[article]
+title = "【Python】 クロージャとUnboundLocalError: local variable 'x' referenced before assignment"
+description = "Python における UnboundLocalError の理由と対処法。"
+tags = [
+  "python",
+  "python3",
+]
+
+[[article.revisions]]
+date = "2021-10-02"
+remark = "Qiita から移植"
+---
+<article>
+  <note>
+    この記事は Qiita から移植してきたものです。
+    元 URL: <a href="https://qiita.com/nsfisis/items/5d733703afcb35bbf399">https://qiita.com/nsfisis/items/5d733703afcb35bbf399</a>
+  </note>
+  <p>
+    本記事は Python 3.7.6 の動作結果を元にして書かれている。
+  </p>
+  <p>
+    Python でクロージャを作ろうと、次のようなコードを書いた。
+  </p>
+  <codeblock language="python">
+    <![CDATA[
+    def f():
+        x = 0
+        def g():
+            x += 1
+        g()
+
+    f()
+    ]]>
+  </codeblock>
+  <p>
+    関数 <code>g</code> から 関数 <code>f</code> のスコープ内で定義された変数 <code>x</code> を参照し、それに
+    1 を足そうとしている。 これを実行すると <code>x += 1</code>
+    の箇所でエラーが発生する。
+  </p>
+  <blockquote>
+    <p>
+      UnboundLocalError: local variable `x' referenced before assignment
+    </p>
+  </blockquote>
+  <p>
+    local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code>
+    を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。
+    前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code>
+    を変数宣言のための構文として擬似的に利用している。
+  </p>
+  <codeblock language="python">
+    <![CDATA[
+    # 注: var は正しい Python の文法ではない。上記参照のこと
+    def f():
+      var x           #  f の local変数 'x' を宣言
+      x = 0           #  x に 0 を代入
+      def g():        #  f の内部関数 g を定義
+          var x       #  g の local変数 'x' を宣言
+          #  たまたま f にも同じ名前の変数があるが、それとは別の変数
+          x += 1      #  x に 1 を加算 (x = x + 1 の糖衣構文)
+          #  加算する前の値を参照しようとするが、まだ代入されていないためエラー
+      g()
+    ]]>
+  </codeblock>
+  <p>
+    当初の意図を表現するには、次のように書けばよい。
+  </p>
+  <codeblock language="python">
+    <![CDATA[
+    def f():
+        x = 0
+        def g():
+            nonlocal x   ## (*)
+            x += 1
+        g()
+    ]]>
+  </codeblock>
+  <p>
+    <code>(*)</code> のように、<code>nonlocal</code> を追加する。これにより一つ外側のスコープ (<code>g</code>
+    の一つ外側 = <code>f</code>) で定義されている <code>x</code> を探しに行くようになる。
+  </p>
+</article>

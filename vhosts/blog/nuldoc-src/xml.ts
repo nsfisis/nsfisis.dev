@@ -1,10 +1,6 @@
 import { Element, Node, Text } from "./dom.ts";
 import { XmlParseError } from "./errors.ts";
 
-export async function parseXmlFile(filePath: string): Promise<Element> {
-  return parseXmlString(await Deno.readTextFile(filePath));
-}
-
 export function parseXmlString(source: string): Element {
   return parse({ source: source, index: 0 });
 }

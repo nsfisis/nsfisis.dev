@@ -119,14 +119,14 @@
                 <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86</a>
               </p>
                
-              <pre class="highlight" language="c" linenumbering="unnumbered"><code class="highlight">{<span class="hljs-string">&quot;BufAdd&quot;</span>,      EVENT_BUFADD},
+              <pre class="highlight" language="c"><code class="highlight">{<span class="hljs-string">&quot;BufAdd&quot;</span>,      EVENT_BUFADD},
 {<span class="hljs-string">&quot;BufCreate&quot;</span>,   EVENT_BUFADD},</code></pre>
                
               <p>
                 <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97</a>
               </p>
                
-              <pre class="highlight" language="c" linenumbering="unnumbered"><code class="highlight">{<span class="hljs-string">&quot;BufRead&quot;</span>,     EVENT_BUFREADPOST},
+              <pre class="highlight" language="c"><code class="highlight">{<span class="hljs-string">&quot;BufRead&quot;</span>,     EVENT_BUFREADPOST},
 {<span class="hljs-string">&quot;BufReadCmd&quot;</span>,  EVENT_BUFREADCMD},
 {<span class="hljs-string">&quot;BufReadPost&quot;</span>, EVENT_BUFREADPOST},</code></pre>
                
@@ -134,7 +134,7 @@
                 <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105</a>
               </p>
                
-              <pre class="highlight" language="c" linenumbering="unnumbered"><code class="highlight">{<span class="hljs-string">&quot;BufWrite&quot;</span>,    EVENT_BUFWRITEPRE},
+              <pre class="highlight" language="c"><code class="highlight">{<span class="hljs-string">&quot;BufWrite&quot;</span>,    EVENT_BUFWRITEPRE},
 {<span class="hljs-string">&quot;BufWritePost&quot;</span>,    EVENT_BUFWRITEPOST},
 {<span class="hljs-string">&quot;BufWritePre&quot;</span>, EVENT_BUFWRITEPRE},</code></pre>
             </section>
@@ -149,7 +149,7 @@
                 <a href="https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124">https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124</a>
               </p>
                
-              <pre class="highlight" language="lua" linenumbering="unnumbered"><code class="highlight">aliases = {
+              <pre class="highlight" language="lua"><code class="highlight">aliases = {
 BufCreate = <span class="hljs-string">&#x27;BufAdd&#x27;</span>,
 BufRead = <span class="hljs-string">&#x27;BufReadPost&#x27;</span>,
 BufWrite = <span class="hljs-string">&#x27;BufWritePre&#x27;</span>,
@@ -160,7 +160,7 @@ FileEncoding = <span class="hljs-string">&#x27;EncodingChanged&#x27;</span>,
                  ところで、上では取り上げなかった <code>FileEncoding</code> だが、これは <code>:help FileEncoding</code> にしっかりと書いてある。 
               </p>
                
-              <pre class="highlight monospaced"><code>                                                              *FileEncoding*
+              <pre class="highlight"><code>                                                              *FileEncoding*
 FileEncoding                    Obsolete.  It still works and is equivalent
                                 to |EncodingChanged|.</code></pre>
             </section>

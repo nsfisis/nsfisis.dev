@@ -79,7 +79,7 @@
                ソースコードはこちら。実行には PHP 8.1 以上が必要なので注意。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-keyword">declare</span>(strict_types=<span class="hljs-number">0O1</span>);
 
@@ -176,7 +176,7 @@ $🐘([
                    なお、brainf*ck プログラムを普通の書き方で書くと、次のようになる。 
                 </p>
                  
-                <pre class="highlight monospaced"><code>+ + + + + + + + + +
+                <pre class="highlight"><code>+ + + + + + + + + +
 [
   &gt; + + +
   &gt; + + + + +
@@ -266,7 +266,7 @@ $🐘([
                    ソースコードのライセンスを示したこの部分だが、 
                 </p>
                  
-                <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight">https:<span class="hljs-comment">//creativecommons.org/publicdomain/zero/1.0/</span></code></pre>
+                <pre class="highlight" language="php"><code class="highlight">https:<span class="hljs-comment">//creativecommons.org/publicdomain/zero/1.0/</span></code></pre>
                  
                 <p>
                    完全に合法な PHP のコードである。 <code>https:</code> 部分はラベル、<code>//</code> 以降は行コメントになっている。 
@@ -279,7 +279,7 @@ $🐘([
                    ソースコード中に、ほとんど数値リテラルが書かれていないことにお気づきだろうか。 PHP では、型変換を利用することで任意の整数を作り出すことができる。 
                 </p>
                  
-                <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> === +!![]);
+                <pre class="highlight" language="php"><code class="highlight"><span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> === +!![]);
 <span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">1</span> === +![]);
 <span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">2</span> === ![]+![]);
 <span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">3</span> === ![]+![]+![]);
@@ -324,7 +324,7 @@ $🐘([
                ソースコードはこちら。実行には PHP 8.0 以上が必要なので注意。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-comment">/*********************************************************
 * This program displays a PHPer token.                  *
@@ -373,7 +373,7 @@ $🐘([
                  まずはソースコードを読んでいく。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$token</span> = [
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$token</span> = [
 <span class="hljs-comment">// 略</span>
 ];</code></pre>
                
@@ -381,25 +381,25 @@ $🐘([
                  数値からなる <code>$token</code> があり、各要素をループしている。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;</code></pre>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;</code></pre>
                
               <p>
                  まずは排他的論理和 (xor) を取り、 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);</code></pre>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);</code></pre>
                
               <p>
                  二進数に変換して、 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);</code></pre>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);</code></pre>
                
               <p>
                  0 を空白に、1 を <code>#</code> にし、 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));</code></pre>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));</code></pre>
                
               <p>
                  5文字ごとに区切ったあと、改行で結合している。 
@@ -445,13 +445,13 @@ $🐘([
                 <code>N</code> は高々 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> &lt;= N &amp;&amp; N &lt;= <span class="hljs-number">0b11111_11111_11111_11111_11111</span>);</code></pre>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> &lt;= N &amp;&amp; N &lt;= <span class="hljs-number">0b11111_11111_11111_11111_11111</span>);</code></pre>
                
               <p>
                  なのでブルートフォースしてもよいが、ここではブルートフォースしない方法を紹介する。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-variable">$x</span> = <span class="hljs-number">0x14B499C</span>;
 
@@ -472,7 +472,7 @@ $🐘([
                  この一連の変換に対する逆変換を考えると、次のようになる。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-variable">$x</span> =
 <span class="hljs-string">&quot; # # \n&quot;</span> .
@@ -501,7 +501,7 @@ $🐘([
                ソースコードはこちら。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-comment">// License: https://creativecommons.org/publicdomain/zero/1.0/</span>
 <span class="hljs-comment">// This is a quine-like program to generate a PHPer token.</span>
@@ -535,7 +535,7 @@ Q;
                コメントにもあるとおり、次のようにして実行すれば答えがでてくる。 
             </p>
              
-            <pre class="highlight" language="shell-session" linenumbering="unnumbered"><code>$ php toquine.php | php | php | php | ...</code></pre>
+            <pre class="highlight" language="shell-session"><code>$ php toquine.php | php | php | php | ...</code></pre>
              
             <p>
                実際にはもう少しパイプで繋げなければならない。 
@@ -564,7 +564,7 @@ Q;
               <section id="section--q3-toquine--commentary--states">
                 <h4><a href="#section--q3-toquine--commentary--states">状態保持</a></h4> 
                 <p>
-                   トークンの何文字目まで出力したかを、ソースコードを変えずに (quine なので) 覚えておく必要がある。 このプログラムでは、トークンが出力されるとソースコードがだんだんと長くなっていくのを利用して、<code><em>LINE</em></code> から情報を取得している。 
+                   トークンの何文字目まで出力したかを、ソースコードを変えずに (quine なので) 覚えておく必要がある。 このプログラムでは、トークンが出力されるとソースコードがだんだんと長くなっていくのを利用して、<code>__LINE__</code> から情報を取得している。 
                 </p>
               </section>
                

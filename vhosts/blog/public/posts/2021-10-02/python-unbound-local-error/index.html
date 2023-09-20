@@ -73,7 +73,7 @@
              Python でクロージャを作ろうと、次のようなコードを書いた。 
           </p>
            
-          <pre class="highlight" language="python" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
+          <pre class="highlight" language="python"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
     x = <span class="hljs-number">0</span>
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
         x += <span class="hljs-number">1</span>
@@ -95,7 +95,7 @@ f()</code></pre>
              local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code> を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。 前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code> を変数宣言のための構文として擬似的に利用している。 
           </p>
            
-          <pre class="highlight" language="python" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment"># 注: var は正しい Python の文法ではない。上記参照のこと</span>
+          <pre class="highlight" language="python"><code class="highlight"><span class="hljs-comment"># 注: var は正しい Python の文法ではない。上記参照のこと</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
   var x           <span class="hljs-comment">#  f の local変数 &#x27;x&#x27; を宣言</span>
   x = <span class="hljs-number">0</span>           <span class="hljs-comment">#  x に 0 を代入</span>
@@ -110,7 +110,7 @@ f()</code></pre>
              当初の意図を表現するには、次のように書けばよい。 
           </p>
            
-          <pre class="highlight" language="python" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
+          <pre class="highlight" language="python"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
     x = <span class="hljs-number">0</span>
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
         <span class="hljs-keyword">nonlocal</span> x   <span class="hljs-comment">## (*)</span>

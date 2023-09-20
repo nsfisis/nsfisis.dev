@@ -21,7 +21,7 @@ export function postPageEntry(post: PostPage): Element {
       el(
         "section",
         [["class", "entry-content"]],
-        el("p", [], text(post.summary)),
+        el("p", [], text(post.description)),
       ),
       el(
         "footer",

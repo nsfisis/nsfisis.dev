@@ -1,12 +1,6 @@
 import { Config } from "../config.ts";
 import { SlideError } from "../errors.ts";
 import { Revision, stringToDate } from "../revision.ts";
-import {
-  Element,
-  findChildElements,
-  findFirstChildElement,
-  innerText,
-} from "../dom.ts";
 
 export type Slide = {
   sourceFilePath: string;
@@ -18,105 +12,102 @@ export type Slide = {
   revisions: Revision[];
 };
 
-export function createNewSlideFromRootElement(
-  root: Element,
+type Toml = {
+  slide: {
+    title: string;
+    event: string;
+    talkType: string;
+    link: string;
+    tags: string[];
+    revisions: {
+      date: string;
+      remark: string;
+    }[];
+  };
+};
+
+export function createNewSlideFromTomlRootObject(
+  root: Toml,
   sourceFilePath: string,
   _config: Config,
 ): Slide {
-  const slide = findFirstChildElement(root, "slide");
-  if (!slide) {
+  const slide = root.slide ?? null;
+  if (root.slide === undefined) {
     throw new SlideError(
-      `[slide.new] <slide> element not found`,
-    );
-  }
-  const info = findFirstChildElement(slide, "info");
-  if (!info) {
-    throw new SlideError(
-      `[slide.new] <info> element not found`,
+      `[slide.new] 'slide' field not found`,
     );
   }
 
-  const titleElement = findFirstChildElement(info, "title");
-  if (!titleElement) {
+  const title = slide.title ?? null;
+  if (!title) {
     throw new SlideError(
-      `[slide.new] <title> element not found`,
+      `[slide.new] 'slide.title' field not found`,
     );
   }
-  const title = innerText(titleElement).trim();
 
-  const eventElement = findFirstChildElement(info, "event");
-  if (!eventElement) {
+  const event = slide.event ?? null;
+  if (!event) {
     throw new SlideError(
-      `[slide.new] <event> element not found`,
+      `[slide.new] 'slide.event' field not found`,
     );
   }
-  const event = innerText(eventElement).trim();
 
-  const talkTypeElement = findFirstChildElement(info, "talktype");
-  if (!talkTypeElement) {
+  const talkType = slide.talkType ?? null;
+  if (!talkType) {
     throw new SlideError(
-      `[slide.new] <talktype> element not found`,
+      `[slide.new] 'slide.talkType' field not found`,
     );
   }
-  const talkType = innerText(talkTypeElement).trim();
 
-  const slideLinkElement = findFirstChildElement(info, "link");
-  if (!slideLinkElement) {
+  const link = slide.link ?? null;
+  if (!link) {
     throw new SlideError(
-      `[slide.new] <link> element not found`,
+      `[slide.new] 'slide.link' field not found`,
     );
   }
-  const slideLink = innerText(slideLinkElement).trim();
 
-  const keywordsetElement = findFirstChildElement(info, "keywordset");
-  let tags: string[];
-  if (!keywordsetElement) {
-    tags = [];
-  } else {
-    tags = findChildElements(keywordsetElement, "keyword").map((x) =>
-      innerText(x).trim()
-    );
-  }
-  const revhistoryElement = findFirstChildElement(info, "revhistory");
-  if (!revhistoryElement) {
+  const tags = slide.tags ?? [];
+
+  const revisions = slide.revisions ?? null;
+  if (!revisions) {
     throw new SlideError(
-      `[slide.new] <revhistory> element not found`,
+      `[slide.new] 'slide.revisions' field not found`,
     );
   }
-  const revisions = findChildElements(revhistoryElement, "revision").map(
-    (x, i) => {
-      const dateElement = findFirstChildElement(x, "date");
-      if (!dateElement) {
+  if (revisions.length === 0) {
+    throw new SlideError(
+      `[slide.new] 'slide.revisions' field not found`,
+    );
+  }
+  const revisions_ = revisions.map(
+    (x: { date: string; remark: string }, i: number) => {
+      const date = x.date ?? null;
+      if (!date) {
         throw new SlideError(
-          `[slide.new] <date> element not found`,
+          `[slide.new] 'date' field not found`,
         );
       }
-      const revremarkElement = findFirstChildElement(x, "revremark");
-      if (!revremarkElement) {
+      const remark = x.remark ?? null;
+      if (!remark) {
         throw new SlideError(
-          `[slide.new] <revremark> element not found`,
+          `[slide.new] 'remark' field not found`,
         );
       }
       return {
         number: i + 1,
-        date: stringToDate(innerText(dateElement).trim()),
-        remark: innerText(revremarkElement).trim(),
+        date: stringToDate(date),
+        remark: remark,
       };
     },
   );
-  if (revisions.length === 0) {
-    throw new SlideError(
-      `[slide.new] <revision> element not found`,
-    );
-  }
 
   return {
     sourceFilePath: sourceFilePath,
     title: title,
     event: event,
     talkType: talkType,
-    slideLink: slideLink,
+    slideLink: link,
     tags: tags,
-    revisions: revisions,
+    revisions: revisions_,
   };
 }

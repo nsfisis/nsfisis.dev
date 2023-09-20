@@ -64,7 +64,7 @@
            
           <section id="section--tl-dr">
             <h2><a href="#section--tl-dr">TL; DR</a></h2> 
-            <pre class="highlight" language="vim" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment">&quot; License: Public Domain</span>
+            <pre class="highlight" language="vim"><code class="highlight"><span class="hljs-comment">&quot; License: Public Domain</span>
 
 command! -bar -<span class="hljs-built_in">range</span>=%
     \ Reverse
@@ -137,7 +137,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
                  なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。 
               </p>
                
-              <pre class="highlight" language="vim" linenumbering="unnumbered"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
+              <pre class="highlight" language="vim"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
     \ Reverse
     \ <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
                
@@ -172,7 +172,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
                前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする: 
             </p>
              
-            <pre class="highlight" language="vim" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">function!</span> <span class="hljs-title">s</span>:reverse_lines<span class="hljs-params">(from, to)</span> abort
+            <pre class="highlight" language="vim"><code class="highlight"><span class="hljs-keyword">function!</span> <span class="hljs-title">s</span>:reverse_lines<span class="hljs-params">(from, to)</span> abort
     <span class="hljs-keyword">execute</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d,%dg/^/m%d&quot;</span>, <span class="hljs-variable">a:from</span>, <span class="hljs-variable">a:to</span>, <span class="hljs-variable">a:from</span> - <span class="hljs-number">1</span>)
 <span class="hljs-keyword">endfunction</span>
 
@@ -198,7 +198,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </p>
                
               <p>
-                <em role="strong">Autocommands do not change the current search patterns.</em> Vim saves the current search patterns before executing autocommands then restores them after the autocommands finish. This means that autocommands do not affect the strings highlighted with the `hlsearch&apos; option. 
+                <strong>Autocommands do not change the current search patterns.</strong> Vim saves the current search patterns before executing autocommands then restores them after the autocommands finish. This means that autocommands do not affect the strings highlighted with the `hlsearch&apos; option. 
               </p>
             </blockquote>
              
@@ -212,7 +212,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </p>
                
               <p>
-                 (略) This command doesn’t work in an autocommand, because the highlighting state is saved and restored when executing autocommands |autocmd-searchpat|. <em role="strong">Same thing for when invoking a user function.</em>
+                 (略) This command doesn’t work in an autocommand, because the highlighting state is saved and restored when executing autocommands |autocmd-searchpat|. <strong>Same thing for when invoking a user function.</strong>
               </p>
             </blockquote>
              
@@ -229,7 +229,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </p>
             </blockquote>
              
-            <pre class="highlight" language="vim" linenumbering="unnumbered"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
+            <pre class="highlight" language="vim"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
     \ Reverse
     \ keeppatterns <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
              

@@ -1,0 +1,14 @@
+[slide]
+title = "PHPer チャレンジ解説 (デジタルサーカス株式会社)"
+event = "PHPerKaigi 2023"
+talkType = "トークン解説セッション"
+link = "/slides/2023-03-25/phperkaigi-2023-tokens/slide.pdf"
+tags = [
+  "conference",
+  "php",
+  "phperkaigi",
+]
+
+[[slide.revisions]]
+date = "2023-03-25"
+remark = "登壇"

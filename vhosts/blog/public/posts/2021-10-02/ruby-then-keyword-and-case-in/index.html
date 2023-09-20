@@ -78,7 +78,7 @@
                使われることは稀だが、Ruby では <code>then</code> がキーワードになっている。次のように使う: 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">if</span> cond <span class="hljs-keyword">then</span>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> cond <span class="hljs-keyword">then</span>
   puts <span class="hljs-string">&quot;Y&quot;</span>
 <span class="hljs-keyword">else</span>
   puts <span class="hljs-string">&quot;N&quot;</span>
@@ -88,7 +88,7 @@
                このキーワードが現れうる場所はいくつかあり、<code>if</code>、<code>unless</code>、<code>rescue</code>、<code>case</code> 構文がそれに当たる。 上記のように、何か条件を書いた後 <code>then</code> を置き、式がそこで終了していることを示すマーカーとして機能する。 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment"># Example:</span>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-comment"># Example:</span>
 
 <span class="hljs-keyword">if</span> x <span class="hljs-keyword">then</span>
   a
@@ -116,13 +116,13 @@
                普通 Ruby のコードで <code>then</code> を書くことはない。なぜか。次のコードを実行してみるとわかる。 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hljs-keyword">end</span></code></pre>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hljs-keyword">end</span></code></pre>
              
             <p>
                次のような構文エラーが出力される。 
             </p>
              
-            <pre class="highlight monospaced"><code>20:1: syntax error, unexpected local variable or method, expecting `then&apos; or &apos;;&apos; or &apos;\n&apos;
+            <pre class="highlight"><code>20:1: syntax error, unexpected local variable or method, expecting `then&apos; or &apos;;&apos; or &apos;\n&apos;
 if true puts &apos;Hello, World!&apos; end
         ^~~~
 20:1: syntax error, unexpected `end&apos;, expecting end-of-input
@@ -136,7 +136,7 @@ if true puts &apos;Hello, World!&apos; end
                ポイントは改行が <code>then</code> (や <code>;</code>) の代わりとなることである。<code>true</code> の後に改行を入れてみる。 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">if</span> <span class="hljs-literal">true</span>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> <span class="hljs-literal">true</span>
 puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hljs-keyword">end</span></code></pre>
              
             <p>
@@ -150,18 +150,18 @@ puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hlj
                なぜ <code>then</code> や <code>;</code> や改行 (以下 「<code>then</code> 等」) が必要なのだろうか。次の例を見てほしい: 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">if</span> a b <span class="hljs-keyword">end</span></code></pre>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> a b <span class="hljs-keyword">end</span></code></pre>
              
             <p>
               <code>then</code> も <code>;</code> も改行もないのでエラーになるが、これは条件式がどこまで続いているのかわからないためだ。 この例は二通りに解釈できる。 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-comment"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span>
 <span class="hljs-keyword">if</span> a <span class="hljs-keyword">then</span>
 b
 <span class="hljs-keyword">end</span></code></pre>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span>
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-comment"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span>
 <span class="hljs-comment"># その結果が truthy なら何もしない</span>
 <span class="hljs-keyword">if</span> a(b) <span class="hljs-keyword">then</span>
 <span class="hljs-keyword">end</span></code></pre>
@@ -185,7 +185,7 @@ b
               <a href="https://github.com/ruby/ruby/blob/221ca0f8281d39f0dfdfe13b2448875384bbf735/parse.y#L3961-L3986">https://github.com/ruby/ruby/blob/221ca0f8281d39f0dfdfe13b2448875384bbf735/parse.y#L3961-L3986</a>
             </p>
              
-            <pre class="highlight" language="yacc" linenumbering="unnumbered"><code>p_case_body : keyword_in
+            <pre class="highlight" language="yacc"><code>p_case_body : keyword_in
 {
   SET_LEX_STATE(EXPR_BEG|EXPR_LABEL);
   p-&gt;command_start = FALSE;
@@ -216,7 +216,7 @@ p_cases
                簡略版: 
             </p>
              
-            <pre class="highlight" language="yacc" linenumbering="unnumbered"><code>p_case_body : keyword_in p_top_expr then compstmt p_cases
+            <pre class="highlight" language="yacc"><code>p_case_body : keyword_in p_top_expr then compstmt p_cases
 ;</code></pre>
              
             <p>
@@ -227,7 +227,7 @@ p_cases
                これにより、<code>case</code> - <code>when</code> による従来の構文と同じように、<code>then</code> 等をパターンの後ろに挿入すればよいことがわかった。つまり次の3通りのいずれかになる: 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">case</span> x
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">case</span> x
 <span class="hljs-keyword">in</span> <span class="hljs-number">1</span> <span class="hljs-keyword">then</span> a
 <span class="hljs-keyword">in</span> <span class="hljs-number">2</span> <span class="hljs-keyword">then</span> b
 <span class="hljs-keyword">in</span> <span class="hljs-number">3</span> <span class="hljs-keyword">then</span> c
@@ -252,7 +252,7 @@ p_cases
                ところで、<code>p_top_expr</code> には <code>if</code> による guard clause が書けるので、その場合は <code>if</code> - <code>then</code> と似たような見た目になる。 
             </p>
              
-            <pre class="highlight" language="ruby" linenumbering="unnumbered"><code class="highlight"><span class="hljs-keyword">case</span> x
+            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">case</span> x
 <span class="hljs-keyword">in</span> <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> a
 <span class="hljs-keyword">in</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> b
 <span class="hljs-keyword">in</span> n <span class="hljs-keyword">then</span> c

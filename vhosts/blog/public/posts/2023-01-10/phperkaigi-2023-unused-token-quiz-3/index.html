@@ -91,7 +91,7 @@
                注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。 
             </p>
              
-            <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 <span class="hljs-keyword">try</span> {
   <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>);
 } <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Throwable</span> <span class="hljs-variable">$e</span>) {
@@ -242,7 +242,7 @@
                  このうち 1つ目のケースは、 <code>finally</code> 節の中でエラーを投げると PHP 処理系が勝手に <code>$previous</code> を設定してくれる。 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">try</span> {
@@ -268,7 +268,7 @@
                  出力部をコメントや改行を追加して再掲する: 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 <span class="hljs-keyword">try</span> {
   <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>);
 } <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Throwable</span> <span class="hljs-variable">$e</span>) {
@@ -286,7 +286,7 @@
                  フォーマット指定子 <code>%c</code> は、整数を ASCII コード<span></span> と見做して印字する。トークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> の <code>b</code> であれば、ASCII コード <code>98</code> なので、75 行目で発生したエラー、 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-number">1</span>, <span class="hljs-number">20</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,</code></pre>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-number">1</span>, <span class="hljs-number">20</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,</code></pre>
                
               <p>
                  によって表現されている。エラーを起こす方法はいろいろと考えられるが、今回はゼロ除算を使った。 
@@ -303,7 +303,7 @@
                 <code>f()</code> の定義を再掲する (エラーオブジェクトの行数を利用しているので、一部分だけ抜き出すと値が変わることに注意): 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$i</span></span>) </span>{
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$i</span></span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-variable">$i</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-title function_ invoke__">f</span>();
   <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">match</span> (<span class="hljs-variable">$i</span>) {
@@ -328,11 +328,11 @@
                  前述のように、 <code>finally</code> 節でエラーを投げると PHP 処理系が <code>$previous</code> を設定する。ここでは、エラーを繋げるために <code>f()</code> を再帰呼び出ししている。最初に <code>f()</code> を呼び出している箇所を確認すると、 
               </p>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 <span class="hljs-keyword">try</span> {
   <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>); <span class="hljs-comment">// 3 行目</span></code></pre>
                
-              <pre class="highlight" language="php" linenumbering="unnumbered"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">g</span>(<span class="hljs-params"></span>) </span>{
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">g</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">__LINE__</span>; <span class="hljs-comment">// 111 行目</span>
 }</code></pre>
                

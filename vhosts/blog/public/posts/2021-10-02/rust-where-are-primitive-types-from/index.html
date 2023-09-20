@@ -68,7 +68,7 @@
                Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。 
             </p>
              
-            <pre class="highlight" language="rust" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
+            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
 <span class="hljs-meta">#![allow(dead_code)]</span>
 
 <span class="hljs-keyword">struct</span> <span class="hljs-title class_">bool</span>;
@@ -122,7 +122,7 @@
               <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。 しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。 
             </p>
              
-            <pre class="highlight monospaced"><code>$ git grep &quot;\bi128\b&quot; | wc      # i128
+            <pre class="highlight"><code>$ git grep &quot;\bi128\b&quot; | wc      # i128
 165    1069   15790
 
 $ git grep &quot;\bu128\b&quot; | wc      # u128
@@ -135,7 +135,7 @@ $ git grep &quot;\bbool\b&quot; | wc      # cf. bool の結果
                165 程度であれば探すことができそうだ。今回は、クレート名を見ておおよその当たりをつけた。 
             </p>
              
-            <pre class="highlight monospaced"><code>$ git grep &quot;\bi128\b&quot;
+            <pre class="highlight"><code>$ git grep &quot;\bi128\b&quot;
 ...
 rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
 ...</code></pre>
@@ -144,7 +144,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
               <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。 
             </p>
              
-            <pre class="highlight" language="rust" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment">/// Interns the names of the primitive types.</span>
+            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-comment">/// Interns the names of the primitive types.</span>
 <span class="hljs-comment">///</span>
 <span class="hljs-comment">/// All other types are defined somewhere and possibly imported, but the primitive ones need</span>
 <span class="hljs-comment">/// special handling, since they have no place of origin.</span>
@@ -191,7 +191,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
                とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。 
             </p>
              
-            <pre class="highlight" language="rust" linenumbering="unnumbered"><code class="highlight"><span class="hljs-comment">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span>
+            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-comment">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span>
 <span class="hljs-comment">/// (略)</span>
 <span class="hljs-keyword">fn</span> <span class="hljs-title function_">resolve_ident_in_lexical_scope</span>(
     &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>,
@@ -229,7 +229,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
                動作がわかったところで、例として次のコードを考える。 
             </p>
              
-            <pre class="highlight" language="rust" linenumbering="unnumbered"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
+            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
 
 <span class="hljs-keyword">struct</span> <span class="hljs-title class_">bool</span>;
 

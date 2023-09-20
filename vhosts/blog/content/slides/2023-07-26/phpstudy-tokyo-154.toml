@@ -1,0 +1,13 @@
+[slide]
+title = "言語間で比較するエラーの通知と処理"
+event = "PHP 勉強会@東京 第154 回"
+talkType = "レギュラートーク"
+link = "/slides/2023-07-26/phpstudy-tokyo-154/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2023-07-26"
+remark = "登壇"

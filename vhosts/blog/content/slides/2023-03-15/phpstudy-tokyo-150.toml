@@ -1,0 +1,17 @@
+[slide]
+title = "明日のあなたの役に立たない PHP コーディング技法～細長い FizzBuzz を書く～"
+event = "PHP 勉強会@東京 第150 回"
+talkType = "LT"
+link = "/slides/2023-03-15/phpstudy-tokyo-150/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2023-03-15"
+remark = "登壇"
+
+[[slide.revisions]]
+date = "2023-03-18"
+remark = "2文字以下の関数が他にもあったので修正"

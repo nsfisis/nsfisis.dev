@@ -87,6 +87,8 @@ function getDtd(name: string): Dtd {
       return { type: "block" };
     case "span":
       return { type: "inline" };
+    case "strong":
+      return { type: "inline" };
     case "sup":
       return { type: "inline" };
     case "table":

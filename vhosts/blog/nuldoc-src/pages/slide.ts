@@ -122,7 +122,7 @@ export async function generateSlidePage(
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);
   const destFilePath = join(
-    slide.sourceFilePath.replace(contentDir, "").replace(".xml", ""),
+    slide.sourceFilePath.replace(contentDir, "").replace(".toml", ""),
     "index.html",
   );
   return {

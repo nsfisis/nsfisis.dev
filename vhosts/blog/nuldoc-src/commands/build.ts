@@ -2,7 +2,7 @@ import { dirname, join, joinGlobs } from "std/path/mod.ts";
 import { ensureDir } from "std/fs/mod.ts";
 import { expandGlob } from "std/fs/expand_glob.ts";
 import { Config } from "../config.ts";
-import { parseDocBookFile } from "../docbook/parse.ts";
+import { parseNulDocFile } from "../ndoc/parse.ts";
 import { Page } from "../page.ts";
 import { render } from "../render.ts";
 import { dateToString } from "../revision.ts";
@@ -48,7 +48,7 @@ async function buildPostPages(config: Config): Promise<PostPage[]> {
 
 async function collectPostFiles(sourceDir: string): Promise<string[]> {
   const filePaths = [];
-  const globPattern = joinGlobs([sourceDir, "**", "*.xml"]);
+  const globPattern = joinGlobs([sourceDir, "**", "*.ndoc"]);
   for await (const entry of expandGlob(globPattern)) {
     filePaths.push(entry.path);
   }
@@ -62,7 +62,7 @@ async function parsePosts(
   const posts = [];
   for (const postFile of postFiles) {
     posts.push(
-      await generatePostPage(await parseDocBookFile(postFile, config), config),
+      await generatePostPage(await parseNulDocFile(postFile, config), config),
     );
   }
   return posts;
@@ -85,7 +85,7 @@ async function buildSlidePages(config: Config): Promise<SlidePage[]> {
 
 async function collectSlideFiles(sourceDir: string): Promise<string[]> {
   const filePaths = [];
-  const globPattern = joinGlobs([sourceDir, "**", "*.xml"]);
+  const globPattern = joinGlobs([sourceDir, "**", "*.toml"]);
   for await (const entry of expandGlob(globPattern)) {
     filePaths.push(entry.path);
   }

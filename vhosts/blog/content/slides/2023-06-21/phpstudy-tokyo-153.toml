@@ -1,0 +1,13 @@
+[slide]
+title = "テキストファイルの末尾には改行コードを入れよう"
+event = "PHP 勉強会@東京 第153 回"
+talkType = "LT"
+link = "/slides/2023-06-21/phpstudy-tokyo-153/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2023-06-21"
+remark = "登壇"

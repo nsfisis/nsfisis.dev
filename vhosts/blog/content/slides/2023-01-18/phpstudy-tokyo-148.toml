@@ -1,0 +1,13 @@
+[slide]
+title = "明日のあなたの役に立たない PHP コーディング技法～polyglot～"
+event = "PHP 勉強会@東京 第148 回"
+talkType = "LT"
+link = "/slides/2023-01-18/phpstudy-tokyo-148/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2023-01-18"
+remark = "登壇"

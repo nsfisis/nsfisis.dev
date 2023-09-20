@@ -21,7 +21,7 @@ export async function runNewCommand(config: Config) {
     config.locations.contentDir,
     getDirPath(type),
     ymd,
-    "TODO.xml",
+    "TODO.ndoc",
   );
 
   await ensureDir(dirname(destFilePath));
@@ -39,54 +39,40 @@ function getDirPath(type: "post" | "slide"): string {
 
 function getTemplate(type: "post" | "slide", date: string): string {
   if (type === "post") {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0">
-  <info>
+    return `---
+[article]
+title = "TODO"
+description = "TODO"
+tags = [
+  "TODO",
+]
+
+[[article.revisions]]
+date = "${date}"
+remark = "公開"
+---
+<article>
+  <section id="TODO">
     <title>TODO</title>
-    <abstract>
+    <p>
       TODO
-    </abstract>
-    <keywordset>
-      <keyword>TODO</keyword>
-    </keywordset>
-    <revhistory>
-      <revision>
-        <date>${date}</date>
-        <revremark>公開</revremark>
-      </revision>
-    </revhistory>
-  </info>
-  <section xml:id="TODO">
-    <title>TODO</title>
-    <para>
-      TODO
-    </para>
+    </p>
   </section>
 </article>
 `;
   } else {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<slide>
-  <info>
-    <title>TODO</title>
-    <event>
-      TODO
-    </event>
-    <talktype>
-      TODO
-    </talktype>
-    <link>TODO</link>
-    <keywordset>
-      <keyword>TODO</keyword>
-    </keywordset>
-    <revhistory>
-      <revision>
-        <date>${date}</date>
-        <revremark>登壇</revremark>
-      </revision>
-    </revhistory>
-  </info>
-</slide>
+    return `[slide]
+title = "TODO"
+event = "TODO"
+talkType = "TODO"
+link = "TODO"
+tags = [
+  "TODO",
+]
+
+[[slide.revisions]]
+date = "${date}"
+remark = "登壇"
 `;
   }
 }

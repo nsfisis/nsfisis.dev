@@ -1,0 +1,14 @@
+[slide]
+title = "詳説「参照」PHP の参照を完全に理解する"
+event = "PHPerKaigi 2023"
+talkType = "レギュラートーク"
+link = "/slides/2023-03-24/phperkaigi-2023/slide.pdf"
+tags = [
+  "conference",
+  "php",
+  "phperkaigi",
+]
+
+[[slide.revisions]]
+date = "2023-03-24"
+remark = "登壇"

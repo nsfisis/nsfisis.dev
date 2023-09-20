@@ -4,13 +4,13 @@ import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { el, Element, text } from "../dom.ts";
-import { Document } from "../docbook/document.ts";
+import { Document } from "../ndoc/document.ts";
 import { Page } from "../page.ts";
 import { Date, dateToString, Revision } from "../revision.ts";
 
 export interface PostPage extends Page {
   title: string;
-  summary: string;
+  description: string;
   tags: string[];
   revisions: Revision[];
 }
@@ -112,7 +112,7 @@ export async function generatePostPage(
   const html = await pageLayout(
     {
       metaCopyrightYear: getPostCreatedDate(doc).year,
-      metaDescription: doc.summary,
+      metaDescription: doc.description,
       metaKeywords: doc.tags.map((slug) => getTagLabel(config, slug)),
       metaTitle: `${doc.title} | ${config.blog.siteName}`,
       requiresSyntaxHighlight: true,
@@ -124,7 +124,7 @@ export async function generatePostPage(
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);
   const destFilePath = join(
-    doc.sourceFilePath.replace(contentDir, "").replace(".xml", ""),
+    doc.sourceFilePath.replace(contentDir, "").replace(".ndoc", ""),
     "index.html",
   );
   return {
@@ -133,7 +133,7 @@ export async function generatePostPage(
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),
     title: doc.title,
-    summary: doc.summary,
+    description: doc.description,
     tags: doc.tags,
     revisions: doc.revisions,
   };
