@@ -37,6 +37,9 @@ jobs:
           script: |
             set -e
             cd nsfisis.dev
-            git pull origin main
+            git fetch --prune origin
+            git restore -- .
+            git clean -fd
+            git switch -d origin/main
             make clean
             make deploy
