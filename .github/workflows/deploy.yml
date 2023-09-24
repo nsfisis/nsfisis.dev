@@ -35,6 +35,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            set -e
             cd nsfisis.dev
             git pull origin main
             make clean
