@@ -327,36 +327,36 @@ $🐘([
             <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
 
 <span class="hljs-comment">/*********************************************************
-* This program displays a PHPer token.                  *
-* Guess &#x27;N&#x27;.                                            *
-*                                                       *
-* Hints:                                                *
-* - N itself has no special meaning, e.g., 42, 8128,    *
-*   it is selected at random.                           *
-* - Each element of $token represents a single letter.  *
-* - One letter consists of 5x5 cells.                   *
-* - Remember, the output is a complete PHPer token.     *
-*                                                       *
-* License:                                              *
-*   https://creativecommons.org/publicdomain/zero/1.0/  *
-*********************************************************/</span>
+ * This program displays a PHPer token.                  *
+ * Guess &#x27;N&#x27;.                                            *
+ *                                                       *
+ * Hints:                                                *
+ * - N itself has no special meaning, e.g., 42, 8128,    *
+ *   it is selected at random.                           *
+ * - Each element of $token represents a single letter.  *
+ * - One letter consists of 5x5 cells.                   *
+ * - Remember, the output is a complete PHPer token.     *
+ *                                                       *
+ * License:                                              *
+ *   https://creativecommons.org/publicdomain/zero/1.0/  *
+ *********************************************************/</span>
 <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">N</span> = <span class="hljs-number">0</span> <span class="hljs-comment">/* Change it to your answer. */</span>;
 <span class="hljs-title function_ invoke__">assert</span>(<span class="hljs-number">0</span> &lt;= N &amp;&amp; N &lt;= <span class="hljs-number">0b11111_11111_11111_11111_11111</span>);
 
 <span class="hljs-variable">$token</span> = [
-<span class="hljs-number">0x14B499C</span>,
-<span class="hljs-number">0x0BE34CC</span>, <span class="hljs-number">0x01C9C69</span>,
-<span class="hljs-number">0x0ECA069</span>, <span class="hljs-number">0x01C2449</span>, <span class="hljs-number">0x0FDB166</span>, <span class="hljs-number">0x01C9C69</span>,
-<span class="hljs-number">0x01C1C66</span>, <span class="hljs-number">0x0FC1C47</span>, <span class="hljs-number">0x01C1C66</span>,
-<span class="hljs-number">0x10C5858</span>, <span class="hljs-number">0x1E4E3B8</span>, <span class="hljs-number">0x1A2F2F8</span>,
+  <span class="hljs-number">0x14B499C</span>,
+  <span class="hljs-number">0x0BE34CC</span>, <span class="hljs-number">0x01C9C69</span>,
+  <span class="hljs-number">0x0ECA069</span>, <span class="hljs-number">0x01C2449</span>, <span class="hljs-number">0x0FDB166</span>, <span class="hljs-number">0x01C9C69</span>,
+  <span class="hljs-number">0x01C1C66</span>, <span class="hljs-number">0x0FC1C47</span>, <span class="hljs-number">0x01C1C66</span>,
+  <span class="hljs-number">0x10C5858</span>, <span class="hljs-number">0x1E4E3B8</span>, <span class="hljs-number">0x1A2F2F8</span>,
 ];
 <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$token</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$x</span>) {
-<span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;
+  <span class="hljs-variable">$x</span> = <span class="hljs-variable">$x</span> ^ N;
 
-<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);
-<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);
-<span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));
-<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">{$x}</span>\n\n&quot;</span>;
+  <span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%025b&#x27;</span>, <span class="hljs-variable">$x</span>);
+  <span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-attr">search</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], <span class="hljs-attr">replace</span>: [<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;#&#x27;</span>], <span class="hljs-attr">subject</span>: <span class="hljs-variable">$x</span>);
+  <span class="hljs-variable">$x</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-variable">$x</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span>));
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">{$x}</span>\n\n&quot;</span>;
 }</code></pre>
              
             <p>
