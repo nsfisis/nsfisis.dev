@@ -42,7 +42,7 @@ body > footer {
 }
 
 nav {
-  font-size: 1.5rem;
+  font-weight: bold;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -57,11 +57,14 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 1.2rem;
+  font-size: 1.25rem;
+  margin: 0 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 nav ul li:first-child {
-  font-weight: bold;
+  font-size: 1.5rem;
   margin-right: auto;
 }
 
