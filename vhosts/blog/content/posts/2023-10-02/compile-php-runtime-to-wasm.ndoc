@@ -1,6 +1,6 @@
 ---
 [article]
-title = "【PHP】 PHP の処理系を Emscripten で WebAssembly にコンパイルする"
+title = "PHP の処理系を Emscripten で WebAssembly にコンパイルする"
 description = "PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。"
 tags = [
   "php",
