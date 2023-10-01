@@ -29,6 +29,7 @@ export const config = {
       "ruby3": "Ruby 3",
       "rust": "Rust",
       "vim": "Vim",
+      "wasm": "WebAssembly",
     },
   },
 };
