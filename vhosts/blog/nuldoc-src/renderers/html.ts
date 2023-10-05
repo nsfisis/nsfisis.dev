@@ -245,6 +245,12 @@ function getElementAttributes(e: Element): [string, string][] {
           if (a[0] === "name" && b[0] === "content") {
             return -1;
           }
+          if (a[0] === "content" && b[0] === "property") {
+            return 1;
+          }
+          if (a[0] === "property" && b[0] === "content") {
+            return -1;
+          }
         }
         if (e.name === "link") {
           if (a[0] === "href" && b[0] === "rel") {

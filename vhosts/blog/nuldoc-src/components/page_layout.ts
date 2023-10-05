@@ -44,6 +44,26 @@ export async function pageLayout(
         metaKeywords.join(","),
       ]]),
     ]),
+    metaElement([
+      ["property", "og:type"],
+      ["content", "article"],
+    ]),
+    metaElement([
+      ["property", "og:title"],
+      ["content", metaTitle],
+    ]),
+    metaElement([
+      ["property", "og:description"],
+      ["content", metaDescription],
+    ]),
+    metaElement([
+      ["property", "og:site_name"],
+      ["content", config.blog.siteName],
+    ]),
+    metaElement([
+      ["property", "og:locale"],
+      ["content", "ja_JP"],
+    ]),
     linkElement("icon", "/favicon.svg", "image/svg+xml"),
     el("title", [], text(metaTitle)),
     await stylesheetLinkElement("/style.css", config),
