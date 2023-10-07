@@ -2,11 +2,7 @@
 all: deploy
 
 .PHONY: deploy
-deploy: build serve
-
-.PHONY: setup
-setup:
-	true
+deploy: clean build serve
 
 .PHONY: build
 build:
