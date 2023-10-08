@@ -15,12 +15,3 @@ serve:
 .PHONY: clean
 clean:
 	docker-compose down
-
-.PHONY: local_up
-local_up:
-	docker-compose -f docker-compose.local.yml up -d
-	@echo http://localhost
-
-.PHONY: local_down
-local_down:
-	docker-compose -f docker-compose.local.yml down
