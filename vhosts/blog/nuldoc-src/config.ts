@@ -18,6 +18,7 @@ export const config = {
       "cpp": "C++",
       "cpp17": "C++ 17",
       "note-to-self": "備忘録",
+      "ouj": "放送大学",
       "php": "PHP",
       "phpconfuk": "PHP カンファレンス福岡",
       "phpconokinawa": "PHP カンファレンス沖縄",
