@@ -6,16 +6,16 @@ export function globalHeader(config: Config): Element {
     "header",
     [["class", "header"]],
     el(
+      "div",
+      [["class", "site-logo"]],
+      el("a", [["href", "/"]], text(config.blog.siteName)),
+    ),
+    el(
       "nav",
       [["class", "nav"]],
       el(
         "ul",
         [],
-        el(
-          "li",
-          [],
-          el("a", [["href", "/"]], text(config.blog.siteName)),
-        ),
         el(
           "li",
           [],

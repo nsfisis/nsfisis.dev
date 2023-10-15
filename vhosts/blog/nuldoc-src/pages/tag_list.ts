@@ -48,6 +48,19 @@ export async function generateTagListPage(
               [["class", "entry-header"]],
               el("h2", [], text(tag.tagLabel)),
             ),
+            el(
+              "footer",
+              [["class", "entry-footer"]],
+              text((() => {
+                const posts = tag.numOfPosts === 0
+                  ? ""
+                  : `${tag.numOfPosts}件の記事`;
+                const slides = tag.numOfSlides === 0
+                  ? ""
+                  : `${tag.numOfSlides}件のスライド`;
+                return `${posts}${posts && slides ? "、" : ""}${slides}`;
+              })()),
+            ),
           ),
         )
       ),

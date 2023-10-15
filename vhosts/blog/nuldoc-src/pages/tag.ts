@@ -12,6 +12,8 @@ import { TaggedPage } from "./tagged_page.ts";
 export interface TagPage extends Page {
   tagSlug: string;
   tagLabel: string;
+  numOfPosts: number;
+  numOfSlides: number;
 }
 
 export async function generateTagPage(
@@ -56,5 +58,7 @@ export async function generateTagPage(
     href: `/tags/${tagSlug}/`,
     tagSlug: tagSlug,
     tagLabel: tagLabel,
+    numOfPosts: pages.filter((p) => !("event" in p)).length,
+    numOfSlides: pages.filter((p) => "event" in p).length,
   };
 }
