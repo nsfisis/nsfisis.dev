@@ -17,6 +17,7 @@ export const config = {
       "conference": "カンファレンス",
       "cpp": "C++",
       "cpp17": "C++ 17",
+      "isucon": "ISUCON",
       "note-to-self": "備忘録",
       "ouj": "放送大学",
       "php": "PHP",
