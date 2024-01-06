@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2024 nsfisis">
+    <meta name="description" content="Neovim で空の PHP ファイルを開いたとき、ディレクトリの構造に基づいて自動的に namespace 宣言を挿入するようにする。">
+    <meta name="keywords" content="Neovim,PHP">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="【Neovim】 空の PHP ファイルに namespace 宣言を挿入する｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="Neovim で空の PHP ファイルを開いたとき、ディレクトリの構造に基づいて自動的に namespace 宣言を挿入するようにする。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>【Neovim】 空の PHP ファイルに namespace 宣言を挿入する｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=0656606dcfb3f6fa094a976e05df9007">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">【Neovim】 空の PHP ファイルに namespace 宣言を挿入する</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/neovim/">Neovim</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/php/">PHP</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2024-01-10">2024-01-10</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+               この記事は <a href="https://vim-jp.org/ekiden/">Vim 駅伝</a> #136 の記事です。 
+            </div>
+          </div>
+           
+          <section id="section--intro">
+            <h2><a href="#section--intro">やりたいこと</a></h2> 
+            <p>
+               Neovim で空の PHP ファイルを開いたとき、そのファイルが置かれているディレクトリの構造に基づいて、自動的に <code>namespace</code> 宣言を挿入したい。具体的には、トップレベルの名前空間が <code>MyNamespace</code> であり、ファイル <code>src/Foo/Bar/Baz.php</code> を開いたときに、そのファイルが空であるなら、次のようなテンプレートが自動的に挿入されてほしい。 
+            </p>
+             
+            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">MyNamespace</span>\<span class="hljs-title class_">Foo</span>\<span class="hljs-title class_">Bar</span>;</code></pre>
+          </section>
+           
+          <section id="section--version">
+            <h2><a href="#section--version">バージョン情報</a></h2> 
+            <pre class="highlight"><code>$ nvim --version
+NVIM v0.9.2
+Build type: Release
+LuaJIT 2.1.1693350652</code></pre>
+             
+            <p>
+               今回は Lua で処理を記述したため、Vim では動作しない。以下の説明でも Neovim に絞って述べる。 また、パス区切りがスラッシュである前提で記述したため、Windows には対応していない。 
+            </p>
+          </section>
+           
+          <section id="section--ftplugin">
+            <h2><a href="#section--ftplugin">ftplugin を用意する</a></h2> 
+            <p>
+               Neovim には特定のファイルタイプに対して特別な処理をおこなうための ftplugin と呼ばれる仕組みがある。 Neovim の設定を置くディレクトリ (例えば <code>~/.config/nvim</code>) の配下に <code>ftplugin/&lt;FILE_TYPE&gt;.vim</code> または <code>ftplugin/&lt;FILE_TYPE&gt;.lua</code> というファイルを配置すると、その <code>&lt;FILE_TYPE&gt;</code> が読み込まれたときにそのファイルが自動的に実行される。 
+            </p>
+             
+            <p>
+               今回は、Neovim がデフォルトで用意している PHP 用 ftplugin が動作したあとに追加の処理をおこないたいので、<code>after/ftplugin/php.{vim,lua}</code> というファイルを配置する。名前から察せられるとおり、<code>after/ftplugin</code> 以下のファイルは <code>ftplugin</code> 以下のファイルよりもあとに実行される。 
+            </p>
+             
+            <p>
+               この記事では Lua で処理を記述するため、拡張子には <code>.lua</code> を用いる。 これ以降載せるコードは、すべて <code>after/ftplugin/php.lua</code> の中に記述している。 
+            </p>
+          </section>
+           
+          <section id="section--did-ftplugin">
+            <h2><a href="#section--did-ftplugin">二重読み込みを防ぐ</a></h2> 
+            <p>
+               ファイルタイプは読み込んだあとに変更されることもあるので、ftplugin は複数回実行されうる。 二重読み込みを防ぐために、<code>did_ftplugin_&lt;FILE_TYPE&gt;_after</code> というバッファローカル変数を定義しておくのが慣習となっている。 
+            </p>
+             
+            <pre class="highlight" language="lua"><code class="highlight"><span class="hljs-keyword">if</span> vim.b.did_ftplugin_php_after <span class="hljs-keyword">then</span>
+   <span class="hljs-keyword">return</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment">-- ここに実際の処理を書く</span>
+
+vim.b.did_ftplugin_php_after = <span class="hljs-literal">true</span></code></pre>
+          </section>
+           
+          <section id="section--implement">
+            <h2><a href="#section--implement">実装する</a></h2> 
+            <p>
+               では実装していこう。今回私は次のようなロジックとした。以降、「今 Neovim で開いた PHP ファイル」のことを「対象ファイル」と呼ぶことにする。 
+            </p>
+             
+            <ol>
+              <li>
+                対象ファイルが空でなければ何もしない
+              </li>
+               
+              <li>
+                対象ファイルが置かれたディレクトリを上に辿って、<code>composer.json</code> を見つける
+              </li>
+               
+              <li>
+                <code>composer.json</code> の <code>autoload.psr-4</code> を見て、トップレベルの名前空間とディレクトリを特定する
+              </li>
+               
+              <li>
+                対象ファイルが置かれたディレクトリが、トップレベルのディレクトリを基準としてどのようにネストしているか調べる
+              </li>
+               
+              <li>
+                オートロードの設定と照らし合わせて、対象ファイルが属すべき名前空間を特定する
+              </li>
+               
+              <li>
+                PHP の開始タグとともに <code>namespace</code> 宣言を挿入する
+              </li>
+            </ol>
+             
+            <p>
+               実装を簡単にするため、Composer を用いない場合や PSR 4 以外のオートロード規則を使う場合には対応しない。少々長くなるが、以下にスクリプト全文を載せる。 
+            </p>
+             
+            <pre class="highlight" language="lua"><code class="highlight"><span class="hljs-keyword">if</span> vim.b.did_ftplugin_php_after <span class="hljs-keyword">then</span>
+   <span class="hljs-keyword">return</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment">-- base_dir を起点としてディレクトリを上向きに辿っていき、composer.json を探す</span>
+<span class="hljs-comment">-- :help vim.fs.find()</span>
+<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">find_composer_json</span><span class="hljs-params">(base_dir)</span></span>
+   <span class="hljs-keyword">return</span> vim.fs.<span class="hljs-built_in">find</span>(<span class="hljs-string">&#x27;composer.json&#x27;</span>, {
+      <span class="hljs-built_in">path</span> = base_dir,
+      upward = <span class="hljs-literal">true</span>,
+      <span class="hljs-comment">-- ホームディレクトリまで到達したら探索を打ち切る</span>
+      stop = vim.loop.os_homedir(),
+      <span class="hljs-built_in">type</span> = <span class="hljs-string">&#x27;file&#x27;</span>,
+   })[<span class="hljs-number">1</span>]
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment">-- JSON ファイルを読み込み、デコードして返す</span>
+<span class="hljs-comment">-- :help readblob()</span>
+<span class="hljs-comment">-- :help vim.json.decode</span>
+<span class="hljs-comment">-- :help luaref-pcall()</span>
+<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">load_json</span><span class="hljs-params">(file_path)</span></span>
+   <span class="hljs-comment">-- readblob() は Vim script では Blob オブジェクトを返すが、Lua から呼ぶと string に変換される</span>
+   <span class="hljs-keyword">local</span> ok_read, content = <span class="hljs-built_in">pcall</span>(vim.fn.readblob, file_path)
+   <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ok_read <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">local</span> ok_decode, obj = <span class="hljs-built_in">pcall</span>(vim.json.decode, content)
+   <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ok_decode <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">return</span> obj
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment">-- 対象ファイルの置かれたディレクトリを基に namespace 宣言を生成する</span>
+<span class="hljs-comment">-- :help nvim_buf_get_name()</span>
+<span class="hljs-comment">-- :help vim.fs.dirname()</span>
+<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generate_namespace_declaration</span><span class="hljs-params">()</span></span>
+   <span class="hljs-comment">-- composer.json を探し、トップレベルの名前空間とディレクトリを特定する</span>
+   <span class="hljs-keyword">local</span> current_dir = vim.fs.dirname(vim.api.nvim_buf_get_name(<span class="hljs-number">0</span>))
+   <span class="hljs-keyword">local</span> path_to_composer_json = find_composer_json(current_dir)
+   <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> path_to_composer_json <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> <span class="hljs-comment">-- failed to locate composer.json</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">local</span> composer_json = load_json(path_to_composer_json)
+   <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> composer_json <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> <span class="hljs-comment">-- failed to load composer.json</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-comment">-- autoload.psr-4 を探し、型が期待される型と一致するかどうか調べる</span>
+   <span class="hljs-keyword">local</span> psr4 = vim.tbl_get(composer_json, <span class="hljs-string">&#x27;autoload&#x27;</span>, <span class="hljs-string">&#x27;psr-4&#x27;</span>)
+   <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> psr4 <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> <span class="hljs-comment">-- autoload.psr-4 section is absent</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">if</span> vim.tbl_count(psr4) ~= <span class="hljs-number">1</span> <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> <span class="hljs-comment">-- psr-4 section is ambiguous</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">local</span> psr4_namespace, psr4_dir
+   <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(psr4) <span class="hljs-keyword">do</span>
+      psr4_namespace = k
+      psr4_dir = v
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(psr4_dir) == <span class="hljs-string">&#x27;table&#x27;</span> <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">if</span> #psr4_dir == <span class="hljs-number">1</span> <span class="hljs-keyword">then</span>
+         psr4_dir = psr4_dir[<span class="hljs-number">1</span>]
+      <span class="hljs-keyword">else</span>
+         <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> <span class="hljs-comment">-- psr-4 section is ambiguous</span>
+      <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(psr4_namespace) ~= <span class="hljs-string">&#x27;string&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">type</span>(psr4_dir) ~= <span class="hljs-string">&#x27;string&#x27;</span> <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> <span class="hljs-comment">-- psr-4 section is invalid</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-comment">-- 末尾のスラッシュとバックスラッシュを取り除いておく</span>
+   <span class="hljs-keyword">if</span> psr4_namespace:<span class="hljs-built_in">sub</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>) == <span class="hljs-string">&#x27;\\&#x27;</span> <span class="hljs-keyword">then</span>
+      psr4_namespace = psr4_namespace:<span class="hljs-built_in">sub</span>(<span class="hljs-number">0</span>, <span class="hljs-number">-2</span>)
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">if</span> psr4_dir:<span class="hljs-built_in">sub</span>(<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>) == <span class="hljs-string">&#x27;/&#x27;</span> <span class="hljs-keyword">then</span>
+      psr4_dir = psr4_dir:<span class="hljs-built_in">sub</span>(<span class="hljs-number">0</span>, <span class="hljs-number">-2</span>)
+   <span class="hljs-keyword">end</span>
+
+   <span class="hljs-comment">-- 対象ファイルが置かれたディレクトリとトップレベルのディレクトリを比較し、その差分を名前空間とする</span>
+   <span class="hljs-keyword">local</span> namespace_root_dir = vim.fs.dirname(path_to_composer_json) .. <span class="hljs-string">&#x27;/&#x27;</span> .. psr4_dir
+   <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> vim.startswith(current_dir, namespace_root_dir) <span class="hljs-keyword">then</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-keyword">local</span> current_path_suffix = current_dir:<span class="hljs-built_in">sub</span>(#namespace_root_dir + <span class="hljs-number">1</span>)
+   <span class="hljs-keyword">local</span> namespace = psr4_namespace .. current_path_suffix:<span class="hljs-built_in">gsub</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-string">&#x27;\\&#x27;</span>)
+   <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;namespace %s;&quot;</span>):<span class="hljs-built_in">format</span>(namespace)
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generate_template</span><span class="hljs-params">()</span></span>
+   <span class="hljs-keyword">local</span> <span class="hljs-built_in">lines</span> = {
+      <span class="hljs-string">&#x27;&lt;?php&#x27;</span>,
+      <span class="hljs-string">&#x27;&#x27;</span>,
+      <span class="hljs-string">&#x27;declare(strict_types=1);&#x27;</span>,
+      <span class="hljs-string">&#x27;&#x27;</span>,
+   }
+   <span class="hljs-keyword">local</span> namespace_decl = generate_namespace_declaration()
+   <span class="hljs-keyword">if</span> namespace_decl <span class="hljs-keyword">then</span>
+      <span class="hljs-built_in">lines</span>[#<span class="hljs-built_in">lines</span> + <span class="hljs-number">1</span>] = namespace_decl
+      <span class="hljs-built_in">lines</span>[#<span class="hljs-built_in">lines</span> + <span class="hljs-number">1</span>] = <span class="hljs-string">&#x27;&#x27;</span>
+   <span class="hljs-keyword">end</span>
+   <span class="hljs-built_in">lines</span>[#<span class="hljs-built_in">lines</span> + <span class="hljs-number">1</span>] = <span class="hljs-string">&#x27;&#x27;</span>
+   <span class="hljs-keyword">return</span> <span class="hljs-built_in">lines</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">if</span> vim.fn.line(<span class="hljs-string">&#x27;$&#x27;</span>) == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> vim.fn.getline(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">then</span>
+   <span class="hljs-comment">-- 対象ファイルが空なら、テンプレートを挿入してカーソルを末尾に移動させる</span>
+   <span class="hljs-comment">-- :help setline()</span>
+   <span class="hljs-comment">-- :help cursor()</span>
+   vim.fn.setline(<span class="hljs-number">1</span>, generate_template())
+   vim.fn.cursor(<span class="hljs-string">&#x27;$&#x27;</span>, <span class="hljs-number">0</span>)
+<span class="hljs-keyword">end</span>
+
+vim.b.did_ftplugin_php_after = <span class="hljs-literal">true</span></code></pre>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2> 
+            <p>
+               簡易的な実装だが、多くのケースではうまく動いているようだ。 最大の問題は PSR 4 に準拠しないフレームワークを用いているとまったく役に立たないことで、今まさに職場で困っている。 こちらはいずれ改良したい。 
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>
