@@ -49,7 +49,7 @@ export async function generateSlideListPage(
       metaCopyrightYear: config.blog.siteCopyrightYear,
       metaDescription: "登壇したイベントで使用したスライドの一覧",
       metaKeywords: [],
-      metaTitle: `${pageTitle} | ${config.blog.siteName}`,
+      metaTitle: `${pageTitle}｜${config.blog.siteName}`,
       requiresSyntaxHighlight: false,
     },
     body,

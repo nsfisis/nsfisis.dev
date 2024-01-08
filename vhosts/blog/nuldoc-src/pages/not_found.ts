@@ -35,7 +35,7 @@ export async function generateNotFoundPage(
       metaCopyrightYear: config.blog.siteCopyrightYear,
       metaDescription: "リクエストされたページが見つかりません",
       metaKeywords: [],
-      metaTitle: `Page Not Found | ${config.blog.siteName}`,
+      metaTitle: `Page Not Found｜${config.blog.siteName}`,
       requiresSyntaxHighlight: false,
     },
     body,

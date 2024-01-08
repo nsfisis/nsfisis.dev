@@ -167,7 +167,7 @@ export async function generateAboutPage(
       metaCopyrightYear: config.blog.siteCopyrightYear,
       metaDescription: "このサイトの著者について",
       metaKeywords: [],
-      metaTitle: `About | ${config.blog.siteName}`,
+      metaTitle: `About｜${config.blog.siteName}`,
       requiresSyntaxHighlight: false,
     },
     body,

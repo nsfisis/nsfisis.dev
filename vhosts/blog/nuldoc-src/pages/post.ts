@@ -114,7 +114,7 @@ export async function generatePostPage(
       metaCopyrightYear: getPostCreatedDate(doc).year,
       metaDescription: doc.description,
       metaKeywords: doc.tags.map((slug) => getTagLabel(config, slug)),
-      metaTitle: `${doc.title} | ${config.blog.siteName}`,
+      metaTitle: `${doc.title}｜${config.blog.siteName}`,
       requiresSyntaxHighlight: true,
     },
     body,

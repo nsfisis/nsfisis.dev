@@ -44,7 +44,7 @@ export async function generateTagPage(
       metaCopyrightYear: getPostCreatedDate(pages[pages.length - 1]).year,
       metaDescription: `タグ「${tagLabel}」のついた記事またはスライドの一覧`,
       metaKeywords: [tagLabel],
-      metaTitle: `${pageTitle} | ${config.blog.siteName}`,
+      metaTitle: `${pageTitle}｜${config.blog.siteName}`,
       requiresSyntaxHighlight: false,
     },
     body,

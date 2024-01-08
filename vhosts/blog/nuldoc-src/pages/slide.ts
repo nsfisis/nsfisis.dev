@@ -112,7 +112,7 @@ export async function generateSlidePage(
       metaCopyrightYear: getPostCreatedDate(slide).year,
       metaDescription: slide.title,
       metaKeywords: slide.tags.map((slug) => getTagLabel(config, slug)),
-      metaTitle: `${slide.event} (${slide.talkType}) | ${config.blog.siteName}`,
+      metaTitle: `${slide.event} (${slide.talkType})｜${config.blog.siteName}`,
       requiresSyntaxHighlight: true,
     },
     body,

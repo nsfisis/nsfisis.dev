@@ -73,7 +73,7 @@ export async function generateTagListPage(
       metaCopyrightYear: config.blog.siteCopyrightYear,
       metaDescription: "タグの一覧",
       metaKeywords: [],
-      metaTitle: `${pageTitle} | ${config.blog.siteName}`,
+      metaTitle: `${pageTitle}｜${config.blog.siteName}`,
       requiresSyntaxHighlight: false,
     },
     body,

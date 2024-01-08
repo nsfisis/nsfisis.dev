@@ -48,7 +48,7 @@ export async function generatePostListPage(
       metaCopyrightYear: config.blog.siteCopyrightYear,
       metaDescription: "投稿した記事の一覧",
       metaKeywords: [],
-      metaTitle: `${pageTitle} | ${config.blog.siteName}`,
+      metaTitle: `${pageTitle}｜${config.blog.siteName}`,
       requiresSyntaxHighlight: false,
     },
     body,
