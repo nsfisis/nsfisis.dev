@@ -1,0 +1,13 @@
+[slide]
+title = "PHPStan の力で Algebraic Data Types を実現する"
+event = "PHP 勉強会@東京 第160 回"
+talkType = "レギュラートーク"
+link = "/slides/2024-01-24/phpstudy-tokyo-160/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2024-01-24"
+remark = "登壇"
