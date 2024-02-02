@@ -1,7 +1,7 @@
 ---
 [article]
 title = "【PHP】 fizzbuzz を書く。1行あたり2文字で。"
-description = "PHP で、fizzbuzz を書いた。ただし、1行あたりに使える文字数は2文字まで。"
+description = "PHP で fizzbuzz を書いた。ただし、1行あたりに使える文字数は2文字まで。"
 tags = [
   "php",
 ]
