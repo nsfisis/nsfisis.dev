@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2024 nsfisis">
+    <meta name="description" content="個人用サービスのセルフホストに使っているサーバに WireGuard を導入する作業をしたメモ">
+    <meta name="keywords" content="備忘録,WireGuard">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="【備忘録】 個人用サーバに WireGuard を導入する｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="個人用サービスのセルフホストに使っているサーバに WireGuard を導入する作業をしたメモ">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>【備忘録】 個人用サーバに WireGuard を導入する｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=0656606dcfb3f6fa094a976e05df9007">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">【備忘録】 個人用サーバに WireGuard を導入する</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/note-to-self/">備忘録</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/wireguard/">WireGuard</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2024-02-03">2024-02-03</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <p>
+               個人用サービスのセルフホストに使っているサーバに <a href="https://www.wireguard.com/">WireGuard</a> を導入する作業をしたのでメモ。 
+            </p>
+             
+            <p>
+               登場するホストは以下のとおり: 
+            </p>
+             
+            <ul>
+              <li>
+                サーバ (Ubuntu): <code>10.10.1.1</code>
+              </li>
+               
+              <li>
+                クライアント 1 (Windows): <code>10.10.1.2</code>
+              </li>
+               
+              <li>
+                クライアント 2 (Android): <code>10.10.1.3</code>
+              </li>
+            </ul>
+             
+            <p>
+               後ろの IP アドレスは VPN 内で使用するプライベート IP アドレス。 
+            </p>
+          </section>
+           
+          <section id="section--install-wireguard-server">
+            <h2><a href="#section--install-wireguard-server">WireGuard のインストール: サーバ</a></h2> 
+            <p>
+               まずは個人用サービスをホストしている Ubuntu のサーバに WireGuard をインストールする。 
+            </p>
+             
+            <pre class="highlight"><code>$ sudo apt install wireguard</code></pre>
+             
+            <p>
+               次に、WireGuard で使用する鍵を生成する。 
+            </p>
+             
+            <pre class="highlight"><code>$ wg genkey | sudo tee /etc/wireguard/server.key | wg pubkey | sudo tee /etc/wireguard/server.pub
+$ sudo chmod 600 /etc/wireguard/server.{key,pub}</code></pre>
+          </section>
+           
+          <section id="section--install-wireguard-client">
+            <h2><a href="#section--install-wireguard-client">WireGuard のインストール: クライアント</a></h2> 
+            <p>
+               公式サイトから各 OS 向けのクライアントソフトウェアを入手し、インストールする。次に、設定をおこなう。 
+            </p>
+             
+            <pre class="highlight" language="ini"><code class="highlight"><span class="hljs-comment"># クライアント 1 の場合</span>
+<span class="hljs-section">[Interface]</span>
+<span class="hljs-attr">Address</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">1.2</span>/<span class="hljs-number">32</span>
+<span class="hljs-attr">PrivateKey</span> = &lt;クライアント <span class="hljs-number">1</span> の秘密鍵&gt;
+
+<span class="hljs-section">[Peer]</span>
+<span class="hljs-attr">PublicKey</span> = &lt;サーバの公開鍵&gt;
+<span class="hljs-attr">AllowedIPs</span> = &lt;サーバの外部 IP アドレス&gt;/<span class="hljs-number">32</span>
+<span class="hljs-attr">Endpoint</span> = &lt;サーバの外部 IP アドレス&gt;:<span class="hljs-number">51820</span></code></pre>
+             
+            <pre class="highlight" language="ini"><code class="highlight"><span class="hljs-comment"># クライアント 2 の場合</span>
+<span class="hljs-section">[Interface]</span>
+<span class="hljs-attr">Address</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">1.3</span>/<span class="hljs-number">32</span>
+<span class="hljs-attr">PrivateKey</span> = &lt;クライアント <span class="hljs-number">2</span> の秘密鍵&gt;
+
+<span class="hljs-section">[Peer]</span>
+<span class="hljs-attr">PublicKey</span> = &lt;サーバの公開鍵&gt;
+<span class="hljs-attr">AllowedIPs</span> = &lt;サーバの外部 IP アドレス&gt;/<span class="hljs-number">32</span>
+<span class="hljs-attr">Endpoint</span> = &lt;サーバの外部 IP アドレス&gt;:<span class="hljs-number">51820</span></code></pre>
+             
+            <p>
+              <code>PrivateKey</code> や <code>PublicKey</code> は鍵ファイルのパスではなく中身を書くことに注意。 
+            </p>
+          </section>
+           
+          <section id="section--configure-wireguard">
+            <h2><a href="#section--configure-wireguard"> WireGuard の設定 </a></h2> 
+            <p>
+               一度サーバへ戻り、WireGuard の設定ファイルを書く。 
+            </p>
+             
+            <pre class="highlight"><code>$ sudo vim /etc/wireguard/wg0.conf</code></pre>
+             
+            <pre class="highlight" language="ini"><code class="highlight"><span class="hljs-section">[Interface]</span>
+<span class="hljs-attr">Address</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">1.1</span>/<span class="hljs-number">32</span>
+<span class="hljs-attr">SaveConfig</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">PrivateKey</span> = &lt;サーバの秘密鍵&gt;
+<span class="hljs-attr">ListenPort</span> = <span class="hljs-number">51820</span>
+
+<span class="hljs-section">[Peer]</span>
+<span class="hljs-attr">PublicKey</span> = &lt;クライアント <span class="hljs-number">1</span> の公開鍵&gt;
+<span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">1.2</span>/<span class="hljs-number">32</span>
+
+<span class="hljs-section">[Peer]</span>
+<span class="hljs-attr">PublicKey</span> = &lt;クライアント <span class="hljs-number">2</span> の公開鍵&gt;
+<span class="hljs-attr">AllowedIPs</span> = <span class="hljs-number">10.10</span>.<span class="hljs-number">1.3</span>/<span class="hljs-number">32</span></code></pre>
+             
+            <p>
+               次に、WireGuard のサービスを起動する。 
+            </p>
+             
+            <pre class="highlight"><code>$ sudo systemctl enable wg-quick@wg0
+$ sudo systemctl start wg-quick@wg0</code></pre>
+          </section>
+           
+          <section id="section--configure-firewall">
+            <h2><a href="#section--configure-firewall"> ファイアウォールの設定 </a></h2> 
+            <p>
+               続けてファイアウォールを設定する。まずは WireGuard が使用する UDP のポートを開き、<code>wg0</code> を通る通信を許可する。 
+            </p>
+             
+            <pre class="highlight"><code>$ sudo ufw allow 51820/udp
+$ sudo ufw allow in on wg0
+$ sudo ufw allow out on wg0</code></pre>
+             
+            <p>
+               次に、80 や 443 などの必要なポートについて、<code>wg0</code> を経由してのアクセスのみ許可する。 
+            </p>
+             
+            <pre class="highlight"><code>$ sudo ufw allow in on wg0 to any port 80 proto tcp
+$ sudo ufw allow in on wg0 to any port 443 proto tcp</code></pre>
+             
+            <p>
+               最後に、<code>ufw</code> を有効にする。 
+            </p>
+             
+            <pre class="highlight"><code>$ sudo ufw status
+$ sudo ufw enable</code></pre>
+          </section>
+           
+          <section id="section--connect-each-other">
+            <h2><a href="#section--connect-each-other"> 接続する </a></h2> 
+            <p>
+               これで、各クライアントで VPN を有効にすると、当該サーバの 80 ポートや 443 ポートにアクセスできるようになったはずだ。念のため VPN を切った状態でアクセスできないことも確認しておくとよいだろう。 
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

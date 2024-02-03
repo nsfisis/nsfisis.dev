@@ -33,6 +33,7 @@ export const config = {
       "rust": "Rust",
       "vim": "Vim",
       "wasm": "WebAssembly",
+      "wireguard": "WireGuard",
     },
   },
 };
