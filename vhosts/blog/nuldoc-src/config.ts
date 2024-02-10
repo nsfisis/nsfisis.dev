@@ -21,6 +21,7 @@ export const config = {
       "neovim": "Neovim",
       "note-to-self": "備忘録",
       "ouj": "放送大学",
+      "perl": "Perl",
       "php": "PHP",
       "phpconfuk": "PHP カンファレンス福岡",
       "phpconokinawa": "PHP カンファレンス沖縄",
@@ -34,6 +35,7 @@ export const config = {
       "vim": "Vim",
       "wasm": "WebAssembly",
       "wireguard": "WireGuard",
+      "yapc": "YAPC",
     },
   },
 };
