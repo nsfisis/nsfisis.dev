@@ -10,6 +10,10 @@ tags = [
 [[article.revisions]]
 date = "2024-02-03"
 remark = "公開"
+
+[[article.revisions]]
+date = "2024-02-17"
+remark = "80 番ポートについて追記"
 ---
 <article>
   <section id="intro">
@@ -162,6 +166,14 @@ remark = "公開"
     </h>
     <p>
       これで、各クライアントで VPN を有効にすると、当該サーバの 80 ポートや 443 ポートにアクセスできるようになったはずだ。念のため VPN を切った状態でアクセスできないことも確認しておくとよいだろう。
+    </p>
+  </section>
+  <section id="edit-80-port">
+    <h>
+      追記: 80 番ポートについて
+    </h>
+    <p>
+      Let's Encrypt でサーバの証明書を取得している場合、80 番ポートを空けておく必要がある。気づかないうちに証明書が切れないよう注意。
     </p>
   </section>
 </article>

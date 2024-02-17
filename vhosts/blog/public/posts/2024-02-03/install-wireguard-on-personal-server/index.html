@@ -59,6 +59,9 @@
               <li class="revision">
                 <time datetime="2024-02-03">2024-02-03</time>: 公開
               </li>
+              <li class="revision">
+                <time datetime="2024-02-17">2024-02-17</time>: 80 番ポートについて追記
+              </li>
             </ol>
           </section>
           <section id="section--intro">
@@ -196,6 +199,13 @@ $ sudo ufw enable</code></pre>
             <h2><a href="#section--connect-each-other"> 接続する </a></h2> 
             <p>
                これで、各クライアントで VPN を有効にすると、当該サーバの 80 ポートや 443 ポートにアクセスできるようになったはずだ。念のため VPN を切った状態でアクセスできないことも確認しておくとよいだろう。 
+            </p>
+          </section>
+           
+          <section id="section--edit-80-port">
+            <h2><a href="#section--edit-80-port"> 追記: 80 番ポートについて </a></h2> 
+            <p>
+               Let&apos;s Encrypt でサーバの証明書を取得している場合、80 番ポートを空けておく必要がある。気づかないうちに証明書が切れないよう注意。 
             </p>
           </section>
         </div>
