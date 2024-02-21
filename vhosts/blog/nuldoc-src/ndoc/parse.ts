@@ -23,6 +23,7 @@ export async function parseNulDocFile(
 
 function parseMetaInfo(s: string): {
   article: {
+    uuid: string;
     title: string;
     description: string;
     tags: string[];
@@ -34,6 +35,7 @@ function parseMetaInfo(s: string): {
 } {
   const root = parseToml(s) as {
     article: {
+      uuid: string;
       title: string;
       description: string;
       tags: string[];

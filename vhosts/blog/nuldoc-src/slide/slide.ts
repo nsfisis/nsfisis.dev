@@ -4,6 +4,7 @@ import { Revision, stringToDate } from "../revision.ts";
 
 export type Slide = {
   sourceFilePath: string;
+  uuid: string;
   title: string;
   event: string;
   talkType: string;
@@ -14,6 +15,7 @@ export type Slide = {
 
 type Toml = {
   slide: {
+    uuid: string;
     title: string;
     event: string;
     talkType: string;
@@ -35,6 +37,13 @@ export function createNewSlideFromTomlRootObject(
   if (root.slide === undefined) {
     throw new SlideError(
       `[slide.new] 'slide' field not found`,
+    );
+  }
+
+  const uuid = slide.uuid ?? null;
+  if (!uuid) {
+    throw new SlideError(
+      `[slide.new] 'slide.uuid' field not found`,
     );
   }
 
@@ -103,6 +112,7 @@ export function createNewSlideFromTomlRootObject(
 
   return {
     sourceFilePath: sourceFilePath,
+    uuid: uuid,
     title: title,
     event: event,
     talkType: talkType,

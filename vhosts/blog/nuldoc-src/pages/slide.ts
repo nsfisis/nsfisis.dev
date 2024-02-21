@@ -6,17 +6,21 @@ import { staticScriptElement } from "../components/utils.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { el, text } from "../dom.ts";
 import { Page } from "../page.ts";
-import { dateToString, Revision } from "../revision.ts";
+import { Date, dateToString, Revision } from "../revision.ts";
 import { Slide } from "../slide/slide.ts";
-import { getPostCreatedDate } from "./post.ts";
+import { getPostCreatedDate, getPostUpdatedDate } from "./post.ts";
 
 export interface SlidePage extends Page {
   title: string;
+  description: string;
   event: string;
   talkType: string;
   slideLink: string;
   tags: string[];
   revisions: Revision[];
+  published: Date;
+  updated: Date;
+  uuid: string;
 }
 
 export async function generateSlidePage(
@@ -131,10 +135,14 @@ export async function generateSlidePage(
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),
     title: slide.title,
+    description: `登壇: ${slide.event} (${slide.talkType})`,
     event: slide.event,
     talkType: slide.talkType,
     slideLink: slide.slideLink,
     tags: slide.tags,
     revisions: slide.revisions,
+    published: getPostCreatedDate(slide),
+    updated: getPostUpdatedDate(slide),
+    uuid: slide.uuid,
   };
 }

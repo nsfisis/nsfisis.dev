@@ -20,6 +20,15 @@ export function dateToString(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
+export function dateToRfc3339String(date: Date): string {
+  // 2021-01-01T12:00:00+00:00
+  // TODO: currently, time part is fixed to 00:00:00.
+  const y = `${date.year}`.padStart(4, "0");
+  const m = `${date.month}`.padStart(2, "0");
+  const d = `${date.day}`.padStart(2, "0");
+  return `${y}-${m}-${d}T00:00:00+09:00`;
+}
+
 export type Revision = {
   number: number;
   date: Date;

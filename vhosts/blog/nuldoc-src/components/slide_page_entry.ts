@@ -13,7 +13,7 @@ export function slidePageEntry(slide: SlidePage): Element {
       el(
         "header",
         [["class", "entry-header"]],
-        el("h2", [], text(`登壇: ${slide.event} (${slide.talkType})`)),
+        el("h2", [], text(slide.description)),
       ),
       el(
         "section",

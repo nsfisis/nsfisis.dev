@@ -10,6 +10,7 @@ export async function parseSlideFile(
     // TODO runtime assertion
     const root = parseToml(await Deno.readTextFile(filePath)) as {
       slide: {
+        uuid: string;
         title: string;
         event: string;
         talkType: string;

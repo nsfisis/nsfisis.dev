@@ -11,6 +11,7 @@ export const config = {
   },
   blog: {
     author: "nsfisis",
+    fqdn: "blog.nsfisis.dev",
     siteName: "REPL: Rest-Eat-Program Loop",
     siteCopyrightYear: 2021,
     tagLabels: {

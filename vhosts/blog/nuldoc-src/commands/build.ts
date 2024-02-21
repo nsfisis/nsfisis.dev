@@ -1,7 +1,8 @@
 import { dirname, join, joinGlobs } from "std/path/mod.ts";
 import { ensureDir } from "std/fs/mod.ts";
 import { expandGlob } from "std/fs/expand_glob.ts";
-import { Config } from "../config.ts";
+import { generateFeedPageFromEntries } from "../atom/generate.ts";
+import { Config, getTagLabel } from "../config.ts";
 import { parseNulDocFile } from "../ndoc/parse.ts";
 import { Page } from "../page.ts";
 import { render } from "../render.ts";
@@ -32,6 +33,7 @@ export async function runBuildCommand(config: Config) {
   await buildHomePage(config);
   await buildAboutPage(slides, config);
   await buildNotFoundPage(config);
+  await buildFeedOfAllContents(posts, slides, config);
   await copyStaticFiles(config);
   await copyAssetFiles(slides, config);
 }
@@ -71,6 +73,14 @@ async function parsePosts(
 async function buildPostListPage(posts: PostPage[], config: Config) {
   const postListPage = await generatePostListPage(posts, config);
   await writePage(postListPage, config);
+  const postFeedPage = generateFeedPageFromEntries(
+    postListPage.href,
+    "posts",
+    `投稿一覧｜${config.blog.siteName}`,
+    posts,
+    config,
+  );
+  await writePage(postFeedPage, config);
 }
 
 async function buildSlidePages(config: Config): Promise<SlidePage[]> {
@@ -108,6 +118,14 @@ async function parseSlides(
 async function buildSlideListPage(slides: SlidePage[], config: Config) {
   const slideListPage = await generateSlideListPage(slides, config);
   await writePage(slideListPage, config);
+  const slideFeedPage = generateFeedPageFromEntries(
+    slideListPage.href,
+    "slides",
+    `スライド一覧｜${config.blog.siteName}`,
+    slides,
+    config,
+  );
+  await writePage(slideFeedPage, config);
 }
 
 async function buildHomePage(config: Config) {
@@ -125,6 +143,21 @@ async function buildNotFoundPage(config: Config) {
   await writePage(notFoundPage, config);
 }
 
+async function buildFeedOfAllContents(
+  posts: PostPage[],
+  slides: SlidePage[],
+  config: Config,
+) {
+  const feed = generateFeedPageFromEntries(
+    "/",
+    "all",
+    config.blog.siteName,
+    [...posts, ...slides],
+    config,
+  );
+  await writePage(feed, config);
+}
+
 async function buildTagPages(
   posts: PostPage[],
   slides: SlidePage[],
@@ -135,6 +168,14 @@ async function buildTagPages(
   for (const [tag, pages] of tagsAndPages) {
     const tagPage = await generateTagPage(tag, pages, config);
     await writePage(tagPage, config);
+    const tagFeedPage = generateFeedPageFromEntries(
+      tagPage.href,
+      `tag-${tag}`,
+      `タグ「${getTagLabel(config, tag)}」一覧｜${config.blog.siteName}`,
+      pages,
+      config,
+    );
+    await writePage(tagFeedPage, config);
     tags.push(tagPage);
   }
   return tags;

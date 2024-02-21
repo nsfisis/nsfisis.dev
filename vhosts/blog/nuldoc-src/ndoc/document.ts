@@ -7,6 +7,7 @@ import { Element, findFirstChildElement } from "../dom.ts";
 export type Document = {
   root: Element;
   sourceFilePath: string;
+  uuid: string;
   link: string;
   title: string;
   description: string; // TODO: should it be markup text?
@@ -18,6 +19,7 @@ export function createNewDocumentFromRootElement(
   root: Element,
   meta: {
     article: {
+      uuid: string;
       title: string;
       description: string;
       tags: string[];
@@ -43,6 +45,7 @@ export function createNewDocumentFromRootElement(
   return {
     root: root,
     sourceFilePath: sourceFilePath,
+    uuid: meta.article.uuid,
     link: link,
     title: meta.article.title,
     description: meta.article.description,

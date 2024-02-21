@@ -13,6 +13,9 @@ export interface PostPage extends Page {
   description: string;
   tags: string[];
   revisions: Revision[];
+  published: Date;
+  updated: Date;
+  uuid: string;
 }
 
 export function getPostCreatedDate(page: { revisions: Revision[] }): Date {
@@ -136,5 +139,8 @@ export async function generatePostPage(
     description: doc.description,
     tags: doc.tags,
     revisions: doc.revisions,
+    published: getPostCreatedDate(doc),
+    updated: getPostUpdatedDate(doc),
+    uuid: doc.uuid,
   };
 }
