@@ -1,5 +1,6 @@
 ---
 [article]
+uuid = "42f0b29b-1e44-4dbe-9864-69abe3bb1e6e"
 title = "【PHP】 fizzbuzz を書く。1行あたり2文字で。"
 description = "PHP で fizzbuzz を書いた。ただし、1行あたりに使える文字数は2文字まで。"
 tags = [

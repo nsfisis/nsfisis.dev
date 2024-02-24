@@ -1,4 +1,5 @@
 [slide]
+uuid = "2dce7e27-1eaf-4ca4-8037-e9a3ead18b48"
 title = "詳説「参照」PHP の参照を完全に理解する"
 event = "PHPerKaigi 2023"
 talkType = "レギュラートーク"

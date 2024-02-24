@@ -1,4 +1,5 @@
 [slide]
+uuid = "9376560b-250a-4697-ac10-0903ad16acee"
 title = "明日のあなたの役に立たない PHP コーディング技法～細長い FizzBuzz を書く～"
 event = "PHP 勉強会@東京 第150 回"
 talkType = "LT"

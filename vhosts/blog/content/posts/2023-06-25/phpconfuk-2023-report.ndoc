@@ -1,5 +1,6 @@
 ---
 [article]
+uuid = "e1568c4c-9bdd-47b9-8b39-939ade4f3ba0"
 title = "PHP カンファレンス福岡 2023 参加レポ"
 description = "2023-06-24 に開催された、PHP カンファレンス福岡に参加した。"
 tags = [

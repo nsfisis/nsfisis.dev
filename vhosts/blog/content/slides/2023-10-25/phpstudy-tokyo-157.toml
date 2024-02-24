@@ -1,4 +1,5 @@
 [slide]
+uuid = "6c377f3f-6f52-4074-b690-c79d02050562"
 title = "PHP コードを隔離された環境で安全に動かす (on WebAssembly)"
 event = "PHP 勉強会@東京 第157 回"
 talkType = "LT"

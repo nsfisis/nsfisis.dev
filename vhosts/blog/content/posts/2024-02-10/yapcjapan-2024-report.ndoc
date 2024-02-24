@@ -1,5 +1,6 @@
 ---
 [article]
+uuid = "230a0048-93c0-4aac-91ef-bb3108f3e587"
 title = "YAPC::Hiroshima 2024 参加レポ"
 description = "2024-02-10 に開催された、YAPC::Hiroshima 2024 に参加した。"
 tags = [

@@ -1,4 +1,5 @@
 [slide]
+uuid = "fe75bb63-1cd9-457e-8244-c444307cd40a"
 title = "list でない array の末尾を探す"
 event = "PHP 勉強会@東京 第151 回"
 talkType = "LT"

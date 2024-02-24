@@ -1,5 +1,6 @@
 ---
 [article]
+uuid = "44171f75-c312-4c92-9927-3d260e162175"
 title = "【Vim】 autocmd events の BufWrite/BufWritePre の違い"
 description = "Vim の autocmd events における BufWrite/BufWritePre がどう違うのかを調べた結果、違いはないことがわかった。"
 tags = [

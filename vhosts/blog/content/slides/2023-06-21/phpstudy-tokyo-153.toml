@@ -1,4 +1,5 @@
 [slide]
+uuid = "6016d501-b9c9-474a-a304-1ec1295e049a"
 title = "テキストファイルの末尾には改行コードを入れよう"
 event = "PHP 勉強会@東京 第153 回"
 talkType = "LT"
