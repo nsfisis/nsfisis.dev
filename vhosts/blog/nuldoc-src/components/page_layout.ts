@@ -7,6 +7,7 @@ type Params = {
   metaDescription: string;
   metaKeywords: string[];
   metaTitle: string;
+  metaAtomFeedHref?: string;
   requiresSyntaxHighlight: boolean;
 };
 
@@ -16,6 +17,7 @@ export async function pageLayout(
     metaDescription,
     metaKeywords,
     metaTitle,
+    metaAtomFeedHref,
     requiresSyntaxHighlight,
   }: Params,
   body: Element,
@@ -64,6 +66,9 @@ export async function pageLayout(
       ["property", "og:locale"],
       ["content", "ja_JP"],
     ]),
+    ...(metaAtomFeedHref
+      ? [linkElement("alternate", metaAtomFeedHref, "application/atom+xml")]
+      : []),
     linkElement("icon", "/favicon.svg", "image/svg+xml"),
     el("title", [], text(metaTitle)),
     await stylesheetLinkElement("/style.css", config),

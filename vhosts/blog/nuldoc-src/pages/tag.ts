@@ -45,6 +45,7 @@ export async function generateTagPage(
       metaDescription: `タグ「${tagLabel}」のついた記事またはスライドの一覧`,
       metaKeywords: [tagLabel],
       metaTitle: `${pageTitle}｜${config.blog.siteName}`,
+      metaAtomFeedHref: `https://${config.blog.fqdn}/tags/${tagSlug}/atom.xml`,
       requiresSyntaxHighlight: false,
     },
     body,

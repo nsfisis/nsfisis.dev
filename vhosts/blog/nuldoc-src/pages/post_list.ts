@@ -49,6 +49,7 @@ export async function generatePostListPage(
       metaDescription: "投稿した記事の一覧",
       metaKeywords: [],
       metaTitle: `${pageTitle}｜${config.blog.siteName}`,
+      metaAtomFeedHref: `https://${config.blog.fqdn}/posts/atom.xml`,
       requiresSyntaxHighlight: false,
     },
     body,

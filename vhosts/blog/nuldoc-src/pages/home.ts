@@ -81,6 +81,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
       metaDescription: "nsfisis のブログサイト",
       metaKeywords: [],
       metaTitle: config.blog.siteName,
+      metaAtomFeedHref: `https://${config.blog.fqdn}/atom.xml`,
       requiresSyntaxHighlight: false,
     },
     body,

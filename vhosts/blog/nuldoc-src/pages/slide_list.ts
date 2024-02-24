@@ -50,6 +50,7 @@ export async function generateSlideListPage(
       metaDescription: "登壇したイベントで使用したスライドの一覧",
       metaKeywords: [],
       metaTitle: `${pageTitle}｜${config.blog.siteName}`,
+      metaAtomFeedHref: `https://${config.blog.fqdn}/slides/atom.xml`,
       requiresSyntaxHighlight: false,
     },
     body,
