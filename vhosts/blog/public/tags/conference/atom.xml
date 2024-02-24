@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-conference</id>
+  <title>タグ「カンファレンス」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/conference/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/conference/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2024-02-21T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:fd8fcb03-8e4d-4ca7-8499-0674accc51a9</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-02-22/phpkansai-2024-report/"></link>
+    <title>PHPカンファレンス関西 2024 参加レポ</title>
+    <summary>2024-02-11 に開催された、PHPカンファレンス関西 2024 に参加した。</summary>
+    <published>2024-02-21T00:00:00+09:00</published>
+    <updated>2024-02-21T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:230a0048-93c0-4aac-91ef-bb3108f3e587</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-02-10/yapcjapan-2024-report/"></link>
+    <title>YAPC::Hiroshima 2024 参加レポ</title>
+    <summary>2024-02-10 に開催された、YAPC::Hiroshima 2024 に参加した。</summary>
+    <published>2024-02-10T00:00:00+09:00</published>
+    <updated>2024-02-10T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:e1568c4c-9bdd-47b9-8b39-939ade4f3ba0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-06-25/phpconfuk-2023-report/"></link>
+    <title>PHP カンファレンス福岡 2023 参加レポ</title>
+    <summary>2023-06-24 に開催された、PHP カンファレンス福岡に参加した。</summary>
+    <published>2023-06-25T00:00:00+09:00</published>
+    <updated>2023-06-25T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:21ce39f0-d613-45f2-a760-89c368892d77</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-04-04/phperkaigi-2023-report/"></link>
+    <title>PHPerKaigi 2023 参加レポ</title>
+    <summary>2023-03-23 から 2023-03-25 にかけて開催された、PHPerKaigi 2023 に参加した。</summary>
+    <published>2023-04-04T00:00:00+09:00</published>
+    <updated>2023-06-28T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:3cce70d8-cee9-4e0e-8b38-6ef1e0a8a278</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-25/phperkaigi-2023-tokens/"></link>
+    <title>PHPer チャレンジ解説 (デジタルサーカス株式会社)</title>
+    <summary>登壇: PHPerKaigi 2023 (トークン解説セッション)</summary>
+    <published>2023-03-25T00:00:00+09:00</published>
+    <updated>2023-03-25T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:2dce7e27-1eaf-4ca4-8037-e9a3ead18b48</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-24/phperkaigi-2023/"></link>
+    <title>詳説「参照」PHP の参照を完全に理解する</title>
+    <summary>登壇: PHPerKaigi 2023 (レギュラートーク)</summary>
+    <published>2023-03-24T00:00:00+09:00</published>
+    <updated>2023-03-24T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:bb71bb5d-361b-44cb-9753-81d14583d860</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-08-27/php-conference-okinawa-code-golf/"></link>
+    <title>PHP カンファレンス沖縄で出題されたコードゴルフの問題を解いてみた</title>
+    <summary>PHP カンファレンス沖縄の懇親会 LT で出題されたコードゴルフの問題を解いてみた。</summary>
+    <published>2022-08-27T00:00:00+09:00</published>
+    <updated>2022-08-27T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:9211e1fe-bca3-43c4-ba4e-c67d62f3fed0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-05-01/phperkaigi-2022/"></link>
+    <title>PHPerKaigi 2022</title>
+    <summary>2022-04-09 から 2022-04-11 にかけて開催された、PHPerKaigi 2022 に参加した。</summary>
+    <published>2022-05-01T00:00:00+09:00</published>
+    <updated>2022-05-01T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:f4985d54-0907-4449-8101-0fcd382f9e02</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-04-09/phperkaigi-2022-tokens/"></link>
+    <title>PHPerKaigi 2022 トークン問題の解説</title>
+    <summary>PHPerKaigi 2022 で私が作成した PHPer チャレンジ問題を解説する。</summary>
+    <published>2022-04-09T00:00:00+09:00</published>
+    <updated>2022-04-16T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:3fbe0b8c-216e-48f6-b905-c0d361b94542</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-03-30/phperkaigi-2021/"></link>
+    <title>PHPerKaigi 2021</title>
+    <summary>2021-03-26 から 2021-03-28 にかけて開催された、PHPerKaigi 2021 に参加した。</summary>
+    <published>2021-03-30T00:00:00+09:00</published>
+    <updated>2021-03-30T00:00:00+09:00</updated>
+  </entry>
+</feed>

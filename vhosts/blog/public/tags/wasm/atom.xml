@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-wasm</id>
+  <title>タグ「WebAssembly」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/wasm/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/wasm/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2023-10-02T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:0ed1ccc8-d437-481c-8cca-2131ce800cc0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-10-02/compile-php-runtime-to-wasm/"></link>
+    <title>PHP の処理系を Emscripten で WebAssembly にコンパイルする</title>
+    <summary>PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。</summary>
+    <published>2023-10-02T00:00:00+09:00</published>
+    <updated>2023-10-02T00:00:00+09:00</updated>
+  </entry>
+</feed>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-isucon</id>
+  <title>タグ「ISUCON」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/isucon/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/isucon/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2023-12-03T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:d0c404bb-4700-4a6f-9911-621e9872d8c6</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-12-03/isucon-13/"></link>
+    <title>ISUCON 13 に参加した</title>
+    <summary>ISUCON 13 に参加した。チーム名「うつしもゆ」、最終スコア 13,580 点</summary>
+    <published>2023-12-03T00:00:00+09:00</published>
+    <updated>2023-12-03T00:00:00+09:00</updated>
+  </entry>
+</feed>

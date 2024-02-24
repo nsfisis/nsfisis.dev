@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-ruby</id>
+  <title>タグ「Ruby」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/ruby/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/ruby/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2021-10-02T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:e1456a50-4fc6-42ef-89f3-8be78e01da13</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/ruby-detect-running-implementation/"></link>
+    <title>【Ruby】 自身を実行している処理系の種類を判定する</title>
+    <summary>Ruby には複数の実装があるが、自身を実行している処理系の種類をスクリプト上からどのように判定すればよいだろうか。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:87455008-fe5b-49bf-af5a-b875264f8326</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/ruby-then-keyword-and-case-in/"></link>
+    <title>【Ruby】 then キーワードと case in</title>
+    <summary>Ruby 3.0 で追加される case in 構文と、then キーワードについて。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+</feed>
