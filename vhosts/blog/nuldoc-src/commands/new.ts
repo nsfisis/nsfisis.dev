@@ -58,9 +58,11 @@ function getDirPath(type: "post" | "slide"): string {
 }
 
 function getTemplate(type: "post" | "slide", date: string): string {
+  const uuid = crypto.randomUUID();
   if (type === "post") {
     return `---
 [article]
+uuid = "${uuid}"
 title = "TODO"
 description = "TODO"
 tags = [
@@ -82,6 +84,7 @@ remark = "公開"
 `;
   } else {
     return `[slide]
+uuid = "${uuid}"
 title = "TODO"
 event = "TODO"
 talkType = "TODO"
