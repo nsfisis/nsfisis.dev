@@ -1,20 +1,36 @@
 import { dirname, join } from "std/path/mod.ts";
 import { ensureDir } from "std/fs/mod.ts";
+import { parse } from "std/flags/mod.ts";
 import { Config } from "../config.ts";
 
 export async function runNewCommand(config: Config) {
-  const type = Deno.args[1];
+  const parsedArgs = parse(Deno.args, {
+    string: ["date"],
+  });
+
+  const type = parsedArgs._[1];
   if (type !== "post" && type !== "slide") {
     console.log(`Usage: nuldoc new <type>
 
-<type> must be either post or slide.`);
+<type> must be either "post" or "slide".
+
+OPTIONS:
+  --date <DATE>
+`);
     Deno.exit(1);
   }
 
-  const now = new Date();
-  const ymd = `${now.getFullYear()}-${
-    (now.getMonth() + 1).toString().padStart(2, "0")
-  }-${now.getDate().toString().padStart(2, "0")}`;
+  const ymd = (() => {
+    if (parsedArgs.date) {
+      return parsedArgs.date;
+    }
+
+    const now = new Date();
+    const y = now.getFullYear();
+    const d = (now.getMonth() + 1).toString().padStart(2, "0");
+    const m = now.getDate().toString().padStart(2, "0");
+    return `${y}-${d}-${m}`;
+  })();
 
   const destFilePath = join(
     Deno.cwd(),
