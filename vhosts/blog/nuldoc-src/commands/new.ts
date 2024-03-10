@@ -21,7 +21,7 @@ export async function runNewCommand(config: Config) {
     config.locations.contentDir,
     getDirPath(type),
     ymd,
-    "TODO.ndoc",
+    getFilename(type),
   );
 
   await ensureDir(dirname(destFilePath));
@@ -31,6 +31,10 @@ export async function runNewCommand(config: Config) {
       destFilePath.replace(Deno.cwd(), "")
     } was successfully created.`,
   );
+}
+
+function getFilename(type: "post" | "slide"): string {
+  return type === "post" ? "TODO.ndoc" : "TODO.toml";
 }
 
 function getDirPath(type: "post" | "slide"): string {
