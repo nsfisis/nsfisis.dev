@@ -1,0 +1,15 @@
+[slide]
+uuid = "cee40048-f3c5-4043-9ef8-a4ee2ae7cf0e"
+title = "WebAssembly を理解する 〜VM の作成を通して〜"
+event = "PHPerKaigi 2024"
+talkType = "レギュラートーク (40分)"
+link = "/slides/2024-03-08/phperkaigi-2024/slide.pdf"
+tags = [
+  "conference",
+  "php",
+  "phperkaigi",
+]
+
+[[slide.revisions]]
+date = "2024-03-08"
+remark = "登壇"

@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-01-24T00:00:00+09:00</updated>
+  <updated>2024-03-08T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:cee40048-f3c5-4043-9ef8-a4ee2ae7cf0e</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-08/phperkaigi-2024/"></link>
+    <title>WebAssembly を理解する 〜VM の作成を通して〜</title>
+    <summary>登壇: PHPerKaigi 2024 (レギュラートーク (40分))</summary>
+    <published>2024-03-08T00:00:00+09:00</published>
+    <updated>2024-03-08T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:82db7893-983a-4631-8bee-d0725d078252</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-01-24/phpstudy-tokyo-160/"></link>
