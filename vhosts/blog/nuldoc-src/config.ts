@@ -37,6 +37,7 @@ export const config = {
       "vim": "Vim",
       "wasm": "WebAssembly",
       "wireguard": "WireGuard",
+      "ya8": "Ya8",
       "yapc": "YAPC",
     },
   },

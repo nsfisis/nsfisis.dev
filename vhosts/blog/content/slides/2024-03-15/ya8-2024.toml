@@ -1,0 +1,15 @@
+[slide]
+uuid = "da7b1d5a-70df-4c4a-936c-1b49ca1a7c37"
+title = "CLI の PHP プログラムを限界まで高速化してみる"
+event = "Ya8 2024"
+talkType = "レギュラートーク (60分)"
+link = "/slides/2024-03-15/ya8-2024/slide.pdf"
+tags = [
+  "conference",
+  "wasm",
+  "ya8",
+]
+
+[[slide.revisions]]
+date = "2024-03-15"
+remark = "登壇"

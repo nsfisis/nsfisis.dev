@@ -7,7 +7,23 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2023-10-02T00:00:00+09:00</updated>
+  <updated>2024-03-15T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:da7b1d5a-70df-4c4a-936c-1b49ca1a7c37</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
+    <title>CLI の PHP プログラムを限界まで高速化してみる</title>
+    <summary>登壇: Ya8 2024 (レギュラートーク (60分))</summary>
+    <published>2024-03-15T00:00:00+09:00</published>
+    <updated>2024-03-15T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:cee40048-f3c5-4043-9ef8-a4ee2ae7cf0e</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-08/phperkaigi-2024/"></link>
+    <title>WebAssembly を理解する 〜VM の作成を通して〜</title>
+    <summary>登壇: PHPerKaigi 2024 (レギュラートーク (40分))</summary>
+    <published>2024-03-08T00:00:00+09:00</published>
+    <updated>2024-03-08T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:0ed1ccc8-d437-481c-8cca-2131ce800cc0</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-10-02/compile-php-runtime-to-wasm/"></link>
