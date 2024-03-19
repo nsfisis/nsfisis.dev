@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-03-17T00:00:00+09:00</updated>
+  <updated>2024-03-20T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:6b749793-c760-4597-8a4c-b32d027b7585</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-03-20/todos-in-my-life/"></link>
+    <title>死ぬまでに作る自作○○一覧あるいは人生の TODO リスト</title>
+    <summary>駄文</summary>
+    <published>2024-03-20T00:00:00+09:00</published>
+    <updated>2024-03-20T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:750be5c8-ca52-4cbd-86fe-5645b06bde95</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-03-17/phperkaigi-2024-report/"></link>
