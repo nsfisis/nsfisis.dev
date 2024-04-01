@@ -13,7 +13,7 @@ export LEGO_CONF_WEBROOT="${REPO_ROOT}/letsencrypt/webroot"
 export LEGO_CONF_PATH="${REPO_ROOT}/letsencrypt/lego"
 export LEGO_CONF_DOMAINS=nsfisis.dev,blog.nsfisis.dev
 export GOLANG_VERSION=1.21.1
-export MIOPROXY_VERSION=v0.1.0
+export MIOPROXY_VERSION=v0.3.0
 
 mitamae_bin_url="https://github.com/itamae-kitchen/mitamae/releases/download/${MITAMAE_VERSION}/mitamae-${MITAMAE_ARCH}.tar.gz"
 
