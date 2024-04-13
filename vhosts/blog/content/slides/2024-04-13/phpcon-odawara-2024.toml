@@ -1,0 +1,15 @@
+[slide]
+uuid = "69e1694b-5ddb-41a5-a7f4-138ce82a78b2"
+title = "来る新 JIT エンジンについて知った気になる"
+event = "PHP カンファレンス小田原"
+talkType = "レギュラートーク (15分)"
+link = "/slides/2024-04-13/phpcon-odawara-2024/slide.pdf"
+tags = [
+  "conference",
+  "php",
+  "phpcon-odawara",
+]
+
+[[slide.revisions]]
+date = "2024-04-13"
+remark = "登壇"
