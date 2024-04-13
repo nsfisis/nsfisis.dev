@@ -1,0 +1,75 @@
+---
+[article]
+uuid = "be9c896d-7efa-42dd-a50a-dda5fd3a7f5c"
+title = "PHP カンファレンス小田原 2024 参加レポ"
+description = "2024-04-13 に開催された、PHP カンファレンス小田原 2024 に参加した。"
+tags = [
+  "conference",
+  "php",
+  "phpcon-odawara",
+]
+
+[[article.revisions]]
+date = "2024-04-14"
+remark = "公開"
+---
+<article>
+  <section id="intro">
+    <h>はじめに</h>
+    <p>
+      2024-04-13 に開催された<a href="https://phpcon-odawara.jp/">PHP カンファレンス小田原</a>に、スピーカーとして、また当日スタッフとして参加した。
+    </p>
+  </section>
+  <section id="as-speaker">
+    <h>スピーカーとして</h>
+    <p>
+      PHP 処理系の JIT コンパイルにおける PHP 8.4 での変更について、登壇をおこなった。
+    </p>
+    <ul>
+      <li>
+        来る新 JIT エンジンについて知った気になる
+        <ul>
+          <li><a href="https://fortee.jp/phpconodawara-2024/proposal/bc9669f6-6583-489c-aa6a-1b68abf7c291">プロポーザル</a></li>
+          <li><a href="/slides/2024-04-13/phpcon-odawara-2024/">スライド</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      今回、どこから話を始めるか大いに迷ったのだが、最終的には PHP 処理系の opcode や VM といった概念は既知のものとし、そこから JIT コンパイルへ繋げるといった構成にした。
+    </p>
+    <p>
+      PHP の処理系がスクリプトを opcode へ変換する過程については、ちょうど同じカンファレンスの<a href="https://fortee.jp/phpconodawara-2024/proposal/21d94a60-404d-4fba-8c60-d1c8889a0138">めもりーさんの発表</a>あたりを参考にしていただくとよいだろう。
+      また、新しい IR についてより詳しく知りたいという方は、スライド末尾の「参考資料」にあるリンクを参照いただくのがよいかと思う。
+    </p>
+    <p>
+      Tracing JIT の発火条件や、IR を使って実現される最適化方法など、調べたものの発表に入らなかった話がごまんとあるので、これもどこかに持っていければと考えている。
+    </p>
+  </section>
+  <section id="as-staff">
+    <h>スタッフとして</h>
+    <p>
+      当日スタッフとして前日の準備と当日の運営をおこなった。今回はモノの移動が比較的 (比較対象: <a href="/posts/2024-03-17/phperkaigi-2024-report/">PHPerKaigi</a>) 少なく、体力にはかなり余裕があった。
+    </p>
+    <p>
+      自分の担当範囲内では、一度タイムキーパー係のときに時間を思いきり間違えた以外は、スムーズに進められたかと思う。
+    </p>
+    <p>
+      また、これはコアスタッフの方々のおかげだろうが、初開催としては大きなトラブルなく終わったと言えるのではないだろうか。
+    </p>
+  </section>
+  <section id="as-attendee">
+    <h>参加者として</h>
+    <p>
+      TODO: スタッフ業でしっかりと見られていない発表がほとんどなので、後日アーカイブで見直してから埋める
+    </p>
+  </section>
+  <section id="outro">
+    <h>おわりに</h>
+    <p>
+      怒涛の月刊 PHP カンファレンスも折り返しとなったが、まだまだ新鮮に楽しい。
+    </p>
+    <p>
+      また今度、カンファレンスで会いましょう (震源地がよくわかっていないのだけれど、575 が流行っているらしい)。
+    </p>
+  </section>
+</article>
