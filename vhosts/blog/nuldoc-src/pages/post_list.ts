@@ -6,7 +6,7 @@ import { Config } from "../config.ts";
 import { el, text } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
-import { getPostCreatedDate, PostPage } from "./post.ts";
+import { getPostPublishedDate, PostPage } from "./post.ts";
 
 export type PostListPage = Page;
 
@@ -33,8 +33,8 @@ export async function generatePostListPage(
         ),
       ),
       ...Array.from(posts).sort((a, b) => {
-        const ta = dateToString(getPostCreatedDate(a));
-        const tb = dateToString(getPostCreatedDate(b));
+        const ta = dateToString(getPostPublishedDate(a));
+        const tb = dateToString(getPostPublishedDate(b));
         if (ta > tb) return -1;
         if (ta < tb) return 1;
         return 0;

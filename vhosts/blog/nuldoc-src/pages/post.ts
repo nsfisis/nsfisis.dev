@@ -18,12 +18,21 @@ export interface PostPage extends Page {
   uuid: string;
 }
 
-export function getPostCreatedDate(page: { revisions: Revision[] }): Date {
+export function getPostPublishedDate(page: { revisions: Revision[] }): Date {
+  for (const rev of page.revisions) {
+    if (!rev.isInternal) {
+      return rev.date;
+    }
+  }
   return page.revisions[0].date;
 }
 
 export function getPostUpdatedDate(page: { revisions: Revision[] }): Date {
   return page.revisions[page.revisions.length - 1].date;
+}
+
+export function postHasAnyUpdates(page: { revisions: Revision[] }): boolean {
+  return 2 <= page.revisions.filter((rev) => !rev.isInternal).length;
 }
 
 export async function generatePostPage(
@@ -114,7 +123,7 @@ export async function generatePostPage(
 
   const html = await pageLayout(
     {
-      metaCopyrightYear: getPostCreatedDate(doc).year,
+      metaCopyrightYear: getPostPublishedDate(doc).year,
       metaDescription: doc.description,
       metaKeywords: doc.tags.map((slug) => getTagLabel(config, slug)),
       metaTitle: `${doc.title}｜${config.blog.siteName}`,
@@ -139,7 +148,7 @@ export async function generatePostPage(
     description: doc.description,
     tags: doc.tags,
     revisions: doc.revisions,
-    published: getPostCreatedDate(doc),
+    published: getPostPublishedDate(doc),
     updated: getPostUpdatedDate(doc),
     uuid: doc.uuid,
   };

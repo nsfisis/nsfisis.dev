@@ -8,7 +8,7 @@ import { el, text } from "../dom.ts";
 import { Page } from "../page.ts";
 import { Date, dateToString, Revision } from "../revision.ts";
 import { Slide } from "../slide/slide.ts";
-import { getPostCreatedDate, getPostUpdatedDate } from "./post.ts";
+import { getPostPublishedDate, getPostUpdatedDate } from "./post.ts";
 
 export interface SlidePage extends Page {
   title: string;
@@ -113,7 +113,7 @@ export async function generateSlidePage(
 
   const html = await pageLayout(
     {
-      metaCopyrightYear: getPostCreatedDate(slide).year,
+      metaCopyrightYear: getPostPublishedDate(slide).year,
       metaDescription: slide.title,
       metaKeywords: slide.tags.map((slug) => getTagLabel(config, slug)),
       metaTitle: `${slide.event} (${slide.talkType})｜${config.blog.siteName}`,
@@ -141,7 +141,7 @@ export async function generateSlidePage(
     slideLink: slide.slideLink,
     tags: slide.tags,
     revisions: slide.revisions,
-    published: getPostCreatedDate(slide),
+    published: getPostPublishedDate(slide),
     updated: getPostUpdatedDate(slide),
     uuid: slide.uuid,
   };

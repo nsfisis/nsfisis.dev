@@ -12,7 +12,7 @@ import { generateHomePage } from "../pages/home.ts";
 import { generateNotFoundPage } from "../pages/not_found.ts";
 import {
   generatePostPage,
-  getPostCreatedDate,
+  getPostPublishedDate,
   PostPage,
 } from "../pages/post.ts";
 import { generatePostListPage } from "../pages/post_list.ts";
@@ -202,8 +202,8 @@ function collectTags(taggedPages: TaggedPage[]): [string, TaggedPage[]][] {
     result.push([
       tag,
       tagsAndPages.get(tag).sort((a: TaggedPage, b: TaggedPage) => {
-        const ta = dateToString(getPostCreatedDate(a));
-        const tb = dateToString(getPostCreatedDate(b));
+        const ta = dateToString(getPostPublishedDate(a));
+        const tb = dateToString(getPostPublishedDate(b));
         if (ta > tb) return -1;
         if (ta < tb) return 1;
         return 0;

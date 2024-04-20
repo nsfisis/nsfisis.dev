@@ -33,4 +33,5 @@ export type Revision = {
   number: number;
   date: Date;
   remark: string;
+  isInternal: boolean;
 };

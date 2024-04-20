@@ -30,6 +30,7 @@ function parseMetaInfo(s: string): {
     revisions: {
       date: string;
       remark: string;
+      isInternal?: boolean;
     }[];
   };
 } {
@@ -42,6 +43,7 @@ function parseMetaInfo(s: string): {
       revisions: {
         date: string;
         remark: string;
+        isInternal?: boolean;
       }[];
     };
   };

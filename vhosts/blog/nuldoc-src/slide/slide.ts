@@ -89,7 +89,7 @@ export function createNewSlideFromTomlRootObject(
     );
   }
   const revisions_ = revisions.map(
-    (x: { date: string; remark: string }, i: number) => {
+    (x: { date: string; remark: string; isInternal?: boolean }, i: number) => {
       const date = x.date ?? null;
       if (!date) {
         throw new SlideError(
@@ -102,10 +102,12 @@ export function createNewSlideFromTomlRootObject(
           `[slide.new] 'remark' field not found`,
         );
       }
+      const isInternal = x.isInternal ?? false;
       return {
         number: i + 1,
         date: stringToDate(date),
-        remark: remark,
+        remark,
+        isInternal,
       };
     },
   );

@@ -1,7 +1,8 @@
 import { el, Element, text } from "../dom.ts";
 import {
-  getPostCreatedDate,
+  getPostPublishedDate,
   getPostUpdatedDate,
+  postHasAnyUpdates,
   PostPage,
 } from "../pages/post.ts";
 import { dateToString } from "../revision.ts";
@@ -28,11 +29,11 @@ export function postPageEntry(post: PostPage): Element {
         [["class", "entry-footer"]],
         el(
           "time",
-          [["datetime", dateToString(getPostCreatedDate(post))]],
-          text(dateToString(getPostCreatedDate(post))),
+          [["datetime", dateToString(getPostPublishedDate(post))]],
+          text(dateToString(getPostPublishedDate(post))),
         ),
         text(" 投稿"),
-        ...(post.revisions.length > 1
+        ...(postHasAnyUpdates(post)
           ? [
             text("、"),
             el("time", [[

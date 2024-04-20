@@ -19,6 +19,7 @@ export async function parseSlideFile(
         revisions: {
           date: string;
           remark: string;
+          isInternal?: boolean;
         }[];
       };
     };

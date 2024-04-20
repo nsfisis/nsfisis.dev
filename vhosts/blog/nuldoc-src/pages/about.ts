@@ -6,7 +6,7 @@ import { Config } from "../config.ts";
 import { el, text } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
-import { getPostCreatedDate } from "./post.ts";
+import { getPostPublishedDate } from "./post.ts";
 import { SlidePage } from "./slide.ts";
 
 export type AboutPage = Page;
@@ -134,8 +134,8 @@ export async function generateAboutPage(
               "ul",
               [],
               ...Array.from(slides).sort((a, b) => {
-                const ta = dateToString(getPostCreatedDate(a));
-                const tb = dateToString(getPostCreatedDate(b));
+                const ta = dateToString(getPostPublishedDate(a));
+                const tb = dateToString(getPostPublishedDate(b));
                 if (ta > tb) return -1;
                 if (ta < tb) return 1;
                 return 0;
@@ -148,7 +148,7 @@ export async function generateAboutPage(
                     [["href", slide.href]],
                     text(
                       `${
-                        dateToString(getPostCreatedDate(slide))
+                        dateToString(getPostPublishedDate(slide))
                       }: ${slide.event} (${slide.talkType})`,
                     ),
                   ),

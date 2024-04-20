@@ -26,6 +26,7 @@ export function createNewDocumentFromRootElement(
       revisions: {
         date: string;
         remark: string;
+        isInternal?: boolean;
       }[];
     };
   },
@@ -54,6 +55,7 @@ export function createNewDocumentFromRootElement(
       number: i,
       date: stringToDate(r.date),
       remark: r.remark,
+      isInternal: !!r.isInternal,
     })),
   };
 }

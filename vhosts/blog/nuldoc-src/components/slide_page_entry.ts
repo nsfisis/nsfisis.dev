@@ -1,5 +1,9 @@
 import { el, Element, text } from "../dom.ts";
-import { getPostCreatedDate, getPostUpdatedDate } from "../pages/post.ts";
+import {
+  getPostPublishedDate,
+  getPostUpdatedDate,
+  postHasAnyUpdates,
+} from "../pages/post.ts";
 import { SlidePage } from "../pages/slide.ts";
 import { dateToString } from "../revision.ts";
 
@@ -25,11 +29,11 @@ export function slidePageEntry(slide: SlidePage): Element {
         [["class", "entry-footer"]],
         el(
           "time",
-          [["datetime", dateToString(getPostCreatedDate(slide))]],
-          text(dateToString(getPostCreatedDate(slide))),
+          [["datetime", dateToString(getPostPublishedDate(slide))]],
+          text(dateToString(getPostPublishedDate(slide))),
         ),
         text(" 登壇"),
-        ...(slide.revisions.length > 1
+        ...(postHasAnyUpdates(slide)
           ? [
             text("、"),
             el("time", [[

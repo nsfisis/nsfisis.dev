@@ -6,7 +6,7 @@ import { slidePageEntry } from "../components/slide_page_entry.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { el, text } from "../dom.ts";
 import { Page } from "../page.ts";
-import { getPostCreatedDate } from "./post.ts";
+import { getPostPublishedDate } from "./post.ts";
 import { TaggedPage } from "./tagged_page.ts";
 
 export interface TagPage extends Page {
@@ -41,7 +41,7 @@ export async function generateTagPage(
 
   const html = await pageLayout(
     {
-      metaCopyrightYear: getPostCreatedDate(pages[pages.length - 1]).year,
+      metaCopyrightYear: getPostPublishedDate(pages[pages.length - 1]).year,
       metaDescription: `タグ「${tagLabel}」のついた記事またはスライドの一覧`,
       metaKeywords: [tagLabel],
       metaTitle: `${pageTitle}｜${config.blog.siteName}`,
