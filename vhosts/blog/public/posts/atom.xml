@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-04-14T00:00:00+09:00</updated>
+  <updated>2024-04-21T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:a4c326a6-5ffe-450c-abf2-45833c5efb6a</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-21/pipefail-option-in-gitlab-ci-cd/"></link>
+    <title>【GitLab】 GitLab CI/CD 上での bash/sh は pipefail が有効になっている</title>
+    <summary>GitLab CI/CD で bash/sh スクリプトを動かすと、pipefail オプションが有効になった状態で実行される。</summary>
+    <published>2024-04-21T00:00:00+09:00</published>
+    <updated>2024-04-21T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:be9c896d-7efa-42dd-a50a-dda5fd3a7f5c</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-14/phpcon-odawara-2024-report/"></link>
