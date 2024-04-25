@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-04-13T00:00:00+09:00</updated>
+  <updated>2024-04-25T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:6cf84106-cc69-4d87-b957-9d58d7e585bb</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-04-25/phpstudy-tokyo-163/"></link>
+    <title>Tracing JIT の発動条件</title>
+    <summary>登壇: PHP 勉強会@東京 第163回 (LT)</summary>
+    <published>2024-04-25T00:00:00+09:00</published>
+    <updated>2024-04-25T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:69e1694b-5ddb-41a5-a7f4-138ce82a78b2</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-04-13/phpcon-odawara-2024/"></link>

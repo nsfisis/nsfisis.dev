@@ -1,0 +1,14 @@
+[slide]
+uuid = "6cf84106-cc69-4d87-b957-9d58d7e585bb"
+title = "Tracing JIT の発動条件"
+event = "PHP 勉強会@東京 第163回"
+talkType = "LT"
+link = "/slides/2024-04-25/phpstudy-tokyo-163/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2024-04-25"
+remark = "登壇"
