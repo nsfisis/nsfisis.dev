@@ -1,5 +1,17 @@
 {
-  "version": "2",
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:highlight.js": "npm:highlight.js@11.7.0",
+      "npm:highlight.js@11.7.0": "npm:highlight.js@11.7.0"
+    },
+    "npm": {
+      "highlight.js@11.7.0": {
+        "integrity": "sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==",
+        "dependencies": {}
+      }
+    }
+  },
   "remote": {
     "https://deno.land/std@0.170.0/_util/asserts.ts": "d0844e9b62510f89ce1f9878b046f6a57bf88f208a10304aab50efcb48365272",
     "https://deno.land/std@0.170.0/_util/os.ts": "8a33345f74990e627b9dfe2de9b040004b08ea5146c7c9e8fe9a29070d193934",
@@ -72,15 +84,9 @@
     "https://deno.land/std@0.170.0/testing/asserts.ts": "51353e79437361d4b02d8e32f3fc83b22231bc8f8d4c841d86fd32b0b0afe940",
     "https://deno.land/std@0.170.0/version.ts": "eb6935c9beaac221b235d011ba5b127ceb5d3addf329cc01e05806af07ba93e1"
   },
-  "npm": {
-    "specifiers": {
-      "highlight.js": "highlight.js@11.7.0"
-    },
-    "packages": {
-      "highlight.js@11.7.0": {
-        "integrity": "sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==",
-        "dependencies": {}
-      }
-    }
+  "workspace": {
+    "dependencies": [
+      "npm:highlight.js@11.7.0"
+    ]
   }
 }

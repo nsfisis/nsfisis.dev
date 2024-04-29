@@ -1,5 +1,5 @@
 // @deno-types="../types/highlight-js.d.ts"
-import hljs from "npm:highlight.js";
+import hljs from "highlight.js";
 import { Document } from "./document.ts";
 import { DocBookError } from "../errors.ts";
 import {
