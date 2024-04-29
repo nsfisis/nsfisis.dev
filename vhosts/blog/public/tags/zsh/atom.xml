@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-zsh</id>
+  <title>タグ「Zsh」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/zsh/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/zsh/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2024-04-29T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:9b26c1ed-45c3-4cad-9476-cbf2cf2e4de7</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-29/zsh-file-completion-for-composer-custom-commands/"></link>
+    <title>【Zsh】 Composer のカスタムコマンドに対する Zsh 補完で引数にファイルを補完させる</title>
+    <summary>Zsh の Composer に対する補完はカスタムコマンドやその引数を補完しない。カスタムコマンドの引数としてファイルを補完させる方法を調べた。</summary>
+    <published>2024-04-29T00:00:00+09:00</published>
+    <updated>2024-04-29T00:00:00+09:00</updated>
+  </entry>
+</feed>

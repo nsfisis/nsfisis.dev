@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-04-21T00:00:00+09:00</updated>
+  <updated>2024-04-29T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:9b26c1ed-45c3-4cad-9476-cbf2cf2e4de7</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-29/zsh-file-completion-for-composer-custom-commands/"></link>
+    <title>【Zsh】 Composer のカスタムコマンドに対する Zsh 補完で引数にファイルを補完させる</title>
+    <summary>Zsh の Composer に対する補完はカスタムコマンドやその引数を補完しない。カスタムコマンドの引数としてファイルを補完させる方法を調べた。</summary>
+    <published>2024-04-29T00:00:00+09:00</published>
+    <updated>2024-04-29T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:a4c326a6-5ffe-450c-abf2-45833c5efb6a</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-21/pipefail-option-in-gitlab-ci-cd/"></link>

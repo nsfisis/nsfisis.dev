@@ -222,7 +222,12 @@ function highlightPrograms(doc: Document) {
     const sourceCode = sourceCodeNode.content;
 
     if (!hljs.getLanguage(language)) {
-      return;
+      if (language === "zsh") {
+        // highlight.js does not have a language definition for zsh.
+        hljs.registerAliases("zsh", { languageName: "bash" });
+      } else {
+        return;
+      }
     }
 
     const highlighted =

@@ -16,6 +16,7 @@ export const config = {
     siteCopyrightYear: 2021,
     tagLabels: {
       "ci-cd": "CI/CD",
+      "composer": "Composer",
       "conference": "カンファレンス",
       "cpp": "C++",
       "cpp17": "C++ 17",
@@ -42,6 +43,7 @@ export const config = {
       "wireguard": "WireGuard",
       "ya8": "Ya8",
       "yapc": "YAPC",
+      "zsh": "Zsh",
     },
   },
 };
