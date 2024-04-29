@@ -1,4 +1,4 @@
-import { parse as parseToml } from "std/encoding/toml.ts";
+import { parse as parseToml } from "std/toml/mod.ts";
 import { Config } from "../config.ts";
 import { parseXmlString } from "../xml.ts";
 import { createNewDocumentFromRootElement, Document } from "./document.ts";

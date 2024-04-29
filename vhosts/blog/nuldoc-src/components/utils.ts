@@ -1,4 +1,4 @@
-import { crypto, toHashString } from "std/crypto/mod.ts";
+import { Hash } from "checksum/mod.ts";
 import { join } from "std/path/mod.ts";
 import { Config } from "../config.ts";
 import { el, Element } from "../dom.ts";
@@ -25,6 +25,6 @@ export async function staticScriptElement(
 async function calculateFileHash(
   filePath: string,
 ): Promise<string> {
-  const content = (await Deno.readFile(filePath)).buffer;
-  return toHashString(await crypto.subtle.digest("MD5", content), "hex");
+  const content = await Deno.readFile(filePath);
+  return new Hash("md5").digest(content).hex();
 }
