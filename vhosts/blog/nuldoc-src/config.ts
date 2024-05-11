@@ -29,6 +29,7 @@ export const config = {
       "php": "PHP",
       "phpcon-odawara": "PHP カンファレンス小田原",
       "phpconfuk": "PHP カンファレンス福岡",
+      "phpconkagawa": "PHP カンファレンス香川",
       "phpconokinawa": "PHP カンファレンス沖縄",
       "phperkaigi": "PHPerKaigi",
       "phpkansai": "PHP カンファレンス関西",

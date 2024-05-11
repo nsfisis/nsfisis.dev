@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-04-29T00:00:00+09:00</updated>
+  <updated>2024-05-11T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:f13aa9d6-4533-4a15-872a-c298ab2090db</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-05-11/phpconkagawa-2024-report/"></link>
+    <title>PHP カンファレンス香川 2024 参加レポ</title>
+    <summary>2024-05-11 に開催された、PHP カンファレンス香川 2024 に参加した。</summary>
+    <published>2024-05-11T00:00:00+09:00</published>
+    <updated>2024-05-11T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:9b26c1ed-45c3-4cad-9476-cbf2cf2e4de7</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-29/zsh-file-completion-for-composer-custom-commands/"></link>
