@@ -23,8 +23,8 @@ $ ./nuldoc new slide
 Update PDF.js.
 
 ```
-$ curl -o static/pdf.min.js https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.min.js
-$ curl -o static/pdf.worker.min.js https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js
+$ curl -o static/pdf.min.mjs https://unpkg.com/pdfjs-dist@4.3.136/build/pdf.min.mjs
+$ curl -o static/pdf.worker.min.mjs https://unpkg.com/pdfjs-dist@4.3.136/build/pdf.worker.min.mjs
 ```
 
 Update p5.js.

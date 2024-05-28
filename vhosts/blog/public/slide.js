@@ -1,6 +1,7 @@
+import { GlobalWorkerOptions, getDocument } from "/pdf.min.mjs";
+
 document.addEventListener("DOMContentLoaded", async () => {
-  const pdfjsLib = globalThis.pdfjsLib;
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js";
+  GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
   const canvas = document.getElementById("slide");
   const ctx = canvas.getContext("2d");
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     pageRendering = true;
     const page = await doc.getPage(num);
 
-    var viewport = page.getViewport({ scale: 1.0 });
+    const viewport = page.getViewport({ scale: 1.0 });
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
@@ -54,6 +55,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // TODO: error handling
-  doc = await pdfjsLib.getDocument(url).promise;
+  doc = await getDocument(url).promise;
   queueRenderPage(pageNum);
 });

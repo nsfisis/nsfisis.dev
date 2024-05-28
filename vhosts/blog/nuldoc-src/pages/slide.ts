@@ -103,7 +103,6 @@ export async function generateSlidePage(
             el("button", [["id", "prev"]], text("Prev")),
             el("button", [["id", "next"]], text("Next")),
           ),
-          await staticScriptElement("/pdf.min.js", [], config),
           await staticScriptElement("/slide.js", [["type", "module"]], config),
         ),
       ),
