@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-scalamatsuri</id>
+  <title>タグ「ScalaMatsuri」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/scalamatsuri/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/scalamatsuri/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2024-06-19T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:8d6f3690-3da3-4235-a81b-b9707cee22ad</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-06-19/scalamatsuri-2024-report/"></link>
+    <title>ScalaMatsuri 2024 参加レポ</title>
+    <summary>2024-06-08 から 2024-06-09 にかけて開催された、ScalaMatsuri 2024 に参加した。</summary>
+    <published>2024-06-19T00:00:00+09:00</published>
+    <updated>2024-06-19T00:00:00+09:00</updated>
+  </entry>
+</feed>

@@ -39,6 +39,8 @@ export const config = {
       "ruby": "Ruby",
       "ruby3": "Ruby 3",
       "rust": "Rust",
+      "scala": "Scala",
+      "scalamatsuri": "ScalaMatsuri",
       "vim": "Vim",
       "wasm": "WebAssembly",
       "wireguard": "WireGuard",
