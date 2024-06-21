@@ -30,7 +30,7 @@ $ curl -o static/pdf.worker.min.mjs https://unpkg.com/pdfjs-dist@4.3.136/build/p
 Update p5.js.
 
 ```
-$ curl -o static/p5.min.js https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js
+$ curl -o static/p5.min.js https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js
 ```
 
 
