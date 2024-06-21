@@ -1,7 +1,9 @@
 import { runBuildCommand } from "./commands/build.ts";
 import { runNewCommand } from "./commands/new.ts";
 import { runServeCommand } from "./commands/serve.ts";
-import { config } from "./config.ts";
+import { getDefaultConfigPath, loadConfig } from "./config.ts";
+
+const config = await loadConfig(getDefaultConfigPath());
 
 if (import.meta.main) {
   const command = Deno.args[0] ?? "build";

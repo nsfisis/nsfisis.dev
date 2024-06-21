@@ -1,61 +1,40 @@
-export const config = {
-  locations: {
-    contentDir: "/content",
-    destDir: "/public",
-    staticDir: "/static",
-  },
-  rendering: {
-    html: {
-      indentWidth: 2,
-    },
-  },
-  blog: {
-    author: "nsfisis",
-    fqdn: "blog.nsfisis.dev",
-    siteName: "REPL: Rest-Eat-Program Loop",
-    siteCopyrightYear: 2021,
-    tagLabels: {
-      "ci-cd": "CI/CD",
-      "composer": "Composer",
-      "conference": "カンファレンス",
-      "cpp": "C++",
-      "cpp17": "C++ 17",
-      "gitlab": "GitLab",
-      "isucon": "ISUCON",
-      "neovim": "Neovim",
-      "note-to-self": "備忘録",
-      "ouj": "放送大学",
-      "perl": "Perl",
-      "php": "PHP",
-      "phpcon-odawara": "PHP カンファレンス小田原",
-      "phpconfuk": "PHP カンファレンス福岡",
-      "phpconkagawa": "PHP カンファレンス香川",
-      "phpconokinawa": "PHP カンファレンス沖縄",
-      "phperkaigi": "PHPerKaigi",
-      "phpkansai": "PHP カンファレンス関西",
-      "phpstudy-tokyo": "PHP 勉強会@東京",
-      "python": "Python",
-      "python3": "Python 3",
-      "ruby": "Ruby",
-      "ruby3": "Ruby 3",
-      "rust": "Rust",
-      "scala": "Scala",
-      "scalamatsuri": "ScalaMatsuri",
-      "vim": "Vim",
-      "wasm": "WebAssembly",
-      "wireguard": "WireGuard",
-      "ya8": "Ya8",
-      "yapc": "YAPC",
-      "zsh": "Zsh",
-    },
-  },
-};
+import { join } from "std/path/mod.ts";
+import { parse as parseToml } from "std/toml/mod.ts";
+import { z } from "zod/mod.ts";
 
-export type Config = typeof config;
+const ConfigSchema = z.object({
+  locations: z.object({
+    contentDir: z.string(),
+    destDir: z.string(),
+    staticDir: z.string(),
+  }),
+  rendering: z.object({
+    html: z.object({
+      indentWidth: z.number(),
+    }),
+  }),
+  blog: z.object({
+    author: z.string(),
+    fqdn: z.string(),
+    siteName: z.string(),
+    siteCopyrightYear: z.number(),
+    tagLabels: z.record(z.string(), z.string()),
+  }),
+});
+
+export type Config = z.infer<typeof ConfigSchema>;
 
 export function getTagLabel(c: Config, slug: string): string {
   if (!(slug in c.blog.tagLabels)) {
     throw new Error(`Unknown tag: ${slug}`);
   }
-  return (c.blog.tagLabels as { [slug: string]: string })[slug];
+  return c.blog.tagLabels[slug];
+}
+
+export function getDefaultConfigPath(): string {
+  return join(Deno.cwd(), "nuldoc.toml");
+}
+
+export async function loadConfig(filePath: string): Promise<Config> {
+  return ConfigSchema.parse(parseToml(await Deno.readTextFile(filePath)));
 }

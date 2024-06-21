@@ -3,6 +3,7 @@
     "checksum/": "https://deno.land/x/checksum@1.4.0/",
     "highlight.js": "npm:highlight.js@11.9.0",
     "std/": "https://deno.land/std@0.224.0/",
+    "zod/": "https://deno.land/x/zod@v3.23.8/",
   },
   "tasks": {
     "check": "deno check nuldoc-src/main.ts && deno lint -- nuldoc-src/ && deno fmt --check -- nuldoc-src/",
