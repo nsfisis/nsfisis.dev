@@ -12,6 +12,10 @@ tags = [
 [[article.revisions]]
 date = "2024-03-17"
 remark = "公開"
+
+[[article.revisions]]
+date = "2024-07-07"
+remark = "Wasm ランタイムの進捗について追記"
 ---
 <article>
   <section id="intro">
@@ -75,6 +79,9 @@ remark = "公開"
       </p>
       <p>
         P.S. Ask the Speaker で話した、Ruby VM (written in PHP) on PHP VM (compiled to Wasm) on Wasm VM (written in PHP) on PHP というアイデアは「マジ」なので、続報をお待ちください (自作 Wasm runtime に不足している機能を鋭意実装中です)。
+      </p>
+      <p>
+        2024-07-07 追記: <a href="https://github.com/nsfisis/php-waddiwasi/commit/a312e95a95d243943535f94653822d6796d4637f">コミット a312e95</a> で、ついに Ruby VM on PHP VM on Wasm VM on PHP を実現した。現時点での動かしかたは README に記載している。
       </p>
     </section>
   </section>
