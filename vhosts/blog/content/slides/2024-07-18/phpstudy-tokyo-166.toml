@@ -1,0 +1,14 @@
+[slide]
+uuid = "eec495b5-45e2-4c6f-a725-e62b1e0a7ad5"
+title = "PHPerKaigi 2024 で発表した WebAssembly ランタイムのその後"
+event = "PHP 勉強会@東京 第166回"
+talkType = "レギュラートーク (20分)"
+link = "/slides/2024-07-18/phpstudy-tokyo-166/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2024-07-18"
+remark = "登壇"

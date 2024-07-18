@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-07-07T00:00:00+09:00</updated>
+  <updated>2024-07-18T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:eec495b5-45e2-4c6f-a725-e62b1e0a7ad5</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-07-18/phpstudy-tokyo-166/"></link>
+    <title>PHPerKaigi 2024 で発表した WebAssembly ランタイムのその後</title>
+    <summary>登壇: PHP 勉強会@東京 第166回 (レギュラートーク (20分))</summary>
+    <published>2024-07-18T00:00:00+09:00</published>
+    <updated>2024-07-18T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:f13aa9d6-4533-4a15-872a-c298ab2090db</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-05-11/phpconkagawa-2024-report/"></link>
