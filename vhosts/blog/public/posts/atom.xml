@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-07-07T00:00:00+09:00</updated>
+  <updated>2024-07-19T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:222488dd-cf07-4961-83aa-a014b05369ff</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-07-19/reparojson-fix-only-json-formatter/"></link>
+    <title>reparojson: 文法エラーを直すだけの JSON フォーマッタを作った</title>
+    <summary>文法エラーだけを直し、空白の削除や挿入といった整形処理を一切おこなわない JSON フォーマッタを作成した。Neovim と連携させる設定例も紹介する。</summary>
+    <published>2024-07-19T00:00:00+09:00</published>
+    <updated>2024-07-19T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:8d6f3690-3da3-4235-a81b-b9707cee22ad</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-06-19/scalamatsuri-2024-report/"></link>

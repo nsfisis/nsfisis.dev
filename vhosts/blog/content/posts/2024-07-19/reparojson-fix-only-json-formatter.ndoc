@@ -1,0 +1,153 @@
+---
+[article]
+uuid = "222488dd-cf07-4961-83aa-a014b05369ff"
+title = "reparojson: 文法エラーを直すだけの JSON フォーマッタを作った"
+description = "文法エラーだけを直し、空白の削除や挿入といった整形処理を一切おこなわない JSON フォーマッタを作成した。Neovim と連携させる設定例も紹介する。"
+tags = [
+  "neovim",
+  "vim",
+]
+
+[[article.revisions]]
+date = "2024-07-19"
+remark = "公開"
+---
+<article>
+  <note>
+    この記事は <a href="https://vim-jp.org/ekiden/">Vim 駅伝</a> #218 の記事です。
+  </note>
+  <section id="intro">
+    <h>欲しかったもの</h>
+    <p>
+      Vim で JSON を編集しているときに、文法エラー (末尾カンマやカンマの不足) のみを修正して一切の整形をおこなわないプラグインが欲しかった。
+      整形も同時におこなうプラグインは見つかっただけでも多数あったのだが、整形しないものは見つけられなかったので自作することにした。
+    </p>
+    <p>
+      なお、作成したツール自体は単体の CLI として動作し、Vim とは無関係に使うことができる。
+      この記事では Neovim と組み合わせる場合の設定を紹介するが、およそ任意のエディタで使えるだろう。
+    </p>
+  </section>
+  <section id="reparojson">
+    <h>作ったもの</h>
+    <p>
+      作成したものがこちら: <a href="https://github.com/nsfisis/reparojson">ReparoJSON</a>
+    </p>
+    <p>
+      次のように動作する。
+    </p>
+    <codeblock>
+      <![CDATA[
+      $ echo '[ 1 2 ]' | reparojson
+      [ 1, 2 ]
+
+      $ echo '[ 1, 2, ]' | reparojson
+      [ 1, 2 ]
+
+      $ echo '{ "foo": 1 "bar": 2 }' | reparojson
+      { "foo": 1, "bar": 2 }
+
+      $ echo '{ "foo": 1, "bar": 2, }' | reparojson
+      { "foo": 1, "bar": 2 }
+      ]]>
+    </codeblock>
+    <p>
+      バージョン 0.1.1 時点で修正対象の文法エラーは次のとおり:
+    </p>
+    <ul>
+      <li>配列末尾の余計なカンマ (削除する)</li>
+      <li>配列内のカンマ不足 (挿入する)</li>
+      <li>オブジェクト末尾の余計なカンマ (削除する)</li>
+      <li>オブジェクト内のカンマ不足 (挿入する)</li>
+    </ul>
+    <p>
+      他にも自動で直せそうなエラーはいくつか思いつくが (オブジェクトのキーがクォートされていない等)、私自身があまり困っていないので優先度は低い。
+    </p>
+  </section>
+  <section id="itegration-with-neovim">
+    <h>Neovim との連携</h>
+    <p>
+      Neovim で JSON ファイルを保存したときに、上記のツールを自動で走らせるように設定する。
+    </p>
+    <p>
+      ここでは、<a href="https://github.com/neovim/nvim-lspconfig">nvim-lspconfig</a> と <a href="https://github.com/mattn/efm-langserver">efm-langserver</a> を用いた設定例を紹介する。
+    </p>
+    <codeblock language="lua">
+      <![CDATA[
+         local lspconfig = require('lspconfig')
+
+         lspconfig.efm.setup({
+            init_options = { documentFormatting = true },
+            settings = {
+               rootMarkers = {".git/"},
+               languages = {
+                  json = {
+                     {
+                        formatCommand = "reparojson -q",
+                        formatStdin = true,
+                     },
+                  },
+               },
+            }
+         })
+
+         vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(e)
+               vim.api.nvim_create_autocmd('BufWritePre', {
+                  buffer = e.buf,
+                  callback = function()
+                     vim.lsp.buf.format({ async = false })
+                  end
+               })
+            end,
+         })
+      ]]>
+    </codeblock>
+    <p>
+      ほとんどは nvim-lspconfig と efm-langserver を使う際のボイラープレートだが、<code>formatCommand</code> で <code>-q</code> フラグを指定していることに注意してほしい。
+      このツールは、デフォルトでは JSON が修正された場合 exit code 1 で終了する。
+      これは、入力が最初から正しかった場合と修正して正しくなった場合を区別するためだが、異常終了してしまうと置き換えが発生しない。
+      そのため、<code>-q</code> フラグを指定して、修正されたときも exit code 0 で終了するようにしている。
+    </p>
+  </section>
+  <section id="outro">
+    <h>おわりに</h>
+    <p>
+      このツールが威力を発揮するのは、行の入れ換え時である。次のような JSON があり、
+    </p>
+    <codeblock language="json">
+      <![CDATA[
+         {
+            "a": true,
+            "b": false
+         }
+      ]]>
+    </codeblock>
+    <p>
+      2行目と3行目を入れ換えて以下のように編集した。
+    </p>
+    <codeblock language="json">
+      <![CDATA[
+         {
+            "b": false
+            "a": true,
+         }
+      ]]>
+    </codeblock>
+    <p>
+      これは不正な JSON だが、このツールを通せば次のようになる。
+    </p>
+    <codeblock language="json">
+      <![CDATA[
+         {
+            "b": false,
+            "a": true
+         }
+      ]]>
+    </codeblock>
+    <p>
+      もちろん、このような操作を文法を壊さずにおこなう Vim プラグインは存在する。
+      しかし、単なる行の入れ換えであれば <code>ddp</code> の3ストロークでおこなうことができ、専用のキーバインドを覚える必要もない。
+      このツールを用いることで、より Vimmer-friendly な JSON 編集が可能となる。
+    </p>
+  </section>
+</article>
