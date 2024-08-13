@@ -52,7 +52,7 @@ export function generateFeedPageFromEntries(
 
   const xml = buildXmlTree(feed);
   return {
-    root: el("__root__", [], xml),
+    root: el("__root__", {}, xml),
     renderer: "xml",
     destFilePath: feedPath,
     href: feedPath,
@@ -62,24 +62,24 @@ export function generateFeedPageFromEntries(
 function buildXmlTree(feed: Feed) {
   return el(
     "feed",
-    [["xmlns", "http://www.w3.org/2005/Atom"]],
-    el("id", [], feed.id),
-    el("title", [], feed.title),
-    el("link", [["rel", "alternate"], ["href", feed.linkToAlternate]]),
-    el("link", [["rel", "self"], ["href", feed.linkToSelf]]),
-    el("author", [], el("name", [], feed.author)),
-    el("updated", [], feed.updated),
+    { xmlns: "http://www.w3.org/2005/Atom" },
+    el("id", {}, feed.id),
+    el("title", {}, feed.title),
+    el("link", { rel: "alternate", href: feed.linkToAlternate }),
+    el("link", { rel: "self", href: feed.linkToSelf }),
+    el("author", {}, el("name", {}, feed.author)),
+    el("updated", {}, feed.updated),
     ...feed.entries.map(
       (entry) =>
         el(
           "entry",
-          [],
-          el("id", [], entry.id),
-          el("link", [["rel", "alternate"], ["href", entry.linkToAlternate]]),
-          el("title", [], entry.title),
-          el("summary", [], entry.summary),
-          el("published", [], entry.published),
-          el("updated", [], entry.updated),
+          {},
+          el("id", {}, entry.id),
+          el("link", { rel: "alternate", href: entry.linkToAlternate }),
+          el("title", {}, entry.title),
+          el("summary", {}, entry.summary),
+          el("published", {}, entry.published),
+          el("updated", {}, entry.updated),
         ),
     ),
   );

@@ -19,19 +19,15 @@ export async function generateSlideListPage(
 
   const body = el(
     "body",
-    [["class", "list"]],
+    { className: "list" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "header",
-        [["class", "page-header"]],
-        el(
-          "h1",
-          [],
-          pageTitle,
-        ),
+        { className: "page-header" },
+        el("h1", {}, pageTitle),
       ),
       ...Array.from(slides).sort((a, b) => {
         const ta = dateToString(getPostPublishedDate(a));
@@ -58,7 +54,7 @@ export async function generateSlideListPage(
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: "/slides/index.html",
     href: "/slides/",

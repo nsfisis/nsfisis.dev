@@ -25,52 +25,31 @@ export async function pageLayout(
 ): Promise<Element> {
   const head = el(
     "head",
-    [],
-    metaElement([["charset", "UTF-8"]]),
-    metaElement([["name", "viewport"], [
-      "content",
-      "width=device-width, initial-scale=1.0",
-    ]]),
-    metaElement([["name", "author"], ["content", config.blog.author]]),
-    metaElement([["name", "copyright"], [
-      "content",
-      `&copy; ${metaCopyrightYear} ${config.blog.author}`,
-    ]]),
-    metaElement([["name", "description"], [
-      "content",
-      metaDescription,
-    ]]),
+    {},
+    metaElement({ charset: "UTF-8" }),
+    metaElement({
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0",
+    }),
+    metaElement({ name: "author", content: config.blog.author }),
+    metaElement({
+      name: "copyright",
+      content: `&copy; ${metaCopyrightYear} ${config.blog.author}`,
+    }),
+    metaElement({ name: "description", content: metaDescription }),
     ...(metaKeywords.length === 0 ? [] : [
-      metaElement([["name", "keywords"], [
-        "content",
-        metaKeywords.join(","),
-      ]]),
+      metaElement({ name: "keywords", content: metaKeywords.join(",") }),
     ]),
-    metaElement([
-      ["property", "og:type"],
-      ["content", "article"],
-    ]),
-    metaElement([
-      ["property", "og:title"],
-      ["content", metaTitle],
-    ]),
-    metaElement([
-      ["property", "og:description"],
-      ["content", metaDescription],
-    ]),
-    metaElement([
-      ["property", "og:site_name"],
-      ["content", config.blog.siteName],
-    ]),
-    metaElement([
-      ["property", "og:locale"],
-      ["content", "ja_JP"],
-    ]),
+    metaElement({ property: "og:type", content: "article" }),
+    metaElement({ property: "og:title", content: metaTitle }),
+    metaElement({ property: "og:description", content: metaDescription }),
+    metaElement({ property: "og:site_name", content: config.blog.siteName }),
+    metaElement({ property: "og:locale", content: "ja_JP" }),
     ...(metaAtomFeedHref
       ? [linkElement("alternate", metaAtomFeedHref, "application/atom+xml")]
       : []),
     linkElement("icon", "/favicon.svg", "image/svg+xml"),
-    el("title", [], metaTitle),
+    el("title", {}, metaTitle),
     await stylesheetLinkElement("/style.css", config),
     ...(
       requiresSyntaxHighlight
@@ -80,13 +59,13 @@ export async function pageLayout(
   );
   return el(
     "html",
-    [["lang", "ja-JP"]],
+    { lang: "ja-JP" },
     head,
     body,
   );
 }
 
-function metaElement(attrs: [string, string][]): Element {
+function metaElement(attrs: Record<string, string>): Element {
   return el("meta", attrs);
 }
 
@@ -95,9 +74,9 @@ function linkElement(
   href: string,
   type: string | null,
 ): Element {
-  const attrs: [string, string][] = [["rel", rel], ["href", href]];
+  const attrs: Record<string, string> = { rel: rel, href: href };
   if (type !== null) {
-    attrs.push(["type", type]);
+    attrs.type = type;
   }
   return el("link", attrs);
 }

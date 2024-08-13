@@ -9,17 +9,17 @@ export async function stylesheetLinkElement(
 ): Promise<Element> {
   const filePath = join(Deno.cwd(), config.locations.staticDir, fileName);
   const hash = await calculateFileHash(filePath);
-  return el("link", [["rel", "stylesheet"], ["href", `${fileName}?h=${hash}`]]);
+  return el("link", { rel: "stylesheet", href: `${fileName}?h=${hash}` });
 }
 
 export async function staticScriptElement(
   fileName: string,
-  attrs: [string, string][],
+  attrs: Record<string, string>,
   config: Config,
 ): Promise<Element> {
   const filePath = join(Deno.cwd(), config.locations.staticDir, fileName);
   const hash = await calculateFileHash(filePath);
-  return el("script", [["src", `${fileName}?h=${hash}`], ...attrs]);
+  return el("script", { src: `${fileName}?h=${hash}`, ...attrs });
 }
 
 async function calculateFileHash(

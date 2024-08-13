@@ -16,19 +16,15 @@ export async function generateTagListPage(
 
   const body = el(
     "body",
-    [["class", "list"]],
+    { className: "list" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "header",
-        [["class", "page-header"]],
-        el(
-          "h1",
-          [],
-          pageTitle,
-        ),
+        { className: "page-header" },
+        el("h1", {}, pageTitle),
       ),
       ...Array.from(tags).sort((a, b) => {
         const ta = a.tagSlug;
@@ -39,18 +35,18 @@ export async function generateTagListPage(
       }).map((tag) =>
         el(
           "article",
-          [["class", "post-entry"]],
+          { className: "post-entry" },
           el(
             "a",
-            [["href", tag.href]],
+            { href: tag.href },
             el(
               "header",
-              [["class", "entry-header"]],
-              el("h2", [], tag.tagLabel),
+              { className: "entry-header" },
+              el("h2", {}, tag.tagLabel),
             ),
             el(
               "footer",
-              [["class", "entry-footer"]],
+              { className: "entry-footer" },
               (() => {
                 const posts = tag.numOfPosts === 0
                   ? ""
@@ -81,7 +77,7 @@ export async function generateTagListPage(
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: "/tags/index.html",
     href: "/tags/",

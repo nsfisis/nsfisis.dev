@@ -17,81 +17,66 @@ export async function generateAboutPage(
 ): Promise<AboutPage> {
   const body = el(
     "body",
-    [["class", "single"]],
+    { className: "single" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "article",
-        [["class", "post-single"]],
+        { className: "post-single" },
         el(
           "header",
-          [["class", "post-header"]],
-          el(
-            "h1",
-            [["class", "post-title"]],
-            "nsfisis",
-          ),
+          { className: "post-header" },
+          el("h1", { className: "post-title" }, "nsfisis"),
           el(
             "div",
-            [["class", "my-icon"]],
-            await staticScriptElement("/p5.min.js", [], config),
-            await staticScriptElement("/my-icon.js", [], config),
-            el("div", [["id", "p5jsMyIcon"]]),
+            { className: "my-icon" },
+            await staticScriptElement("/p5.min.js", {}, config),
+            await staticScriptElement("/my-icon.js", {}, config),
+            el("div", { id: "p5jsMyIcon" }),
             el(
               "noscript",
-              [],
-              el(
-                "img",
-                [["src", "/favicon.svg"]],
-              ),
+              {},
+              el("img", { src: "/favicon.svg" }),
             ),
           ),
         ),
         el(
           "div",
-          [["class", "post-content"]],
+          { className: "post-content" },
           el(
             "section",
-            [],
-            el(
-              "h2",
-              [],
-              "読み方",
-            ),
+            {},
+            el("h2", {}, "読み方"),
             el(
               "p",
-              [],
+              {},
               "読み方は決めていません。音にする必要があるときは本名である「いまむら」をお使いください。",
             ),
           ),
           el(
             "section",
-            [],
-            el(
-              "h2",
-              [],
-              "アカウント",
-            ),
+            {},
+            el("h2", {}, "アカウント"),
             el(
               "ul",
-              [],
+              {},
               el(
                 "li",
-                [],
+                {},
                 el(
                   "a",
-                  [["href", "https://twitter.com/nsfisis"]],
+                  { href: "https://twitter.com/nsfisis" },
                   "Twitter (現 𝕏): @nsfisis",
                 ),
               ),
               el(
                 "li",
-                [],
+                {},
                 el(
                   "a",
-                  [["href", "https://github.com/nsfisis"]],
+                  { href: "https://github.com/nsfisis" },
                   "GitHub: @nsfisis",
                 ),
               ),
@@ -99,22 +84,18 @@ export async function generateAboutPage(
           ),
           el(
             "section",
-            [],
-            el(
-              "h2",
-              [],
-              "仕事",
-            ),
+            {},
+            el("h2", {}, "仕事"),
             el(
               "ul",
-              [],
+              {},
               el(
                 "li",
-                [],
+                {},
                 "2021-01～現在: ",
                 el(
                   "a",
-                  [["href", "https://www.dgcircus.com/"]],
+                  { href: "https://www.dgcircus.com/" },
                   "デジタルサーカス株式会社",
                 ),
               ),
@@ -122,15 +103,11 @@ export async function generateAboutPage(
           ),
           el(
             "section",
-            [],
-            el(
-              "h2",
-              [],
-              "登壇",
-            ),
+            {},
+            el("h2", {}, "登壇"),
             el(
               "ul",
-              [],
+              {},
               ...Array.from(slides).sort((a, b) => {
                 const ta = dateToString(getPostPublishedDate(a));
                 const tb = dateToString(getPostPublishedDate(b));
@@ -140,10 +117,10 @@ export async function generateAboutPage(
               }).map((slide) =>
                 el(
                   "li",
-                  [],
+                  {},
                   el(
                     "a",
-                    [["href", slide.href]],
+                    { href: slide.href },
                     `${
                       dateToString(getPostPublishedDate(slide))
                     }: ${slide.event} (${slide.talkType})`,
@@ -171,7 +148,7 @@ export async function generateAboutPage(
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: "/about/index.html",
     href: "/about/",

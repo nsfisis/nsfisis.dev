@@ -10,63 +10,63 @@ export type HomePage = Page;
 export async function generateHomePage(config: Config): Promise<HomePage> {
   const body = el(
     "body",
-    [["class", "single"]],
+    { className: "single" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "article",
-        [["class", "post-single"]],
+        { className: "post-single" },
         el(
           "article",
-          [["class", "post-entry"]],
+          { className: "post-entry" },
           el(
             "a",
-            [["href", "/about/"]],
+            { href: "/about/" },
             el(
               "header",
-              [["class", "entry-header"]],
-              el("h2", [], "About"),
+              { className: "entry-header" },
+              el("h2", {}, "About"),
             ),
           ),
         ),
         el(
           "article",
-          [["class", "post-entry"]],
+          { className: "post-entry" },
           el(
             "a",
-            [["href", "/posts/"]],
+            { href: "/posts/" },
             el(
               "header",
-              [["class", "entry-header"]],
-              el("h2", [], "Posts"),
+              { className: "entry-header" },
+              el("h2", {}, "Posts"),
             ),
           ),
         ),
         el(
           "article",
-          [["class", "post-entry"]],
+          { className: "post-entry" },
           el(
             "a",
-            [["href", "/slides/"]],
+            { href: "/slides/" },
             el(
               "header",
-              [["class", "entry-header"]],
-              el("h2", [], "Slides"),
+              { className: "entry-header" },
+              el("h2", {}, "Slides"),
             ),
           ),
         ),
         el(
           "article",
-          [["class", "post-entry"]],
+          { className: "post-entry" },
           el(
             "a",
-            [["href", "/tags/"]],
+            { href: "/tags/" },
             el(
               "header",
-              [["class", "entry-header"]],
-              el("h2", [], "Tags"),
+              { className: "entry-header" },
+              el("h2", {}, "Tags"),
             ),
           ),
         ),
@@ -89,7 +89,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: "/index.html",
     href: "/",

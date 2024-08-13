@@ -41,33 +41,29 @@ export async function generatePostPage(
 ): Promise<PostPage> {
   const body = el(
     "body",
-    [["class", "single"]],
+    { className: "single" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "article",
-        [["class", "post-single"]],
+        { className: "post-single" },
         el(
           "header",
-          [["class", "post-header"]],
-          el(
-            "h1",
-            [["class", "post-title"]],
-            doc.title,
-          ),
+          { className: "post-header" },
+          el("h1", { className: "post-title" }, doc.title),
           ...(doc.tags.length === 0 ? [] : [
             el(
               "ul",
-              [["class", "post-tags"]],
+              { className: "post-tags" },
               ...doc.tags.map((slug) =>
                 el(
                   "li",
-                  [["class", "tag"]],
+                  { className: "tag" },
                   el(
                     "a",
-                    [["href", `/tags/${slug}/`]],
+                    { href: `/tags/${slug}/` },
                     getTagLabel(config, slug),
                   ),
                 )
@@ -77,25 +73,21 @@ export async function generatePostPage(
         ),
         el(
           "div",
-          [["class", "post-content"]],
+          { className: "post-content" },
           el(
             "section",
-            [],
-            el(
-              "h2",
-              [["id", "changelog"]],
-              "更新履歴",
-            ),
+            {},
+            el("h2", { id: "changelog" }, "更新履歴"),
             el(
               "ol",
-              [],
+              {},
               ...doc.revisions.map((rev) =>
                 el(
                   "li",
-                  [["class", "revision"]],
+                  { className: "revision" },
                   el(
                     "time",
-                    [["datetime", dateToString(rev.date)]],
+                    { datetime: dateToString(rev.date) },
                     dateToString(rev.date),
                   ),
                   `: ${rev.remark}`,
@@ -138,7 +130,7 @@ export async function generatePostPage(
     "index.html",
   );
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),

@@ -12,19 +12,15 @@ export async function generateNotFoundPage(
 ): Promise<NotFoundPage> {
   const body = el(
     "body",
-    [["class", "single"]],
+    { className: "single" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "article",
-        [],
-        el(
-          "div",
-          [["class", "not-found"]],
-          "404",
-        ),
+        {},
+        el("div", { className: "not-found" }, "404"),
       ),
     ),
     globalFooter(config),
@@ -43,7 +39,7 @@ export async function generateNotFoundPage(
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: "/404.html",
     href: "/404.html",

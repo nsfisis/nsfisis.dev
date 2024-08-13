@@ -10,36 +10,37 @@ import { dateToString } from "../revision.ts";
 export function slidePageEntry(slide: SlidePage): Element {
   return el(
     "article",
-    [["class", "post-entry"]],
+    { className: "post-entry" },
     el(
       "a",
-      [["href", slide.href]],
+      { href: slide.href },
       el(
         "header",
-        [["class", "entry-header"]],
-        el("h2", [], slide.description),
+        { className: "entry-header" },
+        el("h2", {}, slide.description),
       ),
       el(
         "section",
-        [["class", "entry-content"]],
-        el("p", [], slide.title),
+        { className: "entry-content" },
+        el("p", {}, slide.title),
       ),
       el(
         "footer",
-        [["class", "entry-footer"]],
+        { className: "entry-footer" },
         el(
           "time",
-          [["datetime", dateToString(getPostPublishedDate(slide))]],
+          { datetime: dateToString(getPostPublishedDate(slide)) },
           dateToString(getPostPublishedDate(slide)),
         ),
         " 登壇",
         ...(postHasAnyUpdates(slide)
           ? [
             "、",
-            el("time", [[
-              "datetime",
+            el(
+              "time",
+              { "datetime": dateToString(getPostUpdatedDate(slide)) },
               dateToString(getPostUpdatedDate(slide)),
-            ]], dateToString(getPostUpdatedDate(slide))),
+            ),
             " 更新",
           ]
           : []),

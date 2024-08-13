@@ -26,12 +26,12 @@ export async function generateTagPage(
 
   const body = el(
     "body",
-    [["class", "list"]],
+    { className: "list" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
-      el("header", [["class", "page-header"]], el("h1", [], pageTitle)),
+      { className: "main" },
+      el("header", { className: "page-header" }, el("h1", {}, pageTitle)),
       ...pages.map((page) =>
         "event" in page ? slidePageEntry(page) : postPageEntry(page)
       ),
@@ -53,7 +53,7 @@ export async function generateTagPage(
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: `/tags/${tagSlug}/index.html`,
     href: `/tags/${tagSlug}/`,

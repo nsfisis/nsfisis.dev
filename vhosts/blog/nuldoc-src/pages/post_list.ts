@@ -18,19 +18,15 @@ export async function generatePostListPage(
 
   const body = el(
     "body",
-    [["class", "list"]],
+    { className: "list" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "header",
-        [["class", "page-header"]],
-        el(
-          "h1",
-          [],
-          pageTitle,
-        ),
+        { className: "page-header" },
+        el("h1", {}, pageTitle),
       ),
       ...Array.from(posts).sort((a, b) => {
         const ta = dateToString(getPostPublishedDate(a));
@@ -57,7 +53,7 @@ export async function generatePostListPage(
   );
 
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: "/posts/index.html",
     href: "/posts/",

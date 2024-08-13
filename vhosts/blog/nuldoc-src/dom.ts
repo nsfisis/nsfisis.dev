@@ -89,13 +89,13 @@ function makeTextNode(content: string): Text {
 
 export function el(
   name: string,
-  attrs: [string, string][],
+  attrs: Record<string, string>,
   ...children: (Node | string)[]
 ): Element {
   return {
     kind: "element",
     name: name,
-    attributes: new Map(attrs),
+    attributes: new Map(Object.entries(attrs)),
     children: children.map((n) => typeof n === "string" ? makeTextNode(n) : n),
   };
 }

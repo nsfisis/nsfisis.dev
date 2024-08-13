@@ -29,33 +29,29 @@ export async function generateSlidePage(
 ): Promise<SlidePage> {
   const body = el(
     "body",
-    [["class", "single"]],
+    { className: "single" },
     globalHeader(config),
     el(
       "main",
-      [["class", "main"]],
+      { className: "main" },
       el(
         "article",
-        [["class", "post-single"]],
+        { className: "post-single" },
         el(
           "header",
-          [["class", "post-header"]],
-          el(
-            "h1",
-            [["class", "post-title"]],
-            slide.title,
-          ),
+          { className: "post-header" },
+          el("h1", { className: "post-title" }, slide.title),
           ...(slide.tags.length === 0 ? [] : [
             el(
               "ul",
-              [["class", "post-tags"]],
+              { className: "post-tags" },
               ...slide.tags.map((slug) =>
                 el(
                   "li",
-                  [["class", "tag"]],
+                  { className: "tag" },
                   el(
                     "a",
-                    [["href", `/tags/${slug}/`]],
+                    { href: `/tags/${slug}/` },
                     getTagLabel(config, slug),
                   ),
                 )
@@ -65,25 +61,21 @@ export async function generateSlidePage(
         ),
         el(
           "div",
-          [["class", "post-content"]],
+          { className: "post-content" },
           el(
             "section",
-            [],
-            el(
-              "h2",
-              [["id", "changelog"]],
-              "更新履歴",
-            ),
+            {},
+            el("h2", { id: "changelog" }, "更新履歴"),
             el(
               "ol",
-              [],
+              {},
               ...slide.revisions.map((rev) =>
                 el(
                   "li",
-                  [["class", "revision"]],
+                  { className: "revision" },
                   el(
                     "time",
-                    [["datetime", dateToString(rev.date)]],
+                    { datetime: dateToString(rev.date) },
                     dateToString(rev.date),
                   ),
                   `: ${rev.remark}`,
@@ -93,15 +85,15 @@ export async function generateSlidePage(
           ),
           el(
             "canvas",
-            [["id", "slide"], ["data-slide-link", slide.slideLink]],
+            { id: "slide", "data-slide-link": slide.slideLink },
           ),
           el(
             "div",
-            [],
-            el("button", [["id", "prev"]], "Prev"),
-            el("button", [["id", "next"]], "Next"),
+            {},
+            el("button", { id: "prev" }, "Prev"),
+            el("button", { id: "next" }, "Next"),
           ),
-          await staticScriptElement("/slide.js", [["type", "module"]], config),
+          await staticScriptElement("/slide.js", { type: "module" }, config),
         ),
       ),
     ),
@@ -127,7 +119,7 @@ export async function generateSlidePage(
     "index.html",
   );
   return {
-    root: el("__root__", [], html),
+    root: el("__root__", {}, html),
     renderer: "html",
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),
