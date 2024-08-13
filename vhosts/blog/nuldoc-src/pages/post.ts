@@ -3,7 +3,7 @@ import { globalFooter } from "../components/global_footer.ts";
 import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { Config, getTagLabel } from "../config.ts";
-import { el, Element, text } from "../dom.ts";
+import { el, Element } from "../dom.ts";
 import { Document } from "../ndoc/document.ts";
 import { Page } from "../page.ts";
 import { Date, dateToString, Revision } from "../revision.ts";
@@ -55,7 +55,7 @@ export async function generatePostPage(
           el(
             "h1",
             [["class", "post-title"]],
-            text(doc.title),
+            doc.title,
           ),
           ...(doc.tags.length === 0 ? [] : [
             el(
@@ -68,9 +68,7 @@ export async function generatePostPage(
                   el(
                     "a",
                     [["href", `/tags/${slug}/`]],
-                    text(
-                      getTagLabel(config, slug),
-                    ),
+                    getTagLabel(config, slug),
                   ),
                 )
               ),
@@ -86,7 +84,7 @@ export async function generatePostPage(
             el(
               "h2",
               [["id", "changelog"]],
-              text("更新履歴"),
+              "更新履歴",
             ),
             el(
               "ol",
@@ -98,9 +96,9 @@ export async function generatePostPage(
                   el(
                     "time",
                     [["datetime", dateToString(rev.date)]],
-                    text(dateToString(rev.date)),
+                    dateToString(rev.date),
                   ),
-                  text(`: ${rev.remark}`),
+                  `: ${rev.remark}`,
                 )
               ),
             ),

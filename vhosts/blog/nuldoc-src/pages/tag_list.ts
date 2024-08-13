@@ -2,7 +2,7 @@ import { globalFooter } from "../components/global_footer.ts";
 import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { TagPage } from "./tag.ts";
 
@@ -27,7 +27,7 @@ export async function generateTagListPage(
         el(
           "h1",
           [],
-          text(pageTitle),
+          pageTitle,
         ),
       ),
       ...Array.from(tags).sort((a, b) => {
@@ -46,12 +46,12 @@ export async function generateTagListPage(
             el(
               "header",
               [["class", "entry-header"]],
-              el("h2", [], text(tag.tagLabel)),
+              el("h2", [], tag.tagLabel),
             ),
             el(
               "footer",
               [["class", "entry-footer"]],
-              text((() => {
+              (() => {
                 const posts = tag.numOfPosts === 0
                   ? ""
                   : `${tag.numOfPosts}件の記事`;
@@ -59,7 +59,7 @@ export async function generateTagListPage(
                   ? ""
                   : `${tag.numOfSlides}件のスライド`;
                 return `${posts}${posts && slides ? "、" : ""}${slides}`;
-              })()),
+              })(),
             ),
           ),
         )

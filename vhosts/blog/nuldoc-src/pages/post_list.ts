@@ -3,7 +3,7 @@ import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { postPageEntry } from "../components/post_page_entry.ts";
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate, PostPage } from "./post.ts";
@@ -29,7 +29,7 @@ export async function generatePostListPage(
         el(
           "h1",
           [],
-          text(pageTitle),
+          pageTitle,
         ),
       ),
       ...Array.from(posts).sort((a, b) => {

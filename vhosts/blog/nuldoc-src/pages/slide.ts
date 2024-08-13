@@ -4,7 +4,7 @@ import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { staticScriptElement } from "../components/utils.ts";
 import { Config, getTagLabel } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { Date, dateToString, Revision } from "../revision.ts";
 import { Slide } from "../slide/slide.ts";
@@ -43,7 +43,7 @@ export async function generateSlidePage(
           el(
             "h1",
             [["class", "post-title"]],
-            text(slide.title),
+            slide.title,
           ),
           ...(slide.tags.length === 0 ? [] : [
             el(
@@ -56,9 +56,7 @@ export async function generateSlidePage(
                   el(
                     "a",
                     [["href", `/tags/${slug}/`]],
-                    text(
-                      getTagLabel(config, slug),
-                    ),
+                    getTagLabel(config, slug),
                   ),
                 )
               ),
@@ -74,7 +72,7 @@ export async function generateSlidePage(
             el(
               "h2",
               [["id", "changelog"]],
-              text("更新履歴"),
+              "更新履歴",
             ),
             el(
               "ol",
@@ -86,9 +84,9 @@ export async function generateSlidePage(
                   el(
                     "time",
                     [["datetime", dateToString(rev.date)]],
-                    text(dateToString(rev.date)),
+                    dateToString(rev.date),
                   ),
-                  text(`: ${rev.remark}`),
+                  `: ${rev.remark}`,
                 )
               ),
             ),
@@ -100,8 +98,8 @@ export async function generateSlidePage(
           el(
             "div",
             [],
-            el("button", [["id", "prev"]], text("Prev")),
-            el("button", [["id", "next"]], text("Next")),
+            el("button", [["id", "prev"]], "Prev"),
+            el("button", [["id", "next"]], "Next"),
           ),
           await staticScriptElement("/slide.js", [["type", "module"]], config),
         ),

@@ -4,7 +4,7 @@ import { pageLayout } from "../components/page_layout.ts";
 import { postPageEntry } from "../components/post_page_entry.ts";
 import { slidePageEntry } from "../components/slide_page_entry.ts";
 import { Config, getTagLabel } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { getPostPublishedDate } from "./post.ts";
 import { TaggedPage } from "./tagged_page.ts";
@@ -31,7 +31,7 @@ export async function generateTagPage(
     el(
       "main",
       [["class", "main"]],
-      el("header", [["class", "page-header"]], el("h1", [], text(pageTitle))),
+      el("header", [["class", "page-header"]], el("h1", [], pageTitle)),
       ...pages.map((page) =>
         "event" in page ? slidePageEntry(page) : postPageEntry(page)
       ),

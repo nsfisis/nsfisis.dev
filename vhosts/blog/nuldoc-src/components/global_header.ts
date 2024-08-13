@@ -1,5 +1,5 @@
 import { Config } from "../config.ts";
-import { el, Element, text } from "../dom.ts";
+import { el, Element } from "../dom.ts";
 
 export function globalHeader(config: Config): Element {
   return el(
@@ -8,7 +8,7 @@ export function globalHeader(config: Config): Element {
     el(
       "div",
       [["class", "site-logo"]],
-      el("a", [["href", "/"]], text(config.blog.siteName)),
+      el("a", [["href", "/"]], config.blog.siteName),
     ),
     el(
       "nav",
@@ -19,22 +19,22 @@ export function globalHeader(config: Config): Element {
         el(
           "li",
           [],
-          el("a", [["href", "/about/"]], text("About")),
+          el("a", [["href", "/about/"]], "About"),
         ),
         el(
           "li",
           [],
-          el("a", [["href", "/posts/"]], text("Posts")),
+          el("a", [["href", "/posts/"]], "Posts"),
         ),
         el(
           "li",
           [],
-          el("a", [["href", "/slides/"]], text("Slides")),
+          el("a", [["href", "/slides/"]], "Slides"),
         ),
         el(
           "li",
           [],
-          el("a", [["href", "/tags/"]], text("Tags")),
+          el("a", [["href", "/tags/"]], "Tags"),
         ),
       ),
     ),

@@ -1,5 +1,5 @@
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { Entry, Feed } from "./types.ts";
 import { PostPage } from "../pages/post.ts";
@@ -63,23 +63,23 @@ function buildXmlTree(feed: Feed) {
   return el(
     "feed",
     [["xmlns", "http://www.w3.org/2005/Atom"]],
-    el("id", [], text(feed.id)),
-    el("title", [], text(feed.title)),
+    el("id", [], feed.id),
+    el("title", [], feed.title),
     el("link", [["rel", "alternate"], ["href", feed.linkToAlternate]]),
     el("link", [["rel", "self"], ["href", feed.linkToSelf]]),
-    el("author", [], el("name", [], text(feed.author))),
-    el("updated", [], text(feed.updated)),
+    el("author", [], el("name", [], feed.author)),
+    el("updated", [], feed.updated),
     ...feed.entries.map(
       (entry) =>
         el(
           "entry",
           [],
-          el("id", [], text(entry.id)),
+          el("id", [], entry.id),
           el("link", [["rel", "alternate"], ["href", entry.linkToAlternate]]),
-          el("title", [], text(entry.title)),
-          el("summary", [], text(entry.summary)),
-          el("published", [], text(entry.published)),
-          el("updated", [], text(entry.updated)),
+          el("title", [], entry.title),
+          el("summary", [], entry.summary),
+          el("published", [], entry.published),
+          el("updated", [], entry.updated),
         ),
     ),
   );

@@ -3,7 +3,7 @@ import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { slidePageEntry } from "../components/slide_page_entry.ts";
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "./post.ts";
@@ -30,7 +30,7 @@ export async function generateSlideListPage(
         el(
           "h1",
           [],
-          text(pageTitle),
+          pageTitle,
         ),
       ),
       ...Array.from(slides).sort((a, b) => {

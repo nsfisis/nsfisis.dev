@@ -1,4 +1,4 @@
-import { el, Element, text } from "../dom.ts";
+import { el, Element } from "../dom.ts";
 import {
   getPostPublishedDate,
   getPostUpdatedDate,
@@ -17,12 +17,12 @@ export function slidePageEntry(slide: SlidePage): Element {
       el(
         "header",
         [["class", "entry-header"]],
-        el("h2", [], text(slide.description)),
+        el("h2", [], slide.description),
       ),
       el(
         "section",
         [["class", "entry-content"]],
-        el("p", [], text(slide.title)),
+        el("p", [], slide.title),
       ),
       el(
         "footer",
@@ -30,17 +30,17 @@ export function slidePageEntry(slide: SlidePage): Element {
         el(
           "time",
           [["datetime", dateToString(getPostPublishedDate(slide))]],
-          text(dateToString(getPostPublishedDate(slide))),
+          dateToString(getPostPublishedDate(slide)),
         ),
-        text(" 登壇"),
+        " 登壇",
         ...(postHasAnyUpdates(slide)
           ? [
-            text("、"),
+            "、",
             el("time", [[
               "datetime",
               dateToString(getPostUpdatedDate(slide)),
-            ]], text(dateToString(getPostUpdatedDate(slide)))),
-            text(" 更新"),
+            ]], dateToString(getPostUpdatedDate(slide))),
+            " 更新",
           ]
           : []),
       ),

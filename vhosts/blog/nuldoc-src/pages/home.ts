@@ -2,7 +2,7 @@ import { globalFooter } from "../components/global_footer.ts";
 import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 
 export type HomePage = Page;
@@ -27,7 +27,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
             el(
               "header",
               [["class", "entry-header"]],
-              el("h2", [], text("About")),
+              el("h2", [], "About"),
             ),
           ),
         ),
@@ -40,7 +40,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
             el(
               "header",
               [["class", "entry-header"]],
-              el("h2", [], text("Posts")),
+              el("h2", [], "Posts"),
             ),
           ),
         ),
@@ -53,7 +53,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
             el(
               "header",
               [["class", "entry-header"]],
-              el("h2", [], text("Slides")),
+              el("h2", [], "Slides"),
             ),
           ),
         ),
@@ -66,7 +66,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
             el(
               "header",
               [["class", "entry-header"]],
-              el("h2", [], text("Tags")),
+              el("h2", [], "Tags"),
             ),
           ),
         ),

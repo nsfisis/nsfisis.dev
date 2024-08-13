@@ -2,7 +2,7 @@ import { globalFooter } from "../components/global_footer.ts";
 import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 
 export type NotFoundPage = Page;
@@ -23,7 +23,7 @@ export async function generateNotFoundPage(
         el(
           "div",
           [["class", "not-found"]],
-          text("404"),
+          "404",
         ),
       ),
     ),

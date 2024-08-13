@@ -1,4 +1,4 @@
-import { el, Element, text } from "../dom.ts";
+import { el, Element } from "../dom.ts";
 import {
   getPostPublishedDate,
   getPostUpdatedDate,
@@ -17,12 +17,12 @@ export function postPageEntry(post: PostPage): Element {
       el(
         "header",
         [["class", "entry-header"]],
-        el("h2", [], text(post.title)),
+        el("h2", [], post.title),
       ),
       el(
         "section",
         [["class", "entry-content"]],
-        el("p", [], text(post.description)),
+        el("p", [], post.description),
       ),
       el(
         "footer",
@@ -30,17 +30,17 @@ export function postPageEntry(post: PostPage): Element {
         el(
           "time",
           [["datetime", dateToString(getPostPublishedDate(post))]],
-          text(dateToString(getPostPublishedDate(post))),
+          dateToString(getPostPublishedDate(post)),
         ),
-        text(" 投稿"),
+        " 投稿",
         ...(postHasAnyUpdates(post)
           ? [
-            text("、"),
+            "、",
             el("time", [[
               "datetime",
               dateToString(getPostUpdatedDate(post)),
-            ]], text(dateToString(getPostUpdatedDate(post)))),
-            text(" 更新"),
+            ]], dateToString(getPostUpdatedDate(post))),
+            " 更新",
           ]
           : []),
       ),

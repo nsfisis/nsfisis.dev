@@ -1,5 +1,5 @@
 import { Config } from "../config.ts";
-import { el, Element, text } from "../dom.ts";
+import { el, Element } from "../dom.ts";
 import { stylesheetLinkElement } from "./utils.ts";
 
 type Params = {
@@ -70,7 +70,7 @@ export async function pageLayout(
       ? [linkElement("alternate", metaAtomFeedHref, "application/atom+xml")]
       : []),
     linkElement("icon", "/favicon.svg", "image/svg+xml"),
-    el("title", [], text(metaTitle)),
+    el("title", [], metaTitle),
     await stylesheetLinkElement("/style.css", config),
     ...(
       requiresSyntaxHighlight

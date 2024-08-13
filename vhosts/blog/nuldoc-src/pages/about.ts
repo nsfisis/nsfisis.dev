@@ -3,7 +3,7 @@ import { globalHeader } from "../components/global_header.ts";
 import { pageLayout } from "../components/page_layout.ts";
 import { staticScriptElement } from "../components/utils.ts";
 import { Config } from "../config.ts";
-import { el, text } from "../dom.ts";
+import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "./post.ts";
@@ -31,7 +31,7 @@ export async function generateAboutPage(
           el(
             "h1",
             [["class", "post-title"]],
-            text("nsfisis"),
+            "nsfisis",
           ),
           el(
             "div",
@@ -58,14 +58,12 @@ export async function generateAboutPage(
             el(
               "h2",
               [],
-              text("読み方"),
+              "読み方",
             ),
             el(
               "p",
               [],
-              text(
-                "読み方は決めていません。音にする必要があるときは本名である「いまむら」をお使いください。",
-              ),
+              "読み方は決めていません。音にする必要があるときは本名である「いまむら」をお使いください。",
             ),
           ),
           el(
@@ -74,7 +72,7 @@ export async function generateAboutPage(
             el(
               "h2",
               [],
-              text("アカウント"),
+              "アカウント",
             ),
             el(
               "ul",
@@ -85,7 +83,7 @@ export async function generateAboutPage(
                 el(
                   "a",
                   [["href", "https://twitter.com/nsfisis"]],
-                  text("Twitter (現 𝕏): @nsfisis"),
+                  "Twitter (現 𝕏): @nsfisis",
                 ),
               ),
               el(
@@ -94,7 +92,7 @@ export async function generateAboutPage(
                 el(
                   "a",
                   [["href", "https://github.com/nsfisis"]],
-                  text("GitHub: @nsfisis"),
+                  "GitHub: @nsfisis",
                 ),
               ),
             ),
@@ -105,7 +103,7 @@ export async function generateAboutPage(
             el(
               "h2",
               [],
-              text("仕事"),
+              "仕事",
             ),
             el(
               "ul",
@@ -113,11 +111,11 @@ export async function generateAboutPage(
               el(
                 "li",
                 [],
-                text("2021-01～現在: "),
+                "2021-01～現在: ",
                 el(
                   "a",
                   [["href", "https://www.dgcircus.com/"]],
-                  text("デジタルサーカス株式会社"),
+                  "デジタルサーカス株式会社",
                 ),
               ),
             ),
@@ -128,7 +126,7 @@ export async function generateAboutPage(
             el(
               "h2",
               [],
-              text("登壇"),
+              "登壇",
             ),
             el(
               "ul",
@@ -146,11 +144,9 @@ export async function generateAboutPage(
                   el(
                     "a",
                     [["href", slide.href]],
-                    text(
-                      `${
-                        dateToString(getPostPublishedDate(slide))
-                      }: ${slide.event} (${slide.talkType})`,
-                    ),
+                    `${
+                      dateToString(getPostPublishedDate(slide))
+                    }: ${slide.event} (${slide.talkType})`,
                   ),
                 )
               ),
