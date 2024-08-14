@@ -3,6 +3,23 @@ import { Config } from "../config.ts";
 import { DocBookError } from "../errors.ts";
 import { Revision, stringToDate } from "../revision.ts";
 import { Element, findFirstChildElement } from "../dom.ts";
+import { z } from "zod/mod.ts";
+
+export const PostMetadataSchema = z.object({
+  article: z.object({
+    uuid: z.string(),
+    title: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()),
+    revisions: z.array(z.object({
+      date: z.string(),
+      remark: z.string(),
+      isInternal: z.boolean().optional(),
+    })),
+  }),
+});
+
+export type PostMetadata = z.infer<typeof PostMetadataSchema>;
 
 export type Document = {
   root: Element;
@@ -17,19 +34,7 @@ export type Document = {
 
 export function createNewDocumentFromRootElement(
   root: Element,
-  meta: {
-    article: {
-      uuid: string;
-      title: string;
-      description: string;
-      tags: string[];
-      revisions: {
-        date: string;
-        remark: string;
-        isInternal?: boolean;
-      }[];
-    };
-  },
+  meta: PostMetadata,
   sourceFilePath: string,
   config: Config,
 ): Document {

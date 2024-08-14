@@ -1,25 +1,13 @@
 import { parse as parseToml } from "std/toml/mod.ts";
 import { Config } from "../config.ts";
 import { parseXmlString } from "../xml.ts";
-import { createNewDocumentFromRootElement, Document } from "./document.ts";
+import {
+  createNewDocumentFromRootElement,
+  Document,
+  PostMetadata,
+  PostMetadataSchema,
+} from "./document.ts";
 import toHtml from "./to_html.ts";
-import { z } from "zod/mod.ts";
-
-const PostMetadataSchema = z.object({
-  article: z.object({
-    uuid: z.string(),
-    title: z.string(),
-    description: z.string(),
-    tags: z.array(z.string()),
-    revisions: z.array(z.object({
-      date: z.string(),
-      remark: z.string(),
-      isInternal: z.boolean().optional(),
-    })),
-  }),
-});
-
-type PostMetadata = z.infer<typeof PostMetadataSchema>;
 
 export async function parseNulDocFile(
   filePath: string,
