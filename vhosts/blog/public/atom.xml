@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-07-19T00:00:00+09:00</updated>
+  <updated>2024-08-19T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:eed112e4-3227-4b3f-9991-7e11c288ee2b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-08-19/go-template-access-outer-scope-pipeline-within-with-or-range/"></link>
+    <title>【Go】 text/template の with や range の内側から外側の &quot;.&quot; にアクセスする</title>
+    <summary>Go言語の text/template における with や range は &quot;.&quot; を上書きする。これらの内側から外側の &quot;.&quot; にアクセスする方法を調べた。</summary>
+    <published>2024-08-19T00:00:00+09:00</published>
+    <updated>2024-08-19T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:222488dd-cf07-4961-83aa-a014b05369ff</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-07-19/reparojson-fix-only-json-formatter/"></link>
