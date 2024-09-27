@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-08-19T00:00:00+09:00</updated>
+  <updated>2024-09-28T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:ee7289ee-ff2e-439d-b343-7f87504192fd</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-09-28/mncore-challenge-1/"></link>
+    <title>MN-Core Challenge #1 参加レポ</title>
+    <summary>2024-08-28 から 2024-09-24 にかけて開催された MN-Core Challenge #1 に参加した。</summary>
+    <published>2024-09-28T00:00:00+09:00</published>
+    <updated>2024-09-28T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:eed112e4-3227-4b3f-9991-7e11c288ee2b</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-08-19/go-template-access-outer-scope-pipeline-within-with-or-range/"></link>
