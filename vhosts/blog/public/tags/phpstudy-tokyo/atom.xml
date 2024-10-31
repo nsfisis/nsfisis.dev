@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-07-18T00:00:00+09:00</updated>
+  <updated>2024-10-30T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:a84100cf-8c92-4856-addf-81a7c5547074</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-10-30/phpstudy-tokyo-169/"></link>
+    <title>PHP で PHP を作る (縮小版)</title>
+    <summary>登壇: PHP 勉強会@東京 第169回 (レギュラートーク (20分))</summary>
+    <published>2024-10-30T00:00:00+09:00</published>
+    <updated>2024-10-30T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:eec495b5-45e2-4c6f-a725-e62b1e0a7ad5</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-07-18/phpstudy-tokyo-166/"></link>

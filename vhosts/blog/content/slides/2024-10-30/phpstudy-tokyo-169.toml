@@ -1,0 +1,14 @@
+[slide]
+uuid = "a84100cf-8c92-4856-addf-81a7c5547074"
+title = "PHP で PHP を作る (縮小版)"
+event = "PHP 勉強会@東京 第169回"
+talkType = "レギュラートーク (20分)"
+link = "/slides/2024-10-30/phpstudy-tokyo-169/slide.pdf"
+tags = [
+  "php",
+  "phpstudy-tokyo",
+]
+
+[[slide.revisions]]
+date = "2024-10-30"
+remark = "登壇"
