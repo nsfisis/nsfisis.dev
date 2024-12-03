@@ -1,0 +1,1 @@
+`./content/posts/<date>/<slug>/` 以下に置いた画像が `./public/` にコピーされない。

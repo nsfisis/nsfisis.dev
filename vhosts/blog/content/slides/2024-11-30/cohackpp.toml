@@ -5,8 +5,8 @@ event = "紅白ぺぱ合戦"
 talkType = "LT"
 link = "/slides/2024-11-30/cohackpp/slides.pdf"
 tags = [
-  "php",
   "cohackpp",
+  "php",
 ]
 
 [[slide.revisions]]
