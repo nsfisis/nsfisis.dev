@@ -1,0 +1,14 @@
+[slide]
+uuid = "e1ca4664-f6f1-4de2-b4a5-ea2b64006708"
+title = "プログラミングマナー講座"
+event = "紅白ぺぱ合戦"
+talkType = "LT"
+link = "/slides/2024-11-30/cohackpp/slides.pdf"
+tags = [
+  "php",
+  "cohackpp",
+]
+
+[[slide.revisions]]
+date = "2024-11-30"
+remark = "登壇"

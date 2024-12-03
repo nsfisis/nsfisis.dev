@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-10-30T00:00:00+09:00</updated>
+  <updated>2024-11-30T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:e1ca4664-f6f1-4de2-b4a5-ea2b64006708</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-11-30/cohackpp/"></link>
+    <title>プログラミングマナー講座</title>
+    <summary>登壇: 紅白ぺぱ合戦 (LT)</summary>
+    <published>2024-11-30T00:00:00+09:00</published>
+    <updated>2024-11-30T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:a84100cf-8c92-4856-addf-81a7c5547074</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-10-30/phpstudy-tokyo-169/"></link>

@@ -14,6 +14,7 @@ siteCopyrightYear = 2021
 
 [blog.tagLabels]
 ci-cd = "CI/CD"
+cohackpp = "紅白ぺぱ合戦"
 composer = "Composer"
 conference = "カンファレンス"
 cpp = "C++"
