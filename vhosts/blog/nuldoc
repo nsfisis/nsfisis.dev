@@ -6,6 +6,5 @@ deno run \
     --allow-read="$base_dir" \
     --allow-write="$base_dir" \
     --allow-net="0.0.0.0:8000" \
-    --allow-run="./nuldoc" \
     "$base_dir/nuldoc-src/main.ts" \
     "$@"

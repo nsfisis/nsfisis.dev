@@ -2,19 +2,14 @@ import { serveDir } from "std/http/file_server.ts";
 import { STATUS_CODE, STATUS_TEXT } from "std/http/mod.ts";
 import { join } from "std/path/mod.ts";
 import { Config } from "../config.ts";
+import { runBuildCommand } from "./build.ts";
 
 export function runServeCommand(config: Config) {
   const rootDir = join(Deno.cwd(), config.locations.destDir);
   Deno.serve(async (req) => {
     const pathname = new URL(req.url).pathname;
     if (!pathname.endsWith("css") && !pathname.endsWith("svg")) {
-      const command = new Deno.Command(
-        join(Deno.cwd(), "nuldoc"),
-        {
-          args: ["build"],
-        },
-      );
-      await command.output();
+      await runBuildCommand(config);
       console.log("rebuild");
     }
     const res = await serveDir(req, {
