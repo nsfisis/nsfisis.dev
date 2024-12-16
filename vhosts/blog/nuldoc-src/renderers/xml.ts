@@ -72,7 +72,7 @@ function elementNodeToXmlText(e: Element, ctx: Context): string {
       s += " ";
       for (let i = 0; i < attributes.length; i++) {
         const [name, value] = attributes[i];
-        s += `${name}="${value}"`;
+        s += `${name}="${encodeSpecialCharacters(value)}"`;
         if (i !== attributes.length - 1) {
           s += " ";
         }
