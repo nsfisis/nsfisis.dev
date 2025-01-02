@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-12-05T00:00:00+09:00</updated>
+  <updated>2025-01-02T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:d7f98354-83fc-4cf1-8769-2784f0ebb6c8</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-12-33/2024-reflections/"></link>
+    <title>2024年の振り返り</title>
+    <summary>2024年にやったことを振り返る</summary>
+    <published>2025-01-02T00:00:00+09:00</published>
+    <updated>2025-01-02T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:ea0593d3-691c-4e08-8db4-98b8925717ec</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-12-04/cohackpp-report/"></link>
