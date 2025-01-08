@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="PHPerKaigi 2023 でデジタルサーカス株式会社から出題した問題を解説する。全5問中の第1問。">
+    <meta name="keywords" content="カンファレンス,PHP,PHPerKaigi,Piet">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="PHPerKaigi 2023 トークン問題解説 (1/5)｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="PHPerKaigi 2023 でデジタルサーカス株式会社から出題した問題を解説する。全5問中の第1問。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>PHPerKaigi 2023 トークン問題解説 (1/5)｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=0656606dcfb3f6fa094a976e05df9007">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">PHPerKaigi 2023 トークン問題解説 (1/5)</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/conference/">カンファレンス</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/php/">PHP</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/phperkaigi/">PHPerKaigi</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/piet/">Piet</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2025-01-08">2025-01-08</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <div class="admonition">
+              <div class="admonition-label">
+                NOTE
+              </div>
+              <div class="admonition-content">
+                 これは PHPerKaigi 2023 の記事です。今は 2025 年ですが、PHPerKaigi 2023 の記事です。 
+              </div>
+            </div>
+             
+            <p>
+               2023-03-23 から 2023-03-25 にかけて開催された <a href="https://phperkaigi.jp/2023/">PHPerKaigi 2023</a> では、弊社デジタルサーカス株式会社からトークン問題を出題した。 「トークン問題」とは、PHPerKaigi 2023 でおこなわれた PHPer チャレンジと呼ばれる企画で使われたもので、この記事で説明するような問題を解くと、「PHPer トークン」と呼ばれる「#」から始まる文字列を得ることができる。参加者がこのトークンを集めると、景品などが得られるという仕組みである。 
+            </p>
+             
+            <p>
+              <a href="/posts/2023-04-04/phperkaigi-2023-report/">PHPerKaigi 2023 の参加レポ</a> でも書いたとおり、この年のトークン問題は「昨年の PHPerKaigi 2022 が終わった段階から作り始め、約半年かけて制作」された。PHPerKaigi 当日も <a href="/slides/2023-03-25/phperkaigi-2023-tokens/">PHPer チャレンジ解説セッション</a> という形で解説の機会を頂いたのだが、せっかくなので記事の形でも残しておこうと思う。 
+            </p>
+             
+            <p>
+               この記事は、全5問ある中の第1問について解説する。他の問題については以下のリンクを参照のこと。 
+            </p>
+             
+            <ol>
+              <li>
+                <a href="/posts/2025-01-08/phperkaigi-2023-tokens-q1/">第1問 (この記事)</a>
+              </li>
+               
+              <li>
+                第2問 (TODO: 執筆中)
+              </li>
+               
+              <li>
+                第3問 (TODO: 執筆中)
+              </li>
+               
+              <li>
+                第4問 (TODO: 執筆中)
+              </li>
+               
+              <li>
+                第5問 (TODO: 執筆中)
+              </li>
+            </ol>
+          </section>
+           
+          <section id="section--quiz">
+            <h2><a href="#section--quiz">Q1: An Art of Computer Programming</a></h2> 
+            <p>
+               第1問『An Art of Computer Programming』はこちら。 
+            </p>
+             
+            <img alt="全体がQRコードになっており、中央には小さな文字で「Password is one of the PHPer tokens.」と書かれている" src="/posts/2025-01-08/phperkaigi-2023-tokens-q1/Q1.png">
+            </img>
+          </section>
+           
+          <section id="section--how-to-solve">
+            <h2><a href="#section--how-to-solve">解き方</a></h2> 
+            <p>
+               まずはトークンを得る方法を解説なしに説明する。次のように実行する。 
+            </p>
+             
+            <pre class="highlight"><code>$ echo &quot;#iwillblog&quot; | php Q1.png &gt;/dev/null</code></pre>
+             
+            <p>
+               無事に実行できていれば「#ModernPHPisStaticallyTypedLanguage」というトークンが得られる。 
+            </p>
+          </section>
+           
+          <section id="section--commentary">
+            <h2><a href="#section--commentary">解説</a></h2> 
+            <section id="section--commentary--read-as-image">
+              <h3><a href="#section--commentary--read-as-image">画像として読む</a></h3> 
+              <p>
+                 まずは素直に画像として見てみよう。 全体は QR コードになっている。適当な QR コードリーダで読み込むと、次のようなテキストが表示されるはずだ。 
+              </p>
+               
+              <pre class="highlight"><code>Guess password. $ echo &quot;password&quot; | php Q1.png &gt;/dev/null</code></pre>
+               
+              <p>
+                 メッセージは、この画像の実行方法とこの問題でやるべきこと (パスワードの推測) を示している。 
+              </p>
+               
+              <p>
+                 次に QR コードの中央部に目を向けると、小さな文字で「Password is one of the PHPer tokens.」と書かれているのがわかる。 他の PHPer トークンの中から適切な1つを見つけだし、「パスワード」として渡すことで答えとなる PHPer トークンが得られるというわけだ。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--password">
+              <h3><a href="#section--commentary--password">パスワード</a></h3> 
+              <p>
+                 不正なパスワードを使って実行してみると、次のようなエラーメッセージが表示される。 
+              </p>
+               
+              <pre class="highlight"><code>$ echo &quot;foo&quot; | php Q1.png &gt;/dev/null
+401 Unauthorized</code></pre>
+               
+              <p>
+                 すでに<a href="#section--how-to-solve">「解き方」の節</a>で示したように、パスワードである PHPer トークンは「#iwillblog」で、これを与えると正解のトークンが得られる。 
+              </p>
+               
+              <p>
+                 このパスワードの選択にはとある事情がある。 今回の問題の作問は前回の開催 (PHPerKaigi 2022) 直後からスタートしており、この時点では PHPerKaigi 2023 で登録される PHPer トークンにどのようなものがあるかはまったくわからない状態であった。 作問作業を早期に終わらせるには、次回開催でも確実に使われるであろう定番のトークンを予測して選ぶ必要があったのだ。 かくして、私が知る限り毎回登場しているトークンである「#iwillblog」に白羽の矢が立てられた。 
+              </p>
+               
+              <p>
+                 なお、解いてくださった方の中には、先頭の「#」を入力せずに何度も試してしまい答えが得られずじまいになった方もいらっしゃるようだった。 問題を置いていたリポジトリにヒントとしてパスワードのトークンが「i」で始まると書いていたのだが、これが意図せずミスリードになってしまった。 これは私のミスである。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--png-steganography">
+              <h3><a href="#section--commentary--png-steganography">PNG ステガノグラフィ</a></h3> 
+              <p>
+                 QR コードも言っているように、このファイルは PNG 画像であるにもかかわらず PHP で実行することができる。なぜこのようなことが可能なのか。 
+              </p>
+               
+              <p>
+                 PNG 画像のフォーマットは、次のようになっている。 
+              </p>
+               
+              <ol>
+                <li>
+                  マジックナンバーなど
+                </li>
+                 
+                <li>
+                  PNG ヘッダ (<code>IHDR</code> チャンク)
+                </li>
+                 
+                <li>
+                  実際の画像データ (<code>IDAT</code> チャンク)
+                </li>
+                 
+                <li>
+                  PNG フッタ (<code>IEND</code> チャンク)
+                </li>
+              </ol>
+               
+              <p>
+                 PNG フッタの後ろにあるデータは、画像ビューアには解釈されず、画像の表示には影響を与えない。したがって、PNG フッタの後ろには任意のデータを埋め込むことができる。 
+              </p>
+               
+              <p>
+                 さて、PHP には、PHP プログラムの始まりを示すための PHP タグ (<code>&lt;?php</code> または <code>&lt;?</code>) がある。 CLI で実行する場合、PHP タグよりも前にあるデータは標準出力へそのまま出力される。 
+              </p>
+               
+              <p>
+                 この2つの事実を使って、この画像ファイルは次のような構造になっていた。 
+              </p>
+               
+              <ol>
+                <li>
+                  マジックナンバーなど
+                </li>
+                 
+                <li>
+                  PNG ヘッダ (<code>IHDR</code> チャンク)
+                </li>
+                 
+                <li>
+                  実際の画像データ (<code>IDAT</code> チャンク)
+                </li>
+                 
+                <li>
+                  PNG フッタ (<code>IEND</code> チャンク)
+                </li>
+                 
+                <li>
+                  <strong>PHP タグ (<code>&lt;?php</code>)</strong>
+                </li>
+                 
+                <li>
+                  <strong>通常の PHP ソースコード</strong>
+                </li>
+              </ol>
+               
+              <p>
+                <code>strings</code> コマンドを使うと、隠されたデータを浮き彫りにできる。 
+              </p>
+               
+              <pre class="highlight"><code>IHDR
+-HHc
+&lt;PLTE
+IDATx
+IEND
+&lt;?php
+error_reporting(-1);
+$b = unpack(&apos;C*&apos;, file_get_contents(__FILE__));
+$w = $b[20]+2;
+$h = $b[24]+2;
+// (以下略)</code></pre>
+               
+              <p>
+                <code>IHDR</code> や <code>IEND</code> は PNG 画像の一部である。<code>&lt;?php</code> からが実際のプログラムになっている。 もちろんこれを PHP プログラムとして動かすと、PHP タグより前にある PNG 画像としてのデータはそのまま標準出力へと出力されてしまう。 それを防ぐため、QR コードを読み込んだときの実行方法には 
+              </p>
+               
+              <pre class="highlight"><code>Guess password. $ echo &quot;password&quot; | php Q1.png &gt;/dev/null</code></pre>
+               
+              <p>
+                 標準出力を捨てるよう <code>&gt;/dev/null</code> と指定されている。 
+              </p>
+               
+              <p>
+                 なお、このように PNG 画像などに本来のデータとは異なる別のデータを隠すことを「ステガノグラフィ」(<a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%86%E3%82%AC%E3%83%8E%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%BC">Wikipedia「ステガノグラフィー」</a>) と呼ぶ。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--php-program">
+              <h3><a href="#section--commentary--php-program">実行される PHP プログラム</a></h3> 
+              <p>
+                 画像の正体がわかったところで、画像に隠されていた PHP プログラムについて見ていこう。先ほどは一部しか記載しなかったので、全体を載せる。 なお、雑にゴルフしながら書いたので、空白こそ残しているものの可読性は非常に低いことと思う。 
+              </p>
+               
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-title function_ invoke__">error_reporting</span>(-<span class="hljs-number">1</span>);
+<span class="hljs-variable">$b</span> = <span class="hljs-title function_ invoke__">unpack</span>(<span class="hljs-string">&#x27;C*&#x27;</span>, <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-keyword">__FILE__</span>));
+<span class="hljs-variable">$w</span> = <span class="hljs-variable">$b</span>[<span class="hljs-number">20</span>]+<span class="hljs-number">2</span>;
+<span class="hljs-variable">$h</span> = <span class="hljs-variable">$b</span>[<span class="hljs-number">24</span>]+<span class="hljs-number">2</span>;
+<span class="hljs-variable">$cs</span> = [];
+<span class="hljs-keyword">for</span> (<span class="hljs-variable">$y</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$y</span> &lt; <span class="hljs-variable">$h</span>; <span class="hljs-variable">$y</span>++)
+  <span class="hljs-keyword">for</span> (<span class="hljs-variable">$x</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$x</span> &lt; <span class="hljs-variable">$w</span>; <span class="hljs-variable">$x</span>++)
+    <span class="hljs-variable">$cs</span>[<span class="hljs-variable">$y</span>*<span class="hljs-variable">$w</span> + <span class="hljs-variable">$x</span>] = (<span class="hljs-variable">$x</span>*<span class="hljs-variable">$y</span> === <span class="hljs-number">0</span> || <span class="hljs-variable">$x</span> === <span class="hljs-variable">$w</span>-<span class="hljs-number">1</span> || <span class="hljs-variable">$y</span> === <span class="hljs-variable">$h</span>-<span class="hljs-number">1</span>)
+                        ? <span class="hljs-number">0</span>
+                        : <span class="hljs-variable">$b</span>[<span class="hljs-number">122</span>+(<span class="hljs-variable">$y</span>-<span class="hljs-number">1</span>)*(<span class="hljs-variable">$w</span>-<span class="hljs-number">1</span>)+<span class="hljs-variable">$x</span>-<span class="hljs-number">1</span>];
+<span class="hljs-variable">$i</span> = <span class="hljs-title function_ invoke__">stream_isatty</span>(STDIN)
+    ? []
+    : <span class="hljs-title function_ invoke__">array_map</span>(<span class="hljs-title function_ invoke__">ord</span>(...), <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-title function_ invoke__">trim</span>((<span class="hljs-keyword">string</span>) <span class="hljs-title function_ invoke__">fgets</span>(STDIN))));
+<span class="hljs-variable">$m</span> = [];
+<span class="hljs-variable">$pc</span> = <span class="hljs-number">1</span>*<span class="hljs-variable">$w</span>+<span class="hljs-number">1</span>;
+<span class="hljs-variable">$dp</span> = <span class="hljs-number">0</span>;
+<span class="hljs-variable">$cc</span> = <span class="hljs-number">1</span>;
+<span class="hljs-variable">$c0</span> = <span class="hljs-number">1</span>;
+<span class="hljs-variable">$b</span> = <span class="hljs-number">0</span>;
+<span class="hljs-variable">$ns</span> = <span class="hljs-number">0</span>;
+<span class="hljs-variable">$o</span> = <span class="hljs-string">&#x27;&#x27;</span>;
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+  <span class="hljs-variable">$ns</span>++;
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$ns</span> &gt; <span class="hljs-number">1e5</span>) {
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;infinite loop detected\n&quot;</span>;
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-variable">$c1</span> = <span class="hljs-variable">$cs</span>[<span class="hljs-variable">$pc</span>];
+  <span class="hljs-variable">$y</span> = (<span class="hljs-number">6</span> + <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$c1</span>-<span class="hljs-number">2</span>, <span class="hljs-number">3</span>) - <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$c0</span>-<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)) % <span class="hljs-number">6</span>;
+  <span class="hljs-variable">$x</span> = (<span class="hljs-number">3</span> + <span class="hljs-variable">$c1</span>%<span class="hljs-number">3</span> - <span class="hljs-variable">$c0</span>%<span class="hljs-number">3</span>) % <span class="hljs-number">3</span>;
+  <span class="hljs-keyword">match</span> ((<span class="hljs-variable">$c0</span> !== <span class="hljs-number">1</span>) * (<span class="hljs-variable">$c1</span> !== <span class="hljs-number">1</span>) * (<span class="hljs-variable">$y</span>*<span class="hljs-number">3</span> + <span class="hljs-variable">$x</span>)) {
+    <span class="hljs-number">1</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-variable">$b</span>,
+    <span class="hljs-number">2</span> =&gt; <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>),
+    <span class="hljs-number">3</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>) + <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>),
+    <span class="hljs-number">4</span> =&gt; <span class="hljs-variable">$m</span>[] = (<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$x</span>, <span class="hljs-variable">$y</span></span>) =&gt;</span> <span class="hljs-variable">$y</span> - <span class="hljs-variable">$x</span>)(<span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>), <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
+    <span class="hljs-number">5</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>) * <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>),
+    <span class="hljs-number">8</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>) === <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>,
+    <span class="hljs-number">11</span> =&gt; <span class="hljs-variable">$cc</span> *= <span class="hljs-title function_ invoke__">pow</span>(-<span class="hljs-number">1</span>, <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
+    <span class="hljs-number">12</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-variable">$m</span>[<span class="hljs-title function_ invoke__">count</span>(<span class="hljs-variable">$m</span>)-<span class="hljs-number">1</span>],
+    <span class="hljs-number">13</span> =&gt; <span class="hljs-variable">$m</span> = (<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$n</span>, <span class="hljs-variable">$d</span>, <span class="hljs-variable">$m</span>, <span class="hljs-variable">$l</span></span>) =&gt;</span> [
+            ...<span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$m</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$l</span>-<span class="hljs-variable">$d</span>),
+            ...<span class="hljs-title function_ invoke__">array_reverse</span>([
+              ...<span class="hljs-title function_ invoke__">array_reverse</span>(<span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$m</span>, <span class="hljs-variable">$l</span>-<span class="hljs-variable">$d</span>, <span class="hljs-variable">$d</span>-<span class="hljs-variable">$n</span>)),
+              ...<span class="hljs-title function_ invoke__">array_reverse</span>(<span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$m</span>, <span class="hljs-variable">$l</span>-<span class="hljs-variable">$n</span>)),
+            ]),
+          ])(<span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>), <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>), <span class="hljs-variable">$m</span>, <span class="hljs-title function_ invoke__">count</span>(<span class="hljs-variable">$m</span>)),
+    <span class="hljs-number">15</span> =&gt; !<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$i</span>) <span class="hljs-keyword">and</span> <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_shift</span>(<span class="hljs-variable">$i</span>),
+    <span class="hljs-number">16</span> =&gt; <span class="hljs-variable">$o</span> .= <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%d&#x27;</span>, <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
+    <span class="hljs-number">17</span> =&gt; <span class="hljs-variable">$o</span> .= <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
+    <span class="hljs-keyword">default</span> =&gt; <span class="hljs-string">&#x27;nop&#x27;</span>,
+  };
+  <span class="hljs-variable">$c0</span> = <span class="hljs-variable">$c1</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-variable">$j</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$j</span> &lt; <span class="hljs-number">8</span>; <span class="hljs-variable">$j</span>++) {
+    <span class="hljs-variable">$v</span> = [];
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$c1</span> === <span class="hljs-number">1</span>) {
+      <span class="hljs-variable">$x</span> = <span class="hljs-variable">$pc</span> % <span class="hljs-variable">$w</span>;
+      <span class="hljs-variable">$y</span> = <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$pc</span>, <span class="hljs-variable">$w</span>);
+      <span class="hljs-variable">$e</span> = [(<span class="hljs-variable">$y</span>+<span class="hljs-number">1</span>)*<span class="hljs-variable">$w</span>-<span class="hljs-number">1</span>, (<span class="hljs-variable">$h</span>-<span class="hljs-number">1</span>)*<span class="hljs-variable">$w</span>+<span class="hljs-variable">$x</span>, <span class="hljs-variable">$y</span>*<span class="hljs-variable">$w</span>, <span class="hljs-variable">$x</span>][<span class="hljs-variable">$dp</span>];
+      <span class="hljs-variable">$z</span> = [<span class="hljs-number">1</span>, <span class="hljs-variable">$w</span>, -<span class="hljs-number">1</span>, -<span class="hljs-variable">$w</span>][<span class="hljs-variable">$dp</span>];
+      <span class="hljs-keyword">for</span> (<span class="hljs-variable">$ep</span> = <span class="hljs-variable">$pc</span>; <span class="hljs-variable">$ep</span> !== <span class="hljs-variable">$e</span>; <span class="hljs-variable">$ep</span> += <span class="hljs-variable">$z</span>)
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$cs</span>[<span class="hljs-variable">$ep</span>] !== <span class="hljs-number">1</span>) <span class="hljs-keyword">break</span>;
+      <span class="hljs-variable">$ep</span> -= <span class="hljs-variable">$z</span>;
+      <span class="hljs-variable">$pc</span> = <span class="hljs-variable">$ep</span>;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-variable">$q</span> = [<span class="hljs-variable">$pc</span>];
+      <span class="hljs-variable">$ep</span> = <span class="hljs-variable">$pc</span>;
+      <span class="hljs-keyword">while</span> (!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$q</span>)) {
+        <span class="hljs-variable">$qq</span> = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$q</span>);
+        <span class="hljs-variable">$v</span>[<span class="hljs-variable">$qq</span>] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">foreach</span> ([<span class="hljs-variable">$qq</span>+<span class="hljs-number">1</span>, <span class="hljs-variable">$qq</span>+<span class="hljs-variable">$w</span>, <span class="hljs-variable">$qq</span>-<span class="hljs-number">1</span>, <span class="hljs-variable">$qq</span>-<span class="hljs-variable">$w</span>] <span class="hljs-keyword">as</span> <span class="hljs-variable">$qp</span>) {
+          <span class="hljs-keyword">if</span> (<span class="hljs-variable">$cs</span>[<span class="hljs-variable">$qp</span>] !== <span class="hljs-variable">$c1</span>) <span class="hljs-keyword">continue</span>;
+          <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$v</span>[<span class="hljs-variable">$qp</span>])) <span class="hljs-keyword">continue</span>;
+          <span class="hljs-variable">$q</span>[] = <span class="hljs-variable">$qp</span>;
+          <span class="hljs-variable">$qx</span> = <span class="hljs-variable">$qp</span> % <span class="hljs-variable">$w</span>;
+          <span class="hljs-variable">$qy</span> = <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$qp</span>, <span class="hljs-variable">$w</span>);
+          <span class="hljs-variable">$x</span> = <span class="hljs-variable">$ep</span> % <span class="hljs-variable">$w</span>;
+          <span class="hljs-variable">$y</span> = <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$ep</span>, <span class="hljs-variable">$w</span>);
+          <span class="hljs-keyword">if</span> (
+            (<span class="hljs-variable">$dp</span> === <span class="hljs-number">0</span> &amp;&amp; (<span class="hljs-variable">$x</span> &lt; <span class="hljs-variable">$qx</span> || (<span class="hljs-variable">$x</span> === <span class="hljs-variable">$qx</span> &amp;&amp; (<span class="hljs-variable">$y</span>&lt;=&gt;<span class="hljs-variable">$qy</span>) === <span class="hljs-variable">$cc</span>)))
+            || (<span class="hljs-variable">$dp</span> === <span class="hljs-number">1</span> &amp;&amp; (<span class="hljs-variable">$y</span> &lt; <span class="hljs-variable">$qy</span> || (<span class="hljs-variable">$y</span> === <span class="hljs-variable">$qy</span> &amp;&amp; (<span class="hljs-variable">$qx</span>&lt;=&gt;<span class="hljs-variable">$x</span>) === <span class="hljs-variable">$cc</span>)))
+            || (<span class="hljs-variable">$dp</span> === <span class="hljs-number">2</span> &amp;&amp; (<span class="hljs-variable">$qx</span> &lt; <span class="hljs-variable">$x</span> || (<span class="hljs-variable">$qx</span> === <span class="hljs-variable">$x</span> &amp;&amp; (<span class="hljs-variable">$qy</span>&lt;=&gt;<span class="hljs-variable">$y</span>) === <span class="hljs-variable">$cc</span>)))
+            || (<span class="hljs-variable">$dp</span> === <span class="hljs-number">3</span> &amp;&amp; (<span class="hljs-variable">$qy</span> &lt; <span class="hljs-variable">$y</span> || (<span class="hljs-variable">$qy</span> === <span class="hljs-variable">$y</span> &amp;&amp; (<span class="hljs-variable">$x</span>&lt;=&gt;<span class="hljs-variable">$qx</span>) === <span class="hljs-variable">$cc</span>)))
+          )
+            <span class="hljs-variable">$ep</span> = <span class="hljs-variable">$qp</span>;
+        }
+      }
+    }
+    <span class="hljs-variable">$np</span> = <span class="hljs-variable">$ep</span> + [<span class="hljs-number">1</span>, <span class="hljs-variable">$w</span>, -<span class="hljs-number">1</span>, -<span class="hljs-variable">$w</span>][<span class="hljs-variable">$dp</span>];
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$cs</span>[<span class="hljs-variable">$np</span>] !== <span class="hljs-number">0</span>) {
+      <span class="hljs-variable">$b</span> = <span class="hljs-title function_ invoke__">count</span>(<span class="hljs-title function_ invoke__">array_keys</span>(<span class="hljs-variable">$v</span>));
+      <span class="hljs-variable">$pc</span> = <span class="hljs-variable">$np</span>;
+      <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$j</span> === <span class="hljs-number">7</span>) <span class="hljs-keyword">break</span> <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$j</span> % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) <span class="hljs-variable">$cc</span> = -<span class="hljs-variable">$cc</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$j</span> % <span class="hljs-number">2</span> === <span class="hljs-number">1</span>) <span class="hljs-variable">$dp</span> = (<span class="hljs-variable">$dp</span>+<span class="hljs-number">1</span>) % <span class="hljs-number">4</span>;
+<span class="hljs-comment">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span>
+<span class="hljs-comment">// Failure of authentication should be notified by 401, not 403.</span>
+<span class="hljs-comment">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span>
+<span class="hljs-comment">// Piet any longer at that time.</span>
+<span class="hljs-title function_ invoke__">fwrite</span>(STDERR, <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;403 Forbidden&#x27;</span>, <span class="hljs-string">&#x27;401 Unauthorized&#x27;</span>, <span class="hljs-variable">$o</span>));</code></pre>
+               
+              <p>
+                 これは一体なんなのか。ずばり、難解プログラミング言語の一つ Piet のインタプリタになっている。 Piet はピエト・モンドリアン (『赤・青・黄のコンポジション』などで知られる抽象画家) の作品にインスピレーションを受けて作られた、画像をソースコードとするプログラミング言語である。 インタプリタは画像の各ピクセルの上を進みながら、色等に応じて特定の処理をおこなっていく。 ここでは詳しい言語仕様については解説しないので、<a href="https://ja.wikipedia.org/wiki/Piet">Wikipedia の記事「Piet」</a> などを参照してほしい。 
+              </p>
+               
+              <p>
+                 プログラムの冒頭にあるこの箇所 
+              </p>
+               
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$b</span> = <span class="hljs-title function_ invoke__">unpack</span>(<span class="hljs-string">&#x27;C*&#x27;</span>, <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-keyword">__FILE__</span>));</code></pre>
+               
+              <p>
+                 で <code>__FILE__</code> つまりこの画像ファイルを読み込んでいる。 先ほど Piet は画像をソースコードにしていると説明した。 そう、今回の問題の画像ファイル <code>Q1.png</code> は、PHP 製 Piet インタプリタであると同時に、Piet のソースコード画像でもあるのだ。 QR コード中央のカラフルな部分が Piet の命令になっている。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--piet-source-code">
+              <h3><a href="#section--commentary--piet-source-code">Piet のソースコード</a></h3> 
+              <p>
+                 さて、Piet でどのようなコードが書かれて (いや、描かれて) いるのかを解説したいところだが、今の私にはできそうにない。 というのも、すでに述べたように Piet は「難解プログラミング言語」である。 およそ人が描いたり読んだりするようには作られていない。性質としては、パズルに近い代物である。 
+              </p>
+               
+              <p>
+                 というわけで、ここではあらましを説明するだけでご容赦いただきたい。 それぞれの部分はおおよそ次のようなことをやっている (再検証・再読解はしていないので大嘘かもしれない)。 
+              </p>
+               
+              <ul>
+                <li>
+                  左上: 入力受け付け 
+                  <ul>
+                    <li>
+                      標準入力から1文字ずつ読み込み、入力がなくなるまでスタックに積む。多分。
+                    </li>
+                  </ul>
+                </li>
+                 
+                <li>
+                  上辺、右辺: パスワードの検証 
+                  <ul>
+                    <li>
+                      入力がパスワードと一致するか (= <code>#iwillblog</code> かどうか) を調べる。多分。
+                    </li>
+                  </ul>
+                </li>
+                 
+                <li>
+                  下辺、左辺、上辺の3列目、右辺の3列目、下辺の2列目: トークンの出力 
+                  <ul>
+                    <li>
+                      パスワードと一致していればここに飛んでくる。正解のトークンを出力する。多分。
+                    </li>
+                  </ul>
+                </li>
+                 
+                <li>
+                  右辺の2列目、上辺の2列目: 不正解のメッセージ出力 
+                  <ul>
+                    <li>
+                      パスワードと一致していなければここに飛んでくる。不正解のときのメッセージを出力する。多分。
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+               
+              <p>
+                 ところで、先ほど掲載した Piet のインタプリタのソースコード末尾には次のような箇所がある。 
+              </p>
+               
+              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-comment">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span>
+<span class="hljs-comment">// Failure of authentication should be notified by 401, not 403.</span>
+<span class="hljs-comment">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span>
+<span class="hljs-comment">// Piet any longer at that time.</span>
+<span class="hljs-title function_ invoke__">fwrite</span>(STDERR, <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;403 Forbidden&#x27;</span>, <span class="hljs-string">&#x27;401 Unauthorized&#x27;</span>, <span class="hljs-variable">$o</span>));</code></pre>
+               
+              <p>
+                 コメントにも書かれているが、この Piet のソースコード画像には誤りがあった。 本来 HTTP のステータスコードを真似るのなら、認証の失敗には 401 を返さなければならない。 しかし、Piet のソースは 403 を返すように書いてしまっていた。 そのことに私が気付いたのは PHPerKaigi 2023 が開催されるひと月前で、その時点で私はこの Piet のソースコードを (ちょうどこの記事でそうなっているのと同じように) 読解できなくなっていた。 さらに悪いことに、正しいメッセージ「401 Unauthorized」は元の「403 Forbidden」よりも3文字長い。 3文字出力が長くなるということは、それだけ Piet で塗るべきピクセルが増えることを意味する。 もはや3文字追加で出力するだけの余白はこの画像に残されていなかった (と思う。腕ききの Piet プログラマならできるかもしれないので挑戦してみてほしい)。 
+              </p>
+               
+              <p>
+                 これを解決するために私が選んだのは、インタプリタを改造し、本来のメッセージとは異なるメッセージを無理やり出力させて帳尻を合わせることだった。 そういうわけでこの Piet インタプリタは完全な Piet インタプリタではなく、「403 Forbidden」というテキストを絶対に出力できない。 
+              </p>
+            </section>
+             
+            <section id="section--commentary--misc">
+              <h3><a href="#section--commentary--misc">その他小ネタ</a></h3> 
+              <p>
+                 ここまでで問題の核心部分は説明し終えたので、ここからは残った小ネタを紹介しておく。 
+              </p>
+               
+              <p>
+                 この問題のタイトル『An Art of Computer Programming』は、ドナルド・クヌースの『The Art of Computer Programming』をパロディしたものである。 
+              </p>
+               
+              <p>
+                 この問題で得られるトークン「#ModernPHPisStaticallyTypedLanguage」は特に元ネタがあるわけではない。当然のような顔で嘘を主張したかったのでこうなった。 
+              </p>
+            </section>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2> 
+            <p>
+               この問題の自己評価はこちら。 
+            </p>
+             
+            <ul>
+              <li>
+                難しさ: 2位 / 全5問
+              </li>
+               
+              <li>
+                お気に入り度: 4位 / 全5問
+              </li>
+               
+              <li>
+                鮮やかさ: 1位 / 全5問
+              </li>
+            </ul>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>
