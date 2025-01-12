@@ -21,7 +21,9 @@ export async function parseNulDocFile(
     const doc = createNewDocumentFromRootElement(root, meta, filePath, config);
     return toHtml(doc);
   } catch (e) {
-    e.message = `${e.message} in ${filePath}`;
+    if (e instanceof Error) {
+      e.message = `${e.message} in ${filePath}`;
+    }
     throw e;
   }
 }

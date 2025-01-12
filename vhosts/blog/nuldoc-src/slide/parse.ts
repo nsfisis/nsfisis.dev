@@ -29,7 +29,9 @@ export async function parseSlideFile(
     );
     return createNewSlideFromTomlRootObject(root, filePath, config);
   } catch (e) {
-    e.message = `${e.message} in ${filePath}`;
+    if (e instanceof Error) {
+      e.message = `${e.message} in ${filePath}`;
+    }
     throw e;
   }
 }
