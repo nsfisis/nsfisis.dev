@@ -1,30 +1,21 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import PostPageEntry from "../components/PostPageEntry.tsx";
 import SlidePageEntry from "../components/SlidePageEntry.tsx";
 import { Config, getTagLabel } from "../config.ts";
-import { Page } from "../page.ts";
-import { getPostPublishedDate } from "./post.tsx";
-import { TaggedPage } from "./tagged_page.ts";
+import { getPostPublishedDate } from "../generators/post.ts";
+import { TaggedPage } from "../generators/tagged_page.ts";
 
-export interface TagPage extends Page {
-  tagSlug: string;
-  tagLabel: string;
-  numOfPosts: number;
-  numOfSlides: number;
-}
-
-export async function generateTagPage(
+export default function TagPage(
   tagSlug: string,
   pages: TaggedPage[],
   config: Config,
-): Promise<TagPage> {
+) {
   const tagLabel = getTagLabel(config, tagSlug);
   const pageTitle = `タグ「${tagLabel}」一覧`;
 
-  const html = await renderToDOM(
+  return (
     <PageLayout
       metaCopyrightYear={getPostPublishedDate(pages[pages.length - 1]).year}
       metaDescription={`タグ「${tagLabel}」のついた記事またはスライドの一覧`}
@@ -47,17 +38,6 @@ export async function generateTagPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: `/tags/${tagSlug}/index.html`,
-    href: `/tags/${tagSlug}/`,
-    tagSlug: tagSlug,
-    tagLabel: tagLabel,
-    numOfPosts: pages.filter((p) => !("event" in p)).length,
-    numOfSlides: pages.filter((p) => "event" in p).length,
-  };
 }

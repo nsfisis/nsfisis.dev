@@ -1,20 +1,16 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
-import { Page } from "../page.ts";
-import { TagPage } from "./tag.tsx";
+import { TagPage } from "../generators/tag.ts";
 
-export type TagListPage = Page;
-
-export async function generateTagListPage(
+export default function TagListPage(
   tags: TagPage[],
   config: Config,
-): Promise<TagListPage> {
+) {
   const pageTitle = "タグ一覧";
 
-  const html = await renderToDOM(
+  return (
     <PageLayout
       metaCopyrightYear={config.blog.siteCopyrightYear}
       metaDescription="タグの一覧"
@@ -56,13 +52,6 @@ export async function generateTagListPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: "/tags/index.html",
-    href: "/tags/",
-  };
 }

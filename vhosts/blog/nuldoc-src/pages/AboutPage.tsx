@@ -3,19 +3,15 @@ import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import StaticScript from "../components/StaticScript.tsx";
 import { Config } from "../config.ts";
-import { renderToDOM } from "../jsx/render.ts";
-import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
-import { getPostPublishedDate } from "./post.tsx";
-import { SlidePage } from "./slide.tsx";
+import { getPostPublishedDate } from "../generators/post.ts";
+import { SlidePage } from "../generators/slide.ts";
 
-export type AboutPage = Page;
-
-export async function generateAboutPage(
+export default function AboutPage(
   slides: SlidePage[],
   config: Config,
-): Promise<AboutPage> {
-  const html = await renderToDOM(
+) {
+  return (
     <PageLayout
       metaCopyrightYear={config.blog.siteCopyrightYear}
       metaDescription="このサイトの著者について"
@@ -93,13 +89,6 @@ export async function generateAboutPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: "/about/index.html",
-    href: "/about/",
-  };
 }

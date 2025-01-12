@@ -1,46 +1,17 @@
-import { join } from "std/path/mod.ts";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalFooter from "../components/GlobalFooter.tsx";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config, getTagLabel } from "../config.ts";
 import { Element } from "../dom.ts";
 import { Document } from "../ndoc/document.ts";
-import { Page } from "../page.ts";
-import { Date, dateToString, Revision } from "../revision.ts";
+import { dateToString } from "../revision.ts";
+import { getPostPublishedDate } from "../generators/post.ts";
 
-export interface PostPage extends Page {
-  title: string;
-  description: string;
-  tags: string[];
-  revisions: Revision[];
-  published: Date;
-  updated: Date;
-  uuid: string;
-}
-
-export function getPostPublishedDate(page: { revisions: Revision[] }): Date {
-  for (const rev of page.revisions) {
-    if (!rev.isInternal) {
-      return rev.date;
-    }
-  }
-  return page.revisions[0].date;
-}
-
-export function getPostUpdatedDate(page: { revisions: Revision[] }): Date {
-  return page.revisions[page.revisions.length - 1].date;
-}
-
-export function postHasAnyUpdates(page: { revisions: Revision[] }): boolean {
-  return 2 <= page.revisions.filter((rev) => !rev.isInternal).length;
-}
-
-export async function generatePostPage(
+export default function PostPage(
   doc: Document,
   config: Config,
-): Promise<PostPage> {
-  const html = await renderToDOM(
+) {
+  return (
     <PageLayout
       metaCopyrightYear={getPostPublishedDate(doc).year}
       metaDescription={doc.description}
@@ -98,26 +69,6 @@ export async function generatePostPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  const cwd = Deno.cwd();
-  const contentDir = join(cwd, config.locations.contentDir);
-  const destFilePath = join(
-    doc.sourceFilePath.replace(contentDir, "").replace(".ndoc", ""),
-    "index.html",
-  );
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: destFilePath,
-    href: destFilePath.replace("index.html", ""),
-    title: doc.title,
-    description: doc.description,
-    tags: doc.tags,
-    revisions: doc.revisions,
-    published: getPostPublishedDate(doc),
-    updated: getPostUpdatedDate(doc),
-    uuid: doc.uuid,
-  };
 }

@@ -1,14 +1,10 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
-import { Page } from "../page.ts";
 
-export type HomePage = Page;
-
-export async function generateHomePage(config: Config): Promise<HomePage> {
-  const html = await renderToDOM(
+export default function HomePage(config: Config) {
+  return (
     <PageLayout
       metaCopyrightYear={config.blog.siteCopyrightYear}
       metaDescription="nsfisis のブログサイト"
@@ -52,13 +48,6 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: "/index.html",
-    href: "/",
-  };
 }

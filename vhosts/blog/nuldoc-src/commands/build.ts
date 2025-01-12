@@ -7,20 +7,20 @@ import { parseNulDocFile } from "../ndoc/parse.ts";
 import { Page } from "../page.ts";
 import { render } from "../render.ts";
 import { dateToString } from "../revision.ts";
-import { generateAboutPage } from "../pages/about.tsx";
-import { generateHomePage } from "../pages/home.tsx";
-import { generateNotFoundPage } from "../pages/not_found.tsx";
+import { generateAboutPage } from "../generators/about.ts";
+import { generateHomePage } from "../generators/home.ts";
+import { generateNotFoundPage } from "../generators/not_found.ts";
 import {
   generatePostPage,
   getPostPublishedDate,
   PostPage,
-} from "../pages/post.tsx";
-import { generatePostListPage } from "../pages/post_list.tsx";
-import { generateSlidePage, SlidePage } from "../pages/slide.tsx";
-import { generateSlideListPage } from "../pages/slide_list.tsx";
-import { generateTagPage, TagPage } from "../pages/tag.tsx";
-import { TaggedPage } from "../pages/tagged_page.ts";
-import { generateTagListPage } from "../pages/tag_list.tsx";
+} from "../generators/post.ts";
+import { generatePostListPage } from "../generators/post_list.ts";
+import { generateSlidePage, SlidePage } from "../generators/slide.ts";
+import { generateSlideListPage } from "../generators/slide_list.ts";
+import { generateTagPage, TagPage } from "../generators/tag.ts";
+import { TaggedPage } from "../generators/tagged_page.ts";
+import { generateTagListPage } from "../generators/tag_list.ts";
 import { parseSlideFile } from "../slide/parse.ts";
 
 export async function runBuildCommand(config: Config) {

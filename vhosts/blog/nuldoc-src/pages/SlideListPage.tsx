@@ -1,23 +1,19 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import SlidePageEntry from "../components/SlidePageEntry.tsx";
 import { Config } from "../config.ts";
-import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
-import { getPostPublishedDate } from "./post.tsx";
-import { SlidePage } from "./slide.tsx";
+import { getPostPublishedDate } from "../generators/post.ts";
+import { SlidePage } from "../generators/slide.ts";
 
-export type SlideListPage = Page;
-
-export async function generateSlideListPage(
+export default function SlideListPage(
   slides: SlidePage[],
   config: Config,
-): Promise<SlideListPage> {
+) {
   const pageTitle = "スライド一覧";
 
-  const html = await renderToDOM(
+  return (
     <PageLayout
       metaCopyrightYear={config.blog.siteCopyrightYear}
       metaDescription="登壇したイベントで使用したスライドの一覧"
@@ -41,13 +37,6 @@ export async function generateSlideListPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: "/slides/index.html",
-    href: "/slides/",
-  };
 }

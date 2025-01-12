@@ -1,22 +1,18 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import PostPageEntry from "../components/PostPageEntry.tsx";
 import { Config } from "../config.ts";
-import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
-import { getPostPublishedDate, PostPage } from "./post.tsx";
+import { getPostPublishedDate, PostPage } from "../generators/post.ts";
 
-export type PostListPage = Page;
-
-export async function generatePostListPage(
+export default function PostListPage(
   posts: PostPage[],
   config: Config,
-): Promise<PostListPage> {
+) {
   const pageTitle = "投稿一覧";
 
-  const html = await renderToDOM(
+  return (
     <PageLayout
       metaCopyrightYear={config.blog.siteCopyrightYear}
       metaDescription="投稿した記事の一覧"
@@ -40,13 +36,6 @@ export async function generatePostListPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: "/posts/index.html",
-    href: "/posts/",
-  };
 }

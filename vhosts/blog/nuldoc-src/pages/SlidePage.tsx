@@ -1,33 +1,17 @@
-import { join } from "std/path/mod.ts";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalFooter from "../components/GlobalFooter.tsx";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import StaticScript from "../components/StaticScript.tsx";
 import { Config, getTagLabel } from "../config.ts";
-import { Page } from "../page.ts";
-import { Date, dateToString, Revision } from "../revision.ts";
+import { dateToString } from "../revision.ts";
 import { Slide } from "../slide/slide.ts";
-import { getPostPublishedDate, getPostUpdatedDate } from "./post.tsx";
+import { getPostPublishedDate } from "../generators/post.ts";
 
-export interface SlidePage extends Page {
-  title: string;
-  description: string;
-  event: string;
-  talkType: string;
-  slideLink: string;
-  tags: string[];
-  revisions: Revision[];
-  published: Date;
-  updated: Date;
-  uuid: string;
-}
-
-export async function generateSlidePage(
+export default function SlidePage(
   slide: Slide,
   config: Config,
-): Promise<SlidePage> {
-  const html = await renderToDOM(
+) {
+  return (
     <PageLayout
       metaCopyrightYear={getPostPublishedDate(slide).year}
       metaDescription={slide.title}
@@ -81,29 +65,6 @@ export async function generateSlidePage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  const cwd = Deno.cwd();
-  const contentDir = join(cwd, config.locations.contentDir);
-  const destFilePath = join(
-    slide.sourceFilePath.replace(contentDir, "").replace(".toml", ""),
-    "index.html",
-  );
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: destFilePath,
-    href: destFilePath.replace("index.html", ""),
-    title: slide.title,
-    description: `登壇: ${slide.event} (${slide.talkType})`,
-    event: slide.event,
-    talkType: slide.talkType,
-    slideLink: slide.slideLink,
-    tags: slide.tags,
-    revisions: slide.revisions,
-    published: getPostPublishedDate(slide),
-    updated: getPostUpdatedDate(slide),
-    uuid: slide.uuid,
-  };
 }

@@ -1,16 +1,12 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
-import { Page } from "../page.ts";
 
-export type NotFoundPage = Page;
-
-export async function generateNotFoundPage(
+export default function NotFoundPage(
   config: Config,
-): Promise<NotFoundPage> {
-  const html = await renderToDOM(
+) {
+  return (
     <PageLayout
       metaCopyrightYear={config.blog.siteCopyrightYear}
       metaDescription="リクエストされたページが見つかりません"
@@ -26,13 +22,6 @@ export async function generateNotFoundPage(
         </main>
         <GlobalFooter config={config} />
       </body>
-    </PageLayout>,
+    </PageLayout>
   );
-
-  return {
-    root: html,
-    renderer: "html",
-    destFilePath: "/404.html",
-    href: "/404.html",
-  };
 }

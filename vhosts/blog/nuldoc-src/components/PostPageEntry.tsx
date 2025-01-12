@@ -3,7 +3,7 @@ import {
   getPostUpdatedDate,
   postHasAnyUpdates,
   PostPage,
-} from "../pages/post.tsx";
+} from "../generators/post.ts";
 import { dateToString } from "../revision.ts";
 
 export default function PostPageEntry({ post }: { post: PostPage }) {

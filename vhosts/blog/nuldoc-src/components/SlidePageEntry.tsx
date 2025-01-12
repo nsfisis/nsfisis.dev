@@ -2,8 +2,8 @@ import {
   getPostPublishedDate,
   getPostUpdatedDate,
   postHasAnyUpdates,
-} from "../pages/post.tsx";
-import { SlidePage } from "../pages/slide.tsx";
+} from "../generators/post.ts";
+import { SlidePage } from "../generators/slide.ts";
 import { dateToString } from "../revision.ts";
 
 export default function SlidePageEntry({ slide }: { slide: SlidePage }) {
