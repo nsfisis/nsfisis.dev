@@ -1,4 +1,4 @@
-import { PostPage } from "./post.ts";
-import { SlidePage } from "./slide.ts";
+import { PostPage } from "./post.tsx";
+import { SlidePage } from "./slide.tsx";
 
 export type TaggedPage = PostPage | SlidePage;

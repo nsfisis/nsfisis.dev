@@ -2,8 +2,8 @@ import { Config } from "../config.ts";
 import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { Entry, Feed } from "./types.ts";
-import { PostPage } from "../pages/post.ts";
-import { SlidePage } from "../pages/slide.ts";
+import { PostPage } from "../pages/post.tsx";
+import { SlidePage } from "../pages/slide.tsx";
 import { dateToRfc3339String } from "../revision.ts";
 
 const BASE_NAME = "atom.xml";
