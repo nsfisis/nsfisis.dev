@@ -3,7 +3,6 @@ import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import StaticScript from "../components/StaticScript.tsx";
 import { Config } from "../config.ts";
-import { el } from "../dom.ts";
 import { renderToDOM } from "../jsx/render.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
@@ -98,7 +97,7 @@ export async function generateAboutPage(
   );
 
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: "/about/index.html",
     href: "/about/",

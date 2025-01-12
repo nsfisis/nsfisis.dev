@@ -3,7 +3,6 @@ import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 
 export type NotFoundPage = Page;
@@ -31,7 +30,7 @@ export async function generateNotFoundPage(
   );
 
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: "/404.html",
     href: "/404.html",

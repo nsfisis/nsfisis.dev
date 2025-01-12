@@ -3,7 +3,6 @@ import { renderToDOM } from "../jsx/render.ts";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { TagPage } from "./tag.tsx";
 
@@ -61,7 +60,7 @@ export async function generateTagListPage(
   );
 
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: "/tags/index.html",
     href: "/tags/",

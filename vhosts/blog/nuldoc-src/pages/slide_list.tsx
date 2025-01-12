@@ -4,7 +4,6 @@ import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import SlidePageEntry from "../components/SlidePageEntry.tsx";
 import { Config } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "./post.tsx";
@@ -46,7 +45,7 @@ export async function generateSlideListPage(
   );
 
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: "/slides/index.html",
     href: "/slides/",

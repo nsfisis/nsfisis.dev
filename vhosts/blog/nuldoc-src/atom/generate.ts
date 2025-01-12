@@ -50,9 +50,8 @@ export function generateFeedPageFromEntries(
     entries: entries_,
   };
 
-  const xml = buildXmlTree(feed);
   return {
-    root: el("__root__", {}, xml),
+    root: buildXmlTree(feed),
     renderer: "xml",
     destFilePath: feedPath,
     href: feedPath,

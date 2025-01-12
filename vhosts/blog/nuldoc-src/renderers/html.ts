@@ -3,7 +3,7 @@ import { DocBookError } from "../errors.ts";
 
 export function renderHtml(root: Node): string {
   return `<!DOCTYPE html>\n` + nodeToHtmlText(root, {
-    indentLevel: -1,
+    indentLevel: 0,
     isInPre: false,
   });
 }
@@ -17,8 +17,6 @@ type Dtd = { type: "block" | "inline"; auto_closing?: boolean };
 
 function getDtd(name: string): Dtd {
   switch (name) {
-    case "__root__":
-      return { type: "block" };
     case "a":
       return { type: "inline" };
     case "article":
@@ -164,29 +162,29 @@ function elementNodeToHtmlText(e: Element, ctx: Context): string {
   const dtd = getDtd(e.name);
 
   let s = "";
-  if (e.name !== "__root__") {
-    if (isBlockNode(e)) {
-      s += indent(ctx);
-    }
-    s += `<${e.name}`;
-    const attributes = getElementAttributes(e);
-    if (attributes.length > 0) {
-      s += " ";
-      for (let i = 0; i < attributes.length; i++) {
-        const [name, value] = attributes[i];
-        s += `${name === "className" ? "class" : name}="${
-          encodeSpecialCharacters(value)
-        }"`;
-        if (i !== attributes.length - 1) {
-          s += " ";
-        }
+
+  if (isBlockNode(e)) {
+    s += indent(ctx);
+  }
+  s += `<${e.name}`;
+  const attributes = getElementAttributes(e);
+  if (attributes.length > 0) {
+    s += " ";
+    for (let i = 0; i < attributes.length; i++) {
+      const [name, value] = attributes[i];
+      s += `${name === "className" ? "class" : name}="${
+        encodeSpecialCharacters(value)
+      }"`;
+      if (i !== attributes.length - 1) {
+        s += " ";
       }
     }
-    s += ">";
-    if (isBlockNode(e) && e.name !== "pre") {
-      s += "\n";
-    }
   }
+  s += ">";
+  if (isBlockNode(e) && e.name !== "pre") {
+    s += "\n";
+  }
+
   ctx.indentLevel += 1;
 
   let prevChild: Node | null = null;
@@ -213,7 +211,7 @@ function elementNodeToHtmlText(e: Element, ctx: Context): string {
   }
 
   ctx.indentLevel -= 1;
-  if (e.name !== "__root__" && !dtd.auto_closing) {
+  if (!dtd.auto_closing) {
     if (e.name !== "pre") {
       if (isBlockNode(e)) {
         if (needsLineBreak(prevChild)) {

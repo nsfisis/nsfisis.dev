@@ -4,7 +4,6 @@ import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import PostPageEntry from "../components/PostPageEntry.tsx";
 import { Config } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate, PostPage } from "./post.tsx";
@@ -45,7 +44,7 @@ export async function generatePostListPage(
   );
 
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: "/posts/index.html",
     href: "/posts/",

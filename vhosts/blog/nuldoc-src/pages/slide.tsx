@@ -5,7 +5,6 @@ import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import StaticScript from "../components/StaticScript.tsx";
 import { Config, getTagLabel } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { Date, dateToString, Revision } from "../revision.ts";
 import { Slide } from "../slide/slide.ts";
@@ -92,7 +91,7 @@ export async function generateSlidePage(
     "index.html",
   );
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),

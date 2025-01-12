@@ -5,7 +5,6 @@ import PageLayout from "../components/PageLayout.tsx";
 import PostPageEntry from "../components/PostPageEntry.tsx";
 import SlidePageEntry from "../components/SlidePageEntry.tsx";
 import { Config, getTagLabel } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { getPostPublishedDate } from "./post.tsx";
 import { TaggedPage } from "./tagged_page.ts";
@@ -52,7 +51,7 @@ export async function generateTagPage(
   );
 
   return {
-    root: el("__root__", {}, html),
+    root: html,
     renderer: "html",
     destFilePath: `/tags/${tagSlug}/index.html`,
     href: `/tags/${tagSlug}/`,
