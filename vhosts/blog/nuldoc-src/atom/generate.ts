@@ -2,8 +2,8 @@ import { Config } from "../config.ts";
 import { el } from "../dom.ts";
 import { Page } from "../page.ts";
 import { Entry, Feed } from "./types.ts";
-import { PostPage } from "../pages/post.ts";
-import { SlidePage } from "../pages/slide.ts";
+import { PostPage } from "../generators/post.ts";
+import { SlidePage } from "../generators/slide.ts";
 import { dateToRfc3339String } from "../revision.ts";
 
 const BASE_NAME = "atom.xml";
@@ -50,9 +50,8 @@ export function generateFeedPageFromEntries(
     entries: entries_,
   };
 
-  const xml = buildXmlTree(feed);
   return {
-    root: el("__root__", {}, xml),
+    root: buildXmlTree(feed),
     renderer: "xml",
     destFilePath: feedPath,
     href: feedPath,

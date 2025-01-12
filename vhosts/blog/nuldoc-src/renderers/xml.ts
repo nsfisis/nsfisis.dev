@@ -2,7 +2,7 @@ import { Element, forEachChild, Node, Text } from "../dom.ts";
 
 export function renderXml(root: Node): string {
   return `<?xml version="1.0" encoding="utf-8"?>\n` + nodeToXmlText(root, {
-    indentLevel: -1,
+    indentLevel: 0,
   });
 }
 
@@ -14,7 +14,6 @@ type Dtd = { type: "block" | "inline" };
 
 function getDtd(name: string): Dtd {
   switch (name) {
-    case "__root__":
     case "feed":
     case "entry":
     case "author":
@@ -64,24 +63,23 @@ function encodeSpecialCharacters(s: string): string {
 
 function elementNodeToXmlText(e: Element, ctx: Context): string {
   let s = "";
-  if (e.name !== "__root__") {
-    s += indent(ctx);
-    s += `<${e.name}`;
-    const attributes = getElementAttributes(e);
-    if (attributes.length > 0) {
-      s += " ";
-      for (let i = 0; i < attributes.length; i++) {
-        const [name, value] = attributes[i];
-        s += `${name}="${encodeSpecialCharacters(value)}"`;
-        if (i !== attributes.length - 1) {
-          s += " ";
-        }
+
+  s += indent(ctx);
+  s += `<${e.name}`;
+  const attributes = getElementAttributes(e);
+  if (attributes.length > 0) {
+    s += " ";
+    for (let i = 0; i < attributes.length; i++) {
+      const [name, value] = attributes[i];
+      s += `${name}="${encodeSpecialCharacters(value)}"`;
+      if (i !== attributes.length - 1) {
+        s += " ";
       }
     }
-    s += ">";
-    if (isBlockNode(e)) {
-      s += "\n";
-    }
+  }
+  s += ">";
+  if (isBlockNode(e)) {
+    s += "\n";
   }
   ctx.indentLevel += 1;
 
@@ -90,13 +88,12 @@ function elementNodeToXmlText(e: Element, ctx: Context): string {
   });
 
   ctx.indentLevel -= 1;
-  if (e.name !== "__root__") {
-    if (isBlockNode(e)) {
-      s += indent(ctx);
-    }
-    s += `</${e.name}>`;
-    s += "\n";
+  if (isBlockNode(e)) {
+    s += indent(ctx);
   }
+  s += `</${e.name}>`;
+  s += "\n";
+
   return s;
 }
 
