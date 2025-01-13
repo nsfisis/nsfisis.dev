@@ -1,5 +1,5 @@
 import { Element, forEachChild, Node, Text } from "../dom.ts";
-import { DocBookError } from "../errors.ts";
+import { NuldocError } from "../errors.ts";
 
 export function renderHtml(root: Node): string {
   return `<!DOCTYPE html>\n` + nodeToHtmlText(root, {
@@ -108,7 +108,7 @@ function getDtd(name: string): Dtd {
     case "ul":
       return { type: "block" };
     default:
-      throw new DocBookError(`[html.write] Unknown element name: ${name}`);
+      throw new NuldocError(`[html.write] Unknown element name: ${name}`);
   }
 }
 

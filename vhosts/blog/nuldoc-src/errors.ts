@@ -1,6 +1,6 @@
-export class DocBookError extends Error {
+export class NuldocError extends Error {
   static {
-    this.prototype.name = "DocBookError";
+    this.prototype.name = "NuldocError";
   }
 }
 

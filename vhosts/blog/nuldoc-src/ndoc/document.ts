@@ -1,6 +1,6 @@
 import { join } from "std/path/mod.ts";
 import { Config } from "../config.ts";
-import { DocBookError } from "../errors.ts";
+import { NuldocError } from "../errors.ts";
 import { Revision, stringToDate } from "../revision.ts";
 import { Element, findFirstChildElement } from "../dom.ts";
 import { z } from "zod/mod.ts";
@@ -40,8 +40,8 @@ export function createNewDocumentFromRootElement(
 ): Document {
   const article = findFirstChildElement(root, "article");
   if (!article) {
-    throw new DocBookError(
-      `[docbook.new] <article> element not found`,
+    throw new NuldocError(
+      `[nuldoc.new] <article> element not found`,
     );
   }
 

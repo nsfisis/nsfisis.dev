@@ -1,7 +1,7 @@
 // @deno-types="../types/highlight-js.d.ts"
 import hljs from "highlight.js";
 import { Document } from "./document.ts";
-import { DocBookError } from "../errors.ts";
+import { NuldocError } from "../errors.ts";
 import {
   addClass,
   Element,
@@ -86,8 +86,8 @@ function setSectionTitleAnchor(doc: Document) {
     if (c.name === "h") {
       const currentSection = sectionStack[sectionStack.length - 1];
       if (!currentSection) {
-        throw new DocBookError(
-          "[docbook.tohtml] <h> element must be inside <section>",
+        throw new NuldocError(
+          "[nuldoc.tohtml] <h> element must be inside <section>",
         );
       }
       const sectionId = currentSection.attributes.get("id");
