@@ -20,7 +20,18 @@ declare global {
       // deno-lint-ignore no-explicit-any
       | ((props: any) => FunctionComponentResult);
 
+    // TODO: HTML 用の element と XML 用の element を分ける
     interface IntrinsicElements {
+      // XML (Atom)
+      author: IntrinsicElementType;
+      entry: IntrinsicElementType;
+      feed: IntrinsicElementType & { xmlns: string };
+      id: IntrinsicElementType;
+      name: IntrinsicElementType;
+      published: IntrinsicElementType;
+      summary: IntrinsicElementType;
+      updated: IntrinsicElementType;
+      // HTML
       a: IntrinsicElementType & { href?: string };
       article: IntrinsicElementType;
       body: IntrinsicElementType;

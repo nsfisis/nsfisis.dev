@@ -1,20 +1,40 @@
 import { Config } from "../config.ts";
-import { el } from "../dom.ts";
 import { Page } from "../page.ts";
-import { Entry, Feed } from "./types.ts";
 import { PostPage } from "../generators/post.ts";
 import { SlidePage } from "../generators/slide.ts";
 import { dateToRfc3339String } from "../revision.ts";
+import AtomPage from "../pages/AtomPage.tsx";
+import { renderToDOM } from "../jsx/render.ts";
+
+export type Feed = {
+  author: string;
+  icon: string;
+  id: string;
+  linkToSelf: string;
+  linkToAlternate: string;
+  title: string;
+  updated: string;
+  entries: Entry[];
+};
+
+export type Entry = {
+  id: string;
+  linkToAlternate: string;
+  published: string;
+  summary: string;
+  title: string;
+  updated: string;
+};
 
 const BASE_NAME = "atom.xml";
 
-export function generateFeedPageFromEntries(
+export async function generateFeedPageFromEntries(
   alternateLink: string,
   feedSlug: string,
   feedTitle: string,
   entries: Array<PostPage | SlidePage>,
   config: Config,
-): Page {
+): Promise<Page> {
   const entries_: Entry[] = [];
   for (const entry of entries) {
     entries_.push({
@@ -51,35 +71,9 @@ export function generateFeedPageFromEntries(
   };
 
   return {
-    root: buildXmlTree(feed),
+    root: await renderToDOM(AtomPage({ feed: feed })),
     renderer: "xml",
     destFilePath: feedPath,
     href: feedPath,
   };
-}
-
-function buildXmlTree(feed: Feed) {
-  return el(
-    "feed",
-    { xmlns: "http://www.w3.org/2005/Atom" },
-    el("id", {}, feed.id),
-    el("title", {}, feed.title),
-    el("link", { rel: "alternate", href: feed.linkToAlternate }),
-    el("link", { rel: "self", href: feed.linkToSelf }),
-    el("author", {}, el("name", {}, feed.author)),
-    el("updated", {}, feed.updated),
-    ...feed.entries.map(
-      (entry) =>
-        el(
-          "entry",
-          {},
-          el("id", {}, entry.id),
-          el("link", { rel: "alternate", href: entry.linkToAlternate }),
-          el("title", {}, entry.title),
-          el("summary", {}, entry.summary),
-          el("published", {}, entry.published),
-          el("updated", {}, entry.updated),
-        ),
-    ),
-  );
 }
