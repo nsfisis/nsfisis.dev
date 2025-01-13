@@ -1,6 +1,24 @@
-import { Config } from "../config.ts";
 import { SlideError } from "../errors.ts";
 import { Revision, stringToDate } from "../revision.ts";
+import { z } from "zod/mod.ts";
+
+export const SlideMetadataSchema = z.object({
+  slide: z.object({
+    uuid: z.string(),
+    title: z.string(),
+    event: z.string(),
+    talkType: z.string(),
+    link: z.string(),
+    tags: z.array(z.string()),
+    revisions: z.array(z.object({
+      date: z.string(),
+      remark: z.string(),
+      isInternal: z.boolean().optional(),
+    })),
+  }),
+});
+
+export type SlideMetadata = z.infer<typeof SlideMetadataSchema>;
 
 export type Slide = {
   sourceFilePath: string;
@@ -13,96 +31,15 @@ export type Slide = {
   revisions: Revision[];
 };
 
-type Toml = {
-  slide: {
-    uuid: string;
-    title: string;
-    event: string;
-    talkType: string;
-    link: string;
-    tags: string[];
-    revisions: {
-      date: string;
-      remark: string;
-    }[];
-  };
-};
-
-export function createNewSlideFromTomlRootObject(
-  root: Toml,
+export function createNewSlideFromMetadata(
+  { slide }: SlideMetadata,
   sourceFilePath: string,
-  _config: Config,
 ): Slide {
-  const slide = root.slide ?? null;
-  if (root.slide === undefined) {
-    throw new SlideError(
-      `[slide.new] 'slide' field not found`,
-    );
-  }
-
-  const uuid = slide.uuid ?? null;
-  if (!uuid) {
-    throw new SlideError(
-      `[slide.new] 'slide.uuid' field not found`,
-    );
-  }
-
-  const title = slide.title ?? null;
-  if (!title) {
-    throw new SlideError(
-      `[slide.new] 'slide.title' field not found`,
-    );
-  }
-
-  const event = slide.event ?? null;
-  if (!event) {
-    throw new SlideError(
-      `[slide.new] 'slide.event' field not found`,
-    );
-  }
-
-  const talkType = slide.talkType ?? null;
-  if (!talkType) {
-    throw new SlideError(
-      `[slide.new] 'slide.talkType' field not found`,
-    );
-  }
-
-  const link = slide.link ?? null;
-  if (!link) {
-    throw new SlideError(
-      `[slide.new] 'slide.link' field not found`,
-    );
-  }
-
-  const tags = slide.tags ?? [];
-
-  const revisions = slide.revisions ?? null;
-  if (!revisions) {
-    throw new SlideError(
-      `[slide.new] 'slide.revisions' field not found`,
-    );
-  }
-  if (revisions.length === 0) {
-    throw new SlideError(
-      `[slide.new] 'slide.revisions' field not found`,
-    );
-  }
-  const revisions_ = revisions.map(
-    (x: { date: string; remark: string; isInternal?: boolean }, i: number) => {
-      const date = x.date ?? null;
-      if (!date) {
-        throw new SlideError(
-          `[slide.new] 'date' field not found`,
-        );
-      }
-      const remark = x.remark ?? null;
-      if (!remark) {
-        throw new SlideError(
-          `[slide.new] 'remark' field not found`,
-        );
-      }
-      const isInternal = x.isInternal ?? false;
+  const revisions = slide.revisions.map(
+    (rev, i) => {
+      const date = rev.date;
+      const remark = rev.remark;
+      const isInternal = rev.isInternal ?? false;
       return {
         number: i + 1,
         date: stringToDate(date),
@@ -111,15 +48,20 @@ export function createNewSlideFromTomlRootObject(
       };
     },
   );
+  if (revisions.length === 0) {
+    throw new SlideError(
+      `[slide.new] 'slide.revisions' field is empty`,
+    );
+  }
 
   return {
     sourceFilePath: sourceFilePath,
-    uuid: uuid,
-    title: title,
-    event: event,
-    talkType: talkType,
-    slideLink: link,
-    tags: tags,
-    revisions: revisions_,
+    uuid: slide.uuid,
+    title: slide.title,
+    event: slide.event,
+    talkType: slide.talkType,
+    slideLink: slide.link,
+    tags: slide.tags,
+    revisions: revisions,
   };
 }

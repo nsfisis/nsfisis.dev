@@ -109,7 +109,7 @@ async function parseSlides(
   const slides = [];
   for (const slideFile of slideFiles) {
     slides.push(
-      await generateSlidePage(await parseSlideFile(slideFile, config), config),
+      await generateSlidePage(await parseSlideFile(slideFile), config),
     );
   }
   return slides;
