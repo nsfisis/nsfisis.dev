@@ -78,24 +78,3 @@ export function forEachChildRecursively(e: Element, f: (n: Node) => void) {
   };
   forEachChild(e, g);
 }
-
-function makeTextNode(content: string): Text {
-  return {
-    kind: "text",
-    content: content,
-    raw: false,
-  };
-}
-
-export function el(
-  name: string,
-  attrs: Record<string, string>,
-  ...children: (Node | string)[]
-): Element {
-  return {
-    kind: "element",
-    name: name,
-    attributes: new Map(Object.entries(attrs)),
-    children: children.map((n) => typeof n === "string" ? makeTextNode(n) : n),
-  };
-}
