@@ -27,7 +27,7 @@ export default function toHtml(doc: Document): Document {
 }
 
 function removeUnnecessaryTextNode(doc: Document) {
-  const g = (n: Node) => {
+  forEachChildRecursively(doc.root, (n) => {
     if (n.kind !== "element") {
       return;
     }
@@ -52,10 +52,7 @@ function removeUnnecessaryTextNode(doc: Document) {
         changed = true;
       }
     }
-
-    forEachChild(n, g);
-  };
-  forEachChild(doc.root, g);
+  });
 }
 
 function transformSectionIdAttribute(doc: Document) {
