@@ -24,10 +24,7 @@ remark = "-f オプションについて追記"
       $ term-banner 'Hello, World!' 'こんにちは、' '世界！'
       ]]>
     </codeblock>
-    <p>
-      image::https://raw.githubusercontent.com/nsfisis/term-banner/main/screenshot.png[term-banner
-      のスクリーンショット]
-    </p>
+    <img src="/posts/2022-04-24/term-banner-write-tool-showing-banner-in-terminal/screenshot.png" alt="term-banner が動作している様子のスクリーンショット"></img>
     <p>
       コマンドライン引数として渡した文字列をターミナルに大きく表示する。
     </p>
@@ -38,7 +35,7 @@ remark = "-f オプションについて追記"
   <section id="motivation">
     <h>Motivation</h>
     <p>
-      以前、https://github.com/nsfisis/big-clock-mode[big-clock-mode]
+      以前、<a href="https://github.com/nsfisis/big-clock-mode"><code>big-clock-mode</code></a>
       という似たようなプログラムを書いた。 これは tmux の <code>:clock-mode</code>
       コマンドに着想を得たもので、<code>:clock-mode</code>
       よりも大きく現在時刻を表示する。
@@ -87,8 +84,7 @@ remark = "-f オプションについて追記"
     <h>フォント</h>
     <p>
       フリーの 8x8
-      ビットマップフォントである、https://littlelimit.net/misaki.htm[美咲フォント
-      2021-05-05a 版] を使わせていただいた。
+      ビットマップフォントである、<a href="https://littlelimit.net/misaki.htm">美咲フォント 2021-05-05a 版</a> を使わせていただいた。
     </p>
     <p>
       はじめは自分でポチポチ打っていたのだが、「き」くらいまでやって挫折した。

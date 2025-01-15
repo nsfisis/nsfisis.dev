@@ -101,7 +101,7 @@ remark = "Qiita から移植"
     が返ってくることを確認済み。
   </p>
   <p>
-    この表にない主要な処理系として、https://mruby.org[mruby] は <code>'mruby'</code>
+    この表にない主要な処理系として、<a href="https://mruby.org">mruby</a> は <code>'mruby'</code>
     を返す。
   </p>
   <p>
