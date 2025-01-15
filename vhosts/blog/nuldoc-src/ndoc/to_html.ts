@@ -15,6 +15,7 @@ import {
 
 export default function toHtml(doc: Document): Document {
   removeUnnecessaryTextNode(doc);
+  transformLinkLikeToAnchorElement(doc);
   transformSectionIdAttribute(doc);
   setSectionTitleAnchor(doc);
   transformSectionTitleElement(doc);
@@ -52,6 +53,44 @@ function removeUnnecessaryTextNode(doc: Document) {
         changed = true;
       }
     }
+  });
+}
+
+function transformLinkLikeToAnchorElement(doc: Document) {
+  forEachChildRecursively(doc.root, (n) => {
+    if (
+      n.kind !== "element" || n.name === "a" || n.name === "code" ||
+      n.name === "codeblock"
+    ) {
+      return;
+    }
+
+    const newChildren: Node[] = [];
+    for (const child of n.children) {
+      if (child.kind !== "text") {
+        newChildren.push(child);
+        continue;
+      }
+      let restContent = child.content;
+      while (restContent !== "") {
+        const match = /^(.*?)(https?:\/\/[^ \n]+)(.*)$/s.exec(restContent);
+        if (!match) {
+          newChildren.push({ kind: "text", content: restContent, raw: false });
+          restContent = "";
+          break;
+        }
+        const [_, prefix, url, suffix] = match;
+        newChildren.push({ kind: "text", content: prefix, raw: false });
+        newChildren.push({
+          kind: "element",
+          name: "a",
+          attributes: new Map([["href", url]]),
+          children: [{ kind: "text", content: url, raw: false }],
+        });
+        restContent = suffix;
+      }
+    }
+    n.children = newChildren;
   });
 }
 

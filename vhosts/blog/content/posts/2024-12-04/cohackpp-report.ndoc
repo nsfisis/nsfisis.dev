@@ -84,7 +84,7 @@ remark = "「育てた」枠・「育てられた」枠を勘違いして逆に�
   <section id="congrats">
     <h>ご結婚おめでとうございます</h>
     <p>
-      <a href="https://github.com/nsfisis/cohackpp/blob/main/congrats.php">https://github.com/nsfisis/cohackpp/blob/main/congrats.php</a>
+      https://github.com/nsfisis/cohackpp/blob/main/congrats.php
     </p>
     <codeblock language="php">
       <![CDATA[

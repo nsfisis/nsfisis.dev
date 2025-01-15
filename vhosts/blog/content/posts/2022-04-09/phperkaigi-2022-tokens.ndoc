@@ -27,7 +27,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
       3問作成した。この記事では、これらの問題の解説をおこなう。
     </p>
     <p>
-      リポジトリはこちら: <a href="https://github.com/nsfisis/PHPerKaigi2022-tokens">https://github.com/nsfisis/PHPerKaigi2022-tokens</a>
+      リポジトリはこちら: https://github.com/nsfisis/PHPerKaigi2022-tokens
     </p>
   </section>
   <section id="q1-brainfuck">
@@ -128,7 +128,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           Wikipedia の該当ページを読んだ方がよい。
         </p>
         <p>
-          <a href="https://ja.wikipedia.org/wiki/Brainfuck">https://ja.wikipedia.org/wiki/Brainfuck</a>
+          https://ja.wikipedia.org/wiki/Brainfuck
         </p>
         <p>
           なお、brainf*ck プログラムを普通の書き方で書くと、次のようになる。
@@ -160,7 +160,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           ]]>
         </codeblock>
         <p>
-          実行結果はこちら: <a href="https://ideone.com/22VWmb">https://ideone.com/22VWmb</a>
+          実行結果はこちら: https://ideone.com/22VWmb
         </p>
         <p>
           それぞれの絵文字で表された関数が、各命令に対応している。

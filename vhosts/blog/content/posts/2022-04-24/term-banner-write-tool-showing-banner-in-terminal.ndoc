@@ -29,7 +29,7 @@ remark = "-f オプションについて追記"
       コマンドライン引数として渡した文字列をターミナルに大きく表示する。
     </p>
     <p>
-      リポジトリはこちら: <a href="https://github.com/nsfisis/term-banner">https://github.com/nsfisis/term-banner</a>
+      リポジトリはこちら: https://github.com/nsfisis/term-banner
     </p>
   </section>
   <section id="motivation">

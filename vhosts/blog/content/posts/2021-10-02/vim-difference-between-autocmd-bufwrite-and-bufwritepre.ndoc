@@ -14,7 +14,7 @@ remark = "Qiita から移植"
 <article>
   <note>
     この記事は Qiita から移植してきたものです。
-    元 URL: <a href="https://qiita.com/nsfisis/items/79ab4db8564032de0b25">https://qiita.com/nsfisis/items/79ab4db8564032de0b25</a>
+    元 URL: https://qiita.com/nsfisis/items/79ab4db8564032de0b25
   </note>
   <section id="tl-dr">
     <h>TL; DR</h>
@@ -61,7 +61,7 @@ remark = "Qiita から移植"
         の名前と内部で使われている整数値とのマッピングを定義している箇所である。見ての通り、上でエイリアスではないかと述べた3組には、それぞれ同じ内部値が使われている。
       </p>
       <p>
-        <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86</a>
+        https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86
       </p>
       <codeblock language="c">
         <![CDATA[
@@ -70,7 +70,7 @@ remark = "Qiita から移植"
         ]]>
       </codeblock>
       <p>
-        <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97</a>
+        https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97
       </p>
       <codeblock language="c">
         <![CDATA[
@@ -80,7 +80,7 @@ remark = "Qiita から移植"
         ]]>
       </codeblock>
       <p>
-        <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105</a>
+        https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105
       </p>
       <codeblock language="c">
         <![CDATA[
@@ -97,7 +97,7 @@ remark = "Qiita から移植"
         で書かれている。以下にある通り、はっきり <code>aliases</code> と書かれている。
       </p>
       <p>
-        <a href="https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124">https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124</a>
+        https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124
       </p>
       <codeblock language="lua">
         <![CDATA[

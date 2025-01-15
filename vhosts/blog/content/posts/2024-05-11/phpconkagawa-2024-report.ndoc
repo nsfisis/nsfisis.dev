@@ -27,7 +27,7 @@ remark = "公開"
         泥まみれの技術革新: あなたの[ PHPバージョンアップ | 新フレームワーク採用 | アーキテクチャ刷新 | … ]を後押しするために by nrslib
         <ul>
           <li>
-            fortee URL: <a href="https://fortee.jp/phpconkagawa-2024/proposal/7f4622af-03b6-4b83-a0ef-e1cfc7b7c930">https://fortee.jp/phpconkagawa-2024/proposal/7f4622af-03b6-4b83-a0ef-e1cfc7b7c930</a>
+            fortee URL: https://fortee.jp/phpconkagawa-2024/proposal/7f4622af-03b6-4b83-a0ef-e1cfc7b7c930
           </li>
           <li>
             感想: ちょうどとあるマイグレーション作業をしているので、頷きながら拝聴しました。結局は誰しも移行作業は根気と腕力なのだということに勇気をもらえました。
@@ -38,7 +38,7 @@ remark = "公開"
         PHP 9 に備えよ - 動的プロパティ、どうすればいぃ？ by 荒瀬 泰輔
         <ul>
           <li>
-            fortee URL: <a href="https://fortee.jp/phpconkagawa-2024/proposal/039ebb21-d104-4df2-86bb-be2680979b7b">https://fortee.jp/phpconkagawa-2024/proposal/039ebb21-d104-4df2-86bb-be2680979b7b</a>
+            fortee URL: https://fortee.jp/phpconkagawa-2024/proposal/039ebb21-d104-4df2-86bb-be2680979b7b
           </li>
           <li>
             感想: これも上と同じく移行作業の話ではあり、結局のところは「頑張って地道にやっていく」しかないところもあります (とはいえこちらは静的解析である程度潰せますが)。PHP 言語のコミュニティ全体で頑張っていきましょう。
@@ -49,7 +49,7 @@ remark = "公開"
         1人プロ・ペアプロ・モブプロの効果的な使い分け by まきまき
         <ul>
           <li>
-            fortee URL: <a href="https://fortee.jp/phpconkagawa-2024/proposal/db3e9634-4a79-46c1-84fd-8ffa4d495a13">https://fortee.jp/phpconkagawa-2024/proposal/db3e9634-4a79-46c1-84fd-8ffa4d495a13</a>
+            fortee URL: https://fortee.jp/phpconkagawa-2024/proposal/db3e9634-4a79-46c1-84fd-8ffa4d495a13
           </li>
           <li>
             感想: 今会社でペアプロを部分的に取り入れているものの、迷うところが多く、楽しみにしていた発表です。まずは何か一つ変えないことには始まらないので、発表から得たヒントを自分たちのチームに反映すべく、何かやりかたを変えてみる予定です。
@@ -60,7 +60,7 @@ remark = "公開"
         mb_trim関数を作りました - PHPに新しい関数を追加しました - by てきめん
         <ul>
           <li>
-            fortee URL: <a href="https://fortee.jp/phpconkagawa-2024/proposal/0ec36f50-c4b7-4aa4-abef-006f8bab3931">https://fortee.jp/phpconkagawa-2024/proposal/0ec36f50-c4b7-4aa4-abef-006f8bab3931</a>
+            fortee URL: https://fortee.jp/phpconkagawa-2024/proposal/0ec36f50-c4b7-4aa4-abef-006f8bab3931
           </li>
           <li>
             感想: RFC を必要とするような機能追加のプロセスを日本語で解説する資料がどんどんと増えていくのは、ハードルを下げるという意味で非常にありがたいです。私も以前から出そう出そうと考えている書きかけの RFC があるのですが、具体的なプロセスが明示されるとやはりやる気になりますね。
@@ -71,7 +71,7 @@ remark = "公開"
         (「PHPカンファレンス小田原2024」を実行委員長がふりかえる by asumikam)
         <ul>
           <li>
-            fortee URL: <a href="https://fortee.jp/phpconkagawa-2024/proposal/c1efd828-72c9-4719-93f7-2ca3f8f20ac1">https://fortee.jp/phpconkagawa-2024/proposal/c1efd828-72c9-4719-93f7-2ca3f8f20ac1</a>
+            fortee URL: https://fortee.jp/phpconkagawa-2024/proposal/c1efd828-72c9-4719-93f7-2ca3f8f20ac1
           </li>
           <li>
             備考: ちょっとしたトラブルにより午前中の発表が見られなかったので、生で拝聴したわけではなく、スライドを拝見して感想を書いています。
