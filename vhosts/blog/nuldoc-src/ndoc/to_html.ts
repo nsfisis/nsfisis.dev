@@ -21,6 +21,7 @@ export default function toHtml(doc: Document): Document {
   transformSectionTitleElement(doc);
   transformCodeBlockElement(doc);
   transformNoteElement(doc);
+  addAttributesToExternalLinkElement(doc);
   setDefaultLangAttribute(doc);
   traverseFootnotes(doc);
   highlightPrograms(doc);
@@ -208,6 +209,22 @@ function transformNoteElement(doc: Document) {
       labelElement,
       contentElement,
     ];
+  });
+}
+
+function addAttributesToExternalLinkElement(doc: Document) {
+  forEachChildRecursively(doc.root, (n) => {
+    if (n.kind !== "element" || n.name !== "a") {
+      return;
+    }
+
+    const href = n.attributes.get("href") ?? "";
+    if (!href.startsWith("http")) {
+      return;
+    }
+    n.attributes
+      .set("target", "_blank")
+      .set("rel", "noreferrer");
   });
 }
 

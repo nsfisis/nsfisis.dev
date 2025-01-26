@@ -69,7 +69,7 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は、2022-11-17 に<a href="https://www.dgcircus.com/">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。 
+               この記事は、2022-11-17 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。 
             </div>
           </div>
            
@@ -187,7 +187,7 @@ set +o pipefail</code></pre>
           <section id="section--where-pipefail-is-enabled">
             <h2><a href="#section--where-pipefail-is-enabled">どこで <code>pipefail</code> が on になるか</a></h2> 
             <p>
-              <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。 そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner">GitLab Runner のリポジトリ</a> を調査したところ、<a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。 
+              <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。 そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner" rel="noreferrer" target="_blank">GitLab Runner のリポジトリ</a> を調査したところ、<a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276" rel="noreferrer" target="_blank">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。 
             </p>
              
             <pre class="highlight" language="go"><code class="highlight"><span class="hljs-comment">// pipefail オプションが存在しない環境にも対応するため、</span>

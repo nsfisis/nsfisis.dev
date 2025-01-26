@@ -44,12 +44,22 @@ export default function AboutPage(
                 <h2>アカウント</h2>
                 <ul>
                   <li>
-                    <a href="https://twitter.com/nsfisis">
+                    <a
+                      href="https://twitter.com/nsfisis"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Twitter (現 𝕏): @nsfisis
                     </a>
                   </li>
                   <li>
-                    <a href="https://github.com/nsfisis">GitHub: @nsfisis</a>
+                    <a
+                      href="https://github.com/nsfisis"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub: @nsfisis
+                    </a>
                   </li>
                 </ul>
               </section>
@@ -58,7 +68,11 @@ export default function AboutPage(
                 <ul>
                   <li>
                     {"2021-01～現在: "}
-                    <a href="https://www.dgcircus.com/">
+                    <a
+                      href="https://www.dgcircus.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       デジタルサーカス株式会社
                     </a>
                   </li>

@@ -64,7 +64,7 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2> 
             <p>
-              <a href="https://emscripten.org/">Emscripten</a> を用いて <a href="https://github.com/php/php-src">PHP の処理系</a>を <a href="https://developer.mozilla.org/docs/WebAssembly">WebAssembly</a> にコンパイルした。機能をある程度絞ることで、思ったよりも簡単に実現できたので、備忘録として記しておく。 
+              <a href="https://emscripten.org/" rel="noreferrer" target="_blank">Emscripten</a> を用いて <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">PHP の処理系</a>を <a href="https://developer.mozilla.org/docs/WebAssembly" rel="noreferrer" target="_blank">WebAssembly</a> にコンパイルした。機能をある程度絞ることで、思ったよりも簡単に実現できたので、備忘録として記しておく。 
             </p>
              
             <p>
@@ -182,13 +182,13 @@
               </p>
                
               <p>
-                 まずは <a href="https://hub.docker.com/r/emscripten/emsdk">Emscripten 公式が提供している Docker イメージ</a>を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。 
+                 まずは <a href="https://hub.docker.com/r/emscripten/emsdk" rel="noreferrer" target="_blank">Emscripten 公式が提供している Docker イメージ</a>を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。 
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">FROM</span> emscripten/emsdk:<span class="hljs-number">3.1</span>.<span class="hljs-number">46</span> AS wasm-builder</code></pre>
                
               <p>
-                 次に、<a href="https://github.com/php/php-src">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。 有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。 
+                 次に、<a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。 有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。 
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">RUN</span><span class="language-bash"> git <span class="hljs-built_in">clone</span> --depth=1 --branch=php-8.2.10 https://github.com/php/php-src</span>
@@ -363,7 +363,7 @@ exit code: <span class="hljs-number">0</span></code></pre>
           <section id="section--outro">
             <h2><a href="#section--outro">まとめ</a></h2> 
             <p>
-              <a href="https://github.com/nsfisis/tiny-php.wasm">ここまでをまとめた Git リポジトリ</a>を用意した。 簡単にコンパイルできるので、興味があれば試してみてほしい。 
+              <a href="https://github.com/nsfisis/tiny-php.wasm" rel="noreferrer" target="_blank">ここまでをまとめた Git リポジトリ</a>を用意した。 簡単にコンパイルできるので、興味があれば試してみてほしい。 
             </p>
           </section>
            
@@ -371,23 +371,23 @@ exit code: <span class="hljs-number">0</span></code></pre>
             <h2><a href="#section--references">参考リンク</a></h2> 
             <ul>
               <li>
-                <a href="https://github.com/php/php-src">php/php-src: ビルドの方法について</a>
+                <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src: ビルドの方法について</a>
               </li>
                
               <li>
-                <a href="https://emscripten.org/docs/getting_started/Tutorial.html">Emscripten: チュートリアル</a>
+                <a href="https://emscripten.org/docs/getting_started/Tutorial.html" rel="noreferrer" target="_blank">Emscripten: チュートリアル</a>
               </li>
                
               <li>
-                <a href="https://emscripten.org/docs/compiling/Building-Projects.html#building-projects">Emscripten: ビルドの基本</a>
+                <a href="https://emscripten.org/docs/compiling/Building-Projects.html#building-projects" rel="noreferrer" target="_blank">Emscripten: ビルドの基本</a>
               </li>
                
               <li>
-                <a href="https://emscripten.org/docs/tools_reference/emcc.html#emccdoc">Emscripten: <code>emcc</code> などのリファレンス</a>
+                <a href="https://emscripten.org/docs/tools_reference/emcc.html#emccdoc" rel="noreferrer" target="_blank">Emscripten: <code>emcc</code> などのリファレンス</a>
               </li>
                
               <li>
-                <a href="https://emscripten.org/docs/api_reference/module.html#module">Emscripten: 生成される JavaScript の API</a>
+                <a href="https://emscripten.org/docs/api_reference/module.html#module" rel="noreferrer" target="_blank">Emscripten: 生成される JavaScript の API</a>
               </li>
             </ul>
           </section>

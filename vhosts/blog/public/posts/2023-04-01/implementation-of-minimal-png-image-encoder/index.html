@@ -235,7 +235,7 @@
               </ol>
                
               <p>
-                 CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている (<a href="https://www.w3.org/TR/png/#D-CRCAppendix">D. Sample CRC implementation</a>) ので、これを Go に移植する。 
+                 CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている (<a href="https://www.w3.org/TR/png/#D-CRCAppendix" rel="noreferrer" target="_blank">D. Sample CRC implementation</a>) ので、これを Go に移植する。 
               </p>
                
               <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">var</span> (
@@ -423,7 +423,7 @@
                 </p>
                  
                 <p>
-                   Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている (<a href="https://www.rfc-editor.org/rfc/rfc1950#section-9">9. Appendix: Sample code</a>) ので、Go に移植する。 
+                   Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている (<a href="https://www.rfc-editor.org/rfc/rfc1950#section-9" rel="noreferrer" target="_blank">9. Appendix: Sample code</a>) ので、Go に移植する。 
                 </p>
                  
                 <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">const</span> adler32Base = <span class="hljs-number">65521</span>
@@ -732,11 +732,11 @@
             <h2><a href="#section--references">参考</a></h2> 
             <ul>
               <li>
-                <a href="https://www.w3.org/TR/png">Portable Network Graphics (PNG) Specification (Third Edition)</a>
+                <a href="https://www.w3.org/TR/png" rel="noreferrer" target="_blank">Portable Network Graphics (PNG) Specification (Third Edition)</a>
               </li>
                
               <li>
-                <a href="https://www.rfc-editor.org/rfc/rfc1950">ZLIB Compressed Data Format Specification version 3.3</a>
+                <a href="https://www.rfc-editor.org/rfc/rfc1950" rel="noreferrer" target="_blank">ZLIB Compressed Data Format Specification version 3.3</a>
               </li>
             </ul>
           </section>

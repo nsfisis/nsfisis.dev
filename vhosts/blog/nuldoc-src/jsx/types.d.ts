@@ -32,7 +32,11 @@ declare global {
       summary: IntrinsicElementType;
       updated: IntrinsicElementType;
       // HTML
-      a: IntrinsicElementType & { href?: string };
+      a: IntrinsicElementType & {
+        href?: string;
+        rel?: "noreferrer";
+        target?: "_blank";
+      };
       article: IntrinsicElementType;
       body: IntrinsicElementType;
       button: IntrinsicElementType;
