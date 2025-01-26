@@ -59,6 +59,8 @@ function getDtd(name: string): Dtd {
       return { type: "block" };
     case "html":
       return { type: "block" };
+    case "i":
+      return { type: "inline" };
     case "img":
       return { type: "block" };
     case "li":

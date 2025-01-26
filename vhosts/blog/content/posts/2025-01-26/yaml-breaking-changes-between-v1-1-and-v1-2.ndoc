@@ -1,0 +1,87 @@
+---
+[article]
+uuid = "da2a0cec-74b3-4c5e-b2a2-47fe79ef49f9"
+title = "【YAML】YAML 1.1 と YAML 1.2 の主な破壊的変更"
+description = "データ記述言語 YAML におけるバージョン 1.1 と 1.2 の主な破壊的変更をまとめた。"
+tags = [
+  "yaml",
+]
+
+[[article.revisions]]
+date = "2021-06-30"
+remark = "デジタルサーカス株式会社の社内記事として公開"
+isInternal = true
+
+[[article.revisions]]
+date = "2025-01-26"
+remark = "ブログ記事として一般公開"
+---
+<article>
+  <note>
+    この記事は、2021-06-30 に<a href="https://www.dgcircus.com/">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+  </note>
+  <section id="intro">
+    <h>はじめに</h>
+    <p>
+      データ記述言語の一つ YAML には 1.0、1.1、1.2 のバージョンがある。
+      これらのうち、1.1 と 1.2 の間には無視できない非互換の変更が多く、1.2 に対応していないライブラリもある (Ruby 同梱の <code>yaml</code> など)。
+      この記事では、YAML 1.1 と YAML 1.2 の主な破壊的変更を紹介する (影響範囲が広いものを抜粋しており、すべての非互換を網羅してはいない)。
+    </p>
+    <p>
+      参照した仕様書はこちら: https://yaml.org/spec/1.2.2/ext/changes/
+    </p>
+  </section>
+  <section id="breaking-changes">
+    <h>主な破壊的変更</h>
+    <section id="breaking-changes--boolean-literals">
+      <h>Boolean としてパースされるトークンが <code>true</code> / <code>false</code> とその亜種のみに</h>
+      <p>
+        この変更の影響が最も大きいと思われる。
+        YAML 1.1 では、boolean 値のリテラルとして <code>true</code>、<code>false</code> のほか <code>yes</code>、<code>no</code>、<code>y</code>、<code>n</code>、<code>on</code>、<code>off</code>、それらの大文字バージョンなどが認められていた。
+        YAML 1.2 では、<code>true</code> と <code>false</code>、それらの大文字バージョン (<code>True</code>、<code>TRUE</code>、<code>False</code>、<code>FALSE</code>) のみが boolean としてパースされるようになった。
+      </p>
+    </section>
+    <section id="breaking-changes--octal-literals">
+      <h>八進数リテラルには <code>0o</code> が必須に</h>
+      <p>
+        C 言語などでは、<code>0</code> から始まる数字の列を八進数としてパースする。
+        YAML 1.1 もこれに準じていたが、1.2 からは <code>0o</code> のプレフィクスが必須となった ("o" は "octal" の "o")。
+        プログラミング言語では、Python や Haskell、Swift、Rust などがこの記法を採用している。
+      </p>
+    </section>
+    <section id="breaking-changes--merging">
+      <h><code>&lt;&lt;</code> によるマージが不可能に</h>
+      <p>
+        YAML 1.1 では、<code>&lt;&lt;</code> という文字列をキーに指定することで、マップをマージすることができた。
+      </p>
+      <codeblock language="yaml">
+        <![CDATA[
+        x: &base
+          a: 123
+        # => { "x": { "a": 123 } }
+
+        y:
+          <<: *base
+          b: 456
+        # => { "y": { "a": 123, "b": 456 } }
+        ]]>
+      </codeblock>
+      <p>
+        1.2 からはこれができなくなる。
+      </p>
+    </section>
+    <section id="breaking-changes--number-separator">
+      <h>数字を <code>_</code> で区切るのが禁止に</h>
+      <p>
+        <code>1234567</code> を <code>1_234_567</code> と書けなくなった。
+      </p>
+    </section>
+  </section>
+  <section id="outro">
+    <h>おわりに</h>
+    <p>
+      全体的に、<i>There's more than one way to do it.</i> から <i>There should be one - and preferably only one - obvious way to do it.</i> へ移行しているように思われる。
+      データ記述言語としては望ましい方向性ではないかと感じる。
+    </p>
+  </section>
+</article>
