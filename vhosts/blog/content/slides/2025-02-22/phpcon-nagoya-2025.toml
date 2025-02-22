@@ -1,0 +1,15 @@
+[slide]
+uuid = "9172fbef-c812-4ade-86f5-eaa12c966708"
+title = "PHP 処理系の garbage collection を理解する～メモリはいつ解放されるのか～"
+event = "PHP カンファレンス名古屋 2025"
+talkType = "レギュラートーク (30分)"
+link = "/slides/2025-02-22/phpcon-nagoya-2025/slides.pdf"
+tags = [
+  "conference",
+  "php",
+  "phpcon-nagoya",
+]
+
+[[slide.revisions]]
+date = "2025-02-22"
+remark = "登壇"

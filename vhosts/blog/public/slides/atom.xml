@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-11-30T00:00:00+09:00</updated>
+  <updated>2025-02-22T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:9172fbef-c812-4ade-86f5-eaa12c966708</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-02-22/phpcon-nagoya-2025/"></link>
+    <title>PHP 処理系の garbage collection を理解する～メモリはいつ解放されるのか～</title>
+    <summary>登壇: PHP カンファレンス名古屋 2025 (レギュラートーク (30分))</summary>
+    <published>2025-02-22T00:00:00+09:00</published>
+    <updated>2025-02-22T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:e1ca4664-f6f1-4de2-b4a5-ea2b64006708</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-11-30/cohackpp/"></link>

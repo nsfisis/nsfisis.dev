@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-01-26T00:00:00+09:00</updated>
+  <updated>2025-02-22T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:9172fbef-c812-4ade-86f5-eaa12c966708</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-02-22/phpcon-nagoya-2025/"></link>
+    <title>PHP 処理系の garbage collection を理解する～メモリはいつ解放されるのか～</title>
+    <summary>登壇: PHP カンファレンス名古屋 2025 (レギュラートーク (30分))</summary>
+    <published>2025-02-22T00:00:00+09:00</published>
+    <updated>2025-02-22T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:da2a0cec-74b3-4c5e-b2a2-47fe79ef49f9</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-01-26/yaml-breaking-changes-between-v1-1-and-v1-2/"></link>
