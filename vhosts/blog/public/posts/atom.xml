@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-01-26T00:00:00+09:00</updated>
+  <updated>2025-02-24T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:13174dc7-c1a3-465f-9ba6-14f0bc6f5961</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-02-24/phpcon-nagoya-2025-report/"></link>
+    <title>PHP カンファレンス名古屋 2025 参加レポ</title>
+    <summary>2025-02-22 に開催された、PHP カンファレンス名古屋 2025 に参加した。</summary>
+    <published>2025-02-24T00:00:00+09:00</published>
+    <updated>2025-02-24T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:da2a0cec-74b3-4c5e-b2a2-47fe79ef49f9</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-01-26/yaml-breaking-changes-between-v1-1-and-v1-2/"></link>
