@@ -63,21 +63,21 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/79ab4db8564032de0b25" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/79ab4db8564032de0b25</a> 
+               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/79ab4db8564032de0b25" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/79ab4db8564032de0b25</a> 
             </div>
           </div>
            
           <section id="section--tl-dr">
             <h2><a href="#section--tl-dr">TL; DR</a></h2> 
             <p>
-               違いはない。ただのエイリアス。 
+               違いはない。ただのエイリアス。
             </p>
           </section>
            
           <section id="section--code-reading">
             <h2><a href="#section--code-reading">調査記録</a></h2> 
             <p>
-               Vim の autocmd events には似通った名前のものがいくつかある。大抵は <code>:help</code> に説明があるが、この記事のタイトルにある2つを含めた以下のイベントには、その違いについて説明がない。 
+               Vim の autocmd events には似通った名前のものがいくつかある。大抵は <code>:help</code> に説明があるが、この記事のタイトルにある2つを含めた以下のイベントには、その違いについて説明がない。
             </p>
              
             <ul>
@@ -105,7 +105,7 @@
             </blockquote>
              
             <p>
-               とあり、おそらくは <code>BufAdd</code> のエイリアスであろうということがわかる。他の2組も同様ではないかと予想されるが、確認のため vim と neovim のソースコードを調査した。 
+               とあり、おそらくは <code>BufAdd</code> のエイリアスであろうということがわかる。他の2組も同様ではないかと予想されるが、確認のため vim と neovim のソースコードを調査した。
             </p>
              
             <blockquote>
@@ -117,7 +117,7 @@
             <section id="section--code-reading--vim">
               <h3><a href="#section--code-reading--vim">vim のソースコード</a></h3> 
               <p>
-                 以下は、autocmd events の名前と内部で使われている整数値とのマッピングを定義している箇所である。見ての通り、上でエイリアスではないかと述べた3組には、それぞれ同じ内部値が使われている。 
+                 以下は、autocmd events の名前と内部で使われている整数値とのマッピングを定義している箇所である。見ての通り、上でエイリアスではないかと述べた3組には、それぞれ同じ内部値が使われている。
               </p>
                
               <p>
@@ -147,7 +147,7 @@
             <section id="section--code-reading--neovim">
               <h3><a href="#section--code-reading--neovim">neovim のソースコード</a></h3> 
               <p>
-                 neovim の場合でも同様のマッピングが定義されているが、こちらの場合は Lua で書かれている。以下にある通り、はっきり <code>aliases</code> と書かれている。 
+                 neovim の場合でも同様のマッピングが定義されているが、こちらの場合は Lua で書かれている。以下にある通り、はっきり <code>aliases</code> と書かれている。
               </p>
                
               <p>
@@ -162,7 +162,7 @@ FileEncoding = <span class="hljs-string">&#x27;EncodingChanged&#x27;</span>,
 },</code></pre>
                
               <p>
-                 ところで、上では取り上げなかった <code>FileEncoding</code> だが、これは <code>:help FileEncoding</code> にしっかりと書いてある。 
+                 ところで、上では取り上げなかった <code>FileEncoding</code> だが、これは <code>:help FileEncoding</code> にしっかりと書いてある。
               </p>
                
               <pre class="highlight"><code>                                                              *FileEncoding*
@@ -174,7 +174,7 @@ FileEncoding                    Obsolete.  It still works and is equivalent
           <section id="section--outro">
             <h2><a href="#section--outro">まとめ</a></h2> 
             <p>
-               記事タイトルについて言えば、どちらも変わらないので好きな方を使えばよい。あえて言えば、次のようになるだろう。 
+               記事タイトルについて言えば、どちらも変わらないので好きな方を使えばよい。あえて言えば、次のようになるだろう。
             </p>
              
             <ul>
@@ -216,7 +216,7 @@ FileEncoding                    Obsolete.  It still works and is equivalent
             </ul>
              
             <p>
-               ところでこの調査で知ったのだが、<code>BufRead</code> と <code>BufWrite</code> は上にある通り発火するタイミングが「後」と「前」で対称性がない。可能なら <code>Pre</code>/<code>Post</code> 付きのものを使った方が分かりやすいだろう。 
+               ところでこの調査で知ったのだが、<code>BufRead</code> と <code>BufWrite</code> は上にある通り発火するタイミングが「後」と「前」で対称性がない。可能なら <code>Pre</code>/<code>Post</code> 付きのものを使った方が分かりやすいだろう。
             </p>
           </section>
         </div>

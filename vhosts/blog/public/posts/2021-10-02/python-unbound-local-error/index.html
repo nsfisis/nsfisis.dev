@@ -66,16 +66,16 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/5d733703afcb35bbf399" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/5d733703afcb35bbf399</a> 
+               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/5d733703afcb35bbf399" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/5d733703afcb35bbf399</a> 
             </div>
           </div>
            
           <p>
-             本記事は Python 3.7.6 の動作結果を元にして書かれている。 
+             本記事は Python 3.7.6 の動作結果を元にして書かれている。
           </p>
            
           <p>
-             Python でクロージャを作ろうと、次のようなコードを書いた。 
+             Python でクロージャを作ろうと、次のようなコードを書いた。
           </p>
            
           <pre class="highlight" language="python"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
@@ -87,7 +87,7 @@
 f()</code></pre>
            
           <p>
-             関数 <code>g</code> から 関数 <code>f</code> のスコープ内で定義された変数 <code>x</code> を参照し、それに 1 を足そうとしている。 これを実行すると <code>x += 1</code> の箇所でエラーが発生する。 
+             関数 <code>g</code> から 関数 <code>f</code> のスコープ内で定義された変数 <code>x</code> を参照し、それに 1 を足そうとしている。 これを実行すると <code>x += 1</code> の箇所でエラーが発生する。
           </p>
            
           <blockquote>
@@ -97,7 +97,7 @@ f()</code></pre>
           </blockquote>
            
           <p>
-             local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code> を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。 前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code> を変数宣言のための構文として擬似的に利用している。 
+             local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code> を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code> を変数宣言のための構文として擬似的に利用している。
           </p>
            
           <pre class="highlight" language="python"><code class="highlight"><span class="hljs-comment"># 注: var は正しい Python の文法ではない。上記参照のこと</span>
@@ -112,7 +112,7 @@ f()</code></pre>
   g()</code></pre>
            
           <p>
-             当初の意図を表現するには、次のように書けばよい。 
+             当初の意図を表現するには、次のように書けばよい。
           </p>
            
           <pre class="highlight" language="python"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
@@ -123,7 +123,7 @@ f()</code></pre>
     g()</code></pre>
            
           <p>
-            <code>(*)</code> のように、<code>nonlocal</code> を追加する。これにより一つ外側のスコープ (<code>g</code> の一つ外側 = <code>f</code>) で定義されている <code>x</code> を探しに行くようになる。 
+            <code>(*)</code> のように、<code>nonlocal</code> を追加する。これにより一つ外側のスコープ (<code>g</code> の一つ外側 = <code>f</code>) で定義されている <code>x</code> を探しに行くようになる。
           </p>
         </div>
       </article>

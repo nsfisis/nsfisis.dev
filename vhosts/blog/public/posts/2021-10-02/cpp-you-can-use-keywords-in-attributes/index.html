@@ -66,12 +66,12 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/94090937bcf860cfa93b" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/94090937bcf860cfa93b</a> 
+               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/94090937bcf860cfa93b" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/94090937bcf860cfa93b</a> 
             </div>
           </div>
            
           <p>
-             タイトル落ち。まずはこのコードを見て欲しい。 
+             タイトル落ち。まずはこのコードを見て欲しい。
           </p>
            
           <pre class="highlight" language="cpp"><code class="highlight"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
@@ -105,11 +105,11 @@
           </blockquote>
            
           <p>
-             この記事から得られるものはこれ以上ないので以下は蛇足になる。 
+             この記事から得られるものはこれ以上ないので以下は蛇足になる。
           </p>
            
           <p>
-             別件で cppreference.com の <a href="https://en.cppreference.com/w/cpp/language/identifiers" rel="noreferrer" target="_blank">identifier のページ</a> を読んでいた時、次の文が目に止まった。 
+             別件で cppreference.com の <a href="https://en.cppreference.com/w/cpp/language/identifiers" rel="noreferrer" target="_blank">identifier のページ</a> を読んでいた時、次の文が目に止まった。
           </p>
            
           <blockquote>
@@ -126,22 +126,22 @@
           </blockquote>
            
           <p>
-             キーワードでも属性として指定する場合は非キーワードとして使えるらしい。 実際にやってみる。 
+             キーワードでも属性として指定する場合は非キーワードとして使えるらしい。実際にやってみる。
           </p>
            
           <p>
-             同サイトの <a href="https://en.cppreference.com/w/cpp/keyword" rel="noreferrer" target="_blank">keywords のページ</a> から一覧を拝借し、上のコードが出来上がった (C++17 においてキーワードでないものなど、一部省いている)。 大量の警告 (unknown attribute `〇〇&apos; ignored) がコンパイラから出力されるが、コンパイルできる。 
+             同サイトの <a href="https://en.cppreference.com/w/cpp/keyword" rel="noreferrer" target="_blank">keywords のページ</a> から一覧を拝借し、上のコードが出来上がった (C++17 においてキーワードでないものなど、一部省いている)。 大量の警告 (unknown attribute `〇〇&apos; ignored) がコンパイラから出力されるが、コンパイルできる。
           </p>
            
           <p>
-             上のコードでは <code>[[using]]</code> をコメントアウトしているが、これは <code>using</code> キーワードのみ属性構文の中で意味を持つからであり、このコメントアウトを外すとコンパイルに失敗する。 
+             上のコードでは <code>[[using]]</code> をコメントアウトしているが、これは <code>using</code> キーワードのみ属性構文の中で意味を持つからであり、このコメントアウトを外すとコンパイルに失敗する。
           </p>
            
           <pre class="highlight" language="cpp"><code class="highlight"><span class="hljs-comment">// using の例</span>
 [[<span class="hljs-keyword">using</span> foo: attr1, attr2]] <span class="hljs-type">int</span> x; <span class="hljs-comment">// [[foo::attr1, foo::attr2]] の糖衣構文</span></code></pre>
            
           <p>
-             C++17 の仕様も見てみる (正確には標準化前のドラフト)。 
+             C++17 の仕様も見てみる (正確には標準化前のドラフト)。
           </p>
            
           <p>
@@ -155,7 +155,7 @@
           </blockquote>
            
           <p>
-             「<code>identifier</code> の構文上の要件を満たすキーワードまたは代替トークンが <code>attribute-token</code> に含まれている場合、<code>identifier</code> とみなされる」とある。どうやら間違いないようだ。 
+             「<code>identifier</code> の構文上の要件を満たすキーワードまたは代替トークンが <code>attribute-token</code> に含まれている場合、<code>identifier</code> とみなされる」とある。どうやら間違いないようだ。
           </p>
            
           <p>
@@ -189,7 +189,7 @@
           </ul>
            
           <p>
-             「<code>identifier</code> の構文上の要件を満たさないような代替トークン」はこれらが当てはまると思われる。 
+             「<code>identifier</code> の構文上の要件を満たさないような代替トークン」はこれらが当てはまると思われる。
           </p>
            
           <p>

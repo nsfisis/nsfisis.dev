@@ -64,18 +64,18 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2> 
             <p>
-              <a href="https://emscripten.org/" rel="noreferrer" target="_blank">Emscripten</a> を用いて <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">PHP の処理系</a>を <a href="https://developer.mozilla.org/docs/WebAssembly" rel="noreferrer" target="_blank">WebAssembly</a> にコンパイルした。機能をある程度絞ることで、思ったよりも簡単に実現できたので、備忘録として記しておく。 
+              <a href="https://emscripten.org/" rel="noreferrer" target="_blank">Emscripten</a> を用いて <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">PHP の処理系</a>を <a href="https://developer.mozilla.org/docs/WebAssembly" rel="noreferrer" target="_blank">WebAssembly</a> にコンパイルした。機能をある程度絞ることで、思ったよりも簡単に実現できたので、備忘録として記しておく。
             </p>
              
             <p>
-               なお、この記事では Emscripten や WebAssembly とは何か知っていることを前提とする。 
+               なお、この記事では Emscripten や WebAssembly とは何か知っていることを前提とする。
             </p>
           </section>
            
           <section id="section--version">
             <h2><a href="#section--version">バージョン情報</a></h2> 
             <p>
-               この記事中で使用するソフトウェア等のバージョンを記載する。 
+               この記事中で使用するソフトウェア等のバージョンを記載する。
             </p>
              
             <ul>
@@ -101,14 +101,14 @@
             </ul>
              
             <p>
-               なお、Docker から下は Docker 上で導入するので、ホストマシンにはインストールしなくてよい。 
+               なお、Docker から下は Docker 上で導入するので、ホストマシンにはインストールしなくてよい。
             </p>
           </section>
            
           <section id="section--goal">
             <h2><a href="#section--goal">本記事のゴール</a></h2> 
             <p>
-               先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。 このコードはこのあと使うので、<code>index.mjs</code> の名前で保存しておくこと。 
+               先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。このコードはこのあと使うので、<code>index.mjs</code> の名前で保存しておくこと。
             </p>
              
             <pre class="highlight" language="javascript"><code class="highlight"><span class="hljs-keyword">import</span> { readFile } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:fs/promises&#x27;</span>;
@@ -125,7 +125,7 @@
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`exit code: <span class="hljs-subst">${result}</span>`</span>);</code></pre>
              
             <p>
-               標準入力から与えたコードを WebAssembly にコンパイルされた PHP 処理系の上で実行している。このような <code>php-wasm.mjs</code> (とそこから呼び出される <code>php-wasm.wasm</code>) を作成する。 
+               標準入力から与えたコードを WebAssembly にコンパイルされた PHP 処理系の上で実行している。このような <code>php-wasm.mjs</code> (とそこから呼び出される <code>php-wasm.wasm</code>) を作成する。
             </p>
           </section>
            
@@ -134,7 +134,7 @@
             <section id="section--build--write-c-entrypoint">
               <h3><a href="#section--build--write-c-entrypoint">C のエントリポイントを書く</a></h3> 
               <p>
-                 先ほどのコードでも使っていたエントリポイントである <code>php_wasm_run</code> を用意する。 
+                 先ほどのコードでも使っていたエントリポイントである <code>php_wasm_run</code> を用意する。
               </p>
                
               <pre class="highlight" language="c"><code class="highlight"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
@@ -163,32 +163,32 @@
 }</code></pre>
                
               <p>
-                 ほとんどはただの PHP の公開 API を使ったコードだが、Emscripten 向けの注意点が 2点ある。 
+                 ほとんどはただの PHP の公開 API を使ったコードだが、Emscripten 向けの注意点が 2点ある。
               </p>
                
               <p>
-                 まずは <code>EMSCRIPTEN_KEEPALIVE</code> について。 これは Emscripten が用意している特殊なマクロである。 このマクロが付与されている関数は、どこからも使用されていなくともコンパイル後の WebAssembly バイナリから削除されない。 もしこれを付け忘れると、未使用の関数とみなされ削除される。 
+                 まずは <code>EMSCRIPTEN_KEEPALIVE</code> について。これは Emscripten が用意している特殊なマクロである。このマクロが付与されている関数は、どこからも使用されていなくともコンパイル後の WebAssembly バイナリから削除されない。もしこれを付け忘れると、未使用の関数とみなされ削除される。
               </p>
                
               <p>
-                 次に、コードを評価したあとに呼んでいる標準出力と標準エラー出力に対する改行の出力について。 出力バッファから出力させるためだけなら改行を出力させなくとも <code>fflush()</code> だけで事足りると考えたのだが、ないと動かなかったので追加した。 これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。 改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。 
+                 次に、コードを評価したあとに呼んでいる標準出力と標準エラー出力に対する改行の出力について。出力バッファから出力させるためだけなら改行を出力させなくとも <code>fflush()</code> だけで事足りると考えたのだが、ないと動かなかったので追加した。これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
               </p>
             </section>
              
             <section id="section--build--compile-to-wasm">
               <h3><a href="#section--build--compile-to-wasm">WebAssembly にコンパイルする</a></h3> 
               <p>
-                 それでは WebAssembly にコンパイルしていこう。ここからは <code>Dockerfile</code> 上のコマンドとして操作を示す。 
+                 それでは WebAssembly にコンパイルしていこう。ここからは <code>Dockerfile</code> 上のコマンドとして操作を示す。
               </p>
                
               <p>
-                 まずは <a href="https://hub.docker.com/r/emscripten/emsdk" rel="noreferrer" target="_blank">Emscripten 公式が提供している Docker イメージ</a>を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。 
+                 まずは <a href="https://hub.docker.com/r/emscripten/emsdk" rel="noreferrer" target="_blank">Emscripten 公式が提供している Docker イメージ</a>を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">FROM</span> emscripten/emsdk:<span class="hljs-number">3.1</span>.<span class="hljs-number">46</span> AS wasm-builder</code></pre>
                
               <p>
-                 次に、<a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。 有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。 
+                 次に、<a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">RUN</span><span class="language-bash"> git <span class="hljs-built_in">clone</span> --depth=1 --branch=php-8.2.10 https://github.com/php/php-src</span>
@@ -203,7 +203,7 @@
     :</span></code></pre>
                
               <p>
-                 続けて、Emscripten のツールチェインを用いて PHP 処理系をビルドする。 
+                 続けて、Emscripten のツールチェインを用いて PHP 処理系をビルドする。
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">cd</span> php-src &amp;&amp; \
@@ -230,31 +230,31 @@
     :</span></code></pre>
                
               <p>
-                 ここまでと比べると少し複雑なので、それぞれ詳しく見ていこう。 
+                 ここまでと比べると少し複雑なので、それぞれ詳しく見ていこう。
               </p>
                
               <p>
-                 まず、<code>buildconf</code> は PHP 処理系をビルドするときに (Emscripten とは関係なく) 使うツールである。 このツールの最も重要な仕事は、<code>configure</code> の生成である。 
+                 まず、<code>buildconf</code> は PHP 処理系をビルドするときに (Emscripten とは関係なく) 使うツールである。このツールの最も重要な仕事は、<code>configure</code> の生成である。
               </p>
                
               <p>
-                 次に <code>configure</code> するわけだが、ここで <code>emconfigure</code> を使う。 これを使うことで、Emscripten が上手く諸々のツールチェインを WebAssembly のビルド向けに調整しながら <code>configure</code> してくれる。 
+                 次に <code>configure</code> するわけだが、ここで <code>emconfigure</code> を使う。これを使うことで、Emscripten が上手く諸々のツールチェインを WebAssembly のビルド向けに調整しながら <code>configure</code> してくれる。
               </p>
                
               <p>
-                <code>configure</code> の後ろに指定してあるフラグは、通常の PHP 処理系のビルドで使う <code>configure</code> と同じなので、詳しくはそちらの <code>cofigure --help</code> を参照していただきたい。 ほとんどは、機能の無効化のために指定している (依存するライブラリを減らし、ビルドをより簡単にするため)。 
+                <code>configure</code> の後ろに指定してあるフラグは、通常の PHP 処理系のビルドで使う <code>configure</code> と同じなので、詳しくはそちらの <code>cofigure --help</code> を参照していただきたい。ほとんどは、機能の無効化のために指定している (依存するライブラリを減らし、ビルドをより簡単にするため)。
               </p>
                
               <p>
-                 通常の C のビルドなら、<code>configure</code> の次は <code>make</code> するところだが、ここでも <code>emmake</code> を使う。 役割はほとんど <code>emconfigure</code> と同様である。 指定してある <code>EMCC_CFLAGS</code> という環境変数は、Emscripten の C コンパイラへのフラグで、ここでは <code>ERROR_ON_UNDEFINED_SYMBOLS</code> を無効化している。 これにより、コンパイル中に出現した解決できなかったシンボルを無視するようになる (代わりに、そのシンボルを呼ぼうとしたタイミングで実行時エラーになる)。 すべての依存を完全に解決するのは面倒なので、あまり使わない機能については無視してもよいだろう。 
+                 通常の C のビルドなら、<code>configure</code> の次は <code>make</code> するところだが、ここでも <code>emmake</code> を使う。役割はほとんど <code>emconfigure</code> と同様である。指定してある <code>EMCC_CFLAGS</code> という環境変数は、Emscripten の C コンパイラへのフラグで、ここでは <code>ERROR_ON_UNDEFINED_SYMBOLS</code> を無効化している。これにより、コンパイル中に出現した解決できなかったシンボルを無視するようになる (代わりに、そのシンボルを呼ぼうとしたタイミングで実行時エラーになる)。すべての依存を完全に解決するのは面倒なので、あまり使わない機能については無視してもよいだろう。
               </p>
                
               <p>
-                 ここまでを実行すると <code>libs/libphp.a</code> が生成される。これは後で使うので移動させている。 
+                 ここまでを実行すると <code>libs/libphp.a</code> が生成される。これは後で使うので移動させている。
               </p>
                
               <p>
-                 さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。 <code>Dockerfile</code> と同じ場所に <code>php-wasm.c</code> という名前で保存し、次のようにする。 
+                 さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。<code>Dockerfile</code> と同じ場所に <code>php-wasm.c</code> という名前で保存し、次のようにする。
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">COPY</span><span class="language-bash"> php-wasm.c /src/</span>
@@ -275,11 +275,11 @@
     :</span></code></pre>
                
               <p>
-                <code>emcc</code> は <code>cc</code> (C コンパイラ/リンカ) の Emscripten 版で、<code>-c</code> は「コンパイル」の意。 <code>-o</code> や <code>-I</code> は普通の C コンパイラと同様、出力ファイルの指定とインクルードパスの指定である。 
+                <code>emcc</code> は <code>cc</code> (C コンパイラ/リンカ) の Emscripten 版で、<code>-c</code> は「コンパイル」の意。<code>-o</code> や <code>-I</code> は普通の C コンパイラと同様、出力ファイルの指定とインクルードパスの指定である。
               </p>
                
               <p>
-                <code>libphp.a</code> と <code>php-wasm.o</code> が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。 これにも <code>emcc</code> コマンドを使う。 
+                <code>libphp.a</code> と <code>php-wasm.o</code> が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。これにも <code>emcc</code> コマンドを使う。
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">RUN</span><span class="language-bash"> emcc \
@@ -296,43 +296,43 @@
     ;</span></code></pre>
                
               <p>
-                 それぞれのフラグについて解説する。 
+                 それぞれのフラグについて解説する。
               </p>
                
               <p>
-                <code>-s ENVIRONMENT=node</code> は、生成する WebAssembly/JavaScript の実行環境を指定する。 今回は <code>node</code> を指定しているので、Node.js 向けのファイルが生成される。 
+                <code>-s ENVIRONMENT=node</code> は、生成する WebAssembly/JavaScript の実行環境を指定する。今回は <code>node</code> を指定しているので、Node.js 向けのファイルが生成される。
               </p>
                
               <p>
-                <code>-s ERROR_ON_UNDEFINED_SYMBOLS=0</code> についてはすでに述べたので省略する。 
+                <code>-s ERROR_ON_UNDEFINED_SYMBOLS=0</code> についてはすでに述べたので省略する。
               </p>
                
               <p>
-                <code>-s EXPORTED_RUNTIME_METHODS=&apos;[&quot;ccall&quot;]&apos;</code> は、生成される JavaScript から公開される API である。 すでに <code>index.mjs</code> で使用しているが、<code>ccall(&apos;関数名&apos;, &apos;返り値の型&apos;, [&apos;仮引数の型&apos;, ...], [&apos;実引数&apos;, ...])</code> のように使う。 
+                <code>-s EXPORTED_RUNTIME_METHODS=&apos;[&quot;ccall&quot;]&apos;</code> は、生成される JavaScript から公開される API である。すでに <code>index.mjs</code> で使用しているが、<code>ccall(&apos;関数名&apos;, &apos;返り値の型&apos;, [&apos;仮引数の型&apos;, ...], [&apos;実引数&apos;, ...])</code> のように使う。
               </p>
                
               <p>
-                <code>-s EXPORT_ES6=1</code> は、JavaScript コードを ECMAScript 6 に準拠した module として生成する。 これを指定することで、<code>require()</code> ではなく <code>import</code> できる JavaScript を生成させられる。 
+                <code>-s EXPORT_ES6=1</code> は、JavaScript コードを ECMAScript 6 に準拠した module として生成する。これを指定することで、<code>require()</code> ではなく <code>import</code> できる JavaScript を生成させられる。
               </p>
                
               <p>
-                <code>-s INITIAL_MEMORY=16777216</code> は呼んで字のごとく。用途に合わせて適当に決めてほしい。 
+                <code>-s INITIAL_MEMORY=16777216</code> は呼んで字のごとく。用途に合わせて適当に決めてほしい。
               </p>
                
               <p>
-                <code>-s INVOKE_RUN=0</code> は、module をロードしたときに勝手に <code>main()</code> を呼ぶかどうか (だと思う)。 今回は <code>php_wasm_run()</code> しか使うつもりがないので切っている。 
+                <code>-s INVOKE_RUN=0</code> は、module をロードしたときに勝手に <code>main()</code> を呼ぶかどうか (だと思う)。今回は <code>php_wasm_run()</code> しか使うつもりがないので切っている。
               </p>
                
               <p>
-                <code>-s MODULARIZE=1</code> は、実質的にほぼ必須のオプションであり、1 を指定することで「WebAssembly module をインスタンス化する関数」をエクスポートするような JavaScript ファイルを生成するようになる。 これを指定しないと、生成物の JavaScript ファイルを読み込むと WebAssembly module が即座にインスタンス化されてしまい、起動のタイミングを制御できない。 
+                <code>-s MODULARIZE=1</code> は、実質的にほぼ必須のオプションであり、1 を指定することで「WebAssembly module をインスタンス化する関数」をエクスポートするような JavaScript ファイルを生成するようになる。これを指定しないと、生成物の JavaScript ファイルを読み込むと WebAssembly module が即座にインスタンス化されてしまい、起動のタイミングを制御できない。
               </p>
                
               <p>
-                 ここまで実行すると、<code>php-wasm.js</code> と <code>php-wasm.wasm</code> が作られる。 では、ここからはこれらの実行環境を作っていこう。 
+                 ここまで実行すると、<code>php-wasm.js</code> と <code>php-wasm.wasm</code> が作られる。では、ここからはこれらの実行環境を作っていこう。
               </p>
                
               <p>
-                 といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。 先ほど掲載した JavaScript のコードは、<code>Dockerfile</code> と同じディレクトリに <code>index.mjs</code> で配置すること。 
+                 といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。先ほど掲載した JavaScript のコードは、<code>Dockerfile</code> と同じディレクトリに <code>index.mjs</code> で配置すること。
               </p>
                
               <pre class="highlight" language="dockerfile"><code class="highlight"><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">20.7</span>
@@ -349,7 +349,7 @@
           <section id="section--run">
             <h2><a href="#section--run">実行</a></h2> 
             <p>
-              <code>Dockerfile</code>、<code>php-wasm.c</code>、<code>index.mjs</code> を用意したら、Docker コンテナをビルドして実行する。 
+              <code>Dockerfile</code>、<code>php-wasm.c</code>、<code>index.mjs</code> を用意したら、Docker コンテナをビルドして実行する。
             </p>
              
             <pre class="highlight" language="dockerfile"><code class="highlight">$ docker build -t php-wasm .
@@ -363,7 +363,7 @@ exit code: <span class="hljs-number">0</span></code></pre>
           <section id="section--outro">
             <h2><a href="#section--outro">まとめ</a></h2> 
             <p>
-              <a href="https://github.com/nsfisis/tiny-php.wasm" rel="noreferrer" target="_blank">ここまでをまとめた Git リポジトリ</a>を用意した。 簡単にコンパイルできるので、興味があれば試してみてほしい。 
+              <a href="https://github.com/nsfisis/tiny-php.wasm" rel="noreferrer" target="_blank">ここまでをまとめた Git リポジトリ</a>を用意した。簡単にコンパイルできるので、興味があれば試してみてほしい。
             </p>
           </section>
            

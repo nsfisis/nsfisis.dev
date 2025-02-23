@@ -63,14 +63,14 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/9a429432258bbcd6c565" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/9a429432258bbcd6c565</a> 
+               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/9a429432258bbcd6c565" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/9a429432258bbcd6c565</a> 
             </div>
           </div>
            
           <section id="section--intro">
             <h2><a href="#section--intro">前置き</a></h2> 
             <p>
-               Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。 
+               Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。
             </p>
              
             <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
@@ -95,7 +95,7 @@
 <span class="hljs-keyword">struct</span> <span class="hljs-title class_">str</span>;</code></pre>
              
             <p>
-               では、普段単に <code>bool</code> と書いたとき、この <code>bool</code> は一体どこから来ているのか。rustc のソースを追ってみた。 
+               では、普段単に <code>bool</code> と書いたとき、この <code>bool</code> は一体どこから来ているのか。rustc のソースを追ってみた。
             </p>
              
             <blockquote>
@@ -116,15 +116,15 @@
             </p>
              
             <p>
-               どのようにして調べるか。rustc の構造には詳しくないため、すぐに当たりをつけるのは難しい。 
+               どのようにして調べるか。rustc の構造には詳しくないため、すぐに当たりをつけるのは難しい。
             </p>
              
             <p>
-               大雑把な構造としては、<code>compiler</code> フォルダ以下に <code>rustc_*</code> という名前のクレートが数十個入っている。これがどうやら <code>rustc</code> コマンドの実装部のようだ。 
+               大雑把な構造としては、<code>compiler</code> フォルダ以下に <code>rustc_*</code> という名前のクレートが数十個入っている。これがどうやら <code>rustc</code> コマンドの実装部のようだ。
             </p>
              
             <p>
-              <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。 しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。 
+              <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。
             </p>
              
             <pre class="highlight"><code>$ git grep &quot;\bi128\b&quot; | wc      # i128
@@ -137,7 +137,7 @@ $ git grep &quot;\bbool\b&quot; | wc      # cf. bool の結果
 3563   23577  294659</code></pre>
              
             <p>
-               165 程度であれば探すことができそうだ。今回は、クレート名を見ておおよその当たりをつけた。 
+               165 程度であれば探すことができそうだ。今回は、クレート名を見ておおよその当たりをつけた。
             </p>
              
             <pre class="highlight"><code>$ git grep &quot;\bi128\b&quot;
@@ -146,7 +146,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
 ...</code></pre>
              
             <p>
-              <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。 
+              <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。
             </p>
              
             <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-comment">/// Interns the names of the primitive types.</span>
@@ -183,7 +183,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
 }</code></pre>
              
             <p>
-               これは初めに列挙したプリミティブ型の一覧と一致している。doc comment にも、 
+               これは初めに列挙したプリミティブ型の一覧と一致している。doc comment にも、
             </p>
              
             <blockquote>
@@ -193,7 +193,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
             </blockquote>
              
             <p>
-               とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。 
+               とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。
             </p>
              
             <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-comment">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span>
@@ -219,19 +219,19 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
 }</code></pre>
              
             <p>
-               関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。 <code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。 
+               関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。<code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。
             </p>
              
             <p>
-               なお、<code>ns</code> は「名前空間」を示す変数である。Rust における名前空間はC言語におけるそれとほとんど同じで、今探している名前が関数名/変数名なのか型なのかマクロなのかを区別している。この <code>if</code> は、プリミティブ型に解決されるのは型を探しているときだけだ、と言っている。 
+               なお、<code>ns</code> は「名前空間」を示す変数である。Rust における名前空間はC言語におけるそれとほとんど同じで、今探している名前が関数名/変数名なのか型なのかマクロなのかを区別している。この <code>if</code> は、プリミティブ型に解決されるのは型を探しているときだけだ、と言っている。
             </p>
              
             <p>
-               重要なのは、これが <code>resolve_ident_in_lexical_scope()</code> の最後に書かれている点である。つまり、最初に挙げたプリミティブ型の識別子は、「名前解決の最終段階で」、「他に同名の型が見つかっていなければ」プリミティブ型として解決される。 
+               重要なのは、これが <code>resolve_ident_in_lexical_scope()</code> の最後に書かれている点である。つまり、最初に挙げたプリミティブ型の識別子は、「名前解決の最終段階で」、「他に同名の型が見つかっていなければ」プリミティブ型として解決される。
             </p>
              
             <p>
-               動作がわかったところで、例として次のコードを考える。 
+               動作がわかったところで、例として次のコードを考える。
             </p>
              
             <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
@@ -243,14 +243,14 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
 }</code></pre>
              
             <p>
-               ここで <code>main()</code> の <code>bool</code> は <code>struct bool</code> として解決される。なぜなら、プリミティブ型の判定をする前に <code>bool</code> という名前の別の型が見つかるからだ。 
+               ここで <code>main()</code> の <code>bool</code> は <code>struct bool</code> として解決される。なぜなら、プリミティブ型の判定をする前に <code>bool</code> という名前の別の型が見つかるからだ。
             </p>
           </section>
            
           <section id="section--outro">
             <h2><a href="#section--outro">まとめ</a></h2> 
             <p>
-               Rust のプリミティブ型は予約語ではない。名前解決の最終段階で特別扱いされ、他に同名の型が見つかっていなければ対応するプリミティブ型に解決される。 
+               Rust のプリミティブ型は予約語ではない。名前解決の最終段階で特別扱いされ、他に同名の型が見つかっていなければ対応するプリミティブ型に解決される。
             </p>
           </section>
         </div>

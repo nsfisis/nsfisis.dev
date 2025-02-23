@@ -63,7 +63,7 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/4fefb361d9a693803520" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/4fefb361d9a693803520</a> 
+               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/4fefb361d9a693803520" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/4fefb361d9a693803520</a> 
             </div>
           </div>
            
@@ -94,7 +94,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
             <section id="section--existing-solution--external-commands">
               <h3><a href="#section--existing-solution--external-commands"><code>tac</code> / <code>tail</code></a></h3> 
               <p>
-                <code>tac</code> や <code>tail -r</code> などの外部コマンドを <code>!</code> を使って呼び出し、置き換える。 
+                <code>tac</code> や <code>tail -r</code> などの外部コマンドを <code>!</code> を使って呼び出し、置き換える。
               </p>
                
               <blockquote>
@@ -115,7 +115,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </p>
                
               <p>
-                <code>:global</code> コマンドは <code>:[range]global/{pattern}/[command]</code> のように使い、<code>[range]</code> で指定された範囲の行のうち、<code>{pattern}</code> で指定された検索パターンにマッチする行に対して、順番に <code>[command]</code> で指定された Ex コマンドを呼び出す。 
+                <code>:global</code> コマンドは <code>:[range]global/{pattern}/[command]</code> のように使い、<code>[range]</code> で指定された範囲の行のうち、<code>{pattern}</code> で指定された検索パターンにマッチする行に対して、順番に <code>[command]</code> で指定された Ex コマンドを呼び出す。
               </p>
                
               <blockquote>
@@ -125,7 +125,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </blockquote>
                
               <p>
-                <code>:move</code> コマンドは <code>[range]:move {address}</code> のように使い、<code>[range]</code> で指定された範囲の行を <code>{address}</code> で指定された位置に移動させる。 
+                <code>:move</code> コマンドは <code>[range]:move {address}</code> のように使い、<code>[range]</code> で指定された範囲の行を <code>{address}</code> で指定された位置に移動させる。
               </p>
                
               <blockquote>
@@ -135,11 +135,11 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </blockquote>
                
               <p>
-                <code>:g/^/m0</code> のように組み合わせると、「すべての行を1行ずつ 0行目(1行目の上)に動かす」という動きをする。これは確かに行の入れ替えになっている。 
+                <code>:g/^/m0</code> のように組み合わせると、「すべての行を1行ずつ 0行目(1行目の上)に動かす」という動きをする。これは確かに行の入れ替えになっている。
               </p>
                
               <p>
-                 なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。 
+                 なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
               </p>
                
               <pre class="highlight" language="vim"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
@@ -147,7 +147,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
     \ <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
                
               <p>
-                 これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。 
+                 これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。
               </p>
             </section>
           </section>
@@ -155,7 +155,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
           <section id="section--problem-of-global-command">
             <h2><a href="#section--problem-of-global-command"><code>:g/^/m0</code> の問題点</a></h2> 
             <p>
-              <code>:global</code> コマンドは各行に対してマッチングを行う際、現在の検索パターンを上書きしてしまう。<code>^</code> は行の先頭にマッチするため、結果として全ての行がハイライトされてしまう。<code>&apos;hlsearch&apos;</code> オプションを無効にしている場合その限りではないが、その場合でも直前の検索パターンが失われてしまうと <code>n</code> コマンドなどの際に不便である。 
+              <code>:global</code> コマンドは各行に対してマッチングを行う際、現在の検索パターンを上書きしてしまう。<code>^</code> は行の先頭にマッチするため、結果として全ての行がハイライトされてしまう。<code>&apos;hlsearch&apos;</code> オプションを無効にしている場合その限りではないが、その場合でも直前の検索パターンが失われてしまうと <code>n</code> コマンドなどの際に不便である。
             </p>
              
             <blockquote>
@@ -186,15 +186,15 @@ command! -bar -<span class="hljs-built_in">range</span>=%
     \ <span class="hljs-keyword">call</span> <span class="hljs-symbol">&lt;SID&gt;</span>reverse_lines(<span class="hljs-symbol">&lt;line1&gt;</span>, <span class="hljs-symbol">&lt;line2&gt;</span>)</code></pre>
              
             <p>
-               実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。 
+               実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。
             </p>
              
             <p>
-               この理由は、ユーザー定義関数を実行する際は検索パターンが一度保存され、実行が終了したあと復元されるため。結果として検索パターンが <code>^</code> で上書きされることがなくなる。 
+               この理由は、ユーザー定義関数を実行する際は検索パターンが一度保存され、実行が終了したあと復元されるため。結果として検索パターンが <code>^</code> で上書きされることがなくなる。
             </p>
              
             <p>
-               Vim のヘルプから該当箇所を引用する (強調は筆者による)。 
+               Vim のヘルプから該当箇所を引用する (強調は筆者による)。
             </p>
              
             <blockquote>
@@ -208,7 +208,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
             </blockquote>
              
             <p>
-               これは autocommand の実行に関しての記述だが、これと同じことがユーザー定義関数の実行時にも適用される。このことは <code>:nohlsearch</code> のヘルプにある。同じく該当箇所を引用する (強調は筆者による)。 
+               これは autocommand の実行に関しての記述だが、これと同じことがユーザー定義関数の実行時にも適用される。このことは <code>:nohlsearch</code> のヘルプにある。同じく該当箇所を引用する (強調は筆者による)。
             </p>
              
             <blockquote>
@@ -222,7 +222,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
             </blockquote>
              
             <p>
-               この仕様により、<code>:g/^/m0</code> の呼び出しをユーザー定義関数に切り出すことで上述の問題を解決できる。 
+               この仕様により、<code>:g/^/m0</code> の呼び出しをユーザー定義関数に切り出すことで上述の問題を解決できる。
             </p>
           </section>
            
@@ -239,7 +239,7 @@ command! -bar -<span class="hljs-built_in">range</span>=%
     \ keeppatterns <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
              
             <p>
-               まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。 
+               まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。
             </p>
              
             <blockquote>

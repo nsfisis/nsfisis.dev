@@ -69,12 +69,12 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は、2022-11-17 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。 
+               この記事は、2022-11-17 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
             </div>
           </div>
            
           <p>
-             ハマったのでメモ。 
+             ハマったのでメモ。
           </p>
            
           <section id="section--background">
@@ -82,7 +82,7 @@
             <section id="section--background--gitlab-ci-cd">
               <h3><a href="#section--background--gitlab-ci-cd">GitLab CI/CD について</a></h3> 
               <p>
-                 GitLab CI/CD では、Docker executor を用いて任意の Docker image 上でスクリプトを走らせることができる。 
+                 GitLab CI/CD では、Docker executor を用いて任意の Docker image 上でスクリプトを走らせることができる。
               </p>
                
               <p>
@@ -99,11 +99,11 @@
   <span class="hljs-attr">when:</span> <span class="hljs-string">always</span></code></pre>
                
               <p>
-                 ここで、<code>script</code> に指定したコマンドが失敗する (exit status が 0 以外になる) と、即座に実行が停止され、ジョブは失敗する。 
+                 ここで、<code>script</code> に指定したコマンドが失敗する (exit status が 0 以外になる) と、即座に実行が停止され、ジョブは失敗する。
               </p>
                
               <p>
-                 では、次のようなケースだとどうなるか。 
+                 では、次のようなケースだとどうなるか。
               </p>
                
               <pre class="highlight" filename=".gitlab-ci.yml" language="yaml"><code class="highlight"><span class="hljs-attr">hello-world:</span>
@@ -116,14 +116,14 @@
   <span class="hljs-attr">when:</span> <span class="hljs-string">always</span></code></pre>
                
               <p>
-                 失敗するコマンドをパイプに接続した。通常 Bash では、パイプの最後のコマンドの exit code が全体の exit code になる。 
+                 失敗するコマンドをパイプに接続した。通常 Bash では、パイプの最後のコマンドの exit code が全体の exit code になる。
               </p>
             </section>
              
             <section id="section--background--pipefail-option">
               <h3><a href="#section--background--pipefail-option"><code>pipefail</code> オプションについて</a></h3> 
               <p>
-                 前述したようなケースにおいて、途中で失敗したときに全体を失敗させるには、<code>pipefail</code> オプションを有効にする。 
+                 前述したようなケースにおいて、途中で失敗したときに全体を失敗させるには、<code>pipefail</code> オプションを有効にする。
               </p>
                
               <pre class="highlight" language="bash"><code class="highlight"><span class="hljs-comment"># On にする</span>
@@ -132,7 +132,7 @@
 <span class="hljs-built_in">set</span> +o pipefail</code></pre>
                
               <p>
-                 こうすると、パイプ全体が失敗するようになる。 この設定は、デフォルトだと off になっている。 
+                 こうすると、パイプ全体が失敗するようになる。この設定は、デフォルトだと off になっている。
               </p>
             </section>
           </section>
@@ -140,7 +140,7 @@
           <section id="section--problem">
             <h2><a href="#section--problem">発生した問題</a></h2> 
             <p>
-               次のような GitLab CI/CD ジョブが失敗してしまった。 
+               次のような GitLab CI/CD ジョブが失敗してしまった。
             </p>
              
             <pre class="highlight" filename=".gitlab-ci.yml" language="yaml"><code class="highlight"><span class="hljs-attr">hoge:</span>
@@ -153,11 +153,11 @@
   <span class="hljs-attr">when:</span> <span class="hljs-string">always</span></code></pre>
              
             <p>
-              <code>grep</code> コマンドは、パターンにマッチする行が一行もなかったとき、exit code 1 を返す。よって、<code>pipefail</code> が on になっていると、このジョブは失敗する。 現在の <code>pipefail</code> がどうなっているか確かめるため <code>set +o</code> で全オプションを出力させたところ、<code>pipefail</code> が on になっていた。 
+              <code>grep</code> コマンドは、パターンにマッチする行が一行もなかったとき、exit code 1 を返す。よって、<code>pipefail</code> が on になっていると、このジョブは失敗する。現在の <code>pipefail</code> がどうなっているか確かめるため <code>set +o</code> で全オプションを出力させたところ、<code>pipefail</code> が on になっていた。
             </p>
              
             <p>
-               しかし、先述したように Bash における <code>pipefail</code> のデフォルト値は off のはずだ。 実際に、ローカルで <code>alpine:latest</code> を動かしてみたところ、 
+               しかし、先述したように Bash における <code>pipefail</code> のデフォルト値は off のはずだ。実際に、ローカルで <code>alpine:latest</code> を動かしてみたところ、
             </p>
              
             <pre class="highlight"><code>$ docker run --rm alpine:latest sh -c &quot;set +o&quot;
@@ -176,18 +176,18 @@ set +o vi
 set +o pipefail</code></pre>
              
             <p>
-               確かに <code>pipefail</code> は無効になっている。 
+               確かに <code>pipefail</code> は無効になっている。
             </p>
              
             <p>
-               なぜスクリプト内で <code>set -o pipefail</code> しているわけでもないのに <code>pipefail</code> が on になっているのか。 
+               なぜスクリプト内で <code>set -o pipefail</code> しているわけでもないのに <code>pipefail</code> が on になっているのか。
             </p>
           </section>
            
           <section id="section--where-pipefail-is-enabled">
             <h2><a href="#section--where-pipefail-is-enabled">どこで <code>pipefail</code> が on になるか</a></h2> 
             <p>
-              <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。 そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner" rel="noreferrer" target="_blank">GitLab Runner のリポジトリ</a> を調査したところ、<a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276" rel="noreferrer" target="_blank">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。 
+              <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner" rel="noreferrer" target="_blank">GitLab Runner のリポジトリ</a> を調査したところ、<a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276" rel="noreferrer" target="_blank">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。
             </p>
              
             <pre class="highlight" language="go"><code class="highlight"><span class="hljs-comment">// pipefail オプションが存在しない環境にも対応するため、</span>
@@ -198,7 +198,7 @@ buf.WriteString(<span class="hljs-string">&quot;if set -o | grep pipefail &gt; /
           <section id="section--how-to-solve">
             <h2><a href="#section--how-to-solve">どのように解決するか</a></h2> 
             <p>
-               通常の Bash スクリプトを書く場合と同様に、<code>pipefail</code> が on になっていては困る場所だけ off にしてやればよい。 
+               通常の Bash スクリプトを書く場合と同様に、<code>pipefail</code> が on になっていては困る場所だけ off にしてやればよい。
             </p>
              
             <pre class="highlight" diff="true" filename=".gitlab-ci.yml" language="yaml"><code class="highlight"> <span class="hljs-attr">hoge:</span>
@@ -216,7 +216,7 @@ buf.WriteString(<span class="hljs-string">&quot;if set -o | grep pipefail &gt; /
           <section id="section--remarks">
             <h2><a href="#section--remarks">備考</a></h2> 
             <p>
-               なお、上述した実装ファイルは <code>shells/bash.go</code> だが、<code>alpine:latest</code> の例でもそうであったように、シェルが <code>sh</code> である場合にも適用される。 
+               なお、上述した実装ファイルは <code>shells/bash.go</code> だが、<code>alpine:latest</code> の例でもそうであったように、シェルが <code>sh</code> である場合にも適用される。
             </p>
           </section>
         </div>

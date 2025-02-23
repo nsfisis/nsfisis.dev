@@ -148,8 +148,15 @@ function textNodeToHtmlText(t: Text, ctx: Context): string {
   const s = encodeSpecialCharacters(t.content);
   if (ctx.isInPre) return s;
 
-  // TODO: 日本語で改行するときはスペースを入れない
-  return s.replaceAll(/\n */g, " ");
+  return s.replaceAll(/\n */g, (_match, offset, subject) => {
+    const last_char = subject[offset - 1];
+    if (last_char === "。" || last_char === "、") {
+      // 日本語で改行するときはスペースを入れない
+      return "";
+    } else {
+      return " ";
+    }
+  });
 }
 
 function encodeSpecialCharacters(s: string): string {

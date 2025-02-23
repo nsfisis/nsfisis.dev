@@ -61,14 +61,14 @@
           <section id="section--tldr">
             <h2><a href="#section--tldr">TL;DR</a></h2> 
             <p>
-               常にトップレベルを指す特殊変数 <code>$</code> を使えばよい。 
+               常にトップレベルを指す特殊変数 <code>$</code> を使えばよい。
             </p>
           </section>
            
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2> 
             <p>
-               Go には、標準ライブラリにテンプレートライブラリ <code>text/template</code> がある。 この <code>text/template</code> における制御構造、<code>with</code> と <code>range</code> は次のように使われる。 
+               Go には、標準ライブラリにテンプレートライブラリ <code>text/template</code> がある。この <code>text/template</code> における制御構造、<code>with</code> と <code>range</code> は次のように使われる。
             </p>
              
             <pre class="highlight"><code># {{ .Title }}
@@ -86,15 +86,15 @@
 {{ end }}</code></pre>
              
             <p>
-              <code>text/template</code> の <code>.</code> は、現在の操作対象を表す特殊なオブジェクトである。 
+              <code>text/template</code> の <code>.</code> は、現在の操作対象を表す特殊なオブジェクトである。
             </p>
              
             <p>
-              <code>with</code> や <code>range</code> は、<code>.</code> を変更する効果を持つ。 <code>with</code> は引数に渡されたオブジェクトを <code>.</code> へセットして、内部のテンプレートを実行する。 <code>range</code> は引数に渡されたイテレート可能なオブジェクトに対し、それぞれの要素を <code>.</code> へセットして、要素の個数だけ内部のテンプレートを実行する。 
+              <code>with</code> や <code>range</code> は、<code>.</code> を変更する効果を持つ。<code>with</code> は引数に渡されたオブジェクトを <code>.</code> へセットして、内部のテンプレートを実行する。<code>range</code> は引数に渡されたイテレート可能なオブジェクトに対し、それぞれの要素を <code>.</code> へセットして、要素の個数だけ内部のテンプレートを実行する。
             </p>
              
             <p>
-               つまりこのテンプレートは、次のような構造をレンダリングしている (<code>Execute()</code> の第2引数)。 
+               つまりこのテンプレートは、次のような構造をレンダリングしている (<code>Execute()</code> の第2引数)。
             </p>
              
             <pre class="highlight" language="go"><code class="highlight">tmpl.Execute(out, Params{
@@ -114,7 +114,7 @@
           <section id="section--what-i-want-to-do">
             <h2><a href="#section--what-i-want-to-do">やりたいこと</a></h2> 
             <p>
-               今回おこないたいのは、<code>with</code> や <code>range</code> の中で、その外側で使われていたトップレベルのオブジェクトを参照することだ。 
+               今回おこないたいのは、<code>with</code> や <code>range</code> の中で、その外側で使われていたトップレベルのオブジェクトを参照することだ。
             </p>
              
             <pre class="highlight"><code>{{ with .User }}
@@ -126,7 +126,7 @@
 {{ end }}</code></pre>
              
             <p>
-              <code>with</code> や <code>range</code> は、<code>.</code> を自身の対象オブジェクトに変更するので、 単に <code>{{ with .User }}</code> の中で <code>.Title</code> と書いても、それは <code>User</code> の <code>Title</code> プロパティを参照しているとみなされる。 
+              <code>with</code> や <code>range</code> は、<code>.</code> を自身の対象オブジェクトに変更するので、単に <code>{{ with .User }}</code> の中で <code>.Title</code> と書いても、それは <code>User</code> の <code>Title</code> プロパティを参照しているとみなされる。
             </p>
              
             <p>
@@ -136,18 +136,18 @@
             <pre class="highlight"><code>{{ $params := . }}</code></pre>
              
             <p>
-               とでもしておけば実現は可能である。 
+               とでもしておけば実現は可能である。
             </p>
              
             <p>
-               しかしながら、頻発するシチュエーションにしてはあまりに不恰好である。よりスマートな方法が用意されているはずだ。 
+               しかしながら、頻発するシチュエーションにしてはあまりに不恰好である。よりスマートな方法が用意されているはずだ。
             </p>
           </section>
            
           <section id="section--solution">
             <h2><a href="#section--solution">解決方法</a></h2> 
             <p>
-               常にトップレベルを指す特殊変数 <code>$</code> を使えばよい。 
+               常にトップレベルを指す特殊変数 <code>$</code> を使えばよい。
             </p>
              
             <pre class="highlight"><code>{{ with .User }}
@@ -159,11 +159,11 @@
 {{ end }}</code></pre>
              
             <p>
-              <code>$</code> は、テンプレートが実行されるときに渡されたオブジェクトを指す。 これを使えば現在の <code>.</code> に関係なくトップレベルを参照できる。 
+              <code>$</code> は、テンプレートが実行されるときに渡されたオブジェクトを指す。これを使えば現在の <code>.</code> に関係なくトップレベルを参照できる。
             </p>
              
             <p>
-               このことは、<a href="https://pkg.go.dev/text/template#hdr-Variables" rel="noreferrer" target="_blank"><code>text/template</code> の公式ドキュメント</a>にも以下のように記載されている。 
+               このことは、<a href="https://pkg.go.dev/text/template#hdr-Variables" rel="noreferrer" target="_blank"><code>text/template</code> の公式ドキュメント</a>にも以下のように記載されている。
             </p>
              
             <blockquote>

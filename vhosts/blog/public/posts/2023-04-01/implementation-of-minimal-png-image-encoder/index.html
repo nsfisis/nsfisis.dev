@@ -55,14 +55,14 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2> 
             <p>
-               この記事では、PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。 PNG 画像に対応したビューアであれば読み込めるが、圧縮効率については一切考えない。 また、実装には Go 言語を使うが、Go の標準ライブラリにあるさまざまなアルゴリズム (PNG 画像に関係する範囲だと、zlib や CRC32、Adler-32 など) は使わない。 
+               この記事では、PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。PNG 画像に対応したビューアであれば読み込めるが、圧縮効率については一切考えない。また、実装には Go 言語を使うが、Go の標準ライブラリにあるさまざまなアルゴリズム (PNG 画像に関係する範囲だと、zlib や CRC32、Adler-32 など) は使わない。
             </p>
           </section>
            
           <section id="section--basic-structure-of-png">
             <h2><a href="#section--basic-structure-of-png">PNG ファイルの基本構造</a></h2> 
             <p>
-               PNG ファイルの基本構造は次のようになっている。 
+               PNG ファイルの基本構造は次のようになっている。
             </p>
              
             <ol>
@@ -84,18 +84,18 @@
             </ol>
              
             <p>
-               Chunk には画像データを入れる IDAT chunk、パレットデータを入れる PLTE chunk、テキストデータを入れる tEXt chunk などがあるが、 今回は最小構成ということで IDAT chunk (と IHDR chunk と IEND chunk) のみを用いる。 
+               Chunk には画像データを入れる IDAT chunk、パレットデータを入れる PLTE chunk、テキストデータを入れる tEXt chunk などがあるが、今回は最小構成ということで IDAT chunk (と IHDR chunk と IEND chunk) のみを用いる。
             </p>
              
             <p>
-               次節で、それぞれの具体的な構造を確認しつつ実装していく。 
+               次節で、それぞれの具体的な構造を確認しつつ実装していく。
             </p>
           </section>
            
           <section id="section--implement-png-encoder">
             <h2><a href="#section--implement-png-encoder">PNG のエンコーダを実装する</a></h2> 
             <p>
-               以下のソースコードをベースにする。 今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。 
+               以下のソースコードをベースにする。今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。
             </p>
              
             <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">package</span> main
@@ -138,13 +138,13 @@
 }</code></pre>
              
             <p>
-               以降は、<code>writeSignature</code> や <code>writeChunkIhdr</code> などを実装していく。 
+               以降は、<code>writeSignature</code> や <code>writeChunkIhdr</code> などを実装していく。
             </p>
              
             <section id="section--implement-png-encoder--png-signature">
               <h3><a href="#section--implement-png-encoder--png-signature">PNG signature</a></h3> 
               <p>
-                 PNG signature は、PNG 画像の先頭に固定で付与されるバイト列で、8 バイトからなる。 
+                 PNG signature は、PNG 画像の先頭に固定で付与されるバイト列で、8 バイトからなる。
               </p>
                
               <ol>
@@ -182,7 +182,7 @@
               </ol>
                
               <p>
-                 CRLF や LF は、送信中に改行コードの変換が誤っておこなわれていないかどうかを検知するのに使われる。 
+                 CRLF や LF は、送信中に改行コードの変換が誤っておこなわれていないかどうかを検知するのに使われる。
               </p>
                
               <p>
@@ -206,14 +206,14 @@
 }</code></pre>
                
               <p>
-                <code>encoding/binary</code> パッケージの <code>binary.Write</code> を使い、固定の 8 バイトを書き込む。 
+                <code>encoding/binary</code> パッケージの <code>binary.Write</code> を使い、固定の 8 バイトを書き込む。
               </p>
             </section>
              
             <section id="section--implement-png-encoder--structure-of-chunk">
               <h3><a href="#section--implement-png-encoder--structure-of-chunk">Chunk の構造</a></h3> 
               <p>
-                 IHDR chunk に進む前に、chunk 一般の構造を確認する。 
+                 IHDR chunk に進む前に、chunk 一般の構造を確認する。
               </p>
                
               <ol>
@@ -235,7 +235,7 @@
               </ol>
                
               <p>
-                 CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている (<a href="https://www.w3.org/TR/png/#D-CRCAppendix" rel="noreferrer" target="_blank">D. Sample CRC implementation</a>) ので、これを Go に移植する。 
+                 CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている (<a href="https://www.w3.org/TR/png/#D-CRCAppendix" rel="noreferrer" target="_blank">D. Sample CRC implementation</a>) ので、これを Go に移植する。
               </p>
                
               <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">var</span> (
@@ -275,7 +275,7 @@
 }</code></pre>
                
               <p>
-                 できた <code>crc</code> 関数を使って、chunk 一般を書き込む関数も用意しておこう。 
+                 できた <code>crc</code> 関数を使って、chunk 一般を書き込む関数も用意しておこう。
               </p>
                
               <pre class="highlight" language="go"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">writeChunk</span><span class="hljs-params">(w io.Writer, chunkType <span class="hljs-type">string</span>, data []<span class="hljs-type">byte</span>)</span></span> {
@@ -289,18 +289,18 @@
 }</code></pre>
                
               <p>
-                 仕様どおり、<code>chunkType</code> と <code>data</code> から CRC を計算し、<code>data</code> の長さと合わせて書き込んでいる。 PNG では基本的に big endian を使うことに注意する。 
+                 仕様どおり、<code>chunkType</code> と <code>data</code> から CRC を計算し、<code>data</code> の長さと合わせて書き込んでいる。PNG では基本的に big endian を使うことに注意する。
               </p>
                
               <p>
-                 準備ができたところで、具体的な chunk をエンコードしていく。 
+                 準備ができたところで、具体的な chunk をエンコードしていく。
               </p>
             </section>
              
             <section id="section--implement-png-encoder--ihdr-chunk">
               <h3><a href="#section--implement-png-encoder--ihdr-chunk">IHDR chunk</a></h3> 
               <p>
-                 IHDR chunk は最初に配置される chunk である。次のようなデータからなる。 
+                 IHDR chunk は最初に配置される chunk である。次のようなデータからなる。
               </p>
                
               <ol>
@@ -369,7 +369,7 @@
               </ol>
                
               <p>
-                 今回ほとんどのデータは決め打ちするので、データに応じて変わるのは width と height だけになる。コードは次のようになる。 
+                 今回ほとんどのデータは決め打ちするので、データに応じて変わるのは width と height だけになる。コードは次のようになる。
               </p>
                
               <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;bytes&quot;</span>
@@ -391,13 +391,13 @@
             <section id="section--implement-png-encoder--idat-chunk">
               <h3><a href="#section--implement-png-encoder--idat-chunk">IDAT chunk</a></h3> 
               <p>
-                 IDAT chunk は、実際の画像データが格納された chunk である。IDAT chunk は deflate アルゴリズムにより圧縮され、zlib 形式で格納される。 
+                 IDAT chunk は、実際の画像データが格納された chunk である。IDAT chunk は deflate アルゴリズムにより圧縮され、zlib 形式で格納される。
               </p>
                
               <section id="section--implement-png-encoder--idat-chunk--zlib">
                 <h4><a href="#section--implement-png-encoder--idat-chunk--zlib">Zlib</a></h4> 
                 <p>
-                   まずは zlib について確認する。おおよそ次のような構造になっている。 
+                   まずは zlib について確認する。おおよそ次のような構造になっている。
                 </p>
                  
                 <ol>
@@ -419,11 +419,11 @@
                 </ol>
                  
                 <p>
-                   最初の 2 バイトにも意味はあるが、PNG では固定で構わない。 
+                   最初の 2 バイトにも意味はあるが、PNG では固定で構わない。
                 </p>
                  
                 <p>
-                   Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている (<a href="https://www.rfc-editor.org/rfc/rfc1950#section-9" rel="noreferrer" target="_blank">9. Appendix: Sample code</a>) ので、Go に移植する。 
+                   Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている (<a href="https://www.rfc-editor.org/rfc/rfc1950#section-9" rel="noreferrer" target="_blank">9. Appendix: Sample code</a>) ので、Go に移植する。
                 </p>
                  
                 <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">const</span> adler32Base = <span class="hljs-number">65521</span>
@@ -444,11 +444,11 @@
 }</code></pre>
                  
                 <p>
-                   「データ」の部分には圧縮したデータが入るのだが、真面目に deflate アルゴリズムを実装する必要はない。Zlib には無圧縮のデータブロックを格納することができるので、これを使う。本来は、データの圧縮効率の悪いランダムなデータをそのまま格納するためのものだが、今回は deflate の実装をサボるために使う。 
+                   「データ」の部分には圧縮したデータが入るのだが、真面目に deflate アルゴリズムを実装する必要はない。Zlib には無圧縮のデータブロックを格納することができるので、これを使う。本来は、データの圧縮効率の悪いランダムなデータをそのまま格納するためのものだが、今回は deflate の実装をサボるために使う。
                 </p>
                  
                 <p>
-                   1 つの無圧縮ブロックには 65535 (2<sup>16</sup> - 1) バイトまで格納できる。それぞれのブロックは次のような構成になっている。 
+                   1 つの無圧縮ブロックには 65535 (2<sup>16</sup> - 1) バイトまで格納できる。それぞれのブロックは次のような構成になっている。
                 </p>
                  
                 <ol>
@@ -502,11 +502,11 @@
               <section id="section--implement-png-encoder--idat-chunk--image-data">
                 <h4><a href="#section--implement-png-encoder--idat-chunk--image-data">画像データ</a></h4> 
                 <p>
-                   では次に、zlib 形式で格納するデータを用意する。PNG 画像は次のような順にスキャンする。 画像の左上のピクセルから同じ行を横にスキャンしていき、一番右まで到達したら次の行の左に向かう。 右下のピクセルまで行けば終わり。要は Z 字型に進んでいく。 
+                   では次に、zlib 形式で格納するデータを用意する。PNG 画像は次のような順にスキャンする。画像の左上のピクセルから同じ行を横にスキャンしていき、一番右まで到達したら次の行の左に向かう。右下のピクセルまで行けば終わり。要は Z 字型に進んでいく。
                 </p>
                  
                 <p>
-                   また、それぞれの行の先頭には、圧縮のためのフィルタタイプを指定する。 ただ、今回はその実装を省略するために、常にフィルタ 0 (何も加工しない) を使う。 
+                   また、それぞれの行の先頭には、圧縮のためのフィルタタイプを指定する。ただ、今回はその実装を省略するために、常にフィルタ 0 (何も加工しない) を使う。
                 </p>
                  
                 <p>
@@ -533,7 +533,7 @@
             <section id="section--implement-png-encoder--iend-chunk">
               <h3><a href="#section--implement-png-encoder--iend-chunk">IEND chunk</a></h3> 
               <p>
-                 最後に IEND chunk を書き込む。これは PNG 画像の最後に配置される chunk で、PNG のデコーダはこの chunk に出会うとそこでデコードを停止する。 
+                 最後に IEND chunk を書き込む。これは PNG 画像の最後に配置される chunk で、PNG のデコーダはこの chunk に出会うとそこでデコードを停止する。
               </p>
                
               <p>
@@ -549,7 +549,7 @@
           <section id="section--outro">
             <h2><a href="#section--outro">おわりに</a></h2> 
             <p>
-               最後に全ソースコードを再掲しておく。 
+               最後に全ソースコードを再掲しておく。
             </p>
              
             <pre class="highlight" language="go"><code class="highlight"><span class="hljs-keyword">package</span> main

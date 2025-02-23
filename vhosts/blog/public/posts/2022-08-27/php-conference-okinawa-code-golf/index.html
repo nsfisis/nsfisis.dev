@@ -67,11 +67,11 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2> 
             <p>
-               本日 <a href="https://phpcon.okinawa.jp/" rel="noreferrer" target="_blank">PHP カンファレンス沖縄 2022</a> が開催された (らしい)。 
+               本日 <a href="https://phpcon.okinawa.jp/" rel="noreferrer" target="_blank">PHP カンファレンス沖縄 2022</a> が開催された (らしい)。
             </p>
              
             <p>
-               カンファレンスには参加できなかったものの、懇親会の LT で出題されたコードゴルフの問題が Twitter に流れてきたので、解いてみた。 
+               カンファレンスには参加できなかったものの、懇親会の LT で出題されたコードゴルフの問題が Twitter に流れてきたので、解いてみた。
             </p>
              
             <ul>
@@ -88,7 +88,7 @@
           <section id="section--solution">
             <h2><a href="#section--solution">解</a></h2> 
             <p>
-               細かいレギュレーションは不明だったので、勝手に定めた。 
+               細かいレギュレーションは不明だったので、勝手に定めた。
             </p>
              
             <ul>
@@ -124,7 +124,7 @@
             <pre class="highlight" language="php"><code class="highlight">[<span class="hljs-meta">&lt;?php</span> <span class="hljs-variable">$n</span>=<span class="hljs-variable">$argv</span>[<span class="hljs-number">1</span>];<span class="hljs-keyword">foreach</span>([<span class="hljs-number">1e4</span>,<span class="hljs-number">5e3</span>,<span class="hljs-number">2e3</span>,<span class="hljs-number">1e3</span>,<span class="hljs-number">500</span>,<span class="hljs-number">100</span>,<span class="hljs-number">50</span>,<span class="hljs-number">10</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>]<span class="hljs-keyword">as</span><span class="hljs-variable">$x</span>)<span class="hljs-keyword">for</span>(;<span class="hljs-variable">$n</span>&gt;=<span class="hljs-variable">$x</span>;<span class="hljs-variable">$n</span>-=<span class="hljs-variable">$x</span>)<span class="hljs-variable">$r</span>[]=<span class="hljs-variable">$x</span>;<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;, &#x27;</span>,<span class="hljs-variable">$r</span>??[]);<span class="hljs-meta">?&gt;</span>]</code></pre>
              
             <p>
-               しめて 123 バイトとなった (末尾改行を含めずにカウント)。 
+               しめて 123 バイトとなった (末尾改行を含めずにカウント)。
             </p>
              
             <p>
@@ -147,36 +147,36 @@
             <section id="section--techniques--exponential-notation">
               <h3><a href="#section--techniques--exponential-notation">指数表記</a></h3> 
               <p>
-                 割と多くの言語のゴルフで使えるテクニック。 <code>e</code> を用いた指数表記で、大きな数を短く表す。 このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。 
+                 割と多くの言語のゴルフで使えるテクニック。<code>e</code> を用いた指数表記で、大きな数を短く表す。このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。
               </p>
             </section>
              
             <section id="section--techniques--shorten-loop">
               <h3><a href="#section--techniques--shorten-loop">foreach や for の中身を1つの文に</a></h3> 
               <p>
-                <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、 通常 <code>{</code> を続けて複数の文を連ねるが、中身の文を1つにしてしまえば、<code>{</code> と <code>}</code> を省略できる。 C言語などでも使える。 
+                <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、通常 <code>{</code> を続けて複数の文を連ねるが、中身の文を1つにしてしまえば、<code>{</code> と <code>}</code> を省略できる。C言語などでも使える。
               </p>
             </section>
              
             <section id="section--techniques--omit-initialization">
               <h3><a href="#section--techniques--omit-initialization">$r に初期値を入れない</a></h3> 
               <p>
-                 PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、 <code>$r</code> が未定義だった場合は <code>$r</code> を勝手に定義して空の配列で初期化してくれる。 これを利用すると、<code>$r = [];</code> のような初期化が不要になる。 
+                 PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、<code>$r</code> が未定義だった場合は <code>$r</code> を勝手に定義して空の配列で初期化してくれる。これを利用すると、<code>$r = [];</code> のような初期化が不要になる。
               </p>
                
               <p>
-                 ただし、プログラムに 0 が渡されるとループを一度も回らないので、<code>$r</code> が未定義になってしまい、 <code>implode()</code> に渡すところでエラーになる。 それを防ぐために <code>$r ?? []</code> を使っている。 
+                 ただし、プログラムに 0 が渡されるとループを一度も回らないので、<code>$r</code> が未定義になってしまい、<code>implode()</code> に渡すところでエラーになる。それを防ぐために <code>$r ?? []</code> を使っている。
               </p>
                
               <p>
-                 もし 0 が渡されたケースを無視するなら、これが不要になるので 4 バイト縮む。 
+                 もし 0 が渡されたケースを無視するなら、これが不要になるので 4 バイト縮む。
               </p>
             </section>
              
             <section id="section--techniques--put-text-outside-php-tag">
               <h3><a href="#section--techniques--put-text-outside-php-tag">PHP タグの外に文字列を置く</a></h3> 
               <p>
-                 PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。 今回のケースでは、先頭と末尾に必ず <code>[</code> と <code>]</code> を出力するので、そのまま書いてやればよい。 
+                 PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。今回のケースでは、先頭と末尾に必ず <code>[</code> と <code>]</code> を出力するので、そのまま書いてやればよい。
               </p>
             </section>
           </section>
@@ -184,7 +184,7 @@
           <section id="section--outro">
             <h2><a href="#section--outro">おわりに</a></h2> 
             <p>
-               最後になりましたが、<a href="https://twitter.com/m3m0r7" rel="noreferrer" target="_blank">めもりー</a>さん、楽しい問題をありがとうございました。 
+               最後になりましたが、<a href="https://twitter.com/m3m0r7" rel="noreferrer" target="_blank">めもりー</a>さん、楽しい問題をありがとうございました。
             </p>
           </section>
         </div>
