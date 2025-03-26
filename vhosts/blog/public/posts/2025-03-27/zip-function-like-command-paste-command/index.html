@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="zip 関数のような動きをする paste コマンドについてのメモ。">
+    <meta name="keywords" content="備忘録">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="zip 関数のようなコマンド paste｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="zip 関数のような動きをする paste コマンドについてのメモ。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>zip 関数のようなコマンド paste｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">zip 関数のようなコマンド paste</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/note-to-self/">備忘録</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2021-03-22">2021-03-22</time>: デジタルサーカス株式会社の社内記事として公開
+              </li>
+              <li class="revision">
+                <time datetime="2025-03-27">2025-03-27</time>: ブログ記事として一般公開
+              </li>
+            </ol>
+          </section>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+               この記事は、2021-03-22 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+            </div>
+          </div>
+           
+          <section id="section--intro">
+            <h2><a href="#section--intro">実現したい内容</a></h2> 
+            <p>
+               次の2ファイル <code>a.txt</code> / <code>b.txt</code> から出力 <code>ab.txt</code> を得たい。
+            </p>
+             
+            <p>
+              <code>a.txt</code>
+            </p>
+             
+            <pre class="highlight"><code>a1
+a2
+a3</code></pre>
+             
+            <p>
+              <code>b.txt</code>
+            </p>
+             
+            <pre class="highlight"><code>b1
+b2
+b3</code></pre>
+             
+            <p>
+              <code>ab.txt</code>
+            </p>
+             
+            <pre class="highlight"><code>a1
+b1
+a2
+b2
+a3
+b3</code></pre>
+             
+            <p>
+               ちょうど Python や Haskell などにある <code>zip</code> 関数のような動きをさせたい。
+            </p>
+          </section>
+           
+          <section id="section--paste-command">
+            <h2><a href="#section--paste-command">実現方法</a></h2> 
+            <p>
+               記事タイトルに書いたように、<code>paste</code> コマンドを使うと実現できる。
+            </p>
+             
+            <pre class="highlight"><code>$ paste -d &apos;\
+&apos; a.txt b.txt &gt; ab.txt</code></pre>
+             
+            <p>
+              <code>paste</code> コマンドは複数のファイルを引数に取り、それらを1行ずつ消費しながら <code>-d</code> で指定した文字で区切って出力する。<code>-d</code> は区切り文字の指定で、デフォルトだとタブ区切りになる。
+            </p>
+             
+            <p>
+               ファイル名には <code>-</code> を指定でき、その場合は標準入力から読み込んで出力する。このとき <code>paste - -</code> のように複数回 <code>-</code> を指定すると、指定した回数の行ごとに連結することができる。例えば <code>ab.txt</code> だとこうなる。
+            </p>
+             
+            <pre class="highlight"><code>$ paste - - &lt; ab.txt
+a1	b1
+a2	b2
+a3	b3</code></pre>
+             
+            <p>
+               これは標準入力を使うとき特有の挙動で、単に同じファイル名を指定してもこうはならない。
+            </p>
+             
+            <pre class="highlight"><code>$ paste ab.txt ab.txt
+a1	a1
+b1	b1
+a2	a2
+b2	b2
+a3	a3
+b3	b3</code></pre>
+             
+            <p>
+               ときどき便利。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

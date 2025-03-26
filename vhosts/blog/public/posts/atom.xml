@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-02-24T00:00:00+09:00</updated>
+  <updated>2025-03-27T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:99111377-27e7-427b-9dc5-a23f621fa826</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-27/zip-function-like-command-paste-command/"></link>
+    <title>zip 関数のようなコマンド paste</title>
+    <summary>zip 関数のような動きをする paste コマンドについてのメモ。</summary>
+    <published>2025-03-27T00:00:00+09:00</published>
+    <updated>2025-03-27T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:13174dc7-c1a3-465f-9ba6-14f0bc6f5961</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-02-24/phpcon-nagoya-2025-report/"></link>
