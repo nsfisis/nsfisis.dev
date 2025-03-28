@@ -32,8 +32,8 @@ export default function TagPage(
           </header>
           {pages.map((page) =>
             "event" in page
-              ? <SlidePageEntry slide={page} />
-              : <PostPageEntry post={page} />
+              ? <SlidePageEntry slide={page} key={page.uuid} />
+              : <PostPageEntry post={page} key={page.uuid} />
           )}
         </main>
         <GlobalFooter config={config} />

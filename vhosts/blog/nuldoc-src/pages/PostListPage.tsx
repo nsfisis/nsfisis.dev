@@ -32,7 +32,7 @@ export default function PostListPage(
             if (ta > tb) return -1;
             if (ta < tb) return 1;
             return 0;
-          }).map((post) => <PostPageEntry post={post} />)}
+          }).map((post) => <PostPageEntry post={post} key={post.uuid} />)}
         </main>
         <GlobalFooter config={config} />
       </body>

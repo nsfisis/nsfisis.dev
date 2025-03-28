@@ -52,8 +52,8 @@ export default function SlidePage(
               </section>
               <canvas id="slide" data-slide-link={slide.slideLink} />
               <div>
-                <button id="prev">Prev</button>
-                <button id="next">Next</button>
+                <button id="prev" type="button">Prev</button>
+                <button id="next" type="button">Next</button>
               </div>
               <StaticScript
                 fileName="/slide.js"

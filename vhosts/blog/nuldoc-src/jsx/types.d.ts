@@ -10,6 +10,8 @@ interface IntrinsicElementType {
   children?: JSXNode;
   className?: string;
   id?: string;
+  // My JSX runtime does not use key. It is only for linter that complains about missing key.
+  key?: string;
 }
 
 declare global {
@@ -39,7 +41,7 @@ declare global {
       };
       article: IntrinsicElementType;
       body: IntrinsicElementType;
-      button: IntrinsicElementType;
+      button: IntrinsicElementType & { type: string };
       canvas: { id?: string; "data-slide-link"?: string };
       div: IntrinsicElementType;
       footer: IntrinsicElementType;
@@ -72,5 +74,10 @@ declare global {
     interface ElementChildrenAttribute {
       children: unknown;
     }
+
+    type LibraryManagedAttributes<_F, P> = P & {
+      // My JSX runtime does not use key. It is only for linter that complains about missing key.
+      key?: string;
+    };
   }
 }
