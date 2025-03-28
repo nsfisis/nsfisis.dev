@@ -1,6 +1,5 @@
-import { serveDir } from "std/http/file_server.ts";
-import { STATUS_CODE, STATUS_TEXT } from "std/http/mod.ts";
-import { join } from "std/path/mod.ts";
+import { serveDir, STATUS_CODE, STATUS_TEXT } from "@std/http";
+import { join } from "@std/path";
 import { Config } from "../config.ts";
 import { runBuildCommand } from "./build.ts";
 

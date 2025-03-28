@@ -1,4 +1,4 @@
-import { join } from "std/path/mod.ts";
+import { join } from "@std/path";
 import { renderToDOM } from "../jsx/render.ts";
 import SlidePage from "../pages/SlidePage.tsx";
 import { Config } from "../config.ts";

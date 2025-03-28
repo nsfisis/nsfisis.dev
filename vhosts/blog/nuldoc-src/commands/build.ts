@@ -1,6 +1,5 @@
-import { dirname, join, joinGlobs } from "std/path/mod.ts";
-import { ensureDir } from "std/fs/mod.ts";
-import { expandGlob } from "std/fs/expand_glob.ts";
+import { dirname, join, joinGlobs } from "@std/path";
+import { ensureDir, expandGlob } from "@std/fs";
 import { generateFeedPageFromEntries } from "../generators/atom.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { parseNulDocFile } from "../ndoc/parse.ts";

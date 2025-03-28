@@ -1,4 +1,4 @@
-import { join } from "std/path/mod.ts";
+import { join } from "@std/path";
 import { Config } from "../config.ts";
 import { NuldocError } from "../errors.ts";
 import { Revision, stringToDate } from "../revision.ts";

@@ -1,4 +1,4 @@
-import { parse as parseToml } from "std/toml/mod.ts";
+import { parse as parseToml } from "@std/toml";
 import { Config } from "../config.ts";
 import { parseXmlString } from "../xml.ts";
 import {

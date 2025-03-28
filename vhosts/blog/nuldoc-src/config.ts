@@ -1,5 +1,5 @@
-import { join } from "std/path/mod.ts";
-import { parse as parseToml } from "std/toml/mod.ts";
+import { join } from "@std/path";
+import { parse as parseToml } from "@std/toml";
 import { z } from "zod/mod.ts";
 
 const ConfigSchema = z.object({

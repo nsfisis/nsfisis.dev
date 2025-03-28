@@ -1,10 +1,10 @@
-import { dirname, join } from "std/path/mod.ts";
-import { ensureDir } from "std/fs/mod.ts";
-import { parse } from "std/flags/mod.ts";
+import { dirname, join } from "@std/path";
+import { ensureDir } from "@std/fs";
+import { parseArgs } from "@std/cli";
 import { Config } from "../config.ts";
 
 export async function runNewCommand(config: Config) {
-  const parsedArgs = parse(Deno.args, {
+  const parsedArgs = parseArgs(Deno.args, {
     string: ["date"],
   });
 

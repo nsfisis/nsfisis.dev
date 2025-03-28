@@ -1,4 +1,4 @@
-import { join } from "std/path/mod.ts";
+import { join } from "@std/path";
 import { renderToDOM } from "../jsx/render.ts";
 import PostPage from "../pages/PostPage.tsx";
 import { Config } from "../config.ts";

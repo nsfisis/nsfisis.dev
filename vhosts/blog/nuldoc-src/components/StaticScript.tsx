@@ -1,4 +1,4 @@
-import { join } from "std/path/mod.ts";
+import { join } from "@std/path";
 import { Config } from "../config.ts";
 import { calculateFileHash } from "./utils.ts";
 
