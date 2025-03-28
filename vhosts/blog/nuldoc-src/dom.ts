@@ -69,6 +69,15 @@ export function forEachChild(e: Element, f: (n: Node) => void) {
   }
 }
 
+export async function forEachChildAsync(
+  e: Element,
+  f: (n: Node) => Promise<void>,
+): Promise<void> {
+  for (const c of e.children) {
+    await f(c);
+  }
+}
+
 export function forEachChildRecursively(e: Element, f: (n: Node) => void) {
   const g = (c: Node) => {
     f(c);
@@ -77,4 +86,17 @@ export function forEachChildRecursively(e: Element, f: (n: Node) => void) {
     }
   };
   forEachChild(e, g);
+}
+
+export async function forEachChildRecursivelyAsync(
+  e: Element,
+  f: (n: Node) => Promise<void>,
+): Promise<void> {
+  const g = async (c: Node) => {
+    await f(c);
+    if (c.kind === "element") {
+      await forEachChildAsync(c, g);
+    }
+  };
+  await forEachChildAsync(e, g);
 }

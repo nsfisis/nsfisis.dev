@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>Vimで選択した行の順番を入れ替える｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -69,11 +68,13 @@
            
           <section id="section--tl-dr">
             <h2><a href="#section--tl-dr">TL; DR</a></h2> 
-            <pre class="highlight" language="vim"><code class="highlight"><span class="hljs-comment">&quot; License: Public Domain</span>
-
-command! -bar -<span class="hljs-built_in">range</span>=%
-    \ Reverse
-    \ keeppatterns <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
+            <div class="codeblock" language="vim">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">" License: Public Domain</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
+            </div>
           </section>
            
           <section id="section--version">
@@ -142,9 +143,11 @@ command! -bar -<span class="hljs-built_in">range</span>=%
                  なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
               </p>
                
-              <pre class="highlight" language="vim"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
-    \ Reverse
-    \ <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
+              <div class="codeblock" language="vim">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
+              </div>
                
               <p>
                  これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。
@@ -177,13 +180,15 @@ command! -bar -<span class="hljs-built_in">range</span>=%
                前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする: 
             </p>
              
-            <pre class="highlight" language="vim"><code class="highlight"><span class="hljs-keyword">function!</span> <span class="hljs-title">s</span>:reverse_lines<span class="hljs-params">(from, to)</span> abort
-    <span class="hljs-keyword">execute</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d,%dg/^/m%d&quot;</span>, <span class="hljs-variable">a:from</span>, <span class="hljs-variable">a:to</span>, <span class="hljs-variable">a:from</span> - <span class="hljs-number">1</span>)
-<span class="hljs-keyword">endfunction</span>
-
-command! -bar -<span class="hljs-built_in">range</span>=%
-    \ Reverse
-    \ <span class="hljs-keyword">call</span> <span class="hljs-symbol">&lt;SID&gt;</span>reverse_lines(<span class="hljs-symbol">&lt;line1&gt;</span>, <span class="hljs-symbol">&lt;line2&gt;</span>)</code></pre>
+            <div class="codeblock" language="vim">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function!</span><span style="color:#6F42C1"> s:reverse_lines</span><span style="color:#24292E">(from, </span><span style="color:#005CC5">to</span><span style="color:#24292E">) </span><span style="color:#D73A49">abort</span></span>
+<span class="line"><span style="color:#005CC5">    execute</span><span style="color:#6F42C1"> printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"%d,%dg/^/m%d"</span><span style="color:#24292E">, a:from, a:to, a:from</span><span style="color:#D73A49"> - </span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#D73A49">endfunction</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#D73A49"> call</span><span style="color:#24292E"> &#x3C;</span><span style="color:#005CC5">SID</span><span style="color:#24292E">></span><span style="color:#6F42C1">reverse_lines</span><span style="color:#24292E">(&#x3C;line1>, &#x3C;line2>)</span></span></code></pre>
+            </div>
              
             <p>
                実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。
@@ -234,9 +239,11 @@ command! -bar -<span class="hljs-built_in">range</span>=%
               </p>
             </blockquote>
              
-            <pre class="highlight" language="vim"><code class="highlight">command! -bar -<span class="hljs-built_in">range</span>=%
-    \ Reverse
-    \ keeppatterns <span class="hljs-symbol">&lt;line1&gt;</span>,<span class="hljs-symbol">&lt;line2&gt;</span>g/^/<span class="hljs-keyword">m</span><span class="hljs-symbol">&lt;line1&gt;</span>-<span class="hljs-number">1</span></code></pre>
+            <div class="codeblock" language="vim">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
+<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
+            </div>
              
             <p>
                まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。

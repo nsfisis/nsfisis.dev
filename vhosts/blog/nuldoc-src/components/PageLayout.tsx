@@ -20,7 +20,7 @@ export default function PageLayout(
     metaKeywords,
     metaTitle,
     metaAtomFeedHref,
-    requiresSyntaxHighlight,
+    requiresSyntaxHighlight: _,
     config,
     children,
   }: Props,
@@ -54,8 +54,6 @@ export default function PageLayout(
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <title>{metaTitle}</title>
         <StaticStylesheet fileName="/style.css" config={config} />
-        {requiresSyntaxHighlight &&
-          <StaticStylesheet fileName="/hl.css" config={config} />}
       </head>
       {children}
     </html>

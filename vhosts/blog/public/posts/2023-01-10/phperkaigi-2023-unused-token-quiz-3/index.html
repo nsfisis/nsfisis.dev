@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>PHPerKaigi 2023: ボツになったトークン問題 その 3｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -96,118 +95,120 @@
                注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。
             </p>
              
-            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-<span class="hljs-keyword">try</span> {
-  <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>);
-} <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Throwable</span> <span class="hljs-variable">$e</span>) {
-  <span class="hljs-keyword">while</span> (<span class="hljs-variable">$e</span> = <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getPrevious</span>()) <span class="hljs-title function_ invoke__">printf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getLine</span>() + <span class="hljs-number">23</span>);
-  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
-}
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$i</span></span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$i</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-title function_ invoke__">f</span>();
-  <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">match</span> (<span class="hljs-variable">$i</span>) {
-      <span class="hljs-number">0</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-      <span class="hljs-number">15</span>, <span class="hljs-number">36</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">14</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">37</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-
-
-
-
-
-
-
-      <span class="hljs-number">6</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">5</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">22</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-
-      <span class="hljs-number">34</span>, <span class="hljs-number">35</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-
-
-
-
-
-      <span class="hljs-number">25</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">17</span>, <span class="hljs-number">21</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">24</span>, <span class="hljs-number">32</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-
-
-
-
-      <span class="hljs-number">33</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">16</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-      <span class="hljs-number">18</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-
-
-
-
-
-      <span class="hljs-number">7</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">2</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">1</span>, <span class="hljs-number">20</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">10</span>, <span class="hljs-number">28</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">8</span>, <span class="hljs-number">12</span>, <span class="hljs-number">26</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">13</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-
-
-      <span class="hljs-number">31</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">29</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">11</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-
-      <span class="hljs-number">3</span>, <span class="hljs-number">19</span>, <span class="hljs-number">23</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-
-      <span class="hljs-number">27</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-number">30</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-    };
-  } <span class="hljs-keyword">finally</span> {
-    <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-variable">$i</span> - <span class="hljs-number">1</span>);
-  }
-}
-
-
-
-
-
-
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">g</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">__LINE__</span>;
-}</code></pre>
+            <div class="codeblock" language="php">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#6F42C1">  f</span><span style="color:#24292E">(</span><span style="color:#6F42C1">g</span><span style="color:#24292E">() </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">} </span><span style="color:#D73A49">catch</span><span style="color:#24292E"> (</span><span style="color:#005CC5">Throwable</span><span style="color:#24292E"> $e) {</span></span>
+<span class="line"><span style="color:#D73A49">  while</span><span style="color:#24292E"> ($e </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $e</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getPrevious</span><span style="color:#24292E">()) </span><span style="color:#005CC5">printf</span><span style="color:#24292E">(</span><span style="color:#032F62">'%c'</span><span style="color:#24292E">, $e</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getLine</span><span style="color:#24292E">() </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 23</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#005CC5">  echo</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E"> $i) {</span></span>
+<span class="line"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) </span><span style="color:#6F42C1">f</span><span style="color:#24292E">();</span></span>
+<span class="line"><span style="color:#D73A49">  try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    match</span><span style="color:#24292E"> ($i) {</span></span>
+<span class="line"><span style="color:#005CC5">      0</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      15</span><span style="color:#24292E">, </span><span style="color:#005CC5">36</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      14</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      37</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      6</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      5</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      22</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      34</span><span style="color:#24292E">, </span><span style="color:#005CC5">35</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      25</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      17</span><span style="color:#24292E">, </span><span style="color:#005CC5">21</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      24</span><span style="color:#24292E">, </span><span style="color:#005CC5">32</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      33</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      16</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      18</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      7</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      2</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      1</span><span style="color:#24292E">, </span><span style="color:#005CC5">20</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      10</span><span style="color:#24292E">, </span><span style="color:#005CC5">28</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      8</span><span style="color:#24292E">, </span><span style="color:#005CC5">12</span><span style="color:#24292E">, </span><span style="color:#005CC5">26</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      4</span><span style="color:#24292E">, </span><span style="color:#005CC5">9</span><span style="color:#24292E">, </span><span style="color:#005CC5">13</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      31</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      29</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      11</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      3</span><span style="color:#24292E">, </span><span style="color:#005CC5">19</span><span style="color:#24292E">, </span><span style="color:#005CC5">23</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      27</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      30</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">    };</span></span>
+<span class="line"><span style="color:#24292E">  } </span><span style="color:#D73A49">finally</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#6F42C1">    f</span><span style="color:#24292E">($i </span><span style="color:#D73A49">-</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">() {</span></span>
+<span class="line"><span style="color:#D73A49">  return</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+            </div>
              
             <p>
                &quot;Catchline&quot; と名付けた作品。実行するとトークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> が得られる。
@@ -247,20 +248,22 @@
                  このうち 1つ目のケースは、 <code>finally</code> 節の中でエラーを投げると PHP 処理系が勝手に <code>$previous</code> を設定してくれる。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Exception</span>(<span class="hljs-string">&quot;Error 1&quot;</span>);
-  } <span class="hljs-keyword">finally</span> {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Exception</span>(<span class="hljs-string">&quot;Error 2&quot;</span>);
-  }
-} <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Exception</span> <span class="hljs-variable">$e</span>) {
-  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getMessage</span>() . PHP_EOL;
-  <span class="hljs-comment">// =&gt; Error 2</span>
-  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getPrevious</span>()-&gt;<span class="hljs-title function_ invoke__">getMessage</span>() . PHP_EOL;
-  <span class="hljs-comment">// =&gt; Error 1</span>
-}</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">  try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    throw</span><span style="color:#D73A49"> new</span><span style="color:#005CC5"> Exception</span><span style="color:#24292E">(</span><span style="color:#032F62">"Error 1"</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">  } </span><span style="color:#D73A49">finally</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    throw</span><span style="color:#D73A49"> new</span><span style="color:#005CC5"> Exception</span><span style="color:#24292E">(</span><span style="color:#032F62">"Error 2"</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"><span style="color:#24292E">} </span><span style="color:#D73A49">catch</span><span style="color:#24292E"> (</span><span style="color:#005CC5">Exception</span><span style="color:#24292E"> $e) {</span></span>
+<span class="line"><span style="color:#005CC5">  echo</span><span style="color:#24292E"> $e</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getMessage</span><span style="color:#24292E">() </span><span style="color:#D73A49">.</span><span style="color:#005CC5"> PHP_EOL</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#6A737D">  // => Error 2</span></span>
+<span class="line"><span style="color:#005CC5">  echo</span><span style="color:#24292E"> $e</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getPrevious</span><span style="color:#24292E">()</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getMessage</span><span style="color:#24292E">() </span><span style="color:#D73A49">.</span><span style="color:#005CC5"> PHP_EOL</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#6A737D">  // => Error 1</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
                
               <p>
                  この知識を元に、トークンの出力部を解析してみる。
@@ -273,15 +276,17 @@
                  出力部をコメントや改行を追加して再掲する: 
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-<span class="hljs-keyword">try</span> {
-  <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>);
-} <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Throwable</span> <span class="hljs-variable">$e</span>) {
-  <span class="hljs-keyword">while</span> (<span class="hljs-variable">$e</span> = <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getPrevious</span>()) {
-    <span class="hljs-title function_ invoke__">printf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getLine</span>() + <span class="hljs-number">23</span>);
-  }
-  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
-}</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#6F42C1">  f</span><span style="color:#24292E">(</span><span style="color:#6F42C1">g</span><span style="color:#24292E">() </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">} </span><span style="color:#D73A49">catch</span><span style="color:#24292E"> (</span><span style="color:#005CC5">Throwable</span><span style="color:#24292E"> $e) {</span></span>
+<span class="line"><span style="color:#D73A49">  while</span><span style="color:#24292E"> ($e </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $e</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getPrevious</span><span style="color:#24292E">()) {</span></span>
+<span class="line"><span style="color:#005CC5">    printf</span><span style="color:#24292E">(</span><span style="color:#032F62">'%c'</span><span style="color:#24292E">, $e</span><span style="color:#D73A49">-></span><span style="color:#6F42C1">getLine</span><span style="color:#24292E">() </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 23</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"><span style="color:#005CC5">  echo</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
                
               <p>
                  出力をおこなう <code>catch</code> 節を見てみると、 <code>Throwable::getPrevious()</code> を呼び出してエラーチェインを辿り、 <code>Throwable::getLine()</code> でエラーが発生した行数を取得している。その行数に <code>23</code> なるマジックナンバーを足し、フォーマット指定子 <code>%c</code> で出力している。
@@ -291,7 +296,9 @@
                  フォーマット指定子 <code>%c</code> は、整数を ASCII コード<span></span> と見做して印字する。トークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> の <code>b</code> であれば、ASCII コード <code>98</code> なので、75 行目で発生したエラー、
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-number">1</span>, <span class="hljs-number">20</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">20</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span></code></pre>
+              </div>
                
               <p>
                  によって表現されている。エラーを起こす方法はいろいろと考えられるが、今回はゼロ除算を使った。
@@ -308,38 +315,44 @@
                 <code>f()</code> の定義を再掲する (エラーオブジェクトの行数を利用しているので、一部分だけ抜き出すと値が変わることに注意): 
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$i</span></span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$i</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-title function_ invoke__">f</span>();
-  <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">match</span> (<span class="hljs-variable">$i</span>) {
-      <span class="hljs-number">0</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>, <span class="hljs-comment">// 12 行目</span>
-
-
-
-      <span class="hljs-number">15</span>, <span class="hljs-number">36</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">14</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-      <span class="hljs-number">37</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>,
-
-      <span class="hljs-comment">// (略)</span>
-
-      <span class="hljs-number">30</span> =&gt; <span class="hljs-number">0</span> / <span class="hljs-number">0</span>, <span class="hljs-comment">// 97 行目</span>
-    };
-  } <span class="hljs-keyword">finally</span> {
-    <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-variable">$i</span> - <span class="hljs-number">1</span>);
-  }
-}</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E"> $i) {</span></span>
+<span class="line"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) </span><span style="color:#6F42C1">f</span><span style="color:#24292E">();</span></span>
+<span class="line"><span style="color:#D73A49">  try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    match</span><span style="color:#24292E"> ($i) {</span></span>
+<span class="line"><span style="color:#005CC5">      0</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">, </span><span style="color:#6A737D">// 12 行目</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      15</span><span style="color:#24292E">, </span><span style="color:#005CC5">36</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      14</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      37</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">      // (略)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">      30</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">, </span><span style="color:#6A737D">// 97 行目</span></span>
+<span class="line"><span style="color:#24292E">    };</span></span>
+<span class="line"><span style="color:#24292E">  } </span><span style="color:#D73A49">finally</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#6F42C1">    f</span><span style="color:#24292E">($i </span><span style="color:#D73A49">-</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
                
               <p>
                  前述のように、 <code>finally</code> 節でエラーを投げると PHP 処理系が <code>$previous</code> を設定する。ここでは、エラーを繋げるために <code>f()</code> を再帰呼び出ししている。最初に <code>f()</code> を呼び出している箇所を確認すると、
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-<span class="hljs-keyword">try</span> {
-  <span class="hljs-title function_ invoke__">f</span>(<span class="hljs-title function_ invoke__">g</span>() / <span class="hljs-keyword">__LINE__</span>); <span class="hljs-comment">// 3 行目</span></code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#6F42C1">  f</span><span style="color:#24292E">(</span><span style="color:#6F42C1">g</span><span style="color:#24292E">() </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">); </span><span style="color:#6A737D">// 3 行目</span></span></code></pre>
+              </div>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">g</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">__LINE__</span>; <span class="hljs-comment">// 111 行目</span>
-}</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">() {</span></span>
+<span class="line"><span style="color:#D73A49">  return</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">; </span><span style="color:#6A737D">// 111 行目</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
                
               <p>
                 <code>f()</code> には <code>111 / 3</code> で <code>37</code> が渡されることがわかる。そこから 1 ずつ減らして再帰呼び出ししていき、0 より小さくなったら <code>f()</code> を引数なしで呼び出す。引数の数が足りないと呼び出しに失敗するので、再帰はここで止まる。

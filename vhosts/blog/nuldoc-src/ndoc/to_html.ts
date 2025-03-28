@@ -1,30 +1,28 @@
-// @deno-types="../types/highlight-js.d.ts"
-import hljs from "highlight.js";
+import { BundledLanguage, bundledLanguages, codeToHtml } from "shiki";
 import { Document } from "./document.ts";
 import { NuldocError } from "../errors.ts";
 import {
   addClass,
   Element,
-  findFirstChildElement,
   forEachChild,
   forEachChildRecursively,
+  forEachChildRecursivelyAsync,
   Node,
   RawHTML,
   Text,
 } from "../dom.ts";
 
-export default function toHtml(doc: Document): Document {
+export default async function toHtml(doc: Document): Promise<Document> {
   removeUnnecessaryTextNode(doc);
   transformLinkLikeToAnchorElement(doc);
   transformSectionIdAttribute(doc);
   setSectionTitleAnchor(doc);
   transformSectionTitleElement(doc);
-  transformCodeBlockElement(doc);
   transformNoteElement(doc);
   addAttributesToExternalLinkElement(doc);
   setDefaultLangAttribute(doc);
   traverseFootnotes(doc);
-  highlightPrograms(doc);
+  await transformAndHighlightCodeBlockElement(doc);
   return doc;
 }
 
@@ -163,24 +161,6 @@ function transformSectionTitleElement(doc: Document) {
   forEachChild(doc.root, g);
 }
 
-function transformCodeBlockElement(doc: Document) {
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "codeblock") {
-      return;
-    }
-
-    n.name = "pre";
-    addClass(n, "highlight");
-    const codeElement: Element = {
-      kind: "element",
-      name: "code",
-      attributes: new Map(),
-      children: n.children,
-    };
-    n.children = [codeElement];
-  });
-}
-
 function transformNoteElement(doc: Document) {
   forEachChildRecursively(doc.root, (n) => {
     if (n.kind !== "element" || n.name !== "note") {
@@ -254,40 +234,27 @@ function traverseFootnotes(doc: Document) {
   });
 }
 
-function highlightPrograms(doc: Document) {
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "pre") {
+async function transformAndHighlightCodeBlockElement(doc: Document) {
+  await forEachChildRecursivelyAsync(doc.root, async (n) => {
+    if (n.kind !== "element" || n.name !== "codeblock") {
       return;
     }
-    const preClass = n.attributes.get("class") || "";
-    if (!preClass.includes("highlight")) {
-      return;
-    }
-    const codeElement = findFirstChildElement(n, "code");
-    if (!codeElement) {
-      return;
-    }
-    const language = n.attributes.get("language");
-    if (!language) {
-      return;
-    }
-    const sourceCodeNode = codeElement.children[0] as Text | RawHTML;
+
+    const language = n.attributes.get("language") || "text";
+    const sourceCodeNode = n.children[0] as Text | RawHTML;
     const sourceCode = sourceCodeNode.content;
 
-    if (!hljs.getLanguage(language)) {
-      if (language === "zsh") {
-        // highlight.js does not have a language definition for zsh.
-        hljs.registerAliases("zsh", { languageName: "bash" });
-      } else {
-        return;
-      }
-    }
-
-    const highlighted =
-      hljs.highlight(sourceCode, { language: language }).value;
+    const highlighted = await codeToHtml(sourceCode, {
+      lang: language in bundledLanguages ? language as BundledLanguage : "text",
+      theme: "github-light",
+      colorReplacements: {
+        "#fff": "#f5f5f5",
+      },
+    });
 
     sourceCodeNode.content = highlighted;
     sourceCodeNode.raw = true;
-    codeElement.attributes.set("class", "highlight");
+    n.name = "div";
+    n.attributes.set("class", "codeblock");
   });
 }

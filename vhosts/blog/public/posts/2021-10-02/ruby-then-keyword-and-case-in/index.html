@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【Ruby】 then キーワードと case in｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -83,36 +82,40 @@
                使われることは稀だが、Ruby では <code>then</code> がキーワードになっている。次のように使う: 
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> cond <span class="hljs-keyword">then</span>
-  puts <span class="hljs-string">&quot;Y&quot;</span>
-<span class="hljs-keyword">else</span>
-  puts <span class="hljs-string">&quot;N&quot;</span>
-<span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> cond </span><span style="color:#D73A49">then</span></span>
+<span class="line"><span style="color:#005CC5">  puts</span><span style="color:#032F62"> "Y"</span></span>
+<span class="line"><span style="color:#D73A49">else</span></span>
+<span class="line"><span style="color:#005CC5">  puts</span><span style="color:#032F62"> "N"</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
              
             <p>
                このキーワードが現れうる場所はいくつかあり、<code>if</code>、<code>unless</code>、<code>rescue</code>、<code>case</code> 構文がそれに当たる。 上記のように、何か条件を書いた後 <code>then</code> を置き、式がそこで終了していることを示すマーカーとして機能する。
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-comment"># Example:</span>
-
-<span class="hljs-keyword">if</span> x <span class="hljs-keyword">then</span>
-  a
-<span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">unless</span> x <span class="hljs-keyword">then</span>
-  a
-<span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">begin</span>
-  a
-<span class="hljs-keyword">rescue</span> <span class="hljs-keyword">then</span>
-  b
-<span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">case</span> x
-<span class="hljs-keyword">when</span> p <span class="hljs-keyword">then</span>
-  a
-<span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># Example:</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> x </span><span style="color:#D73A49">then</span></span>
+<span class="line"><span style="color:#24292E">  a</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">unless</span><span style="color:#24292E"> x </span><span style="color:#D73A49">then</span></span>
+<span class="line"><span style="color:#24292E">  a</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">begin</span></span>
+<span class="line"><span style="color:#24292E">  a</span></span>
+<span class="line"><span style="color:#D73A49">rescue</span><span style="color:#D73A49"> then</span></span>
+<span class="line"><span style="color:#24292E">  b</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
+<span class="line"><span style="color:#D73A49">when</span><span style="color:#005CC5"> p</span><span style="color:#D73A49"> then</span></span>
+<span class="line"><span style="color:#24292E">  a</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
           </section>
            
           <section id="section--why-then-is-usually-unnecessary">
@@ -121,17 +124,21 @@
                普通 Ruby のコードで <code>then</code> を書くことはない。なぜか。次のコードを実行してみるとわかる。
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#005CC5"> true</span><span style="color:#005CC5"> puts</span><span style="color:#032F62"> 'Hello, World!'</span><span style="color:#D73A49"> end</span></span></code></pre>
+            </div>
              
             <p>
                次のような構文エラーが出力される。
             </p>
              
-            <pre class="highlight"><code>20:1: syntax error, unexpected local variable or method, expecting `then&apos; or &apos;;&apos; or &apos;\n&apos;
-if true puts &apos;Hello, World!&apos; end
-        ^~~~
-20:1: syntax error, unexpected `end&apos;, expecting end-of-input
-...f true puts &apos;Hello, World!&apos; end</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>20:1: syntax error, unexpected local variable or method, expecting `then' or ';' or '\n'</span></span>
+<span class="line"><span>if true puts 'Hello, World!' end</span></span>
+<span class="line"><span>        ^~~~</span></span>
+<span class="line"><span>20:1: syntax error, unexpected `end', expecting end-of-input</span></span>
+<span class="line"><span>...f true puts 'Hello, World!' end</span></span></code></pre>
+            </div>
              
             <p>
                二つ目のメッセージは無視して一つ目を読むと、<code>then</code> か <code>;</code> か改行が来るはずのところ変数だかメソッドだかが現れたことによりエラーとなっているようだ。
@@ -141,8 +148,10 @@ if true puts &apos;Hello, World!&apos; end
                ポイントは改行が <code>then</code> (や <code>;</code>) の代わりとなることである。<code>true</code> の後に改行を入れてみる。
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> <span class="hljs-literal">true</span>
-puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#005CC5"> true</span></span>
+<span class="line"><span style="color:#005CC5">puts</span><span style="color:#032F62"> 'Hello, World!'</span><span style="color:#D73A49"> end</span></span></code></pre>
+            </div>
              
             <p>
                無事 Hello, World! と出力されるようになった。
@@ -155,21 +164,27 @@ puts <span class="hljs-string">&#x27;Hello, World!&#x27;</span> <span class="hlj
                なぜ <code>then</code> や <code>;</code> や改行 (以下 「<code>then</code> 等」) が必要なのだろうか。次の例を見てほしい: 
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">if</span> a b <span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> a b </span><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
              
             <p>
               <code>then</code> も <code>;</code> も改行もないのでエラーになるが、これは条件式がどこまで続いているのかわからないためだ。この例は二通りに解釈できる。
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-comment"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span>
-<span class="hljs-keyword">if</span> a <span class="hljs-keyword">then</span>
-b
-<span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span></span>
+<span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> a </span><span style="color:#D73A49">then</span></span>
+<span class="line"><span style="color:#24292E">b</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-comment"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span>
-<span class="hljs-comment"># その結果が truthy なら何もしない</span>
-<span class="hljs-keyword">if</span> a(b) <span class="hljs-keyword">then</span>
-<span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span></span>
+<span class="line"><span style="color:#6A737D"># その結果が truthy なら何もしない</span></span>
+<span class="line"><span style="color:#D73A49">if</span><span style="color:#6F42C1"> a</span><span style="color:#24292E">(b) </span><span style="color:#D73A49">then</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
              
             <p>
               <code>then</code> 等はこの曖昧性を排除するためにあり、条件式は <code>if</code> から <code>then</code> 等までの間にある、ということを明確にする。 C系の <code>if</code> 後に来る <code>(</code>/<code>)</code> や、Python の <code>:</code>、Rust/Go/Swift などの <code>{</code> も同じ役割を持つ。
@@ -190,39 +205,43 @@ b
                <a href="https://github.com/ruby/ruby/blob/221ca0f8281d39f0dfdfe13b2448875384bbf735/parse.y#L3961-L3986" rel="noreferrer" target="_blank">https://github.com/ruby/ruby/blob/221ca0f8281d39f0dfdfe13b2448875384bbf735/parse.y#L3961-L3986</a> 
             </p>
              
-            <pre class="highlight" language="yacc"><code>p_case_body : keyword_in
-{
-  SET_LEX_STATE(EXPR_BEG|EXPR_LABEL);
-  p-&gt;command_start = FALSE;
-  $&lt;ctxt&gt;1 = p-&gt;ctxt;
-  p-&gt;ctxt.in_kwarg = 1;
-  $&lt;tbl&gt;$ = push_pvtbl(p);
-}
-{
-  $&lt;tbl&gt;$ = push_pktbl(p);
-}
-p_top_expr then
-{
-  pop_pktbl(p, $&lt;tbl&gt;3);
-  pop_pvtbl(p, $&lt;tbl&gt;2);
-  p-&gt;ctxt.in_kwarg = $&lt;ctxt&gt;1.in_kwarg;
-}
-compstmt
-p_cases
-{
-  /*%%%*/
-  $$ = NEW_IN($4, $7, $8, &amp;@$);
-  /*% %*/
-  /*% ripper: in!($4, $7, escape_Qundef($8)) %*/
-}
-;</code></pre>
+            <div class="codeblock" language="yacc">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>p_case_body : keyword_in</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  SET_LEX_STATE(EXPR_BEG|EXPR_LABEL);</span></span>
+<span class="line"><span>  p->command_start = FALSE;</span></span>
+<span class="line"><span>  $&#x3C;ctxt>1 = p->ctxt;</span></span>
+<span class="line"><span>  p->ctxt.in_kwarg = 1;</span></span>
+<span class="line"><span>  $&#x3C;tbl>$ = push_pvtbl(p);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  $&#x3C;tbl>$ = push_pktbl(p);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>p_top_expr then</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  pop_pktbl(p, $&#x3C;tbl>3);</span></span>
+<span class="line"><span>  pop_pvtbl(p, $&#x3C;tbl>2);</span></span>
+<span class="line"><span>  p->ctxt.in_kwarg = $&#x3C;ctxt>1.in_kwarg;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>compstmt</span></span>
+<span class="line"><span>p_cases</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  /*%%%*/</span></span>
+<span class="line"><span>  $$ = NEW_IN($4, $7, $8, &#x26;@$);</span></span>
+<span class="line"><span>  /*% %*/</span></span>
+<span class="line"><span>  /*% ripper: in!($4, $7, escape_Qundef($8)) %*/</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>;</span></span></code></pre>
+            </div>
              
             <p>
                簡略版: 
             </p>
              
-            <pre class="highlight" language="yacc"><code>p_case_body : keyword_in p_top_expr then compstmt p_cases
-;</code></pre>
+            <div class="codeblock" language="yacc">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>p_case_body : keyword_in p_top_expr then compstmt p_cases</span></span>
+<span class="line"><span>;</span></span></code></pre>
+            </div>
              
             <p>
                ここで、<code>keyword_in</code> は文字通り <code>in</code>、<code>p_top_expr</code> はいわゆるパターン、<code>then</code> は <code>then</code> キーワードのことではなく、この記事で <code>then</code> 等と呼んでいるもの、つまり <code>then</code> キーワード、<code>;</code>、改行のいずれかである。
@@ -232,36 +251,40 @@ p_cases
                これにより、<code>case</code> - <code>when</code> による従来の構文と同じように、<code>then</code> 等をパターンの後ろに挿入すればよいことがわかった。つまり次の3通りのいずれかになる: 
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">case</span> x
-<span class="hljs-keyword">in</span> <span class="hljs-number">1</span> <span class="hljs-keyword">then</span> a
-<span class="hljs-keyword">in</span> <span class="hljs-number">2</span> <span class="hljs-keyword">then</span> b
-<span class="hljs-keyword">in</span> <span class="hljs-number">3</span> <span class="hljs-keyword">then</span> c
-<span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">case</span> x
-<span class="hljs-keyword">in</span> <span class="hljs-number">1</span>
-  a
-<span class="hljs-keyword">in</span> <span class="hljs-number">2</span>
-  b
-<span class="hljs-keyword">in</span> <span class="hljs-number">3</span>
-  c
-<span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">case</span> x
-<span class="hljs-keyword">in</span> <span class="hljs-number">1</span>; a
-<span class="hljs-keyword">in</span> <span class="hljs-number">2</span>; b
-<span class="hljs-keyword">in</span> <span class="hljs-number">3</span>; c
-<span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> a</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 2</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> b</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> c</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 1</span></span>
+<span class="line"><span style="color:#24292E">  a</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 2</span></span>
+<span class="line"><span style="color:#24292E">  b</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 3</span></span>
+<span class="line"><span style="color:#24292E">  c</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">; a</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 2</span><span style="color:#24292E">; b</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 3</span><span style="color:#24292E">; c</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
              
             <p>
                ところで、<code>p_top_expr</code> には <code>if</code> による guard clause が書けるので、その場合は <code>if</code> - <code>then</code> と似たような見た目になる。
             </p>
              
-            <pre class="highlight" language="ruby"><code class="highlight"><span class="hljs-keyword">case</span> x
-<span class="hljs-keyword">in</span> <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> a
-<span class="hljs-keyword">in</span> n <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> b
-<span class="hljs-keyword">in</span> n <span class="hljs-keyword">then</span> c
-<span class="hljs-keyword">end</span></code></pre>
+            <div class="codeblock" language="ruby">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> a</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#24292E"> n </span><span style="color:#D73A49">if</span><span style="color:#24292E"> n </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> b</span></span>
+<span class="line"><span style="color:#D73A49">in</span><span style="color:#24292E"> n </span><span style="color:#D73A49">then</span><span style="color:#24292E"> c</span></span>
+<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+            </div>
           </section>
            
           <section id="section--outro">

@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【PHP】 fizzbuzz を書く。1行あたり2文字で。｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -125,80 +124,82 @@
                特に、C言語でこのような試みをおこなったことがあるかたならそう思うだろう。事実、Cでのこの制約はほとんど無意味に等しい。
             </p>
              
-            <pre class="highlight" language="c"><code class="highlight">#\
-i\
-n\
-c\
-l\
-u\
-d\
-e\
-&lt;\
-s\
-t\
-d\
-i\
-o\
-.\
-h\
-&gt;\
-<span class="hljs-comment">/*
-*/</span>
-i\
-n\
-t\
-<span class="hljs-comment">/*
-*/</span>
-m\
-a\
-i\
-n(
-){
-f\
-o\
-r(
-i\
-n\
-t\
-<span class="hljs-comment">/*
-*/</span>
-i=
-<span class="hljs-number">1</span>;
-i&lt;
-<span class="hljs-number">1</span>\
-<span class="hljs-number">0</span>\
-<span class="hljs-number">0</span>;
-i\
-+\
-+)
-<span class="hljs-keyword">if</span>
-(i
-%\
-<span class="hljs-number">15</span>
-==
-<span class="hljs-number">0</span>)
-p\
-r\
-i\
-n\
-t\
-f(
-<span class="hljs-string">&quot;\
-F\
-i\
-z\
-z\
-B\
-u\
-z\
-z\
-%\
-c\
-&quot;</span>,
-<span class="hljs-number">10</span>
-);
-
-<span class="hljs-comment">/* あとは同じように普通のプログラムを変形するだけなので省略 */</span></code></pre>
+            <div class="codeblock" language="c">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">n</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">c</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">l</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">u</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">d</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">e</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">s</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">t</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">d</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">o</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">.</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">h</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#D73A49">></span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">*/</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">n</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">t</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">*/</span></span>
+<span class="line"><span style="color:#24292E">m</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">a</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#6F42C1">n</span><span style="color:#24292E">(</span></span>
+<span class="line"><span style="color:#24292E">){</span></span>
+<span class="line"><span style="color:#24292E">f</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">o</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#6F42C1">r</span><span style="color:#24292E">(</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">n</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">t</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">*/</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#D73A49">=</span></span>
+<span class="line"><span style="color:#005CC5">1</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#D73A49">&#x3C;</span></span>
+<span class="line"><span style="color:#005CC5">1\</span></span>
+<span class="line"><span style="color:#005CC5">0\</span></span>
+<span class="line"><span style="color:#005CC5">0</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#D73A49">+</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#D73A49">+</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#D73A49">if</span></span>
+<span class="line"><span style="color:#24292E">(i</span></span>
+<span class="line"><span style="color:#D73A49">%</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#005CC5">15</span></span>
+<span class="line"><span style="color:#D73A49">==</span></span>
+<span class="line"><span style="color:#005CC5">0</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#24292E">p</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">r</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">n</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#24292E">t</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#6F42C1">f</span><span style="color:#24292E">(</span></span>
+<span class="line"><span style="color:#032F62">"</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">F</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">i</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">z</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">z</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">B</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">u</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">z</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">z</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#B31D28;font-style:italic">%</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">c</span><span style="color:#005CC5">\</span></span>
+<span class="line"><span style="color:#032F62">"</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">10</span></span>
+<span class="line"><span style="color:#24292E">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/* あとは同じように普通のプログラムを変形するだけなので省略 */</span></span></code></pre>
+            </div>
              
             <p>
                バックスラッシュを使った行継続がトークンを区切らない、というのがポイントだ。
@@ -250,10 +251,12 @@ c\
                また、2文字だと文字列がまともに書けないのも辛い。<code>&apos;&apos;</code> だけで2文字使うので、「1文字の文字列リテラル」というものを書くことができない。PHP では文字列リテラル中に生の改行が書けるので 
             </p>
              
-            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$a</span>
-=<span class="hljs-string">&#x27;
-a&#x27;</span>
-;;</code></pre>
+            <div class="codeblock" language="php">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$a</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">a'</span></span>
+<span class="line"><span style="color:#24292E">;;</span></span></code></pre>
+            </div>
              
             <p>
                とすると <code>$a</code> は <code>&quot;\na&quot;</code> になるのだが、余計な改行が入ってしまう。
@@ -272,11 +275,13 @@ a&#x27;</span>
                  まずは普通に書くとしよう。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">1</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-number">100</span>; <span class="hljs-variable">$i</span>++) {
-  <span class="hljs-keyword">echo</span> ((<span class="hljs-variable">$i</span> % <span class="hljs-number">3</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Fizz&#x27;</span>) . (<span class="hljs-variable">$i</span> % <span class="hljs-number">5</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Buzz&#x27;</span>) ?: <span class="hljs-variable">$i</span>) . <span class="hljs-string">&quot;\n&quot;</span>;
-}</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">for</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">; $i </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 100</span><span style="color:#24292E">; $i</span><span style="color:#D73A49">++</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#005CC5">  echo</span><span style="color:#24292E"> (($i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> ?</span><span style="color:#032F62"> ''</span><span style="color:#D73A49"> :</span><span style="color:#032F62"> 'Fizz'</span><span style="color:#24292E">) </span><span style="color:#D73A49">.</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 5</span><span style="color:#D73A49"> ?</span><span style="color:#032F62"> ''</span><span style="color:#D73A49"> :</span><span style="color:#032F62"> 'Buzz'</span><span style="color:#24292E">) </span><span style="color:#D73A49">?:</span><span style="color:#24292E"> $i) </span><span style="color:#D73A49">.</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
                
               <p>
                  素直に書いた fizzbuzz とは言い難いが、このくらいは普通だということにしておかないと、この先がやっていられないので許してほしい。
@@ -289,14 +294,16 @@ a&#x27;</span>
                 <code>for</code> は、3文字もある長いキーワードである。こんなものは使えない。<code>array_</code> 系の関数を使って、適当に置き換えるとしよう。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>);
-<span class="hljs-title function_ invoke__">array_walk</span>(
-<span class="hljs-variable">$s</span>,
-fn(<span class="hljs-variable">$i</span>) =&gt;
-<span class="hljs-title function_ invoke__">printf</span>(((<span class="hljs-variable">$i</span> % <span class="hljs-number">3</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Fizz&#x27;</span>) . (<span class="hljs-variable">$i</span> % <span class="hljs-number">5</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Buzz&#x27;</span>) ?: <span class="hljs-variable">$i</span>) . <span class="hljs-string">&quot;\n&quot;</span>),
-);</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> range</span><span style="color:#24292E">(</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">100</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#005CC5">array_walk</span><span style="color:#24292E">(</span></span>
+<span class="line"><span style="color:#24292E">$s,</span></span>
+<span class="line"><span style="color:#D73A49">fn</span><span style="color:#24292E">($i) =></span></span>
+<span class="line"><span style="color:#005CC5">printf</span><span style="color:#24292E">((($i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> ?</span><span style="color:#032F62"> ''</span><span style="color:#D73A49"> :</span><span style="color:#032F62"> 'Fizz'</span><span style="color:#24292E">) </span><span style="color:#D73A49">.</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 5</span><span style="color:#D73A49"> ?</span><span style="color:#032F62"> ''</span><span style="color:#D73A49"> :</span><span style="color:#032F62"> 'Buzz'</span><span style="color:#24292E">) </span><span style="color:#D73A49">?:</span><span style="color:#24292E"> $i) </span><span style="color:#D73A49">.</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">),</span></span>
+<span class="line"><span style="color:#24292E">);</span></span></code></pre>
+              </div>
                
               <p>
                 <code>array_walk</code> や <code>range</code>、<code>printf</code> といった <code>for</code> よりも長いトークンが現れてしまったが、これは次節で直すことにする。なお、<code>echo</code> は文 (statement) であり式 (expression) ではないので、式である <code>printf</code> に置き換えた。
@@ -309,18 +316,20 @@ fn(<span class="hljs-variable">$i</span>) =&gt;
                 <code>range</code>、<code>array_walk</code>、<code>printf</code> は長すぎるのでどうにかせねばならない。ここで、PHP の可変関数を使う。可変関数とは、関数名が文字列として入った変数を経由して、関数を呼び出す機能である。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-variable">$r</span> = <span class="hljs-string">&#x27;range&#x27;</span>;
-<span class="hljs-variable">$w</span> = <span class="hljs-string">&#x27;array_walk&#x27;</span>;
-<span class="hljs-variable">$p</span> = <span class="hljs-string">&#x27;printf&#x27;</span>;
-
-<span class="hljs-variable">$s</span> = <span class="hljs-variable">$r</span>(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>);
-<span class="hljs-variable">$w</span>(
-<span class="hljs-variable">$s</span>,
-<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$i</span></span>) =&gt;</span>
-<span class="hljs-variable">$p</span>(((<span class="hljs-variable">$i</span> % <span class="hljs-number">3</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Fizz&#x27;</span>) . (<span class="hljs-variable">$i</span> % <span class="hljs-number">5</span> ? <span class="hljs-string">&#x27;&#x27;</span> : <span class="hljs-string">&#x27;Buzz&#x27;</span>) ?: <span class="hljs-variable">$i</span>) . <span class="hljs-string">&quot;\n&quot;</span>),
-);</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">$r </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'range'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$w </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'array_walk'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$p </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'printf'</span><span style="color:#24292E">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $r(</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">100</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">$w(</span></span>
+<span class="line"><span style="color:#24292E">$s,</span></span>
+<span class="line"><span style="color:#D73A49">fn</span><span style="color:#24292E">($i) =></span></span>
+<span class="line"><span style="color:#24292E">$p((($i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> ?</span><span style="color:#032F62"> ''</span><span style="color:#D73A49"> :</span><span style="color:#032F62"> 'Fizz'</span><span style="color:#24292E">) </span><span style="color:#D73A49">.</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 5</span><span style="color:#D73A49"> ?</span><span style="color:#032F62"> ''</span><span style="color:#D73A49"> :</span><span style="color:#032F62"> 'Buzz'</span><span style="color:#24292E">) </span><span style="color:#D73A49">?:</span><span style="color:#24292E"> $i) </span><span style="color:#D73A49">.</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">),</span></span>
+<span class="line"><span style="color:#24292E">);</span></span></code></pre>
+              </div>
                
               <p>
                  これで関数を呼び出している所は短くなった。では、<code>$r</code> や <code>$w</code> や <code>$p</code>、また <code>&apos;Fizz&apos;</code> や <code>&apos;Buzz&apos;</code> はどうやって 1 行 2 文字に収めるのか。次のテクニックへ移ろう。
@@ -345,26 +354,30 @@ fn(<span class="hljs-variable">$i</span>) =&gt;
                  というルールがない場合、「未定義の定数が評価された場合、その定数の名前が値になる」という PHP 7.x までの仕様が利用できる。例えば、 <code>Fizz</code> という文字列が欲しければ、次のようにする。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$f</span>
-=F
-.i
-.z
-.z
-;;</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$f</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#005CC5">F</span></span>
+<span class="line"><span style="color:#D73A49">.</span><span style="color:#005CC5">i</span></span>
+<span class="line"><span style="color:#D73A49">.</span><span style="color:#005CC5">z</span></span>
+<span class="line"><span style="color:#D73A49">.</span><span style="color:#005CC5">z</span></span>
+<span class="line"><span style="color:#24292E">;;</span></span></code></pre>
+              </div>
                
               <p>
                  こうして簡単に文字列を作れる。なお、この仕様は 7.x 時点でも警告を受けるので、<code>@</code> 演算子を使って抑制してやるとよい。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$f</span>
-=@
-F.
-@i
-.<span class="hljs-comment">#</span>
-@z
-.<span class="hljs-comment">#</span>
-@z
-;;</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$f</span></span>
+<span class="line"><span style="color:#D73A49">=@</span></span>
+<span class="line"><span style="color:#005CC5">F</span><span style="color:#D73A49">.</span></span>
+<span class="line"><span style="color:#D73A49">@</span><span style="color:#005CC5">i</span></span>
+<span class="line"><span style="color:#D73A49">.</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#D73A49">@</span><span style="color:#005CC5">z</span></span>
+<span class="line"><span style="color:#D73A49">.</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#D73A49">@</span><span style="color:#005CC5">z</span></span>
+<span class="line"><span style="color:#24292E">;;</span></span></code></pre>
+              </div>
                
               <p>
                  むしろ、このことがわかっていたからこそ PHP 8.x での動作を要件に課したところがある。
@@ -381,66 +394,74 @@ F.
                  ずばり、文字列同士のビット演算を使う。PHP では、文字列同士でビット演算 (<code>&amp;</code>、<code>|</code>、<code>^</code>) をした場合、文字列の各バイトごとに指定したビット演算がなされ、それを結合したものが演算結果となる。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$a</span> = <span class="hljs-string">&quot;12345&quot;</span>;
-<span class="hljs-variable">$b</span> = <span class="hljs-string">&quot;world&quot;</span>;
-
-<span class="hljs-comment">// $a ^ $b は次のコードと同じ</span>
-<span class="hljs-variable">$result</span> = <span class="hljs-string">&#x27;&#x27;</span>;
-<span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-title function_ invoke__">min</span>(<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$a</span>), <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$b</span>)); <span class="hljs-variable">$i</span>++) {
-<span class="hljs-variable">$result</span> .= <span class="hljs-variable">$a</span>[<span class="hljs-variable">$i</span>] ^ <span class="hljs-variable">$b</span>[<span class="hljs-variable">$i</span>];
-}
-
-<span class="hljs-keyword">echo</span> <span class="hljs-variable">$result</span>;
-<span class="hljs-comment">// =&gt; F]AXQ</span></code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$a </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "12345"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "world"</span><span style="color:#24292E">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// $a ^ $b は次のコードと同じ</span></span>
+<span class="line"><span style="color:#24292E">$result </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ''</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">for</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">; $i </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> min</span><span style="color:#24292E">(</span><span style="color:#005CC5">strlen</span><span style="color:#24292E">($a), </span><span style="color:#005CC5">strlen</span><span style="color:#24292E">($b)); $i</span><span style="color:#D73A49">++</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#24292E">$result </span><span style="color:#D73A49">.=</span><span style="color:#24292E"> $a[$i] </span><span style="color:#D73A49">^</span><span style="color:#24292E"> $b[$i];</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#24292E"> $result;</span></span>
+<span class="line"><span style="color:#6A737D">// => F]AXQ</span></span></code></pre>
+              </div>
                
               <p>
                  これを踏まえ、次のコードを見てみよう。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span> = <span class="hljs-string">&quot;x\nOm\n&quot;</span>;
-<span class="hljs-variable">$y</span> = <span class="hljs-string">&quot;\nk!\no&quot;</span>;
-<span class="hljs-variable">$r</span> = <span class="hljs-variable">$x</span> ^ <span class="hljs-variable">$y</span>;
-<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$r</span>\n&quot;</span>;</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "x</span><span style="color:#005CC5">\n</span><span style="color:#032F62">Om</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">k!</span><span style="color:#005CC5">\n</span><span style="color:#032F62">o"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$r </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">^</span><span style="color:#24292E"> $y;</span></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#032F62"> "</span><span style="color:#24292E">$r</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span></code></pre>
+              </div>
                
               <p>
                  実行すると、<code>range</code> が表示される。さて、PHP では文字列リテラル中に生の改行を直接書いてもよいのだった (「主な障害」の節を参照のこと)。書きかえてみよう。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span>
-=<span class="hljs-string">&#x27;x
-Om
-&#x27;</span>;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-k!
-o&#x27;</span>
-;
-
-<span class="hljs-variable">$r</span> = <span class="hljs-variable">$x</span> ^ <span class="hljs-variable">$y</span>;
-<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$r</span>\n&quot;</span>;</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'x</span></span>
+<span class="line"><span style="color:#032F62">Om</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">k!</span></span>
+<span class="line"><span style="color:#032F62">o'</span></span>
+<span class="line"><span style="color:#24292E">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">$r </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">^</span><span style="color:#24292E"> $y;</span></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#032F62"> "</span><span style="color:#24292E">$r</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span></code></pre>
+              </div>
                
               <p>
                  さらに <code>#</code> を使って適当に調整すると、次のようになる。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;x
-Om
-&#x27;</span>;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-k!
-o&#x27;</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$r</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-
-<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$r</span>\n&quot;</span>;</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'x</span></span>
+<span class="line"><span style="color:#032F62">Om</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">k!</span></span>
+<span class="line"><span style="color:#032F62">o'</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$r</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#032F62"> "</span><span style="color:#24292E">$r</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span></code></pre>
+              </div>
                
               <p>
                  1行あたり2文字で、<code>range</code> という文字列を生成することに成功した。他の必要な文字列にも、同様の処理をほどこす。
@@ -458,155 +479,157 @@ o&#x27;</span>
                完成したものがこちら。
             </p>
              
-            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;i
-S&#x27;</span>
-;;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-b!
-&#x27;</span>;
-<span class="hljs-variable">$c</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;x
-Om
-&#x27;</span>;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-k!
-o&#x27;</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$r</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;k
-Sk
-~}
-Ma
-&#x27;</span>;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-x!
-s!
-k!
-&#x27;</span>;
-<span class="hljs-variable">$w</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;z
-Hd
-G&#x27;</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-x!
-~!
-&#x27;</span>;
-<span class="hljs-variable">$p</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;L
-[p
-&#x27;</span>;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-c!
-&#x27;</span>;
-<span class="hljs-variable">$f</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;H
-[p
-&#x27;</span>;
-<span class="hljs-variable">$y</span>
-=<span class="hljs-string">&#x27;
-_!
-&#x27;</span>;
-<span class="hljs-variable">$b</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$x</span>
-^<span class="hljs-comment">#</span>
-<span class="hljs-variable">$y</span>
-;<span class="hljs-comment">#</span>
-<span class="hljs-variable">$b</span>
-[<span class="hljs-number">1</span>
-]=
-<span class="hljs-variable">$c</span>
-(<span class="hljs-comment">#</span>
-<span class="hljs-number">13</span>
-*<span class="hljs-number">9</span>
-);
-<span class="hljs-variable">$s</span>
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$r</span>
-(<span class="hljs-number">1</span>
-,(
-<span class="hljs-number">10</span>
-**
-<span class="hljs-number">2</span>)
-);
-<span class="hljs-variable">$w</span>
-(<span class="hljs-comment">#</span>
-<span class="hljs-variable">$s</span>
-,<span class="hljs-comment">#</span>
-<span class="hljs-function"><span class="hljs-keyword">fn</span>
-(<span class="hljs-params">#
-<span class="hljs-variable">$i</span>
-</span>)#
-=&gt;</span>
-<span class="hljs-variable">$p</span>
-((
-(<span class="hljs-comment">#</span>
-<span class="hljs-variable">$i</span>
-%<span class="hljs-number">3</span>
-?<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;&#x27;</span>
-:<span class="hljs-comment">#</span>
-<span class="hljs-variable">$f</span>
-).
-(<span class="hljs-comment">#</span>
-<span class="hljs-variable">$i</span>
-%<span class="hljs-number">5</span>
-?<span class="hljs-comment">#</span>
-<span class="hljs-string">&#x27;&#x27;</span>
-:<span class="hljs-comment">#</span>
-<span class="hljs-variable">$b</span>
-)?
-:<span class="hljs-comment">#</span>
-<span class="hljs-variable">$i</span>
-)<span class="hljs-comment">#</span>
-.<span class="hljs-string">&#x27;
-&#x27;</span>)
-);</code></pre>
+            <div class="codeblock" language="php">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'i</span></span>
+<span class="line"><span style="color:#032F62">S'</span></span>
+<span class="line"><span style="color:#24292E">;;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">b!</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$c</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'x</span></span>
+<span class="line"><span style="color:#032F62">Om</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">k!</span></span>
+<span class="line"><span style="color:#032F62">o'</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$r</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'k</span></span>
+<span class="line"><span style="color:#032F62">Sk</span></span>
+<span class="line"><span style="color:#032F62">~}</span></span>
+<span class="line"><span style="color:#032F62">Ma</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">x!</span></span>
+<span class="line"><span style="color:#032F62">s!</span></span>
+<span class="line"><span style="color:#032F62">k!</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$w</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'z</span></span>
+<span class="line"><span style="color:#032F62">Hd</span></span>
+<span class="line"><span style="color:#032F62">G'</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">x!</span></span>
+<span class="line"><span style="color:#032F62">~!</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$p</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'L</span></span>
+<span class="line"><span style="color:#032F62">[p</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">c!</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$f</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">'H</span></span>
+<span class="line"><span style="color:#032F62">[p</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">_!</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$b</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$x</span></span>
+<span class="line"><span style="color:#D73A49">^</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$y</span></span>
+<span class="line"><span style="color:#24292E">;</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$b</span></span>
+<span class="line"><span style="color:#24292E">[</span><span style="color:#005CC5">1</span></span>
+<span class="line"><span style="color:#24292E">]</span><span style="color:#D73A49">=</span></span>
+<span class="line"><span style="color:#24292E">$c</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#005CC5">13</span></span>
+<span class="line"><span style="color:#D73A49">*</span><span style="color:#005CC5">9</span></span>
+<span class="line"><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">$s</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$r</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#005CC5">1</span></span>
+<span class="line"><span style="color:#24292E">,(</span></span>
+<span class="line"><span style="color:#005CC5">10</span></span>
+<span class="line"><span style="color:#D73A49">**</span></span>
+<span class="line"><span style="color:#005CC5">2</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">$w</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$s</span></span>
+<span class="line"><span style="color:#24292E">,</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#005CC5">fn</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$i</span></span>
+<span class="line"><span style="color:#24292E">)</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#D73A49">=></span></span>
+<span class="line"><span style="color:#24292E">$p</span></span>
+<span class="line"><span style="color:#24292E">((</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$i</span></span>
+<span class="line"><span style="color:#D73A49">%</span><span style="color:#005CC5">3</span></span>
+<span class="line"><span style="color:#D73A49">?</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">''</span></span>
+<span class="line"><span style="color:#D73A49">:</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$f</span></span>
+<span class="line"><span style="color:#24292E">)</span><span style="color:#D73A49">.</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$i</span></span>
+<span class="line"><span style="color:#D73A49">%</span><span style="color:#005CC5">5</span></span>
+<span class="line"><span style="color:#D73A49">?</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#032F62">''</span></span>
+<span class="line"><span style="color:#D73A49">:</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$b</span></span>
+<span class="line"><span style="color:#24292E">)</span><span style="color:#D73A49">?</span></span>
+<span class="line"><span style="color:#D73A49">:</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$i</span></span>
+<span class="line"><span style="color:#24292E">)</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#D73A49">.</span><span style="color:#032F62">'</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#24292E">);</span></span></code></pre>
+            </div>
           </section>
            
           <section id="section--outro">
@@ -626,18 +649,20 @@ _!
                PHP では、バッククォートを使ってシェルを呼び出せる。これは <code>shell_exec</code> 関数と等価である。さて、PHP ではバックスラッシュによる行継続が使えないと書いたが、シェルでは使える (当然だが、呼び出されるシェルに依存する。Bash なら大丈夫だろう。知らんけど)。
             </p>
              
-            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-title function_ invoke__">printf</span>(`
-e\
-c\
-h\
-o\
-\
-<span class="hljs-number">1</span>\
-<span class="hljs-number">2</span>\
-<span class="hljs-number">3</span>\
-`);</code></pre>
+            <div class="codeblock" language="php">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">printf</span><span style="color:#24292E">(</span><span style="color:#032F62">`</span></span>
+<span class="line"><span style="color:#032F62">e\</span></span>
+<span class="line"><span style="color:#032F62">c\</span></span>
+<span class="line"><span style="color:#032F62">h\</span></span>
+<span class="line"><span style="color:#032F62">o\</span></span>
+<span class="line"><span style="color:#032F62">\</span></span>
+<span class="line"><span style="color:#032F62">1\</span></span>
+<span class="line"><span style="color:#032F62">2\</span></span>
+<span class="line"><span style="color:#032F62">3\</span></span>
+<span class="line"><span style="color:#032F62">`</span><span style="color:#24292E">);</span></span></code></pre>
+            </div>
              
             <p>
                なお、ここでは簡単のため出力に <code>printf</code> をそのまま使っているが、実際には <code>printf</code> という文字列を合成して可変関数で呼び出す。
@@ -663,56 +688,62 @@ o\
                もうこれ以上は不可能だと思っていたのだが、この記事の執筆中に解決する方法を思いついたので載せておく。
             </p>
              
-            <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-
-<span class="hljs-variable">$c</span> = <span class="hljs-string">&#x27;chr&#x27;</span>;
-
-${
-<span class="hljs-string">&#x27;_
-&#x27;</span>}
-=<span class="hljs-comment">#</span>
-<span class="hljs-variable">$c</span>
-(<span class="hljs-comment">#</span>
-<span class="hljs-number">32</span>
-).
-<span class="hljs-variable">$c</span>
-(<span class="hljs-comment">#</span>
-<span class="hljs-number">92</span>
-);
-
-<span class="hljs-title function_ invoke__">printf</span>(`
-e\
-c\
-h\
-o\
-${
-<span class="hljs-string">&#x27;_
-&#x27;</span>}
-<span class="hljs-number">1</span>\
-<span class="hljs-number">2</span>\
-<span class="hljs-number">3</span>\
-`);</code></pre>
+            <div class="codeblock" language="php">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">$c </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'chr'</span><span style="color:#24292E">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">${</span></span>
+<span class="line"><span style="color:#032F62">'_</span></span>
+<span class="line"><span style="color:#032F62">'</span><span style="color:#24292E">}</span></span>
+<span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#24292E">$c</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#005CC5">32</span></span>
+<span class="line"><span style="color:#24292E">)</span><span style="color:#D73A49">.</span></span>
+<span class="line"><span style="color:#24292E">$c</span></span>
+<span class="line"><span style="color:#24292E">(</span><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#005CC5">92</span></span>
+<span class="line"><span style="color:#24292E">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">printf</span><span style="color:#24292E">(</span><span style="color:#032F62">`</span></span>
+<span class="line"><span style="color:#032F62">e\</span></span>
+<span class="line"><span style="color:#032F62">c\</span></span>
+<span class="line"><span style="color:#032F62">h\</span></span>
+<span class="line"><span style="color:#032F62">o\</span></span>
+<span class="line"><span style="color:#032F62">${</span></span>
+<span class="line"><span style="color:#032F62">'_</span></span>
+<span class="line"><span style="color:#032F62">'}</span></span>
+<span class="line"><span style="color:#032F62">1\</span></span>
+<span class="line"><span style="color:#032F62">2\</span></span>
+<span class="line"><span style="color:#032F62">3\</span></span>
+<span class="line"><span style="color:#032F62">`</span><span style="color:#24292E">);</span></span></code></pre>
+            </div>
              
             <p>
                先程と同じく、<code>chr</code> や <code>printf</code> を生成する部分は長くなるので省いた。
             </p>
              
-            <pre class="highlight"><code>${
-&apos;_
-&apos;}</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>${</span></span>
+<span class="line"><span>'_</span></span>
+<span class="line"><span>'}</span></span></code></pre>
+            </div>
              
             <p>
                は変数で、中にはスペースとエスケープが入っている (<code>chr(32) . chr(92)</code>)。シェルに渡されている文字列は次のようになる。
             </p>
              
-            <pre class="highlight"><code>e\
-c\
-h\
-o\
-\
-1\
-2\
-3\</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>e\</span></span>
+<span class="line"><span>c\</span></span>
+<span class="line"><span>h\</span></span>
+<span class="line"><span>o\</span></span>
+<span class="line"><span>\</span></span>
+<span class="line"><span>1\</span></span>
+<span class="line"><span>2\</span></span>
+<span class="line"><span>3\</span></span></code></pre>
+            </div>
              
             <p>
                これは、前掲したコマンドと同じだ。かくして、スペースを陽に書かずにシェルをおおよそ自由に扱えるようになった。Fizzbuzz のワンライナーくらいすぐ書けるだろうから、あとはなんとかなるだろう (試してないけど)。
@@ -726,9 +757,11 @@ o\
                ちなみに、PHP 8.2 からは、この記法で Warning が出るようになるようだ。
             </p>
              
-            <pre class="highlight"><code>${
-&apos;_
-&apos;}</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>${</span></span>
+<span class="line"><span>'_</span></span>
+<span class="line"><span>'}</span></span></code></pre>
+            </div>
              
             <p>
                最新版で警告が出るというのも美しくないので、私としては本編の解法を推す。

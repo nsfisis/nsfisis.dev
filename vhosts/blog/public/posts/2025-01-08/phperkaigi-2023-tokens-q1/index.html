@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>PHPerKaigi 2023 トークン問題解説 (1/5)｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -136,7 +135,9 @@
                まずはトークンを得る方法を解説抜きで説明する。次のように実行する。
             </p>
              
-            <pre class="highlight"><code>$ echo &quot;#iwillblog&quot; | php Q1.png &gt;/dev/null</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ echo "#iwillblog" | php Q1.png >/dev/null</span></span></code></pre>
+            </div>
              
             <p>
                無事に実行できていれば「#ModernPHPisStaticallyTypedLanguage」というトークンが得られる。
@@ -151,7 +152,9 @@
                  まずは素直に画像として見てみよう。全体は QR コードになっている。適当な QR コードリーダで読み込むと、次のようなテキストが表示されるはずだ。
               </p>
                
-              <pre class="highlight"><code>Guess password. $ echo &quot;password&quot; | php Q1.png &gt;/dev/null</code></pre>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>Guess password. $ echo "password" | php Q1.png >/dev/null</span></span></code></pre>
+              </div>
                
               <p>
                  メッセージは、この画像の実行方法とこの問題でやるべきこと (パスワードの推測) を示している。
@@ -168,8 +171,10 @@
                  不正なパスワードを使って実行してみると、次のようなエラーメッセージが表示される。
               </p>
                
-              <pre class="highlight"><code>$ echo &quot;foo&quot; | php Q1.png &gt;/dev/null
-401 Unauthorized</code></pre>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ echo "foo" | php Q1.png >/dev/null</span></span>
+<span class="line"><span>401 Unauthorized</span></span></code></pre>
+              </div>
                
               <p>
                  すでに<a href="#section--how-to-solve">「解き方」の節</a>で示したように、パスワードである PHPer トークンは「#iwillblog」である。これを与えて実行すると正解のトークンが得られる。
@@ -258,23 +263,27 @@
                 <code>strings</code> コマンドを使うと、隠されたデータを簡単に閲覧できる。
               </p>
                
-              <pre class="highlight"><code>IHDR
--HHc
-&lt;PLTE
-IDATx
-IEND
-&lt;?php
-error_reporting(-1);
-$b = unpack(&apos;C*&apos;, file_get_contents(__FILE__));
-$w = $b[20]+2;
-$h = $b[24]+2;
-// (以下略)</code></pre>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>IHDR</span></span>
+<span class="line"><span>-HHc</span></span>
+<span class="line"><span>&#x3C;PLTE</span></span>
+<span class="line"><span>IDATx</span></span>
+<span class="line"><span>IEND</span></span>
+<span class="line"><span>&#x3C;?php</span></span>
+<span class="line"><span>error_reporting(-1);</span></span>
+<span class="line"><span>$b = unpack('C*', file_get_contents(__FILE__));</span></span>
+<span class="line"><span>$w = $b[20]+2;</span></span>
+<span class="line"><span>$h = $b[24]+2;</span></span>
+<span class="line"><span>// (以下略)</span></span></code></pre>
+              </div>
                
               <p>
                 <code>IHDR</code> や <code>IEND</code> が PNG 画像の一部で、<code>&lt;?php</code> からが実際のプログラムになっている。もちろんこれを PHP プログラムとして動かすと、PHP タグより前にある PNG 画像としてのデータはそのまま標準出力へと出力されてしまう。それを防ぐため、QR コードを読み込んだときの実行方法 
               </p>
                
-              <pre class="highlight"><code>Guess password. $ echo &quot;password&quot; | php Q1.png &gt;/dev/null</code></pre>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>Guess password. $ echo "password" | php Q1.png >/dev/null</span></span></code></pre>
+              </div>
                
               <p>
                  には標準出力を捨てるよう <code>&gt;/dev/null</code> と指定されている。
@@ -291,107 +300,109 @@ $h = $b[24]+2;
                  画像の正体がわかったところで、画像に隠されていた PHP プログラムについて見ていこう。先ほどは一部しか記載しなかったので、全体を載せる。なお、ある程度ゴルフしながら書いたので、空白こそ残しているものの可読性は非常に低いことと思う。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-meta">&lt;?php</span>
-<span class="hljs-title function_ invoke__">error_reporting</span>(-<span class="hljs-number">1</span>);
-<span class="hljs-variable">$b</span> = <span class="hljs-title function_ invoke__">unpack</span>(<span class="hljs-string">&#x27;C*&#x27;</span>, <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-keyword">__FILE__</span>));
-<span class="hljs-variable">$w</span> = <span class="hljs-variable">$b</span>[<span class="hljs-number">20</span>]+<span class="hljs-number">2</span>;
-<span class="hljs-variable">$h</span> = <span class="hljs-variable">$b</span>[<span class="hljs-number">24</span>]+<span class="hljs-number">2</span>;
-<span class="hljs-variable">$cs</span> = [];
-<span class="hljs-keyword">for</span> (<span class="hljs-variable">$y</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$y</span> &lt; <span class="hljs-variable">$h</span>; <span class="hljs-variable">$y</span>++)
-  <span class="hljs-keyword">for</span> (<span class="hljs-variable">$x</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$x</span> &lt; <span class="hljs-variable">$w</span>; <span class="hljs-variable">$x</span>++)
-    <span class="hljs-variable">$cs</span>[<span class="hljs-variable">$y</span>*<span class="hljs-variable">$w</span> + <span class="hljs-variable">$x</span>] = (<span class="hljs-variable">$x</span>*<span class="hljs-variable">$y</span> === <span class="hljs-number">0</span> || <span class="hljs-variable">$x</span> === <span class="hljs-variable">$w</span>-<span class="hljs-number">1</span> || <span class="hljs-variable">$y</span> === <span class="hljs-variable">$h</span>-<span class="hljs-number">1</span>)
-                        ? <span class="hljs-number">0</span>
-                        : <span class="hljs-variable">$b</span>[<span class="hljs-number">122</span>+(<span class="hljs-variable">$y</span>-<span class="hljs-number">1</span>)*(<span class="hljs-variable">$w</span>-<span class="hljs-number">1</span>)+<span class="hljs-variable">$x</span>-<span class="hljs-number">1</span>];
-<span class="hljs-variable">$i</span> = <span class="hljs-title function_ invoke__">stream_isatty</span>(STDIN)
-    ? []
-    : <span class="hljs-title function_ invoke__">array_map</span>(<span class="hljs-title function_ invoke__">ord</span>(...), <span class="hljs-title function_ invoke__">str_split</span>(<span class="hljs-title function_ invoke__">trim</span>((<span class="hljs-keyword">string</span>) <span class="hljs-title function_ invoke__">fgets</span>(STDIN))));
-<span class="hljs-variable">$m</span> = [];
-<span class="hljs-variable">$pc</span> = <span class="hljs-number">1</span>*<span class="hljs-variable">$w</span>+<span class="hljs-number">1</span>;
-<span class="hljs-variable">$dp</span> = <span class="hljs-number">0</span>;
-<span class="hljs-variable">$cc</span> = <span class="hljs-number">1</span>;
-<span class="hljs-variable">$c0</span> = <span class="hljs-number">1</span>;
-<span class="hljs-variable">$b</span> = <span class="hljs-number">0</span>;
-<span class="hljs-variable">$ns</span> = <span class="hljs-number">0</span>;
-<span class="hljs-variable">$o</span> = <span class="hljs-string">&#x27;&#x27;</span>;
-<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
-  <span class="hljs-variable">$ns</span>++;
-  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$ns</span> &gt; <span class="hljs-number">1e5</span>) {
-    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;infinite loop detected\n&quot;</span>;
-    <span class="hljs-keyword">break</span>;
-  <span class="hljs-variable">$c1</span> = <span class="hljs-variable">$cs</span>[<span class="hljs-variable">$pc</span>];
-  <span class="hljs-variable">$y</span> = (<span class="hljs-number">6</span> + <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$c1</span>-<span class="hljs-number">2</span>, <span class="hljs-number">3</span>) - <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$c0</span>-<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)) % <span class="hljs-number">6</span>;
-  <span class="hljs-variable">$x</span> = (<span class="hljs-number">3</span> + <span class="hljs-variable">$c1</span>%<span class="hljs-number">3</span> - <span class="hljs-variable">$c0</span>%<span class="hljs-number">3</span>) % <span class="hljs-number">3</span>;
-  <span class="hljs-keyword">match</span> ((<span class="hljs-variable">$c0</span> !== <span class="hljs-number">1</span>) * (<span class="hljs-variable">$c1</span> !== <span class="hljs-number">1</span>) * (<span class="hljs-variable">$y</span>*<span class="hljs-number">3</span> + <span class="hljs-variable">$x</span>)) {
-    <span class="hljs-number">1</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-variable">$b</span>,
-    <span class="hljs-number">2</span> =&gt; <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>),
-    <span class="hljs-number">3</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>) + <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>),
-    <span class="hljs-number">4</span> =&gt; <span class="hljs-variable">$m</span>[] = (<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$x</span>, <span class="hljs-variable">$y</span></span>) =&gt;</span> <span class="hljs-variable">$y</span> - <span class="hljs-variable">$x</span>)(<span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>), <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
-    <span class="hljs-number">5</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>) * <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>),
-    <span class="hljs-number">8</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>) === <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>,
-    <span class="hljs-number">11</span> =&gt; <span class="hljs-variable">$cc</span> *= <span class="hljs-title function_ invoke__">pow</span>(-<span class="hljs-number">1</span>, <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
-    <span class="hljs-number">12</span> =&gt; <span class="hljs-variable">$m</span>[] = <span class="hljs-variable">$m</span>[<span class="hljs-title function_ invoke__">count</span>(<span class="hljs-variable">$m</span>)-<span class="hljs-number">1</span>],
-    <span class="hljs-number">13</span> =&gt; <span class="hljs-variable">$m</span> = (<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"><span class="hljs-variable">$n</span>, <span class="hljs-variable">$d</span>, <span class="hljs-variable">$m</span>, <span class="hljs-variable">$l</span></span>) =&gt;</span> [
-            ...<span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$m</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$l</span>-<span class="hljs-variable">$d</span>),
-            ...<span class="hljs-title function_ invoke__">array_reverse</span>([
-              ...<span class="hljs-title function_ invoke__">array_reverse</span>(<span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$m</span>, <span class="hljs-variable">$l</span>-<span class="hljs-variable">$d</span>, <span class="hljs-variable">$d</span>-<span class="hljs-variable">$n</span>)),
-              ...<span class="hljs-title function_ invoke__">array_reverse</span>(<span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$m</span>, <span class="hljs-variable">$l</span>-<span class="hljs-variable">$n</span>)),
-            ]),
-          ])(<span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>), <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>), <span class="hljs-variable">$m</span>, <span class="hljs-title function_ invoke__">count</span>(<span class="hljs-variable">$m</span>)),
-    <span class="hljs-number">15</span> =&gt; !<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$i</span>) <span class="hljs-keyword">and</span> <span class="hljs-variable">$m</span>[] = <span class="hljs-title function_ invoke__">array_shift</span>(<span class="hljs-variable">$i</span>),
-    <span class="hljs-number">16</span> =&gt; <span class="hljs-variable">$o</span> .= <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%d&#x27;</span>, <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
-    <span class="hljs-number">17</span> =&gt; <span class="hljs-variable">$o</span> .= <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&#x27;%c&#x27;</span>, <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$m</span>)),
-    <span class="hljs-keyword">default</span> =&gt; <span class="hljs-string">&#x27;nop&#x27;</span>,
-  };
-  <span class="hljs-variable">$c0</span> = <span class="hljs-variable">$c1</span>;
-  <span class="hljs-keyword">for</span> (<span class="hljs-variable">$j</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$j</span> &lt; <span class="hljs-number">8</span>; <span class="hljs-variable">$j</span>++) {
-    <span class="hljs-variable">$v</span> = [];
-    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$c1</span> === <span class="hljs-number">1</span>) {
-      <span class="hljs-variable">$x</span> = <span class="hljs-variable">$pc</span> % <span class="hljs-variable">$w</span>;
-      <span class="hljs-variable">$y</span> = <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$pc</span>, <span class="hljs-variable">$w</span>);
-      <span class="hljs-variable">$e</span> = [(<span class="hljs-variable">$y</span>+<span class="hljs-number">1</span>)*<span class="hljs-variable">$w</span>-<span class="hljs-number">1</span>, (<span class="hljs-variable">$h</span>-<span class="hljs-number">1</span>)*<span class="hljs-variable">$w</span>+<span class="hljs-variable">$x</span>, <span class="hljs-variable">$y</span>*<span class="hljs-variable">$w</span>, <span class="hljs-variable">$x</span>][<span class="hljs-variable">$dp</span>];
-      <span class="hljs-variable">$z</span> = [<span class="hljs-number">1</span>, <span class="hljs-variable">$w</span>, -<span class="hljs-number">1</span>, -<span class="hljs-variable">$w</span>][<span class="hljs-variable">$dp</span>];
-      <span class="hljs-keyword">for</span> (<span class="hljs-variable">$ep</span> = <span class="hljs-variable">$pc</span>; <span class="hljs-variable">$ep</span> !== <span class="hljs-variable">$e</span>; <span class="hljs-variable">$ep</span> += <span class="hljs-variable">$z</span>)
-        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$cs</span>[<span class="hljs-variable">$ep</span>] !== <span class="hljs-number">1</span>) <span class="hljs-keyword">break</span>;
-      <span class="hljs-variable">$ep</span> -= <span class="hljs-variable">$z</span>;
-      <span class="hljs-variable">$pc</span> = <span class="hljs-variable">$ep</span>;
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-variable">$q</span> = [<span class="hljs-variable">$pc</span>];
-      <span class="hljs-variable">$ep</span> = <span class="hljs-variable">$pc</span>;
-      <span class="hljs-keyword">while</span> (!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$q</span>)) {
-        <span class="hljs-variable">$qq</span> = <span class="hljs-title function_ invoke__">array_pop</span>(<span class="hljs-variable">$q</span>);
-        <span class="hljs-variable">$v</span>[<span class="hljs-variable">$qq</span>] = <span class="hljs-literal">true</span>;
-        <span class="hljs-keyword">foreach</span> ([<span class="hljs-variable">$qq</span>+<span class="hljs-number">1</span>, <span class="hljs-variable">$qq</span>+<span class="hljs-variable">$w</span>, <span class="hljs-variable">$qq</span>-<span class="hljs-number">1</span>, <span class="hljs-variable">$qq</span>-<span class="hljs-variable">$w</span>] <span class="hljs-keyword">as</span> <span class="hljs-variable">$qp</span>) {
-          <span class="hljs-keyword">if</span> (<span class="hljs-variable">$cs</span>[<span class="hljs-variable">$qp</span>] !== <span class="hljs-variable">$c1</span>) <span class="hljs-keyword">continue</span>;
-          <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$v</span>[<span class="hljs-variable">$qp</span>])) <span class="hljs-keyword">continue</span>;
-          <span class="hljs-variable">$q</span>[] = <span class="hljs-variable">$qp</span>;
-          <span class="hljs-variable">$qx</span> = <span class="hljs-variable">$qp</span> % <span class="hljs-variable">$w</span>;
-          <span class="hljs-variable">$qy</span> = <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$qp</span>, <span class="hljs-variable">$w</span>);
-          <span class="hljs-variable">$x</span> = <span class="hljs-variable">$ep</span> % <span class="hljs-variable">$w</span>;
-          <span class="hljs-variable">$y</span> = <span class="hljs-title function_ invoke__">intdiv</span>(<span class="hljs-variable">$ep</span>, <span class="hljs-variable">$w</span>);
-          <span class="hljs-keyword">if</span> (
-            (<span class="hljs-variable">$dp</span> === <span class="hljs-number">0</span> &amp;&amp; (<span class="hljs-variable">$x</span> &lt; <span class="hljs-variable">$qx</span> || (<span class="hljs-variable">$x</span> === <span class="hljs-variable">$qx</span> &amp;&amp; (<span class="hljs-variable">$y</span>&lt;=&gt;<span class="hljs-variable">$qy</span>) === <span class="hljs-variable">$cc</span>)))
-            || (<span class="hljs-variable">$dp</span> === <span class="hljs-number">1</span> &amp;&amp; (<span class="hljs-variable">$y</span> &lt; <span class="hljs-variable">$qy</span> || (<span class="hljs-variable">$y</span> === <span class="hljs-variable">$qy</span> &amp;&amp; (<span class="hljs-variable">$qx</span>&lt;=&gt;<span class="hljs-variable">$x</span>) === <span class="hljs-variable">$cc</span>)))
-            || (<span class="hljs-variable">$dp</span> === <span class="hljs-number">2</span> &amp;&amp; (<span class="hljs-variable">$qx</span> &lt; <span class="hljs-variable">$x</span> || (<span class="hljs-variable">$qx</span> === <span class="hljs-variable">$x</span> &amp;&amp; (<span class="hljs-variable">$qy</span>&lt;=&gt;<span class="hljs-variable">$y</span>) === <span class="hljs-variable">$cc</span>)))
-            || (<span class="hljs-variable">$dp</span> === <span class="hljs-number">3</span> &amp;&amp; (<span class="hljs-variable">$qy</span> &lt; <span class="hljs-variable">$y</span> || (<span class="hljs-variable">$qy</span> === <span class="hljs-variable">$y</span> &amp;&amp; (<span class="hljs-variable">$x</span>&lt;=&gt;<span class="hljs-variable">$qx</span>) === <span class="hljs-variable">$cc</span>)))
-          )
-            <span class="hljs-variable">$ep</span> = <span class="hljs-variable">$qp</span>;
-        }
-      }
-    }
-    <span class="hljs-variable">$np</span> = <span class="hljs-variable">$ep</span> + [<span class="hljs-number">1</span>, <span class="hljs-variable">$w</span>, -<span class="hljs-number">1</span>, -<span class="hljs-variable">$w</span>][<span class="hljs-variable">$dp</span>];
-    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$cs</span>[<span class="hljs-variable">$np</span>] !== <span class="hljs-number">0</span>) {
-      <span class="hljs-variable">$b</span> = <span class="hljs-title function_ invoke__">count</span>(<span class="hljs-title function_ invoke__">array_keys</span>(<span class="hljs-variable">$v</span>));
-      <span class="hljs-variable">$pc</span> = <span class="hljs-variable">$np</span>;
-      <span class="hljs-keyword">break</span>;
-    }
-    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$j</span> === <span class="hljs-number">7</span>) <span class="hljs-keyword">break</span> <span class="hljs-number">2</span>;
-    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$j</span> % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) <span class="hljs-variable">$cc</span> = -<span class="hljs-variable">$cc</span>;
-    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$j</span> % <span class="hljs-number">2</span> === <span class="hljs-number">1</span>) <span class="hljs-variable">$dp</span> = (<span class="hljs-variable">$dp</span>+<span class="hljs-number">1</span>) % <span class="hljs-number">4</span>;
-<span class="hljs-comment">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span>
-<span class="hljs-comment">// Failure of authentication should be notified by 401, not 403.</span>
-<span class="hljs-comment">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span>
-<span class="hljs-comment">// Piet any longer at that time.</span>
-<span class="hljs-title function_ invoke__">fwrite</span>(STDERR, <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;403 Forbidden&#x27;</span>, <span class="hljs-string">&#x27;401 Unauthorized&#x27;</span>, <span class="hljs-variable">$o</span>));</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
+<span class="line"><span style="color:#005CC5">error_reporting</span><span style="color:#24292E">(</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> unpack</span><span style="color:#24292E">(</span><span style="color:#032F62">'C*'</span><span style="color:#24292E">, </span><span style="color:#005CC5">file_get_contents</span><span style="color:#24292E">(</span><span style="color:#005CC5">__FILE__</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">$w </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $b[</span><span style="color:#005CC5">20</span><span style="color:#24292E">]</span><span style="color:#D73A49">+</span><span style="color:#005CC5">2</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$h </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $b[</span><span style="color:#005CC5">24</span><span style="color:#24292E">]</span><span style="color:#D73A49">+</span><span style="color:#005CC5">2</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$cs </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [];</span></span>
+<span class="line"><span style="color:#D73A49">for</span><span style="color:#24292E"> ($y </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">; $y </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> $h; $y</span><span style="color:#D73A49">++</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#D73A49">  for</span><span style="color:#24292E"> ($x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">; $x </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> $w; $x</span><span style="color:#D73A49">++</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#24292E">    $cs[$y</span><span style="color:#D73A49">*</span><span style="color:#24292E">$w </span><span style="color:#D73A49">+</span><span style="color:#24292E"> $x] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> ($x</span><span style="color:#D73A49">*</span><span style="color:#24292E">$y </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> ||</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $w</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#D73A49"> ||</span><span style="color:#24292E"> $y </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $h</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#D73A49">                        ?</span><span style="color:#005CC5"> 0</span></span>
+<span class="line"><span style="color:#D73A49">                        :</span><span style="color:#24292E"> $b[</span><span style="color:#005CC5">122</span><span style="color:#D73A49">+</span><span style="color:#24292E">($y</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span><span style="color:#D73A49">*</span><span style="color:#24292E">($w</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span><span style="color:#D73A49">+</span><span style="color:#24292E">$x</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">];</span></span>
+<span class="line"><span style="color:#24292E">$i </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> stream_isatty</span><span style="color:#24292E">(</span><span style="color:#005CC5">STDIN</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#D73A49">    ?</span><span style="color:#24292E"> []</span></span>
+<span class="line"><span style="color:#D73A49">    :</span><span style="color:#005CC5"> array_map</span><span style="color:#24292E">(</span><span style="color:#005CC5">ord</span><span style="color:#24292E">(</span><span style="color:#D73A49">...</span><span style="color:#24292E">), </span><span style="color:#005CC5">str_split</span><span style="color:#24292E">(</span><span style="color:#005CC5">trim</span><span style="color:#24292E">((</span><span style="color:#D73A49">string</span><span style="color:#24292E">) </span><span style="color:#005CC5">fgets</span><span style="color:#24292E">(</span><span style="color:#005CC5">STDIN</span><span style="color:#24292E">))));</span></span>
+<span class="line"><span style="color:#24292E">$m </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [];</span></span>
+<span class="line"><span style="color:#24292E">$pc </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49">*</span><span style="color:#24292E">$w</span><span style="color:#D73A49">+</span><span style="color:#005CC5">1</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$dp </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$cc </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$c0 </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$ns </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">$o </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ''</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">while</span><span style="color:#24292E"> (</span><span style="color:#005CC5">true</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#24292E">  $ns</span><span style="color:#D73A49">++</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($ns </span><span style="color:#D73A49">></span><span style="color:#005CC5"> 1e5</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#005CC5">    echo</span><span style="color:#032F62"> "infinite loop detected</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">    break</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">  $c1 </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $cs[$pc];</span></span>
+<span class="line"><span style="color:#24292E">  $y </span><span style="color:#D73A49">=</span><span style="color:#24292E"> (</span><span style="color:#005CC5">6</span><span style="color:#D73A49"> +</span><span style="color:#6F42C1"> intdiv</span><span style="color:#24292E">($c1</span><span style="color:#D73A49">-</span><span style="color:#005CC5">2</span><span style="color:#24292E">, </span><span style="color:#005CC5">3</span><span style="color:#24292E">) </span><span style="color:#D73A49">-</span><span style="color:#6F42C1"> intdiv</span><span style="color:#24292E">($c0</span><span style="color:#D73A49">-</span><span style="color:#005CC5">2</span><span style="color:#24292E">, </span><span style="color:#005CC5">3</span><span style="color:#24292E">)) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 6</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">  $x </span><span style="color:#D73A49">=</span><span style="color:#24292E"> (</span><span style="color:#005CC5">3</span><span style="color:#D73A49"> +</span><span style="color:#24292E"> $c1</span><span style="color:#D73A49">%</span><span style="color:#005CC5">3</span><span style="color:#D73A49"> -</span><span style="color:#24292E"> $c0</span><span style="color:#D73A49">%</span><span style="color:#005CC5">3</span><span style="color:#24292E">) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 3</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">  match</span><span style="color:#24292E"> (($c0 </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) </span><span style="color:#D73A49">*</span><span style="color:#24292E"> ($c1 </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) </span><span style="color:#D73A49">*</span><span style="color:#24292E"> ($y</span><span style="color:#D73A49">*</span><span style="color:#005CC5">3</span><span style="color:#D73A49"> +</span><span style="color:#24292E"> $x)) {</span></span>
+<span class="line"><span style="color:#005CC5">    1</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $b,</span></span>
+<span class="line"><span style="color:#005CC5">    2</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($m),</span></span>
+<span class="line"><span style="color:#005CC5">    3</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($m) </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($m),</span></span>
+<span class="line"><span style="color:#005CC5">    4</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> (</span><span style="color:#D73A49">fn</span><span style="color:#24292E">($x, $y) => $y </span><span style="color:#D73A49">-</span><span style="color:#24292E"> $x)(</span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m), </span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m)),</span></span>
+<span class="line"><span style="color:#005CC5">    5</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($m) </span><span style="color:#D73A49">*</span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($m),</span></span>
+<span class="line"><span style="color:#005CC5">    8</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($m) </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> ?</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> :</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">    11</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $cc </span><span style="color:#D73A49">*=</span><span style="color:#005CC5"> pow</span><span style="color:#24292E">(</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m)),</span></span>
+<span class="line"><span style="color:#005CC5">    12</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $m[</span><span style="color:#005CC5">count</span><span style="color:#24292E">($m)</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">],</span></span>
+<span class="line"><span style="color:#005CC5">    13</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $m </span><span style="color:#D73A49">=</span><span style="color:#24292E"> (</span><span style="color:#D73A49">fn</span><span style="color:#24292E">($n, $d, $m, $l) => [</span></span>
+<span class="line"><span style="color:#D73A49">            ...</span><span style="color:#005CC5">array_slice</span><span style="color:#24292E">($m, </span><span style="color:#005CC5">0</span><span style="color:#24292E">, $l</span><span style="color:#D73A49">-</span><span style="color:#24292E">$d),</span></span>
+<span class="line"><span style="color:#D73A49">            ...</span><span style="color:#005CC5">array_reverse</span><span style="color:#24292E">([</span></span>
+<span class="line"><span style="color:#D73A49">              ...</span><span style="color:#005CC5">array_reverse</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_slice</span><span style="color:#24292E">($m, $l</span><span style="color:#D73A49">-</span><span style="color:#24292E">$d, $d</span><span style="color:#D73A49">-</span><span style="color:#24292E">$n)),</span></span>
+<span class="line"><span style="color:#D73A49">              ...</span><span style="color:#005CC5">array_reverse</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_slice</span><span style="color:#24292E">($m, $l</span><span style="color:#D73A49">-</span><span style="color:#24292E">$n)),</span></span>
+<span class="line"><span style="color:#24292E">            ]),</span></span>
+<span class="line"><span style="color:#24292E">          ])(</span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m), </span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m), $m, </span><span style="color:#005CC5">count</span><span style="color:#24292E">($m)),</span></span>
+<span class="line"><span style="color:#005CC5">    15</span><span style="color:#D73A49"> =></span><span style="color:#D73A49"> !</span><span style="color:#005CC5">empty</span><span style="color:#24292E">($i) </span><span style="color:#D73A49">and</span><span style="color:#24292E"> $m[] </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> array_shift</span><span style="color:#24292E">($i),</span></span>
+<span class="line"><span style="color:#005CC5">    16</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $o </span><span style="color:#D73A49">.=</span><span style="color:#005CC5"> sprintf</span><span style="color:#24292E">(</span><span style="color:#032F62">'%d'</span><span style="color:#24292E">, </span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m)),</span></span>
+<span class="line"><span style="color:#005CC5">    17</span><span style="color:#D73A49"> =></span><span style="color:#24292E"> $o </span><span style="color:#D73A49">.=</span><span style="color:#005CC5"> sprintf</span><span style="color:#24292E">(</span><span style="color:#032F62">'%c'</span><span style="color:#24292E">, </span><span style="color:#005CC5">array_pop</span><span style="color:#24292E">($m)),</span></span>
+<span class="line"><span style="color:#D73A49">    default</span><span style="color:#D73A49"> =></span><span style="color:#032F62"> 'nop'</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">  };</span></span>
+<span class="line"><span style="color:#24292E">  $c0 </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $c1;</span></span>
+<span class="line"><span style="color:#D73A49">  for</span><span style="color:#24292E"> ($j </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">; $j </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 8</span><span style="color:#24292E">; $j</span><span style="color:#D73A49">++</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#24292E">    $v </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [];</span></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($c1 </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#24292E">      $x </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $pc </span><span style="color:#D73A49">%</span><span style="color:#24292E"> $w;</span></span>
+<span class="line"><span style="color:#24292E">      $y </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> intdiv</span><span style="color:#24292E">($pc, $w);</span></span>
+<span class="line"><span style="color:#24292E">      $e </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [($y</span><span style="color:#D73A49">+</span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span><span style="color:#D73A49">*</span><span style="color:#24292E">$w</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, ($h</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span><span style="color:#D73A49">*</span><span style="color:#24292E">$w</span><span style="color:#D73A49">+</span><span style="color:#24292E">$x, $y</span><span style="color:#D73A49">*</span><span style="color:#24292E">$w, $x][$dp];</span></span>
+<span class="line"><span style="color:#24292E">      $z </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [</span><span style="color:#005CC5">1</span><span style="color:#24292E">, $w, </span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#D73A49">-</span><span style="color:#24292E">$w][$dp];</span></span>
+<span class="line"><span style="color:#D73A49">      for</span><span style="color:#24292E"> ($ep </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $pc; $ep </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> $e; $ep </span><span style="color:#D73A49">+=</span><span style="color:#24292E"> $z)</span></span>
+<span class="line"><span style="color:#D73A49">        if</span><span style="color:#24292E"> ($cs[$ep] </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) </span><span style="color:#D73A49">break</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">      $ep </span><span style="color:#D73A49">-=</span><span style="color:#24292E"> $z;</span></span>
+<span class="line"><span style="color:#24292E">      $pc </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $ep;</span></span>
+<span class="line"><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">      $q </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [$pc];</span></span>
+<span class="line"><span style="color:#24292E">      $ep </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $pc;</span></span>
+<span class="line"><span style="color:#D73A49">      while</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#005CC5">empty</span><span style="color:#24292E">($q)) {</span></span>
+<span class="line"><span style="color:#24292E">        $qq </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> array_pop</span><span style="color:#24292E">($q);</span></span>
+<span class="line"><span style="color:#24292E">        $v[$qq] </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> true</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">        foreach</span><span style="color:#24292E"> ([$qq</span><span style="color:#D73A49">+</span><span style="color:#005CC5">1</span><span style="color:#24292E">, $qq</span><span style="color:#D73A49">+</span><span style="color:#24292E">$w, $qq</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, $qq</span><span style="color:#D73A49">-</span><span style="color:#24292E">$w] </span><span style="color:#D73A49">as</span><span style="color:#24292E"> $qp) {</span></span>
+<span class="line"><span style="color:#D73A49">          if</span><span style="color:#24292E"> ($cs[$qp] </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> $c1) </span><span style="color:#D73A49">continue</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span><span style="color:#005CC5">isset</span><span style="color:#24292E">($v[$qp])) </span><span style="color:#D73A49">continue</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">          $q[] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $qp;</span></span>
+<span class="line"><span style="color:#24292E">          $qx </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $qp </span><span style="color:#D73A49">%</span><span style="color:#24292E"> $w;</span></span>
+<span class="line"><span style="color:#24292E">          $qy </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> intdiv</span><span style="color:#24292E">($qp, $w);</span></span>
+<span class="line"><span style="color:#24292E">          $x </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $ep </span><span style="color:#D73A49">%</span><span style="color:#24292E"> $w;</span></span>
+<span class="line"><span style="color:#24292E">          $y </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> intdiv</span><span style="color:#24292E">($ep, $w);</span></span>
+<span class="line"><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span></span>
+<span class="line"><span style="color:#24292E">            ($dp </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> &#x26;&#x26;</span><span style="color:#24292E"> ($x </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> $qx </span><span style="color:#D73A49">||</span><span style="color:#24292E"> ($x </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $qx </span><span style="color:#D73A49">&#x26;&#x26;</span><span style="color:#24292E"> ($y</span><span style="color:#D73A49">&#x3C;=></span><span style="color:#24292E">$qy) </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $cc)))</span></span>
+<span class="line"><span style="color:#D73A49">            ||</span><span style="color:#24292E"> ($dp </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> &#x26;&#x26;</span><span style="color:#24292E"> ($y </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> $qy </span><span style="color:#D73A49">||</span><span style="color:#24292E"> ($y </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $qy </span><span style="color:#D73A49">&#x26;&#x26;</span><span style="color:#24292E"> ($qx</span><span style="color:#D73A49">&#x3C;=></span><span style="color:#24292E">$x) </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $cc)))</span></span>
+<span class="line"><span style="color:#D73A49">            ||</span><span style="color:#24292E"> ($dp </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 2</span><span style="color:#D73A49"> &#x26;&#x26;</span><span style="color:#24292E"> ($qx </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">||</span><span style="color:#24292E"> ($qx </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">&#x26;&#x26;</span><span style="color:#24292E"> ($qy</span><span style="color:#D73A49">&#x3C;=></span><span style="color:#24292E">$y) </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $cc)))</span></span>
+<span class="line"><span style="color:#D73A49">            ||</span><span style="color:#24292E"> ($dp </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> &#x26;&#x26;</span><span style="color:#24292E"> ($qy </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> $y </span><span style="color:#D73A49">||</span><span style="color:#24292E"> ($qy </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $y </span><span style="color:#D73A49">&#x26;&#x26;</span><span style="color:#24292E"> ($x</span><span style="color:#D73A49">&#x3C;=></span><span style="color:#24292E">$qx) </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $cc)))</span></span>
+<span class="line"><span style="color:#24292E">          )</span></span>
+<span class="line"><span style="color:#24292E">            $ep </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $qp;</span></span>
+<span class="line"><span style="color:#24292E">        }</span></span>
+<span class="line"><span style="color:#24292E">      }</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#24292E">    $np </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $ep </span><span style="color:#D73A49">+</span><span style="color:#24292E"> [</span><span style="color:#005CC5">1</span><span style="color:#24292E">, $w, </span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#D73A49">-</span><span style="color:#24292E">$w][$dp];</span></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($cs[$np] </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#24292E">      $b </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> count</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_keys</span><span style="color:#24292E">($v));</span></span>
+<span class="line"><span style="color:#24292E">      $pc </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $np;</span></span>
+<span class="line"><span style="color:#D73A49">      break</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($j </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 7</span><span style="color:#24292E">) </span><span style="color:#D73A49">break</span><span style="color:#005CC5"> 2</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($j </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 2</span><span style="color:#D73A49"> ===</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) $cc </span><span style="color:#D73A49">=</span><span style="color:#D73A49"> -</span><span style="color:#24292E">$cc;</span></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($j </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 2</span><span style="color:#D73A49"> ===</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) $dp </span><span style="color:#D73A49">=</span><span style="color:#24292E"> ($dp</span><span style="color:#D73A49">+</span><span style="color:#005CC5">1</span><span style="color:#24292E">) </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 4</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#6A737D">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span></span>
+<span class="line"><span style="color:#6A737D">// Failure of authentication should be notified by 401, not 403.</span></span>
+<span class="line"><span style="color:#6A737D">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span></span>
+<span class="line"><span style="color:#6A737D">// Piet any longer at that time.</span></span>
+<span class="line"><span style="color:#005CC5">fwrite</span><span style="color:#24292E">(</span><span style="color:#005CC5">STDERR</span><span style="color:#24292E">, </span><span style="color:#005CC5">str_replace</span><span style="color:#24292E">(</span><span style="color:#032F62">'403 Forbidden'</span><span style="color:#24292E">, </span><span style="color:#032F62">'401 Unauthorized'</span><span style="color:#24292E">, $o));</span></span></code></pre>
+              </div>
                
               <p>
                  これは一体なんなのか。ずばり、難解プログラミング言語の一つ Piet のインタプリタである。Piet はピエト・モンドリアン (『赤・青・黄のコンポジション』などで知られる抽象画家) の作品にインスピレーションを受けて作られた、画像をソースコードとするプログラミング言語である。インタプリタは画像の各ピクセルの上を進みながら、色等に応じて特定の処理をおこなっていく。ここでは詳しい言語仕様については解説しないので、気になる方は <a href="https://ja.wikipedia.org/wiki/Piet" rel="noreferrer" target="_blank">Wikipedia の記事「Piet」</a> などを参照してほしい。
@@ -401,7 +412,9 @@ $h = $b[24]+2;
                  プログラムの冒頭にあるこの箇所 
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-variable">$b</span> = <span class="hljs-title function_ invoke__">unpack</span>(<span class="hljs-string">&#x27;C*&#x27;</span>, <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-keyword">__FILE__</span>));</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> unpack</span><span style="color:#24292E">(</span><span style="color:#032F62">'C*'</span><span style="color:#24292E">, </span><span style="color:#005CC5">file_get_contents</span><span style="color:#24292E">(</span><span style="color:#005CC5">__FILE__</span><span style="color:#24292E">));</span></span></code></pre>
+              </div>
                
               <p>
                  で <code>__FILE__</code> つまりこの画像ファイルを読み込んでいる。先ほど Piet は画像をソースコードにしていると説明した。そう、今回の問題の画像ファイル <code>Q1.png</code> は、PHP 製 Piet インタプリタであると同時に、Piet のソースコード画像でもあるのだ。QR コード中央のカラフルな部分が Piet の命令になっている。
@@ -460,11 +473,13 @@ $h = $b[24]+2;
                  ところで、先ほど掲載した Piet のインタプリタのソースコード末尾には次のような箇所がある。
               </p>
                
-              <pre class="highlight" language="php"><code class="highlight"><span class="hljs-comment">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span>
-<span class="hljs-comment">// Failure of authentication should be notified by 401, not 403.</span>
-<span class="hljs-comment">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span>
-<span class="hljs-comment">// Piet any longer at that time.</span>
-<span class="hljs-title function_ invoke__">fwrite</span>(STDERR, <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;403 Forbidden&#x27;</span>, <span class="hljs-string">&#x27;401 Unauthorized&#x27;</span>, <span class="hljs-variable">$o</span>));</code></pre>
+              <div class="codeblock" language="php">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span></span>
+<span class="line"><span style="color:#6A737D">// Failure of authentication should be notified by 401, not 403.</span></span>
+<span class="line"><span style="color:#6A737D">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span></span>
+<span class="line"><span style="color:#6A737D">// Piet any longer at that time.</span></span>
+<span class="line"><span style="color:#005CC5">fwrite</span><span style="color:#24292E">(</span><span style="color:#005CC5">STDERR</span><span style="color:#24292E">, </span><span style="color:#005CC5">str_replace</span><span style="color:#24292E">(</span><span style="color:#032F62">'403 Forbidden'</span><span style="color:#24292E">, </span><span style="color:#032F62">'401 Unauthorized'</span><span style="color:#24292E">, $o));</span></span></code></pre>
+              </div>
                
               <p>
                  コメントにも書かれているが、この Piet のソースコード画像には誤りがあった。本来 HTTP のステータスコードを真似るのなら、認証の失敗には 401 を返さなければならない。しかし、Piet のソースは 403 を返すように書いてしまっていた。そのことに私が気付いたのは PHPerKaigi 2023 が開催されるひと月前で、その時点で私はこの Piet のソースコードを (ちょうどこの記事でそうなっているのと同じように) 読解できなくなっていた。さらに悪いことに、正しいメッセージ「401 Unauthorized」は元の「403 Forbidden」よりも3文字長い。3文字出力が長くなるということは、それだけ Piet で塗るべきピクセルが増えることを意味する。もはや3文字追加で出力するだけの余白はこの画像に残されていなかった (と思う。腕ききの Piet プログラマならできるかもしれないので挑戦してみてほしい)。

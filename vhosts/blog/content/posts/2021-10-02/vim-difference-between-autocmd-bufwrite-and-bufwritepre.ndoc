@@ -102,10 +102,10 @@ remark = "Qiita から移植"
       <codeblock language="lua">
         <![CDATA[
         aliases = {
-        BufCreate = 'BufAdd',
-        BufRead = 'BufReadPost',
-        BufWrite = 'BufWritePre',
-        FileEncoding = 'EncodingChanged',
+          BufCreate = 'BufAdd',
+          BufRead = 'BufReadPost',
+          BufWrite = 'BufWritePre',
+          FileEncoding = 'EncodingChanged',
         },
         ]]>
       </codeblock>

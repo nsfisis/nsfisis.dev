@@ -19,7 +19,7 @@ export async function parseNulDocFile(
     const meta = parseMetadata(parts[1]);
     const root = parseXmlString("<?xml ?>" + parts[2]);
     const doc = createNewDocumentFromRootElement(root, meta, filePath, config);
-    return toHtml(doc);
+    return await toHtml(doc);
   } catch (e) {
     if (e instanceof Error) {
       e.message = `${e.message} in ${filePath}`;

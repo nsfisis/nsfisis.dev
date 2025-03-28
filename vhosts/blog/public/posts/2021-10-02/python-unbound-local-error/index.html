@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【Python】 クロージャとUnboundLocalError: local variable &apos;x&apos; referenced before assignment｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -78,13 +77,15 @@
              Python でクロージャを作ろうと、次のようなコードを書いた。
           </p>
            
-          <pre class="highlight" language="python"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
-    x = <span class="hljs-number">0</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
-        x += <span class="hljs-number">1</span>
-    g()
-
-f()</code></pre>
+          <div class="codeblock" language="python">
+            <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">():</span></span>
+<span class="line"><span style="color:#24292E">    x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span></span>
+<span class="line"><span style="color:#D73A49">    def</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">():</span></span>
+<span class="line"><span style="color:#24292E">        x </span><span style="color:#D73A49">+=</span><span style="color:#005CC5"> 1</span></span>
+<span class="line"><span style="color:#24292E">    g()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">f()</span></span></code></pre>
+          </div>
            
           <p>
              関数 <code>g</code> から 関数 <code>f</code> のスコープ内で定義された変数 <code>x</code> を参照し、それに 1 を足そうとしている。 これを実行すると <code>x += 1</code> の箇所でエラーが発生する。
@@ -100,27 +101,31 @@ f()</code></pre>
              local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code> を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code> を変数宣言のための構文として擬似的に利用している。
           </p>
            
-          <pre class="highlight" language="python"><code class="highlight"><span class="hljs-comment"># 注: var は正しい Python の文法ではない。上記参照のこと</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
-  var x           <span class="hljs-comment">#  f の local変数 &#x27;x&#x27; を宣言</span>
-  x = <span class="hljs-number">0</span>           <span class="hljs-comment">#  x に 0 を代入</span>
-  <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():        <span class="hljs-comment">#  f の内部関数 g を定義</span>
-      var x       <span class="hljs-comment">#  g の local変数 &#x27;x&#x27; を宣言</span>
-      <span class="hljs-comment">#  たまたま f にも同じ名前の変数があるが、それとは別の変数</span>
-      x += <span class="hljs-number">1</span>      <span class="hljs-comment">#  x に 1 を加算 (x = x + 1 の糖衣構文)</span>
-      <span class="hljs-comment">#  加算する前の値を参照しようとするが、まだ代入されていないためエラー</span>
-  g()</code></pre>
+          <div class="codeblock" language="python">
+            <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 注: var は正しい Python の文法ではない。上記参照のこと</span></span>
+<span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">():</span></span>
+<span class="line"><span style="color:#24292E">  var x           </span><span style="color:#6A737D">#  f の local変数 'x' を宣言</span></span>
+<span class="line"><span style="color:#24292E">  x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span><span style="color:#6A737D">           #  x に 0 を代入</span></span>
+<span class="line"><span style="color:#D73A49">  def</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">():        </span><span style="color:#6A737D">#  f の内部関数 g を定義</span></span>
+<span class="line"><span style="color:#24292E">      var x       </span><span style="color:#6A737D">#  g の local変数 'x' を宣言</span></span>
+<span class="line"><span style="color:#6A737D">      #  たまたま f にも同じ名前の変数があるが、それとは別の変数</span></span>
+<span class="line"><span style="color:#24292E">      x </span><span style="color:#D73A49">+=</span><span style="color:#005CC5"> 1</span><span style="color:#6A737D">      #  x に 1 を加算 (x = x + 1 の糖衣構文)</span></span>
+<span class="line"><span style="color:#6A737D">      #  加算する前の値を参照しようとするが、まだ代入されていないためエラー</span></span>
+<span class="line"><span style="color:#24292E">  g()</span></span></code></pre>
+          </div>
            
           <p>
              当初の意図を表現するには、次のように書けばよい。
           </p>
            
-          <pre class="highlight" language="python"><code class="highlight"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
-    x = <span class="hljs-number">0</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
-        <span class="hljs-keyword">nonlocal</span> x   <span class="hljs-comment">## (*)</span>
-        x += <span class="hljs-number">1</span>
-    g()</code></pre>
+          <div class="codeblock" language="python">
+            <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">():</span></span>
+<span class="line"><span style="color:#24292E">    x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span></span>
+<span class="line"><span style="color:#D73A49">    def</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">():</span></span>
+<span class="line"><span style="color:#D73A49">        nonlocal</span><span style="color:#24292E"> x   </span><span style="color:#6A737D">## (*)</span></span>
+<span class="line"><span style="color:#24292E">        x </span><span style="color:#D73A49">+=</span><span style="color:#005CC5"> 1</span></span>
+<span class="line"><span style="color:#24292E">    g()</span></span></code></pre>
+          </div>
            
           <p>
             <code>(*)</code> のように、<code>nonlocal</code> を追加する。これにより一つ外側のスコープ (<code>g</code> の一つ外側 = <code>f</code>) で定義されている <code>x</code> を探しに行くようになる。

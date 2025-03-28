@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>Rust のプリミティブ型はどこからやって来るか｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -73,26 +72,28 @@
                Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。
             </p>
              
-            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
-<span class="hljs-meta">#![allow(dead_code)]</span>
-
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">bool</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">char</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">i8</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">i16</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">i32</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">i64</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">i128</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">isize</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">u8</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">u16</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">u32</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">u64</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">u128</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">usize</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">f32</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">f64</span>;
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">str</span>;</code></pre>
+            <div class="codeblock" language="rust">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#![allow(non_camel_case_types)]</span></span>
+<span class="line"><span style="color:#24292E">#![allow(dead_code)]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> bool</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> char</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> i8</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> i16</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> i32</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> i64</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> i128</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> isize</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> u8</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> u16</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> u32</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> u64</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> u128</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> usize</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> f32</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> f64</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> str</span><span style="color:#24292E">;</span></span></code></pre>
+            </div>
              
             <p>
                では、普段単に <code>bool</code> と書いたとき、この <code>bool</code> は一体どこから来ているのか。rustc のソースを追ってみた。
@@ -127,60 +128,66 @@
               <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。
             </p>
              
-            <pre class="highlight"><code>$ git grep &quot;\bi128\b&quot; | wc      # i128
-165    1069   15790
-
-$ git grep &quot;\bu128\b&quot; | wc      # u128
-293    2127   26667
-
-$ git grep &quot;\bbool\b&quot; | wc      # cf. bool の結果
-3563   23577  294659</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ git grep "\bi128\b" | wc      # i128</span></span>
+<span class="line"><span>165    1069   15790</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ git grep "\bu128\b" | wc      # u128</span></span>
+<span class="line"><span>293    2127   26667</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ git grep "\bbool\b" | wc      # cf. bool の結果</span></span>
+<span class="line"><span>3563   23577  294659</span></span></code></pre>
+            </div>
              
             <p>
                165 程度であれば探すことができそうだ。今回は、クレート名を見ておおよその当たりをつけた。
             </p>
              
-            <pre class="highlight"><code>$ git grep &quot;\bi128\b&quot;
-...
-rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
-...</code></pre>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ git grep "\bi128\b"</span></span>
+<span class="line"><span>...</span></span>
+<span class="line"><span>rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));</span></span>
+<span class="line"><span>...</span></span></code></pre>
+            </div>
              
             <p>
               <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。
             </p>
              
-            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-comment">/// Interns the names of the primitive types.</span>
-<span class="hljs-comment">///</span>
-<span class="hljs-comment">/// All other types are defined somewhere and possibly imported, but the primitive ones need</span>
-<span class="hljs-comment">/// special handling, since they have no place of origin.</span>
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">PrimitiveTypeTable</span> {
-    primitive_types: FxHashMap&lt;Symbol, PrimTy&gt;,
-}
-
-<span class="hljs-keyword">impl</span> <span class="hljs-title class_">PrimitiveTypeTable</span> {
-    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">new</span>() <span class="hljs-punctuation">-&gt;</span> PrimitiveTypeTable {
-        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">table</span> = FxHashMap::<span class="hljs-title function_ invoke__">default</span>();
-
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">bool</span>, Bool);
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">char</span>, Char);
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">f32</span>, <span class="hljs-title function_ invoke__">Float</span>(FloatTy::F32));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">f64</span>, <span class="hljs-title function_ invoke__">Float</span>(FloatTy::F64));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">isize</span>, <span class="hljs-title function_ invoke__">Int</span>(IntTy::Isize));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">i8</span>, <span class="hljs-title function_ invoke__">Int</span>(IntTy::I8));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">i16</span>, <span class="hljs-title function_ invoke__">Int</span>(IntTy::I16));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">i32</span>, <span class="hljs-title function_ invoke__">Int</span>(IntTy::I32));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">i64</span>, <span class="hljs-title function_ invoke__">Int</span>(IntTy::I64));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">i128</span>, <span class="hljs-title function_ invoke__">Int</span>(IntTy::I128));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">str</span>, Str);
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">usize</span>, <span class="hljs-title function_ invoke__">Uint</span>(UintTy::Usize));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">u8</span>, <span class="hljs-title function_ invoke__">Uint</span>(UintTy::U8));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">u16</span>, <span class="hljs-title function_ invoke__">Uint</span>(UintTy::U16));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">u32</span>, <span class="hljs-title function_ invoke__">Uint</span>(UintTy::U32));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">u64</span>, <span class="hljs-title function_ invoke__">Uint</span>(UintTy::U64));
-        table.<span class="hljs-title function_ invoke__">insert</span>(sym::<span class="hljs-type">u128</span>, <span class="hljs-title function_ invoke__">Uint</span>(UintTy::U128));
-        <span class="hljs-keyword">Self</span> { primitive_types: table }
-    }
-}</code></pre>
+            <div class="codeblock" language="rust">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// Interns the names of the primitive types.</span></span>
+<span class="line"><span style="color:#6A737D">///</span></span>
+<span class="line"><span style="color:#6A737D">/// All other types are defined somewhere and possibly imported, but the primitive ones need</span></span>
+<span class="line"><span style="color:#6A737D">/// special handling, since they have no place of origin.</span></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> PrimitiveTypeTable</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">    primitive_types</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> FxHashMap</span><span style="color:#24292E">&#x3C;</span><span style="color:#6F42C1">Symbol</span><span style="color:#24292E">, </span><span style="color:#6F42C1">PrimTy</span><span style="color:#24292E">>,</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">impl</span><span style="color:#6F42C1"> PrimitiveTypeTable</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    fn</span><span style="color:#6F42C1"> new</span><span style="color:#24292E">() </span><span style="color:#D73A49">-></span><span style="color:#6F42C1"> PrimitiveTypeTable</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">        let</span><span style="color:#D73A49"> mut</span><span style="color:#24292E"> table </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> FxHashMap</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">default</span><span style="color:#24292E">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">bool</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Bool</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">char</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Char</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">f32</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Float</span><span style="color:#24292E">(</span><span style="color:#6F42C1">FloatTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">F32</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">f64</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Float</span><span style="color:#24292E">(</span><span style="color:#6F42C1">FloatTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">F64</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">isize</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Int</span><span style="color:#24292E">(</span><span style="color:#6F42C1">IntTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">Isize</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">i8</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Int</span><span style="color:#24292E">(</span><span style="color:#6F42C1">IntTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">I8</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">i16</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Int</span><span style="color:#24292E">(</span><span style="color:#6F42C1">IntTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">I16</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">i32</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Int</span><span style="color:#24292E">(</span><span style="color:#6F42C1">IntTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">I32</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">i64</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Int</span><span style="color:#24292E">(</span><span style="color:#6F42C1">IntTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">I64</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">i128</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Int</span><span style="color:#24292E">(</span><span style="color:#6F42C1">IntTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">I128</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">str</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Str</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">usize</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Uint</span><span style="color:#24292E">(</span><span style="color:#6F42C1">UintTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">Usize</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">u8</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Uint</span><span style="color:#24292E">(</span><span style="color:#6F42C1">UintTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">U8</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">u16</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Uint</span><span style="color:#24292E">(</span><span style="color:#6F42C1">UintTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">U16</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">u32</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Uint</span><span style="color:#24292E">(</span><span style="color:#6F42C1">UintTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">U32</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">u64</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Uint</span><span style="color:#24292E">(</span><span style="color:#6F42C1">UintTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">U64</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#24292E">        table</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">insert</span><span style="color:#24292E">(</span><span style="color:#6F42C1">sym</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">u128</span><span style="color:#24292E">, </span><span style="color:#6F42C1">Uint</span><span style="color:#24292E">(</span><span style="color:#6F42C1">UintTy</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">U128</span><span style="color:#24292E">));</span></span>
+<span class="line"><span style="color:#005CC5">        Self</span><span style="color:#24292E"> { primitive_types</span><span style="color:#D73A49">:</span><span style="color:#24292E"> table }</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+            </div>
              
             <p>
                これは初めに列挙したプリミティブ型の一覧と一致している。doc comment にも、
@@ -196,27 +203,29 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
                とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。
             </p>
              
-            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-comment">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span>
-<span class="hljs-comment">/// (略)</span>
-<span class="hljs-keyword">fn</span> <span class="hljs-title function_">resolve_ident_in_lexical_scope</span>(
-    &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>,
-    <span class="hljs-keyword">mut</span> ident: Ident,
-    ns: Namespace,
-    <span class="hljs-comment">// (略)</span>
-) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;LexicalScopeBinding&lt;<span class="hljs-symbol">&#x27;a</span>&gt;&gt; {
-    <span class="hljs-comment">// (略)</span>
-
-    <span class="hljs-keyword">if</span> ns == TypeNS {
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">Some</span>(prim_ty) = <span class="hljs-keyword">self</span>.primitive_type_table.primitive_types.<span class="hljs-title function_ invoke__">get</span>(&amp;ident.name) {
-            <span class="hljs-keyword">let</span> <span class="hljs-variable">binding</span> =
-                (Res::<span class="hljs-title function_ invoke__">PrimTy</span>(*prim_ty), ty::Visibility::Public, DUMMY_SP, ExpnId::<span class="hljs-title function_ invoke__">root</span>())
-                  .<span class="hljs-title function_ invoke__">to_name_binding</span>(<span class="hljs-keyword">self</span>.arenas);
-            <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Some</span>(LexicalScopeBinding::<span class="hljs-title function_ invoke__">Item</span>(binding));
-        }
-    }
-
-    <span class="hljs-literal">None</span>
-}</code></pre>
+            <div class="codeblock" language="rust">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span></span>
+<span class="line"><span style="color:#6A737D">/// (略)</span></span>
+<span class="line"><span style="color:#D73A49">fn</span><span style="color:#6F42C1"> resolve_ident_in_lexical_scope</span><span style="color:#24292E">(</span></span>
+<span class="line"><span style="color:#D73A49">    &#x26;mut</span><span style="color:#005CC5"> self</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#D73A49">    mut</span><span style="color:#24292E"> ident</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Ident</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">    ns</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> Namespace</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#6A737D">    // (略)</span></span>
+<span class="line"><span style="color:#24292E">) </span><span style="color:#D73A49">-></span><span style="color:#6F42C1"> Option</span><span style="color:#24292E">&#x3C;</span><span style="color:#6F42C1">LexicalScopeBinding</span><span style="color:#24292E">&#x3C;'</span><span style="color:#6F42C1">a</span><span style="color:#24292E">>> {</span></span>
+<span class="line"><span style="color:#6A737D">    // (略)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ns </span><span style="color:#D73A49">==</span><span style="color:#6F42C1"> TypeNS</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">        if</span><span style="color:#D73A49"> let</span><span style="color:#6F42C1"> Some</span><span style="color:#24292E">(prim_ty) </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> self</span><span style="color:#D73A49">.</span><span style="color:#24292E">primitive_type_table</span><span style="color:#D73A49">.</span><span style="color:#24292E">primitive_types</span><span style="color:#D73A49">.</span><span style="color:#6F42C1">get</span><span style="color:#24292E">(</span><span style="color:#D73A49">&#x26;</span><span style="color:#24292E">ident</span><span style="color:#D73A49">.</span><span style="color:#24292E">name) {</span></span>
+<span class="line"><span style="color:#D73A49">            let</span><span style="color:#24292E"> binding </span><span style="color:#D73A49">=</span></span>
+<span class="line"><span style="color:#24292E">                (</span><span style="color:#6F42C1">Res</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">PrimTy</span><span style="color:#24292E">(</span><span style="color:#D73A49">*</span><span style="color:#24292E">prim_ty), </span><span style="color:#6F42C1">ty</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">Visibility</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">Public</span><span style="color:#24292E">, </span><span style="color:#005CC5">DUMMY_SP</span><span style="color:#24292E">, </span><span style="color:#6F42C1">ExpnId</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">root</span><span style="color:#24292E">())</span></span>
+<span class="line"><span style="color:#D73A49">                  .</span><span style="color:#6F42C1">to_name_binding</span><span style="color:#24292E">(</span><span style="color:#005CC5">self</span><span style="color:#D73A49">.</span><span style="color:#24292E">arenas);</span></span>
+<span class="line"><span style="color:#D73A49">            return</span><span style="color:#6F42C1"> Some</span><span style="color:#24292E">(</span><span style="color:#6F42C1">LexicalScopeBinding</span><span style="color:#D73A49">::</span><span style="color:#6F42C1">Item</span><span style="color:#24292E">(binding));</span></span>
+<span class="line"><span style="color:#24292E">        }</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">    None</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+            </div>
              
             <p>
                関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。<code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。
@@ -234,13 +243,15 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
                動作がわかったところで、例として次のコードを考える。
             </p>
              
-            <pre class="highlight" language="rust"><code class="highlight"><span class="hljs-meta">#![allow(non_camel_case_types)]</span>
-
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">bool</span>;
-
-<span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() {
-    <span class="hljs-keyword">let</span> <span class="hljs-variable">_</span>: <span class="hljs-type">bool</span> = <span class="hljs-type">bool</span>;
-}</code></pre>
+            <div class="codeblock" language="rust">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#![allow(non_camel_case_types)]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> bool</span><span style="color:#24292E">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">fn</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">() {</span></span>
+<span class="line"><span style="color:#D73A49">    let</span><span style="color:#24292E"> _</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> bool</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> bool</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+            </div>
              
             <p>
                ここで <code>main()</code> の <code>bool</code> は <code>struct bool</code> として解決される。なぜなら、プリミティブ型の判定をする前に <code>bool</code> という名前の別の型が見つかるからだ。

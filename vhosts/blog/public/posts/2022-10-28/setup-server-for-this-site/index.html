@@ -14,8 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【備忘録】 このサイト用の VPS をセットアップしたときのメモ｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
-    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+    <link rel="stylesheet" href="/style.css?h=60eb349e583f5bd51518a7eb98598043">
   </head>
   <body class="single">
     <header class="header">
@@ -94,8 +93,10 @@
                  ローカルマシンで鍵を生成する。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/teika.key
-$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github2teika.key</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/teika.key</span></span>
+<span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github2teika.key</span></span></code></pre>
+              </div>
                
               <p>
                 <code>teika.key</code> はローカルからサーバへの接続用、<code>github2teika.key</code> は、GitHub Actions からサーバへのデプロイ用。
@@ -108,12 +109,14 @@ $ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github2teika.key</code></pre>
                 <code>.ssh/config</code> に設定しておく。
               </p>
                
-              <pre class="highlight" language="ssh_config"><code>Host teika
-    HostName **********
-    User **********
-    Port **********
-    IdentityFile ~/.ssh/teika.key
-    IdentitiesOnly yes</code></pre>
+              <div class="codeblock" language="ssh_config">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>Host teika</span></span>
+<span class="line"><span>    HostName **********</span></span>
+<span class="line"><span>    User **********</span></span>
+<span class="line"><span>    Port **********</span></span>
+<span class="line"><span>    IdentityFile ~/.ssh/teika.key</span></span>
+<span class="line"><span>    IdentitiesOnly yes</span></span></code></pre>
+              </div>
             </section>
           </section>
            
@@ -132,22 +135,28 @@ $ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github2teika.key</code></pre>
                  管理者ユーザで作業すると危ないので、メインで使うユーザを作成する。<code>sudo</code> グループに追加して <code>sudo</code> できるようにし、<code>su</code> で切り替え。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ sudo adduser **********
-$ sudo adduser ********** sudo
-$ su **********
-$ cd</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo adduser **********</span></span>
+<span class="line"><span>$ sudo adduser ********** sudo</span></span>
+<span class="line"><span>$ su **********</span></span>
+<span class="line"><span>$ cd</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--basic-setup--hostname">
               <h3><a href="#section--basic-setup--hostname">ホスト名を変える</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ sudo hostname teika</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo hostname teika</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--basic-setup--public-key">
               <h3><a href="#section--basic-setup--public-key">公開鍵を置く</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ mkdir ~/.ssh
-$ chmod 700 ~/.ssh
-$ vi ~/.ssh/authorized_keys</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ mkdir ~/.ssh</span></span>
+<span class="line"><span>$ chmod 700 ~/.ssh</span></span>
+<span class="line"><span>$ vi ~/.ssh/authorized_keys</span></span></code></pre>
+              </div>
                
               <p>
                 <code>authorized_keys</code> には、ローカルで生成した <code>~/.ssh/teika.key.pub</code> と <code>~/.ssh/github2teika.key.pub</code> の内容をコピーする。
@@ -160,8 +169,10 @@ $ vi ~/.ssh/authorized_keys</code></pre>
                  SSH の設定を変更し、少しでも安全にしておく。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-$ sudo vi /etc/ssh/sshd_config</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</span></span>
+<span class="line"><span>$ sudo vi /etc/ssh/sshd_config</span></span></code></pre>
+              </div>
                
               <ul>
                 <li>
@@ -181,8 +192,10 @@ $ sudo vi /etc/ssh/sshd_config</code></pre>
                  そして設定を反映。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ sudo systemctl restart sshd
-$ sudo systemctl status sshd</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo systemctl restart sshd</span></span>
+<span class="line"><span>$ sudo systemctl status sshd</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--basic-setup--ssh-connect">
@@ -191,7 +204,9 @@ $ sudo systemctl status sshd</code></pre>
                  今の SSH セッションは閉じずに、ターミナルを別途開いて疎通確認する。セッションを閉じてしまうと、SSH の設定に不備があった場合に締め出しをくらう。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ ssh teika</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh teika</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--basic-setup--close-ports">
@@ -200,11 +215,13 @@ $ sudo systemctl status sshd</code></pre>
                  デフォルトの 22 番を閉じ、設定したポートだけ空ける。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ sudo ufw deny ssh
-$ sudo ufw allow *******
-$ sudo ufw enable
-$ sudo ufw reload
-$ sudo ufw status</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw deny ssh</span></span>
+<span class="line"><span>$ sudo ufw allow *******</span></span>
+<span class="line"><span>$ sudo ufw enable</span></span>
+<span class="line"><span>$ sudo ufw reload</span></span>
+<span class="line"><span>$ sudo ufw status</span></span></code></pre>
+              </div>
                
               <p>
                  ここでもう一度 SSH の接続確認を挟む。
@@ -217,40 +234,50 @@ $ sudo ufw status</code></pre>
                  GitHub に置いてある private リポジトリをサーバから clone したいので、SSH 鍵を生成して置いておく。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github.key
-$ cat ~/.ssh/github.key.pub</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github.key</span></span>
+<span class="line"><span>$ cat ~/.ssh/github.key.pub</span></span></code></pre>
+              </div>
                
               <p>
                 <a href="https://github.com/settings/ssh" rel="noreferrer" target="_blank">GitHub の設定画面</a> から、この公開鍵を追加する。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ vi ~/.ssh/config</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ vi ~/.ssh/config</span></span></code></pre>
+              </div>
                
               <p>
                  設定はこう。
               </p>
                
-              <pre class="highlight" language="ssh_config"><code>Host github.com
-    HostName github.com
-    User git
-    Port 22
-    IdentityFile ~/.ssh/github.key
-    IdentitiesOnly yes</code></pre>
+              <div class="codeblock" language="ssh_config">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>Host github.com</span></span>
+<span class="line"><span>    HostName github.com</span></span>
+<span class="line"><span>    User git</span></span>
+<span class="line"><span>    Port 22</span></span>
+<span class="line"><span>    IdentityFile ~/.ssh/github.key</span></span>
+<span class="line"><span>    IdentitiesOnly yes</span></span></code></pre>
+              </div>
                
               <p>
                  最後に接続できるか確認しておく。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ ssh -T github.com</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh -T github.com</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--basic-setup--upgrade-packages">
               <h3><a href="#section--basic-setup--upgrade-packages">パッケージの更新</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ sudo apt update
-$ sudo apt upgrade
-$ sudo apt update
-$ sudo apt upgrade
-$ sudo apt autoremove</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo apt update</span></span>
+<span class="line"><span>$ sudo apt upgrade</span></span>
+<span class="line"><span>$ sudo apt update</span></span>
+<span class="line"><span>$ sudo apt upgrade</span></span>
+<span class="line"><span>$ sudo apt autoremove</span></span></code></pre>
+              </div>
             </section>
           </section>
            
@@ -265,12 +292,16 @@ $ sudo apt autoremove</code></pre>
              
             <section id="section--site-hosting-setup--install-softwares">
               <h3><a href="#section--site-hosting-setup--install-softwares">使うソフトウェアのインストール</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ sudo apt install docker docker-compose git make</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo apt install docker docker-compose git make</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--site-hosting-setup--docker">
               <h3><a href="#section--site-hosting-setup--docker">メインユーザが Docker を使えるように</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ sudo adduser ********** docker</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo adduser ********** docker</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--site-hosting-setup--open-http-ports">
@@ -279,29 +310,37 @@ $ sudo apt autoremove</code></pre>
                  80 番と 443 番を空ける。
               </p>
                
-              <pre class="highlight" language="shell-session"><code>$ sudo ufw allow 80/tcp
-$ sudo ufw allow 443/tcp
-$ sudo ufw reload
-$ sudo ufw status</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw allow 80/tcp</span></span>
+<span class="line"><span>$ sudo ufw allow 443/tcp</span></span>
+<span class="line"><span>$ sudo ufw reload</span></span>
+<span class="line"><span>$ sudo ufw status</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--site-hosting-setup--clone-repositories">
               <h3><a href="#section--site-hosting-setup--clone-repositories">リポジトリのクローン</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ cd
-$ git clone git@github.com:nsfisis/nsfisis.dev.git
-$ cd nsfisis.dev
-$ git submodule update --init</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ cd</span></span>
+<span class="line"><span>$ git clone git@github.com:nsfisis/nsfisis.dev.git</span></span>
+<span class="line"><span>$ cd nsfisis.dev</span></span>
+<span class="line"><span>$ git submodule update --init</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--site-hosting-setup--certbot">
               <h3><a href="#section--site-hosting-setup--certbot">certbot で証明書取得</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ docker-compose up -d acme-challenge
-$ make setup</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ docker-compose up -d acme-challenge</span></span>
+<span class="line"><span>$ make setup</span></span></code></pre>
+              </div>
             </section>
              
             <section id="section--site-hosting-setup--run-server">
               <h3><a href="#section--site-hosting-setup--run-server">サーバを稼動させる</a></h3> 
-              <pre class="highlight" language="shell-session"><code>$ make serve</code></pre>
+              <div class="codeblock" language="shell-session">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ make serve</span></span></code></pre>
+              </div>
             </section>
           </section>
            

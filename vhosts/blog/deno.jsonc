@@ -7,7 +7,7 @@
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/toml": "jsr:@std/toml@^1.0.3",
     "checksum/": "https://deno.land/x/checksum@1.4.0/",
-    "highlight.js": "npm:highlight.js@11.11.1",
+    "shiki": "npm:shiki@^3.2.1",
     "zod/": "https://deno.land/x/zod@v3.24.2/",
     "myjsx/jsx-runtime": "./nuldoc-src/jsx/jsx-runtime.ts",
     "myjsx-types/jsx-runtime": "./nuldoc-src/jsx/types.d.ts",
