@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-01-11T00:00:00+09:00</updated>
+  <updated>2025-03-23T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:ec7f4462-ae56-4bbf-aac7-cbd32bbbeb29</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-03-23/phperkaigi-2025/"></link>
+    <title>PHPで作るPHP～セルフホストできる言語処理系を作ろう～</title>
+    <summary>登壇: PHPerKaigi 2025 (レギュラートーク (40分))</summary>
+    <published>2025-03-23T00:00:00+09:00</published>
+    <updated>2025-03-23T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:ce8f20e8-c79f-48f8-982d-53edd4d20483</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-01-08/phperkaigi-2023-tokens-q1/"></link>

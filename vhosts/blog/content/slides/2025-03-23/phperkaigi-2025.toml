@@ -1,0 +1,15 @@
+[slide]
+uuid = "ec7f4462-ae56-4bbf-aac7-cbd32bbbeb29"
+title = "PHPで作るPHP～セルフホストできる言語処理系を作ろう～"
+event = "PHPerKaigi 2025"
+talkType = "レギュラートーク (40分)"
+link = "/slides/2025-03-23/phperkaigi-2025/slides.pdf"
+tags = [
+  "conference",
+  "php",
+  "phperkaigi",
+]
+
+[[slide.revisions]]
+date = "2025-03-23"
+remark = "登壇"
