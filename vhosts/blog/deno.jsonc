@@ -3,9 +3,9 @@
     "myjsx/jsx-runtime": "./nuldoc-src/jsx/jsx-runtime.ts",
     "myjsx-types/jsx-runtime": "./nuldoc-src/jsx/types.d.ts",
     "checksum/": "https://deno.land/x/checksum@1.4.0/",
-    "highlight.js": "npm:highlight.js@11.9.0",
+    "highlight.js": "npm:highlight.js@11.11.1",
     "std/": "https://deno.land/std@0.224.0/",
-    "zod/": "https://deno.land/x/zod@v3.23.8/",
+    "zod/": "https://deno.land/x/zod@v3.24.2/",
   },
   "compilerOptions": {
     "jsx": "react-jsx",
