@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="HTTP/1.1 で同じヘッダを2回送ったときの挙動について仕様を読んでまとめた。">
+    <meta name="keywords" content="HTTP">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="HTTP/1.1 で同じヘッダを2回送ったときの挙動について仕様を読んでまとめた。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=79020a898c7052f79b32e90376a4497d">
+    <link rel="stylesheet" href="/hl.css?h=340e65ffd5c17713efc9107c06304f7b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/http/">HTTP</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2022-08-18">2022-08-18</time>: デジタルサーカス株式会社の社内記事として公開
+              </li>
+              <li class="revision">
+                <time datetime="2025-03-28">2025-03-28</time>: ブログ記事として一般公開
+              </li>
+            </ol>
+          </section>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+               この記事は、2022-08-18 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+            </div>
+          </div>
+           
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2> 
+            <p>
+               HTTP version 1.1 で同じ名前のヘッダを2回送ると、どのように解釈されるのか。仕様を確認した。
+            </p>
+             
+            <p>
+               今回読んだ仕様は RFC 7230 で、こちらのリンクから閲覧できる: <a href="https://datatracker.ietf.org/doc/html/rfc7230" rel="noreferrer" target="_blank">https://datatracker.ietf.org/doc/html/rfc7230</a> 
+            </p>
+             
+            <p>
+               その中でも、<a href="https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.2" rel="noreferrer" target="_blank">https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.2</a> を主に引用する。
+            </p>
+             
+            <p>
+               ところで、HTTP 周りの仕様を探すときはここから飛ぶと便利: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Resources_and_specifications" rel="noreferrer" target="_blank">https://developer.mozilla.org/en-US/docs/Web/HTTP/Resources_and_specifications</a> 
+            </p>
+          </section>
+           
+          <section id="section--specification">
+            <h2><a href="#section--specification">仕様</a></h2> 
+            <section id="section--sender">
+              <h3><a href="#section--sender">送信側</a></h3> 
+              <blockquote>
+                 A sender MUST NOT generate multiple header fields with the same field name in a message unless either the entire field value for that header field is defined as a comma-separated list [i.e., #(values)] or the header field is a well-known exception (as noted below). 
+              </blockquote>
+               
+              <p>
+                 【日本語訳 (私が訳したもので、公式なものではない)】 送信者は、同じ field name の header field を複数生成してはならない (MUST NOT)。ただし、header field の値がコンマ区切りのリストとして定義されているか、header field がよく知られた例外 (後述) である場合はその限りでない。
+              </p>
+            </section>
+             
+            <section id="section--recipient">
+              <h3><a href="#section--recipient">受信側</a></h3> 
+              <blockquote>
+                 A recipient MAY combine multiple header fields with the same field name into one &quot;field-name: field-value&quot; pair, without changing the semantics of the message, by appending each subsequent field value to the combined field value in order, separated by a comma.  The order in which header fields with the same field name are received is therefore significant to the interpretation of the combined field value; a proxy MUST NOT change the order of these field values when forwarding a message. 
+              </blockquote>
+               
+              <p>
+                 【日本語訳 (私が訳したもので、公式なものではない)】 受信者は、同じ field name を持つ複数の header field を、メッセージの意味を変えないようにしつつ同じ順序で追加して、単一のコンマで区切られた <code>&quot;field-name: field-value&quot;</code> のペアに結合してよい (MAY)。したがって、同じ field name を持つ header field がどのような順序で受信されたかは、結合された値の解釈に影響する。よって、プロキシは、メッセージを転送する際、header field の順序を変えてはならない (MUST NOT)。
+              </p>
+            </section>
+             
+            <section id="section--exception">
+              <h3><a href="#section--exception">例外ケース: Set-Cookie</a></h3> 
+              <blockquote>
+                 Note: In practice, the &quot;Set-Cookie&quot; header field ([<a href="https://datatracker.ietf.org/doc/html/rfc6265" rel="noreferrer" target="_blank">RFC6265</a>]) often appears multiple times in a response message and does not use the list syntax, violating the above requirements on multiple header fields with the same name.  Since it cannot be combined into a single field-value, recipients ought to handle &quot;Set-Cookie&quot; as a special case while processing header fields.  (See Appendix A.2.3 of [Kri2001] for details.) 
+              </blockquote>
+               
+              <p>
+                 【日本語訳 (私が訳したもので、公式なものではない)】 注意: 実際には、<code>Set-Cookie</code> header field (<a href="https://datatracker.ietf.org/doc/html/rfc6265" rel="noreferrer" target="_blank">RFC6265</a>) は、しばしばレスポンスメッセージ中に複数回現れる。これはリストの構文を使っておらず、上述した同じ field name を持つ header field についての要件に違反している。この値は単一の値へ結合できないため、受信者は、header field を処理する際、<code>Set-Cookie</code> を特別扱いした方がよい。
+              </p>
+               
+              <p>
+                 おそらく、「送信側」のところで書かれている「よく知られた例外」の一つがこれだと思われる。
+              </p>
+            </section>
+             
+            <section id="section--comma-separated-list">
+              <h3><a href="#section--comma-separated-list">どの header field がコンマ区切りのリストなのか</a></h3> 
+              <p>
+                 上記のように、同じ field name を持つ header field を複数回送れるかどうかは、その header field がコンマ区切りのリストとして定義されているかどうかで決まる。では、特定の header field がその条件を満たしているかどうか知りたいときは、何を見ればよいのか。
+              </p>
+               
+              <p>
+                 HTTP の仕様として定義されているような header field であれば、下記のリンクからそれぞれの定義を参照できる。
+              </p>
+               
+              <ul>
+                <li>
+                  <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-5" rel="noreferrer" target="_blank">https://datatracker.ietf.org/doc/html/rfc7231#section-5</a>
+                </li>
+                 
+                <li>
+                  <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-7" rel="noreferrer" target="_blank">https://datatracker.ietf.org/doc/html/rfc7231#section-7</a>
+                </li>
+              </ul>
+               
+              <p>
+                 そうでない場合 (たとえば <code>X-</code> から始まるもの等) は、MDN や各ベンダのドキュメントを探すことになるだろう。
+              </p>
+            </section>
+          </section>
+           
+          <section id="section--outro">
+            <h2><a href="#section--outro">まとめ</a></h2> 
+            <ul>
+              <li>
+                送信側: 基本的には複数回送れない。コンマ区切りのヘッダは例外
+              </li>
+               
+              <li>
+                受信側: 基本的には未規定。コンマ区切りのヘッダは複数回来たらその順に結合する
+              </li>
+               
+              <li>
+                プロキシ: 順序を変えてはならない
+              </li>
+               
+              <li>
+                <code>Set-Cookie</code> は例外ケース
+              </li>
+            </ul>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

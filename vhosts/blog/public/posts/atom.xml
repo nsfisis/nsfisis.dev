@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-03-27T00:00:00+09:00</updated>
+  <updated>2025-03-28T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:046e4412-bee8-4ffe-9876-6cbeaa0caf6b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-28/http-1-1-send-multiple-same-headers/"></link>
+    <title>【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか</title>
+    <summary>HTTP/1.1 で同じヘッダを2回送ったときの挙動について仕様を読んでまとめた。</summary>
+    <published>2025-03-28T00:00:00+09:00</published>
+    <updated>2025-03-28T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:99111377-27e7-427b-9dc5-a23f621fa826</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-27/zip-function-like-command-paste-command/"></link>
