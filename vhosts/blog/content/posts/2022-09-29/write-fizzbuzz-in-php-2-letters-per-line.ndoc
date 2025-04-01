@@ -202,7 +202,7 @@ remark = "小さな文言の修正・変更"
   </section>
   <section id="commentary">
     <h>解説</h>
-    <section id="commentary--normal-fizzbuzz">
+    <section id="normal-fizzbuzz">
       <h>普通の (?) fizzbuzz</h>
       <p>
         まずは普通に書くとしよう。
@@ -220,7 +220,7 @@ remark = "小さな文言の修正・変更"
         素直に書いた fizzbuzz とは言い難いが、このくらいは普通だということにしておかないと、この先がやっていられないので許してほしい。
       </p>
     </section>
-    <section id="commentary--remove-keywords">
+    <section id="remove-keywords">
       <h><code>for</code> の排除</h>
       <p>
         <code>for</code> は、3文字もある長いキーワードである。
@@ -244,7 +244,7 @@ remark = "小さな文言の修正・変更"
         なお、<code>echo</code> は文 (statement) であり式 (expression) ではないので、式である <code>printf</code> に置き換えた。
       </p>
     </section>
-    <section id="commentary--shorten-function-invocation">
+    <section id="shorten-function-invocation">
       <h>関数呼び出しの短縮</h>
       <p>
         <code>range</code>、<code>array_walk</code>、<code>printf</code> は長すぎるのでどうにかせねばならない。
@@ -273,7 +273,7 @@ remark = "小さな文言の修正・変更"
         次のテクニックへ移ろう。
       </p>
     </section>
-    <section id="commentary--incompatible-solution">
+    <section id="incompatible-solution">
       <h>余談: PHP 8.x で動作しなくてもいいなら</h>
       <p>
         今回使ったテクニックを説明する前に、余談として、文字列リテラルの短縮法として今回採用しなかったものを紹介する。
@@ -318,7 +318,7 @@ remark = "小さな文言の修正・変更"
         むしろ、このことがわかっていたからこそ PHP 8.x での動作を要件に課したところがある。
       </p>
     </section>
-    <section id="commentary--shorten-string-literals">
+    <section id="shorten-string-literals">
       <h>文字列リテラルの短縮</h>
       <p>
         実際に使った手法の説明に移る。

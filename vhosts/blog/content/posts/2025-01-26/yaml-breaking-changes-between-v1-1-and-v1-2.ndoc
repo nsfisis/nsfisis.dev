@@ -33,7 +33,7 @@ remark = "ブログ記事として一般公開"
   </section>
   <section id="breaking-changes">
     <h>主な破壊的変更</h>
-    <section id="breaking-changes--boolean-literals">
+      <section id="boolean-literals">
       <h>Boolean としてパースされるトークンが <code>true</code> / <code>false</code> とその亜種のみに</h>
       <p>
         この変更の影響が最も大きいと思われる。
@@ -41,7 +41,7 @@ remark = "ブログ記事として一般公開"
         YAML 1.2 では、<code>true</code> と <code>false</code>、それらの大文字バージョン (<code>True</code>、<code>TRUE</code>、<code>False</code>、<code>FALSE</code>) のみが boolean としてパースされるようになった。
       </p>
     </section>
-    <section id="breaking-changes--octal-literals">
+      <section id="octal-literals">
       <h>八進数リテラルには <code>0o</code> が必須に</h>
       <p>
         C 言語などでは、<code>0</code> から始まる数字の列を八進数としてパースする。
@@ -49,7 +49,7 @@ remark = "ブログ記事として一般公開"
         プログラミング言語では、Python や Haskell、Swift、Rust などがこの記法を採用している。
       </p>
     </section>
-    <section id="breaking-changes--merging">
+      <section id="merging">
       <h><code>&lt;&lt;</code> によるマージが不可能に</h>
       <p>
         YAML 1.1 では、<code>&lt;&lt;</code> という文字列をキーに指定することで、マップをマージすることができた。
@@ -70,7 +70,7 @@ remark = "ブログ記事として一般公開"
         1.2 からはこれができなくなる。
       </p>
     </section>
-    <section id="breaking-changes--number-separator">
+      <section id="number-separator">
       <h>数字を <code>_</code> で区切るのが禁止に</h>
       <p>
         <code>1234567</code> を <code>1_234_567</code> と書けなくなった。

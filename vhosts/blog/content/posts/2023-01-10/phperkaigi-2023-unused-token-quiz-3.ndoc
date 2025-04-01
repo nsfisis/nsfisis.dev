@@ -164,13 +164,13 @@ remark = "公開"
   </section>
   <section id="commentary">
     <h>解説</h>
-    <section id="commentary--summary">
+    <section id="summary">
       <h>概要</h>
       <p>
         例外が発生した行数にデータをエンコードし、それを <code>catch</code> で捕まえて表示している。
       </p>
     </section>
-    <section id="commentary--chain-of-exceptions">
+    <section id="chain-of-exceptions">
       <h>例外オブジェクトの連鎖</h>
       <p>
         <a href="https://www.php.net/class.Exception"><code>Exception</code></a> や <a href="https://www.php.net/class.Error"><code>Error</code></a> には <code>$previous</code> というプロパティがあり、コンストラクタの第3引数から渡すことができる。主に 2つの用法がある:
@@ -204,7 +204,7 @@ remark = "公開"
         この知識を元に、トークンの出力部を解析してみる。
       </p>
     </section>
-    <section id="commentary--output">
+    <section id="output">
       <h>出力部の解析</h>
       <p>
         出力部をコメントや改行を追加して再掲する:
@@ -240,7 +240,7 @@ remark = "公開"
         それでは、エラーチェインを作る箇所、関数 <code>f()</code> を見ていく。
       </p>
     </section>
-    <section id="commentary--data-construction">
+    <section id="data-construction">
       <h>データ構成部の解析</h>
       <p>
         <code>f()</code> の定義を再掲する (エラーオブジェクトの行数を利用しているので、一部分だけ抜き出すと値が変わることに注意):

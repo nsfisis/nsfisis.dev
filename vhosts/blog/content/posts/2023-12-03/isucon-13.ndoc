@@ -49,26 +49,26 @@ remark = "公開"
       ISUCON で高スコアを出す戦略については、戦闘力の高い方々が良質な記事を書いてくださっている。
       ここでは、上述したような低い目標を達成するための戦略について書こうと思う。
     </p>
-    <section id="strategy--do-not-destroy-environment">
+    <section id="do-not-destroy-environment">
       <h>環境を破壊しない</h>
       <p>
         ミドルウェアの設定やアプリケーションコードなど、変更を加えるあらゆるものは、必ずバックアップを取るか Git で管理する。
         復旧不能になって環境ごと作り直すことだけは必ず避ける。
       </p>
     </section>
-    <section id="strategy--revert-changes-immediately">
+    <section id="revert-changes-immediately">
       <h>すぐに変更を取り消す</h>
       <p>
         それでも壊してしまったときは、即座に変更を取り消す。壊れた理由を調べることに固執しない。
       </p>
     </section>
-    <section id="strategy--do-small-deployment">
+    <section id="do-small-deployment">
       <h>小さくデプロイする</h>
       <p>
         一度に複数の変更を加えず、可能な限り小さな単位でデプロイする。そしてその都度ベンチマークを走らせ、整合性チェックが通るかどうかを (当然速くなっているかどうかも) 確かめる。
       </p>
     </section>
-    <section id="strategy--use-familiar-tools">
+    <section id="use-familiar-tools">
       <h>使い慣れた道具を使う</h>
       <p>
         使用する言語、ミドルウェア、ツール類を、使い慣れたものに限定する。

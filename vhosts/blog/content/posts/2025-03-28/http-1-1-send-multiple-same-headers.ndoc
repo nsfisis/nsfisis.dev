@@ -37,7 +37,7 @@ remark = "ブログ記事として一般公開"
   </section>
   <section id="specification">
     <h>仕様</h>
-    <section id="specification--sender">
+      <section id="sender">
       <h>送信側</h>
       <blockquote>
         A sender MUST NOT generate multiple header fields with the same field
@@ -51,7 +51,7 @@ remark = "ブログ記事として一般公開"
         ただし、header field の値がコンマ区切りのリストとして定義されているか、header field がよく知られた例外 (後述) である場合はその限りでない。
       </p>
     </section>
-    <section id="specification--recipient">
+      <section id="recipient">
       <h>受信側</h>
       <blockquote>
         A recipient MAY combine multiple header fields with the same field
@@ -70,7 +70,7 @@ remark = "ブログ記事として一般公開"
         よって、プロキシは、メッセージを転送する際、header field の順序を変えてはならない (MUST NOT)。
       </p>
     </section>
-    <section id="specification--exception">
+      <section id="exception">
       <h>例外ケース: Set-Cookie</h>
       <blockquote>
         Note: In practice, the "Set-Cookie" header field ([<a href="https://datatracker.ietf.org/doc/html/rfc6265">RFC6265</a>]) often
@@ -91,7 +91,7 @@ remark = "ブログ記事として一般公開"
         おそらく、「送信側」のところで書かれている「よく知られた例外」の一つがこれだと思われる。
       </p>
     </section>
-    <section id="specification--comma-separated-list">
+      <section id="comma-separated-list">
       <h>どの header field がコンマ区切りのリストなのか</h>
       <p>
         上記のように、同じ field name を持つ header field を複数回送れるかどうかは、その header field がコンマ区切りのリストとして定義されているかどうかで決まる。では、特定の header field がその条件を満たしているかどうか知りたいときは、何を見ればよいのか。

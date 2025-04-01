@@ -88,7 +88,7 @@ remark = "公開"
     <p>
       以降は、<code>writeSignature</code> や <code>writeChunkIhdr</code> などを実装していく。
     </p>
-    <section id="implement-png-encoder--png-signature">
+    <section id="png-signature">
       <h>PNG signature</h>
       <p>
         PNG signature は、PNG 画像の先頭に固定で付与されるバイト列で、8 バイトからなる。
@@ -132,7 +132,7 @@ remark = "公開"
         <code>encoding/binary</code> パッケージの <code>binary.Write</code> を使い、固定の 8 バイトを書き込む。
       </p>
     </section>
-    <section id="implement-png-encoder--structure-of-chunk">
+    <section id="structure-of-chunk">
       <h>Chunk の構造</h>
       <p>
         IHDR chunk に進む前に、chunk 一般の構造を確認する。
@@ -209,7 +209,7 @@ remark = "公開"
         準備ができたところで、具体的な chunk をエンコードしていく。
       </p>
     </section>
-    <section id="implement-png-encoder--ihdr-chunk">
+    <section id="ihdr-chunk">
       <h>IHDR chunk</h>
       <p>
         IHDR chunk は最初に配置される chunk である。次のようなデータからなる。
@@ -274,12 +274,12 @@ remark = "公開"
         ]]>
       </codeblock>
     </section>
-    <section id="implement-png-encoder--idat-chunk">
+    <section id="idat-chunk">
       <h>IDAT chunk</h>
       <p>
         IDAT chunk は、実際の画像データが格納された chunk である。IDAT chunk は deflate アルゴリズムにより圧縮され、zlib 形式で格納される。
       </p>
-      <section id="implement-png-encoder--idat-chunk--zlib">
+      <section id="zlib">
         <h>Zlib</h>
         <p>
           まずは zlib について確認する。おおよそ次のような構造になっている。
@@ -360,7 +360,7 @@ remark = "公開"
           ]]>
         </codeblock>
       </section>
-      <section id="implement-png-encoder--idat-chunk--image-data">
+      <section id="image-data">
         <h>画像データ</h>
         <p>
           では次に、zlib 形式で格納するデータを用意する。PNG 画像は次のような順にスキャンする。
@@ -394,7 +394,7 @@ remark = "公開"
         </codeblock>
       </section>
     </section>
-    <section id="implement-png-encoder--iend-chunk">
+    <section id="iend-chunk">
       <h>IEND chunk</h>
       <p>
         最後に IEND chunk を書き込む。これは PNG 画像の最後に配置される chunk で、PNG のデコーダはこの chunk に出会うとそこでデコードを停止する。

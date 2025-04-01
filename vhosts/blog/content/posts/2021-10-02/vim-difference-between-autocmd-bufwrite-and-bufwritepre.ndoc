@@ -54,7 +54,7 @@ remark = "Qiita から移植"
         <a href="https://github.com/neovim/neovim/tree/71d4f5851f068eeb432af34850dddda8cc1c71e3">neovim (上に同じ)</a>
       </p>
     </blockquote>
-    <section id="code-reading--vim">
+    <section id="vim">
       <h>vim のソースコード</h>
       <p>
         以下は、autocmd events
@@ -90,7 +90,7 @@ remark = "Qiita から移植"
         ]]>
       </codeblock>
     </section>
-    <section id="code-reading--neovim">
+    <section id="neovim">
       <h>neovim のソースコード</h>
       <p>
         neovim の場合でも同様のマッピングが定義されているが、こちらの場合は Lua

@@ -68,7 +68,7 @@ remark = "Wasm ランタイムの進捗について追記"
   </section>
   <section id="as-attendee">
     <h>参加者として</h>
-    <section id="as-attendee--my-best-session">
+    <section id="my-best-session">
       <h>マイベストセッション</h>
       <p>
         <a href="https://fortee.jp/phperkaigi-2024/proposal/ac59d0dd-795a-47cb-ba59-c0b1772d00cc">RubyVM を PHP で実装する〜Hello World を出力するまで〜</a> (めもりー さん)

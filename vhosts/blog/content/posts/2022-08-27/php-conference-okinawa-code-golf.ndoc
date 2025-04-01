@@ -70,7 +70,7 @@ remark = "公開"
   </section>
   <section id="techniques">
     <h>使用したテクニック</h>
-    <section id="techniques--exponential-notation">
+    <section id="exponential-notation">
       <h>指数表記</h>
       <p>
         割と多くの言語のゴルフで使えるテクニック。
@@ -78,7 +78,7 @@ remark = "公開"
         このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。
       </p>
     </section>
-    <section id="techniques--shorten-loop">
+    <section id="shorten-loop">
       <h>foreach や for の中身を1つの文に</h>
       <p>
         <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、
@@ -86,7 +86,7 @@ remark = "公開"
         C言語などでも使える。
       </p>
     </section>
-    <section id="techniques--omit-initialization">
+    <section id="omit-initialization">
       <h>$r に初期値を入れない</h>
       <p>
         PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、
@@ -102,7 +102,7 @@ remark = "公開"
         もし 0 が渡されたケースを無視するなら、これが不要になるので 4 バイト縮む。
       </p>
     </section>
-    <section id="techniques--put-text-outside-php-tag">
+    <section id="put-text-outside-php-tag">
       <h>PHP タグの外に文字列を置く</h>
       <p>
         PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。

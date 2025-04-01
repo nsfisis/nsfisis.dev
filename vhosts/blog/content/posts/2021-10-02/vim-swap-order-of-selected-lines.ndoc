@@ -42,7 +42,7 @@ remark = "Qiita から移植"
   </section>
   <section id="existing-solution">
     <h>よく紹介されている手法</h>
-    <section id="existing-solution--external-commands">
+    <section id="external-commands">
       <h><code>tac</code> / <code>tail</code></h>
       <p>
         <code>tac</code> や <code>tail -r</code> などの外部コマンドを <code>!</code>
@@ -58,7 +58,7 @@ remark = "Qiita から移植"
         オプションは環境によって利用できないことがあり、複数の環境を行き来する場合に採用しづらい
       </p>
     </section>
-    <section id="existing-solution--global-command">
+    <section id="global-command">
       <h><code>:g/^/m0</code></h>
       <p>
         こちらは外部コマンドに頼らず、Vim の機能のみを使う。<code>g</code> は <code>:global</code>

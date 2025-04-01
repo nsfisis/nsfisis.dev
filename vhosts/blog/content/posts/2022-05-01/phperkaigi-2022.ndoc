@@ -28,7 +28,7 @@ remark = "公開"
   </section>
   <section id="comments">
     <h>感想</h>
-    <section id="comments--great-sessions">
+    <section id="great-sessions">
       <h>厳選おすすめトーク</h>
       <p>
         多くの素晴らしいトークの中から、特におすすめのものを 5つ選んだ。
@@ -103,21 +103,21 @@ remark = "公開"
       </p>
     </blockquote>
   </section>
-  <section id="comments--token-quizzes">
+  <section id="token-quizzes">
     <h>トークン問題の作成</h>
     <p>
       今回は、PHPer チャレンジ用に弊社のトークン問題を 3題作成した。
       こちらについては<a href="/posts/2022-04-09/phperkaigi-2022-tokens">別途記事にしている</a>ので、そちらを参照されたい。
     </p>
   </section>
-  <section id="comments--phper-challenge">
+  <section id="phper-challenge">
     <h>PHPer チャレンジ</h>
     <p>
       <a href="https://fortee.jp/phperkaigi-2022/challenge">1位</a>になった。<br/>
       また、賞品として <a href="https://www.amazon.co.jp/dp/B08MQNJC9Z">Echo Show 15</a> をいただいた。
     </p>
   </section>
-  <section id="comments--conference">
+  <section id="conference">
     <h>カンファレンス全体への感想</h>
     <p>
       <a href="/posts/2021-03-30/phperkaigi-2021">去年の参加レポ</a> では、こんなことを書いた。

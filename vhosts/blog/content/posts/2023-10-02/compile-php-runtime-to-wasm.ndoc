@@ -66,7 +66,7 @@ remark = "公開"
   </section>
   <section id="build">
     <h>ビルド</h>
-    <section id="build--write-c-entrypoint">
+    <section id="write-c-entrypoint">
       <h>C のエントリポイントを書く</h>
       <p>
         先ほどのコードでも使っていたエントリポイントである <code>php_wasm_run</code> を用意する。
@@ -115,7 +115,7 @@ remark = "公開"
         改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
       </p>
     </section>
-    <section id="build--compile-to-wasm">
+    <section id="compile-to-wasm">
       <h>WebAssembly にコンパイルする</h>
       <p>
         それでは WebAssembly にコンパイルしていこう。ここからは <code>Dockerfile</code> 上のコマンドとして操作を示す。

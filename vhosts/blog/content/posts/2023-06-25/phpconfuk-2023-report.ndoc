@@ -24,7 +24,7 @@ remark = "公開"
   </section>
   <section id="sessions-thoughts">
     <h>セッションの感想</h>
-    <section id="sessions-thoughts--eve">
+    <section id="eve">
       <h>前夜祭</h>
       <p>
         ※セッションの題名と発表者名は、<a href="https://connpass.com/event/282285/">前夜祭イベントの connpass ページ</a>から引用。
@@ -50,7 +50,7 @@ remark = "公開"
         </li>
       </ul>
     </section>
-    <section id="sessions-thoughts--conference">
+    <section id="conference">
       <h>カンファレンス</h>
       <p>
         ※セッションの題名と発表者名は、<a href="https://fortee.jp/phpconfukuoka-2023/proposal/accepted">カンファレンスの fortee ページ</a>から引用。

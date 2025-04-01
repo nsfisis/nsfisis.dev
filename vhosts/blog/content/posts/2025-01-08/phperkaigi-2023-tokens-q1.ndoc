@@ -70,7 +70,7 @@ remark = "読みやすさのため一部の文言を調整"
   </section>
   <section id="commentary">
     <h>解説</h>
-    <section id="commentary--read-as-image">
+    <section id="read-as-image">
       <h>画像として解釈する</h>
       <p>
         まずは素直に画像として見てみよう。
@@ -89,7 +89,7 @@ remark = "読みやすさのため一部の文言を調整"
         他の PHPer トークンの中から適切な1つを見つけだし、「パスワード」として渡すことで答えとなる PHPer トークンが得られるというわけだ。
       </p>
     </section>
-    <section id="commentary--password">
+    <section id="password">
       <h>パスワード</h>
       <p>
         不正なパスワードを使って実行してみると、次のようなエラーメッセージが表示される。
@@ -115,7 +115,7 @@ remark = "読みやすさのため一部の文言を調整"
         これは私のミスである。
       </p>
     </section>
-    <section id="commentary--png-steganography">
+    <section id="png-steganography">
       <h>PNG ステガノグラフィ</h>
       <p>
         QR コードも言っているように、このファイルは PNG 画像であるにもかかわらず PHP で実行することができる。なぜこのようなことが可能なのか。
@@ -185,7 +185,7 @@ remark = "読みやすさのため一部の文言を調整"
         なお、このように PNG 画像などに本来のデータとは異なる別のデータを隠すことを「ステガノグラフィ」(<a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%86%E3%82%AC%E3%83%8E%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%BC">Wikipedia「ステガノグラフィー」</a>) と呼ぶ。
       </p>
     </section>
-    <section id="commentary--php-program">
+    <section id="php-program">
       <h>実行される PHP プログラム</h>
       <p>
         画像の正体がわかったところで、画像に隠されていた PHP プログラムについて見ていこう。
@@ -318,7 +318,7 @@ remark = "読みやすさのため一部の文言を調整"
         QR コード中央のカラフルな部分が Piet の命令になっている。
       </p>
     </section>
-    <section id="commentary--piet-source-code">
+    <section id="piet-source-code">
       <h>Piet のソースコード</h>
       <p>
         さて、Piet でどのようなコードが書かれて (いや、描かれて) いるのかを解説したいところだが、今の私にはできそうにない。
@@ -377,7 +377,7 @@ remark = "読みやすさのため一部の文言を調整"
         そういうわけでこの Piet インタプリタは完全な Piet インタプリタではなく、「403 Forbidden」というテキストを絶対に出力できない。
       </p>
     </section>
-    <section id="commentary--misc">
+    <section id="misc">
       <h>その他小ネタ</h>
       <p>
         ここまでで問題の核心部分は説明し終えたので、ここからは残った小ネタを紹介しておく。

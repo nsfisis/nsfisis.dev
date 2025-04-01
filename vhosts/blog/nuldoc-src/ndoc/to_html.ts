@@ -94,14 +94,46 @@ function transformLinkLikeToAnchorElement(doc: Document) {
 }
 
 function transformSectionIdAttribute(doc: Document) {
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "section") {
+  const sectionStack: string[] = [];
+  const usedIds = new Set<string>();
+
+  const processNode = (n: Node) => {
+    if (n.kind !== "element") {
       return;
     }
 
-    const idAttr = n.attributes.get("id");
-    n.attributes.set("id", `section--${idAttr}`);
-  });
+    if (n.name === "section") {
+      const idAttr = n.attributes.get("id");
+      if (!idAttr) {
+        return;
+      }
+
+      let newId: string;
+      if (sectionStack.length === 0) {
+        newId = `section--${idAttr}`;
+      } else {
+        newId = `section--${sectionStack.join("--")}--${idAttr}`;
+      }
+
+      if (usedIds.has(newId)) {
+        throw new NuldocError(
+          `[nuldoc.tohtml] Duplicate section ID: ${newId}`,
+        );
+      }
+
+      usedIds.add(newId);
+      n.attributes.set("id", newId);
+      sectionStack.push(idAttr);
+
+      forEachChild(n, processNode);
+
+      sectionStack.pop();
+    } else {
+      forEachChild(n, processNode);
+    }
+  };
+
+  forEachChild(doc.root, processNode);
 }
 
 function setSectionTitleAnchor(doc: Document) {

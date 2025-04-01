@@ -76,7 +76,7 @@ remark = "トークセッションの記事版の執筆を中止"
   </section>
   <section id="as-attendee">
     <h>参加者として</h>
-    <section id="as-attendee--recommended-sessions">
+    <section id="recommended-sessions">
       <h>おすすめセッション</h>
       <p>
         5つのセッションを厳選した。
@@ -115,7 +115,7 @@ remark = "トークセッションの記事版の執筆を中止"
         ネタバレになるが、最終的に (Go で実装された) 本戦優勝スコアを超えている。
       </p>
     </section>
-    <section id="as-attendee--phper-challenge">
+    <section id="phper-challenge">
       <h>PHPer チャレンジ</h>
       <p>
         昨年に引き続き、弊社デジタルサーカス株式会社からのトークン問題の作題を担当した。
@@ -130,7 +130,7 @@ remark = "トークセッションの記事版の執筆を中止"
         (WIP: 解説ブログ記事執筆中。終わったらここにリンク)
       </p>
     </section>
-    <section id="as-attendee--random-thoughts">
+    <section id="random-thoughts">
       <h>雑多な感想</h>
       <p>
         なんかいろいろ。

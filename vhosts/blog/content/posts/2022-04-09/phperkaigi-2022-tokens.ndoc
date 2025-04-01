@@ -111,16 +111,16 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
     <p>
       この問題は、単に適切なバージョンの PHP で動かせばトークンが得られる。
     </p>
-    <section id="q1-brainfuck--commentary">
+    <section id="commentary">
       <h>解説</h>
-      <section id="q1-brainfuck--commentary--emoji">
+      <section id="emoji">
         <h>絵文字</h>
         <p>
           まず目につくのは大量の絵文字だろう。 PHP
           は識別子に使用できる文字の範囲が広く、絵文字も使うことができる。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--brainfuck">
+      <section id="brainfuck">
         <h>プログラム全体</h>
         <p>
           Brainf*ck のインタプリタとプログラムになっている。 Brainf*ck
@@ -182,7 +182,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           なお、<code>$🐘</code> はいわゆる main 関数であり、プログラムの実行部分である。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--emoji-selection">
+      <section id="emoji-selection">
         <h>絵文字の選択</h>
         <p>
           おおよそ意味に合致するよう選んでいるが、<code>$🤡</code> と <code>$🎪</code>
@@ -190,7 +190,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           のマスコットの象に由来する。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--strict-types">
+      <section id="strict-types">
         <h>strict_types</h>
         <p>
           <code>declare</code> 文の <code>strict_types</code> に指定できるのは、<code>0</code> か <code>1</code>
@@ -198,7 +198,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           8.1 から追加された、<code>0O</code> または <code>0o</code> から始まる八進数リテラルを使った。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--url">
+      <section id="url">
         <h>URL</h>
         <p>
           ソースコードのライセンスを示したこの部分だが、
@@ -213,7 +213,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           以降は行コメントになっている。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--numbers">
+      <section id="numbers">
         <h>リテラルなしで数値を生成する</h>
         <p>
           ソースコード中に、ほとんど数値リテラルが書かれていないことにお気づきだろうか。
@@ -242,7 +242,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           にし、さらにビット反転して <code>-1</code> にしている。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--conditionals">
+      <section id="conditionals">
         <h><code>if</code> 文なしで条件分岐</h>
         <p>
           三項演算子ないし <code>match</code> 式を使うことで、<code>if</code>
@@ -251,7 +251,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           のような形で分岐することもできる。
         </p>
       </section>
-      <section id="q1-brainfuck--commentary--loops">
+      <section id="loops">
         <h><code>while</code>、<code>for</code> 文なしでループ</h>
         <p>
           不動点コンビネータを使って無名再帰する
@@ -321,7 +321,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
     <p>
       ここでは、私の想定解を解説する。
     </p>
-    <section id="q2-riddle--code-reading">
+    <section id="code-reading">
       <h>読解</h>
       <p>
         まずはソースコードを読んでいく。
@@ -369,7 +369,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
         5文字ごとに区切ったあと、改行で結合している。
       </p>
     </section>
-    <section id="q2-riddle--hint">
+    <section id="hint">
       <h>ヒント</h>
       <p>
         次に、ソースコードに書いてあるヒントを読んでいく。
@@ -387,7 +387,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
         ファイルに追加ヒントとして書かれている)。
       </p>
     </section>
-    <section id="q2-riddle--solve">
+    <section id="solve">
       <h>解く</h>
       <p>
         ここまでわかれば、あと一歩で解ける。すなわち、<code>0x14B499C</code> が <code>#</code>
@@ -501,9 +501,9 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
     <p>
       実際にはもう少しパイプで繋げなければならない。
     </p>
-    <section id="q3-toquine--commentary">
+    <section id="commentary">
       <h>解説</h>
-      <section id="q3-toquine--commentary--quine">
+      <section id="quine">
         <h>プログラム全体</h>
         <p>
           コメントにもあるとおり、これは quine (風) のプログラムになっている。
@@ -515,14 +515,14 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           異なるのはトークンになっている部分のみである。
         </p>
       </section>
-      <section id="q3-toquine--commentary--tokens">
+      <section id="tokens">
         <h>トークン</h>
         <p>
           <code>$xs</code> がトークンに対応している。変換のロジックは <code>riddle.php</code>
           とほぼ同じなので省略する。
         </p>
       </section>
-      <section id="q3-toquine--commentary--states">
+      <section id="states">
         <h>状態保持</h>
         <p>
           トークンの何文字目まで出力したかを、ソースコードを変えずに (quine
@@ -531,7 +531,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
           から情報を取得している。
         </p>
       </section>
-      <section id="q3-toquine--commentary--rot-13">
+      <section id="rot-13">
         <h>ROT 13</h>
         <p>
           Quine は、素朴に書くとプログラムの一部が 2回記述されてしまう。

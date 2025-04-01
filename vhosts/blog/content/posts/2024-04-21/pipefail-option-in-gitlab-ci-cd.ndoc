@@ -26,7 +26,7 @@ remark = "ブログ記事として一般公開"
   </p>
   <section id="background">
     <h>前提</h>
-    <section id="background--gitlab-ci-cd">
+    <section id="gitlab-ci-cd">
       <h>GitLab CI/CD について</h>
       <p>
         GitLab CI/CD では、Docker executor を用いて任意の Docker image 上でスクリプトを走らせることができる。
@@ -68,7 +68,7 @@ remark = "ブログ記事として一般公開"
         失敗するコマンドをパイプに接続した。通常 Bash では、パイプの最後のコマンドの exit code が全体の exit code になる。
       </p>
     </section>
-    <section id="background--pipefail-option">
+    <section id="pipefail-option">
       <h><code>pipefail</code> オプションについて</h>
       <p>
         前述したようなケースにおいて、途中で失敗したときに全体を失敗させるには、<code>pipefail</code> オプションを有効にする。
