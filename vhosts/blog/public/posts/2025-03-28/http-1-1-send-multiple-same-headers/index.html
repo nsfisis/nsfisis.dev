@@ -90,8 +90,8 @@
            
           <section id="section--specification">
             <h2><a href="#section--specification">仕様</a></h2> 
-            <section id="section--sender">
-              <h3><a href="#section--sender">送信側</a></h3> 
+            <section id="section--specification--sender">
+              <h3><a href="#section--specification--sender">送信側</a></h3> 
               <blockquote>
                  A sender MUST NOT generate multiple header fields with the same field name in a message unless either the entire field value for that header field is defined as a comma-separated list [i.e., #(values)] or the header field is a well-known exception (as noted below). 
               </blockquote>
@@ -101,8 +101,8 @@
               </p>
             </section>
              
-            <section id="section--recipient">
-              <h3><a href="#section--recipient">受信側</a></h3> 
+            <section id="section--specification--recipient">
+              <h3><a href="#section--specification--recipient">受信側</a></h3> 
               <blockquote>
                  A recipient MAY combine multiple header fields with the same field name into one &quot;field-name: field-value&quot; pair, without changing the semantics of the message, by appending each subsequent field value to the combined field value in order, separated by a comma.  The order in which header fields with the same field name are received is therefore significant to the interpretation of the combined field value; a proxy MUST NOT change the order of these field values when forwarding a message. 
               </blockquote>
@@ -112,8 +112,8 @@
               </p>
             </section>
              
-            <section id="section--exception">
-              <h3><a href="#section--exception">例外ケース: Set-Cookie</a></h3> 
+            <section id="section--specification--exception">
+              <h3><a href="#section--specification--exception">例外ケース: Set-Cookie</a></h3> 
               <blockquote>
                  Note: In practice, the &quot;Set-Cookie&quot; header field ([<a href="https://datatracker.ietf.org/doc/html/rfc6265" rel="noreferrer" target="_blank">RFC6265</a>]) often appears multiple times in a response message and does not use the list syntax, violating the above requirements on multiple header fields with the same name.  Since it cannot be combined into a single field-value, recipients ought to handle &quot;Set-Cookie&quot; as a special case while processing header fields.  (See Appendix A.2.3 of [Kri2001] for details.) 
               </blockquote>
@@ -127,8 +127,8 @@
               </p>
             </section>
              
-            <section id="section--comma-separated-list">
-              <h3><a href="#section--comma-separated-list">どの header field がコンマ区切りのリストなのか</a></h3> 
+            <section id="section--specification--comma-separated-list">
+              <h3><a href="#section--specification--comma-separated-list">どの header field がコンマ区切りのリストなのか</a></h3> 
               <p>
                  上記のように、同じ field name を持つ header field を複数回送れるかどうかは、その header field がコンマ区切りのリストとして定義されているかどうかで決まる。では、特定の header field がその条件を満たしているかどうか知りたいときは、何を見ればよいのか。
               </p>
