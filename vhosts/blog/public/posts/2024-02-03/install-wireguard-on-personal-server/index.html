@@ -64,60 +64,49 @@
             </ol>
           </section>
           <section id="section--intro">
-            <h2><a href="#section--intro">はじめに</a></h2> 
+            <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-               個人用サービスのセルフホストに使っているサーバに <a href="https://www.wireguard.com/" rel="noreferrer" target="_blank">WireGuard</a> を導入する作業をしたのでメモ。
+              個人用サービスのセルフホストに使っているサーバに <a href="https://www.wireguard.com/" rel="noreferrer" target="_blank">WireGuard</a> を導入する作業をしたのでメモ。
             </p>
-             
             <p>
-               登場するホストは以下のとおり: 
+              登場するホストは以下のとおり:
             </p>
-             
             <ul>
               <li>
                 サーバ (Ubuntu): <code>10.10.1.1</code>
               </li>
-               
               <li>
                 クライアント 1 (Windows): <code>10.10.1.2</code>
               </li>
-               
               <li>
                 クライアント 2 (Android): <code>10.10.1.3</code>
               </li>
             </ul>
-             
             <p>
-               後ろの IP アドレスは VPN 内で使用するプライベート IP アドレス。
+              後ろの IP アドレスは VPN 内で使用するプライベート IP アドレス。
             </p>
           </section>
-           
           <section id="section--install-wireguard-server">
-            <h2><a href="#section--install-wireguard-server">WireGuard のインストール: サーバ</a></h2> 
+            <h2><a href="#section--install-wireguard-server">WireGuard のインストール: サーバ</a></h2>
             <p>
-               まずは個人用サービスをホストしている Ubuntu のサーバに WireGuard をインストールする。
+              まずは個人用サービスをホストしている Ubuntu のサーバに WireGuard をインストールする。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo apt install wireguard</span></span></code></pre>
             </div>
-             
             <p>
-               次に、WireGuard で使用する鍵を生成する。
+              次に、WireGuard で使用する鍵を生成する。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ wg genkey | sudo tee /etc/wireguard/server.key | wg pubkey | sudo tee /etc/wireguard/server.pub</span></span>
 <span class="line"><span>$ sudo chmod 600 /etc/wireguard/server.{key,pub}</span></span></code></pre>
             </div>
           </section>
-           
           <section id="section--install-wireguard-client">
-            <h2><a href="#section--install-wireguard-client">WireGuard のインストール: クライアント</a></h2> 
+            <h2><a href="#section--install-wireguard-client">WireGuard のインストール: クライアント</a></h2>
             <p>
-               公式サイトから各 OS 向けのクライアントソフトウェアを入手し、インストールする。次に、設定をおこなう。
+              公式サイトから各 OS 向けのクライアントソフトウェアを入手し、インストールする。次に、設定をおこなう。
             </p>
-             
             <div class="codeblock" language="ini">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># クライアント 1 の場合</span></span>
 <span class="line"><span style="color:#6F42C1">[Interface]</span></span>
@@ -129,7 +118,6 @@
 <span class="line"><span style="color:#D73A49">AllowedIPs</span><span style="color:#24292E"> = &#x3C;サーバの外部 IP アドレス>/32</span></span>
 <span class="line"><span style="color:#D73A49">Endpoint</span><span style="color:#24292E"> = &#x3C;サーバの外部 IP アドレス>:51820</span></span></code></pre>
             </div>
-             
             <div class="codeblock" language="ini">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># クライアント 2 の場合</span></span>
 <span class="line"><span style="color:#6F42C1">[Interface]</span></span>
@@ -141,22 +129,18 @@
 <span class="line"><span style="color:#D73A49">AllowedIPs</span><span style="color:#24292E"> = &#x3C;サーバの外部 IP アドレス>/32</span></span>
 <span class="line"><span style="color:#D73A49">Endpoint</span><span style="color:#24292E"> = &#x3C;サーバの外部 IP アドレス>:51820</span></span></code></pre>
             </div>
-             
             <p>
               <code>PrivateKey</code> や <code>PublicKey</code> は鍵ファイルのパスではなく中身を書くことに注意。
             </p>
           </section>
-           
           <section id="section--configure-wireguard">
-            <h2><a href="#section--configure-wireguard"> WireGuard の設定 </a></h2> 
+            <h2><a href="#section--configure-wireguard">WireGuard の設定</a></h2>
             <p>
-               一度サーバへ戻り、WireGuard の設定ファイルを書く。
+              一度サーバへ戻り、WireGuard の設定ファイルを書く。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo vim /etc/wireguard/wg0.conf</span></span></code></pre>
             </div>
-             
             <div class="codeblock" language="ini">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6F42C1">[Interface]</span></span>
 <span class="line"><span style="color:#D73A49">Address</span><span style="color:#24292E"> = 10.10.1.1/32</span></span>
@@ -172,59 +156,49 @@
 <span class="line"><span style="color:#D73A49">PublicKey</span><span style="color:#24292E"> = &#x3C;クライアント 2 の公開鍵></span></span>
 <span class="line"><span style="color:#D73A49">AllowedIPs</span><span style="color:#24292E"> = 10.10.1.3/32</span></span></code></pre>
             </div>
-             
             <p>
-               次に、WireGuard のサービスを起動する。
+              次に、WireGuard のサービスを起動する。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo systemctl enable wg-quick@wg0</span></span>
 <span class="line"><span>$ sudo systemctl start wg-quick@wg0</span></span></code></pre>
             </div>
           </section>
-           
           <section id="section--configure-firewall">
-            <h2><a href="#section--configure-firewall"> ファイアウォールの設定 </a></h2> 
+            <h2><a href="#section--configure-firewall">ファイアウォールの設定</a></h2>
             <p>
-               続けてファイアウォールを設定する。まずは WireGuard が使用する UDP のポートを開き、<code>wg0</code> を通る通信を許可する。
+              続けてファイアウォールを設定する。まずは WireGuard が使用する UDP のポートを開き、<code>wg0</code> を通る通信を許可する。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw allow 51820/udp</span></span>
 <span class="line"><span>$ sudo ufw allow in on wg0</span></span>
 <span class="line"><span>$ sudo ufw allow out on wg0</span></span></code></pre>
             </div>
-             
             <p>
-               次に、80 や 443 などの必要なポートについて、<code>wg0</code> を経由してのアクセスのみ許可する。
+              次に、80 や 443 などの必要なポートについて、<code>wg0</code> を経由してのアクセスのみ許可する。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw allow in on wg0 to any port 80 proto tcp</span></span>
 <span class="line"><span>$ sudo ufw allow in on wg0 to any port 443 proto tcp</span></span></code></pre>
             </div>
-             
             <p>
-               最後に、<code>ufw</code> を有効にする。
+              最後に、<code>ufw</code> を有効にする。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw status</span></span>
 <span class="line"><span>$ sudo ufw enable</span></span></code></pre>
             </div>
           </section>
-           
           <section id="section--connect-each-other">
-            <h2><a href="#section--connect-each-other"> 接続する </a></h2> 
+            <h2><a href="#section--connect-each-other">接続する</a></h2>
             <p>
-               これで、各クライアントで VPN を有効にすると、当該サーバの 80 ポートや 443 ポートにアクセスできるようになったはずだ。念のため VPN を切った状態でアクセスできないことも確認しておくとよいだろう。
+              これで、各クライアントで VPN を有効にすると、当該サーバの 80 ポートや 443 ポートにアクセスできるようになったはずだ。念のため VPN を切った状態でアクセスできないことも確認しておくとよいだろう。
             </p>
           </section>
-           
           <section id="section--edit-80-port">
-            <h2><a href="#section--edit-80-port"> 追記: 80 番ポートについて </a></h2> 
+            <h2><a href="#section--edit-80-port">追記: 80 番ポートについて</a></h2>
             <p>
-               Let&apos;s Encrypt でサーバの証明書を取得している場合、80 番ポートを空けておく必要がある。気づかないうちに証明書が切れないよう注意。
+              Let’s Encrypt でサーバの証明書を取得している場合、80 番ポートを空けておく必要がある。気づかないうちに証明書が切れないよう注意。
             </p>
           </section>
         </div>

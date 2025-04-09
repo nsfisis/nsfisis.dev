@@ -65,31 +65,28 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は <a href="https://vim-jp.org/ekiden/" rel="noreferrer" target="_blank">Vim 駅伝</a> #218 の記事です。
+              <p>
+                この記事は <a href="https://vim-jp.org/ekiden/" rel="noreferrer" target="_blank">Vim 駅伝</a> #218 の記事です。
+              </p>
             </div>
           </div>
-           
           <section id="section--intro">
-            <h2><a href="#section--intro">欲しかったもの</a></h2> 
+            <h2><a href="#section--intro">欲しかったもの</a></h2>
             <p>
-               Vim で JSON を編集しているときに、文法エラー (末尾カンマやカンマの不足) のみを修正して一切の整形をおこなわないプラグインが欲しかった。整形も同時におこなうプラグインは見つかっただけでも多数あったのだが、整形しないものは見つけられなかったので自作することにした。
+              Vim で JSON を編集しているときに、文法エラー (末尾カンマやカンマの不足) のみを修正して一切の整形をおこなわないプラグインが欲しかった。 整形も同時におこなうプラグインは見つかっただけでも多数あったのだが、整形しないものは見つけられなかったので自作することにした。
             </p>
-             
             <p>
-               なお、作成したツール自体は単体の CLI として動作し、Vim とは無関係に使うことができる。この記事では Neovim と組み合わせる場合の設定を紹介するが、およそ任意のエディタで使えるだろう。
+              なお、作成したツール自体は単体の CLI として動作し、Vim とは無関係に使うことができる。 この記事では Neovim と組み合わせる場合の設定を紹介するが、およそ任意のエディタで使えるだろう。
             </p>
           </section>
-           
           <section id="section--reparojson">
-            <h2><a href="#section--reparojson">作ったもの</a></h2> 
+            <h2><a href="#section--reparojson">作ったもの</a></h2>
             <p>
-               作成したものがこちら: <a href="https://github.com/nsfisis/reparojson" rel="noreferrer" target="_blank">ReparoJSON</a>
+              作成したものがこちら: <a href="https://github.com/nsfisis/reparojson" rel="noreferrer" target="_blank">ReparoJSON</a>
             </p>
-             
             <p>
-               次のように動作する。
+              次のように動作する。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ echo '[ 1 2 ]' | reparojson</span></span>
 <span class="line"><span>[ 1, 2 ]</span></span>
@@ -103,116 +100,99 @@
 <span class="line"><span>$ echo '{ "foo": 1, "bar": 2, }' | reparojson</span></span>
 <span class="line"><span>{ "foo": 1, "bar": 2 }</span></span></code></pre>
             </div>
-             
             <p>
-               バージョン 0.1.1 時点で修正対象の文法エラーは次のとおり: 
+              バージョン 0.1.1 時点で修正対象の文法エラーは次のとおり:
             </p>
-             
             <ul>
               <li>
                 配列末尾の余計なカンマ (削除する)
               </li>
-               
               <li>
                 配列内のカンマ不足 (挿入する)
               </li>
-               
               <li>
                 オブジェクト末尾の余計なカンマ (削除する)
               </li>
-               
               <li>
                 オブジェクト内のカンマ不足 (挿入する)
               </li>
             </ul>
-             
             <p>
-               他にも自動で直せそうなエラーはいくつか思いつくが (オブジェクトのキーがクォートされていない等)、私自身があまり困っていないので優先度は低い。
+              他にも自動で直せそうなエラーはいくつか思いつくが (オブジェクトのキーがクォートされていない等)、私自身があまり困っていないので優先度は低い。
             </p>
           </section>
-           
           <section id="section--itegration-with-neovim">
-            <h2><a href="#section--itegration-with-neovim">Neovim との連携</a></h2> 
+            <h2><a href="#section--itegration-with-neovim">Neovim との連携</a></h2>
             <p>
-               Neovim で JSON ファイルを保存したときに、上記のツールを自動で走らせるように設定する。
+              Neovim で JSON ファイルを保存したときに、上記のツールを自動で走らせるように設定する。
             </p>
-             
             <p>
-               ここでは、<a href="https://github.com/neovim/nvim-lspconfig" rel="noreferrer" target="_blank">nvim-lspconfig</a> と <a href="https://github.com/mattn/efm-langserver" rel="noreferrer" target="_blank">efm-langserver</a> を用いた設定例を紹介する。
+              ここでは、 <a href="https://github.com/neovim/nvim-lspconfig" rel="noreferrer" target="_blank">nvim-lspconfig</a> と <a href="https://github.com/mattn/efm-langserver" rel="noreferrer" target="_blank">efm-langserver</a> を用いた設定例を紹介する。
             </p>
-             
             <div class="codeblock" language="lua">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">local</span><span style="color:#24292E"> lspconfig </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> require</span><span style="color:#24292E">(</span><span style="color:#032F62">'lspconfig'</span><span style="color:#24292E">)</span></span>
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> lspconfig </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> require</span><span style="color:#24292E">(</span><span style="color:#032F62">'lspconfig'</span><span style="color:#24292E">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#24292E">lspconfig.</span><span style="color:#6F42C1">efm</span><span style="color:#24292E">.</span><span style="color:#005CC5">setup</span><span style="color:#24292E">({</span></span>
-<span class="line"><span style="color:#24292E">   init_options </span><span style="color:#D73A49">=</span><span style="color:#24292E"> { documentFormatting </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> true</span><span style="color:#24292E"> },</span></span>
-<span class="line"><span style="color:#24292E">   settings </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#24292E">      rootMarkers </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span><span style="color:#032F62">".git/"</span><span style="color:#24292E">},</span></span>
-<span class="line"><span style="color:#24292E">      languages </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#24292E">         json </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#24292E">            {</span></span>
-<span class="line"><span style="color:#24292E">               formatCommand </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "reparojson -q"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">               formatStdin </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> true</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">   lspconfig.</span><span style="color:#6F42C1">efm</span><span style="color:#24292E">.</span><span style="color:#005CC5">setup</span><span style="color:#24292E">({</span></span>
+<span class="line"><span style="color:#24292E">      init_options </span><span style="color:#D73A49">=</span><span style="color:#24292E"> { documentFormatting </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> true</span><span style="color:#24292E"> },</span></span>
+<span class="line"><span style="color:#24292E">      settings </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">         rootMarkers </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span><span style="color:#032F62">".git/"</span><span style="color:#24292E">},</span></span>
+<span class="line"><span style="color:#24292E">         languages </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">            json </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">               {</span></span>
+<span class="line"><span style="color:#24292E">                  formatCommand </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "reparojson -q"</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">                  formatStdin </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> true</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">               },</span></span>
 <span class="line"><span style="color:#24292E">            },</span></span>
 <span class="line"><span style="color:#24292E">         },</span></span>
-<span class="line"><span style="color:#24292E">      },</span></span>
-<span class="line"><span style="color:#24292E">   }</span></span>
-<span class="line"><span style="color:#24292E">})</span></span>
+<span class="line"><span style="color:#24292E">      }</span></span>
+<span class="line"><span style="color:#24292E">   })</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#24292E">vim.</span><span style="color:#6F42C1">api</span><span style="color:#24292E">.</span><span style="color:#005CC5">nvim_create_autocmd</span><span style="color:#24292E">(</span><span style="color:#032F62">'LspAttach'</span><span style="color:#24292E">, {</span></span>
-<span class="line"><span style="color:#6F42C1">   callback</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E">(e)</span></span>
-<span class="line"><span style="color:#24292E">      vim.</span><span style="color:#6F42C1">api</span><span style="color:#24292E">.</span><span style="color:#005CC5">nvim_create_autocmd</span><span style="color:#24292E">(</span><span style="color:#032F62">'BufWritePre'</span><span style="color:#24292E">, {</span></span>
-<span class="line"><span style="color:#24292E">         buffer </span><span style="color:#D73A49">=</span><span style="color:#24292E"> e.</span><span style="color:#6F42C1">buf</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#6F42C1">         callback</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E">()</span></span>
-<span class="line"><span style="color:#24292E">            vim.</span><span style="color:#6F42C1">lsp</span><span style="color:#24292E">.</span><span style="color:#6F42C1">buf</span><span style="color:#24292E">.</span><span style="color:#005CC5">format</span><span style="color:#24292E">({ async </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> false</span><span style="color:#24292E"> })</span></span>
-<span class="line"><span style="color:#D73A49">         end</span></span>
-<span class="line"><span style="color:#24292E">      })</span></span>
-<span class="line"><span style="color:#D73A49">   end</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">})</span></span></code></pre>
+<span class="line"><span style="color:#24292E">   vim.</span><span style="color:#6F42C1">api</span><span style="color:#24292E">.</span><span style="color:#005CC5">nvim_create_autocmd</span><span style="color:#24292E">(</span><span style="color:#032F62">'LspAttach'</span><span style="color:#24292E">, {</span></span>
+<span class="line"><span style="color:#6F42C1">      callback</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E">(e)</span></span>
+<span class="line"><span style="color:#24292E">         vim.</span><span style="color:#6F42C1">api</span><span style="color:#24292E">.</span><span style="color:#005CC5">nvim_create_autocmd</span><span style="color:#24292E">(</span><span style="color:#032F62">'BufWritePre'</span><span style="color:#24292E">, {</span></span>
+<span class="line"><span style="color:#24292E">            buffer </span><span style="color:#D73A49">=</span><span style="color:#24292E"> e.</span><span style="color:#6F42C1">buf</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#6F42C1">            callback</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E">()</span></span>
+<span class="line"><span style="color:#24292E">               vim.</span><span style="color:#6F42C1">lsp</span><span style="color:#24292E">.</span><span style="color:#6F42C1">buf</span><span style="color:#24292E">.</span><span style="color:#005CC5">format</span><span style="color:#24292E">({ async </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> false</span><span style="color:#24292E"> })</span></span>
+<span class="line"><span style="color:#D73A49">            end</span></span>
+<span class="line"><span style="color:#24292E">         })</span></span>
+<span class="line"><span style="color:#D73A49">      end</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">   })</span></span></code></pre>
             </div>
-             
             <p>
-               ほとんどは nvim-lspconfig と efm-langserver を使う際のボイラープレートだが、<code>formatCommand</code> で <code>-q</code> フラグを指定していることに注意してほしい。このツールは、デフォルトでは JSON が修正された場合 exit code 1 で終了する。これは、入力が最初から正しかった場合と修正して正しくなった場合を区別するためだが、異常終了してしまうと置き換えが発生しない。そのため、<code>-q</code> フラグを指定して、修正されたときも exit code 0 で終了するようにしている。
+              ほとんどは nvim-lspconfig と efm-langserver を使う際のボイラープレートだが、<code>formatCommand</code> で <code>-q</code> フラグを指定していることに注意してほしい。 このツールは、デフォルトでは JSON が修正された場合 exit code 1 で終了する。 これは、入力が最初から正しかった場合と修正して正しくなった場合を区別するためだが、異常終了してしまうと置き換えが発生しない。 そのため、<code>-q</code> フラグを指定して、修正されたときも exit code 0 で終了するようにしている。
             </p>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">おわりに</a></h2> 
+            <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-               このツールが威力を発揮するのは、行の入れ換え時である。次のような JSON があり、
+              このツールが威力を発揮するのは、行の入れ換え時である。次のような JSON があり、
             </p>
-             
             <div class="codeblock" language="json">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#005CC5">   "a"</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">   "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">   {</span></span>
+<span class="line"><span style="color:#005CC5">      "a"</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span></span>
+<span class="line"><span style="color:#24292E">   }</span></span></code></pre>
             </div>
-             
             <p>
-               2行目と3行目を入れ換えて以下のように編集した。
+              2行目と3行目を入れ換えて以下のように編集した。
             </p>
-             
             <div class="codeblock" language="json">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#005CC5">   "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span></span>
-<span class="line"><span style="color:#032F62">   "a"</span><span style="color:#B31D28;font-style:italic">:</span><span style="color:#005CC5"> true</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">   {</span></span>
+<span class="line"><span style="color:#005CC5">      "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span></span>
+<span class="line"><span style="color:#032F62">      "a"</span><span style="color:#B31D28;font-style:italic">:</span><span style="color:#005CC5"> true</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#24292E">   }</span></span></code></pre>
             </div>
-             
             <p>
-               これは不正な JSON だが、このツールを通せば次のようになる。
+              これは不正な JSON だが、このツールを通せば次のようになる。
             </p>
-             
             <div class="codeblock" language="json">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#005CC5">   "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">   "a"</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">   {</span></span>
+<span class="line"><span style="color:#005CC5">      "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">      "a"</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span></span>
+<span class="line"><span style="color:#24292E">   }</span></span></code></pre>
             </div>
-             
             <p>
-               もちろん、このような操作を文法を壊さずにおこなう Vim プラグインは存在する。しかし、単なる行の入れ換えであれば <code>ddp</code> の3ストロークでおこなうことができ、専用のキーバインドを覚える必要もない。このツールを用いることで、より Vimmer-friendly な JSON 編集が可能となる。
+              もちろん、このような操作を文法を壊さずにおこなう Vim プラグインは存在する。 しかし、単なる行の入れ換えであれば <code>ddp</code> の3ストロークでおこなうことができ、専用のキーバインドを覚える必要もない。 このツールを用いることで、より Vimmer-friendly な JSON 編集が可能となる。
             </p>
           </section>
         </div>

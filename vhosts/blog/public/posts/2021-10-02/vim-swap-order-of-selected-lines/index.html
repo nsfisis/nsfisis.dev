@@ -62,12 +62,13 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/4fefb361d9a693803520" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/4fefb361d9a693803520</a> 
+              <p>
+                この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/4fefb361d9a693803520" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/4fefb361d9a693803520</a>
+              </p>
             </div>
           </div>
-           
           <section id="section--tl-dr">
-            <h2><a href="#section--tl-dr">TL; DR</a></h2> 
+            <h2><a href="#section--tl-dr">TL; DR</a></h2>
             <div class="codeblock" language="vim">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">" License: Public Domain</span></span>
 <span class="line"></span>
@@ -76,110 +77,96 @@
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
             </div>
           </section>
-           
           <section id="section--version">
-            <h2><a href="#section--version">バージョン情報</a></h2> 
+            <h2><a href="#section--version">バージョン情報</a></h2>
             <p>
-              <code>:version</code> の一部 
+              <code>:version</code> の一部
             </p>
-             
             <blockquote>
               <p>
-                 VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Jan 26 2020 11:30:30) macOS version Included patches: 1-148 Huge version without GUI. 
+                VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Jan 26 2020 11:30:30) macOS version Included patches: 1-148 Huge version without GUI.
               </p>
             </blockquote>
           </section>
-           
           <section id="section--existing-solution">
-            <h2><a href="#section--existing-solution">よく紹介されている手法</a></h2> 
+            <h2><a href="#section--existing-solution">よく紹介されている手法</a></h2>
             <section id="section--existing-solution--external-commands">
-              <h3><a href="#section--existing-solution--external-commands"><code>tac</code> / <code>tail</code></a></h3> 
+              <h3><a href="#section--existing-solution--external-commands"><code>tac</code> / <code>tail</code></a></h3>
               <p>
                 <code>tac</code> や <code>tail -r</code> などの外部コマンドを <code>!</code> を使って呼び出し、置き換える。
               </p>
-               
               <blockquote>
                 <p>
-                   :h v_! 
+                  :h v_!
                 </p>
               </blockquote>
-               
               <p>
-                <code>tac</code> コマンドや <code>tail</code> の <code>-r</code> オプションは環境によって利用できないことがあり、複数の環境を行き来する場合に採用しづらい 
+                <code>tac</code> コマンドや <code>tail</code> の <code>-r</code> オプションは環境によって利用できないことがあり、複数の環境を行き来する場合に採用しづらい
               </p>
             </section>
-             
             <section id="section--existing-solution--global-command">
-              <h3><a href="#section--existing-solution--global-command"><code>:g/^/m0</code></a></h3> 
+              <h3><a href="#section--existing-solution--global-command"><code>:g/^/m0</code></a></h3>
               <p>
-                 こちらは外部コマンドに頼らず、Vim の機能のみを使う。<code>g</code> は <code>:global</code> コマンドの、<code>m</code> は <code>:move</code> コマンドの略 
+                こちらは外部コマンドに頼らず、Vim の機能のみを使う。<code>g</code> は <code>:global</code> コマンドの、<code>m</code> は <code>:move</code> コマンドの略
               </p>
-               
               <p>
                 <code>:global</code> コマンドは <code>:[range]global/{pattern}/[command]</code> のように使い、<code>[range]</code> で指定された範囲の行のうち、<code>{pattern}</code> で指定された検索パターンにマッチする行に対して、順番に <code>[command]</code> で指定された Ex コマンドを呼び出す。
               </p>
-               
               <blockquote>
                 <p>
-                   :h :global 
+                  :h :global
                 </p>
               </blockquote>
-               
               <p>
                 <code>:move</code> コマンドは <code>[range]:move {address}</code> のように使い、<code>[range]</code> で指定された範囲の行を <code>{address}</code> で指定された位置に移動させる。
               </p>
-               
               <blockquote>
                 <p>
-                   :h :move 
+                  :h :move
                 </p>
               </blockquote>
-               
               <p>
                 <code>:g/^/m0</code> のように組み合わせると、「すべての行を1行ずつ 0行目(1行目の上)に動かす」という動きをする。これは確かに行の入れ替えになっている。
               </p>
-               
               <p>
-                 なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
+                なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
               </p>
-               
               <div class="codeblock" language="vim">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
               </div>
-               
               <p>
-                 これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。
+                これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。
               </p>
             </section>
           </section>
-           
           <section id="section--problem-of-global-command">
-            <h2><a href="#section--problem-of-global-command"><code>:g/^/m0</code> の問題点</a></h2> 
+            <h2><a href="#section--problem-of-global-command"><code>:g/^/m0</code> の問題点</a></h2>
             <p>
               <code>:global</code> コマンドは各行に対してマッチングを行う際、現在の検索パターンを上書きしてしまう。<code>^</code> は行の先頭にマッチするため、結果として全ての行がハイライトされてしまう。<code>&apos;hlsearch&apos;</code> オプションを無効にしている場合その限りではないが、その場合でも直前の検索パターンが失われてしまうと <code>n</code> コマンドなどの際に不便である。
             </p>
-             
             <blockquote>
               <p>
-                 :h @/ 
+                :h @/
               </p>
             </blockquote>
           </section>
-           
           <section id="section--solution">
-            <h2><a href="#section--solution">解決策</a></h2> 
-            <blockquote>
-              <p>
-                 [2020/9/28追記] より簡潔な方法を見つけたので次節に追記した 
-              </p>
-            </blockquote>
-             
+            <h2><a href="#section--solution">解決策</a></h2>
+            <div class="admonition">
+              <div class="admonition-label">
+                NOTE
+              </div>
+              <div class="admonition-content">
+                <p>
+                  [2020/9/28追記] より簡潔な方法を見つけたので次節に追記した
+                </p>
+              </div>
+            </div>
             <p>
-               前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする: 
+              前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする:
             </p>
-             
             <div class="codeblock" language="vim">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function!</span><span style="color:#6F42C1"> s:reverse_lines</span><span style="color:#24292E">(from, </span><span style="color:#005CC5">to</span><span style="color:#24292E">) </span><span style="color:#D73A49">abort</span></span>
 <span class="line"><span style="color:#005CC5">    execute</span><span style="color:#6F42C1"> printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"%d,%dg/^/m%d"</span><span style="color:#24292E">, a:from, a:to, a:from</span><span style="color:#D73A49"> - </span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span></span>
@@ -189,69 +176,61 @@
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#D73A49"> call</span><span style="color:#24292E"> &#x3C;</span><span style="color:#005CC5">SID</span><span style="color:#24292E">></span><span style="color:#6F42C1">reverse_lines</span><span style="color:#24292E">(&#x3C;line1>, &#x3C;line2>)</span></span></code></pre>
             </div>
-             
             <p>
-               実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。
+              実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。
             </p>
-             
             <p>
-               この理由は、ユーザー定義関数を実行する際は検索パターンが一度保存され、実行が終了したあと復元されるため。結果として検索パターンが <code>^</code> で上書きされることがなくなる。
+              この理由は、ユーザー定義関数を実行する際は検索パターンが一度保存され、実行が終了したあと復元されるため。結果として検索パターンが <code>^</code> で上書きされることがなくなる。
             </p>
-             
             <p>
-               Vim のヘルプから該当箇所を引用する (強調は筆者による)。
+              Vim のヘルプから該当箇所を引用する (強調は筆者による)。
             </p>
-             
             <blockquote>
               <p>
-                 :h autocmd-searchpat 
+                :h autocmd-searchpat
               </p>
-               
               <p>
-                <strong>Autocommands do not change the current search patterns.</strong> Vim saves the current search patterns before executing autocommands then restores them after the autocommands finish. This means that autocommands do not affect the strings highlighted with the `hlsearch&apos; option. 
+                <strong>Autocommands do not change the current search patterns.</strong> Vim saves the current search patterns before executing autocommands then restores them after the autocommands finish. This means that autocommands do not affect the strings highlighted with the ‘hlsearch’ option.
               </p>
             </blockquote>
-             
             <p>
-               これは autocommand の実行に関しての記述だが、これと同じことがユーザー定義関数の実行時にも適用される。このことは <code>:nohlsearch</code> のヘルプにある。同じく該当箇所を引用する (強調は筆者による)。
+              これは autocommand の実行に関しての記述だが、これと同じことがユーザー定義関数の実行時にも適用される。このことは <code>:nohlsearch</code> のヘルプにある。同じく該当箇所を引用する (強調は筆者による)。
             </p>
-             
             <blockquote>
               <p>
-                 :h :nohlsearch 
+                :h :nohlsearch
               </p>
-               
               <p>
-                 (略) This command doesn’t work in an autocommand, because the highlighting state is saved and restored when executing autocommands |autocmd-searchpat|. <strong>Same thing for when invoking a user function.</strong>
+                (略) This command doesn’t work in an autocommand, because the highlighting state is saved and restored when executing autocommands |autocmd-searchpat|. <strong>Same thing for when invoking a user function.</strong>
               </p>
             </blockquote>
-             
             <p>
-               この仕様により、<code>:g/^/m0</code> の呼び出しをユーザー定義関数に切り出すことで上述の問題を解決できる。
+              この仕様により、<code>:g/^/m0</code> の呼び出しをユーザー定義関数に切り出すことで上述の問題を解決できる。
             </p>
           </section>
-           
           <section id="section--solution-revised">
-            <h2><a href="#section--solution-revised">解決策 (改訂版)</a></h2> 
-            <blockquote>
-              <p>
-                 [2020/9/28追記] より簡潔な方法を見つけたため追記する 
-              </p>
-            </blockquote>
-             
+            <h2><a href="#section--solution-revised">解決策 (改訂版)</a></h2>
+            <div class="admonition">
+              <div class="admonition-label">
+                NOTE
+              </div>
+              <div class="admonition-content">
+                <p>
+                  [2020/9/28追記] より簡潔な方法を見つけたため追記する
+                </p>
+              </div>
+            </div>
             <div class="codeblock" language="vim">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
             </div>
-             
             <p>
-               まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。
+              まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。
             </p>
-             
             <blockquote>
               <p>
-                 :h :keeppatterns 
+                :h :keeppatterns
               </p>
             </blockquote>
           </section>

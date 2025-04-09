@@ -58,39 +58,41 @@
             </ol>
           </section>
           <section id="section--intro">
-            <h2><a href="#section--intro">はじめに</a></h2> 
+            <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-               先日 11月25日、<a href="https://isucon.net/archives/57801192.html" rel="noreferrer" target="_blank">ISUCON 13</a> に参加した。ISUCON への参加は今回が初めてとなる。私 nsfisis の1人チーム「うつしもゆ」として参加し、最終スコアは 13,580 点だった。使用言語は Go。
+              先日 11月25日、 <a href="https://isucon.net/archives/57801192.html" rel="noreferrer" target="_blank">ISUCON 13</a> に参加した。 ISUCON への参加は今回が初めてとなる。 私 nsfisis の1人チーム「うつしもゆ」として参加し、最終スコアは 13,580 点だった。使用言語は Go。
             </p>
-             
             <div class="admonition">
               <div class="admonition-label">
                 NOTE
               </div>
               <div class="admonition-content">
-                 「ISUCON」は、LINEヤフー株式会社の商標または登録商標です。<a href="https://isucon.net/" rel="noreferrer" target="_blank">ISUCON 公式サイトはこちら。</a>
+                <p>
+                  「ISUCON」は、LINEヤフー株式会社の商標または登録商標です。 <a href="https://isucon.net/" rel="noreferrer" target="_blank">ISUCON 公式サイトはこちら。</a>
+                </p>
               </div>
             </div>
           </section>
-           
           <section id="section--goals">
-            <h2><a href="#section--goals">目標</a></h2> 
+            <h2><a href="#section--goals">目標</a></h2>
             <p>
-               今回は初参加ということもあり、目標を以下のように定めた。
+              今回は初参加ということもあり、目標を以下のように定めた。
             </p>
-             
             <ul>
               <li>
-                 正のスコアを取る 
+                <p>
+                  正のスコアを取る
+                </p>
                 <ul>
                   <li>
                     ISUCON ではサーバ動作の整合性がチェックされ、失敗するとスコア 0 となる
                   </li>
                 </ul>
               </li>
-               
               <li>
-                 速度改善以外に時間を浪費しない (= ハマらない) 
+                <p>
+                  速度改善以外に時間を浪費しない (= ハマらない)
+                </p>
                 <ul>
                   <li>
                     プロビジョニング、デバッグ、ミドルウェアの設定方法の調査など、性能改善に寄与しない時間を最小限にする
@@ -99,53 +101,46 @@
               </li>
             </ul>
           </section>
-           
           <section id="section--strategy">
-            <h2><a href="#section--strategy">戦略</a></h2> 
+            <h2><a href="#section--strategy">戦略</a></h2>
             <p>
-               ISUCON で高スコアを出す戦略については、戦闘力の高い方々が良質な記事を書いてくださっている。ここでは、上述したような低い目標を達成するための戦略について書こうと思う。
+              ISUCON で高スコアを出す戦略については、戦闘力の高い方々が良質な記事を書いてくださっている。 ここでは、上述したような低い目標を達成するための戦略について書こうと思う。
             </p>
-             
             <section id="section--strategy--do-not-destroy-environment">
-              <h3><a href="#section--strategy--do-not-destroy-environment">環境を破壊しない</a></h3> 
+              <h3><a href="#section--strategy--do-not-destroy-environment">環境を破壊しない</a></h3>
               <p>
-                 ミドルウェアの設定やアプリケーションコードなど、変更を加えるあらゆるものは、必ずバックアップを取るか Git で管理する。復旧不能になって環境ごと作り直すことだけは必ず避ける。
+                ミドルウェアの設定やアプリケーションコードなど、変更を加えるあらゆるものは、必ずバックアップを取るか Git で管理する。 復旧不能になって環境ごと作り直すことだけは必ず避ける。
               </p>
             </section>
-             
             <section id="section--strategy--revert-changes-immediately">
-              <h3><a href="#section--strategy--revert-changes-immediately">すぐに変更を取り消す</a></h3> 
+              <h3><a href="#section--strategy--revert-changes-immediately">すぐに変更を取り消す</a></h3>
               <p>
-                 それでも壊してしまったときは、即座に変更を取り消す。壊れた理由を調べることに固執しない。
+                それでも壊してしまったときは、即座に変更を取り消す。壊れた理由を調べることに固執しない。
               </p>
             </section>
-             
             <section id="section--strategy--do-small-deployment">
-              <h3><a href="#section--strategy--do-small-deployment">小さくデプロイする</a></h3> 
+              <h3><a href="#section--strategy--do-small-deployment">小さくデプロイする</a></h3>
               <p>
-                 一度に複数の変更を加えず、可能な限り小さな単位でデプロイする。そしてその都度ベンチマークを走らせ、整合性チェックが通るかどうかを (当然速くなっているかどうかも) 確かめる。
+                一度に複数の変更を加えず、可能な限り小さな単位でデプロイする。そしてその都度ベンチマークを走らせ、整合性チェックが通るかどうかを (当然速くなっているかどうかも) 確かめる。
               </p>
             </section>
-             
             <section id="section--strategy--use-familiar-tools">
-              <h3><a href="#section--strategy--use-familiar-tools">使い慣れた道具を使う</a></h3> 
+              <h3><a href="#section--strategy--use-familiar-tools">使い慣れた道具を使う</a></h3>
               <p>
-                 使用する言語、ミドルウェア、ツール類を、使い慣れたものに限定する。「このツールのオプションはほとんどそらで指定できる」と言えるようなものだけを使う。「自分では使ったことがないが ISUCON 強者がお勧めしていた」といった理由でツールを選定しない (もちろん、本番までに練習して習熟するという選択肢は存在する)。
+                使用する言語、ミドルウェア、ツール類を、使い慣れたものに限定する。 「このツールのオプションはほとんどそらで指定できる」と言えるようなものだけを使う。 「自分では使ったことがないが ISUCON 強者がお勧めしていた」といった理由でツールを選定しない (もちろん、本番までに練習して習熟するという選択肢は存在する)。
               </p>
             </section>
           </section>
-           
           <section id="section--performance-optimization">
-            <h2><a href="#section--performance-optimization">パフォーマンスの最適化</a></h2> 
+            <h2><a href="#section--performance-optimization">パフォーマンスの最適化</a></h2>
             <p>
-               もっと強い人の記事を参考にしてほしい。
+              もっと強い人の記事を参考にしてほしい。
             </p>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">おわりに</a></h2> 
+            <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-               事前の準備も含めて、大変楽しいイベントだった。次回があるなら是非また参加したい。その際は、順位やスコアを目標として立てられるようになりたいものである。
+              事前の準備も含めて、大変楽しいイベントだった。次回があるなら是非また参加したい。その際は、順位やスコアを目標として立てられるようになりたいものである。
             </p>
           </section>
         </div>

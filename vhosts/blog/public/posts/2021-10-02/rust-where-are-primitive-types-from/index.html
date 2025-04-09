@@ -62,16 +62,16 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/9a429432258bbcd6c565" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/9a429432258bbcd6c565</a> 
+              <p>
+                この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/9a429432258bbcd6c565" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/9a429432258bbcd6c565</a>
+              </p>
             </div>
           </div>
-           
           <section id="section--intro">
-            <h2><a href="#section--intro">前置き</a></h2> 
+            <h2><a href="#section--intro">前置き</a></h2>
             <p>
-               Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。
+              Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。
             </p>
-             
             <div class="codeblock" language="rust">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#![allow(non_camel_case_types)]</span></span>
 <span class="line"><span style="color:#24292E">#![allow(dead_code)]</span></span>
@@ -94,40 +94,30 @@
 <span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> f64</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> str</span><span style="color:#24292E">;</span></span></code></pre>
             </div>
-             
             <p>
-               では、普段単に <code>bool</code> と書いたとき、この <code>bool</code> は一体どこから来ているのか。rustc のソースを追ってみた。
+              では、普段単に <code>bool</code> と書いたとき、この <code>bool</code> は一体どこから来ているのか。rustc のソースを追ってみた。
             </p>
-             
-            <blockquote>
-              <p>
-                 前提知識: 一般的なコンパイラの構造、用語。<code>rustc</code> そのものの知識は不要 (というよりも筆者自身がよく知らない) 
-              </p>
-            </blockquote>
+            <p>
+              前提知識: 一般的なコンパイラの構造、用語。<code>rustc</code> そのものの知識は不要 (というよりも筆者自身がよく知らない)
+            </p>
           </section>
-           
           <section id="section--code-reading">
-            <h2><a href="#section--code-reading">調査</a></h2> 
+            <h2><a href="#section--code-reading">調査</a></h2>
             <p>
-               調査に使用したソース (調査時点での最新 master) 
+              調査に使用したソース (調査時点での最新 master)
             </p>
-             
             <p>
-               <a href="https://github.com/rust-lang/rust/tree/511ed9f2356af365ad8affe046b3dd33f7ac3c98" rel="noreferrer" target="_blank">https://github.com/rust-lang/rust/tree/511ed9f2356af365ad8affe046b3dd33f7ac3c98</a> 
+              <a href="https://github.com/rust-lang/rust/tree/511ed9f2356af365ad8affe046b3dd33f7ac3c98" rel="noreferrer" target="_blank">https://github.com/rust-lang/rust/tree/511ed9f2356af365ad8affe046b3dd33f7ac3c98</a>
             </p>
-             
             <p>
-               どのようにして調べるか。rustc の構造には詳しくないため、すぐに当たりをつけるのは難しい。
+              どのようにして調べるか。rustc の構造には詳しくないため、すぐに当たりをつけるのは難しい。
             </p>
-             
             <p>
-               大雑把な構造としては、<code>compiler</code> フォルダ以下に <code>rustc_*</code> という名前のクレートが数十個入っている。これがどうやら <code>rustc</code> コマンドの実装部のようだ。
+              大雑把な構造としては、<code>compiler</code> フォルダ以下に <code>rustc_*</code> という名前のクレートが数十個入っている。これがどうやら <code>rustc</code> コマンドの実装部のようだ。
             </p>
-             
             <p>
-              <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。
+              <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。 しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ git grep "\bi128\b" | wc      # i128</span></span>
 <span class="line"><span>165    1069   15790</span></span>
@@ -138,22 +128,18 @@
 <span class="line"><span>$ git grep "\bbool\b" | wc      # cf. bool の結果</span></span>
 <span class="line"><span>3563   23577  294659</span></span></code></pre>
             </div>
-             
             <p>
-               165 程度であれば探すことができそうだ。今回は、クレート名を見ておおよその当たりをつけた。
+              165 程度であれば探すことができそうだ。今回は、クレート名を見ておおよその当たりをつけた。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ git grep "\bi128\b"</span></span>
 <span class="line"><span>...</span></span>
 <span class="line"><span>rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));</span></span>
 <span class="line"><span>...</span></span></code></pre>
             </div>
-             
             <p>
               <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。
             </p>
-             
             <div class="codeblock" language="rust">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// Interns the names of the primitive types.</span></span>
 <span class="line"><span style="color:#6A737D">///</span></span>
@@ -188,21 +174,17 @@
 <span class="line"><span style="color:#24292E">    }</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
-             
             <p>
-               これは初めに列挙したプリミティブ型の一覧と一致している。doc comment にも、
+              これは初めに列挙したプリミティブ型の一覧と一致している。doc comment にも、
             </p>
-             
-            <blockquote>
-              <p>
-                 All other types are defined somewhere and possibly imported, but the primitive ones need special handling, since they have no place of origin. 
-              </p>
-            </blockquote>
-             
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>All other types are defined somewhere and possibly imported, but the</span></span>
+<span class="line"><span>primitive ones need special handling, since they have no place of</span></span>
+<span class="line"><span>origin.</span></span></code></pre>
+            </div>
             <p>
-               とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。
+              とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。
             </p>
-             
             <div class="codeblock" language="rust">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span></span>
 <span class="line"><span style="color:#6A737D">/// (略)</span></span>
@@ -226,23 +208,18 @@
 <span class="line"><span style="color:#6F42C1">    None</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
-             
             <p>
-               関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。<code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。
+              関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。 <code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。
             </p>
-             
             <p>
-               なお、<code>ns</code> は「名前空間」を示す変数である。Rust における名前空間はC言語におけるそれとほとんど同じで、今探している名前が関数名/変数名なのか型なのかマクロなのかを区別している。この <code>if</code> は、プリミティブ型に解決されるのは型を探しているときだけだ、と言っている。
+              なお、<code>ns</code> は「名前空間」を示す変数である。Rust における名前空間はC言語におけるそれとほとんど同じで、今探している名前が関数名/変数名なのか型なのかマクロなのかを区別している。この <code>if</code> は、プリミティブ型に解決されるのは型を探しているときだけだ、と言っている。
             </p>
-             
             <p>
-               重要なのは、これが <code>resolve_ident_in_lexical_scope()</code> の最後に書かれている点である。つまり、最初に挙げたプリミティブ型の識別子は、「名前解決の最終段階で」、「他に同名の型が見つかっていなければ」プリミティブ型として解決される。
+              重要なのは、これが <code>resolve_ident_in_lexical_scope()</code> の最後に書かれている点である。つまり、最初に挙げたプリミティブ型の識別子は、「名前解決の最終段階で」、「他に同名の型が見つかっていなければ」プリミティブ型として解決される。
             </p>
-             
             <p>
-               動作がわかったところで、例として次のコードを考える。
+              動作がわかったところで、例として次のコードを考える。
             </p>
-             
             <div class="codeblock" language="rust">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#![allow(non_camel_case_types)]</span></span>
 <span class="line"></span>
@@ -252,16 +229,14 @@
 <span class="line"><span style="color:#D73A49">    let</span><span style="color:#24292E"> _</span><span style="color:#D73A49">:</span><span style="color:#6F42C1"> bool</span><span style="color:#D73A49"> =</span><span style="color:#6F42C1"> bool</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
-             
             <p>
-               ここで <code>main()</code> の <code>bool</code> は <code>struct bool</code> として解決される。なぜなら、プリミティブ型の判定をする前に <code>bool</code> という名前の別の型が見つかるからだ。
+              ここで <code>main()</code> の <code>bool</code> は <code>struct bool</code> として解決される。なぜなら、プリミティブ型の判定をする前に <code>bool</code> という名前の別の型が見つかるからだ。
             </p>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">まとめ</a></h2> 
+            <h2><a href="#section--outro">まとめ</a></h2>
             <p>
-               Rust のプリミティブ型は予約語ではない。名前解決の最終段階で特別扱いされ、他に同名の型が見つかっていなければ対応するプリミティブ型に解決される。
+              Rust のプリミティブ型は予約語ではない。名前解決の最終段階で特別扱いされ、他に同名の型が見つかっていなければ対応するプリミティブ型に解決される。
             </p>
           </section>
         </div>

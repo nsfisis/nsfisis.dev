@@ -65,43 +65,39 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は、2021-06-30 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+              <p>
+                この記事は、2021-06-30 に <a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+              </p>
             </div>
           </div>
-           
           <section id="section--intro">
-            <h2><a href="#section--intro">はじめに</a></h2> 
+            <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-               データ記述言語の一つ YAML には 1.0、1.1、1.2 のバージョンがある。これらのうち、1.1 と 1.2 の間には無視できない非互換の変更が多く、1.2 に対応していないライブラリもある (Ruby 同梱の <code>yaml</code> など)。この記事では、YAML 1.1 と YAML 1.2 の主な破壊的変更を紹介する (影響範囲が広いものを抜粋しており、すべての非互換を網羅してはいない)。
+              データ記述言語の一つ YAML には 1.0、1.1、1.2 のバージョンがある。 これらのうち、1.1 と 1.2 の間には無視できない非互換の変更が多く、1.2 に対応していないライブラリもある (Ruby 同梱の <code>yaml</code> など)。 この記事では、YAML 1.1 と YAML 1.2 の主な破壊的変更を紹介する (影響範囲が広いものを抜粋しており、すべての非互換を網羅してはいない)。
             </p>
-             
             <p>
-               参照した仕様書はこちら: <a href="https://yaml.org/spec/1.2.2/ext/changes/" rel="noreferrer" target="_blank">https://yaml.org/spec/1.2.2/ext/changes/</a> 
+              参照した仕様書はこちら: <a href="https://yaml.org/spec/1.2.2/ext/changes/" rel="noreferrer" target="_blank">https://yaml.org/spec/1.2.2/ext/changes/</a>
             </p>
           </section>
-           
           <section id="section--breaking-changes">
-            <h2><a href="#section--breaking-changes">主な破壊的変更</a></h2> 
+            <h2><a href="#section--breaking-changes">主な破壊的変更</a></h2>
             <section id="section--breaking-changes--boolean-literals">
-              <h3><a href="#section--breaking-changes--boolean-literals">Boolean としてパースされるトークンが <code>true</code> / <code>false</code> とその亜種のみに</a></h3> 
+              <h3><a href="#section--breaking-changes--boolean-literals">Boolean としてパースされるトークンが <code>true</code> / <code>false</code> とその亜種のみに</a></h3>
               <p>
-                 この変更の影響が最も大きいと思われる。YAML 1.1 では、boolean 値のリテラルとして <code>true</code>、<code>false</code> のほか <code>yes</code>、<code>no</code>、<code>y</code>、<code>n</code>、<code>on</code>、<code>off</code>、それらの大文字バージョンなどが認められていた。YAML 1.2 では、<code>true</code> と <code>false</code>、それらの大文字バージョン (<code>True</code>、<code>TRUE</code>、<code>False</code>、<code>FALSE</code>) のみが boolean としてパースされるようになった。
+                この変更の影響が最も大きいと思われる。 YAML 1.1 では、boolean 値のリテラルとして <code>true</code>、<code>false</code> のほか <code>yes</code>、<code>no</code>、<code>y</code>、<code>n</code>、<code>on</code>、<code>off</code>、それらの大文字バージョンなどが認められていた。 YAML 1.2 では、<code>true</code> と <code>false</code>、それらの大文字バージョン (<code>True</code>、<code>TRUE</code>、<code>False</code>、<code>FALSE</code>) のみが boolean としてパースされるようになった。
               </p>
             </section>
-             
             <section id="section--breaking-changes--octal-literals">
-              <h3><a href="#section--breaking-changes--octal-literals">八進数リテラルには <code>0o</code> が必須に</a></h3> 
+              <h3><a href="#section--breaking-changes--octal-literals">八進数リテラルには <code>0o</code> が必須に</a></h3>
               <p>
-                 C 言語などでは、<code>0</code> から始まる数字の列を八進数としてパースする。YAML 1.1 もこれに準じていたが、1.2 からは <code>0o</code> のプレフィクスが必須となった (&quot;o&quot; は &quot;octal&quot; の &quot;o&quot;)。プログラミング言語では、Python や Haskell、Swift、Rust などがこの記法を採用している。
+                C 言語などでは、<code>0</code> から始まる数字の列を八進数としてパースする。 YAML 1.1 もこれに準じていたが、1.2 からは <code>0o</code> のプレフィクスが必須となった (“o” は “octal” の “o”)。 プログラミング言語では、Python や Haskell、Swift、Rust などがこの記法を採用している。
               </p>
             </section>
-             
             <section id="section--breaking-changes--merging">
-              <h3><a href="#section--breaking-changes--merging"><code>&lt;&lt;</code> によるマージが不可能に</a></h3> 
+              <h3><a href="#section--breaking-changes--merging"><code>&lt;&lt;</code> によるマージが不可能に</a></h3>
               <p>
-                 YAML 1.1 では、<code>&lt;&lt;</code> という文字列をキーに指定することで、マップをマージすることができた。
+                YAML 1.1 では、<code>&lt;&lt;</code> という文字列をキーに指定することで、マップをマージすることができた。
               </p>
-               
               <div class="codeblock" language="yaml">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#22863A">x</span><span style="color:#24292E">: </span><span style="color:#D73A49">&#x26;</span><span style="color:#6F42C1">base</span></span>
 <span class="line"><span style="color:#22863A">  a</span><span style="color:#24292E">: </span><span style="color:#005CC5">123</span></span>
@@ -112,24 +108,21 @@
 <span class="line"><span style="color:#22863A">  b</span><span style="color:#24292E">: </span><span style="color:#005CC5">456</span></span>
 <span class="line"><span style="color:#6A737D"># => { "y": { "a": 123, "b": 456 } }</span></span></code></pre>
               </div>
-               
               <p>
-                 1.2 からはこれができなくなる。
+                1.2 からはこれができなくなる。
               </p>
             </section>
-             
             <section id="section--breaking-changes--number-separator">
-              <h3><a href="#section--breaking-changes--number-separator">数字を <code>_</code> で区切るのが禁止に</a></h3> 
+              <h3><a href="#section--breaking-changes--number-separator">数字を <code>_</code> で区切るのが禁止に</a></h3>
               <p>
                 <code>1234567</code> を <code>1_234_567</code> と書けなくなった。
               </p>
             </section>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">おわりに</a></h2> 
+            <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-               全体的に、<i>There&apos;s more than one way to do it.</i> から <i>There should be one - and preferably only one - obvious way to do it.</i> へ移行しているように思われる。データ記述言語としては望ましい方向性ではないかと感じる。
+              全体的に、<em>There’s more than one way to do it.</em> から <em>There should be one - and preferably only one - obvious way to do it.</em> へ移行しているように思われる。 データ記述言語としては望ましい方向性ではないかと感じる。
             </p>
           </section>
         </div>

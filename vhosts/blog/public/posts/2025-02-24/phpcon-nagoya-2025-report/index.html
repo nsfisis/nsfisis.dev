@@ -64,58 +64,55 @@
             </ol>
           </section>
           <section id="section--intro">
-            <h2><a href="#section--intro">はじめに</a></h2> 
+            <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-               2025-02-22 に開催された<a href="https://phpcon.nagoya/2025/" rel="noreferrer" target="_blank">PHP カンファレンス名古屋</a>に参加した。
+              2025-02-22 に開催された <a href="https://phpcon.nagoya/2025/" rel="noreferrer" target="_blank">PHP カンファレンス名古屋</a> に参加した。
             </p>
           </section>
-           
           <section id="section--sessions">
-            <h2><a href="#section--sessions">セッション感想</a></h2> 
+            <h2><a href="#section--sessions">セッション感想</a></h2>
             <p>
-               特に印象に残ったセッションを二つピックアップした (タイトルと発表者名は fortee のプロポーザルページによる)。
+              特に印象に残ったセッションを二つピックアップした (タイトルと発表者名は fortee のプロポーザルページによる)。
             </p>
-             
             <ul>
               <li>
-                <a href="https://fortee.jp/phpcon-nagoya-2025/proposal/26795bcc-78dd-431e-9538-7450779fa2cf" rel="noreferrer" target="_blank">PHPで印刷所に入稿できる名札データを作る by 長谷川智希 さん</a> 
+                <p>
+                  <a href="https://fortee.jp/phpcon-nagoya-2025/proposal/26795bcc-78dd-431e-9538-7450779fa2cf" rel="noreferrer" target="_blank">PHPで印刷所に入稿できる名札データを作る by 長谷川智希 さん</a>
+                </p>
                 <ul>
                   <li>
                     PHPerKaigi や iOSDC の名札は品質が高いので、他の勉強会やカンファレンスでもついつい使ってしまうのですが、その裏側を覗くことができ面白かったです。カンファレンスの1セッションという形でなければ触れることのないような話が聴けるのはカンファレンスに参加する醍醐味の一つだと思います。
                   </li>
                 </ul>
               </li>
-               
               <li>
-                <a href="https://fortee.jp/phpcon-nagoya-2025/proposal/d3ecbb68-318d-4b03-abfe-9ecccc6beb81" rel="noreferrer" target="_blank">PHP 製 OSS のメモリ問題を辻斬りしていく by sji さん</a> 
+                <p>
+                  <a href="https://fortee.jp/phpcon-nagoya-2025/proposal/d3ecbb68-318d-4b03-abfe-9ecccc6beb81" rel="noreferrer" target="_blank">PHP 製 OSS のメモリ問題を辻斬りしていく by sji さん</a>
+                </p>
                 <ul>
                   <li>
-                    今回一番楽しみにしていた発表です。<a href="https://github.com/reliforp/reli-prof" rel="noreferrer" target="_blank">Reli</a> は以前<a href="/slides/2024-03-15/ya8-2024/">自作の WebAssembly 処理系を高速化するのに使ったのもあり</a>その強力さについてはある程度知っていたつもりでしたが、実際に広く使われているライブラリでの調査過程を見ると唸るばかりです。これをすべて (FFI こそ使っているものの) pure PHP で実装しているとは俄に信じられません。
+                    今回一番楽しみにしていた発表です。 <a href="https://github.com/reliforp/reli-prof" rel="noreferrer" target="_blank">Reli</a> は以前 <a href="/slides/2024-03-15/ya8-2024/">自作の WebAssembly 処理系を高速化するのに使ったのもあり</a> その強力さについてはある程度知っていたつもりでしたが、実際に広く使われているライブラリでの調査過程を見ると唸るばかりです。これをすべて (FFI こそ使っているものの) pure PHP で実装しているとは俄に信じられません。
                   </li>
                 </ul>
               </li>
             </ul>
           </section>
-           
           <section id="section--my-session">
-            <h2><a href="#section--my-session">登壇したセッション</a></h2> 
+            <h2><a href="#section--my-session">登壇したセッション</a></h2>
             <p>
-              <a href="https://fortee.jp/phpcon-nagoya-2025/proposal/24a2ec04-ca57-46f1-905c-52143a449eea" rel="noreferrer" target="_blank">「PHP 処理系の garbage collection を理解する 〜メモリはいつ解放されるのか〜」</a>というタイトルで登壇もおこなった。タイトルどおり、PHP の garbage collection (GC) について扱った発表である。
+              <a href="https://fortee.jp/phpcon-nagoya-2025/proposal/24a2ec04-ca57-46f1-905c-52143a449eea" rel="noreferrer" target="_blank">「PHP 処理系の garbage collection を理解する 〜メモリはいつ解放されるのか〜」</a> というタイトルで登壇もおこなった。タイトルどおり、PHP の garbage collection (GC) について扱った発表である。
             </p>
-             
             <p>
-               技術的な内容としては<a href="https://www.php.net/manual/ja/features.gc.php" rel="noreferrer" target="_blank">PHP のマニュアルの GC に関する記述</a>を出ていないものの、PHP 処理系の内部的な用語を使わないようにしたり、本質的でない処理を省いたりして、理解のための前提条件を減らせたのではないかと思う。
+              技術的な内容としては <a href="https://www.php.net/manual/ja/features.gc.php" rel="noreferrer" target="_blank">PHP のマニュアルの GC に関する記述</a> を出ていないものの、PHP 処理系の内部的な用語を使わないようにしたり、本質的でない処理を省いたりして、理解のための前提条件を減らせたのではないかと思う。
             </p>
-             
             <p>
-               ところで今回スライドのフォントサイズを大きくするために各スライドの見出し部分を消してみたのだが、結局ほとんどのスライドで見出しらしき文言が必要になったので、あまり効果はなかったかもしれない。
+              ところで今回スライドのフォントサイズを大きくするために各スライドの見出し部分を消してみたのだが、結局ほとんどのスライドで見出しらしき文言が必要になったので、あまり効果はなかったかもしれない。
             </p>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">おわりに</a></h2> 
+            <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-               今回もカンファレンスくらいでしか聴けないようなセッションがいくつも聴けてよかった。また、ちょうど連休だったのもあり名古屋も楽しむことができた。運営のみなさま、お疲れさまでした&amp;ありがとうございました。次は PHPerKaigi 2025 で会いましょう。
+              今回もカンファレンスくらいでしか聴けないようなセッションがいくつも聴けてよかった。 また、ちょうど連休だったのもあり名古屋も楽しむことができた。 運営のみなさま、お疲れさまでした&amp;ありがとうございました。 次は PHPerKaigi 2025 で会いましょう。
             </p>
           </section>
         </div>
