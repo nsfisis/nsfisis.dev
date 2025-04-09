@@ -56,7 +56,7 @@ function getDtd(name: string): Dtd {
     case "header":
       return { type: "block" };
     case "hr":
-      return { type: "block" };
+      return { type: "block", auto_closing: true };
     case "html":
       return { type: "block" };
     case "i":
