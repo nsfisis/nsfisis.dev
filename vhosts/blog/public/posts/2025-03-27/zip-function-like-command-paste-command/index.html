@@ -65,40 +65,35 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は、2021-03-22 に<a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+              <p>
+                この記事は、2021-03-22 に <a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+              </p>
             </div>
           </div>
-           
           <section id="section--intro">
-            <h2><a href="#section--intro">実現したい内容</a></h2> 
+            <h2><a href="#section--intro">実現したい内容</a></h2>
             <p>
-               次の2ファイル <code>a.txt</code> / <code>b.txt</code> から出力 <code>ab.txt</code> を得たい。
+              次の2ファイル <code>a.txt</code> / <code>b.txt</code> から出力 <code>ab.txt</code> を得たい。
             </p>
-             
             <p>
               <code>a.txt</code>
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>a1</span></span>
 <span class="line"><span>a2</span></span>
 <span class="line"><span>a3</span></span></code></pre>
             </div>
-             
             <p>
               <code>b.txt</code>
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>b1</span></span>
 <span class="line"><span>b2</span></span>
 <span class="line"><span>b3</span></span></code></pre>
             </div>
-             
             <p>
               <code>ab.txt</code>
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>a1</span></span>
 <span class="line"><span>b1</span></span>
@@ -107,42 +102,34 @@
 <span class="line"><span>a3</span></span>
 <span class="line"><span>b3</span></span></code></pre>
             </div>
-             
             <p>
-               ちょうど Python や Haskell などにある <code>zip</code> 関数のような動きをさせたい。
+              ちょうど Python や Haskell などにある <code>zip</code> 関数のような動きをさせたい。
             </p>
           </section>
-           
           <section id="section--paste-command">
-            <h2><a href="#section--paste-command">実現方法</a></h2> 
+            <h2><a href="#section--paste-command">実現方法</a></h2>
             <p>
-               記事タイトルに書いたように、<code>paste</code> コマンドを使うと実現できる。
+              記事タイトルに書いたように、<code>paste</code> コマンドを使うと実現できる。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ paste -d '\</span></span>
 <span class="line"><span>' a.txt b.txt > ab.txt</span></span></code></pre>
             </div>
-             
             <p>
-              <code>paste</code> コマンドは複数のファイルを引数に取り、それらを1行ずつ消費しながら <code>-d</code> で指定した文字で区切って出力する。<code>-d</code> は区切り文字の指定で、デフォルトだとタブ区切りになる。
+              <code>paste</code> コマンドは複数のファイルを引数に取り、それらを1行ずつ消費しながら <code>-d</code> で指定した文字で区切って出力する。 <code>-d</code> は区切り文字の指定で、デフォルトだとタブ区切りになる。
             </p>
-             
             <p>
-               ファイル名には <code>-</code> を指定でき、その場合は標準入力から読み込んで出力する。このとき <code>paste - -</code> のように複数回 <code>-</code> を指定すると、指定した回数の行ごとに連結することができる。例えば <code>ab.txt</code> だとこうなる。
+              ファイル名には <code>-</code> を指定でき、その場合は標準入力から読み込んで出力する。 このとき <code>paste - -</code> のように複数回 <code>-</code> を指定すると、指定した回数の行ごとに連結することができる。 例えば <code>ab.txt</code> だとこうなる。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ paste - - &#x3C; ab.txt</span></span>
 <span class="line"><span>a1	b1</span></span>
 <span class="line"><span>a2	b2</span></span>
 <span class="line"><span>a3	b3</span></span></code></pre>
             </div>
-             
             <p>
-               これは標準入力を使うとき特有の挙動で、単に同じファイル名を指定してもこうはならない。
+              これは標準入力を使うとき特有の挙動で、単に同じファイル名を指定してもこうはならない。
             </p>
-             
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ paste ab.txt ab.txt</span></span>
 <span class="line"><span>a1	a1</span></span>
@@ -152,9 +139,8 @@
 <span class="line"><span>a3	a3</span></span>
 <span class="line"><span>b3	b3</span></span></code></pre>
             </div>
-             
             <p>
-               ときどき便利。
+              ときどき便利。
             </p>
           </section>
         </div>

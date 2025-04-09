@@ -64,74 +64,59 @@
             </ol>
           </section>
           <section id="section--intro">
-            <h2><a href="#section--intro">はじめに</a></h2> 
+            <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-               本日 <a href="https://phpcon.okinawa.jp/" rel="noreferrer" target="_blank">PHP カンファレンス沖縄 2022</a> が開催された (らしい)。
+              本日 <a href="https://phpcon.okinawa.jp/" rel="noreferrer" target="_blank">PHP カンファレンス沖縄 2022</a> が開催された (らしい)。
             </p>
-             
             <p>
-               カンファレンスには参加できなかったものの、懇親会の LT で出題されたコードゴルフの問題が Twitter に流れてきたので、解いてみた。
+              カンファレンスには参加できなかったものの、懇親会の LT で出題されたコードゴルフの問題が Twitter に流れてきたので、解いてみた。
             </p>
-             
             <ul>
               <li>
                 ツイート: <a href="https://twitter.com/m3m0r7/status/1563397620231712772" rel="noreferrer" target="_blank">https://twitter.com/m3m0r7/status/1563397620231712772</a>
               </li>
-               
               <li>
                 スライド: <a href="https://speakerdeck.com/memory1994/php-conference-okinawa-2022-extra?slide=3" rel="noreferrer" target="_blank">https://speakerdeck.com/memory1994/php-conference-okinawa-2022-extra?slide=3</a>
               </li>
             </ul>
           </section>
-           
           <section id="section--solution">
-            <h2><a href="#section--solution">解</a></h2> 
+            <h2><a href="#section--solution">解</a></h2>
             <p>
-               細かいレギュレーションは不明だったので、勝手に定めた。
+              細かいレギュレーションは不明だったので、勝手に定めた。
             </p>
-             
             <ul>
               <li>
                 コマンドライン引数の第1引数で受けとる
               </li>
-               
               <li>
                 結果は標準出力に出す
               </li>
-               
               <li>
                 コンマの直後にはスペースを1つ置く
               </li>
-               
               <li>
                 末尾コンマは禁止
               </li>
-               
               <li>
                 数字でないものは入ってこないものとする
               </li>
-               
               <li>
                 負数は入ってこないものとする
               </li>
             </ul>
-             
             <p>
-               書いたものがこちら: 
+              書いたものがこちら:
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">[</span><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span><span style="color:#24292E"> $n</span><span style="color:#D73A49">=</span><span style="color:#24292E">$argv[</span><span style="color:#005CC5">1</span><span style="color:#24292E">];</span><span style="color:#D73A49">foreach</span><span style="color:#24292E">([</span><span style="color:#005CC5">1e4</span><span style="color:#24292E">,</span><span style="color:#005CC5">5e3</span><span style="color:#24292E">,</span><span style="color:#005CC5">2e3</span><span style="color:#24292E">,</span><span style="color:#005CC5">1e3</span><span style="color:#24292E">,</span><span style="color:#005CC5">500</span><span style="color:#24292E">,</span><span style="color:#005CC5">100</span><span style="color:#24292E">,</span><span style="color:#005CC5">50</span><span style="color:#24292E">,</span><span style="color:#005CC5">10</span><span style="color:#24292E">,</span><span style="color:#005CC5">5</span><span style="color:#24292E">,</span><span style="color:#005CC5">1</span><span style="color:#24292E">]</span><span style="color:#D73A49">as</span><span style="color:#24292E">$x)</span><span style="color:#D73A49">for</span><span style="color:#24292E">(;$n</span><span style="color:#D73A49">>=</span><span style="color:#24292E">$x;$n</span><span style="color:#D73A49">-=</span><span style="color:#24292E">$x)$r[]</span><span style="color:#D73A49">=</span><span style="color:#24292E">$x;</span><span style="color:#005CC5">echo</span><span style="color:#005CC5"> implode</span><span style="color:#24292E">(</span><span style="color:#032F62">', '</span><span style="color:#24292E">,$r</span><span style="color:#D73A49">??</span><span style="color:#24292E">[]);</span><span style="color:#D73A49">?></span><span style="color:#24292E">]</span></span></code></pre>
             </div>
-             
             <p>
-               しめて 123 バイトとなった (末尾改行を含めずにカウント)。
+              しめて 123 バイトとなった (末尾改行を含めずにカウント)。
             </p>
-             
             <p>
-               こちらは改行とスペースを追加したバージョン: 
+              こちらは改行とスペースを追加したバージョン:
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">[</span><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
@@ -144,50 +129,43 @@
 <span class="line"><span style="color:#D73A49">?></span><span style="color:#24292E">]</span></span></code></pre>
             </div>
           </section>
-           
           <section id="section--techniques">
-            <h2><a href="#section--techniques">使用したテクニック</a></h2> 
+            <h2><a href="#section--techniques">使用したテクニック</a></h2>
             <section id="section--techniques--exponential-notation">
-              <h3><a href="#section--techniques--exponential-notation">指数表記</a></h3> 
+              <h3><a href="#section--techniques--exponential-notation">指数表記</a></h3>
               <p>
-                 割と多くの言語のゴルフで使えるテクニック。<code>e</code> を用いた指数表記で、大きな数を短く表す。このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。
+                割と多くの言語のゴルフで使えるテクニック。 <code>e</code> を用いた指数表記で、大きな数を短く表す。 このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。
               </p>
             </section>
-             
             <section id="section--techniques--shorten-loop">
-              <h3><a href="#section--techniques--shorten-loop">foreach や for の中身を1つの文に</a></h3> 
+              <h3><a href="#section--techniques--shorten-loop">foreach や for の中身を1つの文に</a></h3>
               <p>
-                <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、通常 <code>{</code> を続けて複数の文を連ねるが、中身の文を1つにしてしまえば、<code>{</code> と <code>}</code> を省略できる。C言語などでも使える。
+                <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、 通常 <code>{</code> を続けて複数の文を連ねるが、中身の文を1つにしてしまえば、<code>{</code> と <code>}</code> を省略できる。 C言語などでも使える。
               </p>
             </section>
-             
             <section id="section--techniques--omit-initialization">
-              <h3><a href="#section--techniques--omit-initialization">$r に初期値を入れない</a></h3> 
+              <h3><a href="#section--techniques--omit-initialization">$r に初期値を入れない</a></h3>
               <p>
-                 PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、<code>$r</code> が未定義だった場合は <code>$r</code> を勝手に定義して空の配列で初期化してくれる。これを利用すると、<code>$r = [];</code> のような初期化が不要になる。
+                PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、 <code>$r</code> が未定義だった場合は <code>$r</code> を勝手に定義して空の配列で初期化してくれる。 これを利用すると、<code>$r = [];</code> のような初期化が不要になる。
               </p>
-               
               <p>
-                 ただし、プログラムに 0 が渡されるとループを一度も回らないので、<code>$r</code> が未定義になってしまい、<code>implode()</code> に渡すところでエラーになる。それを防ぐために <code>$r ?? []</code> を使っている。
+                ただし、プログラムに 0 が渡されるとループを一度も回らないので、<code>$r</code> が未定義になってしまい、 <code>implode()</code> に渡すところでエラーになる。 それを防ぐために <code>$r ?? []</code> を使っている。
               </p>
-               
               <p>
-                 もし 0 が渡されたケースを無視するなら、これが不要になるので 4 バイト縮む。
+                もし 0 が渡されたケースを無視するなら、これが不要になるので 4 バイト縮む。
               </p>
             </section>
-             
             <section id="section--techniques--put-text-outside-php-tag">
-              <h3><a href="#section--techniques--put-text-outside-php-tag">PHP タグの外に文字列を置く</a></h3> 
+              <h3><a href="#section--techniques--put-text-outside-php-tag">PHP タグの外に文字列を置く</a></h3>
               <p>
-                 PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。今回のケースでは、先頭と末尾に必ず <code>[</code> と <code>]</code> を出力するので、そのまま書いてやればよい。
+                PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。 今回のケースでは、先頭と末尾に必ず <code>[</code> と <code>]</code> を出力するので、そのまま書いてやればよい。
               </p>
             </section>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">おわりに</a></h2> 
+            <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-               最後になりましたが、<a href="https://twitter.com/m3m0r7" rel="noreferrer" target="_blank">めもりー</a>さん、楽しい問題をありがとうございました。
+              最後になりましたが、 <a href="https://twitter.com/m3m0r7" rel="noreferrer" target="_blank">めもりー</a> さん、楽しい問題をありがとうございました。
             </p>
           </section>
         </div>

@@ -2,7 +2,7 @@ import { dirname, join, joinGlobs } from "@std/path";
 import { ensureDir, expandGlob } from "@std/fs";
 import { generateFeedPageFromEntries } from "../generators/atom.ts";
 import { Config, getTagLabel } from "../config.ts";
-import { parseNulDocFile } from "../ndoc/parse.ts";
+import { parseDjotFile } from "../djot/parse.ts";
 import { Page } from "../page.ts";
 import { render } from "../render.ts";
 import { dateToString } from "../revision.ts";
@@ -49,7 +49,7 @@ async function buildPostPages(config: Config): Promise<PostPage[]> {
 
 async function collectPostFiles(sourceDir: string): Promise<string[]> {
   const filePaths = [];
-  const globPattern = joinGlobs([sourceDir, "**", "*.ndoc"]);
+  const globPattern = joinGlobs([sourceDir, "**", "*.dj"]);
   for await (const entry of expandGlob(globPattern)) {
     filePaths.push(entry.path);
   }
@@ -63,7 +63,7 @@ async function parsePosts(
   const posts = [];
   for (const postFile of postFiles) {
     posts.push(
-      await generatePostPage(await parseNulDocFile(postFile, config), config),
+      await generatePostPage(await parseDjotFile(postFile, config), config),
     );
   }
   return posts;

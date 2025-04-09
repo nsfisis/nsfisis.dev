@@ -61,30 +61,25 @@
             </ol>
           </section>
           <section id="section--intro">
-            <h2><a href="#section--intro">はじめに</a></h2> 
+            <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-               2023 年 3 月 23 日から 25 日にかけて開催予定 (記事執筆時点) の、<a href="https://phperkaigi.jp/2023/" rel="noreferrer" target="_blank">PHPerKaigi 2023</a> において、昨年と同様に、弊社 <a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> から、トークン問題を出題予定である。
+              2023 年 3 月 23 日から 25 日にかけて開催予定 (記事執筆時点) の、 <a href="https://phperkaigi.jp/2023/" rel="noreferrer" target="_blank">PHPerKaigi 2023</a> において、 昨年と同様に、弊社 <a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> から、 トークン問題を出題予定である。
             </p>
-             
             <p>
-               昨年のトークン問題の記事はこちら: <a href="/posts/2022-04-09/phperkaigi-2022-tokens">PHPerKaigi 2022 トークン問題の解説</a>
+              昨年のトークン問題の記事はこちら: <a href="/posts/2022-04-09/phperkaigi-2022-tokens">PHPerKaigi 2022 トークン問題の解説</a>
             </p>
-             
             <p>
-               すでに 2023 年用の問題は作成済みであるが、その制作過程の中でいくつかボツ問ができた。せっかくなので、PHPerKaigi 開催を待つ間に紹介しようと思う。
+              すでに 2023 年用の問題は作成済みであるが、その制作過程の中でいくつかボツ問ができた。 せっかくなので、PHPerKaigi 開催を待つ間に紹介しようと思う。
             </p>
-             
             <p>
-               10 月から 2 月まで、毎月 1 記事ずつ公開していく予定 (忘れていなければ)。
+              10 月から 2 月まで、毎月 1 記事ずつ公開していく予定 (忘れていなければ)。
             </p>
           </section>
-           
           <section id="section--quiz">
-            <h2><a href="#section--quiz">問題</a></h2> 
+            <h2><a href="#section--quiz">問題</a></h2>
             <p>
-               注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。
+              注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
@@ -109,51 +104,41 @@
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
           </section>
-           
           <section id="section--how-to-obtain-token">
-            <h2><a href="#section--how-to-obtain-token">トークン入手方法</a></h2> 
+            <h2><a href="#section--how-to-obtain-token">トークン入手方法</a></h2>
             <p>
-               ソースを見るとわかるとおり、<code>$argv[1]</code> を参照している。それを <code>$π</code> なる変数に代入しているので、円周率を渡してみる。
+              ソースを見るとわかるとおり、<code>$argv[1]</code> を参照している。 それを <code>$π</code> なる変数に代入しているので、円周率を渡してみる。
             </p>
-             
             <div class="codeblock" language="shell-session">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php Q.php 3.14</span></span>
 <span class="line"><span>Failed.</span></span></code></pre>
             </div>
-             
             <p>
-               失敗してしまった。精度を上げてみる。
+              失敗してしまった。精度を上げてみる。
             </p>
-             
             <div class="codeblock" language="shell-session">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php Q.php 3.1415</span></span>
 <span class="line"><span>Failed.</span></span></code></pre>
             </div>
-             
             <p>
-               だめだった。これを成功するまで繰り返す。
+              だめだった。これを成功するまで繰り返す。
             </p>
-             
             <p>
-               最初にトークンが得られるのは、小数点以下 16 桁目まで入力したときで、こうなる。
+              最初にトークンが得られるのは、小数点以下 16 桁目まで入力したときで、こうなる。
             </p>
-             
             <div class="codeblock" language="shell-session">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php Q.php 3.1415926535897932</span></span>
 <span class="line"><span>Token: #YO</span></span></code></pre>
             </div>
-             
             <p>
-               めでたくトークン「<code>#YO</code>」が手に入った。
+              めでたくトークン「<code>#YO</code>」が手に入った。
             </p>
           </section>
-           
           <section id="section--commentary">
-            <h2><a href="#section--commentary">解説</a></h2> 
+            <h2><a href="#section--commentary">解説</a></h2>
             <p>
-               短いので頭から追っていく。
+              短いので頭から追っていく。
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$π </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $argv[</span><span style="color:#005CC5">1</span><span style="color:#24292E">] </span><span style="color:#D73A49">??</span><span style="color:#005CC5"> null</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> ($π </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
@@ -164,43 +149,34 @@
 <span class="line"><span style="color:#D73A49">  exit</span><span style="color:#24292E">(</span><span style="color:#032F62">'Invalid input.'</span><span style="color:#24292E">);</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
-             
             <p>
-               入力のバリデーション部分。数値のみ受け付ける。
+              入力のバリデーション部分。数値のみ受け付ける。
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> implode</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_map</span><span style="color:#24292E">(</span><span style="color:#005CC5">chr</span><span style="color:#24292E">(</span><span style="color:#D73A49">...</span><span style="color:#24292E">), </span><span style="color:#005CC5">str_split</span><span style="color:#24292E">($π, </span><span style="color:#005CC5">2</span><span style="color:#24292E">)));</span></span></code></pre>
             </div>
-             
             <p>
-              <code>$π</code> を 2 文字ごとに区切り (<code>str_split</code>)、数値を ASCII コードと見做して文字に変換 (<code>chr</code>) して結合 (<code>implode</code>) している。
+              <code>$π</code> を 2 文字ごとに区切り (<code>str_split</code>)、 数値を ASCII コードと見做して文字に変換 (<code>chr</code>) して結合 (<code>implode</code>) している。
             </p>
-             
             <p>
-               例えば、<code>$π</code> が <code>&apos;656667&apos;</code> だったとすると、<code>65</code>、<code>66</code>、<code>67</code> に対応した <code>&apos;A&apos;</code>、<code>&apos;B&apos;</code>、<code>&apos;C&apos;</code> へと変換され、<code>&apos;ABC&apos;</code> になる。
+              例えば、<code>$π</code> が <code>&apos;656667&apos;</code> だったとすると、 <code>65</code>、<code>66</code>、<code>67</code> に対応した <code>&apos;A&apos;</code>、<code>&apos;B&apos;</code>、<code>&apos;C&apos;</code> へと変換され、<code>&apos;ABC&apos;</code> になる。
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$π </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '656667'</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> implode</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_map</span><span style="color:#24292E">(</span><span style="color:#005CC5">chr</span><span style="color:#24292E">(</span><span style="color:#D73A49">...</span><span style="color:#24292E">), </span><span style="color:#005CC5">str_split</span><span style="color:#24292E">($π, </span><span style="color:#005CC5">2</span><span style="color:#24292E">)));</span></span>
 <span class="line"><span style="color:#005CC5">echo</span><span style="color:#24292E"> $s;</span></span>
 <span class="line"><span style="color:#6A737D">// => ABC</span></span></code></pre>
             </div>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">preg_match</span><span style="color:#24292E">(</span><span style="color:#032F62">'/(</span><span style="color:#22863A;font-weight:bold">\x</span><span style="color:#032F62">23.</span><span style="color:#D73A49">+</span><span style="color:#032F62">?) /'</span><span style="color:#24292E">, $s, $m);</span></span>
 <span class="line"><span style="color:#24292E">$t </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $m[</span><span style="color:#005CC5">1</span><span style="color:#24292E">] </span><span style="color:#D73A49">??</span><span style="color:#032F62"> ''</span><span style="color:#24292E">;</span></span></code></pre>
             </div>
-             
             <p>
-               正規表現でマッチングしている。<code>\x23</code> は <code>#</code> と同じであることに留意すると、この正規表現は「<code>#</code> から始まる 2 以上の長さ (含 <code>#</code>) の文字列で、最初に現れるスペースまで」にマッチする。つまりこれは、PHPerKaigi におけるトークンである。
+              正規表現でマッチングしている。<code>\x23</code> は <code>#</code> と同じであることに留意すると、 この正規表現は「<code>#</code> から始まる 2 以上の長さ (含 <code>#</code>) の文字列で、 最初に現れるスペースまで」にマッチする。つまりこれは、PHPerKaigi におけるトークンである。
             </p>
-             
             <p>
-               なお、<code>#</code> を直接書いていないのは、<code>/#.+?) /</code> と書くと、<code>#.+?)</code> という意図せぬトークンが登録されてしまうからである。
+              なお、<code>#</code> を直接書いていないのは、<code>/#.+?) /</code> と書くと、 <code>#.+?)</code> という意図せぬトークンが登録されてしまうからである。
             </p>
-             
             <div class="codeblock" language="php">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> (</span><span style="color:#005CC5">md5</span><span style="color:#24292E">($t) </span><span style="color:#D73A49">===</span><span style="color:#032F62"> '056e831a4146bf123e8ea16613303d2e'</span><span style="color:#24292E">) {</span></span>
 <span class="line"><span style="color:#005CC5">  echo</span><span style="color:#032F62"> "Token: {</span><span style="color:#24292E">$t</span><span style="color:#032F62">}</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
@@ -208,20 +184,17 @@
 <span class="line"><span style="color:#005CC5">  echo</span><span style="color:#032F62"> "Failed.</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
-             
             <p>
-               最後にトークンのハッシュ値を見て、想定解かどうかを確認する。
+              最後にトークンのハッシュ値を見て、想定解かどうかを確認する。
             </p>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">おわりに</a></h2> 
+            <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-               円周率を何桁も計算して ASCII コード経由で文字列化すれば、トークンっぽいものがどこかで出てくるのではないか、と考えて生まれた作品。
+              円周率を何桁も計算して ASCII コード経由で文字列化すれば、トークンっぽいものがどこかで出てくるのではないか、と考えて生まれた作品。
             </p>
-             
             <p>
-               最初は真面目に円周率の計算プログラムを組んでいたのだが、いざ動かしてみるとやけに浅いところにあったので驚いた (ちなみに、それでも <code>M_PI</code> や <code>pi()</code> では精度が足りない)。見つけたときは狂喜したものの、冷静になってみると大して面白くなかったのでボツになった。むしろ、100 万桁目くらいに埋まっていてくれたほうがよかったかもしれない。
+              最初は真面目に円周率の計算プログラムを組んでいたのだが、いざ動かしてみるとやけに浅いところにあったので驚いた (ちなみに、それでも <code>M_PI</code> や <code>pi()</code> では精度が足りない)。 見つけたときは狂喜したものの、冷静になってみると大して面白くなかったのでボツになった。 むしろ、100 万桁目くらいに埋まっていてくれたほうがよかったかもしれない。
             </p>
           </section>
         </div>

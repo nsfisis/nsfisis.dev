@@ -62,103 +62,92 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/79ab4db8564032de0b25" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/79ab4db8564032de0b25</a> 
+              <p>
+                この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/79ab4db8564032de0b25" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/79ab4db8564032de0b25</a>
+              </p>
             </div>
           </div>
-           
           <section id="section--tl-dr">
-            <h2><a href="#section--tl-dr">TL; DR</a></h2> 
+            <h2><a href="#section--tl-dr">TL; DR</a></h2>
             <p>
-               違いはない。ただのエイリアス。
+              違いはない。ただのエイリアス。
             </p>
           </section>
-           
           <section id="section--code-reading">
-            <h2><a href="#section--code-reading">調査記録</a></h2> 
+            <h2><a href="#section--code-reading">調査記録</a></h2>
             <p>
-               Vim の autocmd events には似通った名前のものがいくつかある。大抵は <code>:help</code> に説明があるが、この記事のタイトルにある2つを含めた以下のイベントには、その違いについて説明がない。
+              Vim の autocmd events には似通った名前のものがいくつかある。大抵は <code>:help</code> に説明があるが、この記事のタイトルにある2つを含めた以下のイベントには、その違いについて説明がない。
             </p>
-             
             <ul>
               <li>
                 <code>BufRead</code>/<code>BufReadPost</code>
               </li>
-               
               <li>
                 <code>BufWrite</code>/<code>BufWritePre</code>
               </li>
-               
               <li>
                 <code>BufAdd</code>/<code>BufCreate</code>
               </li>
             </ul>
-             
             <p>
-               このうち、<code>BufAdd</code>/<code>BufCreate</code> に関しては、<code>:help BufCreate</code> に 
+              このうち、<code>BufAdd</code>/<code>BufCreate</code> に関しては、<code>:help BufCreate</code> に
             </p>
-             
             <blockquote>
               <p>
-                 The BufCreate event is for historic reasons. 
+                The BufCreate event is for historic reasons.
               </p>
             </blockquote>
-             
             <p>
-               とあり、おそらくは <code>BufAdd</code> のエイリアスであろうということがわかる。他の2組も同様ではないかと予想されるが、確認のため vim と neovim のソースコードを調査した。
+              とあり、おそらくは <code>BufAdd</code> のエイリアスであろうということがわかる。他の2組も同様ではないかと予想されるが、確認のため vim と neovim のソースコードを調査した。
             </p>
-             
-            <blockquote>
-              <p>
-                 ソースコードへのリンク <a href="https://github.com/vim/vim/tree/8e6be34338f13a6a625f19bcef82019c9adc65f2" rel="noreferrer" target="_blank">vim (調査時点での master branch)</a> <a href="https://github.com/neovim/neovim/tree/71d4f5851f068eeb432af34850dddda8cc1c71e3" rel="noreferrer" target="_blank">neovim (上に同じ)</a>
-              </p>
-            </blockquote>
-             
+            <p>
+              ソースコードへのリンク
+            </p>
+            <ul>
+              <li>
+                <a href="https://github.com/vim/vim/tree/8e6be34338f13a6a625f19bcef82019c9adc65f2" rel="noreferrer" target="_blank">vim (調査時点での master branch)</a>
+              </li>
+              <li>
+                <a href="https://github.com/neovim/neovim/tree/71d4f5851f068eeb432af34850dddda8cc1c71e3" rel="noreferrer" target="_blank">neovim (上に同じ)</a>
+              </li>
+            </ul>
             <section id="section--code-reading--vim">
-              <h3><a href="#section--code-reading--vim">vim のソースコード</a></h3> 
+              <h3><a href="#section--code-reading--vim">vim のソースコード</a></h3>
               <p>
-                 以下は、autocmd events の名前と内部で使われている整数値とのマッピングを定義している箇所である。見ての通り、上でエイリアスではないかと述べた3組には、それぞれ同じ内部値が使われている。
+                以下は、autocmd events の名前と内部で使われている整数値とのマッピングを定義している箇所である。見ての通り、上でエイリアスではないかと述べた3組には、それぞれ同じ内部値が使われている。
               </p>
-               
               <p>
-                 <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86</a> 
+                <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86</a>
               </p>
-               
               <div class="codeblock" language="c">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufAdd"</span><span style="color:#24292E">,      EVENT_BUFADD},</span></span>
 <span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufCreate"</span><span style="color:#24292E">,   EVENT_BUFADD},</span></span></code></pre>
               </div>
-               
               <p>
-                 <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97</a> 
+                <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97</a>
               </p>
-               
               <div class="codeblock" language="c">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufRead"</span><span style="color:#24292E">,     EVENT_BUFREADPOST},</span></span>
 <span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufReadCmd"</span><span style="color:#24292E">,  EVENT_BUFREADCMD},</span></span>
 <span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufReadPost"</span><span style="color:#24292E">, EVENT_BUFREADPOST},</span></span></code></pre>
               </div>
-               
               <p>
-                 <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105</a> 
+                <a href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105</a>
               </p>
-               
               <div class="codeblock" language="c">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufWrite"</span><span style="color:#24292E">,    EVENT_BUFWRITEPRE},</span></span>
 <span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufWritePost"</span><span style="color:#24292E">,    EVENT_BUFWRITEPOST},</span></span>
 <span class="line"><span style="color:#24292E">{</span><span style="color:#032F62">"BufWritePre"</span><span style="color:#24292E">, EVENT_BUFWRITEPRE},</span></span></code></pre>
               </div>
             </section>
-             
             <section id="section--code-reading--neovim">
-              <h3><a href="#section--code-reading--neovim">neovim のソースコード</a></h3> 
+              <h3><a href="#section--code-reading--neovim">neovim のソースコード</a></h3>
               <p>
-                 neovim の場合でも同様のマッピングが定義されているが、こちらの場合は Lua で書かれている。以下にある通り、はっきり <code>aliases</code> と書かれている。
+                neovim の場合でも同様のマッピングが定義されているが、こちらの場合は Lua で書かれている。以下にある通り、はっきり <code>aliases</code> と書かれている。
               </p>
-               
               <p>
-                 <a href="https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124" rel="noreferrer" target="_blank">https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124</a> 
+                <a href="https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124" rel="noreferrer" target="_blank">https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124</a>
               </p>
-               
               <div class="codeblock" language="lua">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">aliases </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#24292E">  BufCreate </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'BufAdd'</span><span style="color:#24292E">,</span></span>
@@ -167,11 +156,9 @@
 <span class="line"><span style="color:#24292E">  FileEncoding </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'EncodingChanged'</span><span style="color:#24292E">,</span></span>
 <span class="line"><span style="color:#24292E">},</span></span></code></pre>
               </div>
-               
               <p>
-                 ところで、上では取り上げなかった <code>FileEncoding</code> だが、これは <code>:help FileEncoding</code> にしっかりと書いてある。
+                ところで、上では取り上げなかった <code>FileEncoding</code> だが、これは <code>:help FileEncoding</code> にしっかりと書いてある。
               </p>
-               
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>                                                              *FileEncoding*</span></span>
 <span class="line"><span>FileEncoding                    Obsolete.  It still works and is equivalent</span></span>
@@ -179,53 +166,55 @@
               </div>
             </section>
           </section>
-           
           <section id="section--outro">
-            <h2><a href="#section--outro">まとめ</a></h2> 
+            <h2><a href="#section--outro">まとめ</a></h2>
             <p>
-               記事タイトルについて言えば、どちらも変わらないので好きな方を使えばよい。あえて言えば、次のようになるだろう。
+              記事タイトルについて言えば、どちらも変わらないので好きな方を使えばよい。あえて言えば、次のようになるだろう。
             </p>
-             
             <ul>
               <li>
-                <code>BufAdd</code>/<code>BufCreate</code> 
+                <p>
+                  <code>BufAdd</code>/<code>BufCreate</code>
+                </p>
                 <ul>
                   <li>
-                    → <code>BufCreate</code> は歴史的な理由により (&quot;for historic reasons&quot;) 存在しているため、新しい方 (<code>BufAdd</code>) を使う
+                    → <code>BufCreate</code> は歴史的な理由により (“for historic reasons”) 存在しているため、新しい方 (<code>BufAdd</code>) を使う
                   </li>
                 </ul>
               </li>
-               
               <li>
-                <code>BufRead</code>/<code>BufReadPost</code> 
+                <p>
+                  <code>BufRead</code>/<code>BufReadPost</code>
+                </p>
                 <ul>
                   <li>
                     → <code>BufReadPre</code> との対称性のため、あるいは <code>BufWritePost</code> との対称性のため <code>BufReadPost</code> を使う
                   </li>
                 </ul>
               </li>
-               
               <li>
-                <code>BufWrite</code>/<code>BufWritePre</code> 
+                <p>
+                  <code>BufWrite</code>/<code>BufWritePre</code>
+                </p>
                 <ul>
                   <li>
                     → <code>BufWritePost</code> との対称性のため、あるいは <code>BufReadPre</code> との対称性のため <code>BufWritePre</code> を使う
                   </li>
                 </ul>
               </li>
-               
               <li>
-                <code>FileEncoding</code>/<code>EncodingChanged</code> 
+                <p>
+                  <code>FileEncoding</code>/<code>EncodingChanged</code>
+                </p>
                 <ul>
                   <li>
-                    → <code>FileEncoding</code> は <code>`Obsolete&apos;&apos; と明言されているので、`EncodingChanged</code> を使う
+                    → <code>FileEncoding</code> は “Obsolete” と明言されているので、<code>EncodingChanged</code> を使う
                   </li>
                 </ul>
               </li>
             </ul>
-             
             <p>
-               ところでこの調査で知ったのだが、<code>BufRead</code> と <code>BufWrite</code> は上にある通り発火するタイミングが「後」と「前」で対称性がない。可能なら <code>Pre</code>/<code>Post</code> 付きのものを使った方が分かりやすいだろう。
+              ところでこの調査で知ったのだが、<code>BufRead</code> と <code>BufWrite</code> は上にある通り発火するタイミングが「後」と「前」で対称性がない。可能なら <code>Pre</code>/<code>Post</code> 付きのものを使った方が分かりやすいだろう。
             </p>
           </section>
         </div>

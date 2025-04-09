@@ -62,26 +62,23 @@
               NOTE
             </div>
             <div class="admonition-content">
-               この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/74d7ffeeebc51b20d791" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/74d7ffeeebc51b20d791</a> 
+              <p>
+                この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/74d7ffeeebc51b20d791" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/74d7ffeeebc51b20d791</a>
+              </p>
             </div>
           </div>
-           
           <p>
-             Ruby という言語には複数の実装があるが、それらをスクリプト上からどのようにして programmatically に見分ければよいだろうか。
+            Ruby という言語には複数の実装があるが、それらをスクリプト上からどのようにして programmatically に見分ければよいだろうか。
           </p>
-           
           <p>
             <code>Object</code> クラスに定義されている <code>RUBY_ENGINE</code> という定数がこの用途に使える。
           </p>
-           
           <p>
-             参考: <a href="https://docs.ruby-lang.org/ja/latest/method/Object/c/RUBY_ENGINE.html" rel="noreferrer" target="_blank">Object::RUBY_ENGINE</a>
+            参考: <a href="https://docs.ruby-lang.org/ja/latest/method/Object/c/RUBY_ENGINE.html" rel="noreferrer" target="_blank">Object::RUBY_ENGINE</a>
           </p>
-           
           <p>
-             上記ページの例から引用する: 
+            上記ページの例から引用する:
           </p>
-           
           <div class="codeblock" language="shell-session">
             <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ruby-1.9.1 -ve 'p RUBY_ENGINE'</span></span>
 <span class="line"><span>ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]</span></span>
@@ -90,129 +87,39 @@
 <span class="line"><span>jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]</span></span>
 <span class="line"><span>"jruby"</span></span></code></pre>
           </div>
-           
           <p>
-             それぞれの処理系がどのような値を返すかだが、stack overflow に良い質問と回答があった。
+            それぞれの処理系がどのような値を返すかだが、stack overflow に良い質問と回答があった。
           </p>
-           
           <p>
-            <a href="https://stackoverflow.com/a/9894232" rel="noreferrer" target="_blank">What values for RUBY_ENGINE correspond to which Ruby implementations?</a> より引用: 
+            <a href="https://stackoverflow.com/a/9894232" rel="noreferrer" target="_blank">What values for RUBY_ENGINE correspond to which Ruby implementations?</a> より引用:
           </p>
-           
           <blockquote>
-            <table>
-              <thead>
-                <tr>
-                  <td>
-                    RUBY_ENGINE
-                  </td>
-                   
-                  <td>
-                    Implementation
-                  </td>
-                </tr>
-              </thead>
-               
-              <tbody>
-                <tr>
-                  <td>
-                    &lt;undefined&gt;
-                  </td>
-                   
-                  <td>
-                    MRI &lt; 1.9
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `ruby&apos;
-                  </td>
-                   
-                  <td>
-                    MRI &gt;= 1.9 or REE
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `jruby&apos;
-                  </td>
-                   
-                  <td>
-                    JRuby
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `macruby&apos;
-                  </td>
-                   
-                  <td>
-                    MacRuby
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `rbx&apos;
-                  </td>
-                   
-                  <td>
-                    Rubinius
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `maglev&apos;
-                  </td>
-                   
-                  <td>
-                    MagLev
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `ironruby&apos;
-                  </td>
-                   
-                  <td>
-                    IronRuby
-                  </td>
-                </tr>
-                 
-                <tr>
-                  <td>
-                    `cardinal&apos;
-                  </td>
-                   
-                  <td>
-                    Cardinal
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>| RUBY_ENGINE | Implementation    |</span></span>
+<span class="line"><span>|:-----------:|:------------------|</span></span>
+<span class="line"><span>| &#x3C;undefined> | MRI &#x3C; 1.9         |</span></span>
+<span class="line"><span>| 'ruby'      | MRI >= 1.9 or REE |</span></span>
+<span class="line"><span>| 'jruby'     | JRuby             |</span></span>
+<span class="line"><span>| 'macruby'   | MacRuby           |</span></span>
+<span class="line"><span>| 'rbx'       | Rubinius          |</span></span>
+<span class="line"><span>| 'maglev'    | MagLev            |</span></span>
+<span class="line"><span>| 'ironruby'  | IronRuby          |</span></span>
+<span class="line"><span>| 'cardinal'  | Cardinal          |</span></span></code></pre>
+            </div>
           </blockquote>
-           
           <p>
-             なお、この質問・回答は 2014年になされたものであり、値は変わっている可能性がある。MRI (aka CRuby) については執筆時現在 (2020/12/8) も <code>&apos;ruby&apos;</code> が返ってくることを確認済み。
+            なお、この質問・回答は 2014年になされたものであり、値は変わっている可能性がある。MRI (aka CRuby) については執筆時現在 (2020/12/8) も <code>&apos;ruby&apos;</code> が返ってくることを確認済み。
           </p>
-           
           <p>
-             この表にない主要な処理系として、<a href="https://mruby.org" rel="noreferrer" target="_blank">mruby</a> は <code>&apos;mruby&apos;</code> を返す。
+            この表にない主要な処理系として、 <a href="https://mruby.org" rel="noreferrer" target="_blank">mruby</a> は <code>&apos;mruby&apos;</code> を返す。
           </p>
-           
           <p>
-            <a href="https://github.com/mruby/mruby/blob/ed29d74bfd95362eaeb946fcf7e865d80346b62b/include/mruby/version.h#L32-L35" rel="noreferrer" target="_blank">mruby 該当部分のソース</a> より引用: 
+            <a href="https://github.com/mruby/mruby/blob/ed29d74bfd95362eaeb946fcf7e865d80346b62b/include/mruby/version.h#L32-L35" rel="noreferrer" target="_blank">mruby 該当部分のソース</a> より引用:
           </p>
-           
           <div class="codeblock" language="c">
             <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/*</span></span>
-<span class="line"><span style="color:#6A737D">* Ruby engine.</span></span>
-<span class="line"><span style="color:#6A737D">*/</span></span>
+<span class="line"><span style="color:#6A737D"> * Ruby engine.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
 <span class="line"><span style="color:#D73A49">#define</span><span style="color:#6F42C1"> MRUBY_RUBY_ENGINE</span><span style="color:#032F62">  "mruby"</span></span></code></pre>
           </div>
         </div>

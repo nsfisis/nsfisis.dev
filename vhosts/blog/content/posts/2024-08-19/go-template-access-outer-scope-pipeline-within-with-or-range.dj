@@ -1,0 +1,118 @@
+---
+[article]
+uuid = "eed112e4-3227-4b3f-9991-7e11c288ee2b"
+title = "【Go】 text/template の with や range の内側から外側の \".\" にアクセスする"
+description = "Go言語の text/template における with や range は \".\" を上書きする。これらの内側から外側の \".\" にアクセスする方法を調べた。"
+tags = [
+  "go",
+]
+
+[[article.revisions]]
+date = "2024-08-19"
+remark = "公開"
+---
+{#tldr}
+# TL;DR
+
+常にトップレベルを指す特殊変数 `$` を使えばよい。
+
+{#intro}
+# はじめに
+
+Go には、標準ライブラリにテンプレートライブラリ `text/template` がある。
+この `text/template` における制御構造、`with` と `range` は次のように使われる。
+
+```
+# {{ .Title }}
+
+# User
+
+{{ with .User }}
+  {{ .Name }} ({{ .ID }})
+{{ end }}
+
+# Items
+
+{{ range .Items }}
+  - {{ . }}
+{{ end }}
+```
+
+`text/template` の `.` は、現在の操作対象を表す特殊なオブジェクトである。
+
+`with` や `range` は、`.` を変更する効果を持つ。
+`with` は引数に渡されたオブジェクトを `.` へセットして、内部のテンプレートを実行する。
+`range` は引数に渡されたイテレート可能なオブジェクトに対し、それぞれの要素を `.` へセットして、要素の個数だけ内部のテンプレートを実行する。
+
+つまりこのテンプレートは、次のような構造をレンダリングしている (`Execute()` の第2引数)。
+
+```go
+tmpl.Execute(out, Params{
+    Title: "foo",
+    User: User{
+        ID:   123,
+        Name: "john",
+    },
+    Items: []string{
+        "hoge",
+        "piyo",
+        "fuga",
+    },
+})
+```
+
+{#what-i-want-to-do}
+# やりたいこと
+
+今回おこないたいのは、`with` や `range` の中で、その外側で使われていたトップレベルのオブジェクトを参照することだ。
+
+```
+{{ with .User }}
+  ここから .Title を参照するには？
+{{ end }}
+
+{{ range .Items }}
+  ここから .User を参照するには？
+{{ end }}
+```
+
+`with` や `range` は、`.` を自身の対象オブジェクトに変更するので、
+単に `{{ with .User }}` の中で `.Title` と書いても、それは `User` の `Title` プロパティを参照しているとみなされる。
+
+`text/template` では変数が使えるので、テンプレートの先頭で
+
+```
+{{ $params := . }}
+```
+
+とでもしておけば実現は可能である。
+
+しかしながら、頻発するシチュエーションにしてはあまりに不恰好である。よりスマートな方法が用意されているはずだ。
+
+{#solution}
+# 解決方法
+
+常にトップレベルを指す特殊変数 `$` を使えばよい。
+
+```
+{{ with .User }}
+  {{ $.Title }}
+{{ end }}
+
+{{ range .Items }}
+  {{ $.User.Name }}
+{{ end }}
+```
+
+`$` は、テンプレートが実行されるときに渡されたオブジェクトを指す。
+これを使えば現在の `.` に関係なくトップレベルを参照できる。
+
+このことは、[`text/template` の公式ドキュメント](https://pkg.go.dev/text/template#hdr-Variables)にも以下のように記載されている。
+
+> When execution begins, $ is set to the data argument passed to Execute, that is, to the starting value of dot.
+
+{#reference}
+# 参考
+
+* [直接の出典である Stack Overflow の回答: "In a template how do you access an outer scope while inside of a "with" or "range" scope?"](https://stackoverflow.com/questions/14800204/in-a-template-how-do-you-access-an-outer-scope-while-inside-of-a-with-or-rang)
+* [大元の出典である `text/template` の公式ドキュメント](https://pkg.go.dev/text/template#hdr-Variables)
