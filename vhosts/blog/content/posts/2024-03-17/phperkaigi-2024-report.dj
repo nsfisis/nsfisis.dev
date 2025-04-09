@@ -1,0 +1,85 @@
+---
+[article]
+uuid = "750be5c8-ca52-4cbd-86fe-5645b06bde95"
+title = "PHPerKaigi 2024 参加レポ"
+description = "2024-03-07 から 2024-03-09 にかけて開催された、PHPerKaigi 2024 に参加した。"
+tags = [
+  "conference",
+  "php",
+  "phperkaigi",
+]
+
+[[article.revisions]]
+date = "2024-03-17"
+remark = "公開"
+
+[[article.revisions]]
+date = "2024-07-07"
+remark = "Wasm ランタイムの進捗について追記"
+---
+{#intro}
+# はじめに
+
+2024-03-07 から 2024-03-09 にかけて開催された、 [PHPerKaigi 2024](https://phperkaigi.jp/2024/) に参加した。
+今年はスピーカーとして、また、コアスタッフとして参加した。
+
+過去の参加レポはこちら:
+
+*  [PHPerKaigi 2023](/posts/2023-04-04/phperkaigi-2023-report/)
+*  [PHPerKaigi 2022](/posts/2022-05-01/phperkaigi-2022/)
+*  [PHPerKaigi 2021](/posts/2021-03-30/phperkaigi-2021/)
+
+{#as-speaker}
+# スピーカーとして
+
+昨年に続き、スピーカーとして登壇をおこなった。
+
+* WebAssembly を理解する 〜VM の作成を通して〜
+
+  *  [プロポーザル](https://fortee.jp/phperkaigi-2024/proposal/bc5dc153-17af-4079-8f1b-2660af97e2c8)
+  *  [スライド](/slides/2024-03-08/phperkaigi-2024/)
+
+WebAssembly の VM を PHP で実装し、実装に至るまでの道程や WebAssembly の特徴、言語処理系を作る楽しさについて語った。
+タイトルにある「WebAssembly を理解する」という目的が達成できるようなトークだったかと言われると疑問は残るものの、実際に作った人にしかできない話をすることはできたと思う。
+
+{#as-staff}
+# コアスタッフとして
+
+昨年は当日スタッフとして参加したが、今年はコアスタッフとして運営に参加した。
+今年はコードゴルフ企画を提案し、その準備とシステムの開発、当日の運用をおこなった。
+そのシステムは現在も下記の URL から閲覧でき、当日出題された問題や参加者の方々の回答が見られる。
+
+[Albatross.PHP](https://t.nil.ninja/phperkaigi/2024/golf/)
+
+システムの開発完了や問題の作成完了はスケジュールギリギリとなったのだが、当日はそこそこ安定して稼動していたのではないかと思う。
+
+{#as-attendee}
+# 参加者として
+
+{#my-best-session}
+## マイベストセッション
+
+[RubyVM を PHP で実装する〜Hello World を出力するまで〜](https://fortee.jp/phperkaigi-2024/proposal/ac59d0dd-795a-47cb-ba59-c0b1772d00cc) (めもりー さん)
+
+今回一番楽しみにしていたセッションであり、期待どおりの面白さだった。
+私も今回 VM を作るというテーマで登壇したこともあり、高い解像度で受け取ることができたように思う。
+
+P.S. Ask the Speaker で話した、Ruby VM (written in PHP) on PHP VM (compiled to Wasm) on Wasm VM (written in PHP) on PHP というアイデアは「マジ」なので、続報をお待ちください (自作 Wasm runtime に不足している機能を鋭意実装中です)。
+
+2024-07-07 追記: [コミット a312e95](https://github.com/nsfisis/php-waddiwasi/commit/a312e95a95d243943535f94653822d6796d4637f) で、ついに Ruby VM on PHP VM on Wasm VM on PHP を実現した。現時点での動かしかたは README に記載している。
+
+{#outro}
+# おわりに
+
+今年はスピーカーとスタッフともに開発を伴うものだったので (Wasm 処理系とコードゴルフシステム)、両者がぶつかった結果として準備段階は去年よりも大変になった。
+
+[ゴリゴリに開発しなければいけないセッションのスピーカーとゴリゴリに開発しなければいけない企画のスタッフを同じカンファレンスでやってはいけない](https://twitter.com/nsfisis/status/1765366490277253502)
+
+ただ、それでもコアスタッフとして半年ほど関わっただけに、終わってみると感慨深い。
+例年どおり、お祭のような活気・熱気を感じることができた。
+
+来月は、また登壇とスタッフ (こちらは当日スタッフ) をおこなう [PHP カンファレンス小田原](https://phpcon-odawara.jp/) があるので、良いトーク・良いカンファレンスを作れるようにしたい。
+
+さて、参加レポは例年この言葉で締め括っているので、今年もそれで終わろうと思う。
+
+ではまた来年。
