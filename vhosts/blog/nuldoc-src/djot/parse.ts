@@ -1,15 +1,15 @@
+import { parse as parseDjot } from "@djot/djot";
 import { parse as parseToml } from "@std/toml";
 import { Config } from "../config.ts";
-import { parseXmlString } from "../xml.ts";
 import {
-  createNewDocumentFromRootElement,
+  createNewDocumentFromDjotDocument,
   Document,
   PostMetadata,
   PostMetadataSchema,
 } from "./document.ts";
 import toHtml from "./to_html.ts";
 
-export async function parseNulDocFile(
+export async function parseDjotFile(
   filePath: string,
   config: Config,
 ): Promise<Document> {
@@ -17,8 +17,8 @@ export async function parseNulDocFile(
     const fileContent = await Deno.readTextFile(filePath);
     const parts = fileContent.split(/^---$/m);
     const meta = parseMetadata(parts[1]);
-    const root = parseXmlString("<?xml ?>" + parts[2]);
-    const doc = createNewDocumentFromRootElement(root, meta, filePath, config);
+    const root = parseDjot(parts[2]);
+    const doc = createNewDocumentFromDjotDocument(root, meta, filePath, config);
     return await toHtml(doc);
   } catch (e) {
     if (e instanceof Error) {

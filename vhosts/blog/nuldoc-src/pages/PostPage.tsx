@@ -3,7 +3,7 @@ import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config, getTagLabel } from "../config.ts";
 import { Element } from "../dom.ts";
-import { Document } from "../ndoc/document.ts";
+import { Document } from "../djot/document.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
 

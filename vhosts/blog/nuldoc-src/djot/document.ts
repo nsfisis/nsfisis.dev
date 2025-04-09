@@ -1,9 +1,10 @@
+import { Doc as DjotDoc } from "@djot/djot";
 import { join } from "@std/path";
-import { Config } from "../config.ts";
-import { NuldocError } from "../errors.ts";
-import { Revision, stringToDate } from "../revision.ts";
-import { Element, findFirstChildElement } from "../dom.ts";
 import { z } from "zod/mod.ts";
+import { Config } from "../config.ts";
+import { Element } from "../dom.ts";
+import { Revision, stringToDate } from "../revision.ts";
+import { djot2ndoc } from "./djot2ndoc.ts";
 
 export const PostMetadataSchema = z.object({
   article: z.object({
@@ -32,25 +33,18 @@ export type Document = {
   revisions: Revision[];
 };
 
-export function createNewDocumentFromRootElement(
-  root: Element,
+export function createNewDocumentFromDjotDocument(
+  root: DjotDoc,
   meta: PostMetadata,
   sourceFilePath: string,
   config: Config,
 ): Document {
-  const article = findFirstChildElement(root, "article");
-  if (!article) {
-    throw new NuldocError(
-      `[nuldoc.new] <article> element not found`,
-    );
-  }
-
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);
   const link = sourceFilePath.replace(contentDir, "").replace(".xml", "/");
   return {
-    root: root,
-    sourceFilePath: sourceFilePath,
+    root: djot2ndoc(root),
+    sourceFilePath,
     uuid: meta.article.uuid,
     link: link,
     title: meta.article.title,

@@ -22,6 +22,7 @@ export default async function toHtml(doc: Document): Promise<Document> {
   addAttributesToExternalLinkElement(doc);
   setDefaultLangAttribute(doc);
   traverseFootnotes(doc);
+  removeUnnecessaryParagraphNode(doc);
   await transformAndHighlightCodeBlockElement(doc);
   return doc;
 }
@@ -266,6 +267,33 @@ function traverseFootnotes(doc: Document) {
   });
 }
 
+function removeUnnecessaryParagraphNode(doc: Document) {
+  forEachChildRecursively(doc.root, (n) => {
+    if (n.kind !== "element" || (n.name !== "ul" && n.name !== "ol")) {
+      return;
+    }
+
+    const isTight = n.attributes.get("--tight") === "true";
+    if (!isTight) {
+      return;
+    }
+
+    for (const child of n.children) {
+      if (child.kind !== "element" || child.name !== "li") {
+        continue;
+      }
+      if (child.children.length !== 1) {
+        continue;
+      }
+      const grandChild = child.children[0];
+      if (grandChild.kind !== "element" || grandChild.name !== "p") {
+        continue;
+      }
+      child.children = grandChild.children;
+    }
+  });
+}
+
 async function transformAndHighlightCodeBlockElement(doc: Document) {
   await forEachChildRecursivelyAsync(doc.root, async (n) => {
     if (n.kind !== "element" || n.name !== "codeblock") {
@@ -274,7 +302,7 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
 
     const language = n.attributes.get("language") || "text";
     const sourceCodeNode = n.children[0] as Text | RawHTML;
-    const sourceCode = sourceCodeNode.content;
+    const sourceCode = sourceCodeNode.content.trimEnd();
 
     const highlighted = await codeToHtml(sourceCode, {
       lang: language in bundledLanguages ? language as BundledLanguage : "text",
