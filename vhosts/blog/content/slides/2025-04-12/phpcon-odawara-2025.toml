@@ -1,0 +1,15 @@
+[slide]
+uuid = "c6c7c241-46c1-44b5-95b2-c30c3a500df3"
+title = "PHP 8.x 時代のクラス設計（property promotion から property hooks まで）"
+event = "PHP カンファレンス小田原 2025"
+talkType = "レギュラートーク (20分)"
+link = "/slides/2025-04-12/phpcon-odawara-2025/slides.pdf"
+tags = [
+  "conference",
+  "php",
+  "phpcon-odawara",
+]
+
+[[slide.revisions]]
+date = "2025-04-12"
+remark = "登壇"
