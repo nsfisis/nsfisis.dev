@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-04-12T00:00:00+09:00</updated>
+  <updated>2025-04-20T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:039b3dff-3b75-46b7-a731-9a3a0ff8e21f</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-20/trick-2025-most-ruby-on-ruby-award/"></link>
+    <title>RubyKaigi 2025 の TRICK で入賞した</title>
+    <summary>RubyKaigi 2025 で開催された TRICK において、『最もRuby on Ruby賞』として審査員賞をいただいた。</summary>
+    <published>2025-04-20T00:00:00+09:00</published>
+    <updated>2025-04-20T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:c6c7c241-46c1-44b5-95b2-c30c3a500df3</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-04-12/phpcon-odawara-2025/"></link>
