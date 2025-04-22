@@ -11,6 +11,10 @@ tags = [
 [[article.revisions]]
 date = "2023-10-02"
 remark = "公開"
+
+[[article.revisions]]
+date = "2025-04-23"
+remark = "fflush() の前に改行の出力が必要だった理由と正しい実装について追記"
 ---
 {#intro}
 # はじめに
@@ -101,6 +105,32 @@ int EMSCRIPTEN_KEEPALIVE php_wasm_run(const char* code) {
 出力バッファから出力させるためだけなら改行を出力させなくとも `fflush()` だけで事足りると考えたのだが、ないと動かなかったので追加した。
 これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。
 改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
+
+::: note
+**2025-04-23 追記**:
+
+`fflush()` の前に改行の出力が必要だった理由が判明したので追記する。
+これは、`index.mjs` で標準出力・標準エラー出力へ出力する方法を指定せず、デフォルトの実装に任せているため。
+Emscripten のデフォルト実装では、改行コードを出力するまで出力内容がバッファリングされ、`fflush()` が機能しない。
+
+デフォルトの出力方法は `index.mjs` の中で `PHPWasm()` を呼ぶとき、`stdout`・`stderr` というオプションを渡せば変更できる。
+
+```javascript
+const { ccall } = await PHPWasm({
+  stdout: (c) => {
+    if (c === null) {
+      // flush the standard output.
+    } else {
+      // output c to the standard output.
+    }
+  },
+});
+```
+
+`c` は `null` か 1バイト符号つき整数を取り、`null` が flush 要求を意味する。
+
+記事末尾のリポジトリはすでにこの変更を適用済み。`stdout` や `stderr` の完全なサンプルはそちらを参照のこと。
+:::
 
 {#compile-to-wasm}
 ## WebAssembly にコンパイルする

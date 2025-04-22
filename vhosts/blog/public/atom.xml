@@ -7,7 +7,7 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-04-20T00:00:00+09:00</updated>
+  <updated>2025-04-23T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:039b3dff-3b75-46b7-a731-9a3a0ff8e21f</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-20/trick-2025-most-ruby-on-ruby-award/"></link>
@@ -310,7 +310,7 @@
     <title>PHP の処理系を Emscripten で WebAssembly にコンパイルする</title>
     <summary>PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。</summary>
     <published>2023-10-02T00:00:00+09:00</published>
-    <updated>2023-10-02T00:00:00+09:00</updated>
+    <updated>2025-04-23T00:00:00+09:00</updated>
   </entry>
   <entry>
     <id>urn:uuid:d6118e00-5fb1-4230-9d94-854260beae04</id>

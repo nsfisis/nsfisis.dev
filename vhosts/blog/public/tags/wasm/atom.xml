@@ -7,7 +7,7 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-03-15T00:00:00+09:00</updated>
+  <updated>2025-04-23T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:da7b1d5a-70df-4c4a-936c-1b49ca1a7c37</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
@@ -30,6 +30,6 @@
     <title>PHP の処理系を Emscripten で WebAssembly にコンパイルする</title>
     <summary>PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。</summary>
     <published>2023-10-02T00:00:00+09:00</published>
-    <updated>2023-10-02T00:00:00+09:00</updated>
+    <updated>2025-04-23T00:00:00+09:00</updated>
   </entry>
 </feed>
