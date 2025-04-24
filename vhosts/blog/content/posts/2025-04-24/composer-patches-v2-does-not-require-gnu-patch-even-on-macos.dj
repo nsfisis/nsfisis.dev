@@ -10,9 +10,18 @@ tags = [
 ]
 
 [[article.revisions]]
+date = "2025-04-10"
+remark = "デジタルサーカス株式会社の社内記事として公開"
+isInternal = true
+
+[[article.revisions]]
 date = "2025-04-24"
 remark = "公開"
 ---
+::: note
+この記事は、2025-04-10 に [デジタルサーカス株式会社](https://www.dgcircus.com/) の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+:::
+
 {#intro}
 # はじめに
 
