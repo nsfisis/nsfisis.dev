@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="composer-patches は BSD patch に対応しておらず、一部のパッチの適用に失敗する。現在ベータ版である v2 では patch コマンドに依存しなくなり、macOS で使うときのストレスが解消される見込み。">
+    <meta name="keywords" content="Composer,macOS,PHP">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="composer-patches は BSD patch に対応しておらず、一部のパッチの適用に失敗する。現在ベータ版である v2 では patch コマンドに依存しなくなり、macOS で使うときのストレスが解消される見込み。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=78b3f65931f3074e45f913f1f407a26d">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/composer/">Composer</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/macos/">macOS</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/php/">PHP</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2025-04-24">2025-04-24</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              <a href="https://getcomposer.org/" rel="noreferrer" target="_blank">Composer</a> は PHP におけるデファクトスタンダードなパッケージ管理システムである。
+            </p>
+            <p>
+              Composer を拡張するプラグインの一つに、<a href="https://github.com/cweagans/composer-patches" rel="noreferrer" target="_blank">composer-patches</a> という Composer パッケージがある。 これは、Composer でパッケージをインストールするときにそのパッケージへ任意のパッチを当てるプラグインである。
+            </p>
+            <p>
+              社内で発見しすぐに適用しなければならないバグ修正や、Pull Request こそあるもののなかなかマージされない機能等をすぐさま適用してリリースすることができる。
+            </p>
+            <p>
+              弊社でも多くのプロジェクトで活用されており、のべ数では数百ものパッチが当てられている。
+            </p>
+          </section>
+          <section id="section--on-macos">
+            <h2><a href="#section--on-macos">macOS での問題点</a></h2>
+            <p>
+              <code>composer-patches</code> は、macOS で一部のパッチの適用に失敗することが知られている。 関連 issues:
+            </p>
+            <ul>
+              <li>
+                <a href="https://github.com/cweagans/composer-patches/issues/522" rel="noreferrer" target="_blank">https://github.com/cweagans/composer-patches/issues/522</a>
+              </li>
+              <li>
+                <a href="https://github.com/cweagans/composer-patches/issues/326" rel="noreferrer" target="_blank">https://github.com/cweagans/composer-patches/issues/326</a>
+              </li>
+            </ul>
+            <p>
+              これは、<code>composer-patches</code> の想定する <code>patch</code> コマンドが GNU 実装の patch であることに由来する。 macOS にプリインストールされている <code>patch</code> はいわゆる BSD patch であり、GNU patch とは完全な互換性がない。
+            </p>
+            <p>
+              ワークアラウンドとして、macOS にも GNU patch をインストールしてしまうという方法がある。 例:
+            </p>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ brew install gpatch</span></span>
+<span class="line"><span>$ echo 'PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"' >> ~/.zshrc</span></span></code></pre>
+            </div>
+            <p>
+              GNU patch を Homebrew などの手段でインストールし、BSD patch よりも優先されるパスに配置すれば問題が解消する。
+            </p>
+          </section>
+          <section id="section--in-version-2">
+            <h2><a href="#section--in-version-2">v2 では</a></h2>
+            <p>
+              現在ベータ版である <code>composer-patches</code> v2 では、このワークアラウンドが不要になる (見込み)。
+            </p>
+            <p>
+              最新の実装では、<code>git apply</code> コマンドが最優先で使われる。 また、Git リポジトリがない場合 (<code>config.preferred-install</code> を <code>dist</code> に設定している場合など。デフォルトではそうなる) には <code>git init</code> を使って一時的にリポジトリを作成し、その上で <code>git apply</code> を実行するようになった。
+            </p>
+            <p>
+              この変更により、環境ごとに差異のある <code>patch</code> コマンドへの依存がなくなるので、macOS で <code>composer-patches</code> を使うときの厄介事は解消されるものと思われる。
+            </p>
+            <p>
+              <a href="https://github.com/cweagans/composer-patches/releases/tag/2.0.0-beta1" rel="noreferrer" target="_blank">2.0.0-beta1</a> のリリースノートより:
+            </p>
+            <blockquote>
+              <ul>
+                <li>
+                  Only have git patchers and freeform patcher? by <a href="https://github.com/cweagans" rel="noreferrer" target="_blank"><strong>@cweagans</strong></a> in <a href="https://github.com/cweagans/composer-patches/pull/476" rel="noreferrer" target="_blank">#472</a>
+                </li>
+              </ul>
+            </blockquote>
+            <p>
+              この変更で <code>patch</code> コマンドへの依存が排除された。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2024-04-29T00:00:00+09:00</updated>
+  <updated>2025-04-24T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:087e98f2-743c-48d8-9f67-e9b57e354845</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-24/composer-patches-v2-does-not-require-gnu-patch-even-on-macos/"></link>
+    <title>【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)</title>
+    <summary>composer-patches は BSD patch に対応しておらず、一部のパッチの適用に失敗する。現在ベータ版である v2 では patch コマンドに依存しなくなり、macOS で使うときのストレスが解消される見込み。</summary>
+    <published>2025-04-24T00:00:00+09:00</published>
+    <updated>2025-04-24T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:9b26c1ed-45c3-4cad-9476-cbf2cf2e4de7</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-29/zsh-file-completion-for-composer-custom-commands/"></link>

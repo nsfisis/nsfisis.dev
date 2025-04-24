@@ -1,0 +1,64 @@
+---
+[article]
+uuid = "087e98f2-743c-48d8-9f67-e9b57e354845"
+title = "【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)"
+description = "composer-patches は BSD patch に対応しておらず、一部のパッチの適用に失敗する。現在ベータ版である v2 では patch コマンドに依存しなくなり、macOS で使うときのストレスが解消される見込み。"
+tags = [
+  "composer",
+  "macos",
+  "php",
+]
+
+[[article.revisions]]
+date = "2025-04-24"
+remark = "公開"
+---
+{#intro}
+# はじめに
+
+[Composer](https://getcomposer.org/) は PHP におけるデファクトスタンダードなパッケージ管理システムである。
+
+Composer を拡張するプラグインの一つに、[composer-patches](https://github.com/cweagans/composer-patches) という Composer パッケージがある。
+これは、Composer でパッケージをインストールするときにそのパッケージへ任意のパッチを当てるプラグインである。
+
+社内で発見しすぐに適用しなければならないバグ修正や、Pull Request こそあるもののなかなかマージされない機能等をすぐさま適用してリリースすることができる。
+
+弊社でも多くのプロジェクトで活用されており、のべ数では数百ものパッチが当てられている。
+
+{#on-macos}
+# macOS での問題点
+
+`composer-patches` は、macOS で一部のパッチの適用に失敗することが知られている。
+関連 issues:
+
+* https://github.com/cweagans/composer-patches/issues/522
+* https://github.com/cweagans/composer-patches/issues/326
+
+これは、`composer-patches` の想定する `patch` コマンドが GNU 実装の patch であることに由来する。
+macOS にプリインストールされている `patch` はいわゆる BSD patch であり、GNU patch とは完全な互換性がない。
+
+ワークアラウンドとして、macOS にも GNU patch をインストールしてしまうという方法がある。
+例:
+
+```
+$ brew install gpatch
+$ echo 'PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"' >> ~/.zshrc
+```
+
+GNU patch を Homebrew などの手段でインストールし、BSD patch よりも優先されるパスに配置すれば問題が解消する。
+
+{#in-version-2}
+# v2 では
+
+現在ベータ版である `composer-patches` v2 では、このワークアラウンドが不要になる (見込み)。
+
+最新の実装では、`git apply` コマンドが最優先で使われる。
+また、Git リポジトリがない場合 (`config.preferred-install` を `dist` に設定している場合など。デフォルトではそうなる) には `git init` を使って一時的にリポジトリを作成し、その上で `git apply` を実行するようになった。
+
+この変更により、環境ごとに差異のある `patch` コマンドへの依存がなくなるので、macOS で `composer-patches` を使うときの厄介事は解消されるものと思われる。
+
+[2.0.0-beta1](https://github.com/cweagans/composer-patches/releases/tag/2.0.0-beta1) のリリースノートより:
+
+> * Only have git patchers and freeform patcher? by [*@cweagans*](https://github.com/cweagans) in [#472](https://github.com/cweagans/composer-patches/pull/476)
+
+この変更で `patch` コマンドへの依存が排除された。
