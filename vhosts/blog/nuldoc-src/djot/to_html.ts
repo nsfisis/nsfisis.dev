@@ -200,6 +200,7 @@ function transformNoteElement(doc: Document) {
       return;
     }
 
+    // TODO: 今のセクションレベルに合わせた h* タグにしたい
     const labelElement: Element = {
       kind: "element",
       name: "div",
