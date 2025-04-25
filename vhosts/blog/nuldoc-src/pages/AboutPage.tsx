@@ -25,9 +25,8 @@ export default function AboutPage(
             <header className="post-header">
               <h1 className="post-title">nsfisis</h1>
               <div className="my-icon">
-                <StaticScript fileName="/p5.min.js" config={config} />
                 <StaticScript fileName="/my-icon.js" config={config} />
-                <div id="p5jsMyIcon" />
+                <div id="myIcon" />
                 <noscript>
                   <img src="/favicon.svg" />
                 </noscript>
