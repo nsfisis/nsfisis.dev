@@ -183,9 +183,14 @@ function elementNodeToHtmlText(e: Element, ctx: Context): string {
     s += " ";
     for (let i = 0; i < attributes.length; i++) {
       const [name, value] = attributes[i];
-      s += `${name === "className" ? "class" : name}="${
-        encodeSpecialCharacters(value)
-      }"`;
+      if (name === "defer" && value === "true") {
+        // TODO
+        s += "defer";
+      } else {
+        s += `${name === "className" ? "class" : name}="${
+          encodeSpecialCharacters(value)
+        }"`;
+      }
       if (i !== attributes.length - 1) {
         s += " ";
       }
@@ -246,6 +251,7 @@ function indent(ctx: Context): string {
 function getElementAttributes(e: Element): [string, string][] {
   return [...e.attributes.entries()]
     .filter((a) => !a[0].startsWith("--"))
+    .filter((a) => a[1] !== undefined)
     .sort(
       (a, b) => {
         // Special rules:

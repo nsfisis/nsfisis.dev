@@ -166,7 +166,7 @@ const init = () => {
 
     setTimeout(mainLoop, 1000 / FPS);
   }
-  setTimeout(mainLoop, 2000);
+  mainLoop();
 };
 
 document.addEventListener("DOMContentLoaded", init);

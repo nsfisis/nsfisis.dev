@@ -64,7 +64,7 @@ declare global {
       noscript: IntrinsicElementType;
       ol: IntrinsicElementType;
       p: IntrinsicElementType;
-      script: { src: string; type?: string };
+      script: { src: string; type?: string; defer?: "true" };
       section: IntrinsicElementType;
       time: IntrinsicElementType & { datetime?: string };
       title: IntrinsicElementType;
