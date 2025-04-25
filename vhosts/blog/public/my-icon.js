@@ -25,8 +25,7 @@ const init = () => {
   canvas.height = SIZE * DPR;
   canvas.style.width = `${SIZE}px`;
   canvas.style.height = `${SIZE}px`;
-  container.appendChild(canvas);
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
   ctx.scale(DPR, DPR);
 
   let frameCount = 0;
@@ -166,7 +165,12 @@ const init = () => {
 
     setTimeout(mainLoop, 1000 / FPS);
   }
+
   mainLoop();
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+  container.appendChild(canvas);
 };
 
 document.addEventListener("DOMContentLoaded", init);
