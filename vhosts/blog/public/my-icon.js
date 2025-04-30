@@ -25,7 +25,7 @@ const init = () => {
   canvas.height = SIZE * DPR;
   canvas.style.width = `${SIZE}px`;
   canvas.style.height = `${SIZE}px`;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  const ctx = canvas.getContext("2d");
   ctx.scale(DPR, DPR);
 
   let frameCount = 0;
@@ -94,32 +94,7 @@ const init = () => {
     }
   }
 
-  function applyMosaic(k) {
-    if (k === 0) return;
-
-    const img = ctx.getImageData(0, 0, SIZE, SIZE);
-    const pixels = img.data;
-
-    for (let y = 0; y < SIZE; y += k) {
-      for (let x = 50; x < SIZE; x += k) {
-        let r = 0, g = 0, b = 0;
-        for (let i = 0; i < k; i++) {
-          for (let j = 0; j < k; j++) {
-            const offset = 4 * ((y + i) * SIZE + (x + j));
-            const a = pixels[offset + 3];
-            r += a ? pixels[offset + 0] : 255;
-            g += a ? pixels[offset + 1] : 255;
-            b += a ? pixels[offset + 2] : 255;
-          }
-        }
-        const n = k * k;
-        ctx.fillStyle = `rgb(${(r / n) | 0}, ${(g / n) | 0}, ${(b / n) | 0})`;
-        ctx.fillRect(x, y, k, k);
-      }
-    }
-  }
-
-  function drawMosaic() {
+  function drawMosaic(f) {
     for (let dy = 0; dy < 10; dy++) {
       for (let dx = 0; dx < 10; dx++) {
         const y = dy * 10;
@@ -130,7 +105,7 @@ const init = () => {
         if ((x - 45) ** 2 + (y - 45) ** 2 > 55 ** 2) {
           continue;
         }
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.167 * f) {
           continue;
         }
 
@@ -159,8 +134,7 @@ const init = () => {
     ctx.clearRect(0, 0, SIZE, SIZE);
 
     draw蜜柑();
-    applyMosaic([10, 5, 2, 0][frameCount % 15]);
-    drawMosaic();
+    drawMosaic(frameCount % 15);
     drawEyes();
 
     setTimeout(mainLoop, 1000 / FPS);
