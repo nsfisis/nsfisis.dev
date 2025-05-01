@@ -76,7 +76,7 @@
           <p>
             Python でクロージャを作ろうと、次のようなコードを書いた。
           </p>
-          <div class="codeblock" language="python">
+          <div class="codeblock">
             <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">():</span></span>
 <span class="line"><span style="color:#24292E">    x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span></span>
 <span class="line"><span style="color:#D73A49">    def</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">():</span></span>
@@ -96,7 +96,7 @@
           <p>
             local変数 <code>x</code> が代入前に参照された、とある。これは、<code>f</code> の <code>x</code> を参照するのではなく、新しく別の変数を <code>g</code> 内に作ってしまっているため。 前述のコードを宣言と代入を便宜上分けて書き直すと次のようになる。<code>var</code> を変数宣言のための構文として擬似的に利用している。
           </p>
-          <div class="codeblock" language="python">
+          <div class="codeblock">
             <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 注: var は正しい Python の文法ではない。上記参照のこと</span></span>
 <span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">():</span></span>
 <span class="line"><span style="color:#24292E">  var x           </span><span style="color:#6A737D">#  f の local変数 'x' を宣言</span></span>
@@ -111,7 +111,7 @@
           <p>
             当初の意図を表現するには、次のように書けばよい。
           </p>
-          <div class="codeblock" language="python">
+          <div class="codeblock">
             <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">():</span></span>
 <span class="line"><span style="color:#24292E">    x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0</span></span>
 <span class="line"><span style="color:#D73A49">    def</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">():</span></span>

@@ -69,7 +69,7 @@
           </div>
           <section id="section--tl-dr">
             <h2><a href="#section--tl-dr">TL; DR</a></h2>
-            <div class="codeblock" language="vim">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">" License: Public Domain</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
@@ -131,7 +131,7 @@
               <p>
                 なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
               </p>
-              <div class="codeblock" language="vim">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
@@ -167,7 +167,7 @@
             <p>
               前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする:
             </p>
-            <div class="codeblock" language="vim">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function!</span><span style="color:#6F42C1"> s:reverse_lines</span><span style="color:#24292E">(from, </span><span style="color:#005CC5">to</span><span style="color:#24292E">) </span><span style="color:#D73A49">abort</span></span>
 <span class="line"><span style="color:#005CC5">    execute</span><span style="color:#6F42C1"> printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"%d,%dg/^/m%d"</span><span style="color:#24292E">, a:from, a:to, a:from</span><span style="color:#D73A49"> - </span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span></span>
 <span class="line"><span style="color:#D73A49">endfunction</span></span>
@@ -220,7 +220,7 @@
                 </p>
               </div>
             </div>
-            <div class="codeblock" language="vim">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
 <span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>

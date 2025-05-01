@@ -129,7 +129,7 @@
             <p>
               ここでは、 <a href="https://github.com/neovim/nvim-lspconfig" rel="noreferrer" target="_blank">nvim-lspconfig</a> と <a href="https://github.com/mattn/efm-langserver" rel="noreferrer" target="_blank">efm-langserver</a> を用いた設定例を紹介する。
             </p>
-            <div class="codeblock" language="lua">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> lspconfig </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> require</span><span style="color:#24292E">(</span><span style="color:#032F62">'lspconfig'</span><span style="color:#24292E">)</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">   lspconfig.</span><span style="color:#6F42C1">efm</span><span style="color:#24292E">.</span><span style="color:#005CC5">setup</span><span style="color:#24292E">({</span></span>
@@ -167,7 +167,7 @@
             <p>
               このツールが威力を発揮するのは、行の入れ換え時である。次のような JSON があり、
             </p>
-            <div class="codeblock" language="json">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">   {</span></span>
 <span class="line"><span style="color:#005CC5">      "a"</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span><span style="color:#24292E">,</span></span>
 <span class="line"><span style="color:#005CC5">      "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span></span>
@@ -176,7 +176,7 @@
             <p>
               2行目と3行目を入れ換えて以下のように編集した。
             </p>
-            <div class="codeblock" language="json">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">   {</span></span>
 <span class="line"><span style="color:#005CC5">      "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span></span>
 <span class="line"><span style="color:#032F62">      "a"</span><span style="color:#B31D28;font-style:italic">:</span><span style="color:#005CC5"> true</span><span style="color:#24292E">,</span></span>
@@ -185,7 +185,7 @@
             <p>
               これは不正な JSON だが、このツールを通せば次のようになる。
             </p>
-            <div class="codeblock" language="json">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">   {</span></span>
 <span class="line"><span style="color:#005CC5">      "b"</span><span style="color:#24292E">: </span><span style="color:#005CC5">false</span><span style="color:#24292E">,</span></span>
 <span class="line"><span style="color:#005CC5">      "a"</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span></span>

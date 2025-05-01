@@ -72,7 +72,7 @@
             <p>
               Rust において、プリミティブ型の名前は予約語でない。したがって、次のコードは合法である。
             </p>
-            <div class="codeblock" language="rust">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#![allow(non_camel_case_types)]</span></span>
 <span class="line"><span style="color:#24292E">#![allow(dead_code)]</span></span>
 <span class="line"></span>
@@ -140,7 +140,7 @@
             <p>
               <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。
             </p>
-            <div class="codeblock" language="rust">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// Interns the names of the primitive types.</span></span>
 <span class="line"><span style="color:#6A737D">///</span></span>
 <span class="line"><span style="color:#6A737D">/// All other types are defined somewhere and possibly imported, but the primitive ones need</span></span>
@@ -185,7 +185,7 @@
             <p>
               とある。次はこの struct の使用箇所を追う。追うと言っても使われている箇所は次の一箇所しかない。なお説明に不要な箇所は大きく削っている。
             </p>
-            <div class="codeblock" language="rust">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// This resolves the identifier `ident` in the namespace `ns` in the current lexical scope.</span></span>
 <span class="line"><span style="color:#6A737D">/// (略)</span></span>
 <span class="line"><span style="color:#D73A49">fn</span><span style="color:#6F42C1"> resolve_ident_in_lexical_scope</span><span style="color:#24292E">(</span></span>
@@ -220,7 +220,7 @@
             <p>
               動作がわかったところで、例として次のコードを考える。
             </p>
-            <div class="codeblock" language="rust">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#![allow(non_camel_case_types)]</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">struct</span><span style="color:#6F42C1"> bool</span><span style="color:#24292E">;</span></span>

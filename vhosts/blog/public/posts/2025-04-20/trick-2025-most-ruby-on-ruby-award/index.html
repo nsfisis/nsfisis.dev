@@ -132,7 +132,7 @@
             <p>
               表示している。つまり、Ruby プログラムにルビを振った作品である。例えば、先頭の2行目の <code>require</code> は次のような HTML で構成されている。
             </p>
-            <div class="codeblock" language="html">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">&#x3C;</span><span style="color:#22863A">ruby</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"IDENTIFIER"</span><span style="color:#24292E">>require&#x3C;</span><span style="color:#22863A">rp</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">""</span><span style="color:#24292E">>(&#x3C;/</span><span style="color:#22863A">rp</span><span style="color:#24292E">>&#x3C;</span><span style="color:#22863A">rt</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">""</span><span style="color:#24292E">>リクワイア&#x3C;/</span><span style="color:#22863A">rt</span><span style="color:#24292E">>&#x3C;</span><span style="color:#22863A">rp</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">""</span><span style="color:#24292E">>)&#x3C;/</span><span style="color:#22863A">rp</span><span style="color:#24292E">>&#x3C;/</span><span style="color:#22863A">ruby</span><span style="color:#24292E">></span></span></code></pre>
             </div>
             <p>
@@ -143,7 +143,7 @@
               <p>
                 改めて quine について説明する。Quine とは、自身のソースコードを出力するようなプログラムである。Ruby では様々な方法で quine を書くことができるが、この作品で使っている基本形は以下のようなものである。
               </p>
-              <div class="codeblock" language="ruby">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">eval</span><span style="color:#24292E"> $s</span><span style="color:#032F62">=&#x3C;&#x3C;'EOS'</span></span>
 <span class="line"><span style="color:#032F62">print "eval $s=&#x3C;&#x3C;'EOS'</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span></span>
 <span class="line"><span style="color:#032F62">print $s</span></span>
@@ -162,7 +162,7 @@
               <p>
                 トークナイズには Ruby 3.4 からデフォルトのパーサになった <a href="https://github.com/ruby/prism" rel="noreferrer" target="_blank">Prism</a> を利用している。 <code>Prism.lex()</code> を使うとトークナイズができるので、トークンに付いているソースコード位置の情報を使いつつ元のソースコードを復元する。
               </p>
-              <div class="codeblock" language="ruby">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#E36209">y</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 1</span><span style="color:#6A737D">                 # 現在の行</span></span>
 <span class="line"><span style="color:#E36209">x</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 0</span><span style="color:#6A737D">                 # 現在の列</span></span>
 <span class="line"><span style="color:#005CC5">Prism</span><span style="color:#24292E">.</span><span style="color:#6F42C1">lex</span><span style="color:#24292E">($s).</span><span style="color:#6F42C1">value</span><span style="color:#24292E">[..</span><span style="color:#D73A49">-</span><span style="color:#005CC5">2</span><span style="color:#24292E">].</span><span style="color:#6F42C1">each</span><span style="color:#24292E"> {|t, *|</span></span>
@@ -187,7 +187,7 @@
               <p>
                 トークン種別に応じた色付けは CSS でおこなっている。出力する HTML のクラス名に <code>Prism::Token#type</code> を指定しておいて、<code>index.html</code> でそれぞれのクラスにスタイルを当てた。
               </p>
-              <div class="codeblock" language="html">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">    &#x3C;</span><span style="color:#22863A">style</span><span style="color:#24292E">></span></span>
 <span class="line"><span style="color:#6A737D">      /* ... */</span></span>
 <span class="line"></span>
@@ -212,7 +212,7 @@
               <p>
                 それぞれの英単語や記号に対応した振り仮名のデータは、プログラム中に埋め込まれている。
               </p>
-              <div class="codeblock" language="ruby">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> rt</span><span style="color:#24292E">(t)</span></span>
 <span class="line"><span style="color:#E36209">  r</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#005CC5">    :"&#x26;&#x26;"</span><span style="color:#24292E"> => </span><span style="color:#032F62">"1136"</span><span style="color:#24292E">,</span></span>
@@ -241,7 +241,7 @@
               <p>
                 このテーブルはサイズ制限を突破するために圧縮されており、<code>kana()</code> 関数で展開される。
               </p>
-              <div class="codeblock" language="ruby">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> kana</span><span style="color:#24292E">(s)</span></span>
 <span class="line"><span style="color:#24292E">  s</span></span>
 <span class="line"><span style="color:#D73A49">    &#x26;.</span><span style="color:#6F42C1">scan</span><span style="color:#24292E">(</span><span style="color:#032F62">/.{2}/</span><span style="color:#24292E">)</span></span>
@@ -252,7 +252,7 @@
               <p>
                 例えば <code>value</code> に対応する振り仮名データ <code>&quot;48746992&quot;</code> であれば、次のような変換を経て振り仮名へと展開される。
               </p>
-              <div class="codeblock" language="ruby">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">  s</span></span>
 <span class="line"><span style="color:#6A737D">    # => "48746992"</span></span>
 <span class="line"><span style="color:#D73A49">    &#x26;.</span><span style="color:#6F42C1">scan</span><span style="color:#24292E">(</span><span style="color:#032F62">/.{2}/</span><span style="color:#24292E">)</span></span>

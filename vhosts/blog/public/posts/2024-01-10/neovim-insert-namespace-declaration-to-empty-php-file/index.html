@@ -75,7 +75,7 @@
             <p>
               Neovim で空の PHP ファイルを開いたとき、そのファイルが置かれているディレクトリの構造に基づいて、自動的に <code>namespace</code> 宣言を挿入したい。具体的には、トップレベルの名前空間が <code>MyNamespace</code> であり、ファイル <code>src/Foo/Bar/Baz.php</code> を開いたときに、そのファイルが空であるなら、次のようなテンプレートが自動的に挿入されてほしい。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">namespace</span><span style="color:#6F42C1"> MyNamespace\Foo\Bar</span><span style="color:#24292E">;</span></span></code></pre>
@@ -110,7 +110,7 @@
             <p>
               ファイルタイプは読み込んだあとに変更されることもあるので、ftplugin は複数回実行されうる。 二重読み込みを防ぐために、<code>did_ftplugin_&lt;FILE_TYPE&gt;_after</code> というバッファローカル変数を定義しておくのが慣習となっている。
             </p>
-            <div class="codeblock" language="lua">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> then</span></span>
 <span class="line"><span style="color:#D73A49">   return</span></span>
 <span class="line"><span style="color:#D73A49">end</span></span>
@@ -148,7 +148,7 @@
             <p>
               実装を簡単にするため、Composer を用いない場合や PSR 4 以外のオートロード規則を使う場合には対応しない。少々長くなるが、以下にスクリプト全文を載せる。
             </p>
-            <div class="codeblock" language="lua">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> then</span></span>
 <span class="line"><span style="color:#D73A49">   return</span></span>
 <span class="line"><span style="color:#D73A49">end</span></span>

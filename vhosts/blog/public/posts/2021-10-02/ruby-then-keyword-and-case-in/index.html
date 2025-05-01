@@ -81,7 +81,7 @@
             <p>
               使われることは稀だが、Ruby では <code>then</code> がキーワードになっている。次のように使う:
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> cond </span><span style="color:#D73A49">then</span></span>
 <span class="line"><span style="color:#005CC5">  puts</span><span style="color:#032F62"> "Y"</span></span>
 <span class="line"><span style="color:#D73A49">else</span></span>
@@ -91,7 +91,7 @@
             <p>
               このキーワードが現れうる場所はいくつかあり、<code>if</code>、<code>unless</code>、<code>rescue</code>、<code>case</code> 構文がそれに当たる。 上記のように、何か条件を書いた後 <code>then</code> を置き、式がそこで終了していることを示すマーカーとして機能する。
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># Example:</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> x </span><span style="color:#D73A49">then</span></span>
@@ -119,7 +119,7 @@
             <p>
               普通 Ruby のコードで <code>then</code> を書くことはない。なぜか。次のコードを実行してみるとわかる。
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#005CC5"> true</span><span style="color:#005CC5"> puts</span><span style="color:#032F62"> 'Hello, World!'</span><span style="color:#D73A49"> end</span></span></code></pre>
             </div>
             <p>
@@ -138,7 +138,7 @@
             <p>
               ポイントは改行が <code>then</code> (や <code>;</code>) の代わりとなることである。<code>true</code> の後に改行を入れてみる。
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#005CC5"> true</span></span>
 <span class="line"><span style="color:#005CC5">puts</span><span style="color:#032F62"> 'Hello, World!'</span><span style="color:#D73A49"> end</span></span></code></pre>
             </div>
@@ -151,19 +151,19 @@
             <p>
               なぜ <code>then</code> や <code>;</code> や改行 (以下 「<code>then</code> 等」) が必要なのだろうか。次の例を見てほしい:
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> a b </span><span style="color:#D73A49">end</span></span></code></pre>
             </div>
             <p>
               <code>then</code> も <code>;</code> も改行もないのでエラーになるが、これは条件式がどこまで続いているのかわからないためだ。 この例は二通りに解釈できる。
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span></span>
 <span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> a </span><span style="color:#D73A49">then</span></span>
 <span class="line"><span style="color:#24292E">b</span></span>
 <span class="line"><span style="color:#D73A49">end</span></span></code></pre>
             </div>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span></span>
 <span class="line"><span style="color:#6A737D"># その結果が truthy なら何もしない</span></span>
 <span class="line"><span style="color:#D73A49">if</span><span style="color:#6F42C1"> a</span><span style="color:#24292E">(b) </span><span style="color:#D73A49">then</span></span>
@@ -184,7 +184,7 @@
             <p>
               <a href="https://github.com/ruby/ruby/blob/221ca0f8281d39f0dfdfe13b2448875384bbf735/parse.y#L3961-L3986" rel="noreferrer" target="_blank">https://github.com/ruby/ruby/blob/221ca0f8281d39f0dfdfe13b2448875384bbf735/parse.y#L3961-L3986</a>
             </p>
-            <div class="codeblock" language="yacc">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>p_case_body : keyword_in</span></span>
 <span class="line"><span>{</span></span>
 <span class="line"><span>  SET_LEX_STATE(EXPR_BEG|EXPR_LABEL);</span></span>
@@ -215,7 +215,7 @@
             <p>
               簡略版:
             </p>
-            <div class="codeblock" language="yacc">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>p_case_body : keyword_in p_top_expr then compstmt p_cases</span></span>
 <span class="line"><span>;</span></span></code></pre>
             </div>
@@ -225,7 +225,7 @@
             <p>
               これにより、<code>case</code> - <code>when</code> による従来の構文と同じように、<code>then</code> 等をパターンの後ろに挿入すればよいことがわかった。つまり次の3通りのいずれかになる:
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
 <span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> a</span></span>
 <span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 2</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> b</span></span>
@@ -250,7 +250,7 @@
             <p>
               ところで、<code>p_top_expr</code> には <code>if</code> による guard clause が書けるので、その場合は <code>if</code> - <code>then</code> と似たような見た目になる。
             </p>
-            <div class="codeblock" language="ruby">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">case</span><span style="color:#24292E"> x</span></span>
 <span class="line"><span style="color:#D73A49">in</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> a</span></span>
 <span class="line"><span style="color:#D73A49">in</span><span style="color:#24292E"> n </span><span style="color:#D73A49">if</span><span style="color:#24292E"> n </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> then</span><span style="color:#24292E"> b</span></span>

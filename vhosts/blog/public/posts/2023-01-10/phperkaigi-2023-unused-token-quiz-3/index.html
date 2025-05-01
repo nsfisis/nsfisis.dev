@@ -88,7 +88,7 @@
             <p>
               注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#6F42C1">  f</span><span style="color:#24292E">(</span><span style="color:#6F42C1">g</span><span style="color:#24292E">() </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">);</span></span>
@@ -233,7 +233,7 @@
               <p>
                 このうち 1つ目のケースは、 <code>finally</code> 節の中でエラーを投げると PHP 処理系が勝手に <code>$previous</code> を設定してくれる。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
@@ -258,7 +258,7 @@
               <p>
                 出力部をコメントや改行を追加して再掲する:
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#6F42C1">  f</span><span style="color:#24292E">(</span><span style="color:#6F42C1">g</span><span style="color:#24292E">() </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">);</span></span>
@@ -275,7 +275,7 @@
               <p>
                 フォーマット指定子 <code>%c</code> は、整数を ASCII コード と見做して印字する。トークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> の <code>b</code> であれば、ASCII コード <code>98</code> なので、75 行目で発生したエラー、
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">20</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span></code></pre>
               </div>
               <p>
@@ -290,7 +290,7 @@
               <p>
                 <code>f()</code> の定義を再掲する (エラーオブジェクトの行数を利用しているので、一部分だけ抜き出すと値が変わることに注意):
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> f</span><span style="color:#24292E">(</span><span style="color:#D73A49">int</span><span style="color:#24292E"> $i) {</span></span>
 <span class="line"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) </span><span style="color:#6F42C1">f</span><span style="color:#24292E">();</span></span>
 <span class="line"><span style="color:#D73A49">  try</span><span style="color:#24292E"> {</span></span>
@@ -315,12 +315,12 @@
               <p>
                 前述のように、 <code>finally</code> 節でエラーを投げると PHP 処理系が <code>$previous</code> を設定する。ここでは、エラーを繋げるために <code>f()</code> を再帰呼び出ししている。最初に <code>f()</code> を呼び出している箇所を確認すると、
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"><span style="color:#D73A49">try</span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#6F42C1">  f</span><span style="color:#24292E">(</span><span style="color:#6F42C1">g</span><span style="color:#24292E">() </span><span style="color:#D73A49">/</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">); </span><span style="color:#6A737D">// 3 行目</span></span></code></pre>
               </div>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> g</span><span style="color:#24292E">() {</span></span>
 <span class="line"><span style="color:#D73A49">  return</span><span style="color:#005CC5"> __LINE__</span><span style="color:#24292E">; </span><span style="color:#6A737D">// 111 行目</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>

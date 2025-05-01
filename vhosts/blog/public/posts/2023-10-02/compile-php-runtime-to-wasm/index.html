@@ -103,7 +103,7 @@
             <p>
               先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。 このコードはこのあと使うので、<code>index.mjs</code> の名前で保存しておくこと。
             </p>
-            <div class="codeblock" language="javascript">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> { readFile } </span><span style="color:#D73A49">from</span><span style="color:#032F62"> 'node:fs/promises'</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> PHPWasm </span><span style="color:#D73A49">from</span><span style="color:#032F62"> './php-wasm.mjs'</span></span>
 <span class="line"></span>
@@ -128,7 +128,7 @@
               <p>
                 先ほどのコードでも使っていたエントリポイントである <code>php_wasm_run</code> を用意する。
               </p>
-              <div class="codeblock" language="c">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">#include</span><span style="color:#032F62"> &#x3C;stdio.h></span></span>
 <span class="line"><span style="color:#D73A49">#include</span><span style="color:#032F62"> &#x3C;emscripten.h></span></span>
 <span class="line"><span style="color:#D73A49">#include</span><span style="color:#032F62"> &#x3C;Zend/zend_execute.h></span></span>
@@ -177,7 +177,7 @@
                   <p>
                     デフォルトの出力方法は <code>index.mjs</code> の中で <code>PHPWasm()</code> を呼ぶとき、<code>stdout</code>・<code>stderr</code> というオプションを渡せば変更できる。
                   </p>
-                  <div class="codeblock" language="javascript">
+                  <div class="codeblock">
                     <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">const</span><span style="color:#24292E"> { </span><span style="color:#005CC5">ccall</span><span style="color:#24292E"> } </span><span style="color:#D73A49">=</span><span style="color:#D73A49"> await</span><span style="color:#6F42C1"> PHPWasm</span><span style="color:#24292E">({</span></span>
 <span class="line"><span style="color:#6F42C1">  stdout</span><span style="color:#24292E">: (</span><span style="color:#E36209">c</span><span style="color:#24292E">) </span><span style="color:#D73A49">=></span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#D73A49">    if</span><span style="color:#24292E"> (c </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
@@ -205,13 +205,13 @@
               <p>
                 まずは <a href="https://hub.docker.com/r/emscripten/emsdk" rel="noreferrer" target="_blank">Emscripten 公式が提供している Docker イメージ</a> を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。
               </p>
-              <div class="codeblock" language="dockerfile">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">FROM</span><span style="color:#24292E"> emscripten/emsdk:3.1.46 </span><span style="color:#D73A49">AS</span><span style="color:#24292E"> wasm-builder</span></span></code></pre>
               </div>
               <p>
                 次に、 <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。 有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。
               </p>
-              <div class="codeblock" language="dockerfile">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> git clone --depth=1 --branch=php-8.2.10 https://github.com/php/php-src</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> apt-get update &#x26;&#x26; \</span></span>
@@ -226,7 +226,7 @@
               <p>
                 続けて、Emscripten のツールチェインを用いて PHP 処理系をビルドする。
               </p>
-              <div class="codeblock" language="dockerfile">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> cd php-src &#x26;&#x26; \</span></span>
 <span class="line"><span style="color:#24292E">    ./buildconf --force &#x26;&#x26; \</span></span>
 <span class="line"><span style="color:#24292E">    emconfigure ./configure \</span></span>
@@ -271,7 +271,7 @@
               <p>
                 さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。 <code>Dockerfile</code> と同じ場所に <code>php-wasm.c</code> という名前で保存し、次のようにする。
               </p>
-              <div class="codeblock" language="dockerfile">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">COPY</span><span style="color:#24292E"> php-wasm.c /src/</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> cd php-src &#x26;&#x26; \</span></span>
@@ -295,7 +295,7 @@
               <p>
                 <code>libphp.a</code> と <code>php-wasm.o</code> が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。 これにも <code>emcc</code> コマンドを使う。
               </p>
-              <div class="codeblock" language="dockerfile">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> emcc \</span></span>
 <span class="line"><span style="color:#24292E">    -s ENVIRONMENT=node \</span></span>
 <span class="line"><span style="color:#24292E">    -s ERROR_ON_UNDEFINED_SYMBOLS=0 \</span></span>
@@ -339,7 +339,7 @@
               <p>
                 といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。 先ほど掲載した JavaScript のコードは、<code>Dockerfile</code> と同じディレクトリに <code>index.mjs</code> で配置すること。
               </p>
-              <div class="codeblock" language="dockerfile">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">FROM</span><span style="color:#24292E"> node:20.7</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">WORKDIR</span><span style="color:#24292E"> /app</span></span>
@@ -356,7 +356,7 @@
             <p>
               <code>Dockerfile</code>、<code>php-wasm.c</code>、<code>index.mjs</code> を用意したら、Docker コンテナをビルドして実行する。
             </p>
-            <div class="codeblock" language="dockerfile">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$ docker build -t php-wasm .</span></span>
 <span class="line"><span style="color:#24292E">$ echo </span><span style="color:#032F62">'echo "Hello, World!", PHP_EOL;'</span><span style="color:#24292E"> | docker run --rm -i php-wasm</span></span>
 <span class="line"><span style="color:#24292E">Hello, World!</span></span>

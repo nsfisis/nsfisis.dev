@@ -80,7 +80,7 @@
             <p>
               注意: これはボツ問なので、得られたトークンを PHPerKaigi で入力してもポイントにはならない。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$π </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $argv[</span><span style="color:#005CC5">1</span><span style="color:#24292E">] </span><span style="color:#D73A49">??</span><span style="color:#005CC5"> null</span><span style="color:#24292E">;</span></span>
@@ -109,14 +109,14 @@
             <p>
               ソースを見るとわかるとおり、<code>$argv[1]</code> を参照している。 それを <code>$π</code> なる変数に代入しているので、円周率を渡してみる。
             </p>
-            <div class="codeblock" language="shell-session">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php Q.php 3.14</span></span>
 <span class="line"><span>Failed.</span></span></code></pre>
             </div>
             <p>
               失敗してしまった。精度を上げてみる。
             </p>
-            <div class="codeblock" language="shell-session">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php Q.php 3.1415</span></span>
 <span class="line"><span>Failed.</span></span></code></pre>
             </div>
@@ -126,7 +126,7 @@
             <p>
               最初にトークンが得られるのは、小数点以下 16 桁目まで入力したときで、こうなる。
             </p>
-            <div class="codeblock" language="shell-session">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php Q.php 3.1415926535897932</span></span>
 <span class="line"><span>Token: #YO</span></span></code></pre>
             </div>
@@ -139,7 +139,7 @@
             <p>
               短いので頭から追っていく。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$π </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $argv[</span><span style="color:#005CC5">1</span><span style="color:#24292E">] </span><span style="color:#D73A49">??</span><span style="color:#005CC5"> null</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> ($π </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
 <span class="line"><span style="color:#D73A49">  exit</span><span style="color:#24292E">(</span><span style="color:#032F62">'No input.'</span><span style="color:#24292E">);</span></span>
@@ -152,7 +152,7 @@
             <p>
               入力のバリデーション部分。数値のみ受け付ける。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> implode</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_map</span><span style="color:#24292E">(</span><span style="color:#005CC5">chr</span><span style="color:#24292E">(</span><span style="color:#D73A49">...</span><span style="color:#24292E">), </span><span style="color:#005CC5">str_split</span><span style="color:#24292E">($π, </span><span style="color:#005CC5">2</span><span style="color:#24292E">)));</span></span></code></pre>
             </div>
             <p>
@@ -161,13 +161,13 @@
             <p>
               例えば、<code>$π</code> が <code>&apos;656667&apos;</code> だったとすると、 <code>65</code>、<code>66</code>、<code>67</code> に対応した <code>&apos;A&apos;</code>、<code>&apos;B&apos;</code>、<code>&apos;C&apos;</code> へと変換され、<code>&apos;ABC&apos;</code> になる。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$π </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '656667'</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> implode</span><span style="color:#24292E">(</span><span style="color:#005CC5">array_map</span><span style="color:#24292E">(</span><span style="color:#005CC5">chr</span><span style="color:#24292E">(</span><span style="color:#D73A49">...</span><span style="color:#24292E">), </span><span style="color:#005CC5">str_split</span><span style="color:#24292E">($π, </span><span style="color:#005CC5">2</span><span style="color:#24292E">)));</span></span>
 <span class="line"><span style="color:#005CC5">echo</span><span style="color:#24292E"> $s;</span></span>
 <span class="line"><span style="color:#6A737D">// => ABC</span></span></code></pre>
             </div>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">preg_match</span><span style="color:#24292E">(</span><span style="color:#032F62">'/(</span><span style="color:#22863A;font-weight:bold">\x</span><span style="color:#032F62">23.</span><span style="color:#D73A49">+</span><span style="color:#032F62">?) /'</span><span style="color:#24292E">, $s, $m);</span></span>
 <span class="line"><span style="color:#24292E">$t </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $m[</span><span style="color:#005CC5">1</span><span style="color:#24292E">] </span><span style="color:#D73A49">??</span><span style="color:#032F62"> ''</span><span style="color:#24292E">;</span></span></code></pre>
             </div>
@@ -177,7 +177,7 @@
             <p>
               なお、<code>#</code> を直接書いていないのは、<code>/#.+?) /</code> と書くと、 <code>#.+?)</code> という意図せぬトークンが登録されてしまうからである。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> (</span><span style="color:#005CC5">md5</span><span style="color:#24292E">($t) </span><span style="color:#D73A49">===</span><span style="color:#032F62"> '056e831a4146bf123e8ea16613303d2e'</span><span style="color:#24292E">) {</span></span>
 <span class="line"><span style="color:#005CC5">  echo</span><span style="color:#032F62"> "Token: {</span><span style="color:#24292E">$t</span><span style="color:#032F62">}</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">} </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>

@@ -317,5 +317,6 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
     sourceCodeNode.raw = true;
     n.name = "div";
     n.attributes.set("class", "codeblock");
+    n.attributes.delete("language");
   });
 }

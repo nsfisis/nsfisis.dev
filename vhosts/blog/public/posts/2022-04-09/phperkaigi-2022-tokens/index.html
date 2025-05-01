@@ -80,7 +80,7 @@
             <p>
               ソースコードはこちら。実行には PHP 8.1 以上が必要なので注意。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">declare</span><span style="color:#24292E">(</span><span style="color:#005CC5">strict_types</span><span style="color:#D73A49">=</span><span style="color:#005CC5">0O1</span><span style="color:#24292E">);</span></span>
@@ -250,7 +250,7 @@
                 <p>
                   ソースコードのライセンスを示したこの部分だが、
                 </p>
-                <div class="codeblock" language="php">
+                <div class="codeblock">
                   <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6F42C1">https</span><span style="color:#24292E">:</span><span style="color:#6A737D">//creativecommons.org/publicdomain/zero/1.0/</span></span></code></pre>
                 </div>
                 <p>
@@ -262,7 +262,7 @@
                 <p>
                   ソースコード中に、ほとんど数値リテラルが書かれていないことにお気づきだろうか。 PHP では、型変換を利用することで任意の整数を作り出すことができる。
                 </p>
-                <div class="codeblock" language="php">
+                <div class="codeblock">
                   <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">assert</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#D73A49"> ===</span><span style="color:#D73A49"> +!!</span><span style="color:#24292E">[]);</span></span>
 <span class="line"><span style="color:#005CC5">assert</span><span style="color:#24292E">(</span><span style="color:#005CC5">1</span><span style="color:#D73A49"> ===</span><span style="color:#D73A49"> +!</span><span style="color:#24292E">[]);</span></span>
 <span class="line"><span style="color:#005CC5">assert</span><span style="color:#24292E">(</span><span style="color:#005CC5">2</span><span style="color:#D73A49"> ===</span><span style="color:#D73A49"> !</span><span style="color:#24292E">[]</span><span style="color:#D73A49">+!</span><span style="color:#24292E">[]);</span></span>
@@ -301,7 +301,7 @@
             <p>
               ソースコードはこちら。実行には PHP 8.0 以上が必要なので注意。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">/*********************************************************</span></span>
@@ -348,7 +348,7 @@
               <p>
                 まずはソースコードを読んでいく。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$token </span><span style="color:#D73A49">=</span><span style="color:#24292E"> [</span></span>
 <span class="line"><span style="color:#6A737D">  // 略</span></span>
 <span class="line"><span style="color:#24292E">];</span></span></code></pre>
@@ -356,25 +356,25 @@
               <p>
                 数値からなる <code>$token</code> があり、各要素をループしている。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">^</span><span style="color:#005CC5"> N</span><span style="color:#24292E">;</span></span></code></pre>
               </div>
               <p>
                 まずは排他的論理和 (xor) を取り、
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> sprintf</span><span style="color:#24292E">(</span><span style="color:#032F62">'%025b'</span><span style="color:#24292E">, $x);</span></span></code></pre>
               </div>
               <p>
                 二進数に変換して、
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> str_replace</span><span style="color:#24292E">(</span><span style="color:#6F42C1">search</span><span style="color:#24292E">: [</span><span style="color:#032F62">'0'</span><span style="color:#24292E">, </span><span style="color:#032F62">'1'</span><span style="color:#24292E">], </span><span style="color:#6F42C1">replace</span><span style="color:#24292E">: [</span><span style="color:#032F62">' '</span><span style="color:#24292E">, </span><span style="color:#032F62">'#'</span><span style="color:#24292E">], </span><span style="color:#6F42C1">subject</span><span style="color:#24292E">: $x);</span></span></code></pre>
               </div>
               <p>
                 0 を空白に、1 を <code>#</code> にし、
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> implode</span><span style="color:#24292E">(</span><span style="color:#032F62">"</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">, </span><span style="color:#005CC5">str_split</span><span style="color:#24292E">($x, </span><span style="color:#6F42C1">length</span><span style="color:#24292E">: </span><span style="color:#005CC5">5</span><span style="color:#24292E">));</span></span></code></pre>
               </div>
               <p>
@@ -412,13 +412,13 @@
               <p>
                 <code>N</code> は高々
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">assert</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#D73A49"> &#x3C;=</span><span style="color:#005CC5"> N</span><span style="color:#D73A49"> &#x26;&#x26;</span><span style="color:#005CC5"> N</span><span style="color:#D73A49"> &#x3C;=</span><span style="color:#005CC5"> 0b11111_11111_11111_11111_11111</span><span style="color:#24292E">);</span></span></code></pre>
               </div>
               <p>
                 なのでブルートフォースしてもよいが、ここではブルートフォースしない方法を紹介する。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 0x14B499C</span><span style="color:#24292E">;</span></span>
@@ -439,7 +439,7 @@
               <p>
                 この一連の変換に対する逆変換を考えると、次のようになる。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span></span>
@@ -467,7 +467,7 @@
             <p>
               ソースコードはこちら。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A737D">// License: https://creativecommons.org/publicdomain/zero/1.0/</span></span>
@@ -501,7 +501,7 @@
             <p>
               コメントにもあるとおり、次のようにして実行すれば答えがでてくる。
             </p>
-            <div class="codeblock" language="shell-session">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ php toquine.php | php | php | php | ...</span></span></code></pre>
             </div>
             <p>

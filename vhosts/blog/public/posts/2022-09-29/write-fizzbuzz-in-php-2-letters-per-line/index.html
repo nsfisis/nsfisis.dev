@@ -117,7 +117,7 @@
             <p>
               特に、C言語でこのような試みをおこなったことがあるかたならそう思うだろう。事実、Cでのこの制約はほとんど無意味に等しい。
             </p>
-            <div class="codeblock" language="c">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">#</span><span style="color:#005CC5">\</span></span>
 <span class="line"><span style="color:#24292E">i</span><span style="color:#005CC5">\</span></span>
 <span class="line"><span style="color:#24292E">n</span><span style="color:#005CC5">\</span></span>
@@ -232,7 +232,7 @@
             <p>
               また、2文字だと文字列がまともに書けないのも辛い。<code>&apos;&apos;</code> だけで2文字使うので、 「1文字の文字列リテラル」というものを書くことができない。PHP では文字列リテラル中に生の改行が書けるので
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$a</span></span>
 <span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'</span></span>
 <span class="line"><span style="color:#032F62">a'</span></span>
@@ -252,7 +252,7 @@
               <p>
                 まずは普通に書くとしよう。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">for</span><span style="color:#24292E"> ($i </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">; $i </span><span style="color:#D73A49">&#x3C;</span><span style="color:#005CC5"> 100</span><span style="color:#24292E">; $i</span><span style="color:#D73A49">++</span><span style="color:#24292E">) {</span></span>
@@ -268,7 +268,7 @@
               <p>
                 <code>for</code> は、3文字もある長いキーワードである。 こんなものは使えない。<code>array_</code> 系の関数を使って、適当に置き換えるとしよう。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> range</span><span style="color:#24292E">(</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">100</span><span style="color:#24292E">);</span></span>
@@ -287,7 +287,7 @@
               <p>
                 <code>range</code>、<code>array_walk</code>、<code>printf</code> は長すぎるのでどうにかせねばならない。 ここで、PHP の可変関数を使う。可変関数とは、関数名が文字列として入った変数を経由して、関数を呼び出す機能である。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$r </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'range'</span><span style="color:#24292E">;</span></span>
@@ -320,7 +320,7 @@
               <p>
                 というルールがない場合、「未定義の定数が評価された場合、その定数の名前が値になる」という PHP 7.x までの仕様が利用できる。 例えば、 <code>Fizz</code> という文字列が欲しければ、次のようにする。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$f</span></span>
 <span class="line"><span style="color:#D73A49">=</span><span style="color:#005CC5">F</span></span>
 <span class="line"><span style="color:#D73A49">.</span><span style="color:#005CC5">i</span></span>
@@ -331,7 +331,7 @@
               <p>
                 こうして簡単に文字列を作れる。 なお、この仕様は 7.x 時点でも警告を受けるので、<code>@</code> 演算子を使って抑制してやるとよい。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$f</span></span>
 <span class="line"><span style="color:#D73A49">=@</span></span>
 <span class="line"><span style="color:#005CC5">F</span><span style="color:#D73A49">.</span></span>
@@ -354,7 +354,7 @@
               <p>
                 ずばり、文字列同士のビット演算を使う。 PHP では、文字列同士でビット演算 (<code>&amp;</code>、<code>|</code>、<code>^</code>) をした場合、 文字列の各バイトごとに指定したビット演算がなされ、それを結合したものが演算結果となる。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$a </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "12345"</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "world"</span><span style="color:#24292E">;</span></span>
 <span class="line"></span>
@@ -370,7 +370,7 @@
               <p>
                 これを踏まえ、次のコードを見てみよう。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "x</span><span style="color:#005CC5">\n</span><span style="color:#032F62">Om</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">$y </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">k!</span><span style="color:#005CC5">\n</span><span style="color:#032F62">o"</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#24292E">$r </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">^</span><span style="color:#24292E"> $y;</span></span>
@@ -379,7 +379,7 @@
               <p>
                 実行すると、<code>range</code> が表示される。 さて、PHP では文字列リテラル中に生の改行を直接書いてもよいのだった (「主な障害」の節を参照のこと)。 書きかえてみよう。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x</span></span>
 <span class="line"><span style="color:#D73A49">=</span><span style="color:#032F62">'x</span></span>
 <span class="line"><span style="color:#032F62">Om</span></span>
@@ -396,7 +396,7 @@
               <p>
                 さらに <code>#</code> を使って適当に調整すると、次のようになる。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$x</span></span>
 <span class="line"><span style="color:#D73A49">=</span><span style="color:#6A737D">#</span></span>
 <span class="line"><span style="color:#032F62">'x</span></span>
@@ -429,7 +429,7 @@
             <p>
               完成したものがこちら。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$x</span></span>
@@ -595,7 +595,7 @@
             <p>
               PHP では、バッククォートを使ってシェルを呼び出せる。 これは <code>shell_exec</code> 関数と等価である。 さて、PHP ではバックスラッシュによる行継続が使えないと書いたが、シェルでは使える (当然だが、呼び出されるシェルに依存する。Bash なら大丈夫だろう。知らんけど)。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#005CC5">printf</span><span style="color:#24292E">(</span><span style="color:#032F62">`</span></span>
@@ -628,7 +628,7 @@
             <p>
               もうこれ以上は不可能だと思っていたのだが、この記事の執筆中に解決する方法を思いついたので載せておく。
             </p>
-            <div class="codeblock" language="php">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#24292E">$c </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'chr'</span><span style="color:#24292E">;</span></span>

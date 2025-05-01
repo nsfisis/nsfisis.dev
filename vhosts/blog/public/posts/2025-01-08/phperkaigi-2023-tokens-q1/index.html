@@ -257,7 +257,7 @@
               <p>
                 画像の正体がわかったところで、画像に隠されていた PHP プログラムについて見ていこう。 先ほどは一部しか記載しなかったので、全体を載せる。 なお、ある程度ゴルフしながら書いたので、空白こそ残しているものの可読性は非常に低いことと思う。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
 <span class="line"><span style="color:#005CC5">error_reporting</span><span style="color:#24292E">(</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">);</span></span>
 <span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> unpack</span><span style="color:#24292E">(</span><span style="color:#032F62">'C*'</span><span style="color:#24292E">, </span><span style="color:#005CC5">file_get_contents</span><span style="color:#24292E">(</span><span style="color:#005CC5">__FILE__</span><span style="color:#24292E">));</span></span>
@@ -366,7 +366,7 @@
               <p>
                 プログラムの冒頭にあるこの箇所
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$b </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> unpack</span><span style="color:#24292E">(</span><span style="color:#032F62">'C*'</span><span style="color:#24292E">, </span><span style="color:#005CC5">file_get_contents</span><span style="color:#24292E">(</span><span style="color:#005CC5">__FILE__</span><span style="color:#24292E">));</span></span></code></pre>
               </div>
               <p>
@@ -426,7 +426,7 @@
               <p>
                 ところで、先ほど掲載した Piet のインタプリタのソースコード末尾には次のような箇所がある。
               </p>
-              <div class="codeblock" language="php">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">// The original Piet image is wrong: it outputs 403 error for invalid passwords.</span></span>
 <span class="line"><span style="color:#6A737D">// Failure of authentication should be notified by 401, not 403.</span></span>
 <span class="line"><span style="color:#6A737D">// I noticed that one month before PHPerKaigi, but I could not read or write (paint)</span></span>

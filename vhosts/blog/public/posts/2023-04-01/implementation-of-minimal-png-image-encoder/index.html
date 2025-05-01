@@ -88,7 +88,7 @@
             <p>
               以下のソースコードをベースにする。 今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。
             </p>
-            <div class="codeblock" language="go">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">package</span><span style="color:#6F42C1"> main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> (</span></span>
@@ -168,7 +168,7 @@
               <p>
                 <code>writeSignature</code> の実装はこちら:
               </p>
-              <div class="codeblock" language="go">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">import</span><span style="color:#032F62"> "</span><span style="color:#6F42C1">encoding/binary</span><span style="color:#032F62">"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> writeSignature</span><span style="color:#24292E">(</span><span style="color:#E36209">w</span><span style="color:#6F42C1"> io</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Writer</span><span style="color:#24292E">) {</span></span>
@@ -211,7 +211,7 @@
               <p>
                 CRC (Cyclic Redundancy Check) は誤り検出符号の一種。Go 言語では <code>hash/crc32</code> パッケージにあるが、今回はこれも自前で実装する。PNG の仕様書に C 言語のサンプルコードが載っている ( <a href="https://www.w3.org/TR/png/#D-CRCAppendix" rel="noreferrer" target="_blank">D. Sample CRC implementation</a> ) ので、これを Go に移植する。
               </p>
-              <div class="codeblock" language="go">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">var</span><span style="color:#24292E"> (</span></span>
 <span class="line"><span style="color:#24292E">	crcTable         [</span><span style="color:#005CC5">256</span><span style="color:#24292E">]</span><span style="color:#D73A49">uint32</span></span>
 <span class="line"><span style="color:#24292E">	crcTableComputed </span><span style="color:#D73A49">bool</span></span>
@@ -251,7 +251,7 @@
               <p>
                 できた <code>crc</code> 関数を使って、chunk 一般を書き込む関数も用意しておこう。
               </p>
-              <div class="codeblock" language="go">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> writeChunk</span><span style="color:#24292E">(</span><span style="color:#E36209">w</span><span style="color:#6F42C1"> io</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Writer</span><span style="color:#24292E">, </span><span style="color:#E36209">chunkType</span><span style="color:#D73A49"> string</span><span style="color:#24292E">, </span><span style="color:#E36209">data</span><span style="color:#24292E"> []</span><span style="color:#D73A49">byte</span><span style="color:#24292E">) {</span></span>
 <span class="line"><span style="color:#24292E">	typeAndData </span><span style="color:#D73A49">:=</span><span style="color:#6F42C1"> make</span><span style="color:#24292E">([]</span><span style="color:#D73A49">byte</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#6F42C1">len</span><span style="color:#24292E">(chunkType)</span><span style="color:#D73A49">+</span><span style="color:#6F42C1">len</span><span style="color:#24292E">(data))</span></span>
 <span class="line"><span style="color:#24292E">	typeAndData </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> append</span><span style="color:#24292E">(typeAndData, []</span><span style="color:#D73A49">byte</span><span style="color:#24292E">(chunkType)</span><span style="color:#D73A49">...</span><span style="color:#24292E">)</span></span>
@@ -347,7 +347,7 @@
               <p>
                 今回ほとんどのデータは決め打ちするので、データに応じて変わるのは width と height だけになる。コードは次のようになる。
               </p>
-              <div class="codeblock" language="go">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">import</span><span style="color:#032F62"> "</span><span style="color:#6F42C1">bytes</span><span style="color:#032F62">"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> writeChunkIhdr</span><span style="color:#24292E">(</span><span style="color:#E36209">w</span><span style="color:#6F42C1"> io</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Writer</span><span style="color:#24292E">, </span><span style="color:#E36209">width</span><span style="color:#24292E">, </span><span style="color:#E36209">height</span><span style="color:#D73A49"> uint32</span><span style="color:#24292E">) {</span></span>
@@ -394,7 +394,7 @@
                 <p>
                   Adler-32 も CRC と同じく誤り検出符号である。こちらも zlib の仕様書に C 言語でサンプルコードが記載されている ( <a href="https://www.rfc-editor.org/rfc/rfc1950#section-9" rel="noreferrer" target="_blank">9. Appendix: Sample code</a> ) ので、Go に移植する。
                 </p>
-                <div class="codeblock" language="go">
+                <div class="codeblock">
                   <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">const</span><span style="color:#005CC5"> adler32Base</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 65521</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> updateAdler32</span><span style="color:#24292E">(</span><span style="color:#E36209">adler</span><span style="color:#D73A49"> uint32</span><span style="color:#24292E">, </span><span style="color:#E36209">buf</span><span style="color:#24292E"> []</span><span style="color:#D73A49">byte</span><span style="color:#24292E">) </span><span style="color:#D73A49">uint32</span><span style="color:#24292E"> {</span></span>
@@ -435,7 +435,7 @@
                 <p>
                   実際にこの手抜き zlib を実装したものがこちら:
                 </p>
-                <div class="codeblock" language="go">
+                <div class="codeblock">
                   <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> encodeZlib</span><span style="color:#24292E">(</span><span style="color:#E36209">data</span><span style="color:#24292E"> []</span><span style="color:#D73A49">byte</span><span style="color:#24292E">) []</span><span style="color:#D73A49">byte</span><span style="color:#24292E"> {</span></span>
 <span class="line"><span style="color:#D73A49">	var</span><span style="color:#24292E"> buf </span><span style="color:#6F42C1">bytes</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Buffer</span></span>
 <span class="line"></span>
@@ -473,7 +473,7 @@
                 <p>
                   先ほどの <code>encodeZlib</code> も使って実際に実装したものがこちら:
                 </p>
-                <div class="codeblock" language="go">
+                <div class="codeblock">
                   <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> writeChunkIdat</span><span style="color:#24292E">(</span><span style="color:#E36209">w</span><span style="color:#6F42C1"> io</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Writer</span><span style="color:#24292E">, </span><span style="color:#E36209">width</span><span style="color:#24292E">, </span><span style="color:#E36209">height</span><span style="color:#D73A49"> uint32</span><span style="color:#24292E">, </span><span style="color:#E36209">img</span><span style="color:#6F42C1"> image</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Image</span><span style="color:#24292E">) {</span></span>
 <span class="line"><span style="color:#D73A49">	var</span><span style="color:#24292E"> pixels </span><span style="color:#6F42C1">bytes</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Buffer</span></span>
 <span class="line"><span style="color:#D73A49">	for</span><span style="color:#24292E"> y </span><span style="color:#D73A49">:=</span><span style="color:#D73A49"> uint32</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">); y </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> height; y</span><span style="color:#D73A49">++</span><span style="color:#24292E"> {</span></span>
@@ -499,7 +499,7 @@
               <p>
                 特に追加のデータはなく、必要なのは chunk type の <code>IEND</code> くらいなので実装は簡単:
               </p>
-              <div class="codeblock" language="go">
+              <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">func</span><span style="color:#6F42C1"> writeChunkIend</span><span style="color:#24292E">(</span><span style="color:#E36209">w</span><span style="color:#6F42C1"> io</span><span style="color:#24292E">.</span><span style="color:#6F42C1">Writer</span><span style="color:#24292E">) {</span></span>
 <span class="line"><span style="color:#6F42C1">	writeChunk</span><span style="color:#24292E">(w, </span><span style="color:#032F62">"IEND"</span><span style="color:#24292E">, </span><span style="color:#005CC5">nil</span><span style="color:#24292E">)</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
@@ -511,7 +511,7 @@
             <p>
               最後に全ソースコードを再掲しておく。
             </p>
-            <div class="codeblock" language="go">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">package</span><span style="color:#6F42C1"> main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> (</span></span>

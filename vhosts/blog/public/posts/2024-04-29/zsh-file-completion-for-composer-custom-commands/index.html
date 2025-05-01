@@ -91,7 +91,7 @@
             <p>
               このことは、先ほどリンクを載せた <code>_composer</code> 関数を定義しているファイルの冒頭にも書かれている。
             </p>
-            <div class="codeblock" language="zsh">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># - @todo We don't complete custom commands (including script aliases). This is</span></span>
 <span class="line"><span style="color:#6A737D">#   easy to do in the general case, but it probably requires some clever caching</span></span>
 <span class="line"><span style="color:#6A737D">#   to avoid introducing a noticeable lag to every completion operation, due to</span></span>
@@ -113,7 +113,7 @@
             <p>
               まずは、Zsh で補完関数を提供する場合のボイラープレートコードを書く。 以下は <code>~/.zshrc</code> にすべて書く前提だが、<code>autoload</code> を設定するなどすれば別ファイルに分離できる (詳細な手順は割愛)。
             </p>
-            <div class="codeblock" language="zsh">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6F42C1">compdef</span><span style="color:#032F62"> _my_composer</span><span style="color:#032F62"> composer</span><span style="color:#032F62"> composer.phar</span></span></code></pre>
             </div>
             <p>
@@ -122,7 +122,7 @@
             <p>
               次に <code>_my_composer</code> を定義する。基本的にはデフォルトの <code>composer</code> コマンドの補完関数 (つまり <code>_composer</code> 関数) を使い、それが何も返さなかった場合に限り、Zsh のファイル・ディレクトリ補完へフォールバックする。
             </p>
-            <div class="codeblock" language="zsh">
+            <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function</span><span style="color:#6F42C1"> _my_composer</span><span style="color:#24292E">() {</span></span>
 <span class="line"><span style="color:#6F42C1">    _composer</span><span style="color:#032F62"> "</span><span style="color:#005CC5">$@</span><span style="color:#032F62">"</span><span style="color:#D73A49"> ||</span><span style="color:#6F42C1"> _files</span><span style="color:#032F62"> "</span><span style="color:#005CC5">$@</span><span style="color:#032F62">"</span></span>
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
