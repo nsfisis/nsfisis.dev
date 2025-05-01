@@ -110,7 +110,8 @@ const init = () => {
         }
 
         const [r, g, b] = randomChoice(colorMosaic);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.75)`;
+        const a = 0.9 - f * 0.05;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
         ctx.fillRect(x, y, 10, 10);
       }
     }
