@@ -5,7 +5,7 @@ import { runBuildCommand } from "./build.ts";
 
 export function runServeCommand(config: Config) {
   const rootDir = join(Deno.cwd(), config.locations.destDir);
-  Deno.serve(async (req) => {
+  Deno.serve({ hostname: "127.0.0.1" }, async (req) => {
     const pathname = new URL(req.url).pathname;
     if (!pathname.endsWith("css") && !pathname.endsWith("svg")) {
       await runBuildCommand(config);
