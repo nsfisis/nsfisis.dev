@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-c</id>
+  <title>タグ「C」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/c/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/c/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-05-05T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:64f5e1a6-2f5c-4d5d-b1c8-8346a66c1d40</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-05-05/make-tiny-self-hosted-c-compiler/"></link>
+    <title>セルフホスト可能な C コンパイラを作った</title>
+    <summary>ゴールデンウィークを使って、セルフホストできる C コンパイラを開発した</summary>
+    <published>2025-05-05T00:00:00+09:00</published>
+    <updated>2025-05-05T00:00:00+09:00</updated>
+  </entry>
+</feed>

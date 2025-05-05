@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="ゴールデンウィークを使って、セルフホストできる C コンパイラを開発した">
+    <meta name="keywords" content="C">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="セルフホスト可能な C コンパイラを作った｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="ゴールデンウィークを使って、セルフホストできる C コンパイラを開発した">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>セルフホスト可能な C コンパイラを作った｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=8415c13be008f55a351b69c568b3e8ed">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">セルフホスト可能な C コンパイラを作った</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/c/">C</a>
+            </li>
+          </ul>
+        </header>
+        <div class="post-content">
+          <section>
+            <h2 id="changelog">更新履歴</h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2025-05-05">2025-05-05</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              C コンパイラと言えば、世界三大自作したいソフトウェアの一角である。 というわけで <a href="https://www.sigbus.info/compilerbook" rel="noreferrer" target="_blank">『低レイヤを知りたい人のためのCコンパイラ作成入門』</a> (以下 compilerbook) 片手に作ることにした。
+            </p>
+            <p>
+              ゴールデンウィークの間 (2025-05-03 から 2025-05-06) に書き始めて書き終えることとし、ISO 8601 の表記で 4日間を表す “P4D” を冠して P4Dcc と名付けた。
+            </p>
+            <p>
+              <a href="https://github.com/nsfisis/P4Dcc" rel="noreferrer" target="_blank">P4Dcc のリポジトリはこちら</a>
+            </p>
+          </section>
+          <section id="section--regulation">
+            <h2><a href="#section--regulation">レギュレーション</a></h2>
+            <ul>
+              <li>
+                実装するのは C 言語からアセンブリ言語への変換部分のみ。アセンブラやリンカは GCC をそのまま用いる
+              </li>
+              <li>
+                compilerbook を読みながら実装してよい
+              </li>
+              <li>
+                compilerbook に記載されたソースコードを除き、コンパイラのソースコードを読まない
+              </li>
+              <li>
+                GCC の出力は見てもよい。それ以外のコンパイラの出力 (特に 9cc などの compilerbook 準拠のコンパイラ) は見ない
+              </li>
+              <li>
+                ソースコードの生成やデバッグに AI を使わない。ツールの使用方法を調べる目的 (GCC に渡すフラグなど) には使ってよい
+              </li>
+            </ul>
+          </section>
+          <section id="section--design">
+            <h2><a href="#section--design">設計</a></h2>
+            <p>
+              ゴールデンウィークの4日間で終わらせたいので、実装する言語機能は最低限に絞ることが必要になる。 今回は次のような設計とした (compilerbook の設計を踏襲しているものは除く)。
+            </p>
+            <ul>
+              <li>
+                <p>
+                  宣言の文法を単純にパースできるものに絞る
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      <code>typedef</code> をサポートしない
+                    </p>
+                    <ul>
+                      <li>
+                        構造体には必ず <code>struct</code> キーワードを書く
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>
+                      配列型をサポートしない
+                    </p>
+                    <ul>
+                      <li>
+                        常にヒープに確保してポインタ経由で扱う
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    以上の制限により、型に関する情報が必ず変数名の前に来る
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  無くてもなんとかなる構文糖を実装しない。ソースを書くときに頑張る
+                </p>
+                <ul>
+                  <li>
+                    インクリメント・デクリメント演算子 (1足したり引いたりする)
+                  </li>
+                  <li>
+                    <p>
+                      複合代入演算子 (左辺と右辺で 2回書く)
+                    </p>
+                    <ul>
+                      <li>
+                        なお、<code>+=</code> と <code>-=</code> はセルフホスト達成後に実装された
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>
+                      <code>while</code> (<code>for</code> で置き換える)
+                    </p>
+                    <ul>
+                      <li>
+                        なお、<code>while</code> はセルフホスト達成後に実装された
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <code>switch</code> (<code>if</code> で置き換える)
+                  </li>
+                  <li>
+                    ほか多数
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  プリプロセッサのほとんどを実装しない
+                </p>
+                <ul>
+                  <li>
+                    数値または識別子へ置換する単純な <code>#define</code> のみサポートする
+                  </li>
+                  <li>
+                    特に、<code>#include</code> をサポートしないのは重要な設計判断。すべて 1ファイルでおこなう
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  グローバル変数を用いない
+                </p>
+                <ul>
+                  <li>
+                    <code>stdin</code>、<code>stdout</code>、<code>stderr</code> を含む
+                  </li>
+                  <li>
+                    これは compilerbook とは大きく設計が変わった部分
+                  </li>
+                  <li>
+                    これにより、トップレベルに来るのは関数か構造体の定義/宣言のみとなった
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>
+                  変数のシャドウイングを実装しない
+                </p>
+                <ul>
+                  <li>
+                    変数は常に関数スコープ
+                  </li>
+                  <li>
+                    グローバル変数もないので、スコープチェーンの実装が不要になる
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <section id="section--design--language-features">
+              <h3><a href="#section--design--language-features">言語機能</a></h3>
+              <p>
+                最終的にサポートされた文法は以下のとおり:
+              </p>
+              <ul>
+                <li>
+                  <p>
+                    文
+                  </p>
+                  <ul>
+                    <li>
+                      <code>if</code> / <code>else</code>
+                    </li>
+                    <li>
+                      <code>for</code>
+                    </li>
+                    <li>
+                      <code>break</code>
+                    </li>
+                    <li>
+                      <code>continue</code>
+                    </li>
+                    <li>
+                      <code>return</code>
+                    </li>
+                    <li>
+                      <code>while</code> (実装はセルフホスト達成後)
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <p>
+                    式
+                  </p>
+                  <ul>
+                    <li>
+                      <p>
+                        二項演算
+                      </p>
+                      <ul>
+                        <li>
+                          <code>+</code> / <code>-</code> / <code>*</code> / <code>/</code> / <code>%</code>
+                        </li>
+                        <li>
+                          <code>==</code> / <code>!=</code>
+                        </li>
+                        <li>
+                          <code>&lt;</code> / <code>&lt;=</code> / <code>&gt;</code> / <code>&gt;=</code>
+                        </li>
+                        <li>
+                          <code>&amp;&amp;</code> / <code>||</code>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        代入
+                      </p>
+                      <ul>
+                        <li>
+                          <code>=</code>
+                        </li>
+                        <li>
+                          <code>+=</code> / <code>-=</code> (実装はセルフホスト達成後)
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      単項演算: <code>-</code> / <code>!</code> / <code>*</code> / <code>&amp;</code> / <code>sizeof</code>
+                    </li>
+                    <li>
+                      関数呼び出し: <code>f(a, b)</code>
+                    </li>
+                    <li>
+                      配列アクセス: <code>a[b]</code>
+                    </li>
+                    <li>
+                      メンバ呼び出し: <code>a.b</code> / <code>a-&gt;b</code>
+                    </li>
+                    <li>
+                      整数リテラル
+                    </li>
+                    <li>
+                      文字列リテラル
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <p>
+                    型
+                  </p>
+                  <ul>
+                    <li>
+                      <code>char</code>
+                    </li>
+                    <li>
+                      <code>int</code>
+                    </li>
+                    <li>
+                      <code>long</code>
+                    </li>
+                    <li>
+                      <code>void</code>
+                    </li>
+                    <li>
+                      <code>struct</code>
+                    </li>
+                    <li>
+                      それらのポインタ
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <p>
+                    宣言・定義
+                  </p>
+                  <ul>
+                    <li>
+                      関数
+                    </li>
+                    <li>
+                      構造体
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <p>
+                    プリプロセッサ
+                  </p>
+                  <ul>
+                    <li>
+                      引数なし <code>#define</code>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+          </section>
+          <section id="section--development">
+            <h2><a href="#section--development">開発</a></h2>
+            <p>
+              時系列順に開発の様子を辿っていく。
+            </p>
+            <section id="section--development--day1">
+              <h3><a href="#section--development--day1">1日目 (2025-05-03)</a></h3>
+              <p>
+                compilerbook では整数一つのパース・コード生成から始めるが、今回は以下のようなソースをパースしてコード生成するところからスタートすることにした。
+              </p>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">() {</span></span>
+<span class="line"><span style="color:#D73A49">    return</span><span style="color:#005CC5"> 42</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
+              <p>
+                この時点で、<code>struct Token</code>、<code>struct Parser</code>、<code>struct AstNode</code>、<code>struct CodeGen</code> といった主要なデータ構造が定義され、この後もほぼ同じソース設計のまま進めている。
+              </p>
+              <p>
+                compilerbook のようなインクリメンタルな進め方を取らずに、最初から普通の言語処理系のような構成にしたのには理由がある。
+              </p>
+              <p>
+                それは、どのくらいの言語機能があればコンパイラを作るのに十分かをこの時点で見積もるためである。 開発を開始する前にも必要な言語機能にはあたりを付けていたが、実際にプロトタイプを作ってみて、これだけの機能セットがあれば足りるだろうという正確な TODO リストを作りたかった。 実際、このとき作ったチェックリストはこのあともほとんど変わっていない (大きな変化点は、配列型をサポートしないと決めたことくらいか)。
+              </p>
+              <p>
+                このあとは、おおむね compilerbook に従って以下のように機能追加を続けた。
+              </p>
+              <ol>
+                <li>
+                  四則演算
+                </li>
+                <li>
+                  単項マイナス
+                </li>
+                <li>
+                  比較
+                </li>
+                <li>
+                  ローカル変数
+                </li>
+                <li>
+                  <code>if</code> 文
+                </li>
+                <li>
+                  <code>for</code> 文
+                </li>
+                <li>
+                  引数なしの関数呼び出し
+                </li>
+                <li>
+                  引数ありの関数呼び出し
+                </li>
+                <li>
+                  文字列リテラル
+                </li>
+              </ol>
+              <p>
+                一日の終わりには、次のようなプログラムのテストが通るようになった。
+              </p>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> printf</span><span style="color:#24292E">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">() {</span></span>
+<span class="line"><span style="color:#D73A49">    int</span><span style="color:#24292E"> i;</span></span>
+<span class="line"><span style="color:#D73A49">    for</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">; i </span><span style="color:#D73A49">&#x3C;=</span><span style="color:#005CC5"> 100</span><span style="color:#24292E">; i </span><span style="color:#D73A49">=</span><span style="color:#24292E"> i </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#D73A49">        if</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 15</span><span style="color:#D73A49"> ==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"FizzBuzz</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> ==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"Fizz</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 5</span><span style="color:#D73A49"> ==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"Buzz</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"</span><span style="color:#005CC5">%d\n</span><span style="color:#032F62">"</span><span style="color:#24292E">, i);</span></span>
+<span class="line"><span style="color:#24292E">        }</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#D73A49">    return</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              </div>
+            </section>
+            <section id="section--development--day2">
+              <h3><a href="#section--development--day2">2日目 (2025-05-03)</a></h3>
+              <p>
+                この時点で、不足している機能はおおよそ2つ。ポインタと構造体である。
+              </p>
+              <p>
+                このあたりからは compilerbook の解説も減っていき (構造体については完全に記載がない)、実装も離れていっている。
+              </p>
+              <p>
+                以下のように実装を進めていった。
+              </p>
+              <ol>
+                <li>
+                  <code>char</code>、<code>long</code>、<code>void</code>
+                </li>
+                <li>
+                  ポインタ
+                </li>
+                <li>
+                  アドレス演算子: <code>&amp;</code>
+                </li>
+                <li>
+                  間接参照演算子: <code>*</code>
+                </li>
+                <li>
+                  <code>sizeof</code>
+                </li>
+                <li>
+                  ポインタの演算
+                </li>
+                <li>
+                  <code>#define</code>
+                </li>
+                <li>
+                  構造体の定義・宣言
+                </li>
+                <li>
+                  構造体の <code>sizeof</code>
+                </li>
+                <li>
+                  メンバーアクセス
+                </li>
+                <li>
+                  論理演算子: <code>&amp;&amp;</code>、<code>||</code>
+                </li>
+                <li>
+                  初期化式つきの変数定義
+                </li>
+                <li>
+                  文字リテラル
+                </li>
+                <li>
+                  配列アクセス
+                </li>
+                <li>
+                  論理演算子: <code>!</code>
+                </li>
+                <li>
+                  返り値なしの <code>return</code>
+                </li>
+              </ol>
+              <p>
+                <code>&amp;</code>、<code>*</code>、<code>sizeof</code> あたりの実装が終わるとかなり C 言語らしくなっていき楽しい。
+              </p>
+              <p>
+                このあたりから、セルフホストに向けて逆方向からのアプローチも並行しておこなっている。 セルフホストするためには処理系のソースコードで使っている言語機能をすべて実装する必要があるわけだが、これまでは処理系が扱える機能を拡充していくという方向だった。この逆、つまり処理系のソースコードで使っている機能を減らすことでもセルフホストに近付いていく。
+              </p>
+              <p>
+                例えば、このコンパイラは <code>typedef</code> をサポートしていないが、開発中ずっと <code>typedef</code> を使わないというのは面倒だ。 そこで、セルフホストがある程度現実的になるまでは構造体を <code>typedef</code> しておいて、途中のどこかで <code>typedef</code> を手で脱糖する。
+              </p>
+              <p>
+                これらの作業をおこなうことで、処理系自身のソースコード <code>main.c</code> をパースしてバイナリを出力することができるようになった。 いわゆる第2世代のコンパイラである。この現時点ではまだ第2世代コンパイラは何もできない (何を与えてもクラッシュする)。
+              </p>
+            </section>
+            <section id="section--development--day3">
+              <h3><a href="#section--development--day3">3日目 (2025-05-03)</a></h3>
+              <p>
+                さて、第2世代コンパイラが手に入ったので、ここからは地獄のデバッグ作業が始まる。多段になっているために問題が起きている箇所の特定が難しい。
+              </p>
+              <p>
+                ……と考えていたのだが、実際のところデバッグは1時間ほどで終わってしまった。 修正したのは1点。 なんのことはない、2日目終了時点でほとんど完成していたわけだ。
+              </p>
+              <p>
+                記念すべき (?) 最後のバグはこちら。
+              </p>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">         gen_expr(g, ast->expr1, GEN_RVAL);</span></span>
+<span class="line"><span style="color:#24292E">     } else {</span></span>
+<span class="line"><span style="color:#24292E">         gen_expr(g, ast->expr1, GEN_RVAL);</span></span>
+<span class="line"><span style="color:#B31D28">-        gen_lval2rval(ast->expr1->ty);</span></span>
+<span class="line"><span style="color:#22863A">+        gen_lval2rval(ast->expr1->ty->to);</span></span>
+<span class="line"><span style="color:#24292E">     }</span></span>
+<span class="line"><span style="color:#24292E"> }</span></span></code></pre>
+              </div>
+              <p>
+                メモリアドレスから参照先の値を得る際、その型によってロードする命令の種類を変える必要があるのだが、その切替をポインタ型でおこなっていた。 正しくは、そのポインタ型が指す型を元にして切り替えなければならない。
+              </p>
+              <p>
+                これを修正すると、第2世代コンパイラが第3世代コンパイラを出力できるようになり、その後も第N世代が第N+1世代を生成できるようになった。
+              </p>
+              <p>
+                あとは、第2世代のコンパイラがそれ以降のコンパイラとバイナリレベルで一致するかどうかを確かめればよい。 実際に調べてみると、ほとんどの場所が一致したもののどの世代も 6バイトだけ異なることがわかった。
+              </p>
+              <p>
+                一体どこが異なるのか。<code>hexdump</code> の差分がこちら。
+              </p>
+              <div class="codeblock">
+                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ diff -u &#x3C;(hexdump -C p4dcc2) &#x3C;(hexdump -C p4dcc3)</span></span>
+<span class="line"><span>@@ -5090,7 +5090,7 @@</span></span>
+<span class="line"><span> 00015db0  72 72 61 79 5f 65 6e 74  72 79 00 66 72 61 6d 65  |rray_entry.frame|</span></span>
+<span class="line"><span> 00015dc0  5f 64 75 6d 6d 79 00 5f  5f 66 72 61 6d 65 5f 64  |_dummy.__frame_d|</span></span>
+<span class="line"><span> 00015dd0  75 6d 6d 79 5f 69 6e 69  74 5f 61 72 72 61 79 5f  |ummy_init_array_|</span></span>
+<span class="line"><span>-00015de0  65 6e 74 72 79 00 63 63  6d 69 42 49 59 6b 2e 6f  |entry.ccmiBIYk.o|</span></span>
+<span class="line"><span>+00015de0  65 6e 74 72 79 00 63 63  53 71 64 47 76 57 2e 6f  |entry.ccSqdGvW.o|</span></span>
+<span class="line"><span> 00015df0  00 66 61 74 61 6c 5f 65  72 72 6f 72 00 72 65 61  |.fatal_error.rea|</span></span>
+<span class="line"><span> 00015e00  64 5f 61 6c 6c 00 74 6f  6b 65 6e 69 7a 65 00 74  |d_all.tokenize.t|</span></span>
+<span class="line"><span> 00015e10  79 70 65 5f 6e 65 77 00  74 79 70 65 5f 6e 65 77  |ype_new.type_new|</span></span></code></pre>
+              </div>
+              <p>
+                <code>fatal_error</code>、<code>read_all</code>、<code>tokenize</code> <code>type_new</code> はいずれも <code>main.c</code> で定義された関数の名前である。 このことから考えると、これは GCC が埋め込んだシンボルテーブルである可能性が高い。 わずかに異なっている 6バイトは、ランダム生成された何かのように見える。
+              </p>
+              <p>
+                そこで <code>gcc</code> に <code>-s</code> (シンボルテーブルを削除するフラグ) を渡してみると、めでたく2世代目以降のコンパイラのバイナリが完全に一致するようになった。
+              </p>
+              <p>
+                これにてセルフホスト達成である。
+              </p>
+            </section>
+          </section>
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2>
+            <p>
+              最終的な実装は1900行ほど、所要時間は20時間弱となった。
+            </p>
+            <p>
+              正直なところ、思ったより早く終わって拍子抜けしている。 これは compilerbook がうまく実装順を整理しているのと、アセンブリの細かい落とし穴を事前に解説して潰していることが大きいと思われる。
+            </p>
+            <p>
+              当初の仮説どおり、サポートする機能を慎重に選ぶことで案外簡単にセルフホストまで持っていけてしまうので、まとまった休みに是非いかがだろうか。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

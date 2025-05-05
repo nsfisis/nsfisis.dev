@@ -13,6 +13,7 @@ siteName = "REPL: Rest-Eat-Program Loop"
 siteCopyrightYear = 2021
 
 [blog.tagLabels]
+c = "C"
 ci-cd = "CI/CD"
 cohackpp = "紅白ぺぱ合戦"
 composer = "Composer"
