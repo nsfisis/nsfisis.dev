@@ -283,14 +283,15 @@ function removeUnnecessaryParagraphNode(doc: Document) {
       if (child.kind !== "element" || child.name !== "li") {
         continue;
       }
-      if (child.children.length !== 1) {
-        continue;
+      const newGrandChildren: Node[] = [];
+      for (const grandChild of child.children) {
+        if (grandChild.kind === "element" && grandChild.name === "p") {
+          newGrandChildren.push(...grandChild.children);
+        } else {
+          newGrandChildren.push(grandChild);
+        }
       }
-      const grandChild = child.children[0];
-      if (grandChild.kind !== "element" || grandChild.name !== "p") {
-        continue;
-      }
-      child.children = grandChild.children;
+      child.children = newGrandChildren;
     }
   });
 }
