@@ -37,8 +37,10 @@ export default function SlidePage(
               )}
             </header>
             <div className="post-content">
-              <section>
-                <h2 id="changelog">更新履歴</h2>
+              <section id="changelog">
+                <h2>
+                  <a href="#changelog">更新履歴</a>
+                </h2>
                 <ol>
                   {slide.revisions.map((rev) => (
                     <li className="revision">
