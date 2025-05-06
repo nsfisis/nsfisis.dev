@@ -56,16 +56,6 @@ export default function PostPage(
                 // TODO: refactor
                 (doc.root.children[0] as Element).children
               }
-              {
-                // TODO: footnotes
-                // <div id="footnotes">
-                //   <% for footnote in footnotes %>
-                //     <div class="footnote" id="_footnotedef_<%= footnote.index %>">
-                //       <a href="#_footnoteref_<%= footnote.index %>"><%= footnote.index %></a>. <%= footnote.text %>
-                //     </div>
-                //   <% end %>
-                // </div>
-              }
             </div>
           </article>
         </main>

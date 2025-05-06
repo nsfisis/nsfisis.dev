@@ -273,7 +273,7 @@
                 出力をおこなう <code>catch</code> 節を見てみると、 <code>Throwable::getPrevious()</code> を呼び出してエラーチェインを辿り、 <code>Throwable::getLine()</code> でエラーが発生した行数を取得している。その行数に <code>23</code> なるマジックナンバーを足し、フォーマット指定子 <code>%c</code> で出力している。
               </p>
               <p>
-                フォーマット指定子 <code>%c</code> は、整数を ASCII コード と見做して印字する。トークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> の <code>b</code> であれば、ASCII コード <code>98</code> なので、75 行目で発生したエラー、
+                フォーマット指定子 <code>%c</code> は、整数を ASCII コード<sup class="footnote"><a class="footnote" href="#footnote--ras-syndrome" id="footnoteref--ras-syndrome">[1]</a></sup> と見做して印字する。トークン <code>#base64_decode(&apos;SGVsbG8sIFdvcmxkIQ==&apos;)</code> の <code>b</code> であれば、ASCII コード <code>98</code> なので、75 行目で発生したエラー、
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">20</span><span style="color:#D73A49"> =></span><span style="color:#005CC5"> 0</span><span style="color:#D73A49"> /</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">,</span></span></code></pre>
@@ -375,6 +375,14 @@
             <p>
               今回エラーを投げるのにゼロ除算を用いたのは、それがエラーを投げる最も短いコードだと考えたからである。もし 3バイト未満で <code>Throwable</code> なオブジェクトを投げる手段をご存じのかたがいらっしゃれば、ぜひご教示いただきたい。……と締める予定だったのだが、<code>0/0</code> のところを存在しない定数にすれば、簡単に 1バイトを達成できた。ゼロ除算している箇所はちょうど 26 箇所あるので、アルファベットにでもしておけば意味ありげで良かったかもしれない。
             </p>
+          </section>
+          <section class="footnotes">
+            <div class="footnote" id="footnote--ras-syndrome">
+              <a href="#footnoteref--ras-syndrome">1. </a>
+              <p>
+                RAS syndrome
+              </p>
+            </div>
           </section>
         </div>
       </article>

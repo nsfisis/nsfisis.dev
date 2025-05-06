@@ -250,21 +250,84 @@ function setDefaultLangAttribute(_doc: Document) {
 }
 
 function traverseFootnotes(doc: Document) {
+  let footnoteCounter = 0;
+  const footnoteMap = new Map<string, number>();
+
+  forEachChildRecursively(doc.root, (n) => {
+    if (n.kind !== "element" || n.name !== "footnoteref") {
+      return;
+    }
+
+    const reference = n.attributes.get("reference");
+    if (!reference) {
+      return;
+    }
+
+    let footnoteNumber: number;
+    if (footnoteMap.has(reference)) {
+      footnoteNumber = footnoteMap.get(reference)!;
+    } else {
+      footnoteNumber = ++footnoteCounter;
+      footnoteMap.set(reference, footnoteNumber);
+    }
+
+    n.name = "sup";
+    n.attributes.delete("reference");
+    n.attributes.set("class", "footnote");
+    n.children = [
+      {
+        kind: "element",
+        name: "a",
+        attributes: new Map([
+          ["id", `footnoteref--${reference}`],
+          ["class", "footnote"],
+          ["href", `#footnote--${reference}`],
+        ]),
+        children: [
+          {
+            kind: "text",
+            content: `[${footnoteNumber}]`,
+            raw: false,
+          },
+        ],
+      },
+    ];
+  });
+
   forEachChildRecursively(doc.root, (n) => {
     if (n.kind !== "element" || n.name !== "footnote") {
       return;
     }
 
-    // TODO
-    // <footnote>x</footnote>
-    //
-    // <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1">1</a>]</sup>
-    //
-    // <div class="footnote" id="_footnotedef_1">
-    //   <a href="#_footnoteref_1">1</a>. RAS syndrome
-    // </div>
-    n.name = "span";
-    n.children = [];
+    const id = n.attributes.get("id");
+    if (!id || !footnoteMap.has(id)) {
+      n.name = "span";
+      n.children = [];
+      return;
+    }
+
+    const footnoteNumber = footnoteMap.get(id)!;
+
+    n.name = "div";
+    n.attributes.delete("id");
+    n.attributes.set("class", "footnote");
+    n.attributes.set("id", `footnote--${id}`);
+
+    n.children = [
+      {
+        kind: "element",
+        name: "a",
+        attributes: new Map([["href", `#footnoteref--${id}`]]),
+        children: [
+          {
+            kind: "text",
+            content: `${footnoteNumber}. `,
+            raw: false,
+          },
+        ],
+      },
+      ...n.children,
+    ];
   });
 }
 

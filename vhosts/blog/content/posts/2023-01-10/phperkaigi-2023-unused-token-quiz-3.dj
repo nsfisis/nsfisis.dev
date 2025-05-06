@@ -210,8 +210,6 @@ try {
 
 フォーマット指定子 `%c` は、整数を ASCII コード[^ras-syndrome] と見做して印字する。トークン `#base64_decode('SGVsbG8sIFdvcmxkIQ==')` の `b` であれば、ASCII コード `98` なので、75 行目で発生したエラー、
 
-[^ras-syndrome]: RAS syndrome
-
 ```php
 1, 20 => 0 / 0,
 ```
@@ -219,6 +217,8 @@ try {
 によって表現されている。エラーを起こす方法はいろいろと考えられるが、今回はゼロ除算を使った。
 
 それでは、エラーチェインを作る箇所、関数 `f()` を見ていく。
+
+[^ras-syndrome]: RAS syndrome
 
 {#data-construction}
 ## データ構成部の解析

@@ -529,20 +529,13 @@ function processEmail(node: DjotEmail): Element {
   };
 }
 
-function processFootnoteReference(node: DjotFootnoteReference): Node {
-  void node;
-  // TODO
+function processFootnoteReference(node: DjotFootnoteReference): Element {
   return {
-    kind: "text",
-    content: "",
-    raw: false,
+    kind: "element",
+    name: "footnoteref",
+    attributes: new Map([["reference", node.text]]),
+    children: [],
   };
-  // return {
-  //   kind: "element",
-  //   name: "footnoteref",
-  //   attributes: new Map([["reference", node.text]]),
-  //   children: [],
-  // };
 }
 
 function processUrl(node: DjotUrl): Element {
@@ -799,25 +792,24 @@ export function djot2ndoc(doc: DjotDoc): Element {
 
   // Process footnotes if any exist
   if (doc.footnotes && Object.keys(doc.footnotes).length > 0) {
-    // TODO
-    // const footnoteSection: Element = {
-    //   kind: "element",
-    //   name: "section",
-    //   attributes: new Map([["class", "footnotes"]]),
-    //   children: [],
-    // };
-    //
-    // for (const [id, footnote] of Object.entries(doc.footnotes)) {
-    //   const footnoteElement: Element = {
-    //     kind: "element",
-    //     name: "footnote",
-    //     attributes: new Map([["id", id]]),
-    //     children: footnote.children.map(processBlock),
-    //   };
-    //   footnoteSection.children.push(footnoteElement);
-    // }
-    //
-    // children.push(footnoteSection);
+    const footnoteSection: Element = {
+      kind: "element",
+      name: "section",
+      attributes: new Map([["class", "footnotes"]]),
+      children: [],
+    };
+
+    for (const [id, footnote] of Object.entries(doc.footnotes)) {
+      const footnoteElement: Element = {
+        kind: "element",
+        name: "footnote",
+        attributes: new Map([["id", id]]),
+        children: footnote.children.map(processBlock),
+      };
+      footnoteSection.children.push(footnoteElement);
+    }
+
+    children.push(footnoteSection);
   }
 
   return {
