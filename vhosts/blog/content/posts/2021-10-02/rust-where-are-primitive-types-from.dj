@@ -96,6 +96,7 @@ rustc_resolve/src/lib.rs:        table.insert(sym::i128, Int(IntTy::I128));
 `rustc_resolve`
 というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。
 
+{filename="rustc_resolve/src/lib.rs"}
 ```rust
 /// Interns the names of the primitive types.
 ///

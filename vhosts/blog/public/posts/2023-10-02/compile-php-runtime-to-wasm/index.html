@@ -14,7 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>PHP の処理系を Emscripten で WebAssembly にコンパイルする｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=8415c13be008f55a351b69c568b3e8ed">
+    <link rel="stylesheet" href="/style.css?h=ad87bb00eb411fe20ba3a8366c69e490">
   </head>
   <body class="single">
     <header class="header">
@@ -104,6 +104,9 @@
               先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。 このコードはこのあと使うので、<code>index.mjs</code> の名前で保存しておくこと。
             </p>
             <div class="codeblock">
+              <div class="filename">
+                index.mjs
+              </div>
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> { readFile } </span><span style="color:#D73A49">from</span><span style="color:#032F62"> 'node:fs/promises'</span><span style="color:#24292E">;</span></span>
 <span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> PHPWasm </span><span style="color:#D73A49">from</span><span style="color:#032F62"> './php-wasm.mjs'</span></span>
 <span class="line"></span>
@@ -357,12 +360,12 @@
               <code>Dockerfile</code>、<code>php-wasm.c</code>、<code>index.mjs</code> を用意したら、Docker コンテナをビルドして実行する。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">$ docker build -t php-wasm .</span></span>
-<span class="line"><span style="color:#24292E">$ echo </span><span style="color:#032F62">'echo "Hello, World!", PHP_EOL;'</span><span style="color:#24292E"> | docker run --rm -i php-wasm</span></span>
-<span class="line"><span style="color:#24292E">Hello, World!</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#24292E">exit code: 0</span></span></code></pre>
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ docker build -t php-wasm .</span></span>
+<span class="line"><span>$ echo 'echo "Hello, World!", PHP_EOL;' | docker run --rm -i php-wasm</span></span>
+<span class="line"><span>Hello, World!</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>exit code: 0</span></span></code></pre>
             </div>
           </section>
           <section id="section--outro">

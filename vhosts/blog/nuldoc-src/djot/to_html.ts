@@ -366,6 +366,7 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
     }
 
     const language = n.attributes.get("language") || "text";
+    const filename = n.attributes.get("filename");
     const sourceCodeNode = n.children[0] as Text | RawHTML;
     const sourceCode = sourceCodeNode.content.trimEnd();
 
@@ -377,10 +378,33 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
       },
     });
 
-    sourceCodeNode.content = highlighted;
-    sourceCodeNode.raw = true;
     n.name = "div";
     n.attributes.set("class", "codeblock");
     n.attributes.delete("language");
+
+    if (filename) {
+      n.attributes.delete("filename");
+
+      n.children = [
+        {
+          kind: "element",
+          name: "div",
+          attributes: new Map([["class", "filename"]]),
+          children: [{
+            kind: "text",
+            content: filename,
+            raw: false,
+          }],
+        },
+        {
+          kind: "text",
+          content: highlighted,
+          raw: true,
+        },
+      ];
+    } else {
+      sourceCodeNode.content = highlighted;
+      sourceCodeNode.raw = true;
+    }
   });
 }

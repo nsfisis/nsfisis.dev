@@ -53,6 +53,7 @@ vim と neovim のソースコードを調査した。
 
 https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L85-L86
 
+{filename="src/autocmd.c"}
 ```c
 {"BufAdd",      EVENT_BUFADD},
 {"BufCreate",   EVENT_BUFADD},
@@ -60,6 +61,7 @@ https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/aut
 
 https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97
 
+{filename="src/autocmd.c"}
 ```c
 {"BufRead",     EVENT_BUFREADPOST},
 {"BufReadCmd",  EVENT_BUFREADCMD},
@@ -68,6 +70,7 @@ https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/aut
 
 https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105
 
+{filename="src/autocmd.c"}
 ```c
 {"BufWrite",    EVENT_BUFWRITEPRE},
 {"BufWritePost",    EVENT_BUFWRITEPOST},
@@ -82,6 +85,7 @@ neovim の場合でも同様のマッピングが定義されているが、こ�
 
 https://github.com/neovim/neovim/blob/71d4f5851f068eeb432af34850dddda8cc1c71e3/src/nvim/auevents.lua#L119-L124
 
+{filename="src/nvim/auevents.lua"}
 ```lua
 aliases = {
   BufCreate = 'BufAdd',
@@ -94,6 +98,7 @@ aliases = {
 ところで、上では取り上げなかった `FileEncoding` だが、これは
 `:help FileEncoding` にしっかりと書いてある。
 
+{filename=":help FileEncoding"}
 ```
                                                               *FileEncoding*
 FileEncoding                    Obsolete.  It still works and is equivalent

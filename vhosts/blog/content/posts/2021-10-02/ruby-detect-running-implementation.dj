@@ -65,6 +65,7 @@ CRuby) については執筆時現在 (2020/12/8) も `'ruby'`
 
 [mruby 該当部分のソース](https://github.com/mruby/mruby/blob/ed29d74bfd95362eaeb946fcf7e865d80346b62b/include/mruby/version.h#L32-L35) より引用:
 
+{filename="version.h"}
 ```c
 /*
  * Ruby engine.

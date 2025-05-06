@@ -14,7 +14,7 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>Rust のプリミティブ型はどこからやって来るか｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=8415c13be008f55a351b69c568b3e8ed">
+    <link rel="stylesheet" href="/style.css?h=ad87bb00eb411fe20ba3a8366c69e490">
   </head>
   <body class="single">
     <header class="header">
@@ -141,6 +141,9 @@
               <code>rustc_resolve</code> というのはいかにも名前解決を担いそうなクレート名である。該当箇所を見てみる。
             </p>
             <div class="codeblock">
+              <div class="filename">
+                rustc_resolve/src/lib.rs
+              </div>
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/// Interns the names of the primitive types.</span></span>
 <span class="line"><span style="color:#6A737D">///</span></span>
 <span class="line"><span style="color:#6A737D">/// All other types are defined somewhere and possibly imported, but the primitive ones need</span></span>

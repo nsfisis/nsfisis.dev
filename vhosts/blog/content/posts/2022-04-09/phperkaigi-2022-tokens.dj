@@ -32,6 +32,7 @@ remark = "2問目、3問目の解説を追加、1問目に加筆"
 
 ソースコードはこちら。実行には PHP 8.1 以上が必要なので注意。
 
+{filename="brainf_ck.php"}
 ```php
 <?php
 
@@ -246,6 +247,7 @@ Z コンビネータとして知られるものを使った (`$z`)。
 
 ソースコードはこちら。実行には PHP 8.0 以上が必要なので注意。
 
+{filename="riddle.php"}
 ```php
 <?php
 
@@ -402,6 +404,7 @@ echo "N = $n\n";
 
 ソースコードはこちら。
 
+{filename="toquine.php"}
 ```php
 <?php
 

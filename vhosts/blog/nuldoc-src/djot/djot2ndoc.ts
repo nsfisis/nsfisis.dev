@@ -130,6 +130,9 @@ function processCodeBlock(node: DjotCodeBlock): Element {
   if (node.lang) {
     attributes.set("language", node.lang);
   }
+  if (node.attributes?.filename) {
+    attributes.set("filename", node.attributes.filename);
+  }
   return {
     kind: "element",
     name: "codeblock",

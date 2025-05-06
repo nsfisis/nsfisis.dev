@@ -42,6 +42,7 @@ remark = "fflush() の前に改行の出力が必要だった理由と正しい�
 先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。
 このコードはこのあと使うので、`index.mjs` の名前で保存しておくこと。
 
+{filename="index.mjs"}
 ```javascript
 import { readFile } from 'node:fs/promises';
 import PHPWasm from './php-wasm.mjs'
@@ -291,7 +292,7 @@ ENTRYPOINT ["node", "index.mjs"]
 
 `Dockerfile`、`php-wasm.c`、`index.mjs` を用意したら、Docker コンテナをビルドして実行する。
 
-```dockerfile
+```
 $ docker build -t php-wasm .
 $ echo 'echo "Hello, World!", PHP_EOL;' | docker run --rm -i php-wasm
 Hello, World!
