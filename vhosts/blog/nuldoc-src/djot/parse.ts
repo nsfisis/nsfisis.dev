@@ -15,9 +15,9 @@ export async function parseDjotFile(
 ): Promise<Document> {
   try {
     const fileContent = await Deno.readTextFile(filePath);
-    const parts = fileContent.split(/^---$/m);
-    const meta = parseMetadata(parts[1]);
-    const root = parseDjot(parts[2]);
+    const [, frontmatter, ...rest] = fileContent.split(/^---$/m);
+    const meta = parseMetadata(frontmatter);
+    const root = parseDjot(rest.join("\n"));
     const doc = createNewDocumentFromDjotDocument(root, meta, filePath, config);
     return await toHtml(doc);
   } catch (e) {
