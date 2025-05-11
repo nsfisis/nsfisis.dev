@@ -7,7 +7,7 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-05-05T00:00:00+09:00</updated>
+  <updated>2025-05-12T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:64f5e1a6-2f5c-4d5d-b1c8-8346a66c1d40</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-05-05/make-tiny-self-hosted-c-compiler/"></link>
@@ -590,6 +590,6 @@
     <title>My First Post</title>
     <summary>これはテスト投稿です。これはテスト投稿です。これはテスト投稿です。</summary>
     <published>2021-03-05T00:00:00+09:00</published>
-    <updated>2021-03-05T00:00:00+09:00</updated>
+    <updated>2025-05-12T00:00:00+09:00</updated>
   </entry>
 </feed>

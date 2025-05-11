@@ -49,6 +49,9 @@
               <li class="revision">
                 <time datetime="2021-03-05">2021-03-05</time>: 公開
               </li>
+              <li class="revision">
+                <time datetime="2025-05-12">2025-05-12</time>: ジェネレータやスタイルをテストするためのコンテンツを追加
+              </li>
             </ol>
           </section>
           <section id="section--test">
@@ -56,6 +59,181 @@
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
+          </section>
+          <section id="section--sec-1">
+            <h2><a href="#section--sec-1">Section level 1</a></h2>
+            <section id="section--sec-1--sec-2">
+              <h3><a href="#section--sec-1--sec-2">Section level 2</a></h3>
+              <section id="section--sec-1--sec-2--sec-3">
+                <h4><a href="#section--sec-1--sec-2--sec-3">Section level 3</a></h4>
+                <section id="section--sec-1--sec-2--sec-3--sec-4">
+                  <h5><a href="#section--sec-1--sec-2--sec-3--sec-4">Section level 4</a></h5>
+                  <section id="section--sec-1--sec-2--sec-3--sec-4--sec-5">
+                    <h6><a href="#section--sec-1--sec-2--sec-3--sec-4--sec-5">Section level 5</a></h6>
+                    <ul>
+                      <li>
+                        list item 1
+                      </li>
+                      <li>
+                        list item 2
+                        <ul>
+                          <li>
+                            list item 2.a
+                          </li>
+                          <li>
+                            list item 2.b
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        list item 3
+                      </li>
+                      <li>
+                        list item 3
+                      </li>
+                    </ul>
+                    <ol>
+                      <li>
+                        list item 1
+                      </li>
+                      <li>
+                        list item 2
+                        <ol>
+                          <li>
+                            list item 2.a
+                          </li>
+                          <li>
+                            list item 2.b
+                          </li>
+                        </ol>
+                      </li>
+                      <li>
+                        list item 3
+                      </li>
+                      <li>
+                        list item 3
+                      </li>
+                    </ol>
+                    <ul type="task">
+                      <li checked="false">
+                        list item 1
+                      </li>
+                      <li checked="false">
+                        list item 2
+                        <ul type="task">
+                          <li checked="false">
+                            list item 2.a
+                          </li>
+                          <li checked="false">
+                            list item 2.b
+                          </li>
+                        </ul>
+                      </li>
+                      <li checked="false">
+                        list item 3
+                      </li>
+                      <li checked="false">
+                        list item 3
+                      </li>
+                    </ul>
+                    <blockquote>
+                      <p>
+                        blockquote
+                      </p>
+                    </blockquote>
+                    <div class="codeblock">
+                      <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">puts</span><span style="color:#032F62"> "Hello, World!"</span></span></code></pre>
+                    </div>
+                    <p>
+                      <strong>emph</strong> <em>strong</em>
+                    </p>
+                    <p>
+                      <mark>highlighted</mark>
+                    </p>
+                    <p>
+                      <a href="https://example.com" rel="noreferrer" target="_blank">https://example.com</a>
+                    </p>
+                    <p>
+                      <a href="https://example.com" rel="noreferrer" target="_blank">example link</a>
+                    </p>
+                    <p>
+                      H<sub>2</sub>O
+                    </p>
+                    <p>
+                      2<sup>64</sup>
+                    </p>
+                    <p>
+                      ‘foo’ “bar”
+                    </p>
+                    <p>
+                      <code>code</code>
+                    </p>
+                    <p>
+                      <ins>
+                        inserted
+                      </ins>
+                       
+                      <del>
+                        deleted
+                      </del>
+                    </p>
+                    <p>
+                      footenote. <sup class="footnote"><a class="footnote" href="#footnote--foo" id="footnoteref--foo">[1]</a></sup>
+                    </p>
+                    <div class="admonition">
+                      <div class="admonition-label">
+                        NOTE
+                      </div>
+                      <div class="admonition-content">
+                        <p>
+                          hoge piyo
+                        </p>
+                      </div>
+                    </div>
+                    <table>
+                      <caption>
+                      </caption>
+                      <thead>
+                        <tr>
+                          <th>
+                            name
+                          </th>
+                          <th align="right">
+                            age
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            Taro
+                          </td>
+                          <td align="right">
+                            10
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Hanako
+                          </td>
+                          <td align="right">
+                            20
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
+                </section>
+              </section>
+            </section>
+          </section>
+          <section class="footnotes">
+            <div class="footnote" id="footnote--foo">
+              <a href="#footnoteref--foo">1. </a>
+              <p>
+                foo bar
+              </p>
+            </div>
           </section>
         </div>
       </article>
