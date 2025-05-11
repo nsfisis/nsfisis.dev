@@ -31,8 +31,12 @@ function getDtd(name: string): Dtd {
       return { type: "block" };
     case "canvas":
       return { type: "block" };
+    case "caption":
+      return { type: "block" };
     case "code":
       return { type: "inline" };
+    case "del":
+      return { type: "block" };
     case "div":
       return { type: "block" };
     case "em":
@@ -61,14 +65,18 @@ function getDtd(name: string): Dtd {
       return { type: "block" };
     case "i":
       return { type: "inline" };
-    case "img":
-      return { type: "block" };
     case "li":
       return { type: "block" };
     case "link":
       return { type: "block", auto_closing: true };
+    case "img":
+      return { type: "block" };
+    case "ins":
+      return { type: "block" };
     case "main":
       return { type: "block" };
+    case "mark":
+      return { type: "inline" };
     case "meta":
       return { type: "block", auto_closing: true };
     case "nav":
@@ -100,6 +108,8 @@ function getDtd(name: string): Dtd {
     case "td": // TODO
       return { type: "block" };
     case "tfoot":
+      return { type: "block" };
+    case "th":
       return { type: "block" };
     case "thead":
       return { type: "block" };
