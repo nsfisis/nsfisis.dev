@@ -367,6 +367,7 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
 
     const language = n.attributes.get("language") || "text";
     const filename = n.attributes.get("filename");
+    const numbered = n.attributes.get("numbered");
     const sourceCodeNode = n.children[0] as Text | RawHTML;
     const sourceCode = sourceCodeNode.content.trimEnd();
 
@@ -382,6 +383,10 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
     n.attributes.set("class", "codeblock");
     n.attributes.delete("language");
 
+    if (numbered === "true") {
+      n.attributes.delete("numbered");
+      addClass(n, "numbered");
+    }
     if (filename) {
       n.attributes.delete("filename");
 

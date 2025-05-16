@@ -133,6 +133,9 @@ function processCodeBlock(node: DjotCodeBlock): Element {
   if (node.attributes?.filename) {
     attributes.set("filename", node.attributes.filename);
   }
+  if (node.attributes?.numbered) {
+    attributes.set("numbered", "true");
+  }
   return {
     kind: "element",
     name: "codeblock",

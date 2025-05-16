@@ -156,6 +156,22 @@ code {
   padding: 0;
 }
 
+/* https://github.com/shikijs/shiki/issues/3 */
+.shiki code {
+  counter-reset: codeblock-line-number;
+  counter-increment: codeblock-line-number 0;
+}
+
+.numbered .shiki code .line::before {
+  content: counter(codeblock-line-number);
+  counter-increment: codeblock-line-number;
+  width: 2rem;
+  margin-right: 1.5rem;
+  display: inline-block;
+  text-align: right;
+  color: #777;
+}
+
 li.revision {
   list-style: inside;
 }

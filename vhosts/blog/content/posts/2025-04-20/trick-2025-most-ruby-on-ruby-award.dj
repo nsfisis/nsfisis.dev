@@ -68,6 +68,7 @@ TRICK とは RubyKaigi で不定期に開催されているコンテストで、
 
 改めて quine について説明する。Quine とは、自身のソースコードを出力するようなプログラムである。Ruby では様々な方法で quine を書くことができるが、この作品で使っている基本形は以下のようなものである。
 
+{numbered="true"}
 ```ruby
 eval $s=<<'EOS'
 print "eval $s=<<'EOS'\n"
