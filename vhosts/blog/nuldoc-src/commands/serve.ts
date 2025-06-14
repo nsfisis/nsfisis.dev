@@ -3,11 +3,25 @@ import { join } from "@std/path";
 import { Config } from "../config.ts";
 import { runBuildCommand } from "./build.ts";
 
+function isResourcePath(pathname: string): boolean {
+  const EXTENSIONS = [
+    ".css",
+    ".gif",
+    ".ico",
+    ".jpeg",
+    ".jpg",
+    ".js",
+    ".png",
+    ".svg",
+  ];
+  return EXTENSIONS.some((ext) => pathname.endsWith(ext));
+}
+
 export function runServeCommand(config: Config) {
   const rootDir = join(Deno.cwd(), config.locations.destDir);
   Deno.serve({ hostname: "127.0.0.1" }, async (req) => {
     const pathname = new URL(req.url).pathname;
-    if (!pathname.endsWith("css") && !pathname.endsWith("svg")) {
+    if (!isResourcePath(pathname)) {
       await runBuildCommand(config);
       console.log("rebuild");
     }
