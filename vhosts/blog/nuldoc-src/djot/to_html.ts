@@ -20,7 +20,6 @@ export default async function toHtml(doc: Document): Promise<Document> {
   transformSectionTitleElement(doc);
   transformNoteElement(doc);
   addAttributesToExternalLinkElement(doc);
-  setDefaultLangAttribute(doc);
   traverseFootnotes(doc);
   removeUnnecessaryParagraphNode(doc);
   await transformAndHighlightCodeBlockElement(doc);
@@ -240,13 +239,6 @@ function addAttributesToExternalLinkElement(doc: Document) {
       .set("target", "_blank")
       .set("rel", "noreferrer");
   });
-}
-
-function setDefaultLangAttribute(_doc: Document) {
-  // TODO
-  // if (!e.attributes.has("lang")) {
-  //   e.attributes.set("lang", "ja-JP");
-  // }
 }
 
 function traverseFootnotes(doc: Document) {
