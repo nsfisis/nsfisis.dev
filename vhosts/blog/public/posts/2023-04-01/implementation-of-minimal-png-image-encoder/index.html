@@ -54,7 +54,7 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-              この記事では、PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。 PNG 画像に対応したビューアであれば読み込めるが、圧縮効率については一切考えない。 また、実装には Go 言語を使うが、Go の標準ライブラリにあるさまざまなアルゴリズム (PNG 画像に関係する範囲だと、zlib や CRC32、Adler-32 など) は使わない。
+              この記事では、PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。PNG 画像に対応したビューアであれば読み込めるが、圧縮効率については一切考えない。また、実装には Go 言語を使うが、Go の標準ライブラリにあるさまざまなアルゴリズム (PNG 画像に関係する範囲だと、zlib や CRC32、Adler-32 など) は使わない。
             </p>
           </section>
           <section id="section--basic-structure-of-png">
@@ -77,7 +77,7 @@
               </li>
             </ol>
             <p>
-              Chunk には画像データを入れる IDAT chunk、パレットデータを入れる PLTE chunk、テキストデータを入れる tEXt chunk などがあるが、 今回は最小構成ということで IDAT chunk (と IHDR chunk と IEND chunk) のみを用いる。
+              Chunk には画像データを入れる IDAT chunk、パレットデータを入れる PLTE chunk、テキストデータを入れる tEXt chunk などがあるが、今回は最小構成ということで IDAT chunk (と IHDR chunk と IEND chunk) のみを用いる。
             </p>
             <p>
               次節で、それぞれの具体的な構造を確認しつつ実装していく。
@@ -86,7 +86,7 @@
           <section id="section--implement-png-encoder">
             <h2><a href="#section--implement-png-encoder">PNG のエンコーダを実装する</a></h2>
             <p>
-              以下のソースコードをベースにする。 今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。
+              以下のソースコードをベースにする。今回 PNG のデコーダは扱わないので、読み込みには Go の標準ライブラリ <code>image/png</code> を用いる。
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">package</span><span style="color:#6F42C1"> main</span></span>
@@ -263,7 +263,7 @@
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
               </div>
               <p>
-                仕様どおり、<code>chunkType</code> と <code>data</code> から CRC を計算し、<code>data</code> の長さと合わせて書き込んでいる。 PNG では基本的に big endian を使うことに注意する。
+                仕様どおり、<code>chunkType</code> と <code>data</code> から CRC を計算し、<code>data</code> の長さと合わせて書き込んでいる。PNG では基本的に big endian を使うことに注意する。
               </p>
               <p>
                 準備ができたところで、具体的な chunk をエンコードしていく。
@@ -455,10 +455,10 @@
               <section id="section--implement-png-encoder--idat-chunk--image-data">
                 <h4><a href="#section--implement-png-encoder--idat-chunk--image-data">画像データ</a></h4>
                 <p>
-                  では次に、zlib 形式で格納するデータを用意する。PNG 画像は次のような順にスキャンする。 画像の左上のピクセルから同じ行を横にスキャンしていき、一番右まで到達したら次の行の左に向かう。 右下のピクセルまで行けば終わり。要は Z 字型に進んでいく。
+                  では次に、zlib 形式で格納するデータを用意する。PNG 画像は次のような順にスキャンする。画像の左上のピクセルから同じ行を横にスキャンしていき、一番右まで到達したら次の行の左に向かう。右下のピクセルまで行けば終わり。要は Z 字型に進んでいく。
                 </p>
                 <p>
-                  また、それぞれの行の先頭には、圧縮のためのフィルタタイプを指定する。 ただ、今回はその実装を省略するために、常にフィルタ 0 (何も加工しない) を使う。
+                  また、それぞれの行の先頭には、圧縮のためのフィルタタイプを指定する。ただ、今回はその実装を省略するために、常にフィルタ 0 (何も加工しない) を使う。
                 </p>
                 <p>
                   先ほどの <code>encodeZlib</code> も使って実際に実装したものがこちら:

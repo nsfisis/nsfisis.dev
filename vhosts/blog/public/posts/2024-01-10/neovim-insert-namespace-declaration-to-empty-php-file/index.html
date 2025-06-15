@@ -90,25 +90,25 @@
 <span class="line"><span>LuaJIT 2.1.1693350652</span></span></code></pre>
             </div>
             <p>
-              今回は Lua で処理を記述したため、Vim では動作しない。以下の説明でも Neovim に絞って述べる。 また、パス区切りがスラッシュである前提で記述したため、Windows には対応していない。
+              今回は Lua で処理を記述したため、Vim では動作しない。以下の説明でも Neovim に絞って述べる。また、パス区切りがスラッシュである前提で記述したため、Windows には対応していない。
             </p>
           </section>
           <section id="section--ftplugin">
             <h2><a href="#section--ftplugin">ftplugin を用意する</a></h2>
             <p>
-              Neovim には特定のファイルタイプに対して特別な処理をおこなうための ftplugin と呼ばれる仕組みがある。 Neovim の設定を置くディレクトリ (例えば <code>~/.config/nvim</code>) の配下に <code>ftplugin/&lt;FILE_TYPE&gt;.vim</code> または <code>ftplugin/&lt;FILE_TYPE&gt;.lua</code> というファイルを配置すると、その <code>&lt;FILE_TYPE&gt;</code> が読み込まれたときにそのファイルが自動的に実行される。
+              Neovim には特定のファイルタイプに対して特別な処理をおこなうための ftplugin と呼ばれる仕組みがある。Neovim の設定を置くディレクトリ (例えば <code>~/.config/nvim</code>) の配下に <code>ftplugin/&lt;FILE_TYPE&gt;.vim</code> または <code>ftplugin/&lt;FILE_TYPE&gt;.lua</code> というファイルを配置すると、その <code>&lt;FILE_TYPE&gt;</code> が読み込まれたときにそのファイルが自動的に実行される。
             </p>
             <p>
               今回は、Neovim がデフォルトで用意している PHP 用 ftplugin が動作したあとに追加の処理をおこないたいので、<code>after/ftplugin/php.{vim,lua}</code> というファイルを配置する。名前から察せられるとおり、<code>after/ftplugin</code> 以下のファイルは <code>ftplugin</code> 以下のファイルよりもあとに実行される。
             </p>
             <p>
-              この記事では Lua で処理を記述するため、拡張子には <code>.lua</code> を用いる。 これ以降載せるコードは、すべて <code>after/ftplugin/php.lua</code> の中に記述している。
+              この記事では Lua で処理を記述するため、拡張子には <code>.lua</code> を用いる。これ以降載せるコードは、すべて <code>after/ftplugin/php.lua</code> の中に記述している。
             </p>
           </section>
           <section id="section--did-ftplugin">
             <h2><a href="#section--did-ftplugin">二重読み込みを防ぐ</a></h2>
             <p>
-              ファイルタイプは読み込んだあとに変更されることもあるので、ftplugin は複数回実行されうる。 二重読み込みを防ぐために、<code>did_ftplugin_&lt;FILE_TYPE&gt;_after</code> というバッファローカル変数を定義しておくのが慣習となっている。
+              ファイルタイプは読み込んだあとに変更されることもあるので、ftplugin は複数回実行されうる。二重読み込みを防ぐために、<code>did_ftplugin_&lt;FILE_TYPE&gt;_after</code> というバッファローカル変数を定義しておくのが慣習となっている。
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> then</span></span>
@@ -267,7 +267,7 @@
           <section id="section--outro">
             <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-              簡易的な実装だが、多くのケースではうまく動いているようだ。 最大の問題は PSR 4 に準拠しないフレームワークを用いているとまったく役に立たないことで、今まさに職場で困っている。 こちらはいずれ改良したい。
+              簡易的な実装だが、多くのケースではうまく動いているようだ。最大の問題は PSR 4 に準拠しないフレームワークを用いているとまったく役に立たないことで、今まさに職場で困っている。こちらはいずれ改良したい。
             </p>
           </section>
         </div>

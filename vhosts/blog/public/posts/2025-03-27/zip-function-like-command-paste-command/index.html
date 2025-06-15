@@ -116,10 +116,10 @@
 <span class="line"><span>' a.txt b.txt > ab.txt</span></span></code></pre>
             </div>
             <p>
-              <code>paste</code> コマンドは複数のファイルを引数に取り、それらを1行ずつ消費しながら <code>-d</code> で指定した文字で区切って出力する。 <code>-d</code> は区切り文字の指定で、デフォルトだとタブ区切りになる。
+              <code>paste</code> コマンドは複数のファイルを引数に取り、それらを1行ずつ消費しながら <code>-d</code> で指定した文字で区切って出力する。<code>-d</code> は区切り文字の指定で、デフォルトだとタブ区切りになる。
             </p>
             <p>
-              ファイル名には <code>-</code> を指定でき、その場合は標準入力から読み込んで出力する。 このとき <code>paste - -</code> のように複数回 <code>-</code> を指定すると、指定した回数の行ごとに連結することができる。 例えば <code>ab.txt</code> だとこうなる。
+              ファイル名には <code>-</code> を指定でき、その場合は標準入力から読み込んで出力する。このとき <code>paste - -</code> のように複数回 <code>-</code> を指定すると、指定した回数の行ごとに連結することができる。例えば <code>ab.txt</code> だとこうなる。
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ paste - - &#x3C; ab.txt</span></span>

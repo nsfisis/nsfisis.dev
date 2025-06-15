@@ -101,7 +101,7 @@
           <section id="section--goal">
             <h2><a href="#section--goal">本記事のゴール</a></h2>
             <p>
-              先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。 このコードはこのあと使うので、<code>index.mjs</code> の名前で保存しておくこと。
+              先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。このコードはこのあと使うので、<code>index.mjs</code> の名前で保存しておくこと。
             </p>
             <div class="codeblock">
               <div class="filename">
@@ -161,10 +161,10 @@
                 ほとんどはただの PHP の公開 API を使ったコードだが、Emscripten 向けの注意点が 2点ある。
               </p>
               <p>
-                まずは <code>EMSCRIPTEN_KEEPALIVE</code> について。 これは Emscripten が用意している特殊なマクロである。 このマクロが付与されている関数は、どこからも使用されていなくともコンパイル後の WebAssembly バイナリから削除されない。 もしこれを付け忘れると、未使用の関数とみなされ削除される。
+                まずは <code>EMSCRIPTEN_KEEPALIVE</code> について。これは Emscripten が用意している特殊なマクロである。このマクロが付与されている関数は、どこからも使用されていなくともコンパイル後の WebAssembly バイナリから削除されない。もしこれを付け忘れると、未使用の関数とみなされ削除される。
               </p>
               <p>
-                次に、コードを評価したあとに呼んでいる標準出力と標準エラー出力に対する改行の出力について。 出力バッファから出力させるためだけなら改行を出力させなくとも <code>fflush()</code> だけで事足りると考えたのだが、ないと動かなかったので追加した。 これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。 改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
+                次に、コードを評価したあとに呼んでいる標準出力と標準エラー出力に対する改行の出力について。出力バッファから出力させるためだけなら改行を出力させなくとも <code>fflush()</code> だけで事足りると考えたのだが、ないと動かなかったので追加した。これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
               </p>
               <div class="admonition" editat="2025-04-23" operation="追記">
                 <div class="admonition-label">
@@ -172,7 +172,7 @@
                 </div>
                 <div class="admonition-content">
                   <p>
-                    <code>fflush()</code> の前に改行の出力が必要だった理由が判明したので追記する。 これは、<code>index.mjs</code> で標準出力・標準エラー出力へ出力する方法を指定せず、デフォルトの実装に任せているため。 Emscripten のデフォルト実装では、改行コードを出力するまで出力内容がバッファリングされ、<code>fflush()</code> が機能しない。
+                    <code>fflush()</code> の前に改行の出力が必要だった理由が判明したので追記する。これは、<code>index.mjs</code> で標準出力・標準エラー出力へ出力する方法を指定せず、デフォルトの実装に任せているため。Emscripten のデフォルト実装では、改行コードを出力するまで出力内容がバッファリングされ、<code>fflush()</code> が機能しない。
                   </p>
                   <p>
                     デフォルトの出力方法は <code>index.mjs</code> の中で <code>PHPWasm()</code> を呼ぶとき、<code>stdout</code>・<code>stderr</code> というオプションを渡せば変更できる。
@@ -209,7 +209,7 @@
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">FROM</span><span style="color:#24292E"> emscripten/emsdk:3.1.46 </span><span style="color:#D73A49">AS</span><span style="color:#24292E"> wasm-builder</span></span></code></pre>
               </div>
               <p>
-                次に、 <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。 有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。
+                次に、 <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> git clone --depth=1 --branch=php-8.2.10 https://github.com/php/php-src</span></span>
@@ -254,22 +254,22 @@
                 ここまでと比べると少し複雑なので、それぞれ詳しく見ていこう。
               </p>
               <p>
-                まず、<code>buildconf</code> は PHP 処理系をビルドするときに (Emscripten とは関係なく) 使うツールである。 このツールの最も重要な仕事は、<code>configure</code> の生成である。
+                まず、<code>buildconf</code> は PHP 処理系をビルドするときに (Emscripten とは関係なく) 使うツールである。このツールの最も重要な仕事は、<code>configure</code> の生成である。
               </p>
               <p>
-                次に <code>configure</code> するわけだが、ここで <code>emconfigure</code> を使う。 これを使うことで、Emscripten が上手く諸々のツールチェインを WebAssembly のビルド向けに調整しながら <code>configure</code> してくれる。
+                次に <code>configure</code> するわけだが、ここで <code>emconfigure</code> を使う。これを使うことで、Emscripten が上手く諸々のツールチェインを WebAssembly のビルド向けに調整しながら <code>configure</code> してくれる。
               </p>
               <p>
-                <code>configure</code> の後ろに指定してあるフラグは、通常の PHP 処理系のビルドで使う <code>configure</code> と同じなので、詳しくはそちらの <code>cofigure --help</code> を参照していただきたい。 ほとんどは、機能の無効化のために指定している (依存するライブラリを減らし、ビルドをより簡単にするため)。
+                <code>configure</code> の後ろに指定してあるフラグは、通常の PHP 処理系のビルドで使う <code>configure</code> と同じなので、詳しくはそちらの <code>cofigure --help</code> を参照していただきたい。ほとんどは、機能の無効化のために指定している (依存するライブラリを減らし、ビルドをより簡単にするため)。
               </p>
               <p>
-                通常の C のビルドなら、<code>configure</code> の次は <code>make</code> するところだが、ここでも <code>emmake</code> を使う。 役割はほとんど <code>emconfigure</code> と同様である。 指定してある <code>EMCC_CFLAGS</code> という環境変数は、Emscripten の C コンパイラへのフラグで、ここでは <code>ERROR_ON_UNDEFINED_SYMBOLS</code> を無効化している。 これにより、コンパイル中に出現した解決できなかったシンボルを無視するようになる (代わりに、そのシンボルを呼ぼうとしたタイミングで実行時エラーになる)。 すべての依存を完全に解決するのは面倒なので、あまり使わない機能については無視してもよいだろう。
+                通常の C のビルドなら、<code>configure</code> の次は <code>make</code> するところだが、ここでも <code>emmake</code> を使う。役割はほとんど <code>emconfigure</code> と同様である。指定してある <code>EMCC_CFLAGS</code> という環境変数は、Emscripten の C コンパイラへのフラグで、ここでは <code>ERROR_ON_UNDEFINED_SYMBOLS</code> を無効化している。これにより、コンパイル中に出現した解決できなかったシンボルを無視するようになる (代わりに、そのシンボルを呼ぼうとしたタイミングで実行時エラーになる)。すべての依存を完全に解決するのは面倒なので、あまり使わない機能については無視してもよいだろう。
               </p>
               <p>
                 ここまでを実行すると <code>libs/libphp.a</code> が生成される。これは後で使うので移動させている。
               </p>
               <p>
-                さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。 <code>Dockerfile</code> と同じ場所に <code>php-wasm.c</code> という名前で保存し、次のようにする。
+                さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。<code>Dockerfile</code> と同じ場所に <code>php-wasm.c</code> という名前で保存し、次のようにする。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">COPY</span><span style="color:#24292E"> php-wasm.c /src/</span></span>
@@ -290,10 +290,10 @@
 <span class="line"><span style="color:#24292E">    :</span></span></code></pre>
               </div>
               <p>
-                <code>emcc</code> は <code>cc</code> (C コンパイラ/リンカ) の Emscripten 版で、<code>-c</code> は「コンパイル」の意。 <code>-o</code> や <code>-I</code> は普通の C コンパイラと同様、出力ファイルの指定とインクルードパスの指定である。
+                <code>emcc</code> は <code>cc</code> (C コンパイラ/リンカ) の Emscripten 版で、<code>-c</code> は「コンパイル」の意。<code>-o</code> や <code>-I</code> は普通の C コンパイラと同様、出力ファイルの指定とインクルードパスの指定である。
               </p>
               <p>
-                <code>libphp.a</code> と <code>php-wasm.o</code> が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。 これにも <code>emcc</code> コマンドを使う。
+                <code>libphp.a</code> と <code>php-wasm.o</code> が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。これにも <code>emcc</code> コマンドを使う。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">RUN</span><span style="color:#24292E"> emcc \</span></span>
@@ -313,31 +313,31 @@
                 それぞれのフラグについて解説する。
               </p>
               <p>
-                <code>-s ENVIRONMENT=node</code> は、生成する WebAssembly/JavaScript の実行環境を指定する。 今回は <code>node</code> を指定しているので、Node.js 向けのファイルが生成される。
+                <code>-s ENVIRONMENT=node</code> は、生成する WebAssembly/JavaScript の実行環境を指定する。今回は <code>node</code> を指定しているので、Node.js 向けのファイルが生成される。
               </p>
               <p>
                 <code>-s ERROR_ON_UNDEFINED_SYMBOLS=0</code> についてはすでに述べたので省略する。
               </p>
               <p>
-                <code>-s EXPORTED_RUNTIME_METHODS=&apos;[&quot;ccall&quot;]&apos;</code> は、生成される JavaScript から公開される API である。 すでに <code>index.mjs</code> で使用しているが、<code>ccall(&apos;関数名&apos;, &apos;返り値の型&apos;, [&apos;仮引数の型&apos;, ...], [&apos;実引数&apos;, ...])</code> のように使う。
+                <code>-s EXPORTED_RUNTIME_METHODS=&apos;[&quot;ccall&quot;]&apos;</code> は、生成される JavaScript から公開される API である。すでに <code>index.mjs</code> で使用しているが、<code>ccall(&apos;関数名&apos;, &apos;返り値の型&apos;, [&apos;仮引数の型&apos;, ...], [&apos;実引数&apos;, ...])</code> のように使う。
               </p>
               <p>
-                <code>-s EXPORT_ES6=1</code> は、JavaScript コードを ECMAScript 6 に準拠した module として生成する。 これを指定することで、<code>require()</code> ではなく <code>import</code> できる JavaScript を生成させられる。
+                <code>-s EXPORT_ES6=1</code> は、JavaScript コードを ECMAScript 6 に準拠した module として生成する。これを指定することで、<code>require()</code> ではなく <code>import</code> できる JavaScript を生成させられる。
               </p>
               <p>
                 <code>-s INITIAL_MEMORY=16777216</code> は呼んで字のごとく。用途に合わせて適当に決めてほしい。
               </p>
               <p>
-                <code>-s INVOKE_RUN=0</code> は、module をロードしたときに勝手に <code>main()</code> を呼ぶかどうか (だと思う)。 今回は <code>php_wasm_run()</code> しか使うつもりがないので切っている。
+                <code>-s INVOKE_RUN=0</code> は、module をロードしたときに勝手に <code>main()</code> を呼ぶかどうか (だと思う)。今回は <code>php_wasm_run()</code> しか使うつもりがないので切っている。
               </p>
               <p>
-                <code>-s MODULARIZE=1</code> は、実質的にほぼ必須のオプションであり、1 を指定することで「WebAssembly module をインスタンス化する関数」をエクスポートするような JavaScript ファイルを生成するようになる。 これを指定しないと、生成物の JavaScript ファイルを読み込むと WebAssembly module が即座にインスタンス化されてしまい、起動のタイミングを制御できない。
+                <code>-s MODULARIZE=1</code> は、実質的にほぼ必須のオプションであり、1 を指定することで「WebAssembly module をインスタンス化する関数」をエクスポートするような JavaScript ファイルを生成するようになる。これを指定しないと、生成物の JavaScript ファイルを読み込むと WebAssembly module が即座にインスタンス化されてしまい、起動のタイミングを制御できない。
               </p>
               <p>
-                ここまで実行すると、<code>php-wasm.js</code> と <code>php-wasm.wasm</code> が作られる。 では、ここからはこれらの実行環境を作っていこう。
+                ここまで実行すると、<code>php-wasm.js</code> と <code>php-wasm.wasm</code> が作られる。では、ここからはこれらの実行環境を作っていこう。
               </p>
               <p>
-                といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。 先ほど掲載した JavaScript のコードは、<code>Dockerfile</code> と同じディレクトリに <code>index.mjs</code> で配置すること。
+                といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。先ほど掲載した JavaScript のコードは、<code>Dockerfile</code> と同じディレクトリに <code>index.mjs</code> で配置すること。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">FROM</span><span style="color:#24292E"> node:20.7</span></span>
@@ -368,7 +368,7 @@
           <section id="section--outro">
             <h2><a href="#section--outro">まとめ</a></h2>
             <p>
-              <a href="https://github.com/nsfisis/tiny-php.wasm" rel="noreferrer" target="_blank">ここまでをまとめた Git リポジトリ</a> を用意した。 簡単にコンパイルできるので、興味があれば試してみてほしい。
+              <a href="https://github.com/nsfisis/tiny-php.wasm" rel="noreferrer" target="_blank">ここまでをまとめた Git リポジトリ</a> を用意した。簡単にコンパイルできるので、興味があれば試してみてほしい。
             </p>
           </section>
           <section id="section--references">

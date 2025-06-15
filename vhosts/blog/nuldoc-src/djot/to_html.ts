@@ -13,6 +13,7 @@ import {
 } from "../dom.ts";
 
 export default async function toHtml(doc: Document): Promise<Document> {
+  mergeConsecutiveTextNodes(doc);
   removeUnnecessaryTextNode(doc);
   transformLinkLikeToAnchorElement(doc);
   transformSectionIdAttribute(doc);
@@ -23,7 +24,45 @@ export default async function toHtml(doc: Document): Promise<Document> {
   traverseFootnotes(doc);
   removeUnnecessaryParagraphNode(doc);
   await transformAndHighlightCodeBlockElement(doc);
+  mergeConsecutiveTextNodes(doc);
   return doc;
+}
+
+function mergeConsecutiveTextNodes(doc: Document) {
+  forEachChildRecursively(doc.root, (n) => {
+    if (n.kind !== "element") {
+      return;
+    }
+
+    const newChildren: Node[] = [];
+    let currentTextContent = "";
+
+    for (const child of n.children) {
+      if (child.kind === "text" && !child.raw) {
+        currentTextContent += child.content;
+      } else {
+        if (currentTextContent !== "") {
+          newChildren.push({
+            kind: "text",
+            content: currentTextContent,
+            raw: false,
+          });
+          currentTextContent = "";
+        }
+        newChildren.push(child);
+      }
+    }
+
+    if (currentTextContent !== "") {
+      newChildren.push({
+        kind: "text",
+        content: currentTextContent,
+        raw: false,
+      });
+    }
+
+    n.children = newChildren;
+  });
 }
 
 function removeUnnecessaryTextNode(doc: Document) {

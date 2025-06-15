@@ -63,7 +63,7 @@
             </div>
             <div class="admonition-content">
               <p>
-                この記事は Qiita から移植してきたものです。 元 URL: <a href="https://qiita.com/nsfisis/items/9a429432258bbcd6c565" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/9a429432258bbcd6c565</a>
+                この記事は Qiita から移植してきたものです。元 URL: <a href="https://qiita.com/nsfisis/items/9a429432258bbcd6c565" rel="noreferrer" target="_blank">https://qiita.com/nsfisis/items/9a429432258bbcd6c565</a>
               </p>
             </div>
           </div>
@@ -116,7 +116,7 @@
               大雑把な構造としては、<code>compiler</code> フォルダ以下に <code>rustc_*</code> という名前のクレートが数十個入っている。これがどうやら <code>rustc</code> コマンドの実装部のようだ。
             </p>
             <p>
-              <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。 しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。
+              <code>rustc</code> はセルフホストされている (= <code>rustc</code> 自身が Rust で書かれている) ので、<code>bool</code> や <code>char</code> などで適当に検索をかけてもノイズが多すぎて話にならない。しかし、お誂え向きなことに <code>i128</code>/<code>u128</code> というコンパイラ自身が使うことがなさそうな型が存在するのでこれを使って <code>git grep</code> してみる。
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ git grep "\bi128\b" | wc      # i128</span></span>
@@ -212,7 +212,7 @@
 <span class="line"><span style="color:#24292E">}</span></span></code></pre>
             </div>
             <p>
-              関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。 <code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。
+              関数名や doc comment が示している通り、この関数は識別子 (identifier, ident) を現在のレキシカルスコープ内で解決 (resolve) する。<code>if ns == TypeNS</code> のブロック内では、<code>primitive_type_table</code> (上記の <code>PrimitiveTypeTable::new()</code> で作られた変数) に含まれている識別子 (<code>bool</code>、<code>i32</code> など) かどうか判定し、そうであればそれに紐づけられたプリミティブ型を返している。
             </p>
             <p>
               なお、<code>ns</code> は「名前空間」を示す変数である。Rust における名前空間はC言語におけるそれとほとんど同じで、今探している名前が関数名/変数名なのか型なのかマクロなのかを区別している。この <code>if</code> は、プリミティブ型に解決されるのは型を探しているときだけだ、と言っている。

@@ -160,7 +160,7 @@
                 シンタックスハイライトは、トークナイズとトークン種別に応じた色付けの2段階からなる。
               </p>
               <p>
-                トークナイズには Ruby 3.4 からデフォルトのパーサになった <a href="https://github.com/ruby/prism" rel="noreferrer" target="_blank">Prism</a> を利用している。 <code>Prism.lex()</code> を使うとトークナイズができるので、トークンに付いているソースコード位置の情報を使いつつ元のソースコードを復元する。
+                トークナイズには Ruby 3.4 からデフォルトのパーサになった <a href="https://github.com/ruby/prism" rel="noreferrer" target="_blank">Prism</a> を利用している。<code>Prism.lex()</code> を使うとトークナイズができるので、トークンに付いているソースコード位置の情報を使いつつ元のソースコードを復元する。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#E36209">y</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 1</span><span style="color:#6A737D">                 # 現在の行</span></span>
@@ -236,7 +236,7 @@
 <span class="line"><span style="color:#D73A49">end</span></span></code></pre>
               </div>
               <p>
-                トークンの種類 (<code>t.type</code>) またはトークンの文字列表現そのもの (<code>t.value.downcase</code>) を使ってテーブルを引いて振り仮名へ変換している。 このテーブルのキー部分そのものにも振り仮名を振るために、トークンが <code>:</code> で終わっていれば <code>:</code> を取り除いて振り仮名を得ている (例: <code>&quot;value:&quot;</code> → <code>&quot;value&quot;</code> → <code>&quot;48746992&quot;</code>)。
+                トークンの種類 (<code>t.type</code>) またはトークンの文字列表現そのもの (<code>t.value.downcase</code>) を使ってテーブルを引いて振り仮名へ変換している。このテーブルのキー部分そのものにも振り仮名を振るために、トークンが <code>:</code> で終わっていれば <code>:</code> を取り除いて振り仮名を得ている (例: <code>&quot;value:&quot;</code> → <code>&quot;value&quot;</code> → <code>&quot;48746992&quot;</code>)。
               </p>
               <p>
                 このテーブルはサイズ制限を突破するために圧縮されており、<code>kana()</code> 関数で展開される。
@@ -263,14 +263,14 @@
 <span class="line"><span style="color:#6A737D">    # => "バリュー"</span></span></code></pre>
               </div>
               <p>
-                これは後で気付いたのだが、Ruby は多倍長整数が扱えるので <code>&quot;48746992&quot;</code> のようなデータは単に <code>48746992</code> と書けばよかった。 <code>kana()</code> 関数が多少長くはなるが、振り仮名データの数 x 2 バイト分サイズが減るのでこちらの方が短くなる。 サイズ制限の都合で振り仮名を振るのを諦めた記号もあったのでもったいない。
+                これは後で気付いたのだが、Ruby は多倍長整数が扱えるので <code>&quot;48746992&quot;</code> のようなデータは単に <code>48746992</code> と書けばよかった。<code>kana()</code> 関数が多少長くはなるが、振り仮名データの数 x 2 バイト分サイズが減るのでこちらの方が短くなる。サイズ制限の都合で振り仮名を振るのを諦めた記号もあったのでもったいない。
               </p>
             </section>
           </section>
           <section id="section--outro">
             <h2><a href="#section--outro">おわりに</a></h2>
             <p>
-              本っ当に取りたかったので心から嬉しいです。 全部で 3作提出したのですが、他の 2つも選外佳作として選出していただけた上、そのうちの “Least Truthful” については最後に Matz 氏から言及があり、審査員賞と合わせて望外の栄誉となりました。
+              本っ当に取りたかったので心から嬉しいです。全部で 3作提出したのですが、他の 2つも選外佳作として選出していただけた上、そのうちの “Least Truthful” については最後に Matz 氏から言及があり、審査員賞と合わせて望外の栄誉となりました。
             </p>
             <p>
               ありがとうございました！

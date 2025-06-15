@@ -128,7 +128,7 @@
 <span class="line"><span style="color:#005CC5">set</span><span style="color:#032F62"> +o</span><span style="color:#032F62"> pipefail</span></span></code></pre>
               </div>
               <p>
-                こうすると、パイプ全体が失敗するようになる。 この設定は、デフォルトだと off になっている。
+                こうすると、パイプ全体が失敗するようになる。この設定は、デフォルトだと off になっている。
               </p>
             </section>
           </section>
@@ -148,10 +148,10 @@
 <span class="line"><span style="color:#22863A">  when</span><span style="color:#24292E">: </span><span style="color:#032F62">always</span></span></code></pre>
             </div>
             <p>
-              <code>grep</code> コマンドは、パターンにマッチする行が一行もなかったとき、exit code 1 を返す。よって、<code>pipefail</code> が on になっていると、このジョブは失敗する。 現在の <code>pipefail</code> がどうなっているか確かめるため <code>set +o</code> で全オプションを出力させたところ、<code>pipefail</code> が on になっていた。
+              <code>grep</code> コマンドは、パターンにマッチする行が一行もなかったとき、exit code 1 を返す。よって、<code>pipefail</code> が on になっていると、このジョブは失敗する。現在の <code>pipefail</code> がどうなっているか確かめるため <code>set +o</code> で全オプションを出力させたところ、<code>pipefail</code> が on になっていた。
             </p>
             <p>
-              しかし、先述したように Bash における <code>pipefail</code> のデフォルト値は off のはずだ。 実際に、ローカルで <code>alpine:latest</code> を動かしてみたところ、
+              しかし、先述したように Bash における <code>pipefail</code> のデフォルト値は off のはずだ。実際に、ローカルで <code>alpine:latest</code> を動かしてみたところ、
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ docker run --rm alpine:latest sh -c "set +o"</span></span>
@@ -179,7 +179,7 @@
           <section id="section--where-pipefail-is-enabled">
             <h2><a href="#section--where-pipefail-is-enabled">どこで <code>pipefail</code> が on になるか</a></h2>
             <p>
-              <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。 そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner" rel="noreferrer" target="_blank">GitLab Runner のリポジトリ</a> を調査したところ、 <a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276" rel="noreferrer" target="_blank">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。
+              <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner" rel="noreferrer" target="_blank">GitLab Runner のリポジトリ</a> を調査したところ、 <a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276" rel="noreferrer" target="_blank">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">// pipefail オプションが存在しない環境にも対応するため、</span></span>

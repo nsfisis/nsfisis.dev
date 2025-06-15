@@ -63,7 +63,7 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-              これまでこの blog は GitHub Pages でホストしていたのだが、先日 VPS に移行した。 そのときにおこなったサーバのセットアップ作業を書き残しておく。 99 % 自分用の備忘録。別のベンダに移したりしたくなったら見に来る。
+              これまでこの blog は GitHub Pages でホストしていたのだが、先日 VPS に移行した。そのときにおこなったサーバのセットアップ作業を書き残しておく。99 % 自分用の備忘録。別のベンダに移したりしたくなったら見に来る。
             </p>
             <p>
               未来の自分へ: 特に自動化してないので、せいぜい苦しんでくれ。
@@ -72,7 +72,7 @@
           <section id="section--vps">
             <h2><a href="#section--vps">VPS</a></h2>
             <p>
-              <a href="https://vps.sakura.ad.jp/" rel="noreferrer" target="_blank">さくらの VPS</a> の 2 GB プラン。 そこまで真面目に選定していないので、困ったら移動するかも。
+              <a href="https://vps.sakura.ad.jp/" rel="noreferrer" target="_blank">さくらの VPS</a> の 2 GB プラン。そこまで真面目に選定していないので、困ったら移動するかも。
             </p>
           </section>
           <section id="section--preparation">
@@ -80,7 +80,7 @@
             <section id="section--preparation--hostname">
               <h3><a href="#section--preparation--hostname">サーバのホスト名を決める</a></h3>
               <p>
-                モチベーションが上がるという効能がある。今回は藤原定家から取って <code>teika</code> にした。 たいていいつも源氏物語の帖か小倉百人一首の歌人から選んでいる。
+                モチベーションが上がるという効能がある。今回は藤原定家から取って <code>teika</code> にした。たいていいつも源氏物語の帖か小倉百人一首の歌人から選んでいる。
               </p>
             </section>
             <section id="section--preparation--ssh-key">
@@ -93,7 +93,7 @@
 <span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github2teika.key</span></span></code></pre>
               </div>
               <p>
-                <code>teika.key</code> はローカルからサーバへの接続用、<code>github2teika.key</code> は、 GitHub Actions からサーバへのデプロイ用。
+                <code>teika.key</code> はローカルからサーバへの接続用、<code>github2teika.key</code> は、GitHub Actions からサーバへのデプロイ用。
               </p>
             </section>
             <section id="section--preparation--ssh-config">
@@ -122,7 +122,7 @@
             <section id="section--basic-setup--user">
               <h3><a href="#section--basic-setup--user">ユーザを作成する</a></h3>
               <p>
-                管理者ユーザで作業すると危ないので、メインで使うユーザを作成する。 <code>sudo</code> グループに追加して <code>sudo</code> できるようにし、<code>su</code> で切り替え。
+                管理者ユーザで作業すると危ないので、メインで使うユーザを作成する。<code>sudo</code> グループに追加して <code>sudo</code> できるようにし、<code>su</code> で切り替え。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo adduser **********</span></span>
@@ -179,7 +179,7 @@
             <section id="section--basic-setup--ssh-connect">
               <h3><a href="#section--basic-setup--ssh-connect">SSH で接続確認</a></h3>
               <p>
-                今の SSH セッションは閉じずに、ターミナルを別途開いて疎通確認する。 セッションを閉じてしまうと、SSH の設定に不備があった場合に締め出しをくらう。
+                今の SSH セッションは閉じずに、ターミナルを別途開いて疎通確認する。セッションを閉じてしまうと、SSH の設定に不備があった場合に締め出しをくらう。
               </p>
               <div class="codeblock">
                 <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh teika</span></span></code></pre>
@@ -303,7 +303,7 @@
           <section id="section--outro">
             <h2><a href="#section--outro">感想</a></h2>
             <p>
-              (業務でなく) 個人だと数年ぶりのサーバセットアップで、これだけでも割と時間を食ってしまった。 とはいえ式年遷宮は楽しいので、これからも定期的にやっていきたい。 コンテナデプロイにしたい気持ちもあるのだが、色々実験したい関係上、本物のサーバも欲しくはある。 次の式年遷宮では、手順の一部だけでも自動化したいところ。
+              (業務でなく) 個人だと数年ぶりのサーバセットアップで、これだけでも割と時間を食ってしまった。とはいえ式年遷宮は楽しいので、これからも定期的にやっていきたい。コンテナデプロイにしたい気持ちもあるのだが、色々実験したい関係上、本物のサーバも欲しくはある。次の式年遷宮では、手順の一部だけでも自動化したいところ。
             </p>
           </section>
         </div>

@@ -134,22 +134,22 @@
             <section id="section--techniques--exponential-notation">
               <h3><a href="#section--techniques--exponential-notation">指数表記</a></h3>
               <p>
-                割と多くの言語のゴルフで使えるテクニック。 <code>e</code> を用いた指数表記で、大きな数を短く表す。 このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。
+                割と多くの言語のゴルフで使えるテクニック。<code>e</code> を用いた指数表記で、大きな数を短く表す。このコードでは <code>10000</code>、<code>5000</code>、<code>2000</code>、<code>1000</code> を指数表記している。
               </p>
             </section>
             <section id="section--techniques--shorten-loop">
               <h3><a href="#section--techniques--shorten-loop">foreach や for の中身を1つの文に</a></h3>
               <p>
-                <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、 通常 <code>{</code> を続けて複数の文を連ねるが、中身の文を1つにしてしまえば、<code>{</code> と <code>}</code> を省略できる。 C言語などでも使える。
+                <code>foreach</code>、<code>for</code>、<code>if</code> などの後ろには、通常 <code>{</code> を続けて複数の文を連ねるが、中身の文を1つにしてしまえば、<code>{</code> と <code>}</code> を省略できる。C言語などでも使える。
               </p>
             </section>
             <section id="section--techniques--omit-initialization">
               <h3><a href="#section--techniques--omit-initialization">$r に初期値を入れない</a></h3>
               <p>
-                PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、 <code>$r</code> が未定義だった場合は <code>$r</code> を勝手に定義して空の配列で初期化してくれる。 これを利用すると、<code>$r = [];</code> のような初期化が不要になる。
+                PHP では、<code>$r[] = ......</code> のような配列の末尾に追加する式を実行したとき、<code>$r</code> が未定義だった場合は <code>$r</code> を勝手に定義して空の配列で初期化してくれる。これを利用すると、<code>$r = [];</code> のような初期化が不要になる。
               </p>
               <p>
-                ただし、プログラムに 0 が渡されるとループを一度も回らないので、<code>$r</code> が未定義になってしまい、 <code>implode()</code> に渡すところでエラーになる。 それを防ぐために <code>$r ?? []</code> を使っている。
+                ただし、プログラムに 0 が渡されるとループを一度も回らないので、<code>$r</code> が未定義になってしまい、<code>implode()</code> に渡すところでエラーになる。それを防ぐために <code>$r ?? []</code> を使っている。
               </p>
               <p>
                 もし 0 が渡されたケースを無視するなら、これが不要になるので 4 バイト縮む。
@@ -158,7 +158,7 @@
             <section id="section--techniques--put-text-outside-php-tag">
               <h3><a href="#section--techniques--put-text-outside-php-tag">PHP タグの外に文字列を置く</a></h3>
               <p>
-                PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。 今回のケースでは、先頭と末尾に必ず <code>[</code> と <code>]</code> を出力するので、そのまま書いてやればよい。
+                PHP では、<code>&lt;?php</code> <code>?&gt;</code> で囲われた部分の外側にある文字列は、そのまま出力される。今回のケースでは、先頭と末尾に必ず <code>[</code> と <code>]</code> を出力するので、そのまま書いてやればよい。
               </p>
             </section>
           </section>

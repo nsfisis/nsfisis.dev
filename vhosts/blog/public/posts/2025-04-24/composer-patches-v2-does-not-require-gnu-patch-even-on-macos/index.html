@@ -82,7 +82,7 @@
               <a href="https://getcomposer.org/" rel="noreferrer" target="_blank">Composer</a> は PHP におけるデファクトスタンダードなパッケージ管理システムである。
             </p>
             <p>
-              Composer を拡張するプラグインの一つに、<a href="https://github.com/cweagans/composer-patches" rel="noreferrer" target="_blank">composer-patches</a> という Composer パッケージがある。 これは、Composer でパッケージをインストールするときにそのパッケージへ任意のパッチを当てるプラグインである。
+              Composer を拡張するプラグインの一つに、<a href="https://github.com/cweagans/composer-patches" rel="noreferrer" target="_blank">composer-patches</a> という Composer パッケージがある。これは、Composer でパッケージをインストールするときにそのパッケージへ任意のパッチを当てるプラグインである。
             </p>
             <p>
               社内で発見しすぐに適用しなければならないバグ修正や、Pull Request こそあるもののなかなかマージされない機能等をすぐさま適用してリリースすることができる。
@@ -94,7 +94,7 @@
           <section id="section--on-macos">
             <h2><a href="#section--on-macos">macOS での問題点</a></h2>
             <p>
-              <code>composer-patches</code> は、macOS で一部のパッチの適用に失敗することが知られている。 関連 issues:
+              <code>composer-patches</code> は、macOS で一部のパッチの適用に失敗することが知られている。関連 issues:
             </p>
             <ul>
               <li>
@@ -105,10 +105,10 @@
               </li>
             </ul>
             <p>
-              これは、<code>composer-patches</code> の想定する <code>patch</code> コマンドが GNU 実装の patch であることに由来する。 macOS にプリインストールされている <code>patch</code> はいわゆる BSD patch であり、GNU patch とは完全な互換性がない。
+              これは、<code>composer-patches</code> の想定する <code>patch</code> コマンドが GNU 実装の patch であることに由来する。macOS にプリインストールされている <code>patch</code> はいわゆる BSD patch であり、GNU patch とは完全な互換性がない。
             </p>
             <p>
-              ワークアラウンドとして、macOS にも GNU patch をインストールしてしまうという方法がある。 例:
+              ワークアラウンドとして、macOS にも GNU patch をインストールしてしまうという方法がある。例:
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ brew install gpatch</span></span>
@@ -124,7 +124,7 @@
               現在ベータ版である <code>composer-patches</code> v2 では、このワークアラウンドが不要になる (見込み)。
             </p>
             <p>
-              最新の実装では、<code>git apply</code> コマンドが最優先で使われる。 また、Git リポジトリがない場合 (<code>config.preferred-install</code> を <code>dist</code> に設定している場合など。デフォルトではそうなる) には <code>git init</code> を使って一時的にリポジトリを作成し、その上で <code>git apply</code> を実行するようになった。
+              最新の実装では、<code>git apply</code> コマンドが最優先で使われる。また、Git リポジトリがない場合 (<code>config.preferred-install</code> を <code>dist</code> に設定している場合など。デフォルトではそうなる) には <code>git init</code> を使って一時的にリポジトリを作成し、その上で <code>git apply</code> を実行するようになった。
             </p>
             <p>
               この変更により、環境ごとに差異のある <code>patch</code> コマンドへの依存がなくなるので、macOS で <code>composer-patches</code> を使うときの厄介事は解消されるものと思われる。

@@ -95,7 +95,7 @@
                 </p>
               </blockquote>
               <p>
-                【日本語訳 (私が訳したもので、公式なものではない)】 送信者は、同じ field name の header field を複数生成してはならない (MUST NOT)。 ただし、header field の値がコンマ区切りのリストとして定義されているか、header field がよく知られた例外 (後述) である場合はその限りでない。
+                【日本語訳 (私が訳したもので、公式なものではない)】 送信者は、同じ field name の header field を複数生成してはならない (MUST NOT)。ただし、header field の値がコンマ区切りのリストとして定義されているか、header field がよく知られた例外 (後述) である場合はその限りでない。
               </p>
             </section>
             <section id="section--specification--recipient">
@@ -106,7 +106,7 @@
                 </p>
               </blockquote>
               <p>
-                【日本語訳 (私が訳したもので、公式なものではない)】 受信者は、同じ field name を持つ複数の header field を、メッセージの意味を変えないようにしつつ同じ順序で追加して、単一のコンマで区切られた <code>&quot;field-name: field-value&quot;</code> のペアに結合してよい (MAY)。 したがって、同じ field name を持つ header field がどのような順序で受信されたかは、結合された値の解釈に影響する。 よって、プロキシは、メッセージを転送する際、header field の順序を変えてはならない (MUST NOT)。
+                【日本語訳 (私が訳したもので、公式なものではない)】 受信者は、同じ field name を持つ複数の header field を、メッセージの意味を変えないようにしつつ同じ順序で追加して、単一のコンマで区切られた <code>&quot;field-name: field-value&quot;</code> のペアに結合してよい (MAY)。したがって、同じ field name を持つ header field がどのような順序で受信されたかは、結合された値の解釈に影響する。よって、プロキシは、メッセージを転送する際、header field の順序を変えてはならない (MUST NOT)。
               </p>
             </section>
             <section id="section--specification--exception">
@@ -117,7 +117,7 @@
                 </p>
               </blockquote>
               <p>
-                【日本語訳 (私が訳したもので、公式なものではない)】 注意: 実際には、<code>Set-Cookie</code> header field (<a href="https://datatracker.ietf.org/doc/html/rfc6265" rel="noreferrer" target="_blank">RFC6265</a>) は、しばしばレスポンスメッセージ中に複数回現れる。 これはリストの構文を使っておらず、上述した同じ field name を持つ header field についての要件に違反している。 この値は単一の値へ結合できないため、受信者は、header field を処理する際、<code>Set-Cookie</code> を特別扱いした方がよい。
+                【日本語訳 (私が訳したもので、公式なものではない)】 注意: 実際には、<code>Set-Cookie</code> header field (<a href="https://datatracker.ietf.org/doc/html/rfc6265" rel="noreferrer" target="_blank">RFC6265</a>) は、しばしばレスポンスメッセージ中に複数回現れる。これはリストの構文を使っておらず、上述した同じ field name を持つ header field についての要件に違反している。この値は単一の値へ結合できないため、受信者は、header field を処理する際、<code>Set-Cookie</code> を特別扱いした方がよい。
               </p>
               <p>
                 おそらく、「送信側」のところで書かれている「よく知られた例外」の一つがこれだと思われる。

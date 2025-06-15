@@ -66,7 +66,7 @@
           <section id="section--intro">
             <h2><a href="#section--intro">はじめに</a></h2>
             <p>
-              Go には、標準ライブラリにテンプレートライブラリ <code>text/template</code> がある。 この <code>text/template</code> における制御構造、<code>with</code> と <code>range</code> は次のように使われる。
+              Go には、標準ライブラリにテンプレートライブラリ <code>text/template</code> がある。この <code>text/template</code> における制御構造、<code>with</code> と <code>range</code> は次のように使われる。
             </p>
             <div class="codeblock">
               <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span># {{ .Title }}</span></span>
@@ -87,7 +87,7 @@
               <code>text/template</code> の <code>.</code> は、現在の操作対象を表す特殊なオブジェクトである。
             </p>
             <p>
-              <code>with</code> や <code>range</code> は、<code>.</code> を変更する効果を持つ。 <code>with</code> は引数に渡されたオブジェクトを <code>.</code> へセットして、内部のテンプレートを実行する。 <code>range</code> は引数に渡されたイテレート可能なオブジェクトに対し、それぞれの要素を <code>.</code> へセットして、要素の個数だけ内部のテンプレートを実行する。
+              <code>with</code> や <code>range</code> は、<code>.</code> を変更する効果を持つ。<code>with</code> は引数に渡されたオブジェクトを <code>.</code> へセットして、内部のテンプレートを実行する。<code>range</code> は引数に渡されたイテレート可能なオブジェクトに対し、それぞれの要素を <code>.</code> へセットして、要素の個数だけ内部のテンプレートを実行する。
             </p>
             <p>
               つまりこのテンプレートは、次のような構造をレンダリングしている (<code>Execute()</code> の第2引数)。
@@ -122,7 +122,7 @@
 <span class="line"><span>{{ end }}</span></span></code></pre>
             </div>
             <p>
-              <code>with</code> や <code>range</code> は、<code>.</code> を自身の対象オブジェクトに変更するので、 単に <code>{{ with .User }}</code> の中で <code>.Title</code> と書いても、それは <code>User</code> の <code>Title</code> プロパティを参照しているとみなされる。
+              <code>with</code> や <code>range</code> は、<code>.</code> を自身の対象オブジェクトに変更するので、単に <code>{{ with .User }}</code> の中で <code>.Title</code> と書いても、それは <code>User</code> の <code>Title</code> プロパティを参照しているとみなされる。
             </p>
             <p>
               <code>text/template</code> では変数が使えるので、テンプレートの先頭で
@@ -152,7 +152,7 @@
 <span class="line"><span>{{ end }}</span></span></code></pre>
             </div>
             <p>
-              <code>$</code> は、テンプレートが実行されるときに渡されたオブジェクトを指す。 これを使えば現在の <code>.</code> に関係なくトップレベルを参照できる。
+              <code>$</code> は、テンプレートが実行されるときに渡されたオブジェクトを指す。これを使えば現在の <code>.</code> に関係なくトップレベルを参照できる。
             </p>
             <p>
               このことは、<a href="https://pkg.go.dev/text/template#hdr-Variables" rel="noreferrer" target="_blank"><code>text/template</code> の公式ドキュメント</a>にも以下のように記載されている。
