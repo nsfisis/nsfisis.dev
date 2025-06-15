@@ -166,14 +166,11 @@
               <p>
                 次に、コードを評価したあとに呼んでいる標準出力と標準エラー出力に対する改行の出力について。 出力バッファから出力させるためだけなら改行を出力させなくとも <code>fflush()</code> だけで事足りると考えたのだが、ないと動かなかったので追加した。 これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。 改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
               </p>
-              <div class="admonition">
+              <div class="admonition" editat="2025-04-23" operation="追記">
                 <div class="admonition-label">
-                  NOTE
+                  2025-04-23 追記
                 </div>
                 <div class="admonition-content">
-                  <p>
-                    <strong><strong>2025-04-23 追記</strong></strong>:
-                  </p>
                   <p>
                     <code>fflush()</code> の前に改行の出力が必要だった理由が判明したので追記する。 これは、<code>index.mjs</code> で標準出力・標準エラー出力へ出力する方法を指定せず、デフォルトの実装に任せているため。 Emscripten のデフォルト実装では、改行コードを出力するまで出力内容がバッファリングされ、<code>fflush()</code> が機能しない。
                   </p>

@@ -199,14 +199,17 @@ function transformNoteElement(doc: Document) {
       return;
     }
 
-    // TODO: 今のセクションレベルに合わせた h* タグにしたい
+    const editatAttr = n.attributes?.get("editat");
+    const operationAttr = n.attributes?.get("operation");
+    const isEditBlock = editatAttr && operationAttr;
+
     const labelElement: Element = {
       kind: "element",
       name: "div",
       attributes: new Map([["class", "admonition-label"]]),
       children: [{
         kind: "text",
-        content: "NOTE",
+        content: isEditBlock ? `${editatAttr} ${operationAttr}` : "NOTE",
         raw: false,
       }],
     };

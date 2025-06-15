@@ -737,6 +737,16 @@ function processDiv(node: DjotDiv): Element {
     };
   }
 
+  if (node.attributes?.class === "edit") {
+    delete node.attributes.class;
+    return {
+      kind: "element",
+      name: "note",
+      attributes: convertAttributes(node.attributes),
+      children: node.children.map(processBlock),
+    };
+  }
+
   return {
     kind: "element",
     name: "div",

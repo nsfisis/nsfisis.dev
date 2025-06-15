@@ -66,7 +66,10 @@ WebAssembly の VM を PHP で実装し、実装に至るまでの道程や WebA
 
 P.S. Ask the Speaker で話した、Ruby VM (written in PHP) on PHP VM (compiled to Wasm) on Wasm VM (written in PHP) on PHP というアイデアは「マジ」なので、続報をお待ちください (自作 Wasm runtime に不足している機能を鋭意実装中です)。
 
-2024-07-07 追記: [コミット a312e95](https://github.com/nsfisis/php-waddiwasi/commit/a312e95a95d243943535f94653822d6796d4637f) で、ついに Ruby VM on PHP VM on Wasm VM on PHP を実現した。現時点での動かしかたは README に記載している。
+{editat="2024-07-07" operation="追記"}
+::: edit
+[コミット a312e95](https://github.com/nsfisis/php-waddiwasi/commit/a312e95a95d243943535f94653822d6796d4637f) で、ついに Ruby VM on PHP VM on Wasm VM on PHP を実現した。現時点での動かしかたは README に記載している。
+:::
 
 {#outro}
 # おわりに
