@@ -13,7 +13,7 @@ type Context = {
   isInPre: boolean;
 };
 
-type Dtd = { type: "block" | "inline"; auto_closing?: boolean };
+type Dtd = { type: "block" | "inline"; self_closing?: boolean };
 
 function getDtd(name: string): Dtd {
   switch (name) {
@@ -26,7 +26,7 @@ function getDtd(name: string): Dtd {
     case "body":
       return { type: "block" };
     case "br":
-      return { type: "block", auto_closing: true };
+      return { type: "block", self_closing: true };
     case "button":
       return { type: "block" };
     case "canvas":
@@ -60,7 +60,7 @@ function getDtd(name: string): Dtd {
     case "header":
       return { type: "block" };
     case "hr":
-      return { type: "block", auto_closing: true };
+      return { type: "block", self_closing: true };
     case "html":
       return { type: "block" };
     case "i":
@@ -68,9 +68,9 @@ function getDtd(name: string): Dtd {
     case "li":
       return { type: "block" };
     case "link":
-      return { type: "block", auto_closing: true };
+      return { type: "block", self_closing: true };
     case "img":
-      return { type: "block" };
+      return { type: "inline", self_closing: true };
     case "ins":
       return { type: "block" };
     case "main":
@@ -78,7 +78,7 @@ function getDtd(name: string): Dtd {
     case "mark":
       return { type: "inline" };
     case "meta":
-      return { type: "block", auto_closing: true };
+      return { type: "block", self_closing: true };
     case "nav":
       return { type: "block" };
     case "noscript":
@@ -237,7 +237,7 @@ function elementNodeToHtmlText(e: Element, ctx: Context): string {
   }
 
   ctx.indentLevel -= 1;
-  if (!dtd.auto_closing) {
+  if (!dtd.self_closing) {
     if (e.name !== "pre") {
       if (isBlockNode(e)) {
         if (needsLineBreak(prevChild)) {
