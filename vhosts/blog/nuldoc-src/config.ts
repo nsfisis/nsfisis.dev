@@ -18,6 +18,7 @@ const ConfigSchema = z.object({
     fqdn: z.string(),
     siteName: z.string(),
     siteCopyrightYear: z.number(),
+    postsPerPage: z.number().default(10),
     tagLabels: z.record(z.string(), z.string()),
   }),
 });

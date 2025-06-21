@@ -11,6 +11,7 @@ author = "nsfisis"
 fqdn = "blog.nsfisis.dev"
 siteName = "REPL: Rest-Eat-Program Loop"
 siteCopyrightYear = 2021
+postsPerPage = 10
 
 [blog.tagLabels]
 c = "C"

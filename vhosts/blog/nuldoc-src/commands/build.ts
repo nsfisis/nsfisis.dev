@@ -14,7 +14,7 @@ import {
   getPostPublishedDate,
   PostPage,
 } from "../generators/post.ts";
-import { generatePostListPage } from "../generators/post_list.ts";
+import { generatePostListPages } from "../generators/post_list.ts";
 import { generateSlidePage, SlidePage } from "../generators/slide.ts";
 import { generateSlideListPage } from "../generators/slide_list.ts";
 import { generateTagPage, TagPage } from "../generators/tag.ts";
@@ -70,10 +70,22 @@ async function parsePosts(
 }
 
 async function buildPostListPage(posts: PostPage[], config: Config) {
-  const postListPage = await generatePostListPage(posts, config);
-  await writePage(postListPage, config);
+  // Sort posts by published date (newest first)
+  const sortedPosts = [...posts].sort((a, b) => {
+    const ta = dateToString(getPostPublishedDate(a));
+    const tb = dateToString(getPostPublishedDate(b));
+    if (ta > tb) return -1;
+    if (ta < tb) return 1;
+    return 0;
+  });
+
+  const postListPages = await generatePostListPages(sortedPosts, config);
+  for (const page of postListPages) {
+    await writePage(page, config);
+  }
+
   const postFeedPage = await generateFeedPageFromEntries(
-    postListPage.href,
+    "/posts/",
     "posts",
     `投稿一覧｜${config.blog.siteName}`,
     posts,

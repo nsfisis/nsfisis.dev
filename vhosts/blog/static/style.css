@@ -312,3 +312,54 @@ img {
 .footnotes {
   border-top: 1px solid #000;
 }
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid #d1d1d1;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.pagination-prev,
+.pagination-next {
+  flex: 1;
+}
+
+.pagination-prev {
+  text-align: left;
+}
+
+.pagination-next {
+  text-align: right;
+}
+
+.pagination-info {
+  flex: 0 0 auto;
+  text-align: center;
+  color: #000;
+  font-size: 0.9rem;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+.pagination a:hover {
+  color: #666;
+}
+
+@media screen and (max-width: 768px) {
+  .pagination {
+    font-size: 0.9rem;
+  }
+
+  .pagination a {
+    padding: 0.5rem;
+  }
+}
