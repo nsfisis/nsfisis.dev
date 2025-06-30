@@ -11,68 +11,44 @@ export default function Pagination(
     return <div></div>;
   }
 
-  const firstPage = 1;
-  const lastPage = totalPages;
-  const prevPage = currentPage > 1 ? currentPage - 1 : null;
-  const nextPage = currentPage < totalPages ? currentPage + 1 : null;
-
-  const firstHref = pageUrlAt(basePath, firstPage);
-  const lastHref = pageUrlAt(basePath, lastPage);
-  const prevHref = prevPage ? pageUrlAt(basePath, prevPage) : null;
-  const nextHref = nextPage ? pageUrlAt(basePath, nextPage) : null;
+  const pages = generatePageNumbers(currentPage, totalPages);
 
   return (
     <nav className="pagination">
       <div className="pagination-prev">
-        {prevHref
+        {currentPage > 1
           ? (
-            <a href={prevHref}>
+            <a href={pageUrlAt(basePath, currentPage - 1)}>
               前へ
             </a>
           )
           : null}
       </div>
-      <div
-        className={"pagination-page" +
-          (firstPage === currentPage ? " pagination-page-current" : "")}
-      >
-        {firstPage === currentPage
-          ? String(firstPage)
-          : <a href={firstHref}>{String(firstPage)}</a>}
-      </div>
-      {currentPage - firstPage > 1
-        ? (
-          <div className="pagination-elipsis">
-            …
-          </div>
-        )
-        : null}
-      {currentPage !== firstPage && currentPage !== lastPage
-        ? (
-          <div className="pagination-page pagination-page-current">
-            {String(currentPage)}
-          </div>
-        )
-        : null}
-      {lastPage - currentPage > 1
-        ? (
-          <div className="pagination-elipsis">
-            …
-          </div>
-        )
-        : null}
-      <div
-        className={"pagination-page" +
-          (lastPage === currentPage ? " pagination-page-current" : "")}
-      >
-        {lastPage === currentPage
-          ? String(lastPage)
-          : <a href={lastHref}>{String(lastPage)}</a>}
-      </div>
+      {pages.map((page) => {
+        if (page === "...") {
+          return (
+            <div className="pagination-elipsis">
+              …
+            </div>
+          );
+        } else if (page === currentPage) {
+          return (
+            <div className="pagination-page pagination-page-current">
+              <span>{String(page)}</span>
+            </div>
+          );
+        } else {
+          return (
+            <div className="pagination-page">
+              <a href={pageUrlAt(basePath, page)}>{String(page)}</a>
+            </div>
+          );
+        }
+      })}
       <div className="pagination-next">
-        {nextHref
+        {currentPage < totalPages
           ? (
-            <a href={nextHref}>
+            <a href={pageUrlAt(basePath, currentPage + 1)}>
               次へ
             </a>
           )
@@ -80,6 +56,47 @@ export default function Pagination(
       </div>
     </nav>
   );
+}
+
+type PageItem = number | "...";
+
+/**
+ * Generates page numbers for pagination display.
+ *
+ * - Always show the first page
+ * - Always show the last page
+ * - Always show the current page
+ * - Always show the page before and after the current page
+ * - If there's only one page gap between displayed pages, fill it
+ * - If there are two or more pages gap between displayed pages, show ellipsis
+ */
+function generatePageNumbers(
+  currentPage: number,
+  totalPages: number,
+): PageItem[] {
+  const pages = new Set<number>();
+  pages.add(1);
+  pages.add(Math.max(1, currentPage - 1));
+  pages.add(currentPage);
+  pages.add(Math.min(totalPages, currentPage + 1));
+  pages.add(totalPages);
+
+  const sorted = Array.from(pages).sort((a, b) => a - b);
+
+  const result: PageItem[] = [];
+  for (let i = 0; i < sorted.length; i++) {
+    if (i > 0) {
+      const gap = sorted[i] - sorted[i - 1];
+      if (gap === 2) {
+        result.push(sorted[i - 1] + 1);
+      } else if (gap > 2) {
+        result.push("...");
+      }
+    }
+    result.push(sorted[i]);
+  }
+
+  return result;
 }
 
 function pageUrlAt(basePath: string, page: number): string {

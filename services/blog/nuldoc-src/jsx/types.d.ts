@@ -66,6 +66,7 @@ declare global {
       p: IntrinsicElementType;
       script: { src: string; type?: string; defer?: "true" };
       section: IntrinsicElementType;
+      span: IntrinsicElementType;
       time: IntrinsicElementType & { datetime?: string };
       title: IntrinsicElementType;
       ul: IntrinsicElementType;
