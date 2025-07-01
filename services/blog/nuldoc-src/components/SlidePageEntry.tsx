@@ -5,8 +5,12 @@ import {
 } from "../generators/post.ts";
 import { SlidePage } from "../generators/slide.ts";
 import { dateToString } from "../revision.ts";
+import { Config } from "../config.ts";
+import TagList from "./TagList.tsx";
 
-export default function SlidePageEntry({ slide }: { slide: SlidePage }) {
+type Props = { slide: SlidePage; config: Config };
+
+export default function SlidePageEntry({ slide, config }: Props) {
   return (
     <article className="post-entry">
       <a href={slide.href}>
@@ -32,6 +36,9 @@ export default function SlidePageEntry({ slide }: { slide: SlidePage }) {
               </time>
             )}
           {postHasAnyUpdates(slide) && " 更新"}
+          {slide.tags.length !== 0 && (
+            <TagList tags={slide.tags} config={config} />
+          )}
         </footer>
       </a>
     </article>

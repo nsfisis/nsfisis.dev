@@ -33,7 +33,9 @@ export default function SlideListPage(
             if (ta > tb) return -1;
             if (ta < tb) return 1;
             return 0;
-          }).map((slide) => <SlidePageEntry slide={slide} key={slide.uuid} />)}
+          }).map((slide) => (
+            <SlidePageEntry slide={slide} config={config} key={slide.uuid} />
+          ))}
         </main>
         <GlobalFooter config={config} />
       </body>

@@ -39,7 +39,9 @@ export default function PostListPage(
             basePath="/posts/"
           />
 
-          {posts.map((post) => <PostPageEntry post={post} key={post.uuid} />)}
+          {posts.map((post) => (
+            <PostPageEntry post={post} config={config} key={post.uuid} />
+          ))}
 
           <Pagination
             currentPage={currentPage}

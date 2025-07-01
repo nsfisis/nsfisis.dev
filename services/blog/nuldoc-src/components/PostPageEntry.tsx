@@ -5,8 +5,12 @@ import {
   PostPage,
 } from "../generators/post.ts";
 import { dateToString } from "../revision.ts";
+import { Config } from "../config.ts";
+import TagList from "./TagList.tsx";
 
-export default function PostPageEntry({ post }: { post: PostPage }) {
+type Props = { post: PostPage; config: Config };
+
+export default function PostPageEntry({ post, config }: Props) {
   return (
     <article className="post-entry">
       <a href={post.href}>
@@ -32,6 +36,9 @@ export default function PostPageEntry({ post }: { post: PostPage }) {
               </time>
             )}
           {postHasAnyUpdates(post) && " 更新"}
+          {post.tags.length !== 0 && (
+            <TagList tags={post.tags} config={config} />
+          )}
         </footer>
       </a>
     </article>
