@@ -92,7 +92,7 @@ H~2~O
 
 {+inserted+} {-deleted-}
 
-footenote. [^foo]
+footnote. [^foo]
 
 [^foo]: foo bar
 
