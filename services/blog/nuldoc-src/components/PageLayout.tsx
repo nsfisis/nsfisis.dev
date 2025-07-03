@@ -43,6 +43,8 @@ export default function PageLayout(
         <meta property="og:description" content={metaDescription} />
         <meta property="og:site_name" content={config.blog.siteName} />
         <meta property="og:locale" content="ja_JP" />
+        {/* https://b.hatena.ne.jp/help/entry/nocomment */}
+        <meta name="Hatena::Bookmark" content="nocomment" />
         {metaAtomFeedHref &&
           (
             <link
