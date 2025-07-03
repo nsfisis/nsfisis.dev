@@ -366,6 +366,15 @@ img {
 
 @media screen and (max-width: 768px) {
   .pagination {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.5rem;
+  }
+
+  .pagination-page a,
+  .pagination-page span {
+    padding: 0.4rem 0.6rem;
+    min-width: 0;
   }
 }
