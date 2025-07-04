@@ -1,4 +1,5 @@
 import type { Element, Node } from "../dom.ts";
+import { elem, text } from "../dom.ts";
 import type {
   JSXNode,
   JSXNullableSimpleNode,
@@ -16,7 +17,7 @@ function transformNode(node: JSXNode): Promise<Node[]> {
       .filter((c): c is JSXSimpleNode => c != null && c !== false)
       .map((c) => {
         if (typeof c === "string") {
-          return { kind: "text", content: c, raw: false };
+          return text(c);
         } else if ("kind" in c) {
           return c;
         } else {
@@ -32,13 +33,8 @@ export async function renderToDOM(
   const { tag, props } = element;
   if (typeof tag === "string") {
     const { children, ...attrs } = props;
-    const attrsMap = new Map(Object.entries(attrs)) as Map<string, string>;
-    return {
-      kind: "element",
-      name: tag,
-      attributes: attrsMap,
-      children: await transformNode(children),
-    };
+    const attrsMap = attrs as Record<string, string>;
+    return elem(tag, attrsMap, ...(await transformNode(children)));
   } else {
     return renderToDOM(await tag(props));
   }

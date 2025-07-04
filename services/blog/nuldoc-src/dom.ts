@@ -1,33 +1,58 @@
 export type Text = {
   kind: "text";
   content: string;
-  raw: false;
 };
 
 export type RawHTML = {
-  kind: "text";
-  content: string;
-  raw: true;
+  kind: "raw";
+  html: string;
 };
 
 export type Element = {
   kind: "element";
   name: string;
-  attributes: Map<string, string>;
+  attributes: Record<string, string>;
   children: Node[];
 };
 
 export type Node = Element | Text | RawHTML;
 
+export function text(content: string): Text {
+  return {
+    kind: "text",
+    content,
+  };
+}
+
+export function rawHTML(html: string): RawHTML {
+  return {
+    kind: "raw",
+    html,
+  };
+}
+
+export function elem(
+  name: string,
+  attributes?: Record<string, string>,
+  ...children: Node[]
+): Element {
+  return {
+    kind: "element",
+    name,
+    attributes: attributes || {},
+    children,
+  };
+}
+
 export function addClass(e: Element, klass: string) {
-  const classes = e.attributes.get("class");
+  const classes = e.attributes.class;
   if (classes === undefined) {
-    e.attributes.set("class", klass);
+    e.attributes.class = klass;
   } else {
     const classList = classes.split(" ");
     classList.push(klass);
     classList.sort();
-    e.attributes.set("class", classList.join(" "));
+    e.attributes.class = classList.join(" ");
   }
 }
 
@@ -99,4 +124,31 @@ export async function forEachChildRecursivelyAsync(
     }
   };
   await forEachChildAsync(e, g);
+}
+
+export function forEachElementOfType(
+  root: Element,
+  elementName: string,
+  f: (e: Element) => void,
+) {
+  forEachChildRecursively(root, (n) => {
+    if (n.kind === "element" && n.name === elementName) {
+      f(n);
+    }
+  });
+}
+
+export function processTextNodesInElement(
+  e: Element,
+  f: (text: string) => Node[],
+) {
+  const newChildren: Node[] = [];
+  for (const child of e.children) {
+    if (child.kind === "text") {
+      newChildren.push(...f(child.content));
+    } else {
+      newChildren.push(child);
+    }
+  }
+  e.children = newChildren;
 }

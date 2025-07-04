@@ -127,7 +127,7 @@ function getDtd(name: string): Dtd {
 }
 
 function isInlineNode(n: Node): boolean {
-  if (n.kind === "text") {
+  if (n.kind === "text" || n.kind === "raw") {
     return true;
   }
   if (n.name !== "a") {
@@ -146,11 +146,9 @@ function isBlockNode(n: Node): boolean {
 
 function nodeToHtmlText(n: Node, ctx: Context): string {
   if (n.kind === "text") {
-    if (n.raw) {
-      return n.content;
-    } else {
-      return textNodeToHtmlText(n, ctx);
-    }
+    return textNodeToHtmlText(n, ctx);
+  } else if (n.kind === "raw") {
+    return n.html;
   } else {
     return elementNodeToHtmlText(n, ctx);
   }
@@ -259,8 +257,8 @@ function indent(ctx: Context): string {
 }
 
 function getElementAttributes(e: Element): [string, string][] {
-  return [...e.attributes.entries()]
-    .filter((a) => !a[0].startsWith("--"))
+  return [...Object.entries(e.attributes)]
+    .filter((a) => !a[0].startsWith("__"))
     .filter((a) => a[1] !== undefined)
     .sort(
       (a, b) => {

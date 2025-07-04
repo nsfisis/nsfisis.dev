@@ -46,7 +46,7 @@ import {
   Url as DjotUrl,
   Verbatim as DjotVerbatim,
 } from "@djot/djot";
-import { Element, Node } from "../dom.ts";
+import { elem, Element, Node, rawHTML, text } from "../dom.ts";
 
 function processBlock(node: DjotBlock): Element {
   switch (node.tag) {
@@ -80,140 +80,93 @@ function processBlock(node: DjotBlock): Element {
 }
 
 function processSection(node: DjotSection): Element {
-  return {
-    kind: "element",
-    name: "section",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processBlock),
-  };
+  return elem(
+    "section",
+    node.attributes,
+    ...node.children.map(processBlock),
+  );
 }
 
 function processPara(node: DjotPara): Element {
-  return {
-    kind: "element",
-    name: "p",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "p",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processHeading(node: DjotHeading): Element {
-  const attributes = convertAttributes(node.attributes);
-  return {
-    kind: "element",
-    name: "h",
-    attributes,
-    children: node.children.map(processInline),
-  };
+  return elem("h", node.attributes, ...node.children.map(processInline));
 }
 
 function processThematicBreak(node: DjotThematicBreak): Element {
-  return {
-    kind: "element",
-    name: "hr",
-    attributes: convertAttributes(node.attributes),
-    children: [],
-  };
+  return elem("hr", node.attributes);
 }
 
 function processBlockQuote(node: DjotBlockQuote): Element {
-  return {
-    kind: "element",
-    name: "blockquote",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processBlock),
-  };
+  return elem(
+    "blockquote",
+    node.attributes,
+    ...node.children.map(processBlock),
+  );
 }
 
 function processCodeBlock(node: DjotCodeBlock): Element {
-  const attributes = convertAttributes(node.attributes);
+  const attributes = node.attributes || {};
   if (node.lang) {
-    attributes.set("language", node.lang);
+    attributes.language = node.lang;
   }
   if (node.attributes?.filename) {
-    attributes.set("filename", node.attributes.filename);
+    attributes.filename = node.attributes.filename;
   }
   if (node.attributes?.numbered) {
-    attributes.set("numbered", "true");
+    attributes.numbered = "true";
   }
-  return {
-    kind: "element",
-    name: "codeblock",
-    attributes,
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
+  return elem("codeblock", attributes, text(node.text));
 }
 
 function processBulletList(node: DjotBulletList): Element {
-  const attributes = convertAttributes(node.attributes);
-  attributes.set("--tight", node.tight ? "true" : "false");
-  return {
-    kind: "element",
-    name: "ul",
-    attributes,
-    children: node.children.map(processListItem),
-  };
+  const attributes = node.attributes || {};
+  attributes.__tight = node.tight ? "true" : "false";
+  return elem("ul", attributes, ...node.children.map(processListItem));
 }
 
 function processOrderedList(node: DjotOrderedList): Element {
-  const attributes = convertAttributes(node.attributes);
-  attributes.set("--tight", node.tight ? "true" : "false");
+  const attributes = node.attributes || {};
+  attributes.__tight = node.tight ? "true" : "false";
   if (node.start !== undefined && node.start !== 1) {
-    attributes.set("start", node.start.toString());
+    attributes.start = node.start.toString();
   }
-  return {
-    kind: "element",
-    name: "ol",
-    attributes,
-    children: node.children.map(processListItem),
-  };
+  return elem("ol", attributes, ...node.children.map(processListItem));
 }
 
 function processTaskList(node: DjotTaskList): Element {
-  const attributes = convertAttributes(node.attributes);
-  attributes.set("type", "task");
-  attributes.set("--tight", node.tight ? "true" : "false");
-  return {
-    kind: "element",
-    name: "ul",
-    attributes,
-    children: node.children.map(processTaskListItem),
-  };
+  const attributes = node.attributes || {};
+  attributes.type = "task";
+  attributes.__tight = node.tight ? "true" : "false";
+  return elem("ul", attributes, ...node.children.map(processTaskListItem));
 }
 
 function processListItem(node: DjotListItem): Element {
-  return {
-    kind: "element",
-    name: "li",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processBlock),
-  };
+  return elem(
+    "li",
+    node.attributes,
+    ...node.children.map(processBlock),
+  );
 }
 
 function processTaskListItem(node: DjotTaskListItem): Element {
-  const attributes = convertAttributes(node.attributes);
-  attributes.set("checked", node.checkbox === "checked" ? "true" : "false");
-  return {
-    kind: "element",
-    name: "li",
-    attributes,
-    children: node.children.map(processBlock),
-  };
+  const attributes = node.attributes || {};
+  attributes.checked = node.checkbox === "checked" ? "true" : "false";
+  return elem("li", attributes, ...node.children.map(processBlock));
 }
 
 function processDefinitionList(node: DjotDefinitionList): Element {
-  return {
-    kind: "element",
-    name: "dl",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.flatMap(processDefinitionListItem),
-  };
+  return elem(
+    "dl",
+    node.attributes,
+    ...node.children.flatMap(processDefinitionListItem),
+  );
 }
 
 function processDefinitionListItem(node: DjotDefinitionListItem): Element[] {
@@ -224,41 +177,33 @@ function processDefinitionListItem(node: DjotDefinitionListItem): Element[] {
 }
 
 function processTerm(node: DjotTerm): Element {
-  return {
-    kind: "element",
-    name: "dt",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "dt",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processDefinition(node: DjotDefinition): Element {
-  return {
-    kind: "element",
-    name: "dd",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processBlock),
-  };
+  return elem(
+    "dd",
+    node.attributes,
+    ...node.children.map(processBlock),
+  );
 }
 
 function processTable(node: DjotTable): Element {
   // Tables in Djot have a caption as first child and then rows
   // For now, we'll create a basic table structure and ignore caption
-  const tableElement: Element = {
-    kind: "element",
-    name: "table",
-    attributes: convertAttributes(node.attributes),
-    children: [],
-  };
+  const tableElement = elem("table", node.attributes);
 
   // Process caption if it exists (first child)
   if (node.children.length > 0 && node.children[0].tag === "caption") {
-    const caption: Element = {
-      kind: "element",
-      name: "caption",
-      attributes: new Map(),
-      children: node.children[0].children.map(processInline),
-    };
+    const caption = elem(
+      "caption",
+      undefined,
+      ...node.children[0].children.map(processInline),
+    );
     tableElement.children.push(caption);
   }
 
@@ -270,26 +215,22 @@ function processTable(node: DjotTable): Element {
   for (let i = 1; i < node.children.length; i++) {
     const row = node.children[i];
     if (row.tag === "row") {
-      const rowElement: Element = {
-        kind: "element",
-        name: "tr",
-        attributes: convertAttributes(row.attributes),
-        children: row.children.map((cell) => {
-          const cellElement: Element = {
-            kind: "element",
-            name: cell.head ? "th" : "td",
-            attributes: convertAttributes(cell.attributes),
-            children: cell.children.map(processInline),
-          };
-
+      const rowElement = elem(
+        "tr",
+        row.attributes,
+        ...row.children.map((cell) => {
+          const cellAttributes = cell.attributes || {};
           // Set alignment attribute if needed
           if (cell.align !== "default") {
-            cellElement.attributes.set("align", cell.align);
+            cellAttributes.align = cell.align;
           }
-
-          return cellElement;
+          return elem(
+            cell.head ? "th" : "td",
+            cellAttributes,
+            ...cell.children.map(processInline),
+          );
         }),
-      };
+      );
 
       if (row.head) {
         headerRows.push(rowElement);
@@ -301,21 +242,11 @@ function processTable(node: DjotTable): Element {
 
   // Add thead and tbody if needed
   if (headerRows.length > 0) {
-    tableElement.children.push({
-      kind: "element",
-      name: "thead",
-      attributes: new Map(),
-      children: headerRows,
-    });
+    tableElement.children.push(elem("thead", undefined, ...headerRows));
   }
 
   if (bodyRows.length > 0) {
-    tableElement.children.push({
-      kind: "element",
-      name: "tbody",
-      attributes: new Map(),
-      children: bodyRows,
-    });
+    tableElement.children.push(elem("tbody", undefined, ...bodyRows));
   }
 
   return tableElement;
@@ -377,80 +308,49 @@ function processInline(node: DjotInline): Node {
 }
 
 function processStr(node: DjotStr): Node {
-  return {
-    kind: "text",
-    content: node.text,
-    raw: false,
-  };
+  return text(node.text);
 }
 
 function processSoftBreak(_node: DjotSoftBreak): Node {
-  return {
-    kind: "text",
-    content: "\n",
-    raw: false,
-  };
+  return text("\n");
 }
 
 function processHardBreak(_node: DjotHardBreak): Node {
-  return {
-    kind: "element",
-    name: "br",
-    attributes: new Map(),
-    children: [],
-  };
+  return elem("br");
 }
 
 function processVerbatim(node: DjotVerbatim): Element {
-  return {
-    kind: "element",
-    name: "code",
-    attributes: convertAttributes(node.attributes),
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
+  return elem("code", node.attributes, text(node.text));
 }
 
 function processEmph(node: DjotEmph): Element {
-  return {
-    kind: "element",
-    name: "em",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "em",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processStrong(node: DjotStrong): Element {
-  return {
-    kind: "element",
-    name: "strong",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "strong",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processLink(node: DjotLink): Element {
-  const attributes = convertAttributes(node.attributes);
+  const attributes = node.attributes || {};
   if (node.destination !== undefined) {
-    attributes.set("href", node.destination);
+    attributes.href = node.destination;
   }
-  return {
-    kind: "element",
-    name: "a",
-    attributes,
-    children: node.children.map(processInline),
-  };
+  return elem("a", attributes, ...node.children.map(processInline));
 }
 
 function processImage(node: DjotImage): Element {
-  const attributes = convertAttributes(node.attributes);
+  const attributes = node.attributes || {};
   if (node.destination !== undefined) {
-    attributes.set("src", node.destination);
+    attributes.src = node.destination;
   }
 
   // Alt text is derived from children in Djot
@@ -464,157 +364,105 @@ function processImage(node: DjotImage): Element {
     .join("");
 
   if (alt) {
-    attributes.set("alt", alt);
+    attributes.alt = alt;
   }
 
-  return {
-    kind: "element",
-    name: "img",
-    attributes,
-    children: [],
-  };
+  return elem("img", attributes);
 }
 
 function processMark(node: DjotMark): Element {
-  return {
-    kind: "element",
-    name: "mark",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "mark",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processSuperscript(node: DjotSuperscript): Element {
-  return {
-    kind: "element",
-    name: "sup",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "sup",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processSubscript(node: DjotSubscript): Element {
-  return {
-    kind: "element",
-    name: "sub",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "sub",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processInsert(node: DjotInsert): Element {
-  return {
-    kind: "element",
-    name: "ins",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "ins",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processDelete(node: DjotDelete): Element {
-  return {
-    kind: "element",
-    name: "del",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "del",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processEmail(node: DjotEmail): Element {
-  return {
-    kind: "element",
-    name: "email",
-    attributes: convertAttributes(node.attributes),
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
+  return elem("email", node.attributes, text(node.text));
 }
 
 function processFootnoteReference(node: DjotFootnoteReference): Element {
-  return {
-    kind: "element",
-    name: "footnoteref",
-    attributes: new Map([["reference", node.text]]),
-    children: [],
-  };
+  return elem("footnoteref", { reference: node.text });
 }
 
 function processUrl(node: DjotUrl): Element {
-  return {
-    kind: "element",
-    name: "a",
-    attributes: new Map([
-      ["href", node.text],
-      ...Object.entries(node.attributes || {}),
-    ]),
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
+  return elem(
+    "a",
+    {
+      href: node.text,
+      ...node.attributes,
+    },
+    text(node.text),
+  );
 }
 
 function processSpan(node: DjotSpan): Element {
-  return {
-    kind: "element",
-    name: "span",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processInline),
-  };
+  return elem(
+    "span",
+    node.attributes,
+    ...node.children.map(processInline),
+  );
 }
 
 function processInlineMath(node: DjotInlineMath): Element {
   // For inline math, we'll wrap it in a span with a class
-  return {
-    kind: "element",
-    name: "span",
-    attributes: new Map([
-      ["class", "math inline"],
-      ...Object.entries(node.attributes || {}),
-    ]),
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
+  return elem(
+    "span",
+    {
+      class: "math inline",
+      ...node.attributes,
+    },
+    text(node.text),
+  );
 }
 
 function processDisplayMath(node: DjotDisplayMath): Element {
   // For display math, we'll wrap it in a div with a class
-  return {
-    kind: "element",
-    name: "div",
-    attributes: new Map([
-      ["class", "math display"],
-      ...Object.entries(node.attributes || {}),
-    ]),
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
+  return elem(
+    "div",
+    {
+      class: "math display",
+      ...node.attributes,
+    },
+    text(node.text),
+  );
 }
 
 function processNonBreakingSpace(_node: DjotNonBreakingSpace): Node {
-  return {
-    kind: "text",
-    content: "\u00A0", // Unicode non-breaking space
-    raw: false,
-  };
+  return text("\u00A0"); // Unicode non-breaking space
 }
 
 function processSymb(node: DjotSymb): Node {
@@ -634,170 +482,98 @@ function processSymb(node: DjotSymb): Node {
 
   const symbolText = symbolMap[node.alias] || node.alias;
 
-  return {
-    kind: "text",
-    content: symbolText,
-    raw: false,
-  };
+  return text(symbolText);
 }
 
 function processRawInline(node: DjotRawInline): Node {
   // If the format is HTML, return as raw HTML
   if (node.format === "html" || node.format === "HTML") {
-    return {
-      kind: "text",
-      content: node.text,
-      raw: true,
-    };
+    return rawHTML(node.text);
   }
 
   // For other formats, just return as text
-  return {
-    kind: "text",
-    content: node.text,
-    raw: false,
-  };
+  return text(node.text);
 }
 
 function processDoubleQuoted(node: DjotDoubleQuoted): Node {
   const children = node.children.map(processInline);
-  const attributes = convertAttributes(node.attributes);
+  const attributes = node.attributes || {};
 
   if (
     children.length === 1 && children[0].kind === "text" &&
-    attributes.size === 0
+    Object.keys(attributes).length === 0
   ) {
     const content = children[0].content;
-    return {
-      kind: "text",
-      content: `\u201C${content}\u201D`,
-      raw: false,
-    };
+    return text(`\u201C${content}\u201D`);
   } else {
-    return {
-      kind: "element",
-      name: "span",
-      attributes: convertAttributes(node.attributes),
-      children,
-    };
+    return elem("span", node.attributes, ...children);
   }
 }
 
 function processSingleQuoted(node: DjotSingleQuoted): Node {
   const children = node.children.map(processInline);
-  const attributes = convertAttributes(node.attributes);
+  const attributes = node.attributes || {};
 
   if (
     children.length === 1 && children[0].kind === "text" &&
-    attributes.size === 0
+    Object.keys(attributes).length === 0
   ) {
     const content = children[0].content;
-    return {
-      kind: "text",
-      content: `\u2018${content}\u2019`,
-      raw: false,
-    };
+    return text(`\u2018${content}\u2019`);
   } else {
-    return {
-      kind: "element",
-      name: "span",
-      attributes: convertAttributes(node.attributes),
-      children,
-    };
+    return elem("span", node.attributes, ...children);
   }
 }
 
 function processSmartPunctuation(node: DjotSmartPunctuation): Node {
   // Map smart punctuation types to Unicode characters
   const punctuationMap: Record<string, string> = {
-    "left_single_quote": "\u2018", // '
-    "right_single_quote": "\u2019", // '
-    "left_double_quote": "\u201C", // "
-    "right_double_quote": "\u201D", // "
-    "ellipses": "\u2026", // …
-    "em_dash": "\u2014", // —
-    "en_dash": "\u2013", // –
+    left_single_quote: "\u2018", // '
+    right_single_quote: "\u2019", // '
+    left_double_quote: "\u201C", // "
+    right_double_quote: "\u201D", // "
+    ellipses: "\u2026", // …
+    em_dash: "\u2014", // —
+    en_dash: "\u2013", // –
   };
 
-  return {
-    kind: "text",
-    content: punctuationMap[node.type] || node.text,
-    raw: false,
-  };
+  return text(punctuationMap[node.type] || node.text);
 }
 
 function processDiv(node: DjotDiv): Element {
   if (node.attributes?.class === "note") {
     delete node.attributes.class;
-    return {
-      kind: "element",
-      name: "note",
-      attributes: convertAttributes(node.attributes),
-      children: node.children.map(processBlock),
-    };
+    return elem(
+      "note",
+      node.attributes,
+      ...node.children.map(processBlock),
+    );
   }
 
   if (node.attributes?.class === "edit") {
     delete node.attributes.class;
-    return {
-      kind: "element",
-      name: "note",
-      attributes: convertAttributes(node.attributes),
-      children: node.children.map(processBlock),
-    };
+    return elem(
+      "note",
+      node.attributes,
+      ...node.children.map(processBlock),
+    );
   }
 
-  return {
-    kind: "element",
-    name: "div",
-    attributes: convertAttributes(node.attributes),
-    children: node.children.map(processBlock),
-  };
+  return elem(
+    "div",
+    node.attributes,
+    ...node.children.map(processBlock),
+  );
 }
 
 function processRawBlock(node: DjotRawBlock): Element {
   // If the format is HTML, wrap the HTML content in a div
   if (node.format === "html" || node.format === "HTML") {
-    return {
-      kind: "element",
-      name: "div",
-      attributes: new Map([["class", "raw-html"]]),
-      children: [
-        {
-          kind: "text",
-          content: node.text,
-          raw: true,
-        },
-      ],
-    };
+    return elem("div", { class: "raw-html" }, rawHTML(node.text));
   }
 
   // For other formats, wrap in a pre tag
-  return {
-    kind: "element",
-    name: "pre",
-    attributes: new Map([["data-format", node.format]]),
-    children: [
-      {
-        kind: "text",
-        content: node.text,
-        raw: false,
-      },
-    ],
-  };
-}
-
-// Helper function to convert Djot attributes to Nuldoc attributes
-function convertAttributes(
-  attrs?: Record<string, string>,
-): Map<string, string> {
-  const result = new Map<string, string>();
-  if (attrs) {
-    for (const [key, value] of Object.entries(attrs)) {
-      result.set(key, value);
-    }
-  }
-  return result;
+  return elem("pre", { "data-format": node.format }, text(node.text));
 }
 
 export function djot2ndoc(doc: DjotDoc): Element {
@@ -808,35 +584,19 @@ export function djot2ndoc(doc: DjotDoc): Element {
 
   // Process footnotes if any exist
   if (doc.footnotes && Object.keys(doc.footnotes).length > 0) {
-    const footnoteSection: Element = {
-      kind: "element",
-      name: "section",
-      attributes: new Map([["class", "footnotes"]]),
-      children: [],
-    };
+    const footnoteSection = elem("section", { class: "footnotes" });
 
     for (const [id, footnote] of Object.entries(doc.footnotes)) {
-      const footnoteElement: Element = {
-        kind: "element",
-        name: "footnote",
-        attributes: new Map([["id", id]]),
-        children: footnote.children.map(processBlock),
-      };
+      const footnoteElement = elem(
+        "footnote",
+        { id },
+        ...footnote.children.map(processBlock),
+      );
       footnoteSection.children.push(footnoteElement);
     }
 
     children.push(footnoteSection);
   }
 
-  return {
-    kind: "element",
-    name: "__root__",
-    attributes: new Map(),
-    children: [{
-      kind: "element",
-      name: "article",
-      attributes: new Map(),
-      children,
-    }],
-  };
+  return elem("__root__", undefined, elem("article", undefined, ...children));
 }

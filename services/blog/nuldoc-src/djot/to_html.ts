@@ -3,14 +3,19 @@ import { Document, TocEntry } from "./document.ts";
 import { NuldocError } from "../errors.ts";
 import {
   addClass,
+  elem,
   Element,
   forEachChild,
   forEachChildRecursively,
   forEachChildRecursivelyAsync,
+  forEachElementOfType,
   innerText,
   Node,
+  processTextNodesInElement,
   RawHTML,
+  rawHTML,
   Text,
+  text,
 } from "../dom.ts";
 
 export default async function toHtml(doc: Document): Promise<Document> {
@@ -41,15 +46,11 @@ function mergeConsecutiveTextNodes(doc: Document) {
     let currentTextContent = "";
 
     for (const child of n.children) {
-      if (child.kind === "text" && !child.raw) {
+      if (child.kind === "text") {
         currentTextContent += child.content;
       } else {
         if (currentTextContent !== "") {
-          newChildren.push({
-            kind: "text",
-            content: currentTextContent,
-            raw: false,
-          });
+          newChildren.push(text(currentTextContent));
           currentTextContent = "";
         }
         newChildren.push(child);
@@ -57,11 +58,7 @@ function mergeConsecutiveTextNodes(doc: Document) {
     }
 
     if (currentTextContent !== "") {
-      newChildren.push({
-        kind: "text",
-        content: currentTextContent,
-        raw: false,
-      });
+      newChildren.push(text(currentTextContent));
     }
 
     n.children = newChildren;
@@ -106,32 +103,23 @@ function transformLinkLikeToAnchorElement(doc: Document) {
       return;
     }
 
-    const newChildren: Node[] = [];
-    for (const child of n.children) {
-      if (child.kind !== "text") {
-        newChildren.push(child);
-        continue;
-      }
-      let restContent = child.content;
+    processTextNodesInElement(n, (content) => {
+      const nodes: Node[] = [];
+      let restContent = content;
       while (restContent !== "") {
         const match = /^(.*?)(https?:\/\/[^ \n]+)(.*)$/s.exec(restContent);
         if (!match) {
-          newChildren.push({ kind: "text", content: restContent, raw: false });
+          nodes.push(text(restContent));
           restContent = "";
           break;
         }
         const [_, prefix, url, suffix] = match;
-        newChildren.push({ kind: "text", content: prefix, raw: false });
-        newChildren.push({
-          kind: "element",
-          name: "a",
-          attributes: new Map([["href", url]]),
-          children: [{ kind: "text", content: url, raw: false }],
-        });
+        nodes.push(text(prefix));
+        nodes.push(elem("a", { href: url }, text(url)));
         restContent = suffix;
       }
-    }
-    n.children = newChildren;
+      return nodes;
+    });
   });
 }
 
@@ -145,7 +133,7 @@ function transformSectionIdAttribute(doc: Document) {
     }
 
     if (n.name === "section") {
-      const idAttr = n.attributes.get("id");
+      const idAttr = n.attributes.id;
       if (!idAttr) {
         return;
       }
@@ -164,7 +152,7 @@ function transformSectionIdAttribute(doc: Document) {
       }
 
       usedIds.add(newId);
-      n.attributes.set("id", newId);
+      n.attributes.id = newId;
       sectionStack.push(idAttr);
 
       forEachChild(n, processNode);
@@ -199,14 +187,9 @@ function setSectionTitleAnchor(doc: Document) {
           "[nuldoc.tohtml] <h> element must be inside <section>",
         );
       }
-      const sectionId = currentSection.attributes.get("id");
-      const aElement: Element = {
-        kind: "element",
-        name: "a",
-        attributes: new Map(),
-        children: c.children,
-      };
-      aElement.attributes.set("href", `#${sectionId}`);
+      const sectionId = currentSection.attributes.id;
+      const aElement = elem("a", undefined, ...c.children);
+      aElement.attributes.href = `#${sectionId}`;
       c.children = [aElement];
     }
   };
@@ -222,7 +205,7 @@ function transformSectionTitleElement(doc: Document) {
 
     if (c.name === "section") {
       sectionLevel += 1;
-      c.attributes.set("--section-level", sectionLevel.toString());
+      c.attributes.__sectionLevel = sectionLevel.toString();
     }
     forEachChild(c, g);
     if (c.name === "section") {
@@ -236,53 +219,35 @@ function transformSectionTitleElement(doc: Document) {
 }
 
 function transformNoteElement(doc: Document) {
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "note") {
-      return;
-    }
-
-    const editatAttr = n.attributes?.get("editat");
-    const operationAttr = n.attributes?.get("operation");
+  forEachElementOfType(doc.root, "note", (n) => {
+    const editatAttr = n.attributes?.editat;
+    const operationAttr = n.attributes?.operation;
     const isEditBlock = editatAttr && operationAttr;
 
-    const labelElement: Element = {
-      kind: "element",
-      name: "div",
-      attributes: new Map([["class", "admonition-label"]]),
-      children: [{
-        kind: "text",
-        content: isEditBlock ? `${editatAttr} ${operationAttr}` : "NOTE",
-        raw: false,
-      }],
-    };
-    const contentElement: Element = {
-      kind: "element",
-      name: "div",
-      attributes: new Map([["class", "admonition-content"]]),
-      children: n.children,
-    };
+    const labelElement = elem(
+      "div",
+      { class: "admonition-label" },
+      text(isEditBlock ? `${editatAttr} ${operationAttr}` : "NOTE"),
+    );
+    const contentElement = elem(
+      "div",
+      { class: "admonition-content" },
+      ...n.children,
+    );
     n.name = "div";
     addClass(n, "admonition");
-    n.children = [
-      labelElement,
-      contentElement,
-    ];
+    n.children = [labelElement, contentElement];
   });
 }
 
 function addAttributesToExternalLinkElement(doc: Document) {
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "a") {
-      return;
-    }
-
-    const href = n.attributes.get("href") ?? "";
+  forEachElementOfType(doc.root, "a", (n) => {
+    const href = n.attributes.href ?? "";
     if (!href.startsWith("http")) {
       return;
     }
-    n.attributes
-      .set("target", "_blank")
-      .set("rel", "noreferrer");
+    n.attributes.target = "_blank";
+    n.attributes.rel = "noreferrer";
   });
 }
 
@@ -290,12 +255,8 @@ function traverseFootnotes(doc: Document) {
   let footnoteCounter = 0;
   const footnoteMap = new Map<string, number>();
 
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "footnoteref") {
-      return;
-    }
-
-    const reference = n.attributes.get("reference");
+  forEachElementOfType(doc.root, "footnoteref", (n) => {
+    const reference = n.attributes.reference;
     if (!reference) {
       return;
     }
@@ -309,34 +270,23 @@ function traverseFootnotes(doc: Document) {
     }
 
     n.name = "sup";
-    n.attributes.delete("reference");
-    n.attributes.set("class", "footnote");
+    delete n.attributes.reference;
+    n.attributes.class = "footnote";
     n.children = [
-      {
-        kind: "element",
-        name: "a",
-        attributes: new Map([
-          ["id", `footnoteref--${reference}`],
-          ["class", "footnote"],
-          ["href", `#footnote--${reference}`],
-        ]),
-        children: [
-          {
-            kind: "text",
-            content: `[${footnoteNumber}]`,
-            raw: false,
-          },
-        ],
-      },
+      elem(
+        "a",
+        {
+          id: `footnoteref--${reference}`,
+          class: "footnote",
+          href: `#footnote--${reference}`,
+        },
+        text(`[${footnoteNumber}]`),
+      ),
     ];
   });
 
-  forEachChildRecursively(doc.root, (n) => {
-    if (n.kind !== "element" || n.name !== "footnote") {
-      return;
-    }
-
-    const id = n.attributes.get("id");
+  forEachElementOfType(doc.root, "footnote", (n) => {
+    const id = n.attributes.id;
     if (!id || !footnoteMap.has(id)) {
       n.name = "span";
       n.children = [];
@@ -346,23 +296,16 @@ function traverseFootnotes(doc: Document) {
     const footnoteNumber = footnoteMap.get(id)!;
 
     n.name = "div";
-    n.attributes.delete("id");
-    n.attributes.set("class", "footnote");
-    n.attributes.set("id", `footnote--${id}`);
+    delete n.attributes.id;
+    n.attributes.class = "footnote";
+    n.attributes.id = `footnote--${id}`;
 
     n.children = [
-      {
-        kind: "element",
-        name: "a",
-        attributes: new Map([["href", `#footnoteref--${id}`]]),
-        children: [
-          {
-            kind: "text",
-            content: `${footnoteNumber}. `,
-            raw: false,
-          },
-        ],
-      },
+      elem(
+        "a",
+        { href: `#footnoteref--${id}` },
+        text(`${footnoteNumber}. `),
+      ),
       ...n.children,
     ];
   });
@@ -374,7 +317,7 @@ function removeUnnecessaryParagraphNode(doc: Document) {
       return;
     }
 
-    const isTight = n.attributes.get("--tight") === "true";
+    const isTight = n.attributes.__tight === "true";
     if (!isTight) {
       return;
     }
@@ -402,11 +345,13 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
       return;
     }
 
-    const language = n.attributes.get("language") || "text";
-    const filename = n.attributes.get("filename");
-    const numbered = n.attributes.get("numbered");
+    const language = n.attributes.language || "text";
+    const filename = n.attributes.filename;
+    const numbered = n.attributes.numbered;
     const sourceCodeNode = n.children[0] as Text | RawHTML;
-    const sourceCode = sourceCodeNode.content.trimEnd();
+    const sourceCode = sourceCodeNode.kind === "text"
+      ? sourceCodeNode.content.trimEnd()
+      : sourceCodeNode.html.trimEnd();
 
     const highlighted = await codeToHtml(sourceCode, {
       lang: language in bundledLanguages ? language as BundledLanguage : "text",
@@ -417,36 +362,26 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
     });
 
     n.name = "div";
-    n.attributes.set("class", "codeblock");
-    n.attributes.delete("language");
+    n.attributes.class = "codeblock";
+    delete n.attributes.language;
 
     if (numbered === "true") {
-      n.attributes.delete("numbered");
+      delete n.attributes.numbered;
       addClass(n, "numbered");
     }
     if (filename) {
-      n.attributes.delete("filename");
+      delete n.attributes.filename;
 
       n.children = [
-        {
-          kind: "element",
-          name: "div",
-          attributes: new Map([["class", "filename"]]),
-          children: [{
-            kind: "text",
-            content: filename,
-            raw: false,
-          }],
-        },
-        {
-          kind: "text",
-          content: highlighted,
-          raw: true,
-        },
+        elem("div", { class: "filename" }, text(filename)),
+        rawHTML(highlighted),
       ];
     } else {
-      sourceCodeNode.content = highlighted;
-      sourceCodeNode.raw = true;
+      if (sourceCodeNode.kind === "text") {
+        n.children[0] = rawHTML(highlighted);
+      } else {
+        sourceCodeNode.html = highlighted;
+      }
     }
   });
 }
@@ -486,7 +421,7 @@ function generateTableOfContents(doc: Document) {
       if (!parentSection) return;
 
       // Check if this section has toc=false attribute
-      const tocAttribute = parentSection.attributes.get("toc");
+      const tocAttribute = parentSection.attributes.toc;
       if (tocAttribute === "false") {
         // Add this level to excluded levels and remove deeper levels
         excludedLevels.length = 0;
@@ -510,7 +445,7 @@ function generateTableOfContents(doc: Document) {
         excludedLevels.pop();
       }
 
-      const sectionId = parentSection.attributes.get("id");
+      const sectionId = parentSection.attributes.id;
       if (!sectionId) return;
 
       let headingText = "";
@@ -558,7 +493,7 @@ function generateTableOfContents(doc: Document) {
 function removeTocAttributes(doc: Document) {
   forEachChildRecursively(doc.root, (node) => {
     if (node.kind === "element" && node.name === "section") {
-      node.attributes.delete("toc");
+      delete node.attributes.toc;
     }
   });
 }

@@ -24,7 +24,7 @@ function getDtd(name: string): Dtd {
 }
 
 function isInlineNode(n: Node): boolean {
-  if (n.kind === "text") {
+  if (n.kind === "text" || n.kind === "raw") {
     return true;
   }
   return getDtd(n.name).type === "inline";
@@ -36,11 +36,9 @@ function isBlockNode(n: Node): boolean {
 
 function nodeToXmlText(n: Node, ctx: Context): string {
   if (n.kind === "text") {
-    if (n.raw) {
-      return n.content;
-    } else {
-      return textNodeToXmlText(n);
-    }
+    return textNodeToXmlText(n);
+  } else if (n.kind === "raw") {
+    return n.html;
   } else {
     return elementNodeToXmlText(n, ctx);
   }
@@ -102,8 +100,8 @@ function indent(ctx: Context): string {
 }
 
 function getElementAttributes(e: Element): [string, string][] {
-  return [...e.attributes.entries()]
-    .filter((a) => !a[0].startsWith("--"))
+  return [...Object.entries(e.attributes)]
+    .filter((a) => !a[0].startsWith("__"))
     .sort(
       (a, b) => {
         // Special rules:
