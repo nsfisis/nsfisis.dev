@@ -1,3 +1,4 @@
+import { parseArgs } from "@std/cli";
 import { serveDir, STATUS_CODE, STATUS_TEXT } from "@std/http";
 import { join } from "@std/path";
 import { Config } from "../config.ts";
@@ -18,10 +19,15 @@ function isResourcePath(pathname: string): boolean {
 }
 
 export function runServeCommand(config: Config) {
+  const parsedArgs = parseArgs(Deno.args, {
+    boolean: ["no-rebuild"],
+  });
+
+  const doRebuild = !parsedArgs["no-rebuild"];
   const rootDir = join(Deno.cwd(), config.locations.destDir);
   Deno.serve({ hostname: "127.0.0.1" }, async (req) => {
     const pathname = new URL(req.url).pathname;
-    if (!isResourcePath(pathname)) {
+    if (!isResourcePath(pathname) && doRebuild) {
       await runBuildCommand(config);
       console.log("rebuild");
     }
