@@ -1,6 +1,7 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
 import GlobalHeader from "../components/GlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
+import TableOfContents from "../components/TableOfContents.tsx";
 import { Config, getTagLabel } from "../config.ts";
 import { Element } from "../dom.ts";
 import { Document } from "../djot/document.ts";
@@ -36,6 +37,9 @@ export default function PostPage(
                 </ul>
               )}
             </header>
+            {doc.toc && doc.toc.entries.length > 0 && (
+              <TableOfContents toc={doc.toc} />
+            )}
             <div className="post-content">
               <section id="changelog">
                 <h2>

@@ -1,5 +1,5 @@
 import { BundledLanguage, bundledLanguages, codeToHtml } from "shiki";
-import { Document } from "./document.ts";
+import { Document, TocEntry } from "./document.ts";
 import { NuldocError } from "../errors.ts";
 import {
   addClass,
@@ -7,6 +7,7 @@ import {
   forEachChild,
   forEachChildRecursively,
   forEachChildRecursivelyAsync,
+  innerText,
   Node,
   RawHTML,
   Text,
@@ -25,6 +26,8 @@ export default async function toHtml(doc: Document): Promise<Document> {
   removeUnnecessaryParagraphNode(doc);
   await transformAndHighlightCodeBlockElement(doc);
   mergeConsecutiveTextNodes(doc);
+  generateTableOfContents(doc);
+  removeTocAttributes(doc);
   return doc;
 }
 
@@ -444,6 +447,118 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
     } else {
       sourceCodeNode.content = highlighted;
       sourceCodeNode.raw = true;
+    }
+  });
+}
+
+function generateTableOfContents(doc: Document) {
+  if (!doc.isTocEnabled) {
+    return;
+  }
+  const tocEntries: TocEntry[] = [];
+  const stack: TocEntry[] = [];
+  const excludedLevels: number[] = []; // Track levels to exclude
+
+  const processNode = (node: Node) => {
+    if (node.kind !== "element") {
+      return;
+    }
+
+    const match = node.name.match(/^h(\d+)$/);
+    if (match) {
+      const level = parseInt(match[1]);
+
+      let parentSection: Element | null = null;
+      const findParentSection = (n: Node, target: Node): Element | null => {
+        if (n.kind !== "element") return null;
+
+        for (const child of n.children) {
+          if (child === target && n.name === "section") {
+            return n;
+          }
+          const result = findParentSection(child, target);
+          if (result) return result;
+        }
+        return null;
+      };
+
+      parentSection = findParentSection(doc.root, node);
+      if (!parentSection) return;
+
+      // Check if this section has toc=false attribute
+      const tocAttribute = parentSection.attributes.get("toc");
+      if (tocAttribute === "false") {
+        // Add this level to excluded levels and remove deeper levels
+        excludedLevels.length = 0;
+        excludedLevels.push(level);
+        return;
+      }
+
+      // Check if this header should be excluded based on parent exclusion
+      const shouldExclude = excludedLevels.some((excludedLevel) =>
+        level > excludedLevel
+      );
+      if (shouldExclude) {
+        return;
+      }
+
+      // Clean up excluded levels that are now at same or deeper level
+      while (
+        excludedLevels.length > 0 &&
+        excludedLevels[excludedLevels.length - 1] >= level
+      ) {
+        excludedLevels.pop();
+      }
+
+      const sectionId = parentSection.attributes.get("id");
+      if (!sectionId) return;
+
+      let headingText = "";
+      for (const child of node.children) {
+        if (child.kind === "element" && child.name === "a") {
+          headingText = innerText(child);
+        }
+      }
+
+      const entry: TocEntry = {
+        id: sectionId,
+        text: headingText,
+        level: level,
+        children: [],
+      };
+
+      while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+        stack.pop();
+      }
+
+      if (stack.length === 0) {
+        tocEntries.push(entry);
+      } else {
+        stack[stack.length - 1].children.push(entry);
+      }
+
+      stack.push(entry);
+    }
+
+    forEachChild(node, processNode);
+  };
+
+  forEachChild(doc.root, processNode);
+
+  // Don't generate TOC if there's only one top-level section with no children
+  if (tocEntries.length === 1 && tocEntries[0].children.length === 0) {
+    return;
+  }
+
+  doc.toc = {
+    entries: tocEntries,
+  };
+}
+
+function removeTocAttributes(doc: Document) {
+  forEachChildRecursively(doc.root, (node) => {
+    if (node.kind === "element" && node.name === "section") {
+      node.attributes.delete("toc");
     }
   });
 }

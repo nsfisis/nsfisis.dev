@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【備忘録】 このサイト用の VPS をセットアップしたときのメモ｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=899271ae83285479ca025cc358975c53">
+    <link rel="stylesheet" href="/style.css?h=f4a12de8fc55ef1668e211e6c6db4ade">
   </head>
   <body class="single">
     <header class="header">
@@ -49,6 +49,92 @@
             </li>
           </ul>
         </header>
+        <nav class="toc">
+          <h2>目次</h2>
+          <ul>
+            <li>
+              <a href="#section--intro">はじめに</a>
+            </li>
+            <li>
+              <a href="#section--vps">VPS</a>
+            </li>
+            <li>
+              <a href="#section--preparation">事前準備</a>
+              <ul>
+                <li>
+                  <a href="#section--preparation--hostname">サーバのホスト名を決める</a>
+                </li>
+                <li>
+                  <a href="#section--preparation--ssh-key">SSH の鍵生成</a>
+                </li>
+                <li>
+                  <a href="#section--preparation--ssh-config">SSH の設定</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#section--basic-setup">基本のセットアップ</a>
+              <ul>
+                <li>
+                  <a href="#section--basic-setup--login">SSH 接続</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--user">ユーザを作成する</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--hostname">ホスト名を変える</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--public-key">公開鍵を置く</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--ssh-config">SSH の設定</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--ssh-connect">SSH で接続確認</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--close-ports">ポートの遮断</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--ssh-key-for-github">GitHub 用の SSH 鍵</a>
+                </li>
+                <li>
+                  <a href="#section--basic-setup--upgrade-packages">パッケージの更新</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#section--site-hosting-setup">サイトホスティング用のセットアップ</a>
+              <ul>
+                <li>
+                  <a href="#section--site-hosting-setup--dns">DNS に IP アドレスを登録する</a>
+                </li>
+                <li>
+                  <a href="#section--site-hosting-setup--install-softwares">使うソフトウェアのインストール</a>
+                </li>
+                <li>
+                  <a href="#section--site-hosting-setup--docker">メインユーザが Docker を使えるように</a>
+                </li>
+                <li>
+                  <a href="#section--site-hosting-setup--open-http-ports">HTTP/HTTPS を通す</a>
+                </li>
+                <li>
+                  <a href="#section--site-hosting-setup--clone-repositories">リポジトリのクローン</a>
+                </li>
+                <li>
+                  <a href="#section--site-hosting-setup--certbot">certbot で証明書取得</a>
+                </li>
+                <li>
+                  <a href="#section--site-hosting-setup--run-server">サーバを稼動させる</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#section--outro">感想</a>
+            </li>
+          </ul>
+        </nav>
         <div class="post-content">
           <section id="changelog">
             <h2><a href="#changelog">更新履歴</a></h2>

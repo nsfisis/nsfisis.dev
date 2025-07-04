@@ -6,6 +6,7 @@ description = "zip 関数のような動きをする paste コマンドについ
 tags = [
   "note-to-self",
 ]
+toc = false
 
 [[article.revisions]]
 date = "2021-03-22"
