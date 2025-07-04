@@ -12,6 +12,7 @@ export const PostMetadataSchema = z.object({
     title: z.string(),
     description: z.string(),
     tags: z.array(z.string()),
+    toc: z.boolean().optional(),
     revisions: z.array(z.object({
       date: z.string(),
       remark: z.string(),
@@ -22,6 +23,17 @@ export const PostMetadataSchema = z.object({
 
 export type PostMetadata = z.infer<typeof PostMetadataSchema>;
 
+export type TocEntry = {
+  id: string;
+  text: string;
+  level: number;
+  children: TocEntry[];
+};
+
+export type TocRoot = {
+  entries: TocEntry[];
+};
+
 export type Document = {
   root: Element;
   sourceFilePath: string;
@@ -31,6 +43,8 @@ export type Document = {
   description: string; // TODO: should it be markup text?
   tags: string[];
   revisions: Revision[];
+  toc?: TocRoot;
+  isTocEnabled: boolean;
 };
 
 export function createNewDocumentFromDjotDocument(
@@ -56,5 +70,6 @@ export function createNewDocumentFromDjotDocument(
       remark: r.remark,
       isInternal: !!r.isInternal,
     })),
+    isTocEnabled: meta.article.toc !== false,
   };
 }
