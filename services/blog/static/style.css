@@ -92,11 +92,14 @@ a {
   text-decoration: none;
   color: #000;
   border-bottom: 1px solid #000;
-  word-break: break-all;
 }
 
 a:hover {
   color: #666;
+}
+
+a.url {
+  word-break: break-all;
 }
 
 .codeblock {

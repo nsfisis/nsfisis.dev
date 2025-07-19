@@ -115,7 +115,7 @@ function transformLinkLikeToAnchorElement(doc: Document) {
         }
         const [_, prefix, url, suffix] = match;
         nodes.push(text(prefix));
-        nodes.push(elem("a", { href: url }, text(url)));
+        nodes.push(elem("a", { href: url, class: "url" }, text(url)));
         restContent = suffix;
       }
       return nodes;

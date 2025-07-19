@@ -46,7 +46,7 @@ import {
   Url as DjotUrl,
   Verbatim as DjotVerbatim,
 } from "@djot/djot";
-import { elem, Element, Node, rawHTML, text } from "../dom.ts";
+import { addClass, elem, Element, Node, rawHTML, text } from "../dom.ts";
 
 function processBlock(node: DjotBlock): Element {
   switch (node.tag) {
@@ -419,7 +419,7 @@ function processFootnoteReference(node: DjotFootnoteReference): Element {
 }
 
 function processUrl(node: DjotUrl): Element {
-  return elem(
+  const e = elem(
     "a",
     {
       href: node.text,
@@ -427,6 +427,8 @@ function processUrl(node: DjotUrl): Element {
     },
     text(node.text),
   );
+  addClass(e, "url");
+  return e;
 }
 
 function processSpan(node: DjotSpan): Element {
