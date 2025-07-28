@@ -1,0 +1,15 @@
+[slide]
+uuid = "4b667c22-e5ef-4827-9db6-8b503b460255"
+title = "セルフホスト可能なCコンパイラを2000行弱で書く"
+event = "TechRAMEN 2025 Conference"
+talkType = "40 分"
+link = "/slides/2025-07-26/techramen-25-conf/slides.pdf"
+tags = [
+  "c",
+  "conference",
+  "techramen",
+]
+
+[[slide.revisions]]
+date = "2025-07-26"
+remark = "登壇"
