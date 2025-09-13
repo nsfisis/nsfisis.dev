@@ -50,7 +50,7 @@ posix InstalledDir:
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 ```
 
-コンパイルコマンド (C17指定)
+コンパイルコマンド (C++17 指定)
 
 ```
 $ clang –std=c++17 hoge.cpp
