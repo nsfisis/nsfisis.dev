@@ -1,4 +1,4 @@
-import { dirname, join, joinGlobs } from "@std/path";
+import { dirname, join, joinGlobs, relative } from "@std/path";
 import { ensureDir, expandGlob } from "@std/fs";
 import { generateFeedPageFromEntries } from "../generators/atom.ts";
 import { Config, getTagLabel } from "../config.ts";
@@ -34,7 +34,8 @@ export async function runBuildCommand(config: Config) {
   await buildNotFoundPage(config);
   await buildFeedOfAllContents(posts, slides, config);
   await copyStaticFiles(config);
-  await copyAssetFiles(slides, config);
+  await copySlidesFiles(slides, config);
+  await copyAssetFiles(config);
 }
 
 async function buildPostPages(config: Config): Promise<PostPage[]> {
@@ -236,7 +237,7 @@ async function copyStaticFiles(config: Config) {
   }
 }
 
-async function copyAssetFiles(slides: SlidePage[], config: Config) {
+async function copySlidesFiles(slides: SlidePage[], config: Config) {
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);
   const destDir = join(cwd, config.locations.destDir);
@@ -244,6 +245,31 @@ async function copyAssetFiles(slides: SlidePage[], config: Config) {
   for (const slide of slides) {
     const src = join(contentDir, slide.slideLink);
     const dst = join(destDir, slide.slideLink);
+    await ensureDir(dirname(dst));
+    await Deno.copyFile(src, dst);
+  }
+}
+
+async function copyAssetFiles(config: Config) {
+  const cwd = Deno.cwd();
+  const contentDir = join(cwd, config.locations.contentDir);
+  const destDir = join(cwd, config.locations.destDir);
+
+  const globPattern = joinGlobs([contentDir, "**", "*"]);
+  for await (const { isFile, path } of expandGlob(globPattern)) {
+    if (!isFile) continue;
+
+    // Skip .dj, .toml, .pdf files
+    if (
+      path.endsWith(".dj") ||
+      path.endsWith(".toml") ||
+      path.endsWith(".pdf")
+    ) {
+      continue;
+    }
+
+    const src = path;
+    const dst = join(destDir, relative(contentDir, path));
     await ensureDir(dirname(dst));
     await Deno.copyFile(src, dst);
   }
