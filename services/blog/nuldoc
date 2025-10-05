@@ -1,12 +1,2 @@
-#!/bin/bash
-
-base_dir="$(dirname "$BASH_SOURCE")"
-
-# VSCODE_TEXTMATE_DEBUG is read by shiki, the syntax highlighter library
-deno run \
-    --allow-read="$base_dir" \
-    --allow-write="$base_dir" \
-    --allow-net="127.0.0.1:8000" \
-    --allow-env=VSCODE_TEXTMATE_DEBUG \
-    "$base_dir/nuldoc-src/main.ts" \
-    "$@"
+#!/usr/bin/env bash
+deno run -P nuldoc-src/main.ts "$@"

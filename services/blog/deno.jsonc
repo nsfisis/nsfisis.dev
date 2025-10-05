@@ -18,6 +18,16 @@
     "jsxImportSource": "myjsx",
     "jsxImportSourceTypes": "myjsx-types",
   },
+  "permissions": {
+    "default": {
+      "read": ["."],
+      "write": ["."],
+      "net": ["127.0.0.1:8000"],
+      "env": [
+        "VSCODE_TEXTMATE_DEBUG", // VSCODE_TEXTMATE_DEBUG is read by shiki.
+      ],
+    },
+  }
   "tasks": {
     "check": "deno check nuldoc-src/main.ts && deno lint -- nuldoc-src/ && deno fmt --check -- nuldoc-src/",
     "fmt": "deno fmt -- nuldoc-src",
