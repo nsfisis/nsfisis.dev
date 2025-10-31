@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="IEEE 754 の nextUp 操作を用いて,浮動小数点数の半開区間で単一値を指定するテクニックを紹介する。">
+    <meta name="keywords" content="浮動小数点数,PHP">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="浮動小数点数の半開区間で単一値を表現する｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="IEEE 754 の nextUp 操作を用いて,浮動小数点数の半開区間で単一値を指定するテクニックを紹介する。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="Hatena::Bookmark" content="nocomment">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>浮動小数点数の半開区間で単一値を表現する｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=d2f027875115279303f9fe391e2ef61b">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="/">REPL: Rest-Eat-Program Loop</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/slides/">Slides</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">浮動小数点数の半開区間で単一値を表現する</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a href="/tags/float/">浮動小数点数</a>
+            </li>
+            <li class="tag">
+              <a href="/tags/php/">PHP</a>
+            </li>
+          </ul>
+        </header>
+        <nav class="toc">
+          <h2>目次</h2>
+          <ul>
+            <li>
+              <a href="#section--intro">はじめに</a>
+            </li>
+            <li>
+              <a href="#section--half-open-real-interval">実数の半開区間</a>
+            </li>
+            <li>
+              <a href="#section--float-numbers">コンピュータにおける実数表現</a>
+            </li>
+            <li>
+              <a href="#section--single-value-float-interval">浮動小数点数で単一値を指す半開区間を作る</a>
+            </li>
+            <li>
+              <a href="#section--nextup-in-php">PHP で nextUp を実装する</a>
+            </li>
+            <li>
+              <a href="#section--outro">おわりに</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="post-content">
+          <section id="changelog">
+            <h2><a href="#changelog">更新履歴</a></h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2025-01-23">2025-01-23</time>: デジタルサーカス株式会社の社内記事として公開
+              </li>
+              <li class="revision">
+                <time datetime="2025-10-29">2025-10-29</time>: PHP 勉強会@東京 第 180 回で発表
+              </li>
+              <li class="revision">
+                <time datetime="2025-10-31">2025-10-31</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+              <p>
+                この記事は、2025-01-23 に <a href="https://www.dgcircus.com/" rel="noreferrer" target="_blank">デジタルサーカス株式会社</a> の社内 Qiita Team に公開された記事をベースに、加筆修正して一般公開したものです。
+              </p>
+            </div>
+          </div>
+          <div class="admonition">
+            <div class="admonition-label">
+              NOTE
+            </div>
+            <div class="admonition-content">
+              <p>
+                この記事の内容を、<a href="/slides/2025-10-29/phpstudy-tokyo-180/">PHP 勉強会@東京 第 180 回</a> で発表しました。
+              </p>
+            </div>
+          </div>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              数値の範囲を指定して検索をおこなう API の中に、半開区間を指定させるものがある。半開区間とは、一方の端を含み一方の端を含まないような区間である。ここでは特に左端が閉じ右端が開いているような区間を扱う。例えば、次の区間 <code>[3, 7)</code> は <code>3 &lt;= x &lt; 7</code> であるような <code>x</code> の集合である。
+            </p>
+            <p>
+              ここで、この API を使って単一の値を検索することを考えたい。検索対象が整数であれば話は簡単で、1 大きい数を右端に指定してやればよい。5 を探したければ <code>[5, 6)</code> を渡せば目的が達成できる。
+            </p>
+            <p>
+              しかし、検索の対象が実数であればどうだろうか？
+            </p>
+          </section>
+          <section id="section--half-open-real-interval">
+            <h2><a href="#section--half-open-real-interval">実数の半開区間</a></h2>
+            <p>
+              ちょうど <code>1</code> だけを含むような半開区間が作れないか考えよう。つまり、左端に <code>1</code> を、右端に <code>1</code> より少しだけ大きい値を指定して、「ちょうど <code>1</code>」を表すような範囲を作れないだろうか。
+            </p>
+            <p>
+              お気付きの方もいるだろうがこれは不可能である。もしそのような区間が作れるなら、<code>[1, p)</code> にちょうど <code>1</code> しか含まれないような実数 <code>p</code> が存在する。しかし、<code>1</code> と <code>p</code> のちょうど真ん中である <code>(1+p) / 2</code> を考えると、<code>1</code> よりも大きく <code>p</code> よりも小さいから <code>[1, p)</code> に含まれる。これは <code>[1, p)</code> が <code>1</code> しか含まないとした仮定に矛盾する。
+            </p>
+            <p>
+              数学の世界ではこのような区間を作ることはできない。では、コンピュータ上ならばどうだろうか？
+            </p>
+          </section>
+          <section id="section--float-numbers">
+            <h2><a href="#section--float-numbers">コンピュータにおける実数表現</a></h2>
+            <p>
+              コンピュータにおける実数の表現にはさまざまなものがあるが、ここでは最もよく使われる IEEE 754 という標準規格に従う形式、その中でも <code>binary64</code> と呼ばれる形式を考えることにする。これは多くの言語で <code>float</code> や <code>double</code> と呼ばれるものと同じである。
+            </p>
+            <p>
+              <code>binary64</code> は 64 bit で構成されており、無限個ある実数をすべて覆い尽くすことはできない。数学の上では存在しなかった <code>p</code> も、<code>binary64</code> の範囲に実数を限定すれば都合のよい <code>p</code> を見つけることができる。
+            </p>
+          </section>
+          <section id="section--single-value-float-interval">
+            <h2><a href="#section--single-value-float-interval">浮動小数点数で単一値を指す半開区間を作る</a></h2>
+            <p>
+              結論から言うと、<code>p</code> は <code>1.0000000000000002</code> である。<code>[1, 1.0000000000000002)</code> は <code>binary64</code> の範囲で <code>1</code> しか含まない。別の言い方をすれば、<code>1 &lt; x &lt; 1.0000000000000002</code> を満たすような <code>x</code> は、<code>binary64</code> で表せない。
+            </p>
+            <p>
+              <code>1</code> と <code>p</code> のビット列での表現を見てみよう。
+            </p>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>1 = 0011111111110000000000000000000000000000000000000000000000000000</span></span>
+<span class="line"><span>p = 0011111111110000000000000000000000000000000000000000000000000001</span></span></code></pre>
+            </div>
+            <p>
+              <code>p</code> が <code>1</code> よりも一つ分だけ大きいのがわかるだろうか (ここでは <code>binary64</code> の具体的な表現について言及していないのでそうなる保証はないのだが、あくまで雰囲気として)。
+            </p>
+            <p>
+              では、任意の値が与えられた際、それに対応する右端を得るにはどうすればよいのだろうか。IEEE 754 にはこのような用途に用いることができる <code>nextUp</code> という操作が定められている。
+            </p>
+            <p>
+              <code>nextUp</code> は、<code>binary64</code> で表現できる値のうち、与えられた数よりも一つだけ大きい値を返す演算である。これを使えば、ある数 <code>x</code> が与えられたとき、<code>[x, nextUp(x))</code> という半開区間を作ればちょうど <code>x</code> だけを含むような範囲を表すことができる。
+            </p>
+          </section>
+          <section id="section--nextup-in-php">
+            <h2><a href="#section--nextup-in-php">PHP で nextUp を実装する</a></h2>
+            <p>
+              プログラミング言語によっては標準ライブラリに <code>nextUp</code> 相当の操作が定められているものもある。PHP には無かったので自作した。
+            </p>
+            <ul>
+              <li>
+                GitHub: <a class="url" href="https://github.com/nsfisis/php-next-after" rel="noreferrer" target="_blank">https://github.com/nsfisis/php-next-after</a>
+              </li>
+              <li>
+                Packagist: <a class="url" href="https://packagist.org/packages/nsfisis/next-after" rel="noreferrer" target="_blank">https://packagist.org/packages/nsfisis/next-after</a>
+              </li>
+            </ul>
+            <p>
+              <code>binary64</code> を 64 bit の整数に変換できるなら、他の言語でもほとんど同じ方法で実装できるはずだ。
+            </p>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">    public</span><span style="color:#D73A49"> static</span><span style="color:#D73A49"> function</span><span style="color:#6F42C1"> nextUp</span><span style="color:#24292E">(</span><span style="color:#D73A49">float</span><span style="color:#24292E"> $x)</span><span style="color:#D73A49">:</span><span style="color:#D73A49"> float</span></span>
+<span class="line"><span style="color:#24292E">    {</span></span>
+<span class="line"><span style="color:#6A737D">        // NaN (Not a Number) なら NaN を返す。</span></span>
+<span class="line"><span style="color:#D73A49">        if</span><span style="color:#24292E"> (</span><span style="color:#005CC5">is_nan</span><span style="color:#24292E">($x)) {</span></span>
+<span class="line"><span style="color:#D73A49">            return</span><span style="color:#005CC5"> NAN</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">        }</span></span>
+<span class="line"><span style="color:#6A737D">        // 正の無限大なら正の無限大を返す。</span></span>
+<span class="line"><span style="color:#D73A49">        if</span><span style="color:#24292E"> (</span><span style="color:#005CC5">is_infinite</span><span style="color:#24292E">($x) </span><span style="color:#D73A49">&#x26;&#x26;</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">></span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#D73A49">            return</span><span style="color:#005CC5"> INF</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">        }</span></span>
+<span class="line"><span style="color:#6A737D">        // 0 なら minValue() を返す (後述)。</span></span>
+<span class="line"><span style="color:#D73A49">        if</span><span style="color:#24292E"> ($x </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> 0.0</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#D73A49">            return</span><span style="color:#D73A49"> self::</span><span style="color:#6F42C1">minValue</span><span style="color:#24292E">();</span></span>
+<span class="line"><span style="color:#24292E">        }</span></span>
+<span class="line"><span style="color:#6A737D">        // binary64 を 64 bit 整数に変換する。</span></span>
+<span class="line"><span style="color:#24292E">        $u </span><span style="color:#D73A49">=</span><span style="color:#D73A49"> self::</span><span style="color:#6F42C1">floatToInt</span><span style="color:#24292E">($x);</span></span>
+<span class="line"><span style="color:#6A737D">        // 正なら整数に +1 して binary64 に戻す。</span></span>
+<span class="line"><span style="color:#6A737D">        // 負なら整数に -1 して binary64 に戻す。</span></span>
+<span class="line"><span style="color:#D73A49">        return</span><span style="color:#24292E"> $x </span><span style="color:#D73A49">></span><span style="color:#005CC5"> 0.0</span><span style="color:#D73A49"> ?</span><span style="color:#D73A49"> self::</span><span style="color:#6F42C1">intToFloat</span><span style="color:#24292E">($u </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) </span><span style="color:#D73A49">:</span><span style="color:#D73A49"> self::</span><span style="color:#6F42C1">intToFloat</span><span style="color:#24292E">($u </span><span style="color:#D73A49">-</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span></code></pre>
+            </div>
+            <p>
+              <code>0</code> のときに返している <code>minValue()</code> は次のような値である。
+            </p>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">    public</span><span style="color:#D73A49"> static</span><span style="color:#D73A49"> function</span><span style="color:#6F42C1"> minValue</span><span style="color:#24292E">()</span><span style="color:#D73A49">:</span><span style="color:#D73A49"> float</span></span>
+<span class="line"><span style="color:#24292E">    {</span></span>
+<span class="line"><span style="color:#6A737D">        // 整数の 1 を binary64 と解釈した値を返す。</span></span>
+<span class="line"><span style="color:#6A737D">        // binary64 で表せる最小の正の非正規化数。</span></span>
+<span class="line"><span style="color:#D73A49">        return</span><span style="color:#D73A49"> self::</span><span style="color:#6F42C1">intToFloat</span><span style="color:#24292E">(</span><span style="color:#005CC5">1</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span></code></pre>
+            </div>
+          </section>
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2>
+            <p>
+              頻繁に必要になるようなものではないが、いつか誰かを救えれば幸いである。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

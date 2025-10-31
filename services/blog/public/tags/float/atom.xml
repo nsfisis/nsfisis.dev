@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-float</id>
+  <title>タグ「浮動小数点数」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/float/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/float/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-10-31T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:39d3d137-f18d-4d88-8ef6-7be9cc2f3f0b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-10-31/representing-single-value-with-half-open-float-interval/"></link>
+    <title>浮動小数点数の半開区間で単一値を表現する</title>
+    <summary>IEEE 754 の nextUp 操作を用いて,浮動小数点数の半開区間で単一値を指定するテクニックを紹介する。</summary>
+    <published>2025-10-31T00:00:00+09:00</published>
+    <updated>2025-10-31T00:00:00+09:00</updated>
+  </entry>
+</feed>

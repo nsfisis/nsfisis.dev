@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-07-15T00:00:00+09:00</updated>
+  <updated>2025-10-31T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:39d3d137-f18d-4d88-8ef6-7be9cc2f3f0b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-10-31/representing-single-value-with-half-open-float-interval/"></link>
+    <title>浮動小数点数の半開区間で単一値を表現する</title>
+    <summary>IEEE 754 の nextUp 操作を用いて,浮動小数点数の半開区間で単一値を指定するテクニックを紹介する。</summary>
+    <published>2025-10-31T00:00:00+09:00</published>
+    <updated>2025-10-31T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:427a124c-fce3-4a1c-a388-5c9827e34957</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-07-15/partial-surrender-to-ebooks/"></link>
