@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-07-26T00:00:00+09:00</updated>
+  <updated>2025-10-29T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:cc51db2d-4f53-4c9c-8930-056e4029e9e0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-10-29/phpstudy-tokyo-180/"></link>
+    <title>浮動小数点数の半開区間で単一値を指定する</title>
+    <summary>登壇: PHP 勉強会@東京 第180回 (レギュラートーク (20分))</summary>
+    <published>2025-10-29T00:00:00+09:00</published>
+    <updated>2025-10-29T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:4b667c22-e5ef-4827-9db6-8b503b460255</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-07-26/techramen-25-conf/"></link>

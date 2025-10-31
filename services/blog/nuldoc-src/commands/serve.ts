@@ -12,6 +12,7 @@ function isResourcePath(pathname: string): boolean {
     ".jpeg",
     ".jpg",
     ".js",
+    ".mjs",
     ".png",
     ".svg",
   ];
