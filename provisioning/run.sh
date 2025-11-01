@@ -11,7 +11,7 @@ export LEGO_ARCH=amd64
 export LEGO_CONF_EMAIL=nsfisis@gmail.com
 export LEGO_CONF_WEBROOT="${REPO_ROOT}/letsencrypt/webroot"
 export LEGO_CONF_PATH="${REPO_ROOT}/letsencrypt/lego"
-export LEGO_CONF_DOMAINS=nsfisis.dev,blog.nsfisis.dev
+export LEGO_CONF_DOMAINS=nsfisis.dev,about.nsfisis.dev,blog.nsfisis.dev,repos.nsfisis.dev,slides.nsfisis.dev
 export GOLANG_VERSION=1.21.1
 export MIOPROXY_VERSION=v0.3.0
 
