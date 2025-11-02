@@ -37,7 +37,6 @@ export async function runBuildCommand(config: Config) {
   await buildNotFoundPage("about", config);
   await buildNotFoundPage("blog", config);
   await buildNotFoundPage("slides", config);
-  await buildFeedOfAllContents(posts, slides, config);
   await copyStaticFiles(config);
   await copySlidesFiles(slides, config);
   await copyBlogAssetFiles(config);
@@ -164,22 +163,6 @@ async function buildNotFoundPage(
 ) {
   const notFoundPage = await generateNotFoundPage(site, config);
   await writePage(notFoundPage, config);
-}
-
-async function buildFeedOfAllContents(
-  posts: PostPage[],
-  slides: SlidePage[],
-  config: Config,
-) {
-  const feed = await generateFeedPageFromEntries(
-    "/",
-    "all",
-    config.sites.default.siteName,
-    [...posts, ...slides],
-    "default",
-    config,
-  );
-  await writePage(feed, config);
 }
 
 async function buildTagPages(
