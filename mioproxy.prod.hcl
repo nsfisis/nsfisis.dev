@@ -26,4 +26,14 @@ server https {
             port = 8001
         }
     }
+
+    proxy repos {
+        from {
+            host = "repos.nsfisis.dev"
+        }
+        to {
+            host = "127.0.0.1"
+            port = 8002
+        }
+    }
 }

@@ -1,0 +1,17 @@
+case-sensitive-sort=0
+cache-size=1024
+clone-url=https://$HTTP_HOST/$CGIT_REPO_URL
+enable-git-config=1
+enable-index-owner=0
+mimetype-file=/etc/mime.types
+readme=:README.md
+readme=:readme.md
+readme=:README.txt
+readme=:readme.txt
+readme=:README
+readme=:readme
+root-desc=nsfisis repositories
+root-title=nsfisis repositories
+snapshots=tar.gz tar.zst zip
+
+include=/etc/repos.cgitrc

@@ -1,0 +1,13 @@
+services:
+  cgit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8002:80"
+    volumes:
+      - ./cgitrc:/etc/cgitrc:ro
+      - ./repos.cgitrc:/etc/repos.cgitrc:ro
+      - ./httpd-cgit.conf:/usr/local/apache2/conf/extra/httpd-cgit.conf:ro
+      - ./repos:/src:ro
+    restart: always

@@ -11,13 +11,16 @@ provision:
 .PHONY: build
 build:
 	cd services/blog; make build
+	cd services/repos; make build
 
 .PHONY: serve
 serve:
 	sudo systemctl start mioproxy
 	cd services/blog; make serve
+	cd services/repos; make serve
 
 .PHONY: clean
 clean:
+	cd services/repos; make clean
 	cd services/blog; make clean
 	sudo systemctl stop mioproxy
