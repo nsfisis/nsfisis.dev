@@ -16,7 +16,7 @@ jobs:
           deno-version: v2.x
 
       - name: Run deno task check
-        run: cd services/blog; deno task check
+        run: cd services/nuldoc; deno task check
 
   deploy:
     needs: test
