@@ -1,9 +1,13 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import AboutGlobalHeader from "../components/AboutGlobalHeader.tsx";
+import BlogGlobalHeader from "../components/BlogGlobalHeader.tsx";
+import SlidesGlobalHeader from "../components/SlidesGlobalHeader.tsx";
+import DefaultGlobalHeader from "../components/DefaultGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
 
 export default function NotFoundPage(
+  site: "default" | "about" | "blog" | "slides",
   config: Config,
 ) {
   return (
@@ -14,7 +18,13 @@ export default function NotFoundPage(
       config={config}
     >
       <body className="single">
-        <GlobalHeader config={config} />
+        {site === "about"
+          ? <AboutGlobalHeader config={config} />
+          : site === "blog"
+          ? <BlogGlobalHeader config={config} />
+          : site === "slides"
+          ? <SlidesGlobalHeader config={config} />
+          : <DefaultGlobalHeader config={config} />}
         <main className="main">
           <article>
             <div className="not-found">404</div>

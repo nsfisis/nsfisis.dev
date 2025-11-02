@@ -10,7 +10,7 @@ export async function generateNotFoundPage(
   config: Config,
 ): Promise<NotFoundPage> {
   const html = await renderToDOM(
-    NotFoundPage(config),
+    NotFoundPage(site, config),
   );
 
   return {

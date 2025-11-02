@@ -1,5 +1,5 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import GlobalHeader from "../components/AboutGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import StaticScript from "../components/StaticScript.tsx";
 import { Config } from "../config.ts";

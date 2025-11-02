@@ -1,5 +1,6 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import BlogGlobalHeader from "../components/BlogGlobalHeader.tsx";
+import SlidesGlobalHeader from "../components/SlidesGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import PostPageEntry from "../components/PostPageEntry.tsx";
 import SlidePageEntry from "../components/SlidePageEntry.tsx";
@@ -28,7 +29,9 @@ export default function TagPage(
       config={config}
     >
       <body className="list">
-        <GlobalHeader config={config} />
+        {site === "blog"
+          ? <BlogGlobalHeader config={config} />
+          : <SlidesGlobalHeader config={config} />}
         <main className="main">
           <header className="page-header">
             <h1>{pageTitle}</h1>

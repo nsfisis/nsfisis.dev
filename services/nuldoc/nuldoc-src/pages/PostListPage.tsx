@@ -1,5 +1,5 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import GlobalHeader from "../components/BlogGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import Pagination from "../components/Pagination.tsx";
 import PostPageEntry from "../components/PostPageEntry.tsx";

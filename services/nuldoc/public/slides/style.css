@@ -50,6 +50,10 @@ body > footer {
   color: #fff;
 }
 
+.site-logo a:hover {
+  color: #fff;
+}
+
 .nav {
   padding: 0;
   margin: 0.5rem 0 0;

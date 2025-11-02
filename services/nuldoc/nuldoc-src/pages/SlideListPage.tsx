@@ -1,5 +1,5 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import GlobalHeader from "../components/SlidesGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import SlidePageEntry from "../components/SlidePageEntry.tsx";
 import { Config } from "../config.ts";

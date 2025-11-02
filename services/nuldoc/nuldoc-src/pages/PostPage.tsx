@@ -1,5 +1,5 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import GlobalHeader from "../components/BlogGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import TableOfContents from "../components/TableOfContents.tsx";
 import { Config, getTagLabel } from "../config.ts";

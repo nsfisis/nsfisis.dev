@@ -1,5 +1,5 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import GlobalHeader from "../components/DefaultGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
 
@@ -17,30 +17,30 @@ export default function HomePage(config: Config) {
         <main className="main">
           <article className="post-single">
             <article className="post-entry">
-              <a href="/about/">
+              <a href={`https://${config.sites.about.fqdn}/`}>
                 <header className="entry-header">
                   <h2>About</h2>
                 </header>
               </a>
             </article>
             <article className="post-entry">
-              <a href="/posts/">
+              <a href={`https://${config.sites.blog.fqdn}/posts/`}>
                 <header className="entry-header">
-                  <h2>Posts</h2>
+                  <h2>Blog</h2>
                 </header>
               </a>
             </article>
             <article className="post-entry">
-              <a href="/slides/">
+              <a href={`https://${config.sites.slides.fqdn}/slides/`}>
                 <header className="entry-header">
                   <h2>Slides</h2>
                 </header>
               </a>
             </article>
             <article className="post-entry">
-              <a href="/tags/">
+              <a href={`https://repos.${config.sites.default.fqdn}/`}>
                 <header className="entry-header">
-                  <h2>Tags</h2>
+                  <h2>Repositories</h2>
                 </header>
               </a>
             </article>

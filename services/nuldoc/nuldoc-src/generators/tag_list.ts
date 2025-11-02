@@ -12,7 +12,7 @@ export async function generateTagListPage(
   config: Config,
 ): Promise<TagListPage> {
   const html = await renderToDOM(
-    TagListPage(tags, config),
+    TagListPage(tags, site, config),
   );
 
   return {

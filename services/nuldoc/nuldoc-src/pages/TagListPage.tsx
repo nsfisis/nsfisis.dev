@@ -1,11 +1,13 @@
 import GlobalFooter from "../components/GlobalFooter.tsx";
-import GlobalHeader from "../components/GlobalHeader.tsx";
+import BlogGlobalHeader from "../components/BlogGlobalHeader.tsx";
+import SlidesGlobalHeader from "../components/SlidesGlobalHeader.tsx";
 import PageLayout from "../components/PageLayout.tsx";
 import { Config } from "../config.ts";
 import { TagPage } from "../generators/tag.ts";
 
 export default function TagListPage(
   tags: TagPage[],
+  site: "blog" | "slides",
   config: Config,
 ) {
   const pageTitle = "タグ一覧";
@@ -18,7 +20,9 @@ export default function TagListPage(
       config={config}
     >
       <body className="list">
-        <GlobalHeader config={config} />
+        {site === "blog"
+          ? <BlogGlobalHeader config={config} />
+          : <SlidesGlobalHeader config={config} />}
         <main className="main">
           <header className="page-header">
             <h1>{pageTitle}</h1>
