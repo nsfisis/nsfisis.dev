@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-cohackpp</id>
+  <title>タグ「紅白ぺぱ合戦」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/cohackpp/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/cohackpp/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2024-12-05T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:ea0593d3-691c-4e08-8db4-98b8925717ec</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-12-04/cohackpp-report/"></link>
+    <title>紅白ぺぱ合戦に参加&amp;LTしました</title>
+    <summary>2024-11-30 に開催された紅白ぺぱ合戦に参加し、ぺ陣営のメンバとして LT しました。</summary>
+    <published>2024-12-04T00:00:00+09:00</published>
+    <updated>2024-12-05T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:e1ca4664-f6f1-4de2-b4a5-ea2b64006708</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-11-30/cohackpp/"></link>
+    <title>プログラミングマナー講座</title>
+    <summary>登壇: 紅白ぺぱ合戦 (LT)</summary>
+    <published>2024-11-30T00:00:00+09:00</published>
+    <updated>2024-11-30T00:00:00+09:00</updated>
+  </entry>
+</feed>

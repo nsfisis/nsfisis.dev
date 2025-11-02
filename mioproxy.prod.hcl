@@ -17,9 +17,39 @@ server https {
     tls_cert_file = "letsencrypt/lego/certificates/nsfisis.dev.crt"
     tls_key_file = "letsencrypt/lego/certificates/nsfisis.dev.key"
 
+    proxy default {
+        from {
+            host = "nsfisis.dev"
+        }
+        to {
+            host = "127.0.0.1"
+            port = 8001
+        }
+    }
+
+    proxy about {
+        from {
+            host = "about.nsfisis.dev"
+        }
+        to {
+            host = "127.0.0.1"
+            port = 8001
+        }
+    }
+
     proxy blog {
         from {
             host = "blog.nsfisis.dev"
+        }
+        to {
+            host = "127.0.0.1"
+            port = 8001
+        }
+    }
+
+    proxy slides {
+        from {
+            host = "slides.nsfisis.dev"
         }
         to {
             host = "127.0.0.1"

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-neovim</id>
+  <title>タグ「Neovim」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/neovim/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/neovim/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2024-07-19T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:222488dd-cf07-4961-83aa-a014b05369ff</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-07-19/reparojson-fix-only-json-formatter/"></link>
+    <title>reparojson: 文法エラーを直すだけの JSON フォーマッタを作った</title>
+    <summary>文法エラーだけを直し、空白の削除や挿入といった整形処理を一切おこなわない JSON フォーマッタを作成した。Neovim と連携させる設定例も紹介する。</summary>
+    <published>2024-07-19T00:00:00+09:00</published>
+    <updated>2024-07-19T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:05cb16e1-05bc-4359-bc06-88ac20510740</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-01-10/neovim-insert-namespace-declaration-to-empty-php-file/"></link>
+    <title>【Neovim】 空の PHP ファイルに namespace 宣言を挿入する</title>
+    <summary>Neovim で空の PHP ファイルを開いたとき、ディレクトリの構造に基づいて自動的に namespace 宣言を挿入するようにする。</summary>
+    <published>2024-01-10T00:00:00+09:00</published>
+    <updated>2024-01-10T00:00:00+09:00</updated>
+  </entry>
+</feed>

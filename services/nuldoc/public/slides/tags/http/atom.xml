@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-http</id>
+  <title>タグ「HTTP」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/http/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/http/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-03-28T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:046e4412-bee8-4ffe-9876-6cbeaa0caf6b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-28/http-1-1-send-multiple-same-headers/"></link>
+    <title>【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか</title>
+    <summary>HTTP/1.1 で同じヘッダを2回送ったときの挙動について仕様を読んでまとめた。</summary>
+    <published>2025-03-28T00:00:00+09:00</published>
+    <updated>2025-03-28T00:00:00+09:00</updated>
+  </entry>
+</feed>

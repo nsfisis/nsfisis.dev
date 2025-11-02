@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:all</id>
+  <title>REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-10-31T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:39d3d137-f18d-4d88-8ef6-7be9cc2f3f0b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-10-31/representing-single-value-with-half-open-float-interval/"></link>
+    <title>浮動小数点数の半開区間で単一値を表現する</title>
+    <summary>IEEE 754 の nextUp 操作を用いて,浮動小数点数の半開区間で単一値を指定するテクニックを紹介する。</summary>
+    <published>2025-10-31T00:00:00+09:00</published>
+    <updated>2025-10-31T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:cc51db2d-4f53-4c9c-8930-056e4029e9e0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-10-29/phpstudy-tokyo-180/"></link>
+    <title>浮動小数点数の半開区間で単一値を指定する</title>
+    <summary>登壇: PHP 勉強会@東京 第180回 (レギュラートーク (20分))</summary>
+    <published>2025-10-29T00:00:00+09:00</published>
+    <updated>2025-10-29T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:4b667c22-e5ef-4827-9db6-8b503b460255</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-07-26/techramen-25-conf/"></link>
+    <title>セルフホスト可能なCコンパイラを2000行弱で書く</title>
+    <summary>登壇: TechRAMEN 2025 Conference (40 分)</summary>
+    <published>2025-07-26T00:00:00+09:00</published>
+    <updated>2025-07-26T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:427a124c-fce3-4a1c-a388-5c9827e34957</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-07-15/partial-surrender-to-ebooks/"></link>
+    <title>電子書籍への部分的降伏</title>
+    <summary>紙の本から電子書籍へ条件付きの移行を決めた。</summary>
+    <published>2025-07-15T00:00:00+09:00</published>
+    <updated>2025-07-15T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:127019eb-e83f-4c9e-ab54-2021124f1bbb</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-06-14/baba-is-you/"></link>
+    <title>最高のパズルゲーム Baba Is You をやれ</title>
+    <summary>Baba Is You という最高のパズルゲームをクリアした。是非プレイしてほしい。</summary>
+    <published>2025-06-14T00:00:00+09:00</published>
+    <updated>2025-06-15T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:64f5e1a6-2f5c-4d5d-b1c8-8346a66c1d40</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-05-05/make-tiny-self-hosted-c-compiler/"></link>
+    <title>セルフホスト可能な C コンパイラを作った</title>
+    <summary>ゴールデンウィークを使って、セルフホストできる C コンパイラを開発した。</summary>
+    <published>2025-05-05T00:00:00+09:00</published>
+    <updated>2025-05-05T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:087e98f2-743c-48d8-9f67-e9b57e354845</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-24/composer-patches-v2-does-not-require-gnu-patch-even-on-macos/"></link>
+    <title>【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)</title>
+    <summary>composer-patches は BSD patch に対応しておらず、一部のパッチの適用に失敗する。現在ベータ版である v2 では patch コマンドに依存しなくなり、macOS で使うときのストレスが解消される見込み。</summary>
+    <published>2025-04-24T00:00:00+09:00</published>
+    <updated>2025-04-24T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:039b3dff-3b75-46b7-a731-9a3a0ff8e21f</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-20/trick-2025-most-ruby-on-ruby-award/"></link>
+    <title>RubyKaigi 2025 の TRICK で入賞した</title>
+    <summary>RubyKaigi 2025 で開催された TRICK において、『最もRuby on Ruby賞』として審査員賞をいただいた。</summary>
+    <published>2025-04-20T00:00:00+09:00</published>
+    <updated>2025-04-20T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:c6c7c241-46c1-44b5-95b2-c30c3a500df3</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-04-12/phpcon-odawara-2025/"></link>
+    <title>PHP 8.x 時代のクラス設計（property promotion から property hooks まで）</title>
+    <summary>登壇: PHP カンファレンス小田原 2025 (レギュラートーク (20分))</summary>
+    <published>2025-04-12T00:00:00+09:00</published>
+    <updated>2025-04-12T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:046e4412-bee8-4ffe-9876-6cbeaa0caf6b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-28/http-1-1-send-multiple-same-headers/"></link>
+    <title>【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか</title>
+    <summary>HTTP/1.1 で同じヘッダを2回送ったときの挙動について仕様を読んでまとめた。</summary>
+    <published>2025-03-28T00:00:00+09:00</published>
+    <updated>2025-03-28T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:99111377-27e7-427b-9dc5-a23f621fa826</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-27/zip-function-like-command-paste-command/"></link>
+    <title>zip 関数のようなコマンド paste</title>
+    <summary>zip 関数のような動きをする paste コマンドについてのメモ。</summary>
+    <published>2025-03-27T00:00:00+09:00</published>
+    <updated>2025-03-27T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:ec7f4462-ae56-4bbf-aac7-cbd32bbbeb29</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-03-23/phperkaigi-2025/"></link>
+    <title>PHPで作るPHP～セルフホストできる言語処理系を作ろう～</title>
+    <summary>登壇: PHPerKaigi 2025 (レギュラートーク (40分))</summary>
+    <published>2025-03-23T00:00:00+09:00</published>
+    <updated>2025-03-23T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:13174dc7-c1a3-465f-9ba6-14f0bc6f5961</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-02-24/phpcon-nagoya-2025-report/"></link>
+    <title>PHP カンファレンス名古屋 2025 参加レポ</title>
+    <summary>2025-02-22 に開催された、PHP カンファレンス名古屋 2025 に参加した。</summary>
+    <published>2025-02-24T00:00:00+09:00</published>
+    <updated>2025-02-24T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:9172fbef-c812-4ade-86f5-eaa12c966708</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-02-22/phpcon-nagoya-2025/"></link>
+    <title>PHP 処理系の garbage collection を理解する～メモリはいつ解放されるのか～</title>
+    <summary>登壇: PHP カンファレンス名古屋 2025 (レギュラートーク (30分))</summary>
+    <published>2025-02-22T00:00:00+09:00</published>
+    <updated>2025-02-22T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:da2a0cec-74b3-4c5e-b2a2-47fe79ef49f9</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-01-26/yaml-breaking-changes-between-v1-1-and-v1-2/"></link>
+    <title>【YAML】YAML 1.1 と YAML 1.2 の主な破壊的変更</title>
+    <summary>データ記述言語 YAML におけるバージョン 1.1 と 1.2 の主な破壊的変更をまとめた。</summary>
+    <published>2025-01-26T00:00:00+09:00</published>
+    <updated>2025-01-26T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:ce8f20e8-c79f-48f8-982d-53edd4d20483</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-01-08/phperkaigi-2023-tokens-q1/"></link>
+    <title>PHPerKaigi 2023 トークン問題解説 (1/5)</title>
+    <summary>PHPerKaigi 2023 でデジタルサーカス株式会社から出題した問題を解説する。全5問中の第1問。</summary>
+    <published>2025-01-08T00:00:00+09:00</published>
+    <updated>2025-01-11T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:d7f98354-83fc-4cf1-8769-2784f0ebb6c8</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-12-33/2024-reflections/"></link>
+    <title>2024年の振り返り</title>
+    <summary>2024年にやったことを振り返る</summary>
+    <published>2025-01-02T00:00:00+09:00</published>
+    <updated>2025-01-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:ea0593d3-691c-4e08-8db4-98b8925717ec</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-12-04/cohackpp-report/"></link>
+    <title>紅白ぺぱ合戦に参加&amp;LTしました</title>
+    <summary>2024-11-30 に開催された紅白ぺぱ合戦に参加し、ぺ陣営のメンバとして LT しました。</summary>
+    <published>2024-12-04T00:00:00+09:00</published>
+    <updated>2024-12-05T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:e1ca4664-f6f1-4de2-b4a5-ea2b64006708</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-11-30/cohackpp/"></link>
+    <title>プログラミングマナー講座</title>
+    <summary>登壇: 紅白ぺぱ合戦 (LT)</summary>
+    <published>2024-11-30T00:00:00+09:00</published>
+    <updated>2024-11-30T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:a84100cf-8c92-4856-addf-81a7c5547074</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-10-30/phpstudy-tokyo-169/"></link>
+    <title>PHP で PHP を作る (縮小版)</title>
+    <summary>登壇: PHP 勉強会@東京 第169回 (レギュラートーク (20分))</summary>
+    <published>2024-10-30T00:00:00+09:00</published>
+    <updated>2024-10-30T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:ee7289ee-ff2e-439d-b343-7f87504192fd</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-09-28/mncore-challenge-1/"></link>
+    <title>MN-Core Challenge #1 参加レポ</title>
+    <summary>2024-08-28 から 2024-09-24 にかけて開催された MN-Core Challenge #1 に参加した。</summary>
+    <published>2024-09-28T00:00:00+09:00</published>
+    <updated>2024-09-28T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:eed112e4-3227-4b3f-9991-7e11c288ee2b</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-08-19/go-template-access-outer-scope-pipeline-within-with-or-range/"></link>
+    <title>【Go】 text/template の with や range の内側から外側の &quot;.&quot; にアクセスする</title>
+    <summary>Go言語の text/template における with や range は &quot;.&quot; を上書きする。これらの内側から外側の &quot;.&quot; にアクセスする方法を調べた。</summary>
+    <published>2024-08-19T00:00:00+09:00</published>
+    <updated>2024-08-19T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:222488dd-cf07-4961-83aa-a014b05369ff</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-07-19/reparojson-fix-only-json-formatter/"></link>
+    <title>reparojson: 文法エラーを直すだけの JSON フォーマッタを作った</title>
+    <summary>文法エラーだけを直し、空白の削除や挿入といった整形処理を一切おこなわない JSON フォーマッタを作成した。Neovim と連携させる設定例も紹介する。</summary>
+    <published>2024-07-19T00:00:00+09:00</published>
+    <updated>2024-07-19T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:eec495b5-45e2-4c6f-a725-e62b1e0a7ad5</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-07-18/phpstudy-tokyo-166/"></link>
+    <title>PHPerKaigi 2024 で発表した WebAssembly ランタイムのその後</title>
+    <summary>登壇: PHP 勉強会@東京 第166回 (レギュラートーク (20分))</summary>
+    <published>2024-07-18T00:00:00+09:00</published>
+    <updated>2024-07-18T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:8d6f3690-3da3-4235-a81b-b9707cee22ad</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-06-19/scalamatsuri-2024-report/"></link>
+    <title>ScalaMatsuri 2024 参加レポ</title>
+    <summary>2024-06-08 から 2024-06-09 にかけて開催された、ScalaMatsuri 2024 に参加した。</summary>
+    <published>2024-06-19T00:00:00+09:00</published>
+    <updated>2024-06-19T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:f13aa9d6-4533-4a15-872a-c298ab2090db</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-05-11/phpconkagawa-2024-report/"></link>
+    <title>PHP カンファレンス香川 2024 参加レポ</title>
+    <summary>2024-05-11 に開催された、PHP カンファレンス香川 2024 に参加した。</summary>
+    <published>2024-05-11T00:00:00+09:00</published>
+    <updated>2024-05-11T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:9b26c1ed-45c3-4cad-9476-cbf2cf2e4de7</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-29/zsh-file-completion-for-composer-custom-commands/"></link>
+    <title>【Zsh】 Composer のカスタムコマンドに対する Zsh 補完で引数にファイルを補完させる</title>
+    <summary>Zsh の Composer に対する補完はカスタムコマンドやその引数を補完しない。カスタムコマンドの引数としてファイルを補完させる方法を調べた。</summary>
+    <published>2024-04-29T00:00:00+09:00</published>
+    <updated>2024-04-29T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:6cf84106-cc69-4d87-b957-9d58d7e585bb</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-04-25/phpstudy-tokyo-163/"></link>
+    <title>Tracing JIT の発動条件</title>
+    <summary>登壇: PHP 勉強会@東京 第163回 (LT)</summary>
+    <published>2024-04-25T00:00:00+09:00</published>
+    <updated>2024-04-25T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:a4c326a6-5ffe-450c-abf2-45833c5efb6a</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-21/pipefail-option-in-gitlab-ci-cd/"></link>
+    <title>【GitLab】 GitLab CI/CD 上での bash/sh は pipefail が有効になっている</title>
+    <summary>GitLab CI/CD で bash/sh スクリプトを動かすと、pipefail オプションが有効になった状態で実行される。</summary>
+    <published>2024-04-21T00:00:00+09:00</published>
+    <updated>2024-04-21T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:be9c896d-7efa-42dd-a50a-dda5fd3a7f5c</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-14/phpcon-odawara-2024-report/"></link>
+    <title>PHP カンファレンス小田原 2024 参加レポ</title>
+    <summary>2024-04-13 に開催された、PHP カンファレンス小田原 2024 に参加した。</summary>
+    <published>2024-04-14T00:00:00+09:00</published>
+    <updated>2024-06-01T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:69e1694b-5ddb-41a5-a7f4-138ce82a78b2</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-04-13/phpcon-odawara-2024/"></link>
+    <title>来る新 JIT エンジンについて知った気になる</title>
+    <summary>登壇: PHP カンファレンス小田原 2024 (レギュラートーク (15分))</summary>
+    <published>2024-04-13T00:00:00+09:00</published>
+    <updated>2024-04-13T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:6b749793-c760-4597-8a4c-b32d027b7585</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-03-20/my-bucket-list/"></link>
+    <title>死ぬまでに作る自作○○一覧あるいは人生の TODO リスト</title>
+    <summary>駄文</summary>
+    <published>2024-03-20T00:00:00+09:00</published>
+    <updated>2024-04-07T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:750be5c8-ca52-4cbd-86fe-5645b06bde95</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-03-17/phperkaigi-2024-report/"></link>
+    <title>PHPerKaigi 2024 参加レポ</title>
+    <summary>2024-03-07 から 2024-03-09 にかけて開催された、PHPerKaigi 2024 に参加した。</summary>
+    <published>2024-03-17T00:00:00+09:00</published>
+    <updated>2024-07-07T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:da7b1d5a-70df-4c4a-936c-1b49ca1a7c37</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
+    <title>CLI の PHP プログラムを限界まで高速化してみる</title>
+    <summary>登壇: Ya8 2024 (レギュラートーク (60分))</summary>
+    <published>2024-03-15T00:00:00+09:00</published>
+    <updated>2024-03-15T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:cee40048-f3c5-4043-9ef8-a4ee2ae7cf0e</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-08/phperkaigi-2024/"></link>
+    <title>WebAssembly を理解する 〜VM の作成を通して〜</title>
+    <summary>登壇: PHPerKaigi 2024 (レギュラートーク (40分))</summary>
+    <published>2024-03-08T00:00:00+09:00</published>
+    <updated>2024-03-08T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:fd8fcb03-8e4d-4ca7-8499-0674accc51a9</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-02-22/phpkansai-2024-report/"></link>
+    <title>PHPカンファレンス関西 2024 参加レポ</title>
+    <summary>2024-02-11 に開催された、PHPカンファレンス関西 2024 に参加した。</summary>
+    <published>2024-02-21T00:00:00+09:00</published>
+    <updated>2024-02-21T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:230a0048-93c0-4aac-91ef-bb3108f3e587</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-02-10/yapcjapan-2024-report/"></link>
+    <title>YAPC::Hiroshima 2024 参加レポ</title>
+    <summary>2024-02-10 に開催された、YAPC::Hiroshima 2024 に参加した。</summary>
+    <published>2024-02-10T00:00:00+09:00</published>
+    <updated>2024-02-10T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:210673d0-c19e-4195-a280-968a0729dd41</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-02-03/install-wireguard-on-personal-server/"></link>
+    <title>【備忘録】 個人用サーバに WireGuard を導入する</title>
+    <summary>個人用サービスのセルフホストに使っているサーバに WireGuard を導入する作業をしたメモ</summary>
+    <published>2024-02-03T00:00:00+09:00</published>
+    <updated>2024-02-17T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:82db7893-983a-4631-8bee-d0725d078252</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-01-24/phpstudy-tokyo-160/"></link>
+    <title>PHPStan の力で Algebraic Data Types を実現する</title>
+    <summary>登壇: PHP 勉強会@東京 第160 回 (レギュラートーク)</summary>
+    <published>2024-01-24T00:00:00+09:00</published>
+    <updated>2024-01-24T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:05cb16e1-05bc-4359-bc06-88ac20510740</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-01-10/neovim-insert-namespace-declaration-to-empty-php-file/"></link>
+    <title>【Neovim】 空の PHP ファイルに namespace 宣言を挿入する</title>
+    <summary>Neovim で空の PHP ファイルを開いたとき、ディレクトリの構造に基づいて自動的に namespace 宣言を挿入するようにする。</summary>
+    <published>2024-01-10T00:00:00+09:00</published>
+    <updated>2024-01-10T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:bfdeed72-dd32-4d55-887f-ba004701ff4c</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-12-31/2023-reflections/"></link>
+    <title>2023年の振り返り</title>
+    <summary>2023年にやったことを振り返る</summary>
+    <published>2023-12-31T00:00:00+09:00</published>
+    <updated>2023-12-31T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:d0c404bb-4700-4a6f-9911-621e9872d8c6</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-12-03/isucon-13/"></link>
+    <title>ISUCON 13 に参加した</title>
+    <summary>ISUCON 13 に参加した。チーム名「うつしもゆ」、最終スコア 13,580 点</summary>
+    <published>2023-12-03T00:00:00+09:00</published>
+    <updated>2023-12-03T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:6c377f3f-6f52-4074-b690-c79d02050562</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-10-25/phpstudy-tokyo-157/"></link>
+    <title>PHP コードを隔離された環境で安全に動かす (on WebAssembly)</title>
+    <summary>登壇: PHP 勉強会@東京 第157 回 (LT)</summary>
+    <published>2023-10-25T00:00:00+09:00</published>
+    <updated>2023-10-25T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:78419bf2-a1e6-421f-875b-3d93e777b04f</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-10-13/i-entered-the-open-university-of-japan/"></link>
+    <title>放送大学に入学しました</title>
+    <summary>放送大学に入学しました。頑張ります。</summary>
+    <published>2023-10-13T00:00:00+09:00</published>
+    <updated>2023-10-13T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:0ed1ccc8-d437-481c-8cca-2131ce800cc0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-10-02/compile-php-runtime-to-wasm/"></link>
+    <title>PHP の処理系を Emscripten で WebAssembly にコンパイルする</title>
+    <summary>PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。</summary>
+    <published>2023-10-02T00:00:00+09:00</published>
+    <updated>2025-04-23T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:d6118e00-5fb1-4230-9d94-854260beae04</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-08-24/phpstudy-tokyo-155/"></link>
+    <title>PHP 3.0 の処理系のソースを読んでみる</title>
+    <summary>登壇: PHP 勉強会@東京 第155 回 (LT)</summary>
+    <published>2023-08-24T00:00:00+09:00</published>
+    <updated>2023-08-24T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:669de08d-9e02-44c5-ac3f-35972112e706</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-07-26/phpstudy-tokyo-154/"></link>
+    <title>言語間で比較するエラーの通知と処理</title>
+    <summary>登壇: PHP 勉強会@東京 第154 回 (レギュラートーク)</summary>
+    <published>2023-07-26T00:00:00+09:00</published>
+    <updated>2023-07-26T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:e1568c4c-9bdd-47b9-8b39-939ade4f3ba0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-06-25/phpconfuk-2023-report/"></link>
+    <title>PHP カンファレンス福岡 2023 参加レポ</title>
+    <summary>2023-06-24 に開催された、PHP カンファレンス福岡に参加した。</summary>
+    <published>2023-06-25T00:00:00+09:00</published>
+    <updated>2023-06-25T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:72244d87-4cf0-41c4-a074-bcc37acaa678</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-06-23/phpconfuk-2023-eve/"></link>
+    <title>巨大なコードベースへ突撃するために</title>
+    <summary>登壇: PHP カンファレンス福岡 2023 前夜祭 (非公式) (レギュラートーク)</summary>
+    <published>2023-06-23T00:00:00+09:00</published>
+    <updated>2023-06-23T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:6016d501-b9c9-474a-a304-1ec1295e049a</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-06-21/phpstudy-tokyo-153/"></link>
+    <title>テキストファイルの末尾には改行コードを入れよう</title>
+    <summary>登壇: PHP 勉強会@東京 第153 回 (LT)</summary>
+    <published>2023-06-21T00:00:00+09:00</published>
+    <updated>2023-06-21T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:fe75bb63-1cd9-457e-8244-c444307cd40a</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-04-12/phpstudy-tokyo-151/"></link>
+    <title>list でない array の末尾を探す</title>
+    <summary>登壇: PHP 勉強会@東京 第151 回 (LT)</summary>
+    <published>2023-04-12T00:00:00+09:00</published>
+    <updated>2023-04-12T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:21ce39f0-d613-45f2-a760-89c368892d77</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-04-04/phperkaigi-2023-report/"></link>
+    <title>PHPerKaigi 2023 参加レポ</title>
+    <summary>2023-03-23 から 2023-03-25 にかけて開催された、PHPerKaigi 2023 に参加した。</summary>
+    <published>2023-04-04T00:00:00+09:00</published>
+    <updated>2023-06-28T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:ed36e185-5bfa-42e1-8358-0b1da9b0a063</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-04-01/implementation-of-minimal-png-image-encoder/"></link>
+    <title>PNG 画像の最小構成エンコーダを実装する</title>
+    <summary>PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。</summary>
+    <published>2023-04-01T00:00:00+09:00</published>
+    <updated>2023-04-01T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:3cce70d8-cee9-4e0e-8b38-6ef1e0a8a278</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-25/phperkaigi-2023-tokens/"></link>
+    <title>PHPer チャレンジ解説 (デジタルサーカス株式会社)</title>
+    <summary>登壇: PHPerKaigi 2023 (トークン解説セッション)</summary>
+    <published>2023-03-25T00:00:00+09:00</published>
+    <updated>2023-03-25T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:2dce7e27-1eaf-4ca4-8037-e9a3ead18b48</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-24/phperkaigi-2023/"></link>
+    <title>詳説「参照」PHP の参照を完全に理解する</title>
+    <summary>登壇: PHPerKaigi 2023 (レギュラートーク)</summary>
+    <published>2023-03-24T00:00:00+09:00</published>
+    <updated>2023-03-24T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:9376560b-250a-4697-ac10-0903ad16acee</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-15/phpstudy-tokyo-150/"></link>
+    <title>明日のあなたの役に立たない PHP コーディング技法～細長い FizzBuzz を書く～</title>
+    <summary>登壇: PHP 勉強会@東京 第150 回 (LT)</summary>
+    <published>2023-03-15T00:00:00+09:00</published>
+    <updated>2023-03-18T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:12512894-05d8-42c6-950e-8f5d60f984d8</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-03-10/rewrite-this-blog-generator/"></link>
+    <title>このブログのジェネレータを書き直した</title>
+    <summary>このブログのジェネレータを書き直したので、やったことを書き記しておく。</summary>
+    <published>2023-03-10T00:00:00+09:00</published>
+    <updated>2023-03-10T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:f23ea81c-5996-4b7e-aab0-4e9f23b172c2</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-02-15/phpstudy-tokyo-149/"></link>
+    <title>PHPerKaigi 2023 のトークン問題でボツにした問題を供養する</title>
+    <summary>登壇: PHP 勉強会@東京 第149 回 (LT)</summary>
+    <published>2023-02-15T00:00:00+09:00</published>
+    <updated>2023-02-15T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:693a4c2e-6f21-4840-b793-4e3644a8ec22</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-01-18/phpstudy-tokyo-148/"></link>
+    <title>明日のあなたの役に立たない PHP コーディング技法～polyglot～</title>
+    <summary>登壇: PHP 勉強会@東京 第148 回 (LT)</summary>
+    <published>2023-01-18T00:00:00+09:00</published>
+    <updated>2023-01-18T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:89722cfb-7f4b-4e96-80bc-e0096e5eeef6</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-01-10/phperkaigi-2023-unused-token-quiz-3/"></link>
+    <title>PHPerKaigi 2023: ボツになったトークン問題 その 3</title>
+    <summary>来年の PHPerKaigi 2023 でデジタルサーカス株式会社から出題予定のトークン問題のうち、ボツになった問題を公開する (その 3)。</summary>
+    <published>2023-01-10T00:00:00+09:00</published>
+    <updated>2023-01-10T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:10fe9c47-7029-4874-82bd-b4dc50e07809</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-11-19/phperkaigi-2023-unused-token-quiz-2/"></link>
+    <title>PHPerKaigi 2023: ボツになったトークン問題 その 2</title>
+    <summary>来年の PHPerKaigi 2023 でデジタルサーカス株式会社から出題予定のトークン問題のうち、ボツになった問題を公開する (その 2)。</summary>
+    <published>2022-11-19T00:00:00+09:00</published>
+    <updated>2022-11-19T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:673cb872-af2d-41a3-9fb0-60f1afcedb0d</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-10-28/setup-server-for-this-site/"></link>
+    <title>【備忘録】 このサイト用の VPS をセットアップしたときのメモ</title>
+    <summary>GitHub Pages でホストしていたこのサイトを VPS へ移行したので、そのときにやったことのメモ。99 % 自分用。</summary>
+    <published>2022-10-28T00:00:00+09:00</published>
+    <updated>2023-08-30T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:46e0d5db-b17e-464c-a723-8c3e01af7d1d</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-10-23/phperkaigi-2023-unused-token-quiz-1/"></link>
+    <title>PHPerKaigi 2023: ボツになったトークン問題 その 1</title>
+    <summary>来年の PHPerKaigi 2023 でデジタルサーカス株式会社から出題予定のトークン問題のうち、ボツになった問題を公開する (その 1)。</summary>
+    <published>2022-10-23T00:00:00+09:00</published>
+    <updated>2022-10-23T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:42f0b29b-1e44-4dbe-9864-69abe3bb1e6e</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-09-29/write-fizzbuzz-in-php-2-letters-per-line/"></link>
+    <title>【PHP】 fizzbuzz を書く。1行あたり2文字で。</title>
+    <summary>PHP で fizzbuzz を書いた。ただし、1行あたりに使える文字数は2文字まで。</summary>
+    <published>2022-09-28T00:00:00+09:00</published>
+    <updated>2022-09-29T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:cd16debe-8077-4edf-aec0-b1d45955a0e2</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-08-31/support-for-communty-is-employee-benefits/"></link>
+    <title>弊社の PHP Foundation への寄付に寄せて</title>
+    <summary>先日、私の勤めるデジタルサーカス株式会社が、PHP Foundation へ寄付をおこないました。本件を社内でしつこく推進した1人として、推進の理由等を書き残しておきます。</summary>
+    <published>2022-08-31T00:00:00+09:00</published>
+    <updated>2022-08-31T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:bb71bb5d-361b-44cb-9753-81d14583d860</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-08-27/php-conference-okinawa-code-golf/"></link>
+    <title>PHP カンファレンス沖縄で出題されたコードゴルフの問題を解いてみた</title>
+    <summary>PHP カンファレンス沖縄の懇親会 LT で出題されたコードゴルフの問題を解いてみた。</summary>
+    <published>2022-08-27T00:00:00+09:00</published>
+    <updated>2022-08-27T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:9211e1fe-bca3-43c4-ba4e-c67d62f3fed0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-05-01/phperkaigi-2022/"></link>
+    <title>PHPerKaigi 2022</title>
+    <summary>2022-04-09 から 2022-04-11 にかけて開催された、PHPerKaigi 2022 に参加した。</summary>
+    <published>2022-05-01T00:00:00+09:00</published>
+    <updated>2022-05-01T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:42cf2829-b897-4748-bc22-80dd734a3c09</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-04-24/term-banner-write-tool-showing-banner-in-terminal/"></link>
+    <title>term-banner: ターミナルにバナーを表示するツールを書いた</title>
+    <summary>ターミナルに任意の文字のバナーを表示するためのツールを Go で書いた。</summary>
+    <published>2022-04-24T00:00:00+09:00</published>
+    <updated>2022-04-27T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:f4985d54-0907-4449-8101-0fcd382f9e02</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-04-09/phperkaigi-2022-tokens/"></link>
+    <title>PHPerKaigi 2022 トークン問題の解説</title>
+    <summary>PHPerKaigi 2022 で私が作成した PHPer チャレンジ問題を解説する。</summary>
+    <published>2022-04-09T00:00:00+09:00</published>
+    <updated>2022-04-16T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:69863d75-ef21-42db-b743-5958f7c86827</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/cpp-you-can-use-keywords-in-attributes/"></link>
+    <title>【C++】 属性構文の属性名にはキーワードが使える</title>
+    <summary>C++ の属性構文の属性名には、キーワードが使える。ネタ記事。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:e1aff84c-d6d4-4dea-bc45-9c41e6445006</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/python-unbound-local-error/"></link>
+    <title>【Python】 クロージャとUnboundLocalError: local variable &apos;x&apos; referenced before assignment</title>
+    <summary>Python における UnboundLocalError の理由と対処法。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:e1456a50-4fc6-42ef-89f3-8be78e01da13</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/ruby-detect-running-implementation/"></link>
+    <title>【Ruby】 自身を実行している処理系の種類を判定する</title>
+    <summary>Ruby には複数の実装があるが、自身を実行している処理系の種類をスクリプト上からどのように判定すればよいだろうか。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:87455008-fe5b-49bf-af5a-b875264f8326</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/ruby-then-keyword-and-case-in/"></link>
+    <title>【Ruby】 then キーワードと case in</title>
+    <summary>Ruby 3.0 で追加される case in 構文と、then キーワードについて。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:91c61980-c262-4e8d-89b0-4304e7f6d644</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/rust-where-are-primitive-types-from/"></link>
+    <title>Rust のプリミティブ型はどこからやって来るか</title>
+    <summary>Rust のプリミティブ型は予約語ではなく普通の識別子である。どのようにこれが名前解決されるのかを調べた。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:44171f75-c312-4c92-9927-3d260e162175</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/vim-difference-between-autocmd-bufwrite-and-bufwritepre/"></link>
+    <title>【Vim】 autocmd events の BufWrite/BufWritePre の違い</title>
+    <summary>Vim の autocmd events における BufWrite/BufWritePre がどう違うのかを調べた結果、違いはないことがわかった。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:665de47e-0ed6-405e-ad30-81c3c4592d45</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/vim-swap-order-of-selected-lines/"></link>
+    <title>Vimで選択した行の順番を入れ替える</title>
+    <summary>Vim で選択した行の順番を入れ替える方法。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:3fbe0b8c-216e-48f6-b905-c0d361b94542</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-03-30/phperkaigi-2021/"></link>
+    <title>PHPerKaigi 2021</title>
+    <summary>2021-03-26 から 2021-03-28 にかけて開催された、PHPerKaigi 2021 に参加した。</summary>
+    <published>2021-03-30T00:00:00+09:00</published>
+    <updated>2025-04-09T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:6e9c71fd-bc8d-43ce-99c5-13d9f5b87ed2</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-03-05/my-first-post/"></link>
+    <title>My First Post</title>
+    <summary>これはテスト投稿です。これはテスト投稿です。これはテスト投稿です。</summary>
+    <published>2021-03-05T00:00:00+09:00</published>
+    <updated>2025-05-12T00:00:00+09:00</updated>
+  </entry>
+</feed>

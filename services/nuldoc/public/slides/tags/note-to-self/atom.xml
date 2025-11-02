@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-note-to-self</id>
+  <title>タグ「備忘録」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/note-to-self/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/note-to-self/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-03-27T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:99111377-27e7-427b-9dc5-a23f621fa826</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-27/zip-function-like-command-paste-command/"></link>
+    <title>zip 関数のようなコマンド paste</title>
+    <summary>zip 関数のような動きをする paste コマンドについてのメモ。</summary>
+    <published>2025-03-27T00:00:00+09:00</published>
+    <updated>2025-03-27T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:210673d0-c19e-4195-a280-968a0729dd41</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-02-03/install-wireguard-on-personal-server/"></link>
+    <title>【備忘録】 個人用サーバに WireGuard を導入する</title>
+    <summary>個人用サービスのセルフホストに使っているサーバに WireGuard を導入する作業をしたメモ</summary>
+    <published>2024-02-03T00:00:00+09:00</published>
+    <updated>2024-02-17T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:673cb872-af2d-41a3-9fb0-60f1afcedb0d</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-10-28/setup-server-for-this-site/"></link>
+    <title>【備忘録】 このサイト用の VPS をセットアップしたときのメモ</title>
+    <summary>GitHub Pages でホストしていたこのサイトを VPS へ移行したので、そのときにやったことのメモ。99 % 自分用。</summary>
+    <published>2022-10-28T00:00:00+09:00</published>
+    <updated>2023-08-30T00:00:00+09:00</updated>
+  </entry>
+</feed>

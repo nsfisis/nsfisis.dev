@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-phpconokinawa</id>
+  <title>タグ「PHP カンファレンス沖縄」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/phpconokinawa/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/phpconokinawa/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2022-08-27T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:bb71bb5d-361b-44cb-9753-81d14583d860</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-08-27/php-conference-okinawa-code-golf/"></link>
+    <title>PHP カンファレンス沖縄で出題されたコードゴルフの問題を解いてみた</title>
+    <summary>PHP カンファレンス沖縄の懇親会 LT で出題されたコードゴルフの問題を解いてみた。</summary>
+    <published>2022-08-27T00:00:00+09:00</published>
+    <updated>2022-08-27T00:00:00+09:00</updated>
+  </entry>
+</feed>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-rubykaigi</id>
+  <title>タグ「RubyKaigi」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/rubykaigi/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/rubykaigi/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-04-20T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:039b3dff-3b75-46b7-a731-9a3a0ff8e21f</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-20/trick-2025-most-ruby-on-ruby-award/"></link>
+    <title>RubyKaigi 2025 の TRICK で入賞した</title>
+    <summary>RubyKaigi 2025 で開催された TRICK において、『最もRuby on Ruby賞』として審査員賞をいただいた。</summary>
+    <published>2025-04-20T00:00:00+09:00</published>
+    <updated>2025-04-20T00:00:00+09:00</updated>
+  </entry>
+</feed>

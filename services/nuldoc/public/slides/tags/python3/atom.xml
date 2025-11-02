@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-python3</id>
+  <title>タグ「Python 3」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/python3/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/python3/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2021-10-02T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:e1aff84c-d6d4-4dea-bc45-9c41e6445006</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/python-unbound-local-error/"></link>
+    <title>【Python】 クロージャとUnboundLocalError: local variable &apos;x&apos; referenced before assignment</title>
+    <summary>Python における UnboundLocalError の理由と対処法。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+</feed>

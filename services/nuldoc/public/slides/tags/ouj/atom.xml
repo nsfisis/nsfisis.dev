@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-ouj</id>
+  <title>タグ「放送大学」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/ouj/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/ouj/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2023-10-13T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:78419bf2-a1e6-421f-875b-3d93e777b04f</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-10-13/i-entered-the-open-university-of-japan/"></link>
+    <title>放送大学に入学しました</title>
+    <summary>放送大学に入学しました。頑張ります。</summary>
+    <published>2023-10-13T00:00:00+09:00</published>
+    <updated>2023-10-13T00:00:00+09:00</updated>
+  </entry>
+</feed>

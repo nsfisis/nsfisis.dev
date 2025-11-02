@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-vim</id>
+  <title>タグ「Vim」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/vim/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/vim/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2024-07-19T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:222488dd-cf07-4961-83aa-a014b05369ff</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-07-19/reparojson-fix-only-json-formatter/"></link>
+    <title>reparojson: 文法エラーを直すだけの JSON フォーマッタを作った</title>
+    <summary>文法エラーだけを直し、空白の削除や挿入といった整形処理を一切おこなわない JSON フォーマッタを作成した。Neovim と連携させる設定例も紹介する。</summary>
+    <published>2024-07-19T00:00:00+09:00</published>
+    <updated>2024-07-19T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:44171f75-c312-4c92-9927-3d260e162175</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/vim-difference-between-autocmd-bufwrite-and-bufwritepre/"></link>
+    <title>【Vim】 autocmd events の BufWrite/BufWritePre の違い</title>
+    <summary>Vim の autocmd events における BufWrite/BufWritePre がどう違うのかを調べた結果、違いはないことがわかった。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:665de47e-0ed6-405e-ad30-81c3c4592d45</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/vim-swap-order-of-selected-lines/"></link>
+    <title>Vimで選択した行の順番を入れ替える</title>
+    <summary>Vim で選択した行の順番を入れ替える方法。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+</feed>

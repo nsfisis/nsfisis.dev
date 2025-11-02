@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-rust</id>
+  <title>タグ「Rust」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/rust/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/rust/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2021-10-02T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:91c61980-c262-4e8d-89b0-4304e7f6d644</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2021-10-02/rust-where-are-primitive-types-from/"></link>
+    <title>Rust のプリミティブ型はどこからやって来るか</title>
+    <summary>Rust のプリミティブ型は予約語ではなく普通の識別子である。どのようにこれが名前解決されるのかを調べた。</summary>
+    <published>2021-10-02T00:00:00+09:00</published>
+    <updated>2021-10-02T00:00:00+09:00</updated>
+  </entry>
+</feed>

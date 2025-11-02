@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-yaml</id>
+  <title>タグ「YAML」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/yaml/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/yaml/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-01-26T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:da2a0cec-74b3-4c5e-b2a2-47fe79ef49f9</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-01-26/yaml-breaking-changes-between-v1-1-and-v1-2/"></link>
+    <title>【YAML】YAML 1.1 と YAML 1.2 の主な破壊的変更</title>
+    <summary>データ記述言語 YAML におけるバージョン 1.1 と 1.2 の主な破壊的変更をまとめた。</summary>
+    <published>2025-01-26T00:00:00+09:00</published>
+    <updated>2025-01-26T00:00:00+09:00</updated>
+  </entry>
+</feed>
