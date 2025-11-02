@@ -25,7 +25,12 @@ export function runServeCommand(config: Config) {
   });
 
   const doRebuild = !parsedArgs["no-rebuild"];
-  const rootDir = join(Deno.cwd(), config.locations.destDir);
+  const siteName = String(parsedArgs._[1]);
+  if (siteName === "") {
+    throw new Error("Usage: nuldoc serve <site>");
+  }
+
+  const rootDir = join(Deno.cwd(), config.locations.destDir, siteName);
   Deno.serve({ hostname: "127.0.0.1" }, async (req) => {
     const pathname = new URL(req.url).pathname;
     if (!isResourcePath(pathname) && doRebuild) {
