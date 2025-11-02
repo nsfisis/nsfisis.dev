@@ -6,7 +6,7 @@ server http {
 
     proxy blog {
         from {
-            host = "blog.localhost"
+            host = "blog.localhost:8000"
         }
         to {
             host = "127.0.0.1"
