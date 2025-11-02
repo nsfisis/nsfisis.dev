@@ -13,11 +13,26 @@ const ConfigSchema = z.object({
       indentWidth: z.number(),
     }),
   }),
+  site: z.object({
+    copyrightYear: z.number(),
+  }),
+  sites: z.object({
+    default: z.object({
+      fqdn: z.string(),
+    }),
+    about: z.object({
+      fqdn: z.string(),
+    }),
+    blog: z.object({
+      fqdn: z.string(),
+    }),
+    slides: z.object({
+      fqdn: z.string(),
+    }),
+  }),
   blog: z.object({
     author: z.string(),
-    fqdn: z.string(),
     siteName: z.string(),
-    siteCopyrightYear: z.number(),
     postsPerPage: z.number().default(10),
     tagLabels: z.record(z.string(), z.string()),
   }),

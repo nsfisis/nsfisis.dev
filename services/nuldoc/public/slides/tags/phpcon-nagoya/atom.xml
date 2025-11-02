@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>tag:blog.nsfisis.dev,2021:tag-phpcon-nagoya</id>
+  <id>tag:slides.nsfisis.dev,2021:tag-phpcon-nagoya</id>
   <title>タグ「PHP カンファレンス名古屋」一覧｜REPL: Rest-Eat-Program Loop</title>
-  <link rel="alternate" href="https://blog.nsfisis.dev/tags/phpcon-nagoya/"></link>
-  <link rel="self" href="https://blog.nsfisis.dev/tags/phpcon-nagoya/atom.xml"></link>
+  <link rel="alternate" href="https://slides.nsfisis.dev/tags/phpcon-nagoya/"></link>
+  <link rel="self" href="https://slides.nsfisis.dev/tags/phpcon-nagoya/atom.xml"></link>
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-02-24T00:00:00+09:00</updated>
-  <entry>
-    <id>urn:uuid:13174dc7-c1a3-465f-9ba6-14f0bc6f5961</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-02-24/phpcon-nagoya-2025-report/"></link>
-    <title>PHP カンファレンス名古屋 2025 参加レポ</title>
-    <summary>2025-02-22 に開催された、PHP カンファレンス名古屋 2025 に参加した。</summary>
-    <published>2025-02-24T00:00:00+09:00</published>
-    <updated>2025-02-24T00:00:00+09:00</updated>
-  </entry>
+  <updated>2025-02-22T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:9172fbef-c812-4ade-86f5-eaa12c966708</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-02-22/phpcon-nagoya-2025/"></link>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2025-02-22/phpcon-nagoya-2025/"></link>
     <title>PHP 処理系の garbage collection を理解する～メモリはいつ解放されるのか～</title>
     <summary>登壇: PHP カンファレンス名古屋 2025 (レギュラートーク (30分))</summary>
     <published>2025-02-22T00:00:00+09:00</published>

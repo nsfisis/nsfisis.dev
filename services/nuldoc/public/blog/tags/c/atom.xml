@@ -7,15 +7,7 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-07-26T00:00:00+09:00</updated>
-  <entry>
-    <id>urn:uuid:4b667c22-e5ef-4827-9db6-8b503b460255</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-07-26/techramen-25-conf/"></link>
-    <title>セルフホスト可能なCコンパイラを2000行弱で書く</title>
-    <summary>登壇: TechRAMEN 2025 Conference (40 分)</summary>
-    <published>2025-07-26T00:00:00+09:00</published>
-    <updated>2025-07-26T00:00:00+09:00</updated>
-  </entry>
+  <updated>2025-05-05T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:64f5e1a6-2f5c-4d5d-b1c8-8346a66c1d40</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-05-05/make-tiny-self-hosted-c-compiler/"></link>

@@ -16,12 +16,4 @@
     <published>2024-12-04T00:00:00+09:00</published>
     <updated>2024-12-05T00:00:00+09:00</updated>
   </entry>
-  <entry>
-    <id>urn:uuid:e1ca4664-f6f1-4de2-b4a5-ea2b64006708</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-11-30/cohackpp/"></link>
-    <title>プログラミングマナー講座</title>
-    <summary>登壇: 紅白ぺぱ合戦 (LT)</summary>
-    <published>2024-11-30T00:00:00+09:00</published>
-    <updated>2024-11-30T00:00:00+09:00</updated>
-  </entry>
 </feed>

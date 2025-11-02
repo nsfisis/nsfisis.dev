@@ -15,10 +15,10 @@ export default function SlideListPage(
 
   return (
     <PageLayout
-      metaCopyrightYear={config.blog.siteCopyrightYear}
+      metaCopyrightYear={config.site.copyrightYear}
       metaDescription="登壇したイベントで使用したスライドの一覧"
       metaTitle={`${pageTitle}｜${config.blog.siteName}`}
-      metaAtomFeedHref={`https://${config.blog.fqdn}/slides/atom.xml`}
+      metaAtomFeedHref={`https://${config.sites.slides.fqdn}/slides/atom.xml`}
       config={config}
     >
       <body className="list">

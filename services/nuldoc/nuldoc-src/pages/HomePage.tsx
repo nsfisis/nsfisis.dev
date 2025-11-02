@@ -6,10 +6,10 @@ import { Config } from "../config.ts";
 export default function HomePage(config: Config) {
   return (
     <PageLayout
-      metaCopyrightYear={config.blog.siteCopyrightYear}
+      metaCopyrightYear={config.site.copyrightYear}
       metaDescription="nsfisis のブログサイト"
       metaTitle={config.blog.siteName}
-      metaAtomFeedHref={`https://${config.blog.fqdn}/atom.xml`}
+      metaAtomFeedHref={`https://${config.sites.default.fqdn}/atom.xml`}
       config={config}
     >
       <body className="single">

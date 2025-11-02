@@ -57,6 +57,7 @@ async function generatePostListPage(
   return {
     root: html,
     renderer: "html",
+    site: "blog",
     destFilePath,
     href,
   };

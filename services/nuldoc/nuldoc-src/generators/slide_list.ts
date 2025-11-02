@@ -17,6 +17,7 @@ export async function generateSlideListPage(
   return {
     root: html,
     renderer: "html",
+    site: "slides",
     destFilePath: "/slides/index.html",
     href: "/slides/",
   };

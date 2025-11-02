@@ -6,6 +6,7 @@ import { Page } from "../page.ts";
 export type NotFoundPage = Page;
 
 export async function generateNotFoundPage(
+  site: "default" | "about" | "blog" | "slides",
   config: Config,
 ): Promise<NotFoundPage> {
   const html = await renderToDOM(
@@ -15,6 +16,7 @@ export async function generateNotFoundPage(
   return {
     root: html,
     renderer: "html",
+    site,
     destFilePath: "/404.html",
     href: "/404.html",
   };

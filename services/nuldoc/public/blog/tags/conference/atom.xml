@@ -7,15 +7,7 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-07-26T00:00:00+09:00</updated>
-  <entry>
-    <id>urn:uuid:4b667c22-e5ef-4827-9db6-8b503b460255</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-07-26/techramen-25-conf/"></link>
-    <title>セルフホスト可能なCコンパイラを2000行弱で書く</title>
-    <summary>登壇: TechRAMEN 2025 Conference (40 分)</summary>
-    <published>2025-07-26T00:00:00+09:00</published>
-    <updated>2025-07-26T00:00:00+09:00</updated>
-  </entry>
+  <updated>2025-04-20T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:039b3dff-3b75-46b7-a731-9a3a0ff8e21f</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-20/trick-2025-most-ruby-on-ruby-award/"></link>
@@ -25,36 +17,12 @@
     <updated>2025-04-20T00:00:00+09:00</updated>
   </entry>
   <entry>
-    <id>urn:uuid:c6c7c241-46c1-44b5-95b2-c30c3a500df3</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-04-12/phpcon-odawara-2025/"></link>
-    <title>PHP 8.x 時代のクラス設計（property promotion から property hooks まで）</title>
-    <summary>登壇: PHP カンファレンス小田原 2025 (レギュラートーク (20分))</summary>
-    <published>2025-04-12T00:00:00+09:00</published>
-    <updated>2025-04-12T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:ec7f4462-ae56-4bbf-aac7-cbd32bbbeb29</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-03-23/phperkaigi-2025/"></link>
-    <title>PHPで作るPHP～セルフホストできる言語処理系を作ろう～</title>
-    <summary>登壇: PHPerKaigi 2025 (レギュラートーク (40分))</summary>
-    <published>2025-03-23T00:00:00+09:00</published>
-    <updated>2025-03-23T00:00:00+09:00</updated>
-  </entry>
-  <entry>
     <id>urn:uuid:13174dc7-c1a3-465f-9ba6-14f0bc6f5961</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-02-24/phpcon-nagoya-2025-report/"></link>
     <title>PHP カンファレンス名古屋 2025 参加レポ</title>
     <summary>2025-02-22 に開催された、PHP カンファレンス名古屋 2025 に参加した。</summary>
     <published>2025-02-24T00:00:00+09:00</published>
     <updated>2025-02-24T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:9172fbef-c812-4ade-86f5-eaa12c966708</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-02-22/phpcon-nagoya-2025/"></link>
-    <title>PHP 処理系の garbage collection を理解する～メモリはいつ解放されるのか～</title>
-    <summary>登壇: PHP カンファレンス名古屋 2025 (レギュラートーク (30分))</summary>
-    <published>2025-02-22T00:00:00+09:00</published>
-    <updated>2025-02-22T00:00:00+09:00</updated>
   </entry>
   <entry>
     <id>urn:uuid:ce8f20e8-c79f-48f8-982d-53edd4d20483</id>
@@ -89,36 +57,12 @@
     <updated>2024-06-01T00:00:00+09:00</updated>
   </entry>
   <entry>
-    <id>urn:uuid:69e1694b-5ddb-41a5-a7f4-138ce82a78b2</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-04-13/phpcon-odawara-2024/"></link>
-    <title>来る新 JIT エンジンについて知った気になる</title>
-    <summary>登壇: PHP カンファレンス小田原 2024 (レギュラートーク (15分))</summary>
-    <published>2024-04-13T00:00:00+09:00</published>
-    <updated>2024-04-13T00:00:00+09:00</updated>
-  </entry>
-  <entry>
     <id>urn:uuid:750be5c8-ca52-4cbd-86fe-5645b06bde95</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-03-17/phperkaigi-2024-report/"></link>
     <title>PHPerKaigi 2024 参加レポ</title>
     <summary>2024-03-07 から 2024-03-09 にかけて開催された、PHPerKaigi 2024 に参加した。</summary>
     <published>2024-03-17T00:00:00+09:00</published>
     <updated>2024-07-07T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:da7b1d5a-70df-4c4a-936c-1b49ca1a7c37</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
-    <title>CLI の PHP プログラムを限界まで高速化してみる</title>
-    <summary>登壇: Ya8 2024 (レギュラートーク (60分))</summary>
-    <published>2024-03-15T00:00:00+09:00</published>
-    <updated>2024-03-15T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:cee40048-f3c5-4043-9ef8-a4ee2ae7cf0e</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-08/phperkaigi-2024/"></link>
-    <title>WebAssembly を理解する 〜VM の作成を通して〜</title>
-    <summary>登壇: PHPerKaigi 2024 (レギュラートーク (40分))</summary>
-    <published>2024-03-08T00:00:00+09:00</published>
-    <updated>2024-03-08T00:00:00+09:00</updated>
   </entry>
   <entry>
     <id>urn:uuid:fd8fcb03-8e4d-4ca7-8499-0674accc51a9</id>
@@ -151,22 +95,6 @@
     <summary>2023-03-23 から 2023-03-25 にかけて開催された、PHPerKaigi 2023 に参加した。</summary>
     <published>2023-04-04T00:00:00+09:00</published>
     <updated>2023-06-28T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:3cce70d8-cee9-4e0e-8b38-6ef1e0a8a278</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-25/phperkaigi-2023-tokens/"></link>
-    <title>PHPer チャレンジ解説 (デジタルサーカス株式会社)</title>
-    <summary>登壇: PHPerKaigi 2023 (トークン解説セッション)</summary>
-    <published>2023-03-25T00:00:00+09:00</published>
-    <updated>2023-03-25T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:2dce7e27-1eaf-4ca4-8037-e9a3ead18b48</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-03-24/phperkaigi-2023/"></link>
-    <title>詳説「参照」PHP の参照を完全に理解する</title>
-    <summary>登壇: PHPerKaigi 2023 (レギュラートーク)</summary>
-    <published>2023-03-24T00:00:00+09:00</published>
-    <updated>2023-03-24T00:00:00+09:00</updated>
   </entry>
   <entry>
     <id>urn:uuid:bb71bb5d-361b-44cb-9753-81d14583d860</id>

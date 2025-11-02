@@ -20,10 +20,10 @@ export default function PostListPage(
 
   return (
     <PageLayout
-      metaCopyrightYear={config.blog.siteCopyrightYear}
+      metaCopyrightYear={config.site.copyrightYear}
       metaDescription={metaDescription}
       metaTitle={metaTitle}
-      metaAtomFeedHref={`https://${config.blog.fqdn}/posts/atom.xml`}
+      metaAtomFeedHref={`https://${config.sites.blog.fqdn}/posts/atom.xml`}
       config={config}
     >
       <body className="list">

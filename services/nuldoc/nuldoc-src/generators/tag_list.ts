@@ -8,6 +8,7 @@ export type TagListPage = Page;
 
 export async function generateTagListPage(
   tags: TagPage[],
+  site: "blog" | "slides",
   config: Config,
 ): Promise<TagListPage> {
   const html = await renderToDOM(
@@ -17,6 +18,7 @@ export async function generateTagListPage(
   return {
     root: html,
     renderer: "html",
+    site,
     destFilePath: "/tags/index.html",
     href: "/tags/",
   };

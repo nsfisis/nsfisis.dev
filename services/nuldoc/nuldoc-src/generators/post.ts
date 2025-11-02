@@ -50,6 +50,7 @@ export async function generatePostPage(
   return {
     root: html,
     renderer: "html",
+    site: "blog",
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),
     title: doc.title,

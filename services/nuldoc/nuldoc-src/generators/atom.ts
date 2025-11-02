@@ -33,13 +33,16 @@ export async function generateFeedPageFromEntries(
   feedSlug: string,
   feedTitle: string,
   entries: Array<PostPage | SlidePage>,
+  site: "default" | "blog" | "slides",
   config: Config,
 ): Promise<Page> {
   const entries_: Entry[] = [];
   for (const entry of entries) {
     entries_.push({
       id: `urn:uuid:${entry.uuid}`,
-      linkToAlternate: `https://${config.blog.fqdn}${entry.href}`,
+      linkToAlternate: `https://${
+        "event" in entry ? config.sites.slides.fqdn : config.sites.blog.fqdn
+      }${entry.href}`,
       title: entry.title,
       summary: entry.description,
       published: dateToRfc3339String(entry.published),
@@ -58,10 +61,12 @@ export async function generateFeedPageFromEntries(
   const feedPath = `${alternateLink}${BASE_NAME}`;
   const feed: Feed = {
     author: config.blog.author,
-    icon: `https://${config.blog.fqdn}/favicon.svg`,
-    id: `tag:${config.blog.fqdn},${config.blog.siteCopyrightYear}:${feedSlug}`,
-    linkToSelf: `https://${config.blog.fqdn}${feedPath}`,
-    linkToAlternate: `https://${config.blog.fqdn}${alternateLink}`,
+    icon: `https://${config.sites[site].fqdn}/favicon.svg`,
+    id: `tag:${
+      config.sites[site].fqdn
+    },${config.site.copyrightYear}:${feedSlug}`,
+    linkToSelf: `https://${config.sites[site].fqdn}${feedPath}`,
+    linkToAlternate: `https://${config.sites[site].fqdn}${alternateLink}`,
     title: feedTitle,
     updated: entries_.reduce(
       (latest, entry) => entry.updated > latest ? entry.updated : latest,
@@ -73,6 +78,7 @@ export async function generateFeedPageFromEntries(
   return {
     root: await renderToDOM(AtomPage({ feed: feed })),
     renderer: "xml",
+    site,
     destFilePath: feedPath,
     href: feedPath,
   };

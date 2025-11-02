@@ -13,6 +13,7 @@ export async function generateHomePage(config: Config): Promise<HomePage> {
   return {
     root: html,
     renderer: "html",
+    site: "default",
     destFilePath: "/index.html",
     href: "/",
   };

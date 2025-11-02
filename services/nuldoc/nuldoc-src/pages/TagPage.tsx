@@ -10,6 +10,7 @@ import { TaggedPage } from "../generators/tagged_page.ts";
 export default function TagPage(
   tagSlug: string,
   pages: TaggedPage[],
+  site: "blog" | "slides",
   config: Config,
 ) {
   const tagLabel = getTagLabel(config, tagSlug);
@@ -21,7 +22,9 @@ export default function TagPage(
       metaDescription={`タグ「${tagLabel}」のついた記事またはスライドの一覧`}
       metaKeywords={[tagLabel]}
       metaTitle={`${pageTitle}｜${config.blog.siteName}`}
-      metaAtomFeedHref={`https://${config.blog.fqdn}/tags/${tagSlug}/atom.xml`}
+      metaAtomFeedHref={`https://${
+        config.sites[site].fqdn
+      }/tags/${tagSlug}/atom.xml`}
       config={config}
     >
       <body className="list">

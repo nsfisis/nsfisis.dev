@@ -7,15 +7,7 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-04-12T00:00:00+09:00</updated>
-  <entry>
-    <id>urn:uuid:c6c7c241-46c1-44b5-95b2-c30c3a500df3</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2025-04-12/phpcon-odawara-2025/"></link>
-    <title>PHP 8.x 時代のクラス設計（property promotion から property hooks まで）</title>
-    <summary>登壇: PHP カンファレンス小田原 2025 (レギュラートーク (20分))</summary>
-    <published>2025-04-12T00:00:00+09:00</published>
-    <updated>2025-04-12T00:00:00+09:00</updated>
-  </entry>
+  <updated>2024-06-01T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:be9c896d-7efa-42dd-a50a-dda5fd3a7f5c</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-04-14/phpcon-odawara-2024-report/"></link>
@@ -23,13 +15,5 @@
     <summary>2024-04-13 に開催された、PHP カンファレンス小田原 2024 に参加した。</summary>
     <published>2024-04-14T00:00:00+09:00</published>
     <updated>2024-06-01T00:00:00+09:00</updated>
-  </entry>
-  <entry>
-    <id>urn:uuid:69e1694b-5ddb-41a5-a7f4-138ce82a78b2</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-04-13/phpcon-odawara-2024/"></link>
-    <title>来る新 JIT エンジンについて知った気になる</title>
-    <summary>登壇: PHP カンファレンス小田原 2024 (レギュラートーク (15分))</summary>
-    <published>2024-04-13T00:00:00+09:00</published>
-    <updated>2024-04-13T00:00:00+09:00</updated>
   </entry>
 </feed>

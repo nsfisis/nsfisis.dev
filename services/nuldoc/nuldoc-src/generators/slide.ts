@@ -37,6 +37,7 @@ export async function generateSlidePage(
   return {
     root: html,
     renderer: "html",
+    site: "slides",
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),
     title: slide.title,

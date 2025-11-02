@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>tag:blog.nsfisis.dev,2021:tag-ya8</id>
+  <id>tag:slides.nsfisis.dev,2021:tag-ya8</id>
   <title>タグ「Ya8」一覧｜REPL: Rest-Eat-Program Loop</title>
-  <link rel="alternate" href="https://blog.nsfisis.dev/tags/ya8/"></link>
-  <link rel="self" href="https://blog.nsfisis.dev/tags/ya8/atom.xml"></link>
+  <link rel="alternate" href="https://slides.nsfisis.dev/tags/ya8/"></link>
+  <link rel="self" href="https://slides.nsfisis.dev/tags/ya8/atom.xml"></link>
   <author>
     <name>nsfisis</name>
   </author>
   <updated>2024-03-15T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:da7b1d5a-70df-4c4a-936c-1b49ca1a7c37</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
     <title>CLI の PHP プログラムを限界まで高速化してみる</title>
     <summary>登壇: Ya8 2024 (レギュラートーク (60分))</summary>
     <published>2024-03-15T00:00:00+09:00</published>

@@ -27,15 +27,21 @@ export async function runBuildCommand(config: Config) {
   await buildPostListPage(posts, config);
   const slides = await buildSlidePages(config);
   await buildSlideListPage(slides, config);
-  const tags = await buildTagPages(posts, slides, config);
-  await buildTagListPage(tags, config);
+  const postTags = await buildTagPages(posts, "blog", config);
+  await buildTagListPage(postTags, "blog", config);
+  const slidesTags = await buildTagPages(slides, "slides", config);
+  await buildTagListPage(slidesTags, "slides", config);
   await buildHomePage(config);
   await buildAboutPage(slides, config);
-  await buildNotFoundPage(config);
+  await buildNotFoundPage("default", config);
+  await buildNotFoundPage("about", config);
+  await buildNotFoundPage("blog", config);
+  await buildNotFoundPage("slides", config);
   await buildFeedOfAllContents(posts, slides, config);
   await copyStaticFiles(config);
   await copySlidesFiles(slides, config);
-  await copyAssetFiles(config);
+  await copyBlogAssetFiles(config);
+  await copySlidesAssetFiles(config);
 }
 
 async function buildPostPages(config: Config): Promise<PostPage[]> {
@@ -90,6 +96,7 @@ async function buildPostListPage(posts: PostPage[], config: Config) {
     "posts",
     `投稿一覧｜${config.blog.siteName}`,
     posts,
+    "blog",
     config,
   );
   await writePage(postFeedPage, config);
@@ -135,6 +142,7 @@ async function buildSlideListPage(slides: SlidePage[], config: Config) {
     "slides",
     `スライド一覧｜${config.blog.siteName}`,
     slides,
+    "slides",
     config,
   );
   await writePage(slideFeedPage, config);
@@ -150,8 +158,11 @@ async function buildAboutPage(slides: SlidePage[], config: Config) {
   await writePage(aboutPage, config);
 }
 
-async function buildNotFoundPage(config: Config) {
-  const notFoundPage = await generateNotFoundPage(config);
+async function buildNotFoundPage(
+  site: "default" | "about" | "blog" | "slides",
+  config: Config,
+) {
+  const notFoundPage = await generateNotFoundPage(site, config);
   await writePage(notFoundPage, config);
 }
 
@@ -165,26 +176,28 @@ async function buildFeedOfAllContents(
     "all",
     config.blog.siteName,
     [...posts, ...slides],
+    "default",
     config,
   );
   await writePage(feed, config);
 }
 
 async function buildTagPages(
-  posts: PostPage[],
-  slides: SlidePage[],
+  pages: TaggedPage[],
+  site: "blog" | "slides",
   config: Config,
 ): Promise<TagPage[]> {
-  const tagsAndPages = collectTags([...posts, ...slides]);
+  const tagsAndPages = collectTags(pages);
   const tags = [];
   for (const [tag, pages] of tagsAndPages) {
-    const tagPage = await generateTagPage(tag, pages, config);
+    const tagPage = await generateTagPage(tag, pages, site, config);
     await writePage(tagPage, config);
     const tagFeedPage = await generateFeedPageFromEntries(
       tagPage.href,
       `tag-${tag}`,
       `タグ「${getTagLabel(config, tag)}」一覧｜${config.blog.siteName}`,
       pages,
+      site,
       config,
     );
     await writePage(tagFeedPage, config);
@@ -193,8 +206,12 @@ async function buildTagPages(
   return tags;
 }
 
-async function buildTagListPage(tags: TagPage[], config: Config) {
-  const tagListPage = await generateTagListPage(tags, config);
+async function buildTagListPage(
+  tags: TagPage[],
+  site: "blog" | "slides",
+  config: Config,
+) {
+  const tagListPage = await generateTagListPage(tags, site, config);
   await writePage(tagListPage, config);
 }
 
@@ -226,14 +243,20 @@ function collectTags(taggedPages: TaggedPage[]): [string, TaggedPage[]][] {
 }
 
 async function copyStaticFiles(config: Config) {
-  const globPattern = joinGlobs([Deno.cwd(), config.locations.staticDir, "*"]);
-  for await (const entry of expandGlob(globPattern)) {
-    const src = entry.path;
-    const dst = src.replace(
+  for (const site of Object.keys(config.sites)) {
+    const globPattern = joinGlobs([
+      Deno.cwd(),
       config.locations.staticDir,
-      config.locations.destDir,
-    );
-    await Deno.copyFile(src, dst);
+      "*",
+    ]);
+    for await (const entry of expandGlob(globPattern)) {
+      const src = entry.path;
+      const dst = src.replace(
+        config.locations.staticDir,
+        join(config.locations.destDir, site),
+      );
+      await Deno.copyFile(src, dst);
+    }
   }
 }
 
@@ -244,16 +267,16 @@ async function copySlidesFiles(slides: SlidePage[], config: Config) {
 
   for (const slide of slides) {
     const src = join(contentDir, slide.slideLink);
-    const dst = join(destDir, slide.slideLink);
+    const dst = join(destDir, "slides", slide.slideLink);
     await ensureDir(dirname(dst));
     await Deno.copyFile(src, dst);
   }
 }
 
-async function copyAssetFiles(config: Config) {
+async function copyBlogAssetFiles(config: Config) {
   const cwd = Deno.cwd();
-  const contentDir = join(cwd, config.locations.contentDir);
-  const destDir = join(cwd, config.locations.destDir);
+  const contentDir = join(cwd, config.locations.contentDir, "posts");
+  const destDir = join(cwd, config.locations.destDir, "blog");
 
   const globPattern = joinGlobs([contentDir, "**", "*"]);
   for await (const { isFile, path } of expandGlob(globPattern)) {
@@ -269,7 +292,32 @@ async function copyAssetFiles(config: Config) {
     }
 
     const src = path;
-    const dst = join(destDir, relative(contentDir, path));
+    const dst = join(destDir, "posts", relative(contentDir, path));
+    await ensureDir(dirname(dst));
+    await Deno.copyFile(src, dst);
+  }
+}
+
+async function copySlidesAssetFiles(config: Config) {
+  const cwd = Deno.cwd();
+  const contentDir = join(cwd, config.locations.contentDir, "slides");
+  const destDir = join(cwd, config.locations.destDir, "slides");
+
+  const globPattern = joinGlobs([contentDir, "**", "*"]);
+  for await (const { isFile, path } of expandGlob(globPattern)) {
+    if (!isFile) continue;
+
+    // Skip .dj, .toml, .pdf files
+    if (
+      path.endsWith(".dj") ||
+      path.endsWith(".toml") ||
+      path.endsWith(".pdf")
+    ) {
+      continue;
+    }
+
+    const src = path;
+    const dst = join(destDir, "slides", relative(contentDir, path));
     await ensureDir(dirname(dst));
     await Deno.copyFile(src, dst);
   }
@@ -279,6 +327,7 @@ async function writePage(page: Page, config: Config) {
   const destFilePath = join(
     Deno.cwd(),
     config.locations.destDir,
+    page.site,
     page.destFilePath,
   );
   await ensureDir(dirname(destFilePath));

@@ -13,7 +13,7 @@ export default function AboutPage(
 ) {
   return (
     <PageLayout
-      metaCopyrightYear={config.blog.siteCopyrightYear}
+      metaCopyrightYear={config.site.copyrightYear}
       metaDescription="このサイトの著者について"
       metaTitle={`About｜${config.blog.siteName}`}
       config={config}
@@ -91,7 +91,9 @@ export default function AboutPage(
                     return 0;
                   }).map((slide) => (
                     <li>
-                      <a href={slide.href}>
+                      <a
+                        href={`https://${config.sites.slides.fqdn}${slide.href}`}
+                      >
                         {`${
                           dateToString(getPostPublishedDate(slide))
                         }: ${slide.event} (${slide.talkType})`}

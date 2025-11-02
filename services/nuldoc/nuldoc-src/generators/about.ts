@@ -17,7 +17,8 @@ export async function generateAboutPage(
   return {
     root: html,
     renderer: "html",
-    destFilePath: "/about/index.html",
-    href: "/about/",
+    site: "about",
+    destFilePath: "/index.html",
+    href: "/",
   };
 }

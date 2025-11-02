@@ -12,7 +12,7 @@ export default function TagListPage(
 
   return (
     <PageLayout
-      metaCopyrightYear={config.blog.siteCopyrightYear}
+      metaCopyrightYear={config.site.copyrightYear}
       metaDescription="タグの一覧"
       metaTitle={`${pageTitle}｜${config.blog.siteName}`}
       config={config}

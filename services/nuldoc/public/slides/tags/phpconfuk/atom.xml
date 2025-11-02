@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>tag:blog.nsfisis.dev,2021:tag-phpconfuk</id>
+  <id>tag:slides.nsfisis.dev,2021:tag-phpconfuk</id>
   <title>タグ「PHP カンファレンス福岡」一覧｜REPL: Rest-Eat-Program Loop</title>
-  <link rel="alternate" href="https://blog.nsfisis.dev/tags/phpconfuk/"></link>
-  <link rel="self" href="https://blog.nsfisis.dev/tags/phpconfuk/atom.xml"></link>
+  <link rel="alternate" href="https://slides.nsfisis.dev/tags/phpconfuk/"></link>
+  <link rel="self" href="https://slides.nsfisis.dev/tags/phpconfuk/atom.xml"></link>
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2023-06-25T00:00:00+09:00</updated>
-  <entry>
-    <id>urn:uuid:e1568c4c-9bdd-47b9-8b39-939ade4f3ba0</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2023-06-25/phpconfuk-2023-report/"></link>
-    <title>PHP カンファレンス福岡 2023 参加レポ</title>
-    <summary>2023-06-24 に開催された、PHP カンファレンス福岡に参加した。</summary>
-    <published>2023-06-25T00:00:00+09:00</published>
-    <updated>2023-06-25T00:00:00+09:00</updated>
-  </entry>
+  <updated>2023-06-23T00:00:00+09:00</updated>
   <entry>
     <id>urn:uuid:72244d87-4cf0-41c4-a074-bcc37acaa678</id>
-    <link rel="alternate" href="https://blog.nsfisis.dev/slides/2023-06-23/phpconfuk-2023-eve/"></link>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2023-06-23/phpconfuk-2023-eve/"></link>
     <title>巨大なコードベースへ突撃するために</title>
     <summary>登壇: PHP カンファレンス福岡 2023 前夜祭 (非公式) (レギュラートーク)</summary>
     <published>2023-06-23T00:00:00+09:00</published>

@@ -14,15 +14,17 @@ export interface TagPage extends Page {
 export async function generateTagPage(
   tagSlug: string,
   pages: TaggedPage[],
+  site: "blog" | "slides",
   config: Config,
 ): Promise<TagPage> {
   const html = await renderToDOM(
-    TagPage(tagSlug, pages, config),
+    TagPage(tagSlug, pages, site, config),
   );
 
   return {
     root: html,
     renderer: "html",
+    site,
     destFilePath: `/tags/${tagSlug}/index.html`,
     href: `/tags/${tagSlug}/`,
     tagSlug: tagSlug,
