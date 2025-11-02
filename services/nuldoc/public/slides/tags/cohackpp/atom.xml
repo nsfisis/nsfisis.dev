@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:slides.nsfisis.dev,2021:tag-cohackpp</id>
-  <title>タグ「紅白ぺぱ合戦」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <title>タグ「紅白ぺぱ合戦」一覧｜nsfisis.dev</title>
   <link rel="alternate" href="https://slides.nsfisis.dev/tags/cohackpp/"></link>
   <link rel="self" href="https://slides.nsfisis.dev/tags/cohackpp/atom.xml"></link>
   <author>

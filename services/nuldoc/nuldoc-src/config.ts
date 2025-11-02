@@ -14,25 +14,28 @@ const ConfigSchema = z.object({
     }),
   }),
   site: z.object({
+    author: z.string(),
     copyrightYear: z.number(),
   }),
   sites: z.object({
     default: z.object({
       fqdn: z.string(),
+      siteName: z.string(),
     }),
     about: z.object({
       fqdn: z.string(),
+      siteName: z.string(),
     }),
     blog: z.object({
       fqdn: z.string(),
+      siteName: z.string(),
     }),
     slides: z.object({
       fqdn: z.string(),
+      siteName: z.string(),
     }),
   }),
   blog: z.object({
-    author: z.string(),
-    siteName: z.string(),
     postsPerPage: z.number().default(10),
     tagLabels: z.record(z.string(), z.string()),
   }),

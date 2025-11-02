@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:slides.nsfisis.dev,2021:tag-conference</id>
-  <title>タグ「カンファレンス」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <title>タグ「カンファレンス」一覧｜nsfisis.dev</title>
   <link rel="alternate" href="https://slides.nsfisis.dev/tags/conference/"></link>
   <link rel="self" href="https://slides.nsfisis.dev/tags/conference/atom.xml"></link>
   <author>

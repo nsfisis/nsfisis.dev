@@ -9,6 +9,7 @@ type Props = {
   metaTitle: string;
   metaAtomFeedHref?: string;
   requiresSyntaxHighlight?: boolean;
+  site: "default" | "about" | "blog" | "slides";
   config: Config;
   children: JSXNode;
 };
@@ -21,6 +22,7 @@ export default function PageLayout(
     metaTitle,
     metaAtomFeedHref,
     requiresSyntaxHighlight: _,
+    site,
     config,
     children,
   }: Props,
@@ -30,10 +32,10 @@ export default function PageLayout(
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="author" content={config.blog.author} />
+        <meta name="author" content={config.site.author} />
         <meta
           name="copyright"
-          content={`&copy; ${metaCopyrightYear} ${config.blog.author}`}
+          content={`&copy; ${metaCopyrightYear} ${config.site.author}`}
         />
         <meta name="description" content={metaDescription} />
         {metaKeywords && metaKeywords.length !== 0 &&
@@ -41,7 +43,7 @@ export default function PageLayout(
         <meta property="og:type" content="article" />
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDescription} />
-        <meta property="og:site_name" content={config.blog.siteName} />
+        <meta property="og:site_name" content={config.sites[site].siteName} />
         <meta property="og:locale" content="ja_JP" />
         {/* https://b.hatena.ne.jp/help/entry/nocomment */}
         <meta name="Hatena::Bookmark" content="nocomment" />

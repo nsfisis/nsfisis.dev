@@ -22,10 +22,11 @@ export default function TagPage(
       metaCopyrightYear={getPostPublishedDate(pages[pages.length - 1]).year}
       metaDescription={`タグ「${tagLabel}」のついた記事またはスライドの一覧`}
       metaKeywords={[tagLabel]}
-      metaTitle={`${pageTitle}｜${config.blog.siteName}`}
+      metaTitle={`${pageTitle}｜${config.sites[site].siteName}`}
       metaAtomFeedHref={`https://${
         config.sites[site].fqdn
       }/tags/${tagSlug}/atom.xml`}
+      site={site}
       config={config}
     >
       <body className="list">

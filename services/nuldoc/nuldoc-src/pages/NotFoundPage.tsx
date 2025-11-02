@@ -14,7 +14,8 @@ export default function NotFoundPage(
     <PageLayout
       metaCopyrightYear={config.site.copyrightYear}
       metaDescription="リクエストされたページが見つかりません"
-      metaTitle={`Page Not Found｜${config.blog.siteName}`}
+      metaTitle={`Page Not Found｜${config.sites[site].siteName}`}
+      site={site}
       config={config}
     >
       <body className="single">

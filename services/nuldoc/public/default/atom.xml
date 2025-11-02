@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:nsfisis.dev,2021:all</id>
-  <title>REPL: Rest-Eat-Program Loop</title>
+  <title>nsfisis.dev</title>
   <link rel="alternate" href="https://nsfisis.dev/"></link>
   <link rel="self" href="https://nsfisis.dev/atom.xml"></link>
   <author>

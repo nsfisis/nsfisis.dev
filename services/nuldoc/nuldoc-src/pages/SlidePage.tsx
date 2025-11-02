@@ -16,8 +16,9 @@ export default function SlidePage(
       metaCopyrightYear={getPostPublishedDate(slide).year}
       metaDescription={slide.title}
       metaKeywords={slide.tags.map((slug) => getTagLabel(config, slug))}
-      metaTitle={`${slide.event} (${slide.talkType})｜${config.blog.siteName}`}
+      metaTitle={`${slide.event} (${slide.talkType})｜${config.sites.slides.siteName}`}
       requiresSyntaxHighlight
+      site="slides"
       config={config}
     >
       <body className="single">

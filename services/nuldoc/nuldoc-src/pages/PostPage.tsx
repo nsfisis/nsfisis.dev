@@ -17,8 +17,9 @@ export default function PostPage(
       metaCopyrightYear={getPostPublishedDate(doc).year}
       metaDescription={doc.description}
       metaKeywords={doc.tags.map((slug) => getTagLabel(config, slug))}
-      metaTitle={`${doc.title}｜${config.blog.siteName}`}
+      metaTitle={`${doc.title}｜${config.sites.blog.siteName}`}
       requiresSyntaxHighlight
+      site="blog"
       config={config}
     >
       <body className="single">

@@ -15,7 +15,8 @@ export default function AboutPage(
     <PageLayout
       metaCopyrightYear={config.site.copyrightYear}
       metaDescription="このサイトの著者について"
-      metaTitle={`About｜${config.blog.siteName}`}
+      metaTitle={`About｜${config.sites.about.siteName}`}
+      site="about"
       config={config}
     >
       <body className="single">

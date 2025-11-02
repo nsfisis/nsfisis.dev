@@ -15,7 +15,8 @@ export default function PostListPage(
   const pageTitle = "投稿一覧";
 
   const pageInfoSuffix = ` (${currentPage}ページ目)`;
-  const metaTitle = `${pageTitle}${pageInfoSuffix}｜${config.blog.siteName}`;
+  const metaTitle =
+    `${pageTitle}${pageInfoSuffix}｜${config.sites.blog.siteName}`;
   const metaDescription = `投稿した記事の一覧${pageInfoSuffix}`;
 
   return (
@@ -24,6 +25,7 @@ export default function PostListPage(
       metaDescription={metaDescription}
       metaTitle={metaTitle}
       metaAtomFeedHref={`https://${config.sites.blog.fqdn}/posts/atom.xml`}
+      site="blog"
       config={config}
     >
       <body className="list">

@@ -7,23 +7,26 @@ staticDir = "/static"
 indentWidth = 2
 
 [site]
+author = "nsfisis"
 copyrightYear = 2021
 
 [sites.default]
 fqdn = "nsfisis.dev"
+siteName = "nsfisis.dev"
 
 [sites.about]
 fqdn = "about.nsfisis.dev"
+siteName = "nsfisis.dev"
 
 [sites.blog]
 fqdn = "blog.nsfisis.dev"
+siteName = "REPL: Rest-Eat-Program Loop"
 
 [sites.slides]
 fqdn = "slides.nsfisis.dev"
+siteName = "nsfisis.dev"
 
 [blog]
-author = "nsfisis"
-siteName = "REPL: Rest-Eat-Program Loop"
 postsPerPage = 10
 
 [blog.tagLabels]

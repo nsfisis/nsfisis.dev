@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:slides.nsfisis.dev,2021:tag-phpcon-nagoya</id>
-  <title>タグ「PHP カンファレンス名古屋」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <title>タグ「PHP カンファレンス名古屋」一覧｜nsfisis.dev</title>
   <link rel="alternate" href="https://slides.nsfisis.dev/tags/phpcon-nagoya/"></link>
   <link rel="self" href="https://slides.nsfisis.dev/tags/phpcon-nagoya/atom.xml"></link>
   <author>

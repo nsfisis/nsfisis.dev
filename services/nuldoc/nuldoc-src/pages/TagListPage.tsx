@@ -16,7 +16,8 @@ export default function TagListPage(
     <PageLayout
       metaCopyrightYear={config.site.copyrightYear}
       metaDescription="タグの一覧"
-      metaTitle={`${pageTitle}｜${config.blog.siteName}`}
+      metaTitle={`${pageTitle}｜${config.sites[site].siteName}`}
+      site={site}
       config={config}
     >
       <body className="list">

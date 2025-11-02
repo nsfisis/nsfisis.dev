@@ -5,8 +5,11 @@ export default function GlobalHeader({ config }: { config: Config }) {
     <header className="header">
       <div className="site-logo">
         <a href={`https://${config.sites.default.fqdn}/`}>
-          {config.blog.siteName}
+          nsfisis.dev
         </a>
+      </div>
+      <div className="site-name">
+        {config.sites.blog.siteName}
       </div>
       <nav className="nav">
         <ul>

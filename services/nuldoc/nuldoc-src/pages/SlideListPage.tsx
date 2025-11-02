@@ -17,8 +17,9 @@ export default function SlideListPage(
     <PageLayout
       metaCopyrightYear={config.site.copyrightYear}
       metaDescription="登壇したイベントで使用したスライドの一覧"
-      metaTitle={`${pageTitle}｜${config.blog.siteName}`}
+      metaTitle={`${pageTitle}｜${config.sites.slides.siteName}`}
       metaAtomFeedHref={`https://${config.sites.slides.fqdn}/slides/atom.xml`}
+      site="slides"
       config={config}
     >
       <body className="list">

@@ -60,7 +60,7 @@ export async function generateFeedPageFromEntries(
   });
   const feedPath = `${alternateLink}${BASE_NAME}`;
   const feed: Feed = {
-    author: config.blog.author,
+    author: config.site.author,
     icon: `https://${config.sites[site].fqdn}/favicon.svg`,
     id: `tag:${
       config.sites[site].fqdn

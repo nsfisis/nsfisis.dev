@@ -94,7 +94,7 @@ async function buildPostListPage(posts: PostPage[], config: Config) {
   const postFeedPage = await generateFeedPageFromEntries(
     "/posts/",
     "posts",
-    `投稿一覧｜${config.blog.siteName}`,
+    `投稿一覧｜${config.sites.blog.siteName}`,
     posts,
     "blog",
     config,
@@ -140,7 +140,7 @@ async function buildSlideListPage(slides: SlidePage[], config: Config) {
   const slideFeedPage = await generateFeedPageFromEntries(
     slideListPage.href,
     "slides",
-    `スライド一覧｜${config.blog.siteName}`,
+    `スライド一覧｜${config.sites.slides.siteName}`,
     slides,
     "slides",
     config,
@@ -174,7 +174,7 @@ async function buildFeedOfAllContents(
   const feed = await generateFeedPageFromEntries(
     "/",
     "all",
-    config.blog.siteName,
+    config.sites.default.siteName,
     [...posts, ...slides],
     "default",
     config,
@@ -195,7 +195,7 @@ async function buildTagPages(
     const tagFeedPage = await generateFeedPageFromEntries(
       tagPage.href,
       `tag-${tag}`,
-      `タグ「${getTagLabel(config, tag)}」一覧｜${config.blog.siteName}`,
+      `タグ「${getTagLabel(config, tag)}」一覧｜${config.sites[site].siteName}`,
       pages,
       site,
       config,

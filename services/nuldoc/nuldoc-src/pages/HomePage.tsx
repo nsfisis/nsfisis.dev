@@ -7,9 +7,10 @@ export default function HomePage(config: Config) {
   return (
     <PageLayout
       metaCopyrightYear={config.site.copyrightYear}
-      metaDescription="nsfisis のブログサイト"
-      metaTitle={config.blog.siteName}
+      metaDescription="nsfisis のサイト"
+      metaTitle={config.sites.default.siteName}
       metaAtomFeedHref={`https://${config.sites.default.fqdn}/atom.xml`}
+      site="default"
       config={config}
     >
       <body className="single">
