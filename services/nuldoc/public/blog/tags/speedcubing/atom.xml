@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-speedcubing</id>
+  <title>タグ「ルービックキューブ」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/speedcubing/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/speedcubing/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-11-09T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:68ce6d2f-81ba-47ca-93d3-26553fc73807</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-11-09/rubiks-cube-blindfolded-first-success/"></link>
+    <title>ルービックキューブを目隠しで揃えることに初成功した</title>
+    <summary>ルービックキューブの目隠し競技 (BLD) に挑戦し、5 日目で初成功した。</summary>
+    <published>2025-11-09T00:00:00+09:00</published>
+    <updated>2025-11-09T00:00:00+09:00</updated>
+  </entry>
+</feed>

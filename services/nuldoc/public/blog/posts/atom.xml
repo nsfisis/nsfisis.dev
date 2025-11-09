@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-10-31T00:00:00+09:00</updated>
+  <updated>2025-11-09T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:68ce6d2f-81ba-47ca-93d3-26553fc73807</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-11-09/rubiks-cube-blindfolded-first-success/"></link>
+    <title>ルービックキューブを目隠しで揃えることに初成功した</title>
+    <summary>ルービックキューブの目隠し競技 (BLD) に挑戦し、5 日目で初成功した。</summary>
+    <published>2025-11-09T00:00:00+09:00</published>
+    <updated>2025-11-09T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:39d3d137-f18d-4d88-8ef6-7be9cc2f3f0b</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-10-31/representing-single-value-with-half-open-float-interval/"></link>
