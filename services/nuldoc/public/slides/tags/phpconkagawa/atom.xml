@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:slides.nsfisis.dev,2021:tag-phpconkagawa</id>
+  <title>タグ「PHP カンファレンス香川」一覧｜nsfisis.dev</title>
+  <link rel="alternate" href="https://slides.nsfisis.dev/tags/phpconkagawa/"></link>
+  <link rel="self" href="https://slides.nsfisis.dev/tags/phpconkagawa/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-11-24T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:4cfade4d-8070-43ba-b7a9-48f9d2a1fa3c</id>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2025-11-24/phpconkagawa-2025/"></link>
+    <title>Pure PHP で作る簡易 HTTP サーバ</title>
+    <summary>登壇: PHP カンファレンス香川 2025 (レギュラートーク (30分))</summary>
+    <published>2025-11-24T00:00:00+09:00</published>
+    <updated>2025-11-24T00:00:00+09:00</updated>
+  </entry>
+</feed>
