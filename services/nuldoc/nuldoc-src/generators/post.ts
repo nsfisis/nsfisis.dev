@@ -1,6 +1,5 @@
 import { join } from "@std/path";
-import { renderToDOM } from "../jsx/render.ts";
-import PostPage from "../pages/PostPage.tsx";
+import PostPage from "../pages/PostPage.ts";
 import { Config } from "../config.ts";
 import { Document } from "../djot/document.ts";
 import { Page } from "../page.ts";
@@ -37,9 +36,7 @@ export async function generatePostPage(
   doc: Document,
   config: Config,
 ): Promise<PostPage> {
-  const html = await renderToDOM(
-    PostPage(doc, config),
-  );
+  const html = await PostPage(doc, config);
 
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);

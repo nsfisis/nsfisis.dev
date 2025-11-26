@@ -1,5 +1,4 @@
-import { renderToDOM } from "../jsx/render.ts";
-import TagPage from "../pages/TagPage.tsx";
+import TagPage from "../pages/TagPage.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { Page } from "../page.ts";
 import { TaggedPage } from "./tagged_page.ts";
@@ -17,9 +16,7 @@ export async function generateTagPage(
   site: "blog" | "slides",
   config: Config,
 ): Promise<TagPage> {
-  const html = await renderToDOM(
-    TagPage(tagSlug, pages, site, config),
-  );
+  const html = await TagPage(tagSlug, pages, site, config);
 
   return {
     root: html,

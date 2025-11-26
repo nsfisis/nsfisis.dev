@@ -1,3 +1,5 @@
+import { elem, Element } from "../dom.ts";
+
 type Props = {
   currentPage: number;
   totalPages: number;
@@ -6,55 +8,47 @@ type Props = {
 
 export default function Pagination(
   { currentPage, totalPages, basePath }: Props,
-) {
+): Element {
   if (totalPages <= 1) {
-    return <div></div>;
+    return elem("div", {});
   }
 
   const pages = generatePageNumbers(currentPage, totalPages);
 
-  return (
-    <nav className="pagination">
-      <div className="pagination-prev">
-        {currentPage > 1
-          ? (
-            <a href={pageUrlAt(basePath, currentPage - 1)}>
-              前へ
-            </a>
-          )
-          : null}
-      </div>
-      {pages.map((page) => {
-        if (page === "...") {
-          return (
-            <div className="pagination-elipsis">
-              …
-            </div>
-          );
-        } else if (page === currentPage) {
-          return (
-            <div className="pagination-page pagination-page-current">
-              <span>{String(page)}</span>
-            </div>
-          );
-        } else {
-          return (
-            <div className="pagination-page">
-              <a href={pageUrlAt(basePath, page)}>{String(page)}</a>
-            </div>
-          );
-        }
-      })}
-      <div className="pagination-next">
-        {currentPage < totalPages
-          ? (
-            <a href={pageUrlAt(basePath, currentPage + 1)}>
-              次へ
-            </a>
-          )
-          : null}
-      </div>
-    </nav>
+  return elem(
+    "nav",
+    { class: "pagination" },
+    elem(
+      "div",
+      { class: "pagination-prev" },
+      currentPage > 1
+        ? elem("a", { href: pageUrlAt(basePath, currentPage - 1) }, "前へ")
+        : null,
+    ),
+    ...pages.map((page) => {
+      if (page === "...") {
+        return elem("div", { class: "pagination-elipsis" }, "…");
+      } else if (page === currentPage) {
+        return elem(
+          "div",
+          { class: "pagination-page pagination-page-current" },
+          elem("span", {}, String(page)),
+        );
+      } else {
+        return elem(
+          "div",
+          { class: "pagination-page" },
+          elem("a", { href: pageUrlAt(basePath, page) }, String(page)),
+        );
+      }
+    }),
+    elem(
+      "div",
+      { class: "pagination-next" },
+      currentPage < totalPages
+        ? elem("a", { href: pageUrlAt(basePath, currentPage + 1) }, "次へ")
+        : null,
+    ),
   );
 }
 

@@ -1,5 +1,4 @@
-import NotFoundPage from "../pages/NotFoundPage.tsx";
-import { renderToDOM } from "../jsx/render.ts";
+import NotFoundPage from "../pages/NotFoundPage.ts";
 import { Config } from "../config.ts";
 import { Page } from "../page.ts";
 
@@ -9,9 +8,7 @@ export async function generateNotFoundPage(
   site: "default" | "about" | "blog" | "slides",
   config: Config,
 ): Promise<NotFoundPage> {
-  const html = await renderToDOM(
-    NotFoundPage(site, config),
-  );
+  const html = await NotFoundPage(site, config);
 
   return {
     root: html,

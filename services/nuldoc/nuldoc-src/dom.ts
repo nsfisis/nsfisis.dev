@@ -17,6 +17,25 @@ export type Element = {
 
 export type Node = Element | Text | RawHTML;
 
+export type NodeLike = Node | string | null | undefined | false | NodeLike[];
+
+function flattenChildren(children: NodeLike[]): Node[] {
+  const result: Node[] = [];
+  for (const child of children) {
+    if (child === null || child === undefined || child === false) {
+      continue;
+    }
+    if (typeof child === "string") {
+      result.push(text(child));
+    } else if (Array.isArray(child)) {
+      result.push(...flattenChildren(child));
+    } else {
+      result.push(child);
+    }
+  }
+  return result;
+}
+
 export function text(content: string): Text {
   return {
     kind: "text",
@@ -34,13 +53,13 @@ export function rawHTML(html: string): RawHTML {
 export function elem(
   name: string,
   attributes?: Record<string, string>,
-  ...children: Node[]
+  ...children: NodeLike[]
 ): Element {
   return {
     kind: "element",
     name,
     attributes: attributes || {},
-    children,
+    children: flattenChildren(children),
   };
 }
 

@@ -1,5 +1,6 @@
 import { join } from "@std/path";
 import { Config } from "../config.ts";
+import { elem, Element } from "../dom.ts";
 import { calculateFileHash } from "./utils.ts";
 
 export default async function StaticScript(
@@ -9,10 +10,11 @@ export default async function StaticScript(
     defer?: "true";
     config: Config;
   },
-) {
+): Promise<Element> {
   const filePath = join(Deno.cwd(), config.locations.staticDir, fileName);
   const hash = await calculateFileHash(filePath);
-  return (
-    <script src={`${fileName}?h=${hash}`} type={type} defer={defer}></script>
-  );
+  const attrs: Record<string, string> = { src: `${fileName}?h=${hash}` };
+  if (type) attrs.type = type;
+  if (defer) attrs.defer = defer;
+  return elem("script", attrs);
 }

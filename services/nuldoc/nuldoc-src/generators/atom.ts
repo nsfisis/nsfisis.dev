@@ -3,8 +3,7 @@ import { Page } from "../page.ts";
 import { PostPage } from "../generators/post.ts";
 import { SlidePage } from "../generators/slide.ts";
 import { dateToRfc3339String } from "../revision.ts";
-import AtomPage from "../pages/AtomPage.tsx";
-import { renderToDOM } from "../jsx/render.ts";
+import AtomPage from "../pages/AtomPage.ts";
 
 export type Feed = {
   author: string;
@@ -28,14 +27,14 @@ export type Entry = {
 
 const BASE_NAME = "atom.xml";
 
-export async function generateFeedPageFromEntries(
+export function generateFeedPageFromEntries(
   alternateLink: string,
   feedSlug: string,
   feedTitle: string,
   entries: Array<PostPage | SlidePage>,
   site: "default" | "blog" | "slides",
   config: Config,
-): Promise<Page> {
+): Page {
   const entries_: Entry[] = [];
   for (const entry of entries) {
     entries_.push({
@@ -76,7 +75,7 @@ export async function generateFeedPageFromEntries(
   };
 
   return {
-    root: await renderToDOM(AtomPage({ feed: feed })),
+    root: AtomPage({ feed: feed }),
     renderer: "xml",
     site,
     destFilePath: feedPath,

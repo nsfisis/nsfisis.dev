@@ -1,6 +1,5 @@
 import { join } from "@std/path";
-import { renderToDOM } from "../jsx/render.ts";
-import SlidePage from "../pages/SlidePage.tsx";
+import SlidePage from "../pages/SlidePage.ts";
 import { Config } from "../config.ts";
 import { Page } from "../page.ts";
 import { Date, Revision } from "../revision.ts";
@@ -24,9 +23,7 @@ export async function generateSlidePage(
   slide: Slide,
   config: Config,
 ): Promise<SlidePage> {
-  const html = await renderToDOM(
-    SlidePage(slide, config),
-  );
+  const html = await SlidePage(slide, config);
 
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);

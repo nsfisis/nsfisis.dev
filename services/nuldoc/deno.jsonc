@@ -9,14 +9,7 @@
     "@std/toml": "jsr:@std/toml@^1.0.8",
     "checksum/": "https://deno.land/x/checksum@1.4.0/",
     "shiki": "npm:shiki@^3.7.0",
-    "zod/": "https://deno.land/x/zod@v3.24.2/",
-    "myjsx/jsx-runtime": "./nuldoc-src/jsx/jsx-runtime.ts",
-    "myjsx-types/jsx-runtime": "./nuldoc-src/jsx/types.d.ts",
-  },
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "myjsx",
-    "jsxImportSourceTypes": "myjsx-types",
+    "zod/": "https://deno.land/x/zod@v3.24.2/"
   },
   "permissions": {
     "default": {

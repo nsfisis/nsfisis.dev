@@ -1,5 +1,4 @@
-import { renderToDOM } from "../jsx/render.ts";
-import PostListPage from "../pages/PostListPage.tsx";
+import PostListPage from "../pages/PostListPage.ts";
 import { Config } from "../config.ts";
 import { Page } from "../page.ts";
 import { PostPage } from "./post.ts";
@@ -39,14 +38,7 @@ async function generatePostListPage(
   currentPage: number,
   totalPages: number,
 ): Promise<PostListPage> {
-  const html = await renderToDOM(
-    PostListPage(
-      posts,
-      config,
-      currentPage,
-      totalPages,
-    ),
-  );
+  const html = await PostListPage(posts, config, currentPage, totalPages);
 
   const destFilePath = currentPage === 1
     ? "/posts/index.html"
