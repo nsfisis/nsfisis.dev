@@ -41,6 +41,7 @@ export async function runBuildCommand(config: Config) {
   await copySlidesFiles(slides, config);
   await copyBlogAssetFiles(config);
   await copySlidesAssetFiles(config);
+  await copyPostSourceFiles(posts, config);
 }
 
 async function buildPostPages(config: Config): Promise<PostPage[]> {
@@ -315,4 +316,17 @@ async function writePage(page: Page, config: Config) {
   );
   await ensureDir(dirname(destFilePath));
   await Deno.writeTextFile(destFilePath, render(page.root, page.renderer));
+}
+
+async function copyPostSourceFiles(posts: PostPage[], config: Config) {
+  const cwd = Deno.cwd();
+  const contentDir = join(cwd, config.locations.contentDir);
+  const destDir = join(cwd, config.locations.destDir, "blog");
+
+  for (const post of posts) {
+    const src = post.sourceFilePath;
+    const dst = join(destDir, relative(contentDir, src));
+    await ensureDir(dirname(dst));
+    await Deno.copyFile(src, dst);
+  }
 }

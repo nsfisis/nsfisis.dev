@@ -13,6 +13,7 @@ export interface PostPage extends Page {
   published: Date;
   updated: Date;
   uuid: string;
+  sourceFilePath: string;
 }
 
 export function getPostPublishedDate(page: { revisions: Revision[] }): Date {
@@ -57,5 +58,6 @@ export async function generatePostPage(
     published: getPostPublishedDate(doc),
     updated: getPostUpdatedDate(doc),
     uuid: doc.uuid,
+    sourceFilePath: doc.sourceFilePath,
   };
 }

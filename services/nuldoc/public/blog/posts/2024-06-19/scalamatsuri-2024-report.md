@@ -1,0 +1,41 @@
+---
+[article]
+uuid = "8d6f3690-3da3-4235-a81b-b9707cee22ad"
+title = "ScalaMatsuri 2024 参加レポ"
+description = "2024-06-08 から 2024-06-09 にかけて開催された、ScalaMatsuri 2024 に参加した。"
+tags = [
+  "conference",
+  "scala",
+  "scalamatsuri",
+]
+
+[[article.revisions]]
+date = "2024-06-19"
+remark = "公開"
+---
+# はじめに {#intro}
+
+2024-06-08 から 2024-06-09 にかけて開催された [ScalaMatsuri 2024](https://2024.scalamatsuri.org/ja) に参加した。
+
+Day 2 には当日参加できなかったため、day 2 のセッションの感想は YouTube にアップロードされたアーカイブ動画を観て書いている。
+
+# セッション感想 {#sessions}
+
+特に印象に残ったセッションを、day 1 と day 2 で一つずつ選んだ (タイトルと登壇者名は [公式ホームページの「プログラム」](https://2024.scalamatsuri.org/ja/programs) から引用)。
+
+* [Scala to WebAssembly: 動機と方法](https://2024.scalamatsuri.org/ja/programs/SESSION_DAY_1_02) (Rikito Taniguchi さん)
+  * [最近 WebAssembly の処理系を作った](/posts/2024-03-17/phperkaigi-2024-report/#section--as-speaker) こともあって、気になっていたセッションです。私の処理系は WasmGC proposal を実装していないので動かせないのですが、いつかサポートして動かしてみたいですね。
+* [作って学ぶ Extensible Effects](https://2024.scalamatsuri.org/ja/programs/SESSION_DAY_2_04) (Kory さん・hsjoihs さん)
+  * 今回一番楽しみにしていたセッションです。Day 2 当日は参加できず、後日アーカイブ動画を視聴したのですが、期待を裏切らない濃厚なセッションでした。後日開かれた [NB-Scala レトロスペクティブ (非公式後夜祭)](https://nextbeat.connpass.com/event/315988/) の発表も拝聴したのですが、どちらも非常に面白かったです。
+
+# その他感想 {#others}
+
+* 良い会場だった。よく取り沙汰されるスライドの文字サイズの問題は、巨大なスクリーンを用意することで解決するという発見があった
+* ランチにお弁当が用意されており、おいしかった ( [参考画像](https://x.com/nsfisis/status/1799276217583260092) )
+
+# おわりに {#outro}
+
+私が Scala を書いたり追ったりしていたのは Scala 2 の頃で、Scala 3 はほとんど浦島太郎状態だったのだが、非常に楽しく面白いイベントだった。
+イベントに触発されて、長らく塩漬けになっていた Scala 製の趣味プロジェクトを久しぶりに触っているのだが、これもまた楽しい。
+
+ScalaMatsuri 運営の皆さま、スピーカーの皆さま、スポンサーの皆さま、最高のイベントをありがとうございました！次回も楽しみにしています。
