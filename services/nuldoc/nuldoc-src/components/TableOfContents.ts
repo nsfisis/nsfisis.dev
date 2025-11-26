@@ -1,4 +1,4 @@
-import { TocEntry, TocRoot } from "../djot/document.ts";
+import { TocEntry, TocRoot } from "../markdown/document.ts";
 import { elem, Element } from "../dom.ts";
 
 type Props = {

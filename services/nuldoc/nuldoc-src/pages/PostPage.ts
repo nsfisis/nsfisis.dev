@@ -4,7 +4,7 @@ import PageLayout from "../components/PageLayout.ts";
 import TableOfContents from "../components/TableOfContents.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { elem, Element } from "../dom.ts";
-import { Document } from "../djot/document.ts";
+import { Document } from "../markdown/document.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
 

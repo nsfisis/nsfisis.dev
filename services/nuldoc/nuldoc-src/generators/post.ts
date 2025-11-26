@@ -1,7 +1,7 @@
 import { join } from "@std/path";
 import PostPage from "../pages/PostPage.ts";
 import { Config } from "../config.ts";
-import { Document } from "../djot/document.ts";
+import { Document } from "../markdown/document.ts";
 import { Page } from "../page.ts";
 import { Date, Revision } from "../revision.ts";
 
@@ -41,7 +41,7 @@ export async function generatePostPage(
   const cwd = Deno.cwd();
   const contentDir = join(cwd, config.locations.contentDir);
   const destFilePath = join(
-    doc.sourceFilePath.replace(contentDir, "").replace(".dj", ""),
+    doc.sourceFilePath.replace(contentDir, "").replace(".md", ""),
     "index.html",
   );
   return {

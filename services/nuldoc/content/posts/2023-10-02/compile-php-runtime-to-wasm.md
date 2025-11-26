@@ -1,0 +1,305 @@
+---
+[article]
+uuid = "0ed1ccc8-d437-481c-8cca-2131ce800cc0"
+title = "PHP の処理系を Emscripten で WebAssembly にコンパイルする"
+description = "PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。"
+tags = [
+  "php",
+  "wasm",
+]
+
+[[article.revisions]]
+date = "2023-10-02"
+remark = "公開"
+
+[[article.revisions]]
+date = "2025-04-23"
+remark = "fflush() の前に改行の出力が必要だった理由と正しい実装について追記"
+---
+# はじめに {#intro}
+
+[Emscripten](https://emscripten.org/) を用いて [PHP の処理系](https://github.com/php/php-src) を  [WebAssembly](https://developer.mozilla.org/docs/WebAssembly) にコンパイルした。機能をある程度絞ることで、思ったよりも簡単に実現できたので、備忘録として記しておく。
+
+なお、この記事では Emscripten や WebAssembly とは何か知っていることを前提とする。
+
+# バージョン情報 {#version}
+
+この記事中で使用するソフトウェア等のバージョンを記載する。
+
+* Ubuntu 22.04 on WSL2
+* Docker version 24.0.6
+* Emscripten 3.1.46
+* Node.js 20.7.0
+* PHP 8.2.10
+
+なお、Docker から下は Docker 上で導入するので、ホストマシンにはインストールしなくてよい。
+
+# 本記事のゴール {#goal}
+
+先にこの記事のゴールを示しておく。これから示す手順のとおりに進めると、次のようなコードが動くようになる。
+このコードはこのあと使うので、`index.mjs` の名前で保存しておくこと。
+
+```javascript filename="index.mjs"
+import { readFile } from 'node:fs/promises';
+import PHPWasm from './php-wasm.mjs'
+
+const code = await readFile('/dev/stdin', { encoding: 'utf-8' });
+
+const { ccall } = await PHPWasm();
+const result = ccall(
+  'php_wasm_run',
+  'number', ['string'],
+  [code],
+);
+console.log(`exit code: ${result}`);
+```
+
+標準入力から与えたコードを WebAssembly にコンパイルされた PHP 処理系の上で実行している。このような `php-wasm.mjs` (とそこから呼び出される `php-wasm.wasm`) を作成する。
+
+# ビルド {#build}
+
+## C のエントリポイントを書く {#write-c-entrypoint}
+
+先ほどのコードでも使っていたエントリポイントである `php_wasm_run` を用意する。
+
+```c
+#include <stdio.h>
+#include <emscripten.h>
+#include <Zend/zend_execute.h>
+#include <sapi/embed/php_embed.h>
+
+int EMSCRIPTEN_KEEPALIVE php_wasm_run(const char* code) {
+    zend_result result;
+
+    int argc = 1;
+    char* argv[] = { "php.wasm", NULL };
+
+    PHP_EMBED_START_BLOCK(argc, argv);
+
+    result = zend_eval_string_ex(code, NULL, "php.wasm code", 1);
+
+    PHP_EMBED_END_BLOCK();
+
+    fprintf(stdout, "\n");
+    fflush(stdout);
+    fprintf(stderr, "\n");
+    fflush(stderr);
+
+    return result == SUCCESS ? 0 : 1;
+}
+```
+
+ほとんどはただの PHP の公開 API を使ったコードだが、Emscripten 向けの注意点が 2点ある。
+
+まずは `EMSCRIPTEN_KEEPALIVE` について。
+これは Emscripten が用意している特殊なマクロである。
+このマクロが付与されている関数は、どこからも使用されていなくともコンパイル後の WebAssembly バイナリから削除されない。
+もしこれを付け忘れると、未使用の関数とみなされ削除される。
+
+次に、コードを評価したあとに呼んでいる標準出力と標準エラー出力に対する改行の出力について。
+出力バッファから出力させるためだけなら改行を出力させなくとも `fflush()` だけで事足りると考えたのだが、ないと動かなかったので追加した。
+これにより、PHP コードの出力の後ろに余分な改行が追加されてしまう。
+改行を出力せずともバッファを消費させる手段をご存知のかたはご教示願いたい。
+
+:::edit{editat="2025-04-23" operation="追記"}
+`fflush()` の前に改行の出力が必要だった理由が判明したので追記する。
+これは、`index.mjs` で標準出力・標準エラー出力へ出力する方法を指定せず、デフォルトの実装に任せているため。
+Emscripten のデフォルト実装では、改行コードを出力するまで出力内容がバッファリングされ、`fflush()` が機能しない。
+
+デフォルトの出力方法は `index.mjs` の中で `PHPWasm()` を呼ぶとき、`stdout`・`stderr` というオプションを渡せば変更できる。
+
+```javascript
+const { ccall } = await PHPWasm({
+  stdout: (c) => {
+    if (c === null) {
+      // flush the standard output.
+    } else {
+      // output c to the standard output.
+    }
+  },
+});
+```
+
+`c` は `null` か 1バイト符号つき整数を取り、`null` が flush 要求を意味する。
+
+記事末尾のリポジトリはすでにこの変更を適用済み。`stdout` や `stderr` の完全なサンプルはそちらを参照のこと。
+:::
+
+## WebAssembly にコンパイルする {#compile-to-wasm}
+
+それでは WebAssembly にコンパイルしていこう。ここからは `Dockerfile` 上のコマンドとして操作を示す。
+
+まずは [Emscripten 公式が提供している Docker イメージ](https://hub.docker.com/r/emscripten/emsdk) を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。
+
+```dockerfile
+FROM emscripten/emsdk:3.1.46 AS wasm-builder
+```
+
+次に、 [php/php-src](https://github.com/php/php-src) から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。
+有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。
+
+```dockerfile
+RUN git clone --depth=1 --branch=php-8.2.10 https://github.com/php/php-src
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        autoconf \
+        bison \
+        pkg-config \
+        re2c \
+        && \
+    :
+```
+
+続けて、Emscripten のツールチェインを用いて PHP 処理系をビルドする。
+
+```dockerfile
+RUN cd php-src && \
+    ./buildconf --force && \
+    emconfigure ./configure \
+        --disable-all \
+        --disable-mbregex \
+        --disable-fiber-asm \
+        --disable-cli \
+        --disable-cgi \
+        --disable-phpdbg \
+        --enable-embed=static \
+        --enable-mbstring \
+        --without-iconv \
+        --without-libxml \
+        --without-pcre-jit \
+        --without-pdo-sqlite \
+        --without-sqlite3 \
+        && \
+    EMCC_CFLAGS='-s ERROR_ON_UNDEFINED_SYMBOLS=0' emmake make -j$(nproc) && \
+    mv libs/libphp.a .. && \
+    make clean && \
+    git clean -fd && \
+    :
+```
+
+ここまでと比べると少し複雑なので、それぞれ詳しく見ていこう。
+
+まず、`buildconf` は PHP 処理系をビルドするときに (Emscripten とは関係なく) 使うツールである。
+このツールの最も重要な仕事は、`configure` の生成である。
+
+次に `configure` するわけだが、ここで `emconfigure` を使う。
+これを使うことで、Emscripten が上手く諸々のツールチェインを WebAssembly のビルド向けに調整しながら `configure` してくれる。
+
+`configure` の後ろに指定してあるフラグは、通常の PHP 処理系のビルドで使う `configure` と同じなので、詳しくはそちらの `cofigure --help` を参照していただきたい。
+ほとんどは、機能の無効化のために指定している (依存するライブラリを減らし、ビルドをより簡単にするため)。
+
+通常の C のビルドなら、`configure` の次は `make` するところだが、ここでも `emmake` を使う。
+役割はほとんど `emconfigure` と同様である。
+指定してある `EMCC_CFLAGS` という環境変数は、Emscripten の C コンパイラへのフラグで、ここでは `ERROR_ON_UNDEFINED_SYMBOLS` を無効化している。
+これにより、コンパイル中に出現した解決できなかったシンボルを無視するようになる (代わりに、そのシンボルを呼ぼうとしたタイミングで実行時エラーになる)。
+すべての依存を完全に解決するのは面倒なので、あまり使わない機能については無視してもよいだろう。
+
+ここまでを実行すると `libs/libphp.a` が生成される。これは後で使うので移動させている。
+
+さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。
+`Dockerfile` と同じ場所に `php-wasm.c` という名前で保存し、次のようにする。
+
+```dockerfile
+COPY php-wasm.c /src/
+
+RUN cd php-src && \
+    emcc \
+        -c \
+        -o php-wasm.o \
+        -I . \
+        -I TSRM \
+        -I Zend \
+        -I main \
+        ../php-wasm.c \
+        && \
+    mv php-wasm.o .. && \
+    make clean && \
+    git clean -fd && \
+    :
+```
+
+`emcc` は `cc` (C コンパイラ/リンカ) の Emscripten 版で、`-c` は「コンパイル」の意。
+`-o` や `-I` は普通の C コンパイラと同様、出力ファイルの指定とインクルードパスの指定である。
+
+`libphp.a` と `php-wasm.o` が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。
+これにも `emcc` コマンドを使う。
+
+```dockerfile
+RUN emcc \
+    -s ENVIRONMENT=node \
+    -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
+    -s EXPORTED_RUNTIME_METHODS='["ccall"]' \
+    -s EXPORT_ES6=1 \
+    -s INITIAL_MEMORY=16777216 \
+    -s INVOKE_RUN=0 \
+    -s MODULARIZE=1 \
+    -o php-wasm.js \
+    php-wasm.o \
+    libphp.a \
+    ;
+```
+
+それぞれのフラグについて解説する。
+
+`-s ENVIRONMENT=node` は、生成する WebAssembly/JavaScript の実行環境を指定する。
+今回は `node` を指定しているので、Node.js 向けのファイルが生成される。
+
+`-s ERROR_ON_UNDEFINED_SYMBOLS=0` についてはすでに述べたので省略する。
+
+`-s EXPORTED_RUNTIME_METHODS='["ccall"]'` は、生成される JavaScript から公開される API である。
+すでに `index.mjs` で使用しているが、`ccall('関数名', '返り値の型', ['仮引数の型', ...], ['実引数', ...])` のように使う。
+
+`-s EXPORT_ES6=1` は、JavaScript コードを ECMAScript 6 に準拠した module として生成する。
+これを指定することで、`require()` ではなく `import` できる JavaScript を生成させられる。
+
+`-s INITIAL_MEMORY=16777216` は呼んで字のごとく。用途に合わせて適当に決めてほしい。
+
+`-s INVOKE_RUN=0` は、module をロードしたときに勝手に `main()` を呼ぶかどうか (だと思う)。
+今回は `php_wasm_run()` しか使うつもりがないので切っている。
+
+`-s MODULARIZE=1` は、実質的にほぼ必須のオプションであり、1 を指定することで「WebAssembly module をインスタンス化する関数」をエクスポートするような JavaScript ファイルを生成するようになる。
+これを指定しないと、生成物の JavaScript ファイルを読み込むと WebAssembly module が即座にインスタンス化されてしまい、起動のタイミングを制御できない。
+
+ここまで実行すると、`php-wasm.js` と `php-wasm.wasm` が作られる。
+では、ここからはこれらの実行環境を作っていこう。
+
+といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。
+先ほど掲載した JavaScript のコードは、`Dockerfile` と同じディレクトリに `index.mjs` で配置すること。
+
+```dockerfile
+FROM node:20.7
+
+WORKDIR /app
+COPY --from=wasm-builder /src/php-wasm.js /app/php-wasm.mjs
+COPY --from=wasm-builder /src/php-wasm.wasm /app/php-wasm.wasm
+COPY index.mjs /app/
+
+ENTRYPOINT ["node", "index.mjs"]
+```
+
+# 実行 {#run}
+
+`Dockerfile`、`php-wasm.c`、`index.mjs` を用意したら、Docker コンテナをビルドして実行する。
+
+```
+$ docker build -t php-wasm .
+$ echo 'echo "Hello, World!", PHP_EOL;' | docker run --rm -i php-wasm
+Hello, World!
+
+
+exit code: 0
+```
+
+# まとめ {#outro}
+
+[ここまでをまとめた Git リポジトリ](https://github.com/nsfisis/tiny-php.wasm) を用意した。
+簡単にコンパイルできるので、興味があれば試してみてほしい。
+
+# 参考リンク {#references}
+
+* [php/php-src: ビルドの方法について](https://github.com/php/php-src)
+* [Emscripten: チュートリアル](https://emscripten.org/docs/getting_started/Tutorial.html)
+* [Emscripten: ビルドの基本](https://emscripten.org/docs/compiling/Building-Projects.html#building-projects)
+* [Emscripten: `emcc` などのリファレンス](https://emscripten.org/docs/tools_reference/emcc.html#emccdoc)
+* [Emscripten: 生成される JavaScript の API](https://emscripten.org/docs/api_reference/module.html#module)

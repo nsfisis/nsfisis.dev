@@ -2,7 +2,7 @@ import { dirname, join, joinGlobs, relative } from "@std/path";
 import { ensureDir, expandGlob } from "@std/fs";
 import { generateFeedPageFromEntries } from "../generators/atom.ts";
 import { Config, getTagLabel } from "../config.ts";
-import { parseDjotFile } from "../djot/parse.ts";
+import { parseMarkdownFile } from "../markdown/parse.ts";
 import { Page } from "../page.ts";
 import { render } from "../render.ts";
 import { dateToString } from "../revision.ts";
@@ -55,7 +55,7 @@ async function buildPostPages(config: Config): Promise<PostPage[]> {
 
 async function collectPostFiles(sourceDir: string): Promise<string[]> {
   const filePaths = [];
-  const globPattern = joinGlobs([sourceDir, "**", "*.dj"]);
+  const globPattern = joinGlobs([sourceDir, "**", "*.md"]);
   for await (const entry of expandGlob(globPattern)) {
     filePaths.push(entry.path);
   }
@@ -69,7 +69,7 @@ async function parsePosts(
   const posts = [];
   for (const postFile of postFiles) {
     posts.push(
-      await generatePostPage(await parseDjotFile(postFile, config), config),
+      await generatePostPage(await parseMarkdownFile(postFile, config), config),
     );
   }
   return posts;
@@ -265,9 +265,9 @@ async function copyBlogAssetFiles(config: Config) {
   for await (const { isFile, path } of expandGlob(globPattern)) {
     if (!isFile) continue;
 
-    // Skip .dj, .toml, .pdf files
+    // Skip .md, .toml, .pdf files
     if (
-      path.endsWith(".dj") ||
+      path.endsWith(".md") ||
       path.endsWith(".toml") ||
       path.endsWith(".pdf")
     ) {
@@ -290,9 +290,9 @@ async function copySlidesAssetFiles(config: Config) {
   for await (const { isFile, path } of expandGlob(globPattern)) {
     if (!isFile) continue;
 
-    // Skip .dj, .toml, .pdf files
+    // Skip .md, .toml, .pdf files
     if (
-      path.endsWith(".dj") ||
+      path.endsWith(".md") ||
       path.endsWith(".toml") ||
       path.endsWith(".pdf")
     ) {
