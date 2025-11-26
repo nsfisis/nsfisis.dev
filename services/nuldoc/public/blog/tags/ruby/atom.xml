@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-04-20T00:00:00+09:00</updated>
+  <updated>2025-11-27T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:2ed2d400-b3f6-48bc-af27-19d9042875a0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-11-27/anybatross-writeup/"></link>
+    <title>カヤックさん開催のコードゴルフコンテスト Anybatross に参加して優勝した</title>
+    <summary>YAPC::Fukuoka 2025 に際してカヤックさんが開催されていたコードゴルフコンテスト、Anybatross に参加して優勝した。</summary>
+    <published>2025-11-27T00:00:00+09:00</published>
+    <updated>2025-11-27T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:039b3dff-3b75-46b7-a731-9a3a0ff8e21f</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-20/trick-2025-most-ruby-on-ruby-award/"></link>
