@@ -8,11 +8,6 @@ const ConfigSchema = z.object({
     destDir: z.string(),
     staticDir: z.string(),
   }),
-  rendering: z.object({
-    html: z.object({
-      indentWidth: z.number(),
-    }),
-  }),
   site: z.object({
     author: z.string(),
     copyrightYear: z.number(),
@@ -29,25 +24,23 @@ const ConfigSchema = z.object({
     blog: z.object({
       fqdn: z.string(),
       siteName: z.string(),
+      postsPerPage: z.number(),
     }),
     slides: z.object({
       fqdn: z.string(),
       siteName: z.string(),
     }),
   }),
-  blog: z.object({
-    postsPerPage: z.number().default(10),
-    tagLabels: z.record(z.string(), z.string()),
-  }),
+  tagLabels: z.record(z.string(), z.string()),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;
 
 export function getTagLabel(c: Config, slug: string): string {
-  if (!(slug in c.blog.tagLabels)) {
+  if (!(slug in c.tagLabels)) {
     throw new Error(`Unknown tag: ${slug}`);
   }
-  return c.blog.tagLabels[slug];
+  return c.tagLabels[slug];
 }
 
 export function getDefaultConfigPath(): string {

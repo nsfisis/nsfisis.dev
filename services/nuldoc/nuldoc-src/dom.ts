@@ -63,6 +63,116 @@ export function elem(
   };
 }
 
+// Helper functions for commonly used elements
+export const a = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("a", attributes, ...children);
+
+export const article = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("article", attributes, ...children);
+
+export const button = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("button", attributes, ...children);
+
+export const div = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("div", attributes, ...children);
+
+export const footer = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("footer", attributes, ...children);
+
+export const h1 = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("h1", attributes, ...children);
+
+export const h2 = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("h2", attributes, ...children);
+
+export const h3 = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("h3", attributes, ...children);
+
+export const h4 = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("h4", attributes, ...children);
+
+export const h5 = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("h5", attributes, ...children);
+
+export const h6 = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("h6", attributes, ...children);
+
+export const header = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("header", attributes, ...children);
+
+export const img = (attributes?: Record<string, string>) =>
+  elem("img", attributes);
+
+export const li = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("li", attributes, ...children);
+
+export const link = (attributes?: Record<string, string>) =>
+  elem("link", attributes);
+
+export const meta = (attributes?: Record<string, string>) =>
+  elem("meta", attributes);
+
+export const nav = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("nav", attributes, ...children);
+
+export const ol = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("ol", attributes, ...children);
+
+export const p = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("p", attributes, ...children);
+
+export const script = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("script", attributes, ...children);
+
+export const section = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("section", attributes, ...children);
+
+export const span = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("span", attributes, ...children);
+
+export const ul = (
+  attributes?: Record<string, string>,
+  ...children: NodeLike[]
+) => elem("ul", attributes, ...children);
+
 export function addClass(e: Element, klass: string) {
   const classes = e.attributes.class;
   if (classes === undefined) {

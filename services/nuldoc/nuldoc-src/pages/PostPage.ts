@@ -3,7 +3,20 @@ import GlobalHeader from "../components/BlogGlobalHeader.ts";
 import PageLayout from "../components/PageLayout.ts";
 import TableOfContents from "../components/TableOfContents.ts";
 import { Config, getTagLabel } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import {
+  a,
+  article,
+  div,
+  elem,
+  Element,
+  h1,
+  h2,
+  header,
+  li,
+  ol,
+  section,
+  ul,
+} from "../dom.ts";
 import { Document } from "../markdown/document.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
@@ -27,23 +40,18 @@ export default async function PostPage(
       elem(
         "main",
         { class: "main" },
-        elem(
-          "article",
+        article(
           { class: "post-single" },
-          elem(
-            "header",
+          header(
             { class: "post-header" },
-            elem("h1", { class: "post-title" }, doc.title),
+            h1({ class: "post-title" }, doc.title),
             doc.tags.length !== 0
-              ? elem(
-                "ul",
+              ? ul(
                 { class: "post-tags" },
                 ...doc.tags.map((slug) =>
-                  elem(
-                    "li",
+                  li(
                     { class: "tag" },
-                    elem(
-                      "a",
+                    a(
                       { href: `/tags/${slug}/` },
                       getTagLabel(config, slug),
                     ),
@@ -55,19 +63,15 @@ export default async function PostPage(
           doc.toc && doc.toc.entries.length > 0
             ? TableOfContents({ toc: doc.toc })
             : null,
-          elem(
-            "div",
+          div(
             { class: "post-content" },
-            elem(
-              "section",
+            section(
               { id: "changelog" },
-              elem("h2", {}, elem("a", { href: "#changelog" }, "更新履歴")),
-              elem(
-                "ol",
+              h2({}, a({ href: "#changelog" }, "更新履歴")),
+              ol(
                 {},
                 ...doc.revisions.map((rev) =>
-                  elem(
-                    "li",
+                  li(
                     { class: "revision" },
                     elem(
                       "time",

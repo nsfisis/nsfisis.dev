@@ -6,7 +6,21 @@ import { Config, getTagLabel } from "../config.ts";
 import { dateToString } from "../revision.ts";
 import { Slide } from "../slide/slide.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
-import { elem, Element } from "../dom.ts";
+import {
+  a,
+  article,
+  button,
+  div,
+  elem,
+  Element,
+  h1,
+  h2,
+  header,
+  li,
+  ol,
+  section,
+  ul,
+} from "../dom.ts";
 
 export default async function SlidePage(
   slide: Slide,
@@ -28,23 +42,18 @@ export default async function SlidePage(
       elem(
         "main",
         { class: "main" },
-        elem(
-          "article",
+        article(
           { class: "post-single" },
-          elem(
-            "header",
+          header(
             { class: "post-header" },
-            elem("h1", { class: "post-title" }, slide.title),
+            h1({ class: "post-title" }, slide.title),
             slide.tags.length !== 0
-              ? elem(
-                "ul",
+              ? ul(
                 { class: "post-tags" },
                 ...slide.tags.map((slug) =>
-                  elem(
-                    "li",
+                  li(
                     { class: "tag" },
-                    elem(
-                      "a",
+                    a(
                       { href: `/tags/${slug}/` },
                       getTagLabel(config, slug),
                     ),
@@ -53,19 +62,15 @@ export default async function SlidePage(
               )
               : null,
           ),
-          elem(
-            "div",
+          div(
             { class: "post-content" },
-            elem(
-              "section",
+            section(
               { id: "changelog" },
-              elem("h2", {}, elem("a", { href: "#changelog" }, "更新履歴")),
-              elem(
-                "ol",
+              h2({}, a({ href: "#changelog" }, "更新履歴")),
+              ol(
                 {},
                 ...slide.revisions.map((rev) =>
-                  elem(
-                    "li",
+                  li(
                     { class: "revision" },
                     elem(
                       "time",
@@ -78,11 +83,10 @@ export default async function SlidePage(
               ),
             ),
             elem("canvas", { id: "slide", "data-slide-link": slide.slideLink }),
-            elem(
-              "div",
+            div(
               {},
-              elem("button", { id: "prev", type: "button" }, "Prev"),
-              elem("button", { id: "next", type: "button" }, "Next"),
+              button({ id: "prev", type: "button" }, "Prev"),
+              button({ id: "next", type: "button" }, "Next"),
             ),
             await StaticScript({
               fileName: "/slide.js",

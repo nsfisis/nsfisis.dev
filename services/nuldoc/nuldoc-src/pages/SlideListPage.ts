@@ -6,7 +6,7 @@ import { Config } from "../config.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
 import { SlidePage } from "../generators/slide.ts";
-import { elem, Element } from "../dom.ts";
+import { elem, Element, h1, header } from "../dom.ts";
 
 export default async function SlideListPage(
   slides: SlidePage[],
@@ -28,11 +28,11 @@ export default async function SlideListPage(
       elem(
         "main",
         { class: "main" },
-        elem("header", { class: "page-header" }, elem("h1", {}, pageTitle)),
+        header({ class: "page-header" }, h1({}, pageTitle)),
         ...Array.from(slides)
-          .sort((a, b) => {
-            const ta = dateToString(getPostPublishedDate(a));
-            const tb = dateToString(getPostPublishedDate(b));
+          .sort((s1, s2) => {
+            const ta = dateToString(getPostPublishedDate(s1));
+            const tb = dateToString(getPostPublishedDate(s2));
             if (ta > tb) return -1;
             if (ta < tb) return 1;
             return 0;

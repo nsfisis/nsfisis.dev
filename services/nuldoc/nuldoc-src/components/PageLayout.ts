@@ -1,5 +1,5 @@
 import { Config } from "../config.ts";
-import { elem, Element, Node } from "../dom.ts";
+import { elem, Element, link, meta, Node } from "../dom.ts";
 import StaticStylesheet from "./StaticStylesheet.ts";
 
 type Props = {
@@ -33,37 +33,37 @@ export default async function PageLayout(
     elem(
       "head",
       {},
-      elem("meta", { charset: "UTF-8" }),
-      elem("meta", {
+      meta({ charset: "UTF-8" }),
+      meta({
         name: "viewport",
         content: "width=device-width, initial-scale=1.0",
       }),
-      elem("meta", { name: "author", content: config.site.author }),
-      elem("meta", {
+      meta({ name: "author", content: config.site.author }),
+      meta({
         name: "copyright",
         content: `&copy; ${metaCopyrightYear} ${config.site.author}`,
       }),
-      elem("meta", { name: "description", content: metaDescription }),
+      meta({ name: "description", content: metaDescription }),
       metaKeywords && metaKeywords.length !== 0
-        ? elem("meta", { name: "keywords", content: metaKeywords.join(",") })
+        ? meta({ name: "keywords", content: metaKeywords.join(",") })
         : null,
-      elem("meta", { property: "og:type", content: "article" }),
-      elem("meta", { property: "og:title", content: metaTitle }),
-      elem("meta", { property: "og:description", content: metaDescription }),
-      elem("meta", {
+      meta({ property: "og:type", content: "article" }),
+      meta({ property: "og:title", content: metaTitle }),
+      meta({ property: "og:description", content: metaDescription }),
+      meta({
         property: "og:site_name",
         content: config.sites[site].siteName,
       }),
-      elem("meta", { property: "og:locale", content: "ja_JP" }),
-      elem("meta", { name: "Hatena::Bookmark", content: "nocomment" }),
+      meta({ property: "og:locale", content: "ja_JP" }),
+      meta({ name: "Hatena::Bookmark", content: "nocomment" }),
       metaAtomFeedHref
-        ? elem("link", {
+        ? link({
           rel: "alternate",
           href: metaAtomFeedHref,
           type: "application/atom+xml",
         })
         : null,
-      elem("link", {
+      link({
         rel: "icon",
         href: "/favicon.svg",
         type: "image/svg+xml",

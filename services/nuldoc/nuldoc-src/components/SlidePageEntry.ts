@@ -6,26 +6,32 @@ import {
 import { SlidePage } from "../generators/slide.ts";
 import { dateToString } from "../revision.ts";
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import {
+  a,
+  article,
+  elem,
+  Element,
+  footer,
+  h2,
+  header,
+  p,
+  section,
+} from "../dom.ts";
 import TagList from "./TagList.ts";
 
 type Props = { slide: SlidePage; config: Config };
 
 export default function SlidePageEntry({ slide, config }: Props): Element {
-  return elem(
-    "article",
+  return article(
     { class: "post-entry" },
-    elem(
-      "a",
+    a(
       { href: slide.href },
-      elem(
-        "header",
+      header(
         { class: "entry-header" },
-        elem("h2", {}, slide.description),
+        h2({}, slide.description),
       ),
-      elem("section", { class: "entry-content" }, elem("p", {}, slide.title)),
-      elem(
-        "footer",
+      section({ class: "entry-content" }, p({}, slide.title)),
+      footer(
         { class: "entry-footer" },
         elem(
           "time",

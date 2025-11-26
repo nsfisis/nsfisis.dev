@@ -4,7 +4,7 @@ import SlidesGlobalHeader from "../components/SlidesGlobalHeader.ts";
 import PageLayout from "../components/PageLayout.ts";
 import { Config } from "../config.ts";
 import { TagPage } from "../generators/tag.ts";
-import { elem, Element } from "../dom.ts";
+import { a, article, elem, Element, footer, h1, h2, header } from "../dom.ts";
 
 export default async function TagListPage(
   tags: TagPage[],
@@ -28,11 +28,11 @@ export default async function TagListPage(
       elem(
         "main",
         { class: "main" },
-        elem("header", { class: "page-header" }, elem("h1", {}, pageTitle)),
+        header({ class: "page-header" }, h1({}, pageTitle)),
         ...Array.from(tags)
-          .sort((a, b) => {
-            const ta = a.tagSlug;
-            const tb = b.tagSlug;
+          .sort((t1, t2) => {
+            const ta = t1.tagSlug;
+            const tb = t2.tagSlug;
             if (ta < tb) return -1;
             if (ta > tb) return 1;
             return 0;
@@ -48,18 +48,15 @@ export default async function TagListPage(
               posts && slides ? "、" : ""
             }${slides}`;
 
-            return elem(
-              "article",
+            return article(
               { class: "post-entry" },
-              elem(
-                "a",
+              a(
                 { href: tag.href },
-                elem(
-                  "header",
+                header(
                   { class: "entry-header" },
-                  elem("h2", {}, tag.tagLabel),
+                  h2({}, tag.tagLabel),
                 ),
-                elem("footer", { class: "entry-footer" }, footerText),
+                footer({ class: "entry-footer" }, footerText),
               ),
             );
           }),

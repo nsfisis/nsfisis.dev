@@ -2,7 +2,7 @@ import GlobalFooter from "../components/GlobalFooter.ts";
 import GlobalHeader from "../components/DefaultGlobalHeader.ts";
 import PageLayout from "../components/PageLayout.ts";
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import { a, article, elem, Element, h2, header } from "../dom.ts";
 
 export default async function HomePage(config: Config): Promise<Element> {
   return await PageLayout({
@@ -19,54 +19,42 @@ export default async function HomePage(config: Config): Promise<Element> {
       elem(
         "main",
         { class: "main" },
-        elem(
-          "article",
+        article(
           { class: "post-single" },
-          elem(
-            "article",
+          article(
             { class: "post-entry" },
-            elem(
-              "a",
+            a(
               { href: `https://${config.sites.about.fqdn}/` },
-              elem(
-                "header",
+              header(
                 { class: "entry-header" },
-                elem("h2", {}, "About"),
+                h2({}, "About"),
               ),
             ),
           ),
-          elem(
-            "article",
+          article(
             { class: "post-entry" },
-            elem(
-              "a",
+            a(
               { href: `https://${config.sites.blog.fqdn}/posts/` },
-              elem("header", { class: "entry-header" }, elem("h2", {}, "Blog")),
+              header({ class: "entry-header" }, h2({}, "Blog")),
             ),
           ),
-          elem(
-            "article",
+          article(
             { class: "post-entry" },
-            elem(
-              "a",
+            a(
               { href: `https://${config.sites.slides.fqdn}/slides/` },
-              elem(
-                "header",
+              header(
                 { class: "entry-header" },
-                elem("h2", {}, "Slides"),
+                h2({}, "Slides"),
               ),
             ),
           ),
-          elem(
-            "article",
+          article(
             { class: "post-entry" },
-            elem(
-              "a",
+            a(
               { href: `https://repos.${config.sites.default.fqdn}/` },
-              elem(
-                "header",
+              header(
                 { class: "entry-header" },
-                elem("h2", {}, "Repositories"),
+                h2({}, "Repositories"),
               ),
             ),
           ),

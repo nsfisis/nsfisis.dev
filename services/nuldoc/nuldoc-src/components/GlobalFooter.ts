@@ -1,9 +1,8 @@
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import { Element, footer } from "../dom.ts";
 
 export default function GlobalFooter({ config }: { config: Config }): Element {
-  return elem(
-    "footer",
+  return footer(
     { class: "footer" },
     `&copy; ${config.site.copyrightYear} ${config.site.author}`,
   );

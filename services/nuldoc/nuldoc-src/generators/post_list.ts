@@ -9,7 +9,7 @@ export async function generatePostListPages(
   posts: PostPage[],
   config: Config,
 ): Promise<PostListPage[]> {
-  const postsPerPage = config.blog.postsPerPage;
+  const postsPerPage = config.sites.blog.postsPerPage;
   const totalPages = Math.ceil(posts.length / postsPerPage);
   const pages: PostListPage[] = [];
 

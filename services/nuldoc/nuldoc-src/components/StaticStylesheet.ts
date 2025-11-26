@@ -1,6 +1,6 @@
 import { join } from "@std/path";
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import { Element, link } from "../dom.ts";
 import { calculateFileHash } from "./utils.ts";
 
 export default async function StaticStylesheet(
@@ -8,5 +8,5 @@ export default async function StaticStylesheet(
 ): Promise<Element> {
   const filePath = join(Deno.cwd(), config.locations.staticDir, fileName);
   const hash = await calculateFileHash(filePath);
-  return elem("link", { rel: "stylesheet", href: `${fileName}?h=${hash}` });
+  return link({ rel: "stylesheet", href: `${fileName}?h=${hash}` });
 }

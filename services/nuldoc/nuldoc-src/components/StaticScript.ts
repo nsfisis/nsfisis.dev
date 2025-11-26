@@ -1,6 +1,6 @@
 import { join } from "@std/path";
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import { Element, script } from "../dom.ts";
 import { calculateFileHash } from "./utils.ts";
 
 export default async function StaticScript(
@@ -16,5 +16,5 @@ export default async function StaticScript(
   const attrs: Record<string, string> = { src: `${fileName}?h=${hash}` };
   if (type) attrs.type = type;
   if (defer) attrs.defer = defer;
-  return elem("script", attrs);
+  return script(attrs);
 }

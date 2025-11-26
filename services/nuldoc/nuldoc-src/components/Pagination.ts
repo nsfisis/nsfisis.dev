@@ -1,4 +1,4 @@
-import { elem, Element } from "../dom.ts";
+import { a, div, Element, nav, span } from "../dom.ts";
 
 type Props = {
   currentPage: number;
@@ -10,43 +10,38 @@ export default function Pagination(
   { currentPage, totalPages, basePath }: Props,
 ): Element {
   if (totalPages <= 1) {
-    return elem("div", {});
+    return div({});
   }
 
   const pages = generatePageNumbers(currentPage, totalPages);
 
-  return elem(
-    "nav",
+  return nav(
     { class: "pagination" },
-    elem(
-      "div",
+    div(
       { class: "pagination-prev" },
       currentPage > 1
-        ? elem("a", { href: pageUrlAt(basePath, currentPage - 1) }, "前へ")
+        ? a({ href: pageUrlAt(basePath, currentPage - 1) }, "前へ")
         : null,
     ),
     ...pages.map((page) => {
       if (page === "...") {
-        return elem("div", { class: "pagination-elipsis" }, "…");
+        return div({ class: "pagination-elipsis" }, "…");
       } else if (page === currentPage) {
-        return elem(
-          "div",
+        return div(
           { class: "pagination-page pagination-page-current" },
-          elem("span", {}, String(page)),
+          span({}, String(page)),
         );
       } else {
-        return elem(
-          "div",
+        return div(
           { class: "pagination-page" },
-          elem("a", { href: pageUrlAt(basePath, page) }, String(page)),
+          a({ href: pageUrlAt(basePath, page) }, String(page)),
         );
       }
     }),
-    elem(
-      "div",
+    div(
       { class: "pagination-next" },
       currentPage < totalPages
-        ? elem("a", { href: pageUrlAt(basePath, currentPage + 1) }, "次へ")
+        ? a({ href: pageUrlAt(basePath, currentPage + 1) }, "次へ")
         : null,
     ),
   );

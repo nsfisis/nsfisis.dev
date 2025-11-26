@@ -3,9 +3,6 @@ contentDir = "/content"
 destDir = "/public"
 staticDir = "/static"
 
-[rendering.html]
-indentWidth = 2
-
 [site]
 author = "nsfisis"
 copyrightYear = 2021
@@ -21,15 +18,13 @@ siteName = "nsfisis.dev"
 [sites.blog]
 fqdn = "blog.nsfisis.dev"
 siteName = "REPL: Rest-Eat-Program Loop"
+postsPerPage = 10
 
 [sites.slides]
 fqdn = "slides.nsfisis.dev"
 siteName = "nsfisis.dev"
 
-[blog]
-postsPerPage = 10
-
-[blog.tagLabels]
+[tagLabels]
 c = "C"
 ci-cd = "CI/CD"
 code-golf = "コードゴルフ"

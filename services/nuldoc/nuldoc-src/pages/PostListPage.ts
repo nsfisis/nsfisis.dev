@@ -5,7 +5,7 @@ import Pagination from "../components/Pagination.ts";
 import PostPageEntry from "../components/PostPageEntry.ts";
 import { Config } from "../config.ts";
 import { PostPage } from "../generators/post.ts";
-import { elem, Element } from "../dom.ts";
+import { elem, Element, h1, header } from "../dom.ts";
 
 export default async function PostListPage(
   posts: PostPage[],
@@ -34,10 +34,9 @@ export default async function PostListPage(
       elem(
         "main",
         { class: "main" },
-        elem(
-          "header",
+        header(
           { class: "page-header" },
-          elem("h1", {}, pageTitle + pageInfoSuffix),
+          h1({}, pageTitle + pageInfoSuffix),
         ),
         Pagination({ currentPage, totalPages, basePath: "/posts/" }),
         ...posts.map((post) => PostPageEntry({ post, config })),

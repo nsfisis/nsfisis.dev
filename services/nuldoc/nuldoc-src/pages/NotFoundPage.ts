@@ -5,7 +5,7 @@ import SlidesGlobalHeader from "../components/SlidesGlobalHeader.ts";
 import DefaultGlobalHeader from "../components/DefaultGlobalHeader.ts";
 import PageLayout from "../components/PageLayout.ts";
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import { article, div, elem, Element } from "../dom.ts";
 
 export default async function NotFoundPage(
   site: "default" | "about" | "blog" | "slides",
@@ -32,7 +32,7 @@ export default async function NotFoundPage(
       elem(
         "main",
         { class: "main" },
-        elem("article", {}, elem("div", { class: "not-found" }, "404")),
+        article({}, div({ class: "not-found" }, "404")),
       ),
       GlobalFooter({ config }),
     ),

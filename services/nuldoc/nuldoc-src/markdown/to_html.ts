@@ -2,8 +2,9 @@ import { BundledLanguage, bundledLanguages, codeToHtml } from "shiki";
 import { Document, TocEntry } from "./document.ts";
 import { NuldocError } from "../errors.ts";
 import {
+  a,
   addClass,
-  elem,
+  div,
   Element,
   forEachChild,
   forEachChildRecursively,
@@ -115,7 +116,7 @@ function transformLinkLikeToAnchorElement(doc: Document) {
         }
         const [_, prefix, url, suffix] = match;
         nodes.push(text(prefix));
-        nodes.push(elem("a", { href: url, class: "url" }, text(url)));
+        nodes.push(a({ href: url, class: "url" }, text(url)));
         restContent = suffix;
       }
       return nodes;
@@ -188,7 +189,7 @@ function setSectionTitleAnchor(doc: Document) {
         );
       }
       const sectionId = currentSection.attributes.id;
-      const aElement = elem("a", undefined, ...c.children);
+      const aElement = a(undefined, ...c.children);
       aElement.attributes.href = `#${sectionId}`;
       c.children = [aElement];
     }
@@ -224,13 +225,11 @@ function transformNoteElement(doc: Document) {
     const operationAttr = n.attributes?.operation;
     const isEditBlock = editatAttr && operationAttr;
 
-    const labelElement = elem(
-      "div",
+    const labelElement = div(
       { class: "admonition-label" },
       text(isEditBlock ? `${editatAttr} ${operationAttr}` : "NOTE"),
     );
-    const contentElement = elem(
-      "div",
+    const contentElement = div(
       { class: "admonition-content" },
       ...n.children,
     );
@@ -273,8 +272,7 @@ function traverseFootnotes(doc: Document) {
     delete n.attributes.reference;
     n.attributes.class = "footnote";
     n.children = [
-      elem(
-        "a",
+      a(
         {
           id: `footnoteref--${reference}`,
           class: "footnote",
@@ -301,8 +299,7 @@ function traverseFootnotes(doc: Document) {
     n.attributes.id = `footnote--${id}`;
 
     n.children = [
-      elem(
-        "a",
+      a(
         { href: `#footnoteref--${id}` },
         text(`${footnoteNumber}. `),
       ),
@@ -373,7 +370,7 @@ async function transformAndHighlightCodeBlockElement(doc: Document) {
       delete n.attributes.filename;
 
       n.children = [
-        elem("div", { class: "filename" }, text(filename)),
+        div({ class: "filename" }, text(filename)),
         rawHTML(highlighted),
       ];
     } else {

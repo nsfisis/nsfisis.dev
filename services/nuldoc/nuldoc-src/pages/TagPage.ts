@@ -7,7 +7,7 @@ import SlidePageEntry from "../components/SlidePageEntry.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
 import { TaggedPage } from "../generators/tagged_page.ts";
-import { elem, Element } from "../dom.ts";
+import { elem, Element, h1, header } from "../dom.ts";
 
 export default async function TagPage(
   tagSlug: string,
@@ -37,7 +37,7 @@ export default async function TagPage(
       elem(
         "main",
         { class: "main" },
-        elem("header", { class: "page-header" }, elem("h1", {}, pageTitle)),
+        header({ class: "page-header" }, h1({}, pageTitle)),
         ...pages.map((page) =>
           "event" in page
             ? SlidePageEntry({ slide: page, config })

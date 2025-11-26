@@ -6,7 +6,21 @@ import { Config } from "../config.ts";
 import { dateToString } from "../revision.ts";
 import { getPostPublishedDate } from "../generators/post.ts";
 import { SlidePage } from "../generators/slide.ts";
-import { elem, Element } from "../dom.ts";
+import {
+  a,
+  article,
+  div,
+  elem,
+  Element,
+  h1,
+  h2,
+  header,
+  img,
+  li,
+  p,
+  section,
+  ul,
+} from "../dom.ts";
 
 export default async function AboutPage(
   slides: SlidePage[],
@@ -25,20 +39,16 @@ export default async function AboutPage(
       elem(
         "main",
         { class: "main" },
-        elem(
-          "article",
+        article(
           { class: "post-single" },
-          elem(
-            "header",
+          header(
             { class: "post-header" },
-            elem("h1", { class: "post-title" }, "nsfisis"),
-            elem(
-              "div",
+            h1({ class: "post-title" }, "nsfisis"),
+            div(
               { class: "my-icon" },
-              elem(
-                "div",
+              div(
                 { id: "myIcon" },
-                elem("img", { src: "/favicon.svg" }),
+                img({ src: "/favicon.svg" }),
               ),
               await StaticScript({
                 fileName: "/my-icon.js",
@@ -47,31 +57,24 @@ export default async function AboutPage(
               }),
             ),
           ),
-          elem(
-            "div",
+          div(
             { class: "post-content" },
-            elem(
-              "section",
+            section(
               {},
-              elem("h2", {}, "読み方"),
-              elem(
-                "p",
+              h2({}, "読み方"),
+              p(
                 {},
                 "読み方は決めていません。音にする必要があるときは本名である「いまむら」をお使いください。",
               ),
             ),
-            elem(
-              "section",
+            section(
               {},
-              elem("h2", {}, "アカウント"),
-              elem(
-                "ul",
+              h2({}, "アカウント"),
+              ul(
                 {},
-                elem(
-                  "li",
+                li(
                   {},
-                  elem(
-                    "a",
+                  a(
                     {
                       href: "https://twitter.com/nsfisis",
                       target: "_blank",
@@ -80,11 +83,9 @@ export default async function AboutPage(
                     "Twitter (現 𝕏): @nsfisis",
                   ),
                 ),
-                elem(
-                  "li",
+                li(
                   {},
-                  elem(
-                    "a",
+                  a(
                     {
                       href: "https://github.com/nsfisis",
                       target: "_blank",
@@ -95,19 +96,15 @@ export default async function AboutPage(
                 ),
               ),
             ),
-            elem(
-              "section",
+            section(
               {},
-              elem("h2", {}, "仕事"),
-              elem(
-                "ul",
+              h2({}, "仕事"),
+              ul(
                 {},
-                elem(
-                  "li",
+                li(
                   {},
                   "2021-01～現在: ",
-                  elem(
-                    "a",
+                  a(
                     {
                       href: "https://www.dgcircus.com/",
                       target: "_blank",
@@ -118,27 +115,23 @@ export default async function AboutPage(
                 ),
               ),
             ),
-            elem(
-              "section",
+            section(
               {},
-              elem("h2", {}, "登壇"),
-              elem(
-                "ul",
+              h2({}, "登壇"),
+              ul(
                 {},
                 ...Array.from(slides)
-                  .sort((a, b) => {
-                    const ta = dateToString(getPostPublishedDate(a));
-                    const tb = dateToString(getPostPublishedDate(b));
+                  .sort((s1, s2) => {
+                    const ta = dateToString(getPostPublishedDate(s1));
+                    const tb = dateToString(getPostPublishedDate(s2));
                     if (ta > tb) return -1;
                     if (ta < tb) return 1;
                     return 0;
                   })
                   .map((slide) =>
-                    elem(
-                      "li",
+                    li(
                       {},
-                      elem(
-                        "a",
+                      a(
                         {
                           href:
                             `https://${config.sites.slides.fqdn}${slide.href}`,

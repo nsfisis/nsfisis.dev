@@ -6,26 +6,32 @@ import {
 } from "../generators/post.ts";
 import { dateToString } from "../revision.ts";
 import { Config } from "../config.ts";
-import { elem, Element } from "../dom.ts";
+import {
+  a,
+  article,
+  elem,
+  Element,
+  footer,
+  h2,
+  header,
+  p,
+  section,
+} from "../dom.ts";
 import TagList from "./TagList.ts";
 
 type Props = { post: PostPage; config: Config };
 
 export default function PostPageEntry({ post, config }: Props): Element {
-  return elem(
-    "article",
+  return article(
     { class: "post-entry" },
-    elem(
-      "a",
+    a(
       { href: post.href },
-      elem("header", { class: "entry-header" }, elem("h2", {}, post.title)),
-      elem(
-        "section",
+      header({ class: "entry-header" }, h2({}, post.title)),
+      section(
         { class: "entry-content" },
-        elem("p", {}, post.description),
+        p({}, post.description),
       ),
-      elem(
-        "footer",
+      footer(
         { class: "entry-footer" },
         elem(
           "time",

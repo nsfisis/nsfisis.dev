@@ -29,7 +29,23 @@ import type {
   LeafDirective,
   TextDirective,
 } from "mdast-util-directive";
-import { elem, Element, Node, rawHTML, text } from "../dom.ts";
+import {
+  a,
+  article,
+  div,
+  elem,
+  Element,
+  img,
+  li,
+  Node,
+  ol,
+  p,
+  rawHTML,
+  section,
+  span,
+  text,
+  ul,
+} from "../dom.ts";
 
 type DirectiveNode = ContainerDirective | LeafDirective | TextDirective;
 
@@ -118,7 +134,7 @@ function processBlock(node: RootContent): Element | Element[] | null {
 }
 
 function processParagraph(node: Paragraph): Element {
-  return elem("p", {}, ...node.children.map(processInline));
+  return p({}, ...node.children.map(processInline));
 }
 
 function processThematicBreak(_node: ThematicBreak): Element {
@@ -182,7 +198,9 @@ function processList(node: List): Element {
     processListItem(item, isTaskList)
   );
 
-  return elem(node.ordered ? "ol" : "ul", attributes, ...children);
+  return node.ordered
+    ? ol(attributes, ...children)
+    : ul(attributes, ...children);
 }
 
 function processListItem(node: ListItem, isTaskList: boolean): Element {
@@ -204,7 +222,7 @@ function processListItem(node: ListItem, isTaskList: boolean): Element {
     }
   }
 
-  return elem("li", attributes, ...children);
+  return li(attributes, ...children);
 }
 
 function processTable(node: Table): Element {
@@ -261,7 +279,7 @@ function processTableCell(
 }
 
 function processHtmlBlock(node: Html): Element {
-  return elem("div", { class: "raw-html" }, rawHTML(node.value));
+  return div({ class: "raw-html" }, rawHTML(node.value));
 }
 
 function processDefinition(_node: Definition): null {
@@ -331,8 +349,7 @@ function processDirective(node: DirectiveNode): Element | null {
     }
   }
 
-  return elem(
-    "div",
+  return div(
     node.attributes as Record<string, string> || {},
     ...children,
   );
@@ -366,8 +383,7 @@ function processInline(node: PhrasingContent): Node {
         return text(String(node.value));
       }
       if ("children" in node && Array.isArray(node.children)) {
-        return elem(
-          "span",
+        return span(
           {},
           ...node.children.map((c: PhrasingContent) => processInline(c)),
         );
@@ -407,7 +423,7 @@ function processLink(node: Link): Element {
   if (isAutolink) {
     attributes.class = "url";
   }
-  return elem("a", attributes, ...node.children.map(processInline));
+  return a(attributes, ...node.children.map(processInline));
 }
 
 function processImage(node: Image): Element {
@@ -421,7 +437,7 @@ function processImage(node: Image): Element {
   if (node.title) {
     attributes.title = node.title;
   }
-  return elem("img", attributes);
+  return img(attributes);
 }
 
 function processDelete(node: Delete): Element {
@@ -453,8 +469,7 @@ export function mdast2ndoc(root: Root): Element {
 
   // Add footnotes section if any exist
   if (footnotes.length > 0) {
-    const footnoteSection = elem(
-      "section",
+    const footnoteSection = section(
       { class: "footnotes" },
       ...footnotes,
     );
@@ -464,7 +479,7 @@ export function mdast2ndoc(root: Root): Element {
   return elem(
     "__root__",
     undefined,
-    elem("article", undefined, ...articleContent),
+    article(undefined, ...articleContent),
   );
 }
 
@@ -566,8 +581,7 @@ function createSectionElement(sectionInfo: SectionInfo): Element {
     attributes.id = sectionInfo.id;
   }
 
-  return elem(
-    "section",
+  return section(
     attributes,
     sectionInfo.heading,
     ...sectionInfo.children,
