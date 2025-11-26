@@ -32,6 +32,7 @@ postsPerPage = 10
 [blog.tagLabels]
 c = "C"
 ci-cd = "CI/CD"
+code-golf = "コードゴルフ"
 cohackpp = "紅白ぺぱ合戦"
 composer = "Composer"
 conference = "カンファレンス"

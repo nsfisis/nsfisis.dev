@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:blog.nsfisis.dev,2021:tag-code-golf</id>
+  <title>タグ「コードゴルフ」一覧｜REPL: Rest-Eat-Program Loop</title>
+  <link rel="alternate" href="https://blog.nsfisis.dev/tags/code-golf/"></link>
+  <link rel="self" href="https://blog.nsfisis.dev/tags/code-golf/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2025-11-27T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:2ed2d400-b3f6-48bc-af27-19d9042875a0</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-11-27/anybatross-writeup/"></link>
+    <title>カヤックさん開催のコードゴルフコンテスト Anybatross に参加して優勝した</title>
+    <summary>YAPC::Fukuoka 2025 に際してカヤックさんが開催されていたコードゴルフコンテスト、Anybatross に参加して優勝した。</summary>
+    <published>2025-11-27T00:00:00+09:00</published>
+    <updated>2025-11-27T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:ee7289ee-ff2e-439d-b343-7f87504192fd</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2024-09-28/mncore-challenge-1/"></link>
+    <title>MN-Core Challenge #1 参加レポ</title>
+    <summary>2024-08-28 から 2024-09-24 にかけて開催された MN-Core Challenge #1 に参加した。</summary>
+    <published>2024-09-28T00:00:00+09:00</published>
+    <updated>2024-09-28T00:00:00+09:00</updated>
+  </entry>
+  <entry>
+    <id>urn:uuid:bb71bb5d-361b-44cb-9753-81d14583d860</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2022-08-27/php-conference-okinawa-code-golf/"></link>
+    <title>PHP カンファレンス沖縄で出題されたコードゴルフの問題を解いてみた</title>
+    <summary>PHP カンファレンス沖縄の懇親会 LT で出題されたコードゴルフの問題を解いてみた。</summary>
+    <published>2022-08-27T00:00:00+09:00</published>
+    <updated>2022-08-27T00:00:00+09:00</updated>
+  </entry>
+</feed>
