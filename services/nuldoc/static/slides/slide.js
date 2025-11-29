@@ -17,13 +17,21 @@ async function init() {
     const page = await doc.getPage(num);
 
     const viewport = page.getViewport({ scale: 1.0 });
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+    const outputScale = globalThis.devicePixelRatio || 1;
+    canvas.height = Math.floor(viewport.height * outputScale);
+    canvas.width = Math.floor(viewport.width * outputScale);
+    canvas.style.width = Math.floor(viewport.width) + "px";
+    canvas.style.height = Math.floor(viewport.height) + "px";
+
+    const transform = outputScale !== 1
+      ? [outputScale, 0, 0, outputScale, 0, 0]
+      : null;
 
     // TODO: error handling
     await page.render({
       canvasContext: ctx,
-      viewport: viewport,
+      viewport,
+      transform,
     });
 
     pageRendering = false;
