@@ -60,7 +60,7 @@ export default async function SlidePage(
                   li(
                     { class: "tag" },
                     a(
-                      { href: `/tags/${slug}/` },
+                      { class: "tag-inner", href: `/tags/${slug}/` },
                       getTagLabel(config, slug),
                     ),
                   )

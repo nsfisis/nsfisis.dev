@@ -148,7 +148,7 @@ blockquote {
 
 .tag {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 0;
   font-size: 0.9rem;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -157,6 +157,14 @@ blockquote {
 
 .tag a {
   border: none;
+}
+
+.tag-inner {
+  padding: 3px 8px;
+}
+
+.tag-inner::before {
+  content: "# ";
 }
 
 .entry-tags {
