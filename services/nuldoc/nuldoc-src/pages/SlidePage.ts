@@ -1,6 +1,7 @@
 import GlobalFooter from "../components/GlobalFooter.ts";
 import GlobalHeader from "../components/SlidesGlobalHeader.ts";
 import PageLayout from "../components/PageLayout.ts";
+import StaticStylesheet from "../components/StaticStylesheet.ts";
 import StaticScript from "../components/StaticScript.ts";
 import { Config, getTagLabel } from "../config.ts";
 import { dateToString } from "../revision.ts";
@@ -38,6 +39,11 @@ export default async function SlidePage(
     children: elem(
       "body",
       { class: "single" },
+      await StaticStylesheet({
+        site: "slides",
+        fileName: "/slides.css",
+        config,
+      }),
       GlobalHeader({ config }),
       elem(
         "main",
