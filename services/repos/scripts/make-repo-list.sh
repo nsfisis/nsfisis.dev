@@ -3,7 +3,7 @@
 set -euo pipefail
 
 cat < /dev/null > repos.cgitrc
-for repo in $(gh repo list --limit 999 --source --visibility public --json name --jq '.[].name'); do
+for repo in $(gh repo list --limit 999 --source --visibility public --json name --jq '.[].name' | sort -f); do
     cat >> repos.cgitrc <<EOS
 repo.url=${repo}
 repo.path=/src/${repo}.git
