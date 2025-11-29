@@ -227,19 +227,19 @@ function collectTags(taggedPages: TaggedPage[]): [string, TaggedPage[]][] {
 }
 
 async function copyStaticFiles(config: Config) {
+  const staticDir = join(Deno.cwd(), config.locations.staticDir);
+
   for (const site of Object.keys(config.sites)) {
-    const globPattern = joinGlobs([
-      Deno.cwd(),
-      config.locations.staticDir,
-      "*",
-    ]);
-    for await (const entry of expandGlob(globPattern)) {
-      const src = entry.path;
-      const dst = src.replace(
-        config.locations.staticDir,
-        join(config.locations.destDir, site),
-      );
-      await Deno.copyFile(src, dst);
+    const destDir = join(Deno.cwd(), config.locations.destDir, site);
+
+    // Copy files from static/_all/ to all sites
+    for await (const entry of expandGlob(join(staticDir, "_all", "*"))) {
+      await Deno.copyFile(entry.path, join(destDir, entry.name));
+    }
+
+    // Copy files from static/<site>/ to the corresponding site
+    for await (const entry of expandGlob(join(staticDir, site, "*"))) {
+      await Deno.copyFile(entry.path, join(destDir, entry.name));
     }
   }
 }

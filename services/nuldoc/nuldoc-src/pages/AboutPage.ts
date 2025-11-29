@@ -51,6 +51,7 @@ export default async function AboutPage(
                 img({ src: "/favicon.svg" }),
               ),
               await StaticScript({
+                site: "about",
                 fileName: "/my-icon.js",
                 defer: "true",
                 config,

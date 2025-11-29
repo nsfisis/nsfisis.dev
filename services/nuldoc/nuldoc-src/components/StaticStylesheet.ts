@@ -4,9 +4,18 @@ import { Element, link } from "../dom.ts";
 import { calculateFileHash } from "./utils.ts";
 
 export default async function StaticStylesheet(
-  { fileName, config }: { fileName: string; config: Config },
+  { site, fileName, config }: {
+    site?: string;
+    fileName: string;
+    config: Config;
+  },
 ): Promise<Element> {
-  const filePath = join(Deno.cwd(), config.locations.staticDir, fileName);
+  const filePath = join(
+    Deno.cwd(),
+    config.locations.staticDir,
+    site || "_all",
+    fileName,
+  );
   const hash = await calculateFileHash(filePath);
   return link({ rel: "stylesheet", href: `${fileName}?h=${hash}` });
 }

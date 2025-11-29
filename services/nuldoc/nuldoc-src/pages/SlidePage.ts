@@ -89,6 +89,7 @@ export default async function SlidePage(
               button({ id: "next", type: "button" }, "Next"),
             ),
             await StaticScript({
+              site: "slides",
               fileName: "/slide.js",
               type: "module",
               config,
