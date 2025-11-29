@@ -16,7 +16,11 @@ async function init() {
     pageRendering = true;
     const page = await doc.getPage(num);
 
-    const viewport = page.getViewport({ scale: 1.0 });
+    const baseViewport = page.getViewport({ scale: 1.0 });
+    const containerWidth = canvas.parentElement.clientWidth;
+    const scale = Math.min(1.0, containerWidth / baseViewport.width);
+    const viewport = page.getViewport({ scale });
+
     const outputScale = globalThis.devicePixelRatio || 1;
     canvas.height = Math.floor(viewport.height * outputScale);
     canvas.width = Math.floor(viewport.width * outputScale);
