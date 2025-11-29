@@ -1,6 +1,6 @@
-import { GlobalWorkerOptions, getDocument } from "/pdf.min.mjs";
+import { getDocument, GlobalWorkerOptions } from "./pdf.min.mjs";
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function init() {
   GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
   const canvas = document.getElementById("slide");
@@ -57,4 +57,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // TODO: error handling
   doc = await getDocument(url).promise;
   queueRenderPage(pageNum);
-});
+}
+
+document.addEventListener("DOMContentLoaded", init);

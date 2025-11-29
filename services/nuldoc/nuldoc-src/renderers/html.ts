@@ -121,6 +121,9 @@ function getDtd(name: string): Dtd {
       return { type: "block" };
     case "ul":
       return { type: "block" };
+    case "svg": // TODO
+    case "path": // TODO
+      return { type: "block" };
     default:
       throw new NuldocError(`[html.write] Unknown element name: ${name}`);
   }

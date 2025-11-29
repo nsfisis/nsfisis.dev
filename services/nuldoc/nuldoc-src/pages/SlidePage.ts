@@ -84,9 +84,40 @@ export default async function SlidePage(
             ),
             elem("canvas", { id: "slide", "data-slide-link": slide.slideLink }),
             div(
-              {},
-              button({ id: "prev", type: "button" }, "Prev"),
-              button({ id: "next", type: "button" }, "Next"),
+              { class: "controllers" },
+              div(
+                { class: "controllers-buttons" },
+                button(
+                  { id: "prev", type: "button" },
+                  elem(
+                    "svg",
+                    {
+                      width: "20",
+                      height: "20",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                    },
+                    elem("path", { d: "M15 18l-6-6 6-6" }),
+                  ),
+                ),
+                button(
+                  { id: "next", type: "button" },
+                  elem(
+                    "svg",
+                    {
+                      width: "20",
+                      height: "20",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                    },
+                    elem("path", { d: "M9 18l6-6-6-6" }),
+                  ),
+                ),
+              ),
             ),
             await StaticScript({
               site: "slides",
