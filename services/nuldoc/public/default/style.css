@@ -202,13 +202,39 @@ h1 {
   font-size: 2.2rem;
 }
 
-.post-content h2,
-.post-content h3,
-.post-content h4,
-.post-content h5,
+.post-content h2 {
+  font-size: 1.25rem;
+  margin: 2.5rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 4px solid #000;
+}
+
+.post-content h3 {
+  font-size: 1.15rem;
+  margin: 2rem 0 0.8rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #000;
+}
+
+.post-content h4 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.6rem 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #000;
+}
+
+.post-content h5 {
+  font-size: 1rem;
+  margin: 1.2rem 0 0.5rem 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px dashed #000;
+}
+
 .post-content h6 {
-  border-bottom: 1px solid #555;
-  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  margin: 1rem 0 0.4rem 0;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px dotted #000;
 }
 
 .post-content h2 a,
@@ -217,41 +243,6 @@ h1 {
 .post-content h5 a,
 .post-content h6 a {
   border: none;
-}
-
-.post-content h2:before {
-  content: "#";
-  padding-right: 0.3rem;
-  color: #555;
-  font-weight: bold;
-}
-
-.post-content h3:before {
-  content: "##";
-  padding-right: 0.3rem;
-  color: #555;
-  font-weight: bold;
-}
-
-.post-content h4:before {
-  content: "###";
-  padding-right: 0.3rem;
-  color: #555;
-  font-weight: bold;
-}
-
-.post-content h5:before {
-  content: "####";
-  padding-right: 0.3rem;
-  color: #555;
-  font-weight: bold;
-}
-
-.post-content h6:before {
-  content: "#####";
-  padding-right: 0.3rem;
-  color: #555;
-  font-weight: bold;
 }
 
 .post-entry {
