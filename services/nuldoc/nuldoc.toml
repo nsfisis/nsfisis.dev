@@ -22,7 +22,7 @@ postsPerPage = 10
 
 [sites.slides]
 fqdn = "slides.nsfisis.dev"
-siteName = "nsfisis.dev"
+siteName = "nsfisis’ slides"
 
 [tagLabels]
 c = "C"

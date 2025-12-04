@@ -29,10 +29,10 @@ export default async function SlidePage(
 ): Promise<Element> {
   return await PageLayout({
     metaCopyrightYear: getPostPublishedDate(slide).year,
-    metaDescription: slide.title,
+    metaDescription: `「${slide.title}」(${slide.event} で登壇)`,
     metaKeywords: slide.tags.map((slug) => getTagLabel(config, slug)),
     metaTitle:
-      `${slide.event} (${slide.talkType})｜${config.sites.slides.siteName}`,
+      `${slide.title} (${slide.event})｜${config.sites.slides.siteName}`,
     requiresSyntaxHighlight: true,
     site: "slides",
     config,

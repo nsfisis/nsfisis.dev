@@ -28,9 +28,9 @@ export default function SlidePageEntry({ slide, config }: Props): Element {
       { href: slide.href },
       header(
         { class: "entry-header" },
-        h2({}, slide.description),
+        h2({}, slide.title),
       ),
-      section({ class: "entry-content" }, p({}, slide.title)),
+      section({ class: "entry-content" }, p({}, slide.description)),
       footer(
         { class: "entry-footer" },
         elem(

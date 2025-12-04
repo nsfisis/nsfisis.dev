@@ -38,7 +38,7 @@ export async function generateSlidePage(
     destFilePath: destFilePath,
     href: destFilePath.replace("index.html", ""),
     title: slide.title,
-    description: `登壇: ${slide.event} (${slide.talkType})`,
+    description: `${slide.event} (${slide.talkType})`,
     event: slide.event,
     talkType: slide.talkType,
     slideLink: slide.slideLink,

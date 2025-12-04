@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:slides.nsfisis.dev,2021:tag-phpcon-odawara</id>
-  <title>タグ「PHP カンファレンス小田原」一覧｜nsfisis.dev</title>
+  <title>タグ「PHP カンファレンス小田原」一覧｜nsfisis’ slides</title>
   <link rel="alternate" href="https://slides.nsfisis.dev/tags/phpcon-odawara/"></link>
   <link rel="self" href="https://slides.nsfisis.dev/tags/phpcon-odawara/atom.xml"></link>
   <author>
@@ -12,7 +12,7 @@
     <id>urn:uuid:c6c7c241-46c1-44b5-95b2-c30c3a500df3</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2025-04-12/phpcon-odawara-2025/"></link>
     <title>PHP 8.x 時代のクラス設計（property promotion から property hooks まで）</title>
-    <summary>登壇: PHP カンファレンス小田原 2025 (レギュラートーク (20分))</summary>
+    <summary>PHP カンファレンス小田原 2025 (レギュラートーク (20分))</summary>
     <published>2025-04-12T00:00:00+09:00</published>
     <updated>2025-04-12T00:00:00+09:00</updated>
   </entry>
@@ -20,7 +20,7 @@
     <id>urn:uuid:69e1694b-5ddb-41a5-a7f4-138ce82a78b2</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2024-04-13/phpcon-odawara-2024/"></link>
     <title>来る新 JIT エンジンについて知った気になる</title>
-    <summary>登壇: PHP カンファレンス小田原 2024 (レギュラートーク (15分))</summary>
+    <summary>PHP カンファレンス小田原 2024 (レギュラートーク (15分))</summary>
     <published>2024-04-13T00:00:00+09:00</published>
     <updated>2024-04-13T00:00:00+09:00</updated>
   </entry>

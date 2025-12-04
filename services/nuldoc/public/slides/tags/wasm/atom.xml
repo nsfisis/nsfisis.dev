@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:slides.nsfisis.dev,2021:tag-wasm</id>
-  <title>タグ「WebAssembly」一覧｜nsfisis.dev</title>
+  <title>タグ「WebAssembly」一覧｜nsfisis’ slides</title>
   <link rel="alternate" href="https://slides.nsfisis.dev/tags/wasm/"></link>
   <link rel="self" href="https://slides.nsfisis.dev/tags/wasm/atom.xml"></link>
   <author>
@@ -12,7 +12,7 @@
     <id>urn:uuid:da7b1d5a-70df-4c4a-936c-1b49ca1a7c37</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2024-03-15/ya8-2024/"></link>
     <title>CLI の PHP プログラムを限界まで高速化してみる</title>
-    <summary>登壇: Ya8 2024 (レギュラートーク (60分))</summary>
+    <summary>Ya8 2024 (レギュラートーク (60分))</summary>
     <published>2024-03-15T00:00:00+09:00</published>
     <updated>2024-03-15T00:00:00+09:00</updated>
   </entry>
@@ -20,7 +20,7 @@
     <id>urn:uuid:cee40048-f3c5-4043-9ef8-a4ee2ae7cf0e</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2024-03-08/phperkaigi-2024/"></link>
     <title>WebAssembly を理解する 〜VM の作成を通して〜</title>
-    <summary>登壇: PHPerKaigi 2024 (レギュラートーク (40分))</summary>
+    <summary>PHPerKaigi 2024 (レギュラートーク (40分))</summary>
     <published>2024-03-08T00:00:00+09:00</published>
     <updated>2024-03-08T00:00:00+09:00</updated>
   </entry>
