@@ -50,7 +50,7 @@ OPTIONS:
 }
 
 function getFilename(type: "post" | "slide"): string {
-  return type === "post" ? "TODO.dj" : "TODO.toml";
+  return type === "post" ? "TODO.md" : "TODO.toml";
 }
 
 function getDirPath(type: "post" | "slide"): string {
@@ -73,8 +73,7 @@ tags = [
 date = "${date}"
 remark = "公開"
 ---
-{#TODO}
-# TODO
+# はじめに {#intro}
 
 TODO
 `;

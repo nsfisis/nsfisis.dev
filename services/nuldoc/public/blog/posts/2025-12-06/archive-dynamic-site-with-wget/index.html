@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2025 nsfisis">
+    <meta name="description" content="運用停止した動的サイトを wget でクロールし、静的ファイルのみで配信できるようにした。">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="wget を使って動的サイトを静的サイトにアーカイブする｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="運用停止した動的サイトを wget でクロールし、静的ファイルのみで配信できるようにした。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="Hatena::Bookmark" content="nocomment">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>wget を使って動的サイトを静的サイトにアーカイブする｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=c171793a210d62f7ff2ddf54208f34e5">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="https://nsfisis.dev/">nsfisis.dev</a>
+      </div>
+      <div class="site-name">
+        REPL: Rest-Eat-Program Loop
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="https://about.nsfisis.dev/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">wget を使って動的サイトを静的サイトにアーカイブする</h1>
+        </header>
+        <nav class="toc">
+          <h2>目次</h2>
+          <ul>
+            <li>
+              <a href="#section--intro">はじめに</a>
+            </li>
+            <li>
+              <a href="#section--archive">アーカイブする</a>
+            </li>
+            <li>
+              <a href="#section--outro">おわりに</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="post-content">
+          <section id="changelog">
+            <h2><a href="#changelog">更新履歴</a></h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2025-12-06">2025-12-06</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              2024 年に開催された <a href="https://phperkaigi.jp/2024/" rel="noreferrer" target="_blank">PHPerKaigi 2024</a> において、コードゴルフ企画が開催された。私はシステムの開発と当日の運用を担当し、 <a class="url" href="https://t.nil.ninja/phperkaigi/2024/golf/" rel="noreferrer" target="_blank">https://t.nil.ninja/phperkaigi/2024/golf/</a> でサイトを公開した。
+            </p>
+            <p>
+              カンファレンスの終了に伴ってこちらのサイトも新規の回答は締め切ったが、以前としてシステムは動的なサイトとして動いていた。
+            </p>
+            <p>
+              サーバのリソースがもったいないので、このたび wget コマンドを用いてアーカイブし、静的なファイルを Nginx で配信するだけの構成とした。
+            </p>
+          </section>
+          <section id="section--archive">
+            <h2><a href="#section--archive">アーカイブする</a></h2>
+            <ul>
+              <li>
+                元々の動的サイトに対応するリポジトリはこちら: <a class="url" href="https://github.com/nsfisis/phperkaigi-2024-albatross" rel="noreferrer" target="_blank">https://github.com/nsfisis/phperkaigi-2024-albatross</a>
+              </li>
+              <li>
+                移行後の静的サイトに対応するリポジトリはこちら: <a class="url" href="https://github.com/nsfisis/phperkaigi-2024-albatross-archive" rel="noreferrer" target="_blank">https://github.com/nsfisis/phperkaigi-2024-albatross-archive</a>
+              </li>
+            </ul>
+            <p>
+              元々の動的サイトは PHP で構築されたウェブサイト部分と、投稿されたゴルフの回答を実行してテストするサンドボックス環境部分に分かれていた。
+            </p>
+            <p>
+              新規の投稿を締め切った今、必要なのは問題文や結果を表示する HTML とそれに付随する JavaScript、CSS、画像などの静的ファイルのみである。
+            </p>
+            <p>
+              wget コマンドを使うと、必要な静的ファイルを集める作業をほとんどすべて自動でおこなうことができる。
+            </p>
+            <p>
+              今回使用したスクリプトはこちら: <a class="url" href="https://github.com/nsfisis/phperkaigi-2024-albatross-archive/blob/cc837f6d2109555e2392016e8f6820fb5fd46dd6/archive.sh" rel="noreferrer" target="_blank">https://github.com/nsfisis/phperkaigi-2024-albatross-archive/blob/cc837f6d2109555e2392016e8f6820fb5fd46dd6/archive.sh</a>
+            </p>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 指定した URL からスタートしてリンクを辿りながら全ファイルをファイルに書き出す</span></span>
+<span class="line"><span style="color:#6A737D">#</span></span>
+<span class="line"><span style="color:#6A737D"># --mirror  リンクを再帰的に辿ってダウンロードする</span></span>
+<span class="line"><span style="color:#6A737D"># --page-requisites  CSS や画像等も含めて HTML から参照されている全ファイルをダウンロードする</span></span>
+<span class="line"><span style="color:#6A737D"># --convert-links  リンクを相対リンクへ変換する</span></span>
+<span class="line"><span style="color:#6A737D"># --adjust-extension  URL に拡張子が無くてもいい感じに推測する</span></span>
+<span class="line"><span style="color:#6A737D"># --no-parent  親ディレクトリは見に行かない</span></span>
+<span class="line"><span style="color:#6A737D"># --no-wait=1  リクエスト間で 1 秒待機する</span></span>
+<span class="line"><span style="color:#6A737D"># -P ./archive/  指定したディレクトリに保存する</span></span>
+<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    --mirror</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    --page-requisites</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    --convert-links</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    --adjust-extension</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    --no-parent</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    --wait=1</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">    -P</span><span style="color:#032F62"> ./archive/</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#032F62">    https://t.nil.ninja/phperkaigi/2024/golf/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># ディレクトリ構造を調整する</span></span>
+<span class="line"><span style="color:#6F42C1">mv</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/2024/golf/</span><span style="color:#005CC5">*</span><span style="color:#032F62"> ./archive</span></span>
+<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/2024/golf/</span></span>
+<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/2024/</span></span>
+<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/</span></span>
+<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">mkdir</span><span style="color:#005CC5"> -p</span><span style="color:#032F62"> ./archive/api/quizzes/{1,2,3}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 動的な API エンドポイントを叩いて結果を JSON ファイルとして保存する</span></span>
+<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ./archive/api/quizzes/1/chart.json</span><span style="color:#032F62"> https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/1/chart</span></span>
+<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ./archive/api/quizzes/2/chart.json</span><span style="color:#032F62"> https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/2/chart</span></span>
+<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ./archive/api/quizzes/3/chart.json</span><span style="color:#032F62"> https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/3/chart</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 上記 API を叩いている箇所を、落としてきた静的ファイルを参照するように変更する</span></span>
+<span class="line"><span style="color:#6F42C1">sed</span><span style="color:#005CC5"> -i</span><span style="color:#005CC5"> -e</span><span style="color:#032F62"> 's#/chart`#/chart.json`#'</span><span style="color:#032F62"> ./archive/assets/chart.js</span></span></code></pre>
+            </div>
+            <p>
+              このように wget に適切なオプションを渡すことで、指定したページから遷移可能なページを再帰的に辿っていき、サイト内の全ページをファイルへ落とすことができる。今回のサイトにはページ遷移では辿り着けないページがあったが (管理画面など)、運用が停止している今そういったページはアーカイブしなくてもよい。
+            </p>
+            <p>
+              あとはこのファイルを適当にサーブしてやればよい。
+            </p>
+            <div class="codeblock">
+              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">server</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    listen </span><span style="color:#005CC5">80</span><span style="color:#005CC5"> default</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">    listen </span><span style="color:#24292E">[::]:80;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    charset </span><span style="color:#24292E">UTF-8;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    location</span><span style="color:#6F42C1"> /phperkaigi/2024/golf/ </span><span style="color:#24292E">{</span></span>
+<span class="line"><span style="color:#D73A49">        alias </span><span style="color:#24292E">/archive/;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+            </div>
+          </section>
+          <section id="section--outro">
+            <h2><a href="#section--outro">おわりに</a></h2>
+            <p>
+              当初はリンクを再帰的に辿るようなスクリプトを手で書いていたのだが、wget を使うことではるかに簡単な手順でサイト全体のアーカイブが実施できた。
+            </p>
+            <p>
+              JavaScript から動的にバックエンドの Web API を叩いている箇所については wget だけだと難しいので、複雑なサイトの場合はここが課題となるだろう。
+            </p>
+            <p>
+              カンファレンスの企画用に作成した運用停止済みのシステムは他にもあるので、それらも順次アーカイブ化を進めていこうと思う。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>
