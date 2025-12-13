@@ -194,6 +194,13 @@ repo.desc=phperkaigi-2024-albatross
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phperkaigi-2024-albatross
 
+repo.url=phperkaigi-2024-albatross-archive
+repo.path=/src/phperkaigi-2024-albatross-archive.git
+repo.name=phperkaigi-2024-albatross-archive
+repo.desc=phperkaigi-2024-albatross-archive
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-2024-albatross-archive
+
 repo.url=phperkaigi-2024-slides
 repo.path=/src/phperkaigi-2024-slides.git
 repo.name=phperkaigi-2024-slides
