@@ -187,6 +187,13 @@ repo.desc=phpconkagawa-2025-slides
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phpconkagawa-2025-slides
 
+repo.url=phperbiglt-2025
+repo.path=/src/phperbiglt-2025.git
+repo.name=phperbiglt-2025
+repo.desc=phperbiglt-2025
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperbiglt-2025
+
 repo.url=phperkaigi-2024-albatross
 repo.path=/src/phperkaigi-2024-albatross.git
 repo.name=phperkaigi-2024-albatross
