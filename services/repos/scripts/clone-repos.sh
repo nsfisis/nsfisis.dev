@@ -10,7 +10,7 @@ for url in $(grep '^repo\.homepage=' repos.cgitrc | sed 's/^repo\.homepage=//');
         echo "Skipping $repo_name"
     else
         echo "Cloning $repo_name from $url"
-        git clone --bare "$url" "$repo_path"
+        git clone --mirror "$url" "$repo_path"
         sleep 5
     fi
 done
