@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-12-06T00:00:00+09:00</updated>
+  <updated>2025-12-31T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:365b8781-2fd8-412f-9666-90fa09fd569e</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-12-31/2025-reflections/"></link>
+    <title>2025 年の振り返り</title>
+    <summary>2025 年にやったことを振り返る</summary>
+    <published>2025-12-31T00:00:00+09:00</published>
+    <updated>2025-12-31T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:02f33085-d81e-4b94-b247-e120ec6e809c</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-12-06/archive-dynamic-site-with-wget/"></link>
