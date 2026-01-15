@@ -5,7 +5,6 @@ title = "【Python】 クロージャとUnboundLocalError: local variable 'x' re
 description = "Python における UnboundLocalError の理由と対処法。"
 tags = [
   "python",
-  "python3",
 ]
 
 [[article.revisions]]

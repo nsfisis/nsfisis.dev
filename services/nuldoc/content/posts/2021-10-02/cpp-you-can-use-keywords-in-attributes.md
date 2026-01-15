@@ -5,7 +5,6 @@ title = "【C++】 属性構文の属性名にはキーワードが使える"
 description = "C++ の属性構文の属性名には、キーワードが使える。ネタ記事。"
 tags = [
   "cpp",
-  "cpp17",
 ]
 
 [[article.revisions]]

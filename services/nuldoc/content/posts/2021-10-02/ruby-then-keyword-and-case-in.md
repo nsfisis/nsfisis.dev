@@ -2,10 +2,9 @@
 [article]
 uuid = "87455008-fe5b-49bf-af5a-b875264f8326"
 title = "【Ruby】 then キーワードと case in"
-description = "Ruby 3.0 で追加される case in 構文と、then キーワードについて。"
+description = "Ruby 3.0 で追加される case in 構文と、then キーワードについて"
 tags = [
   "ruby",
-  "ruby3",
 ]
 
 [[article.revisions]]
