@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2026 nsfisis">
+    <meta name="description" content="2026 年 1 月時点での開発環境まとめ">
+    <meta name="keywords" content="備忘録">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="開発環境現状確認 2026｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="2026 年 1 月時点での開発環境まとめ">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="Hatena::Bookmark" content="nocomment">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>開発環境現状確認 2026｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=c171793a210d62f7ff2ddf54208f34e5">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="https://nsfisis.dev/">nsfisis.dev</a>
+      </div>
+      <div class="site-name">
+        REPL: Rest-Eat-Program Loop
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="https://about.nsfisis.dev/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">開発環境現状確認 2026</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a class="tag-inner" href="/tags/note-to-self/">備忘録</a>
+            </li>
+          </ul>
+        </header>
+        <nav class="toc">
+          <h2>目次</h2>
+          <ul>
+            <li>
+              <a href="#section--intro">はじめに</a>
+            </li>
+            <li>
+              <a href="#section--os">OS</a>
+            </li>
+            <li>
+              <a href="#section--editor">エディタ</a>
+            </li>
+            <li>
+              <a href="#section--ai-coding">AIコーディングツール</a>
+            </li>
+            <li>
+              <a href="#section--terminal-emulator">ターミナルエミュレータ</a>
+            </li>
+            <li>
+              <a href="#section--terminal-multiplexer">ターミナルマルチプレクサ</a>
+            </li>
+            <li>
+              <a href="#section--shell">シェル</a>
+            </li>
+            <li>
+              <a href="#section--dotfiles">設定ファイル</a>
+            </li>
+            <li>
+              <a href="#section--note-taking">メモ</a>
+            </li>
+            <li>
+              <a href="#section--keyboard">キーボード</a>
+            </li>
+            <li>
+              <a href="#section--japanese-input">日本語入力</a>
+            </li>
+            <li>
+              <a href="#section--mouse">マウス</a>
+            </li>
+            <li>
+              <a href="#section--conclusion">まとめ</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="post-content">
+          <section id="changelog">
+            <h2><a href="#changelog">更新履歴</a></h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2026-01-16">2026-01-16</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              男もすなる開発環境現状確認といふものを女もしてみむとてするなり。
+            </p>
+          </section>
+          <section id="section--os">
+            <h2><a href="#section--os">OS</a></h2>
+            <p>
+              Ubuntu。
+            </p>
+            <p>
+              仕事では macOS を使っている。サブ機の Windows があるが開発用途にはほぼ使っておらず、使うときも WSL 上で作業することがほとんど。
+            </p>
+          </section>
+          <section id="section--editor">
+            <h2><a href="#section--editor">エディタ</a></h2>
+            <p>
+              Neovim。
+            </p>
+            <p>
+              Vim も含めるともう十数年以上は使い続けている。
+            </p>
+          </section>
+          <section id="section--ai-coding">
+            <h2><a href="#section--ai-coding">AIコーディングツール</a></h2>
+            <p>
+              Claude Code。
+            </p>
+            <p>
+              趣味・仕事含め 8、9 割ほどのコードは Claude Code に書かせているのではないか。
+            </p>
+            <p>
+              入力補完するタイプの AI ツールは利用していない。利用しているときは気付かなかったが、補完されるのを待機したり読んだりするのが相当ストレスになっていたので、今後もこの形のツールは使わないだろう。
+            </p>
+          </section>
+          <section id="section--terminal-emulator">
+            <h2><a href="#section--terminal-emulator">ターミナルエミュレータ</a></h2>
+            <p>
+              Alacritty。
+            </p>
+            <p>
+              画像表示ができないこと以外に不満はなく、表示したい場面もほとんどないので乗り換えるには至っていない。
+            </p>
+            <p>
+              最近ターミナルエミュレータ上で用いるフォントを UDEV Gothic に変えた。
+            </p>
+          </section>
+          <section id="section--terminal-multiplexer">
+            <h2><a href="#section--terminal-multiplexer">ターミナルマルチプレクサ</a></h2>
+            <p>
+              Tmux。
+            </p>
+            <p>
+              大してカスタマイズしているわけでもないので、Zellij なんかは試してみたいところ。
+            </p>
+          </section>
+          <section id="section--shell">
+            <h2><a href="#section--shell">シェル</a></h2>
+            <p>
+              Fish。
+            </p>
+            <p>
+              Cline が出たころは AI が POSIX 互換のシェルを仮定して動くので相性が悪く、Zsh に戻していた時期もあった。Claude Code は Bash tool を Bash で動かすので、人間用のシェルを再び自由に選べるようになった。むしろ、人間用のエイリアスや関数があると邪魔になることも多いので、人間用にはある程度カスタマイズした Fish、Claude Code 用にはほぼデフォルト設定の Bash という棲み分けができていて都合が良い。
+            </p>
+          </section>
+          <section id="section--dotfiles">
+            <h2><a href="#section--dotfiles">設定ファイル</a></h2>
+            <p>
+              <a href="https://github.com/nsfisis/dotfiles" rel="noreferrer" target="_blank">nsfisis/dotfiles</a> で管理している。
+            </p>
+            <p>
+              ソフトウェアのインストールは Nix と Home Manager でおこなっており、初回のセットアップにだけ mitamae を用いている。
+            </p>
+          </section>
+          <section id="section--note-taking">
+            <h2><a href="#section--note-taking">メモ</a></h2>
+            <p>
+              テキストファイル。
+            </p>
+            <p>
+              <code>~/scratch</code> というディレクトリを用意し、Neovim で書き留めている。Neovim でスペース + S と打つと <code>~/scratch/%Y-%m/%Y-%m-%d-%H%M%S.txt</code> というファイルが新規作成されるようになっている。“Scratch” という名前は Emacs の *scratch* バッファに由来する。
+            </p>
+            <p>
+              こんな簡素な仕組みで困らないのかと言われそうだが、現に困っている。何とかしたいですね。
+            </p>
+          </section>
+          <section id="section--keyboard">
+            <h2><a href="#section--keyboard">キーボード</a></h2>
+            <p>
+              もっぱらノート PC に付属するキーボードをそのまま使っている。
+            </p>
+            <p>
+              以前は Realforce や HHKB を使っていたが、出社することが増えて面倒になったので使わなくなった。
+            </p>
+          </section>
+          <section id="section--japanese-input">
+            <h2><a href="#section--japanese-input">日本語入力</a></h2>
+            <p>
+              Skkeleton (Vim/Neovim の SKK 実装)。
+            </p>
+            <p>
+              OS レベルの IME は SKK にしていないが、私が長文を書くのは大抵 Neovim 上なので困っていない。嘘、困ってはいるのだが気に障るほど困ってはいない。
+            </p>
+          </section>
+          <section id="section--mouse">
+            <h2><a href="#section--mouse">マウス</a></h2>
+            <p>
+              最近 <a href="https://www.logicool.co.jp/ja-jp/shop/p/mx-ergo-s-wireless-trackball-mouse" rel="noreferrer" target="_blank">Logicool のトラックボールマウス</a>を買った。
+            </p>
+          </section>
+          <section id="section--conclusion">
+            <h2><a href="#section--conclusion">まとめ</a></h2>
+            <p>
+              10 年以上ターミナルに引きこもっている。Cursor/Cline で一瞬外に出たが、Claude Code によってまた戻ってきた。
+            </p>
+            <p>
+              IT エンジニアの個人ブログ界隈で流行ってそうなのでやってみたが、面白かったので覚えていれば来年も書きたい。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>

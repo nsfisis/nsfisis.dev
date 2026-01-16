@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-03-27T00:00:00+09:00</updated>
+  <updated>2026-01-16T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:8ef2ea79-97b7-4d9e-9ddb-0aa5423e6da9</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-01-16/development-environment-2026/"></link>
+    <title>開発環境現状確認 2026</title>
+    <summary>2026 年 1 月時点での開発環境まとめ</summary>
+    <published>2026-01-16T00:00:00+09:00</published>
+    <updated>2026-01-16T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:99111377-27e7-427b-9dc5-a23f621fa826</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-03-27/zip-function-like-command-paste-command/"></link>
