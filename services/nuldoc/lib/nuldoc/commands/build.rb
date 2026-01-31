@@ -10,22 +10,32 @@ module Nuldoc
       end
 
       def run
-        posts = build_post_pages
-        build_post_list_page(posts)
-        slides = build_slide_pages
-        build_slide_list_page(slides)
-        post_tags = build_tag_pages(posts, 'blog')
-        build_tag_list_page(post_tags, 'blog')
-        slides_tags = build_tag_pages(slides, 'slides')
-        build_tag_list_page(slides_tags, 'slides')
-        build_home_page
-        build_about_page(slides)
-        %w[default about blog slides].each { |site| build_not_found_page(site) }
-        copy_static_files
-        copy_slides_files(slides)
-        copy_blog_asset_files
-        copy_slides_asset_files
-        copy_post_source_files(posts)
+        pipeline = Pipeline.new
+
+        pipeline.step(:build_posts) { build_post_pages }
+        pipeline.step(:build_post_list, deps: [:build_posts]) { |r| build_post_list_page(r[:build_posts]) }
+        pipeline.step(:build_blog_tags, deps: [:build_posts]) { |r| build_tag_pages(r[:build_posts], 'blog') }
+        pipeline.step(:build_blog_tag_list, deps: [:build_blog_tags]) do |r|
+          build_tag_list_page(r[:build_blog_tags], 'blog')
+        end
+        pipeline.step(:copy_post_sources, deps: [:build_posts]) { |r| copy_post_source_files(r[:build_posts]) }
+
+        pipeline.step(:build_slides) { build_slide_pages }
+        pipeline.step(:build_slide_list, deps: [:build_slides]) { |r| build_slide_list_page(r[:build_slides]) }
+        pipeline.step(:build_slide_tags, deps: [:build_slides]) { |r| build_tag_pages(r[:build_slides], 'slides') }
+        pipeline.step(:build_slide_tag_list, deps: [:build_slide_tags]) do |r|
+          build_tag_list_page(r[:build_slide_tags], 'slides')
+        end
+        pipeline.step(:build_about, deps: [:build_slides]) { |r| build_about_page(r[:build_slides]) }
+        pipeline.step(:copy_slides_files, deps: [:build_slides]) { |r| copy_slides_files(r[:build_slides]) }
+
+        pipeline.step(:build_home) { build_home_page }
+        pipeline.step(:build_not_found) { %w[default about blog slides].each { |site| build_not_found_page(site) } }
+        pipeline.step(:copy_static) { copy_static_files }
+        pipeline.step(:copy_blog_assets) { copy_blog_asset_files }
+        pipeline.step(:copy_slides_assets) { copy_slides_asset_files }
+
+        pipeline.execute
       end
 
       private

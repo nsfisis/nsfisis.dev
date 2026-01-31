@@ -9,6 +9,7 @@ require 'rouge'
 require 'toml-rb'
 require 'webrick'
 
+require_relative 'nuldoc/pipeline'
 require_relative 'nuldoc/dom'
 require_relative 'nuldoc/dom/atom_xml'
 require_relative 'nuldoc/dom/html'
