@@ -5,19 +5,19 @@
 Generate the site.
 
 ```
-$ ./nuldoc build
+$ rake build
 ```
 
 Create a new post.
 
 ```
-$ ./nuldoc new post
+$ rake new post
 ```
 
 Create a new slide.
 
 ```
-$ ./nuldoc new slide
+$ rake new slide
 ```
 
 Update PDF.js.

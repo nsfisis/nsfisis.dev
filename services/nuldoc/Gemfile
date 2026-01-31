@@ -1,0 +1,13 @@
+source 'https://rubygems.org'
+
+gem 'dry-cli'
+gem 'rouge'
+gem 'toml-rb'
+gem 'webrick'
+
+group :development do
+  gem 'rake'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rake'
+end

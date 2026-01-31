@@ -119,7 +119,7 @@
           <section id="section--my-work">
             <h2><a href="#section--my-work">作品紹介</a></h2>
             <p>
-              今回頂いたのは審査員賞の一つ eto award (公式の賞の名前に合わせて敬称略) で、“Most Ruby-on-Ruby” Award (『最もRuby on Ruby賞』) として受賞した (IOCCC と同じく、それぞれの賞に個別の名前が付く)。
+              今回頂いたのは審査員賞の一つ eto award (公式の賞の名前に合わせて敬称略) で、”Most Ruby-on-Ruby” Award (『最もRuby on Ruby賞』) として受賞した (IOCCC と同じく、それぞれの賞に個別の名前が付く)。
             </p>
             <p>
               ソースコード等はこちら: <a class="url" href="https://github.com/tric/trick2025/tree/main/10-nsfisis" rel="noreferrer" target="_blank">https://github.com/tric/trick2025/tree/main/10-nsfisis</a>
@@ -161,7 +161,8 @@
               表示している。つまり、Ruby プログラムにルビを振った作品である。例えば、先頭の2行目の <code>require</code> は次のような HTML で構成されている。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">&#x3C;</span><span style="color:#22863A">ruby</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"IDENTIFIER"</span><span style="color:#24292E">>require&#x3C;</span><span style="color:#22863A">rp</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">""</span><span style="color:#24292E">>(&#x3C;/</span><span style="color:#22863A">rp</span><span style="color:#24292E">>&#x3C;</span><span style="color:#22863A">rt</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">""</span><span style="color:#24292E">>リクワイア&#x3C;/</span><span style="color:#22863A">rt</span><span style="color:#24292E">>&#x3C;</span><span style="color:#22863A">rp</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">""</span><span style="color:#24292E">>)&#x3C;/</span><span style="color:#22863A">rp</span><span style="color:#24292E">>&#x3C;/</span><span style="color:#22863A">ruby</span><span style="color:#24292E">></span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #116329">&lt;ruby</span> <span style="color: #116329">class=</span><span style="color: #0a3069">"IDENTIFIER"</span><span style="color: #116329">&gt;</span>require<span style="color: #116329">&lt;rp</span> <span style="color: #116329">class=</span><span style="color: #0a3069">""</span><span style="color: #116329">&gt;</span>(<span style="color: #116329">&lt;/rp&gt;&lt;rt</span> <span style="color: #116329">class=</span><span style="color: #0a3069">""</span><span style="color: #116329">&gt;</span>リクワイア<span style="color: #116329">&lt;/rt&gt;&lt;rp</span> <span style="color: #116329">class=</span><span style="color: #0a3069">""</span><span style="color: #116329">&gt;</span>)<span style="color: #116329">&lt;/rp&gt;&lt;/ruby&gt;</span>
+</code></pre>
             </div>
             <p>
               順に使ったテクニックを解説していく。
@@ -172,11 +173,12 @@
                 改めて quine について説明する。Quine とは、自身のソースコードを出力するようなプログラムである。Ruby では様々な方法で quine を書くことができるが、この作品で使っている基本形は以下のようなものである。
               </p>
               <div class="codeblock numbered">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#005CC5">eval</span><span style="color:#24292E"> $s</span><span style="color:#032F62">=&#x3C;&#x3C;'EOS'</span></span>
-<span class="line"><span style="color:#032F62">print "eval $s=&#x3C;&#x3C;'EOS'</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span></span>
-<span class="line"><span style="color:#032F62">print $s</span></span>
-<span class="line"><span style="color:#032F62">print "EOS</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span></span>
-<span class="line"><span style="color:#032F62">EOS</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #953800">eval</span> <span style="color: #0550ae">$s</span><span style="color: #0550ae">=&lt;&lt;</span><span style="color: #953800">'EOS'</span><span style="color: #0a3069">
+print "eval $s=&lt;&lt;'EOS'</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"
+print $s
+print "EOS</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"
+</span><span style="color: #953800">EOS</span>
+</code></pre>
               </div>
               <p>
                 変数 <code>$s</code> に 2 行目、3 行目、4 行目が入っており、それに加えて 1 行目と 5 行目を出力すれば元のソースコードが得られる。実際には <code>$s</code> を加工してシンタックスハイライトや振り仮名を振ることになる。
@@ -191,23 +193,24 @@
                 トークナイズには Ruby 3.4 からデフォルトのパーサになった <a href="https://github.com/ruby/prism" rel="noreferrer" target="_blank">Prism</a> を利用している。<code>Prism.lex()</code> を使うとトークナイズができるので、トークンに付いているソースコード位置の情報を使いつつ元のソースコードを復元する。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#E36209">y</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 1</span><span style="color:#6A737D">                 # 現在の行</span></span>
-<span class="line"><span style="color:#E36209">x</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 0</span><span style="color:#6A737D">                 # 現在の列</span></span>
-<span class="line"><span style="color:#005CC5">Prism</span><span style="color:#24292E">.</span><span style="color:#6F42C1">lex</span><span style="color:#24292E">($s).</span><span style="color:#6F42C1">value</span><span style="color:#24292E">[..</span><span style="color:#D73A49">-</span><span style="color:#005CC5">2</span><span style="color:#24292E">].</span><span style="color:#6F42C1">each</span><span style="color:#24292E"> {|t, *|</span></span>
-<span class="line"><span style="color:#E36209">  l</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> t.</span><span style="color:#6F42C1">location</span></span>
-<span class="line"><span style="color:#E36209">  r</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> l.</span><span style="color:#6F42C1">start_line</span><span style="color:#6A737D">    # トークンの開始行</span></span>
-<span class="line"><span style="color:#D73A49">  if</span><span style="color:#24292E"> y </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> r            </span><span style="color:#6A737D"># 改行が必要なら</span></span>
-<span class="line"><span style="color:#005CC5">    p</span><span style="color:#032F62"> "</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#D73A49"> *</span><span style="color:#24292E"> (r </span><span style="color:#D73A49">-</span><span style="color:#24292E"> y)  </span><span style="color:#6A737D">#   改行を挿入して</span></span>
-<span class="line"><span style="color:#E36209">    x</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> 0</span><span style="color:#6A737D">             #   列の先頭へ戻る</span></span>
-<span class="line"><span style="color:#D73A49">  end</span></span>
-<span class="line"><span style="color:#E36209">  c</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> l.</span><span style="color:#6F42C1">start_column</span><span style="color:#6A737D">  # トークンの開始列</span></span>
-<span class="line"><span style="color:#D73A49">  if</span><span style="color:#24292E"> x </span><span style="color:#D73A49">&#x3C;</span><span style="color:#24292E"> c            </span><span style="color:#6A737D"># 空白が必要なら</span></span>
-<span class="line"><span style="color:#005CC5">    p</span><span style="color:#032F62"> " "</span><span style="color:#D73A49"> *</span><span style="color:#24292E"> (c </span><span style="color:#D73A49">-</span><span style="color:#24292E"> x)   </span><span style="color:#6A737D">#   空白を挿入</span></span>
-<span class="line"><span style="color:#D73A49">  end</span></span>
-<span class="line"><span style="color:#005CC5">  p</span><span style="color:#6F42C1"> ruby</span><span style="color:#24292E">(t)           </span><span style="color:#6A737D"># トークン本体を出力</span></span>
-<span class="line"><span style="color:#E36209">  y</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> l.</span><span style="color:#6F42C1">end_line</span><span style="color:#6A737D">      # 現在行を更新</span></span>
-<span class="line"><span style="color:#E36209">  x</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> l.</span><span style="color:#6F42C1">end_column</span><span style="color:#6A737D">    # 現在列を更新</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">y</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">1</span>                 <span style="color: #6e7781"># 現在の行</span>
+<span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">0</span>                 <span style="color: #6e7781"># 現在の列</span>
+<span style="color: #953800">Prism</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">lex</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$s</span><span style="color: #24292f;background-color: #f6f8fa">).</span><span style="color: #8250df">value</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">..-</span><span style="color: #0550ae">2</span><span style="color: #24292f;background-color: #f6f8fa">].</span><span style="color: #8250df">each</span> <span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0550ae">|</span><span style="color: #24292f;background-color: #f6f8fa">t</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">*|</span>
+  <span style="color: #24292f;background-color: #f6f8fa">l</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">t</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">location</span>
+  <span style="color: #24292f;background-color: #f6f8fa">r</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">l</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">start_line</span>    <span style="color: #6e7781"># トークンの開始行</span>
+  <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">y</span> <span style="color: #0550ae">&lt;</span> <span style="color: #24292f;background-color: #f6f8fa">r</span>            <span style="color: #6e7781"># 改行が必要なら</span>
+    <span style="color: #953800">p</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span> <span style="color: #0550ae">*</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">r</span> <span style="color: #0550ae">-</span> <span style="color: #24292f;background-color: #f6f8fa">y</span><span style="color: #24292f;background-color: #f6f8fa">)</span>  <span style="color: #6e7781">#   改行を挿入して</span>
+    <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">0</span>             <span style="color: #6e7781">#   列の先頭へ戻る</span>
+  <span style="color: #cf222e">end</span>
+  <span style="color: #24292f;background-color: #f6f8fa">c</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">l</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">start_column</span>  <span style="color: #6e7781"># トークンの開始列</span>
+  <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #0550ae">&lt;</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>            <span style="color: #6e7781"># 空白が必要なら</span>
+    <span style="color: #953800">p</span> <span style="color: #0a3069">" "</span> <span style="color: #0550ae">*</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">c</span> <span style="color: #0550ae">-</span> <span style="color: #24292f;background-color: #f6f8fa">x</span><span style="color: #24292f;background-color: #f6f8fa">)</span>   <span style="color: #6e7781">#   空白を挿入</span>
+  <span style="color: #cf222e">end</span>
+  <span style="color: #953800">p</span> <span style="color: #24292f;background-color: #f6f8fa">ruby</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">t</span><span style="color: #24292f;background-color: #f6f8fa">)</span>           <span style="color: #6e7781"># トークン本体を出力</span>
+  <span style="color: #24292f;background-color: #f6f8fa">y</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">l</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">end_line</span>      <span style="color: #6e7781"># 現在行を更新</span>
+  <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">l</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">end_column</span>    <span style="color: #6e7781"># 現在列を更新</span>
+<span style="color: #24292f;background-color: #f6f8fa">}</span>
+</code></pre>
               </div>
               <p>
                 補足: 変数名がやたら短いのは、このあとの振り仮名データの量を削減するため。
@@ -216,20 +219,21 @@
                 トークン種別に応じた色付けは CSS でおこなっている。出力する HTML のクラス名に <code>Prism::Token#type</code> を指定しておいて、<code>index.html</code> でそれぞれのクラスにスタイルを当てた。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">    &#x3C;</span><span style="color:#22863A">style</span><span style="color:#24292E">></span></span>
-<span class="line"><span style="color:#6A737D">      /* ... */</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6F42C1">      .COMMENT</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#005CC5">        color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#777</span><span style="color:#24292E">;</span></span>
-<span class="line"><span style="color:#005CC5">        font-style</span><span style="color:#24292E">: </span><span style="color:#005CC5">italic</span><span style="color:#24292E">;</span></span>
-<span class="line"><span style="color:#24292E">      }</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6F42C1">      .CONSTANT</span><span style="color:#24292E">, </span><span style="color:#6F42C1">.GLOBAL_VARIABLE</span><span style="color:#24292E">, </span><span style="color:#6F42C1">.INSTANCE_VARIABLE</span><span style="color:#24292E">, </span><span style="color:#6F42C1">.IDENTIFIER</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#005CC5">        color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#088</span><span style="color:#24292E">;</span></span>
-<span class="line"><span style="color:#24292E">      }</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D">      /* ... */</span></span>
-<span class="line"><span style="color:#24292E">    &#x3C;/</span><span style="color:#22863A">style</span><span style="color:#24292E">></span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>    <span style="color: #116329">&lt;style&gt;</span>
+      <span style="color: #6e7781">/* ... */</span>
+
+      <span style="color: #953800">.COMMENT</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+        <span style="color: #0550ae">color</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #24292f;background-color: #f6f8fa">#777</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+        <span style="color: #0550ae">font-style</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #953800">italic</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+      <span style="color: #24292f;background-color: #f6f8fa">}</span>
+
+      <span style="color: #953800">.CONSTANT</span><span style="color: #0550ae">,</span> <span style="color: #953800">.GLOBAL_VARIABLE</span><span style="color: #0550ae">,</span> <span style="color: #953800">.INSTANCE_VARIABLE</span><span style="color: #0550ae">,</span> <span style="color: #953800">.IDENTIFIER</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+        <span style="color: #0550ae">color</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #24292f;background-color: #f6f8fa">#088</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+      <span style="color: #24292f;background-color: #f6f8fa">}</span>
+
+      <span style="color: #6e7781">/* ... */</span>
+    <span style="color: #116329">&lt;/style&gt;</span>
+</code></pre>
               </div>
               <p>
                 トークン種別の列挙にはそれなりに文字数を使ってしまうのだが、今回の TRICK のレギュレーションでは <code>index.html</code> にサイズ制限がなかったので好きに色を付けることができた。
@@ -241,27 +245,28 @@
                 それぞれの英単語や記号に対応した振り仮名のデータは、プログラム中に埋め込まれている。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> rt</span><span style="color:#24292E">(t)</span></span>
-<span class="line"><span style="color:#E36209">  r</span><span style="color:#D73A49"> =</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#005CC5">    :"&#x26;&#x26;"</span><span style="color:#24292E"> => </span><span style="color:#032F62">"1136"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    :"="</span><span style="color:#24292E"> => </span><span style="color:#032F62">"04199275"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    :"||"</span><span style="color:#24292E"> => </span><span style="color:#032F62">"623147"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    :$s</span><span style="color:#24292E"> => </span><span style="color:#032F62">"41750825"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    :*</span><span style="color:#24292E"> => </span><span style="color:#032F62">"111775"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#6A737D">    # ...</span></span>
-<span class="line"><span style="color:#005CC5">    type:</span><span style="color:#032F62"> "310455"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    utf_8:</span><span style="color:#032F62"> "70923803920853080440"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    value:</span><span style="color:#032F62"> "48746992"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    x:</span><span style="color:#032F62"> "08351525"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#005CC5">    y:</span><span style="color:#032F62"> "7904"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">  }</span></span>
-<span class="line"><span style="color:#6F42C1">  kana</span><span style="color:#24292E">(</span></span>
-<span class="line"><span style="color:#24292E">    r[</span><span style="color:#005CC5">:"#{t.</span><span style="color:#6F42C1">type</span><span style="color:#005CC5">}"</span><span style="color:#24292E">] </span><span style="color:#D73A49">||</span></span>
-<span class="line"><span style="color:#24292E">    r[s </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> :"#{t.</span><span style="color:#6F42C1">value</span><span style="color:#005CC5">.</span><span style="color:#6F42C1">downcase</span><span style="color:#005CC5">}"</span><span style="color:#24292E">] </span><span style="color:#D73A49">||</span></span>
-<span class="line"><span style="color:#24292E">    s.</span><span style="color:#6F42C1">end_with?</span><span style="color:#24292E">(</span><span style="color:#032F62">":"</span><span style="color:#24292E">) </span><span style="color:#D73A49">&#x26;&#x26;</span><span style="color:#24292E"> r[</span><span style="color:#005CC5">:"#{s[..</span><span style="color:#D73A49">-</span><span style="color:#005CC5">2]}"</span><span style="color:#24292E">] </span><span style="color:#D73A49">||</span></span>
-<span class="line"><span style="color:#005CC5">    nil</span></span>
-<span class="line"><span style="color:#24292E">  )</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">def</span> <span style="color: #8250df">rt</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">t</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+  <span style="color: #24292f;background-color: #f6f8fa">r</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+    <span style="color: #0a3069">:"&amp;&amp;"</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #0a3069">"1136"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #0a3069">:"="</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #0a3069">"04199275"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #0a3069">:"||"</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #0a3069">"623147"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #0550ae">$s</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #0a3069">"41750825"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #0550ae">*</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #0a3069">"111775"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #6e7781"># ...</span>
+    <span style="color: #0a3069">type: </span><span style="color: #0a3069">"310455"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #0a3069">utf_8: </span><span style="color: #0a3069">"70923803920853080440"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #0a3069">value: </span><span style="color: #0a3069">"48746992"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #0a3069">x: </span><span style="color: #0a3069">"08351525"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #0a3069">y: </span><span style="color: #0a3069">"7904"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+  <span style="color: #24292f;background-color: #f6f8fa">}</span>
+  <span style="color: #24292f;background-color: #f6f8fa">kana</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+    <span style="color: #24292f;background-color: #f6f8fa">r</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0a3069">:"</span><span style="color: #24292f">#{</span><span style="color: #24292f;background-color: #f6f8fa">t</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">type</span><span style="color: #24292f">}</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">||</span>
+    <span style="color: #24292f;background-color: #f6f8fa">r</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">s</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">:"</span><span style="color: #24292f">#{</span><span style="color: #24292f;background-color: #f6f8fa">t</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">value</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">downcase</span><span style="color: #24292f">}</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">||</span>
+    <span style="color: #24292f;background-color: #f6f8fa">s</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">end_with?</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">":"</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #24292f;background-color: #f6f8fa">r</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0a3069">:"</span><span style="color: #24292f">#{</span><span style="color: #24292f;background-color: #f6f8fa">s</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">..-</span><span style="color: #0550ae">2</span><span style="color: #24292f;background-color: #f6f8fa">]</span><span style="color: #24292f">}</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">||</span>
+    <span style="color: #cf222e">nil</span>
+  <span style="color: #24292f;background-color: #f6f8fa">)</span>
+<span style="color: #cf222e">end</span>
+</code></pre>
               </div>
               <p>
                 トークンの種類 (<code>t.type</code>) またはトークンの文字列表現そのもの (<code>t.value.downcase</code>) を使ってテーブルを引いて振り仮名へ変換している。このテーブルのキー部分そのものにも振り仮名を振るために、トークンが <code>:</code> で終わっていれば <code>:</code> を取り除いて振り仮名を得ている (例: <code>&quot;value:&quot;</code> → <code>&quot;value&quot;</code> → <code>&quot;48746992&quot;</code>)。
@@ -270,25 +275,27 @@
                 このテーブルはサイズ制限を突破するために圧縮されており、<code>kana()</code> 関数で展開される。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> kana</span><span style="color:#24292E">(s)</span></span>
-<span class="line"><span style="color:#24292E">  s</span></span>
-<span class="line"><span style="color:#D73A49">    &#x26;.</span><span style="color:#6F42C1">scan</span><span style="color:#24292E">(</span><span style="color:#032F62">/.{2}/</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">    &#x26;.</span><span style="color:#6F42C1">map</span><span style="color:#24292E">{|c| (</span><span style="color:#005CC5">0x30A0</span><span style="color:#D73A49"> +</span><span style="color:#24292E"> c.</span><span style="color:#6F42C1">to_i</span><span style="color:#24292E">).</span><span style="color:#6F42C1">chr</span><span style="color:#24292E">(</span><span style="color:#005CC5">Encoding</span><span style="color:#24292E">::</span><span style="color:#005CC5">UTF_8</span><span style="color:#24292E">)}</span></span>
-<span class="line"><span style="color:#D73A49">    &#x26;.*</span><span style="color:#24292E">(</span><span style="color:#032F62">""</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">def</span> <span style="color: #8250df">kana</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">s</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+  <span style="color: #24292f;background-color: #f6f8fa">s</span>
+    <span style="color: #0550ae">&amp;</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">scan</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #116329">/.{2}/</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+    <span style="color: #0550ae">&amp;</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">map</span><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0550ae">|</span><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #0550ae">|</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">0x30A0</span> <span style="color: #0550ae">+</span> <span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">to_i</span><span style="color: #24292f;background-color: #f6f8fa">).</span><span style="color: #8250df">chr</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">Encoding</span><span style="color: #0550ae">::</span><span style="color: #953800">UTF_8</span><span style="color: #24292f;background-color: #f6f8fa">)}</span>
+    <span style="color: #0550ae">&amp;</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">*</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">""</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+<span style="color: #cf222e">end</span>
+</code></pre>
               </div>
               <p>
                 例えば <code>value</code> に対応する振り仮名データ <code>&quot;48746992&quot;</code> であれば、次のような変換を経て振り仮名へと展開される。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">  s</span></span>
-<span class="line"><span style="color:#6A737D">    # => "48746992"</span></span>
-<span class="line"><span style="color:#D73A49">    &#x26;.</span><span style="color:#6F42C1">scan</span><span style="color:#24292E">(</span><span style="color:#032F62">/.{2}/</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#6A737D">    # => ["48", "74", "69", "92"]</span></span>
-<span class="line"><span style="color:#D73A49">    &#x26;.</span><span style="color:#6F42C1">map</span><span style="color:#24292E">{|c| (</span><span style="color:#005CC5">0x30A0</span><span style="color:#D73A49"> +</span><span style="color:#24292E"> c.</span><span style="color:#6F42C1">to_i</span><span style="color:#24292E">).</span><span style="color:#6F42C1">chr</span><span style="color:#24292E">(</span><span style="color:#005CC5">Encoding</span><span style="color:#24292E">::</span><span style="color:#005CC5">UTF_8</span><span style="color:#24292E">)}</span></span>
-<span class="line"><span style="color:#6A737D">    # => ["バ", "リ", "ュ", "ー"]</span></span>
-<span class="line"><span style="color:#D73A49">    &#x26;.*</span><span style="color:#24292E">(</span><span style="color:#032F62">""</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#6A737D">    # => "バリュー"</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>  <span style="color: #24292f;background-color: #f6f8fa">s</span>
+    <span style="color: #6e7781"># =&gt; "48746992"</span>
+    <span style="color: #0550ae">&amp;</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">scan</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #116329">/.{2}/</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+    <span style="color: #6e7781"># =&gt; ["48", "74", "69", "92"]</span>
+    <span style="color: #0550ae">&amp;</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">map</span><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0550ae">|</span><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #0550ae">|</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">0x30A0</span> <span style="color: #0550ae">+</span> <span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">to_i</span><span style="color: #24292f;background-color: #f6f8fa">).</span><span style="color: #8250df">chr</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">Encoding</span><span style="color: #0550ae">::</span><span style="color: #953800">UTF_8</span><span style="color: #24292f;background-color: #f6f8fa">)}</span>
+    <span style="color: #6e7781"># =&gt; ["バ", "リ", "ュ", "ー"]</span>
+    <span style="color: #0550ae">&amp;</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">*</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">""</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+    <span style="color: #6e7781"># =&gt; "バリュー"</span>
+</code></pre>
               </div>
               <p>
                 これは後で気付いたのだが、Ruby は多倍長整数が扱えるので <code>&quot;48746992&quot;</code> のようなデータは単に <code>48746992</code> と書けばよかった。<code>kana()</code> 関数が多少長くはなるが、振り仮名データの数 x 2 バイト分サイズが減るのでこちらの方が短くなる。サイズ制限の都合で振り仮名を振るのを諦めた記号もあったのでもったいない。

@@ -90,19 +90,20 @@
               Go には、標準ライブラリにテンプレートライブラリ <code>text/template</code> がある。この <code>text/template</code> における制御構造、<code>with</code> と <code>range</code> は次のように使われる。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span># {{ .Title }}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span># User</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{{ with .User }}</span></span>
-<span class="line"><span>  {{ .Name }} ({{ .ID }})</span></span>
-<span class="line"><span>{{ end }}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span># Items</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{{ range .Items }}</span></span>
-<span class="line"><span>  - {{ . }}</span></span>
-<span class="line"><span>{{ end }}</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code># {{ .Title }}
+
+# User
+
+{{ with .User }}
+  {{ .Name }} ({{ .ID }})
+{{ end }}
+
+# Items
+
+{{ range .Items }}
+  - {{ . }}
+{{ end }}
+</code></pre>
             </div>
             <p>
               <code>text/template</code> の <code>.</code> は、現在の操作対象を表す特殊なオブジェクトである。
@@ -114,18 +115,19 @@
               つまりこのテンプレートは、次のような構造をレンダリングしている (<code>Execute()</code> の第2引数)。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">tmpl.</span><span style="color:#6F42C1">Execute</span><span style="color:#24292E">(out, </span><span style="color:#6F42C1">Params</span><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#24292E">    Title: </span><span style="color:#032F62">"foo"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">    User: </span><span style="color:#6F42C1">User</span><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#24292E">        ID:   </span><span style="color:#005CC5">123</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">        Name: </span><span style="color:#032F62">"john"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">    },</span></span>
-<span class="line"><span style="color:#24292E">    Items: []</span><span style="color:#D73A49">string</span><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#032F62">        "hoge"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#032F62">        "piyo"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#032F62">        "fuga"</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">    },</span></span>
-<span class="line"><span style="color:#24292E">})</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">tmpl</span><span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">Execute</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">out</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">Params</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
+    <span style="color: #24292f;background-color: #f6f8fa">Title</span><span style="color: #0550ae">:</span> <span style="color: #0a3069">"foo"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #24292f;background-color: #f6f8fa">User</span><span style="color: #0550ae">:</span> <span style="color: #24292f;background-color: #f6f8fa">User</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
+        <span style="color: #24292f;background-color: #f6f8fa">ID</span><span style="color: #0550ae">:</span>   <span style="color: #0550ae">123</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+        <span style="color: #24292f;background-color: #f6f8fa">Name</span><span style="color: #0550ae">:</span> <span style="color: #0a3069">"john"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #24292f;background-color: #f6f8fa">},</span>
+    <span style="color: #24292f;background-color: #f6f8fa">Items</span><span style="color: #0550ae">:</span> <span style="color: #24292f;background-color: #f6f8fa">[]</span><span style="color: #cf222e">string</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
+        <span style="color: #0a3069">"hoge"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+        <span style="color: #0a3069">"piyo"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+        <span style="color: #0a3069">"fuga"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+    <span style="color: #24292f;background-color: #f6f8fa">},</span>
+<span style="color: #24292f;background-color: #f6f8fa">})</span>
+</code></pre>
             </div>
           </section>
           <section id="section--what-i-want-to-do">
@@ -134,13 +136,14 @@
               今回おこないたいのは、<code>with</code> や <code>range</code> の中で、その外側で使われていたトップレベルのオブジェクトを参照することだ。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>{{ with .User }}</span></span>
-<span class="line"><span>  ここから .Title を参照するには？</span></span>
-<span class="line"><span>{{ end }}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{{ range .Items }}</span></span>
-<span class="line"><span>  ここから .User を参照するには？</span></span>
-<span class="line"><span>{{ end }}</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>{{ with .User }}
+  ここから .Title を参照するには？
+{{ end }}
+
+{{ range .Items }}
+  ここから .User を参照するには？
+{{ end }}
+</code></pre>
             </div>
             <p>
               <code>with</code> や <code>range</code> は、<code>.</code> を自身の対象オブジェクトに変更するので、単に <code>{{ with .User }}</code> の中で <code>.Title</code> と書いても、それは <code>User</code> の <code>Title</code> プロパティを参照しているとみなされる。
@@ -149,7 +152,8 @@
               <code>text/template</code> では変数が使えるので、テンプレートの先頭で
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>{{ $params := . }}</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>{{ $params := . }}
+</code></pre>
             </div>
             <p>
               とでもしておけば実現は可能である。
@@ -164,13 +168,14 @@
               常にトップレベルを指す特殊変数 <code>$</code> を使えばよい。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>{{ with .User }}</span></span>
-<span class="line"><span>  {{ $.Title }}</span></span>
-<span class="line"><span>{{ end }}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{{ range .Items }}</span></span>
-<span class="line"><span>  {{ $.User.Name }}</span></span>
-<span class="line"><span>{{ end }}</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>{{ with .User }}
+  {{ $.Title }}
+{{ end }}
+
+{{ range .Items }}
+  {{ $.User.Name }}
+{{ end }}
+</code></pre>
             </div>
             <p>
               <code>$</code> は、テンプレートが実行されるときに渡されたオブジェクトを指す。これを使えば現在の <code>.</code> に関係なくトップレベルを参照できる。

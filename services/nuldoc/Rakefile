@@ -1,0 +1,22 @@
+require 'rubocop/rake_task'
+require_relative 'lib/nuldoc'
+
+RuboCop::RakeTask.new
+
+desc 'Build the site'
+task :build do
+  config = Nuldoc::ConfigLoader.load_config(Nuldoc::ConfigLoader.default_config_path)
+  Nuldoc::Commands::Build.run(config)
+end
+
+desc 'Start development server'
+task :serve, [:site] do |_t, args|
+  config = Nuldoc::ConfigLoader.load_config(Nuldoc::ConfigLoader.default_config_path)
+  Nuldoc::Commands::Serve.run(config, site_name: args[:site], no_rebuild: false)
+end
+
+desc 'Create new content'
+task :new, [:type] do |_t, args|
+  config = Nuldoc::ConfigLoader.load_config(Nuldoc::ConfigLoader.default_config_path)
+  Nuldoc::Commands::New.run(config, type: args[:type], date: nil)
+end

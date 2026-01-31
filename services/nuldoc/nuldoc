@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-deno run -P nuldoc-src/main.ts "$@"

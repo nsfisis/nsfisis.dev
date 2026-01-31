@@ -102,11 +102,12 @@
           <section id="section--tl-dr">
             <h2><a href="#section--tl-dr">TL; DR</a></h2>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">" License: Public Domain</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">" License: Public Domain</span>
+
+command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+<span style="color: #0a3069">    \</span> Reverse
+<span style="color: #0a3069">    \</span> <span style="color: #cf222e">keeppatterns</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span>
+</code></pre>
             </div>
           </section>
           <section id="section--version">
@@ -164,9 +165,10 @@
                 なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+<span style="color: #0a3069">    \</span> Reverse
+<span style="color: #0a3069">    \</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span>
+</code></pre>
               </div>
               <p>
                 これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。
@@ -200,13 +202,14 @@
               前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする:
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">function!</span><span style="color:#6F42C1"> s:reverse_lines</span><span style="color:#24292E">(from, </span><span style="color:#005CC5">to</span><span style="color:#24292E">) </span><span style="color:#D73A49">abort</span></span>
-<span class="line"><span style="color:#005CC5">    execute</span><span style="color:#6F42C1"> printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"%d,%dg/^/m%d"</span><span style="color:#24292E">, a:from, a:to, a:from</span><span style="color:#D73A49"> - </span><span style="color:#005CC5">1</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">endfunction</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#D73A49"> call</span><span style="color:#24292E"> &#x3C;</span><span style="color:#005CC5">SID</span><span style="color:#24292E">></span><span style="color:#6F42C1">reverse_lines</span><span style="color:#24292E">(&#x3C;line1>, &#x3C;line2>)</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">function</span><span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #0550ae">s:reverse_lines</span><span style="color: #24292f;background-color: #f6f8fa">(</span>from<span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #cf222e">to</span><span style="color: #24292f;background-color: #f6f8fa">)</span> abort
+    <span style="color: #953800">execute</span> <span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"%d,%dg/^/m%d"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:from</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:to</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:from</span> <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+<span style="color: #cf222e">endfunction</span>
+
+command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+<span style="color: #0a3069">    \</span> Reverse
+<span style="color: #0a3069">    \</span> <span style="color: #cf222e">call</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>SID<span style="color: #24292f;background-color: #f6f8fa">&gt;</span>reverse_lines<span style="color: #24292f;background-color: #f6f8fa">(&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;)</span>
+</code></pre>
             </div>
             <p>
               実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。
@@ -253,9 +256,10 @@
               </div>
             </div>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">command!</span><span style="color:#24292E"> -bar -</span><span style="color:#D73A49">range=</span><span style="color:#24292E">%</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> Reverse</span></span>
-<span class="line"><span style="color:#D73A49">    \</span><span style="color:#24292E"> keeppatterns &#x3C;line1>,&#x3C;line2>g</span><span style="color:#032F62">/^/</span><span style="color:#24292E">m&#x3C;line1>-</span><span style="color:#005CC5">1</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+<span style="color: #0a3069">    \</span> Reverse
+<span style="color: #0a3069">    \</span> <span style="color: #cf222e">keeppatterns</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span>
+</code></pre>
             </div>
             <p>
               まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。

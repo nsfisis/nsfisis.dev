@@ -60,8 +60,7 @@ $ clang –std=c++17 hoge.cpp
 別件で [cppreference.com の identifier のページ](https://en.cppreference.com/w/cpp/language/identifiers)を読んでいた時、次の文が目に止まった。
 
 > * the identifiers that are keywords cannot be used for other purposes;
->
->   * The only place they can be used as non-keywords is in an attribute-token. (e.g. [[private]] is a valid attribute) (since C++11)
+>     * The only place they can be used as non-keywords is in an attribute-token. (e.g. [[private]] is a valid attribute) (since C++11)
 
 キーワードでも属性として指定する場合は非キーワードとして使えるらしい。
 実際にやってみる。

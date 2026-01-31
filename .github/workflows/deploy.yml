@@ -10,13 +10,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Deno
-        uses: denoland/setup-deno@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          deno-version: v2.x
+          ruby-version: '3.4'
+          bundler-cache: true
+          working-directory: services/nuldoc
 
-      - name: Run deno task check
-        run: cd services/nuldoc; deno task check
+      - name: Run rubocop
+        run: cd services/nuldoc; bundle exec rake rubocop
 
   deploy:
     needs: test
