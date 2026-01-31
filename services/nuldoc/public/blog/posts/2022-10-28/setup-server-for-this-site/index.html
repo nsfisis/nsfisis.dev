@@ -176,8 +176,9 @@
                 ローカルマシンで鍵を生成する。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/teika.key</span></span>
-<span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github2teika.key</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ssh-keygen <span style="color: #116329">-t</span> ed25519 <span style="color: #116329">-b</span> 521 <span style="color: #116329">-f</span> ~/.ssh/teika.key
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ssh-keygen <span style="color: #116329">-t</span> ed25519 <span style="color: #116329">-b</span> 521 <span style="color: #116329">-f</span> ~/.ssh/github2teika.key
+</code></pre>
               </div>
               <p>
                 <code>teika.key</code> はローカルからサーバへの接続用、<code>github2teika.key</code> は、GitHub Actions からサーバへのデプロイ用。
@@ -189,12 +190,13 @@
                 <code>.ssh/config</code> に設定しておく。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>Host teika</span></span>
-<span class="line"><span>    HostName **********</span></span>
-<span class="line"><span>    User **********</span></span>
-<span class="line"><span>    Port **********</span></span>
-<span class="line"><span>    IdentityFile ~/.ssh/teika.key</span></span>
-<span class="line"><span>    IdentitiesOnly yes</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>Host teika
+    HostName **********
+    User **********
+    Port **********
+    IdentityFile ~/.ssh/teika.key
+    IdentitiesOnly yes
+</code></pre>
               </div>
             </section>
           </section>
@@ -212,24 +214,27 @@
                 管理者ユーザで作業すると危ないので、メインで使うユーザを作成する。<code>sudo</code> グループに追加して <code>sudo</code> できるようにし、<code>su</code> で切り替え。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo adduser **********</span></span>
-<span class="line"><span>$ sudo adduser ********** sudo</span></span>
-<span class="line"><span>$ su **********</span></span>
-<span class="line"><span>$ cd</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>adduser <span style="color: #cf222e">**********</span>
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>adduser <span style="color: #cf222e">**********</span> <span style="color: #953800">sudo</span>
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>su <span style="color: #cf222e">**********</span>
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">cd</span>
+</code></pre>
               </div>
             </section>
             <section id="section--basic-setup--hostname">
               <h3><a href="#section--basic-setup--hostname">ホスト名を変える</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo hostname teika</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo hostname </span>teika
+</code></pre>
               </div>
             </section>
             <section id="section--basic-setup--public-key">
               <h3><a href="#section--basic-setup--public-key">公開鍵を置く</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ mkdir ~/.ssh</span></span>
-<span class="line"><span>$ chmod 700 ~/.ssh</span></span>
-<span class="line"><span>$ vi ~/.ssh/authorized_keys</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">mkdir</span> ~/.ssh
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">chmod </span>700 ~/.ssh
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>vi ~/.ssh/authorized_keys
+</code></pre>
               </div>
               <p>
                 <code>authorized_keys</code> には、ローカルで生成した <code>~/.ssh/teika.key.pub</code> と <code>~/.ssh/github2teika.key.pub</code> の内容をコピーする。
@@ -241,8 +246,9 @@
                 SSH の設定を変更し、少しでも安全にしておく。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</span></span>
-<span class="line"><span>$ sudo vi /etc/ssh/sshd_config</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo cp</span> /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>vi /etc/ssh/sshd_config
+</code></pre>
               </div>
               <ul>
                 <li>
@@ -259,8 +265,9 @@
                 そして設定を反映。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo systemctl restart sshd</span></span>
-<span class="line"><span>$ sudo systemctl status sshd</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>systemctl restart sshd
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>systemctl status sshd
+</code></pre>
               </div>
             </section>
             <section id="section--basic-setup--ssh-connect">
@@ -269,7 +276,8 @@
                 今の SSH セッションは閉じずに、ターミナルを別途開いて疎通確認する。セッションを閉じてしまうと、SSH の設定に不備があった場合に締め出しをくらう。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh teika</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ssh teika
+</code></pre>
               </div>
             </section>
             <section id="section--basic-setup--close-ports">
@@ -278,11 +286,12 @@
                 デフォルトの 22 番を閉じ、設定したポートだけ空ける。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw deny ssh</span></span>
-<span class="line"><span>$ sudo ufw allow *******</span></span>
-<span class="line"><span>$ sudo ufw enable</span></span>
-<span class="line"><span>$ sudo ufw reload</span></span>
-<span class="line"><span>$ sudo ufw status</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw deny ssh
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw allow <span style="color: #cf222e">*******</span>
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw <span style="color: #953800">enable</span>
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw reload
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw status
+</code></pre>
               </div>
               <p>
                 ここでもう一度 SSH の接続確認を挟む。
@@ -294,41 +303,46 @@
                 GitHub に置いてある private リポジトリをサーバから clone したいので、SSH 鍵を生成して置いておく。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh-keygen -t ed25519 -b 521 -f ~/.ssh/github.key</span></span>
-<span class="line"><span>$ cat ~/.ssh/github.key.pub</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ssh-keygen <span style="color: #116329">-t</span> ed25519 <span style="color: #116329">-b</span> 521 <span style="color: #116329">-f</span> ~/.ssh/github.key
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">cat</span> ~/.ssh/github.key.pub
+</code></pre>
               </div>
               <p>
                 <a href="https://github.com/settings/ssh" rel="noreferrer" target="_blank">GitHub の設定画面</a> から、この公開鍵を追加する。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ vi ~/.ssh/config</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>vi ~/.ssh/config
+</code></pre>
               </div>
               <p>
                 設定はこう。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>Host github.com</span></span>
-<span class="line"><span>    HostName github.com</span></span>
-<span class="line"><span>    User git</span></span>
-<span class="line"><span>    Port 22</span></span>
-<span class="line"><span>    IdentityFile ~/.ssh/github.key</span></span>
-<span class="line"><span>    IdentitiesOnly yes</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>Host github.com
+    HostName github.com
+    User git
+    Port 22
+    IdentityFile ~/.ssh/github.key
+    IdentitiesOnly yes
+</code></pre>
               </div>
               <p>
                 最後に接続できるか確認しておく。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ssh -T github.com</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ssh <span style="color: #116329">-T</span> github.com
+</code></pre>
               </div>
             </section>
             <section id="section--basic-setup--upgrade-packages">
               <h3><a href="#section--basic-setup--upgrade-packages">パッケージの更新</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo apt update</span></span>
-<span class="line"><span>$ sudo apt upgrade</span></span>
-<span class="line"><span>$ sudo apt update</span></span>
-<span class="line"><span>$ sudo apt upgrade</span></span>
-<span class="line"><span>$ sudo apt autoremove</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>apt update
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>apt upgrade
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>apt update
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>apt upgrade
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>apt autoremove
+</code></pre>
               </div>
             </section>
           </section>
@@ -343,13 +357,15 @@
             <section id="section--site-hosting-setup--install-softwares">
               <h3><a href="#section--site-hosting-setup--install-softwares">使うソフトウェアのインストール</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo apt install docker docker-compose git make</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>apt <span style="color: #953800">install </span>docker docker-compose git make
+</code></pre>
               </div>
             </section>
             <section id="section--site-hosting-setup--docker">
               <h3><a href="#section--site-hosting-setup--docker">メインユーザが Docker を使えるように</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo adduser ********** docker</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>adduser <span style="color: #cf222e">**********</span> docker
+</code></pre>
               </div>
             </section>
             <section id="section--site-hosting-setup--open-http-ports">
@@ -358,32 +374,36 @@
                 80 番と 443 番を空ける。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ sudo ufw allow 80/tcp</span></span>
-<span class="line"><span>$ sudo ufw allow 443/tcp</span></span>
-<span class="line"><span>$ sudo ufw reload</span></span>
-<span class="line"><span>$ sudo ufw status</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw allow 80/tcp
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw allow 443/tcp
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw reload
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">sudo </span>ufw status
+</code></pre>
               </div>
             </section>
             <section id="section--site-hosting-setup--clone-repositories">
               <h3><a href="#section--site-hosting-setup--clone-repositories">リポジトリのクローン</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ cd</span></span>
-<span class="line"><span>$ git clone git@github.com:nsfisis/nsfisis.dev.git</span></span>
-<span class="line"><span>$ cd nsfisis.dev</span></span>
-<span class="line"><span>$ git submodule update --init</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">cd</span>
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>git clone git@github.com:nsfisis/nsfisis.dev.git
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #953800">cd </span>nsfisis.dev
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>git submodule update <span style="color: #116329">--init</span>
+</code></pre>
               </div>
             </section>
             <section id="section--site-hosting-setup--certbot">
               <h3><a href="#section--site-hosting-setup--certbot">certbot で証明書取得</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ docker-compose up -d acme-challenge</span></span>
-<span class="line"><span>$ make setup</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>docker-compose up <span style="color: #116329">-d</span> acme-challenge
+<span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>make setup
+</code></pre>
               </div>
             </section>
             <section id="section--site-hosting-setup--run-server">
               <h3><a href="#section--site-hosting-setup--run-server">サーバを稼動させる</a></h3>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ make serve</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>make serve
+</code></pre>
               </div>
             </section>
           </section>

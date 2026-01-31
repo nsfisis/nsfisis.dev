@@ -100,18 +100,20 @@
               Neovim で空の PHP ファイルを開いたとき、そのファイルが置かれているディレクトリの構造に基づいて、自動的に <code>namespace</code> 宣言を挿入したい。具体的には、トップレベルの名前空間が <code>MyNamespace</code> であり、ファイル <code>src/Foo/Bar/Baz.php</code> を開いたときに、そのファイルが空であるなら、次のようなテンプレートが自動的に挿入されてほしい。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">&#x3C;?</span><span style="color:#005CC5">php</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">namespace</span><span style="color:#6F42C1"> MyNamespace\Foo\Bar</span><span style="color:#24292E">;</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
+
+<span style="color: #cf222e">namespace</span> <span style="color: #953800">MyNamespace\Foo\Bar</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</code></pre>
             </div>
           </section>
           <section id="section--version">
             <h2><a href="#section--version">バージョン情報</a></h2>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ nvim --version</span></span>
-<span class="line"><span>NVIM v0.9.2</span></span>
-<span class="line"><span>Build type: Release</span></span>
-<span class="line"><span>LuaJIT 2.1.1693350652</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>$ nvim --version
+NVIM v0.9.2
+Build type: Release
+LuaJIT 2.1.1693350652
+</code></pre>
             </div>
             <p>
               今回は Lua で処理を記述したため、Vim では動作しない。以下の説明でも Neovim に絞って述べる。また、パス区切りがスラッシュである前提で記述したため、Windows には対応していない。
@@ -135,13 +137,14 @@
               ファイルタイプは読み込んだあとに変更されることもあるので、ftplugin は複数回実行されうる。二重読み込みを防ぐために、<code>did_ftplugin_&lt;FILE_TYPE&gt;_after</code> というバッファローカル変数を定義しておくのが慣習となっている。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> then</span></span>
-<span class="line"><span style="color:#D73A49">   return</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D">-- ここに実際の処理を書く</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#24292E">vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> true</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">did_ftplugin_php_after</span> <span style="color: #cf222e">then</span>
+   <span style="color: #cf222e">return</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #6e7781">-- ここに実際の処理を書く</span>
+
+<span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">did_ftplugin_php_after</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">true</span>
+</code></pre>
             </div>
           </section>
           <section id="section--implement">
@@ -173,119 +176,120 @@
               実装を簡単にするため、Composer を用いない場合や PSR 4 以外のオートロード規則を使う場合には対応しない。少々長くなるが、以下にスクリプト全文を載せる。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> then</span></span>
-<span class="line"><span style="color:#D73A49">   return</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D">-- base_dir を起点としてディレクトリを上向きに辿っていき、composer.json を探す</span></span>
-<span class="line"><span style="color:#6A737D">-- :help vim.fs.find()</span></span>
-<span class="line"><span style="color:#D73A49">local</span><span style="color:#D73A49"> function</span><span style="color:#6F42C1"> find_composer_json</span><span style="color:#24292E">(base_dir)</span></span>
-<span class="line"><span style="color:#D73A49">   return</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">fs</span><span style="color:#24292E">.</span><span style="color:#005CC5">find</span><span style="color:#24292E">(</span><span style="color:#032F62">'composer.json'</span><span style="color:#24292E">, {</span></span>
-<span class="line"><span style="color:#24292E">      path </span><span style="color:#D73A49">=</span><span style="color:#24292E"> base_dir,</span></span>
-<span class="line"><span style="color:#24292E">      upward </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> true</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#6A737D">      -- ホームディレクトリまで到達したら探索を打ち切る</span></span>
-<span class="line"><span style="color:#24292E">      stop </span><span style="color:#D73A49">=</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">loop</span><span style="color:#24292E">.</span><span style="color:#005CC5">os_homedir</span><span style="color:#24292E">(),</span></span>
-<span class="line"><span style="color:#24292E">      type </span><span style="color:#D73A49">=</span><span style="color:#032F62"> 'file'</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">   })[</span><span style="color:#005CC5">1</span><span style="color:#24292E">]</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D">-- JSON ファイルを読み込み、デコードして返す</span></span>
-<span class="line"><span style="color:#6A737D">-- :help readblob()</span></span>
-<span class="line"><span style="color:#6A737D">-- :help vim.json.decode</span></span>
-<span class="line"><span style="color:#6A737D">-- :help luaref-pcall()</span></span>
-<span class="line"><span style="color:#D73A49">local</span><span style="color:#D73A49"> function</span><span style="color:#6F42C1"> load_json</span><span style="color:#24292E">(file_path)</span></span>
-<span class="line"><span style="color:#6A737D">   -- readblob() は Vim script では Blob オブジェクトを返すが、Lua から呼ぶと string に変換される</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> ok_read, content </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> pcall</span><span style="color:#24292E">(vim.</span><span style="color:#6F42C1">fn</span><span style="color:#24292E">.</span><span style="color:#6F42C1">readblob</span><span style="color:#24292E">, file_path)</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#D73A49"> not</span><span style="color:#24292E"> ok_read </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> ok_decode, obj </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> pcall</span><span style="color:#24292E">(vim.</span><span style="color:#6F42C1">json</span><span style="color:#24292E">.</span><span style="color:#6F42C1">decode</span><span style="color:#24292E">, content)</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#D73A49"> not</span><span style="color:#24292E"> ok_decode </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   return</span><span style="color:#24292E"> obj</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D">-- 対象ファイルの置かれたディレクトリを基に namespace 宣言を生成する</span></span>
-<span class="line"><span style="color:#6A737D">-- :help nvim_buf_get_name()</span></span>
-<span class="line"><span style="color:#6A737D">-- :help vim.fs.dirname()</span></span>
-<span class="line"><span style="color:#D73A49">local</span><span style="color:#D73A49"> function</span><span style="color:#6F42C1"> generate_namespace_declaration</span><span style="color:#24292E">()</span></span>
-<span class="line"><span style="color:#6A737D">   -- composer.json を探し、トップレベルの名前空間とディレクトリを特定する</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> current_dir </span><span style="color:#D73A49">=</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">fs</span><span style="color:#24292E">.</span><span style="color:#005CC5">dirname</span><span style="color:#24292E">(vim.</span><span style="color:#6F42C1">api</span><span style="color:#24292E">.</span><span style="color:#005CC5">nvim_buf_get_name</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">))</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> path_to_composer_json </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> find_composer_json</span><span style="color:#24292E">(current_dir)</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#D73A49"> not</span><span style="color:#24292E"> path_to_composer_json </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span><span style="color:#6A737D"> -- failed to locate composer.json</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> composer_json </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> load_json</span><span style="color:#24292E">(path_to_composer_json)</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#D73A49"> not</span><span style="color:#24292E"> composer_json </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span><span style="color:#6A737D"> -- failed to load composer.json</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#6A737D">   -- autoload.psr-4 を探し、型が期待される型と一致するかどうか調べる</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> psr4 </span><span style="color:#D73A49">=</span><span style="color:#24292E"> vim.</span><span style="color:#005CC5">tbl_get</span><span style="color:#24292E">(composer_json, </span><span style="color:#032F62">'autoload'</span><span style="color:#24292E">, </span><span style="color:#032F62">'psr-4'</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#D73A49"> not</span><span style="color:#24292E"> psr4 </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span><span style="color:#6A737D"> -- autoload.psr-4 section is absent</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#24292E"> vim.</span><span style="color:#005CC5">tbl_count</span><span style="color:#24292E">(psr4) </span><span style="color:#D73A49">~=</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span><span style="color:#6A737D"> -- psr-4 section is ambiguous</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> psr4_namespace, psr4_dir</span></span>
-<span class="line"><span style="color:#D73A49">   for</span><span style="color:#24292E"> k, v </span><span style="color:#D73A49">in</span><span style="color:#005CC5"> pairs</span><span style="color:#24292E">(psr4) </span><span style="color:#D73A49">do</span></span>
-<span class="line"><span style="color:#24292E">      psr4_namespace </span><span style="color:#D73A49">=</span><span style="color:#24292E"> k</span></span>
-<span class="line"><span style="color:#24292E">      psr4_dir </span><span style="color:#D73A49">=</span><span style="color:#24292E"> v</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#005CC5"> type</span><span style="color:#24292E">(psr4_dir) </span><span style="color:#D73A49">==</span><span style="color:#032F62"> 'table' </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      if</span><span style="color:#D73A49"> #</span><span style="color:#24292E">psr4_dir </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> then</span></span>
-<span class="line"><span style="color:#24292E">         psr4_dir </span><span style="color:#D73A49">=</span><span style="color:#24292E"> psr4_dir[</span><span style="color:#005CC5">1</span><span style="color:#24292E">]</span></span>
-<span class="line"><span style="color:#D73A49">      else</span></span>
-<span class="line"><span style="color:#D73A49">         return</span><span style="color:#005CC5"> nil</span><span style="color:#6A737D"> -- psr-4 section is ambiguous</span></span>
-<span class="line"><span style="color:#D73A49">      end</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#005CC5"> type</span><span style="color:#24292E">(psr4_namespace) </span><span style="color:#D73A49">~=</span><span style="color:#032F62"> 'string' </span><span style="color:#D73A49">or</span><span style="color:#005CC5"> type</span><span style="color:#24292E">(psr4_dir) </span><span style="color:#D73A49">~=</span><span style="color:#032F62"> 'string' </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span><span style="color:#6A737D"> -- psr-4 section is invalid</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#6A737D">   -- 末尾のスラッシュとバックスラッシュを取り除いておく</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#6F42C1"> psr4_namespace</span><span style="color:#24292E">:</span><span style="color:#005CC5">sub</span><span style="color:#24292E">(</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">) </span><span style="color:#D73A49">==</span><span style="color:#032F62"> '</span><span style="color:#005CC5">\\</span><span style="color:#032F62">' </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#24292E">      psr4_namespace </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> psr4_namespace</span><span style="color:#24292E">:</span><span style="color:#005CC5">sub</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#D73A49">-</span><span style="color:#005CC5">2</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#6F42C1"> psr4_dir</span><span style="color:#24292E">:</span><span style="color:#005CC5">sub</span><span style="color:#24292E">(</span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#D73A49">-</span><span style="color:#005CC5">1</span><span style="color:#24292E">) </span><span style="color:#D73A49">==</span><span style="color:#032F62"> '/' </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#24292E">      psr4_dir </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> psr4_dir</span><span style="color:#24292E">:</span><span style="color:#005CC5">sub</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#D73A49">-</span><span style="color:#005CC5">2</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D">   -- 対象ファイルが置かれたディレクトリとトップレベルのディレクトリを比較し、その差分を名前空間とする</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> namespace_root_dir </span><span style="color:#D73A49">=</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">fs</span><span style="color:#24292E">.</span><span style="color:#005CC5">dirname</span><span style="color:#24292E">(path_to_composer_json) </span><span style="color:#D73A49">..</span><span style="color:#032F62"> '/' </span><span style="color:#D73A49">..</span><span style="color:#24292E"> psr4_dir</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#D73A49"> not</span><span style="color:#24292E"> vim.</span><span style="color:#005CC5">startswith</span><span style="color:#24292E">(current_dir, namespace_root_dir) </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#D73A49">      return</span><span style="color:#005CC5"> nil</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> current_path_suffix </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> current_dir</span><span style="color:#24292E">:</span><span style="color:#005CC5">sub</span><span style="color:#24292E">(</span><span style="color:#D73A49">#</span><span style="color:#24292E">namespace_root_dir </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> namespace </span><span style="color:#D73A49">=</span><span style="color:#24292E"> psr4_namespace </span><span style="color:#D73A49">..</span><span style="color:#6F42C1"> current_path_suffix</span><span style="color:#24292E">:</span><span style="color:#005CC5">gsub</span><span style="color:#24292E">(</span><span style="color:#032F62">'/'</span><span style="color:#24292E">, </span><span style="color:#032F62">'</span><span style="color:#005CC5">\\</span><span style="color:#032F62">'</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">   return</span><span style="color:#24292E"> (</span><span style="color:#032F62">"namespace %s;"</span><span style="color:#24292E">):</span><span style="color:#005CC5">format</span><span style="color:#24292E">(namespace)</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">local</span><span style="color:#D73A49"> function</span><span style="color:#6F42C1"> generate_template</span><span style="color:#24292E">()</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> lines </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#032F62">      '&#x3C;?php'</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#032F62">      ''</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#032F62">      'declare(strict_types=1);'</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#032F62">      ''</span><span style="color:#24292E">,</span></span>
-<span class="line"><span style="color:#24292E">   }</span></span>
-<span class="line"><span style="color:#D73A49">   local</span><span style="color:#24292E"> namespace_decl </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> generate_namespace_declaration</span><span style="color:#24292E">()</span></span>
-<span class="line"><span style="color:#D73A49">   if</span><span style="color:#24292E"> namespace_decl </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#24292E">      lines[</span><span style="color:#D73A49">#</span><span style="color:#24292E">lines </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> namespace_decl</span></span>
-<span class="line"><span style="color:#24292E">      lines[</span><span style="color:#D73A49">#</span><span style="color:#24292E">lines </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">] </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ''</span></span>
-<span class="line"><span style="color:#D73A49">   end</span></span>
-<span class="line"><span style="color:#24292E">   lines[</span><span style="color:#D73A49">#</span><span style="color:#24292E">lines </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">] </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ''</span></span>
-<span class="line"><span style="color:#D73A49">   return</span><span style="color:#24292E"> lines</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">if</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">fn</span><span style="color:#24292E">.</span><span style="color:#005CC5">line</span><span style="color:#24292E">(</span><span style="color:#032F62">'$'</span><span style="color:#24292E">) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#D73A49"> and</span><span style="color:#24292E"> vim.</span><span style="color:#6F42C1">fn</span><span style="color:#24292E">.</span><span style="color:#005CC5">getline</span><span style="color:#24292E">(</span><span style="color:#005CC5">1</span><span style="color:#24292E">) </span><span style="color:#D73A49">==</span><span style="color:#032F62"> '' </span><span style="color:#D73A49">then</span></span>
-<span class="line"><span style="color:#6A737D">   -- 対象ファイルが空なら、テンプレートを挿入してカーソルを末尾に移動させる</span></span>
-<span class="line"><span style="color:#6A737D">   -- :help setline()</span></span>
-<span class="line"><span style="color:#6A737D">   -- :help cursor()</span></span>
-<span class="line"><span style="color:#24292E">   vim.</span><span style="color:#6F42C1">fn</span><span style="color:#24292E">.</span><span style="color:#005CC5">setline</span><span style="color:#24292E">(</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">generate_template</span><span style="color:#24292E">())</span></span>
-<span class="line"><span style="color:#24292E">   vim.</span><span style="color:#6F42C1">fn</span><span style="color:#24292E">.</span><span style="color:#005CC5">cursor</span><span style="color:#24292E">(</span><span style="color:#032F62">'$'</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#24292E">)</span></span>
-<span class="line"><span style="color:#D73A49">end</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#24292E">vim.</span><span style="color:#6F42C1">b</span><span style="color:#24292E">.</span><span style="color:#6F42C1">did_ftplugin_php_after</span><span style="color:#D73A49"> =</span><span style="color:#005CC5"> true</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">did_ftplugin_php_after</span> <span style="color: #cf222e">then</span>
+   <span style="color: #cf222e">return</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #6e7781">-- base_dir を起点としてディレクトリを上向きに辿っていき、composer.json を探す</span>
+<span style="color: #6e7781">-- :help vim.fs.find()</span>
+<span style="color: #cf222e">local</span> <span style="color: #cf222e">function</span> <span style="color: #8250df">find_composer_json</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">base_dir</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">return</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fs</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">find</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">'composer.json'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+      <span style="color: #24292f;background-color: #f6f8fa">path</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">base_dir</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+      <span style="color: #24292f;background-color: #f6f8fa">upward</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">true</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+      <span style="color: #6e7781">-- ホームディレクトリまで到達したら探索を打ち切る</span>
+      <span style="color: #24292f;background-color: #f6f8fa">stop</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">loop</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">os_homedir</span><span style="color: #24292f;background-color: #f6f8fa">(),</span>
+      <span style="color: #953800">type</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'file'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+   <span style="color: #24292f;background-color: #f6f8fa">})[</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">]</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #6e7781">-- JSON ファイルを読み込み、デコードして返す</span>
+<span style="color: #6e7781">-- :help readblob()</span>
+<span style="color: #6e7781">-- :help vim.json.decode</span>
+<span style="color: #6e7781">-- :help luaref-pcall()</span>
+<span style="color: #cf222e">local</span> <span style="color: #cf222e">function</span> <span style="color: #8250df">load_json</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">file_path</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #6e7781">-- readblob() は Vim script では Blob オブジェクトを返すが、Lua から呼ぶと string に変換される</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">ok_read</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">content</span> <span style="color: #0550ae">=</span> <span style="color: #953800">pcall</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fn</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">readblob</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">file_path</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">if</span> <span style="color: #0550ae">not</span> <span style="color: #24292f;background-color: #f6f8fa">ok_read</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">ok_decode</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">obj</span> <span style="color: #0550ae">=</span> <span style="color: #953800">pcall</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">json</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">decode</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">content</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">if</span> <span style="color: #0550ae">not</span> <span style="color: #24292f;background-color: #f6f8fa">ok_decode</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">return</span> <span style="color: #24292f;background-color: #f6f8fa">obj</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #6e7781">-- 対象ファイルの置かれたディレクトリを基に namespace 宣言を生成する</span>
+<span style="color: #6e7781">-- :help nvim_buf_get_name()</span>
+<span style="color: #6e7781">-- :help vim.fs.dirname()</span>
+<span style="color: #cf222e">local</span> <span style="color: #cf222e">function</span> <span style="color: #8250df">generate_namespace_declaration</span><span style="color: #24292f;background-color: #f6f8fa">()</span>
+   <span style="color: #6e7781">-- composer.json を探し、トップレベルの名前空間とディレクトリを特定する</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">current_dir</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fs</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">dirname</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">api</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">nvim_buf_get_name</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">))</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">path_to_composer_json</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">find_composer_json</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">current_dir</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">if</span> <span style="color: #0550ae">not</span> <span style="color: #24292f;background-color: #f6f8fa">path_to_composer_json</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span> <span style="color: #6e7781">-- failed to locate composer.json</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">composer_json</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">load_json</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">path_to_composer_json</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">if</span> <span style="color: #0550ae">not</span> <span style="color: #24292f;background-color: #f6f8fa">composer_json</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span> <span style="color: #6e7781">-- failed to load composer.json</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #6e7781">-- autoload.psr-4 を探し、型が期待される型と一致するかどうか調べる</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">psr4</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">tbl_get</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">composer_json</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">'autoload'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">'psr-4'</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">if</span> <span style="color: #0550ae">not</span> <span style="color: #24292f;background-color: #f6f8fa">psr4</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span> <span style="color: #6e7781">-- autoload.psr-4 section is absent</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">tbl_count</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">psr4</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">~=</span> <span style="color: #0550ae">1</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span> <span style="color: #6e7781">-- psr-4 section is ambiguous</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span>
+   <span style="color: #cf222e">for</span> <span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">v</span> <span style="color: #cf222e">in</span> <span style="color: #953800">pairs</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">psr4</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #cf222e">do</span>
+      <span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">k</span>
+      <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">v</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">if</span> <span style="color: #953800">type</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">==</span> <span style="color: #0a3069">'table'</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">if</span> <span style="color: #0550ae">#</span><span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span> <span style="color: #0550ae">==</span> <span style="color: #0550ae">1</span> <span style="color: #cf222e">then</span>
+         <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">]</span>
+      <span style="color: #cf222e">else</span>
+         <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span> <span style="color: #6e7781">-- psr-4 section is ambiguous</span>
+      <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">if</span> <span style="color: #953800">type</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">~=</span> <span style="color: #0a3069">'string'</span> <span style="color: #0550ae">or</span> <span style="color: #953800">type</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">~=</span> <span style="color: #0a3069">'string'</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span> <span style="color: #6e7781">-- psr-4 section is invalid</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #6e7781">-- 末尾のスラッシュとバックスラッシュを取り除いておく</span>
+   <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span><span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #24292f;background-color: #f6f8fa">sub</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">-</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">-</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">==</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">\\</span><span style="color: #0a3069">'</span> <span style="color: #cf222e">then</span>
+      <span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span><span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #24292f;background-color: #f6f8fa">sub</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">-</span><span style="color: #0550ae">2</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span><span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #24292f;background-color: #f6f8fa">sub</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">-</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">-</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">==</span> <span style="color: #0a3069">'/'</span> <span style="color: #cf222e">then</span>
+      <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span><span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #24292f;background-color: #f6f8fa">sub</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">-</span><span style="color: #0550ae">2</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">end</span>
+
+   <span style="color: #6e7781">-- 対象ファイルが置かれたディレクトリとトップレベルのディレクトリを比較し、その差分を名前空間とする</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">namespace_root_dir</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fs</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">dirname</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">path_to_composer_json</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">..</span> <span style="color: #0a3069">'/'</span> <span style="color: #0550ae">..</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_dir</span>
+   <span style="color: #cf222e">if</span> <span style="color: #0550ae">not</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">startswith</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">current_dir</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">namespace_root_dir</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #cf222e">then</span>
+      <span style="color: #cf222e">return</span> <span style="color: #0550ae">nil</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">current_path_suffix</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">current_dir</span><span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #24292f;background-color: #f6f8fa">sub</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">#</span><span style="color: #24292f;background-color: #f6f8fa">namespace_root_dir</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">namespace</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">psr4_namespace</span> <span style="color: #0550ae">..</span> <span style="color: #24292f;background-color: #f6f8fa">current_path_suffix</span><span style="color: #24292f;background-color: #f6f8fa">:</span><span style="color: #953800">gsub</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #116329">'/'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #116329">'</span><span style="color: #0a3069">\\</span><span style="color: #116329">'</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+   <span style="color: #cf222e">return</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"namespace %s;"</span><span style="color: #24292f;background-color: #f6f8fa">):</span><span style="color: #24292f;background-color: #f6f8fa">format</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">namespace</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #cf222e">local</span> <span style="color: #cf222e">function</span> <span style="color: #8250df">generate_template</span><span style="color: #24292f;background-color: #f6f8fa">()</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">lines</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+      <span style="color: #0a3069">'&lt;?php'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+      <span style="color: #0a3069">''</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+      <span style="color: #0a3069">'declare(strict_types=1);'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+      <span style="color: #0a3069">''</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+   <span style="color: #24292f;background-color: #f6f8fa">}</span>
+   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">namespace_decl</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">generate_namespace_declaration</span><span style="color: #24292f;background-color: #f6f8fa">()</span>
+   <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">namespace_decl</span> <span style="color: #cf222e">then</span>
+      <span style="color: #24292f;background-color: #f6f8fa">lines</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">#</span><span style="color: #24292f;background-color: #f6f8fa">lines</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">namespace_decl</span>
+      <span style="color: #24292f;background-color: #f6f8fa">lines</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">#</span><span style="color: #24292f;background-color: #f6f8fa">lines</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">''</span>
+   <span style="color: #cf222e">end</span>
+   <span style="color: #24292f;background-color: #f6f8fa">lines</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">#</span><span style="color: #24292f;background-color: #f6f8fa">lines</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">''</span>
+   <span style="color: #cf222e">return</span> <span style="color: #24292f;background-color: #f6f8fa">lines</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fn</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">line</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">'$'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">==</span> <span style="color: #0550ae">1</span> <span style="color: #0550ae">and</span> <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fn</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">getline</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">==</span> <span style="color: #0a3069">''</span> <span style="color: #cf222e">then</span>
+   <span style="color: #6e7781">-- 対象ファイルが空なら、テンプレートを挿入してカーソルを末尾に移動させる</span>
+   <span style="color: #6e7781">-- :help setline()</span>
+   <span style="color: #6e7781">-- :help cursor()</span>
+   <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fn</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">setline</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">generate_template</span><span style="color: #24292f;background-color: #f6f8fa">())</span>
+   <span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">fn</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">cursor</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">'$'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+<span style="color: #cf222e">end</span>
+
+<span style="color: #24292f;background-color: #f6f8fa">vim</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #24292f;background-color: #f6f8fa">did_ftplugin_php_after</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">true</span>
+</code></pre>
             </div>
           </section>
           <section id="section--outro">

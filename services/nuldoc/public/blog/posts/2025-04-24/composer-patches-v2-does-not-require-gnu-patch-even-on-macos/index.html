@@ -126,8 +126,9 @@
               ワークアラウンドとして、macOS にも GNU patch をインストールしてしまうという方法がある。例:
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ brew install gpatch</span></span>
-<span class="line"><span>$ echo 'PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"' >> ~/.zshrc</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>$ brew install gpatch
+$ echo 'PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"' &gt;&gt; ~/.zshrc
+</code></pre>
             </div>
             <p>
               GNU patch を Homebrew などの手段でインストールし、BSD patch よりも優先されるパスに配置すれば問題が解消する。

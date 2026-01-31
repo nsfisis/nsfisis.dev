@@ -101,41 +101,42 @@
               今回使用したスクリプトはこちら: <a class="url" href="https://github.com/nsfisis/phperkaigi-2024-albatross-archive/blob/cc837f6d2109555e2392016e8f6820fb5fd46dd6/archive.sh" rel="noreferrer" target="_blank">https://github.com/nsfisis/phperkaigi-2024-albatross-archive/blob/cc837f6d2109555e2392016e8f6820fb5fd46dd6/archive.sh</a>
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D"># 指定した URL からスタートしてリンクを辿りながら全ファイルをファイルに書き出す</span></span>
-<span class="line"><span style="color:#6A737D">#</span></span>
-<span class="line"><span style="color:#6A737D"># --mirror  リンクを再帰的に辿ってダウンロードする</span></span>
-<span class="line"><span style="color:#6A737D"># --page-requisites  CSS や画像等も含めて HTML から参照されている全ファイルをダウンロードする</span></span>
-<span class="line"><span style="color:#6A737D"># --convert-links  リンクを相対リンクへ変換する</span></span>
-<span class="line"><span style="color:#6A737D"># --adjust-extension  URL に拡張子が無くてもいい感じに推測する</span></span>
-<span class="line"><span style="color:#6A737D"># --no-parent  親ディレクトリは見に行かない</span></span>
-<span class="line"><span style="color:#6A737D"># --no-wait=1  リクエスト間で 1 秒待機する</span></span>
-<span class="line"><span style="color:#6A737D"># -P ./archive/  指定したディレクトリに保存する</span></span>
-<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    --mirror</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    --page-requisites</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    --convert-links</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    --adjust-extension</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    --no-parent</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    --wait=1</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#005CC5">    -P</span><span style="color:#032F62"> ./archive/</span><span style="color:#005CC5"> \</span></span>
-<span class="line"><span style="color:#032F62">    https://t.nil.ninja/phperkaigi/2024/golf/</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D"># ディレクトリ構造を調整する</span></span>
-<span class="line"><span style="color:#6F42C1">mv</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/2024/golf/</span><span style="color:#005CC5">*</span><span style="color:#032F62"> ./archive</span></span>
-<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/2024/golf/</span></span>
-<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/2024/</span></span>
-<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/phperkaigi/</span></span>
-<span class="line"><span style="color:#6F42C1">rmdir</span><span style="color:#032F62"> ./archive/t.nil.ninja/</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6F42C1">mkdir</span><span style="color:#005CC5"> -p</span><span style="color:#032F62"> ./archive/api/quizzes/{1,2,3}</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D"># 動的な API エンドポイントを叩いて結果を JSON ファイルとして保存する</span></span>
-<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ./archive/api/quizzes/1/chart.json</span><span style="color:#032F62"> https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/1/chart</span></span>
-<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ./archive/api/quizzes/2/chart.json</span><span style="color:#032F62"> https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/2/chart</span></span>
-<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ./archive/api/quizzes/3/chart.json</span><span style="color:#032F62"> https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/3/chart</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D"># 上記 API を叩いている箇所を、落としてきた静的ファイルを参照するように変更する</span></span>
-<span class="line"><span style="color:#6F42C1">sed</span><span style="color:#005CC5"> -i</span><span style="color:#005CC5"> -e</span><span style="color:#032F62"> 's#/chart`#/chart.json`#'</span><span style="color:#032F62"> ./archive/assets/chart.js</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781"># 指定した URL からスタートしてリンクを辿りながら全ファイルをファイルに書き出す</span>
+<span style="color: #6e7781">#</span>
+<span style="color: #6e7781"># --mirror  リンクを再帰的に辿ってダウンロードする</span>
+<span style="color: #6e7781"># --page-requisites  CSS や画像等も含めて HTML から参照されている全ファイルをダウンロードする</span>
+<span style="color: #6e7781"># --convert-links  リンクを相対リンクへ変換する</span>
+<span style="color: #6e7781"># --adjust-extension  URL に拡張子が無くてもいい感じに推測する</span>
+<span style="color: #6e7781"># --no-parent  親ディレクトリは見に行かない</span>
+<span style="color: #6e7781"># --no-wait=1  リクエスト間で 1 秒待機する</span>
+<span style="color: #6e7781"># -P ./archive/  指定したディレクトリに保存する</span>
+wget <span style="color: #0a3069">\</span>
+    <span style="color: #116329">--mirror</span> <span style="color: #0a3069">\</span>
+    <span style="color: #116329">--page-requisites</span> <span style="color: #0a3069">\</span>
+    <span style="color: #116329">--convert-links</span> <span style="color: #0a3069">\</span>
+    <span style="color: #116329">--adjust-extension</span> <span style="color: #0a3069">\</span>
+    <span style="color: #116329">--no-parent</span> <span style="color: #0a3069">\</span>
+    <span style="color: #116329">--wait</span><span style="color: #0550ae">=</span>1 <span style="color: #0a3069">\</span>
+    <span style="color: #116329">-P</span> ./archive/ <span style="color: #0a3069">\</span>
+    https://t.nil.ninja/phperkaigi/2024/golf/
+
+<span style="color: #6e7781"># ディレクトリ構造を調整する</span>
+<span style="color: #953800">mv</span> ./archive/t.nil.ninja/phperkaigi/2024/golf/<span style="color: #cf222e">*</span> ./archive
+<span style="color: #953800">rmdir</span> ./archive/t.nil.ninja/phperkaigi/2024/golf/
+<span style="color: #953800">rmdir</span> ./archive/t.nil.ninja/phperkaigi/2024/
+<span style="color: #953800">rmdir</span> ./archive/t.nil.ninja/phperkaigi/
+<span style="color: #953800">rmdir</span> ./archive/t.nil.ninja/
+
+<span style="color: #953800">mkdir</span> <span style="color: #116329">-p</span> ./archive/api/quizzes/<span style="color: #0550ae">{</span>1,2,3<span style="color: #0550ae">}</span>
+
+<span style="color: #6e7781"># 動的な API エンドポイントを叩いて結果を JSON ファイルとして保存する</span>
+wget <span style="color: #116329">-O</span> ./archive/api/quizzes/1/chart.json https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/1/chart
+wget <span style="color: #116329">-O</span> ./archive/api/quizzes/2/chart.json https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/2/chart
+wget <span style="color: #116329">-O</span> ./archive/api/quizzes/3/chart.json https://t.nil.ninja/phperkaigi/2024/golf/api/quizzes/3/chart
+
+<span style="color: #6e7781"># 上記 API を叩いている箇所を、落としてきた静的ファイルを参照するように変更する</span>
+<span style="color: #953800">sed</span> <span style="color: #116329">-i</span> <span style="color: #116329">-e</span> <span style="color: #0a3069">'s#/chart`#/chart.json`#'</span> ./archive/assets/chart.js
+</code></pre>
             </div>
             <p>
               このように wget に適切なオプションを渡すことで、指定したページから遷移可能なページを再帰的に辿っていき、サイト内の全ページをファイルへ落とすことができる。今回のサイトにはページ遷移では辿り着けないページがあったが (管理画面など)、運用が停止している今そういったページはアーカイブしなくてもよい。
@@ -144,16 +145,17 @@
               あとはこのファイルを適当にサーブしてやればよい。
             </p>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">server</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#D73A49">    listen </span><span style="color:#005CC5">80</span><span style="color:#005CC5"> default</span><span style="color:#24292E">;</span></span>
-<span class="line"><span style="color:#D73A49">    listen </span><span style="color:#24292E">[::]:80;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">    charset </span><span style="color:#24292E">UTF-8;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">    location</span><span style="color:#6F42C1"> /phperkaigi/2024/golf/ </span><span style="color:#24292E">{</span></span>
-<span class="line"><span style="color:#D73A49">        alias </span><span style="color:#24292E">/archive/;</span></span>
-<span class="line"><span style="color:#24292E">    }</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">server</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+    <span style="color: #cf222e">listen</span> <span style="color: #0550ae">80</span> <span style="color: #0a3069">default</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+    <span style="color: #cf222e">listen</span> <span style="color: #0a3069">[::]:80</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+
+    <span style="color: #cf222e">charset</span> <span style="color: #0a3069">UTF-8</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+
+    <span style="color: #cf222e">location</span> <span style="color: #24292f;background-color: #f6f8fa">/phperkaigi/2024/golf/</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+        <span style="color: #cf222e">alias</span> <span style="color: #24292f;background-color: #f6f8fa">/archive/</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+    <span style="color: #24292f;background-color: #f6f8fa">}</span>
+<span style="color: #24292f;background-color: #f6f8fa">}</span>
+</code></pre>
             </div>
           </section>
           <section id="section--outro">

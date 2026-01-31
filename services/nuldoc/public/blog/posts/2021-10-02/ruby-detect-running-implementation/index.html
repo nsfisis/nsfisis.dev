@@ -81,12 +81,13 @@
             上記ページの例から引用する:
           </p>
           <div class="codeblock">
-            <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ ruby-1.9.1 -ve 'p RUBY_ENGINE'</span></span>
-<span class="line"><span>ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]</span></span>
-<span class="line"><span>"ruby"</span></span>
-<span class="line"><span>$ jruby -ve 'p RUBY_ENGINE'</span></span>
-<span class="line"><span>jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]</span></span>
-<span class="line"><span>"jruby"</span></span></code></pre>
+            <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ruby-1.9.1 <span style="color: #116329">-ve</span> <span style="color: #0a3069">'p RUBY_ENGINE'</span>
+<span style="color: #24292f;background-color: #f6f8fa">ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]
+"ruby"
+</span><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>jruby <span style="color: #116329">-ve</span> <span style="color: #0a3069">'p RUBY_ENGINE'</span>
+<span style="color: #24292f;background-color: #f6f8fa">jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
+"jruby"</span>
+</code></pre>
           </div>
           <p>
             それぞれの処理系がどのような値を返すかだが、stack overflow に良い質問と回答があった。
@@ -96,16 +97,17 @@
           </p>
           <blockquote>
             <div class="codeblock">
-              <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>| RUBY_ENGINE | Implementation    |</span></span>
-<span class="line"><span>|:-----------:|:------------------|</span></span>
-<span class="line"><span>| &#x3C;undefined> | MRI &#x3C; 1.9         |</span></span>
-<span class="line"><span>| 'ruby'      | MRI >= 1.9 or REE |</span></span>
-<span class="line"><span>| 'jruby'     | JRuby             |</span></span>
-<span class="line"><span>| 'macruby'   | MacRuby           |</span></span>
-<span class="line"><span>| 'rbx'       | Rubinius          |</span></span>
-<span class="line"><span>| 'maglev'    | MagLev            |</span></span>
-<span class="line"><span>| 'ironruby'  | IronRuby          |</span></span>
-<span class="line"><span>| 'cardinal'  | Cardinal          |</span></span></code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code>| RUBY_ENGINE | Implementation    |
+|:-----------:|:------------------|
+| &lt;undefined&gt; | MRI &lt; 1.9         |
+| 'ruby'      | MRI &gt;= 1.9 or REE |
+| 'jruby'     | JRuby             |
+| 'macruby'   | MacRuby           |
+| 'rbx'       | Rubinius          |
+| 'maglev'    | MagLev            |
+| 'ironruby'  | IronRuby          |
+| 'cardinal'  | Cardinal          |
+</code></pre>
             </div>
           </blockquote>
           <p>
@@ -121,10 +123,11 @@
             <div class="filename">
               version.h
             </div>
-            <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#6A737D">/*</span></span>
-<span class="line"><span style="color:#6A737D"> * Ruby engine.</span></span>
-<span class="line"><span style="color:#6A737D"> */</span></span>
-<span class="line"><span style="color:#D73A49">#define</span><span style="color:#6F42C1"> MRUBY_RUBY_ENGINE</span><span style="color:#032F62">  "mruby"</span></span></code></pre>
+            <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">/*
+ * Ruby engine.
+ */</span>
+<span style="color: #6e7781">#define MRUBY_RUBY_ENGINE  "mruby"</span>
+</code></pre>
           </div>
         </div>
       </article>

@@ -359,9 +359,10 @@
                 compilerbook では整数一つのパース・コード生成から始めるが、今回は以下のようなソースをパースしてコード生成するところからスタートすることにした。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">() {</span></span>
-<span class="line"><span style="color:#D73A49">    return</span><span style="color:#005CC5"> 42</span><span style="color:#24292E">;</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">int</span> <span style="color: #8250df">main</span><span style="color: #24292f;background-color: #f6f8fa">()</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+    <span style="color: #cf222e">return</span> <span style="color: #0550ae">42</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+<span style="color: #24292f;background-color: #f6f8fa">}</span>
+</code></pre>
               </div>
               <p>
                 この時点で、<code>struct Token</code>、<code>struct Parser</code>、<code>struct AstNode</code>、<code>struct CodeGen</code> といった主要なデータ構造が定義され、この後もほぼ同じソース設計のまま進めている。
@@ -408,23 +409,24 @@
                 一日の終わりには、次のようなプログラムのテストが通るようになった。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> printf</span><span style="color:#24292E">();</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#D73A49">int</span><span style="color:#6F42C1"> main</span><span style="color:#24292E">() {</span></span>
-<span class="line"><span style="color:#D73A49">    int</span><span style="color:#24292E"> i;</span></span>
-<span class="line"><span style="color:#D73A49">    for</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">; i </span><span style="color:#D73A49">&#x3C;=</span><span style="color:#005CC5"> 100</span><span style="color:#24292E">; i </span><span style="color:#D73A49">=</span><span style="color:#24292E"> i </span><span style="color:#D73A49">+</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span></span>
-<span class="line"><span style="color:#D73A49">        if</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 15</span><span style="color:#D73A49"> ==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
-<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"FizzBuzz</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">);</span></span>
-<span class="line"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 3</span><span style="color:#D73A49"> ==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
-<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"Fizz</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">);</span></span>
-<span class="line"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (i </span><span style="color:#D73A49">%</span><span style="color:#005CC5"> 5</span><span style="color:#D73A49"> ==</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span></span>
-<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"Buzz</span><span style="color:#005CC5">\n</span><span style="color:#032F62">"</span><span style="color:#24292E">);</span></span>
-<span class="line"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
-<span class="line"><span style="color:#6F42C1">            printf</span><span style="color:#24292E">(</span><span style="color:#032F62">"</span><span style="color:#005CC5">%d\n</span><span style="color:#032F62">"</span><span style="color:#24292E">, i);</span></span>
-<span class="line"><span style="color:#24292E">        }</span></span>
-<span class="line"><span style="color:#24292E">    }</span></span>
-<span class="line"><span style="color:#D73A49">    return</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span></span>
-<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">int</span> <span style="color: #8250df">printf</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
+
+<span style="color: #cf222e">int</span> <span style="color: #8250df">main</span><span style="color: #24292f;background-color: #f6f8fa">()</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+    <span style="color: #cf222e">int</span> <span style="color: #24292f;background-color: #f6f8fa">i</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+    <span style="color: #cf222e">for</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">&lt;=</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">15</span> <span style="color: #0550ae">==</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+            <span style="color: #24292f;background-color: #f6f8fa">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"FizzBuzz</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+        <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">else</span> <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">==</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+            <span style="color: #24292f;background-color: #f6f8fa">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"Fizz</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+        <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">else</span> <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">==</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+            <span style="color: #24292f;background-color: #f6f8fa">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"Buzz</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+        <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">else</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+            <span style="color: #24292f;background-color: #f6f8fa">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"%d</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">i</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+        <span style="color: #24292f;background-color: #f6f8fa">}</span>
+    <span style="color: #24292f;background-color: #f6f8fa">}</span>
+    <span style="color: #cf222e">return</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+<span style="color: #24292f;background-color: #f6f8fa">}</span>
+</code></pre>
               </div>
             </section>
             <section id="section--development--day2">
@@ -513,13 +515,14 @@
                 記念すべき (?) 最後のバグはこちら。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span style="color:#24292E">         gen_expr(g, ast->expr1, GEN_RVAL);</span></span>
-<span class="line"><span style="color:#24292E">     } else {</span></span>
-<span class="line"><span style="color:#24292E">         gen_expr(g, ast->expr1, GEN_RVAL);</span></span>
-<span class="line"><span style="color:#B31D28">-        gen_lval2rval(ast->expr1->ty);</span></span>
-<span class="line"><span style="color:#22863A">+        gen_lval2rval(ast->expr1->ty->to);</span></span>
-<span class="line"><span style="color:#24292E">     }</span></span>
-<span class="line"><span style="color:#24292E"> }</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>         gen_expr(g, ast-&gt;expr1, GEN_RVAL);
+     } else {
+         gen_expr(g, ast-&gt;expr1, GEN_RVAL);
+<span style="color: #82071e;background-color: #ffebe9">-        gen_lval2rval(ast-&gt;expr1-&gt;ty);
+</span><span style="color: #116329;background-color: #dafbe1">+        gen_lval2rval(ast-&gt;expr1-&gt;ty-&gt;to);
+</span>     }
+ }
+</code></pre>
               </div>
               <p>
                 メモリアドレスから参照先の値を得る際、その型によってロードする命令の種類を変える必要があるのだが、その切替をポインタ型でおこなっていた。正しくは、そのポインタ型が指す型を元にして切り替えなければならない。
@@ -534,16 +537,17 @@
                 一体どこが異なるのか。<code>hexdump</code> の差分がこちら。
               </p>
               <div class="codeblock">
-                <pre class="shiki github-light" style="background-color:#f5f5f5;color:#24292e" tabindex="0"><code><span class="line"><span>$ diff -u &#x3C;(hexdump -C p4dcc2) &#x3C;(hexdump -C p4dcc3)</span></span>
-<span class="line"><span>@@ -5090,7 +5090,7 @@</span></span>
-<span class="line"><span> 00015db0  72 72 61 79 5f 65 6e 74  72 79 00 66 72 61 6d 65  |rray_entry.frame|</span></span>
-<span class="line"><span> 00015dc0  5f 64 75 6d 6d 79 00 5f  5f 66 72 61 6d 65 5f 64  |_dummy.__frame_d|</span></span>
-<span class="line"><span> 00015dd0  75 6d 6d 79 5f 69 6e 69  74 5f 61 72 72 61 79 5f  |ummy_init_array_|</span></span>
-<span class="line"><span>-00015de0  65 6e 74 72 79 00 63 63  6d 69 42 49 59 6b 2e 6f  |entry.ccmiBIYk.o|</span></span>
-<span class="line"><span>+00015de0  65 6e 74 72 79 00 63 63  53 71 64 47 76 57 2e 6f  |entry.ccSqdGvW.o|</span></span>
-<span class="line"><span> 00015df0  00 66 61 74 61 6c 5f 65  72 72 6f 72 00 72 65 61  |.fatal_error.rea|</span></span>
-<span class="line"><span> 00015e00  64 5f 61 6c 6c 00 74 6f  6b 65 6e 69 7a 65 00 74  |d_all.tokenize.t|</span></span>
-<span class="line"><span> 00015e10  79 70 65 5f 6e 65 77 00  74 79 70 65 5f 6e 65 77  |ype_new.type_new|</span></span></code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code>$ diff -u &lt;(hexdump -C p4dcc2) &lt;(hexdump -C p4dcc3)
+@@ -5090,7 +5090,7 @@
+ 00015db0  72 72 61 79 5f 65 6e 74  72 79 00 66 72 61 6d 65  |rray_entry.frame|
+ 00015dc0  5f 64 75 6d 6d 79 00 5f  5f 66 72 61 6d 65 5f 64  |_dummy.__frame_d|
+ 00015dd0  75 6d 6d 79 5f 69 6e 69  74 5f 61 72 72 61 79 5f  |ummy_init_array_|
+-00015de0  65 6e 74 72 79 00 63 63  6d 69 42 49 59 6b 2e 6f  |entry.ccmiBIYk.o|
++00015de0  65 6e 74 72 79 00 63 63  53 71 64 47 76 57 2e 6f  |entry.ccSqdGvW.o|
+ 00015df0  00 66 61 74 61 6c 5f 65  72 72 6f 72 00 72 65 61  |.fatal_error.rea|
+ 00015e00  64 5f 61 6c 6c 00 74 6f  6b 65 6e 69 7a 65 00 74  |d_all.tokenize.t|
+ 00015e10  79 70 65 5f 6e 65 77 00  74 79 70 65 5f 6e 65 77  |ype_new.type_new|
+</code></pre>
               </div>
               <p>
                 <code>fatal_error</code>、<code>read_all</code>、<code>tokenize</code> <code>type_new</code> はいずれも <code>main.c</code> で定義された関数の名前である。このことから考えると、これは GCC が埋め込んだシンボルテーブルである可能性が高い。わずかに異なっている 6バイトは、ランダム生成された何かのように見える。
