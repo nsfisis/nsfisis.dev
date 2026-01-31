@@ -4,7 +4,7 @@ uuid = "87455008-fe5b-49bf-af5a-b875264f8326"
 title = "【Ruby】 then キーワードと case in"
 description = "Ruby 3.0 で追加される case in 構文と、then キーワードについて"
 tags = [
-  "ruby",
+    "ruby",
 ]
 
 [[article.revisions]]
@@ -218,6 +218,6 @@ end
 # まとめ {#outro}
 
 * `if` や `case` の条件の後ろには `then`、`;`、改行のいずれかが必要
-  * 通常は改行しておけばよい
+    * 通常は改行しておけばよい
 * 3.0 で入る予定の `case` - `in` でも `then` 等が必要になる
 * Ruby の構文を正確に知るには (現状) `parse.y` を直接読めばよい

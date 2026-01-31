@@ -4,8 +4,8 @@ uuid = "ea0593d3-691c-4e08-8db4-98b8925717ec"
 title = "紅白ぺぱ合戦に参加&LTしました"
 description = "2024-11-30 に開催された紅白ぺぱ合戦に参加し、ぺ陣営のメンバとして LT しました。"
 tags = [
-  "cohackpp",
-  "php",
+    "cohackpp",
+    "php",
 ]
 
 [[article.revisions]]

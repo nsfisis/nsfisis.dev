@@ -4,7 +4,7 @@ uuid = "91c61980-c262-4e8d-89b0-4304e7f6d644"
 title = "Rust のプリミティブ型はどこからやって来るか"
 description = "Rust のプリミティブ型は予約語ではなく普通の識別子である。どのようにこれが名前解決されるのかを調べた。"
 tags = [
-  "rust",
+    "rust",
 ]
 
 [[article.revisions]]

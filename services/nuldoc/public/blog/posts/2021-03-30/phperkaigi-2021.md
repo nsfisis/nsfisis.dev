@@ -4,9 +4,9 @@ uuid = "3fbe0b8c-216e-48f6-b905-c0d361b94542"
 title = "PHPerKaigi 2021"
 description = "2021-03-26 から 2021-03-28 にかけて開催された、PHPerKaigi 2021 に参加した。"
 tags = [
-  "conference",
-  "php",
-  "phperkaigi",
+    "conference",
+    "php",
+    "phperkaigi",
 ]
 
 [[article.revisions]]

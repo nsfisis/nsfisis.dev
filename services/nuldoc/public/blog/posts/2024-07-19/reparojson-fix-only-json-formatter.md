@@ -4,8 +4,8 @@ uuid = "222488dd-cf07-4961-83aa-a014b05369ff"
 title = "reparojson: 文法エラーを直すだけの JSON フォーマッタを作った"
 description = "文法エラーだけを直し、空白の削除や挿入といった整形処理を一切おこなわない JSON フォーマッタを作成した。Neovim と連携させる設定例も紹介する。"
 tags = [
-  "neovim",
-  "vim",
+    "neovim",
+    "vim",
 ]
 
 [[article.revisions]]

@@ -4,9 +4,9 @@ uuid = "be9c896d-7efa-42dd-a50a-dda5fd3a7f5c"
 title = "PHP カンファレンス小田原 2024 参加レポ"
 description = "2024-04-13 に開催された、PHP カンファレンス小田原 2024 に参加した。"
 tags = [
-  "conference",
-  "php",
-  "phpcon-odawara",
+    "conference",
+    "php",
+    "phpcon-odawara",
 ]
 
 [[article.revisions]]
@@ -26,8 +26,8 @@ remark = "セッションの感想を追加"
 PHP 処理系の JIT コンパイルにおける PHP 8.4 での変更について、登壇をおこなった。
 
 * 来る新 JIT エンジンについて知った気になる
-  *  [プロポーザル](https://fortee.jp/phpconodawara-2024/proposal/bc9669f6-6583-489c-aa6a-1b68abf7c291)
-  *  [スライド](/slides/2024-04-13/phpcon-odawara-2024/)
+    *  [プロポーザル](https://fortee.jp/phpconodawara-2024/proposal/bc9669f6-6583-489c-aa6a-1b68abf7c291)
+    *  [スライド](/slides/2024-04-13/phpcon-odawara-2024/)
 
 今回、どこから話を始めるか大いに迷ったのだが、最終的には PHP 処理系の opcode や VM といった概念は既知のものとし、そこから JIT コンパイルへ繋げるといった構成にした。
 
@@ -49,14 +49,14 @@ Tracing JIT の発火条件や、IR を使って実現される最適化方法�
 発表タイトルと発表者名は fortee より引用
 
 * FigmaとPHPで作る、1ミリたりとも表示崩れしない最強の帳票印刷ソリューション (たつきち さん)
-  * プロポーザルリンク: https://fortee.jp/phpconodawara-2024/proposal/7c57d5ca-213a-4d7a-aaf0-26ddc44897f0
-  * 感想: 最初のアイデアから途中の泥臭いワークアラウンドまで非常におもしろかったです。帳票には何度か苦しめられているので、機会があれば試してみたいです。
+    * プロポーザルリンク: https://fortee.jp/phpconodawara-2024/proposal/7c57d5ca-213a-4d7a-aaf0-26ddc44897f0
+    * 感想: 最初のアイデアから途中の泥臭いワークアラウンドまで非常におもしろかったです。帳票には何度か苦しめられているので、機会があれば試してみたいです。
 * PHPの次期バージョンはこの時期どうなっているのか、Internalsの開発体制について (てきめん さん)
-  * プロポーザルリンク: https://fortee.jp/phpconodawara-2024/proposal/740b034a-81f0-4b7a-90e9-cd3fa01c651f
-  * 感想: 前々から出そうとしている RFC があるので、RFC についての日本語情報が増えるのは大変ありがたいです。あとは作業を進めなければ……。
+    * プロポーザルリンク: https://fortee.jp/phpconodawara-2024/proposal/740b034a-81f0-4b7a-90e9-cd3fa01c651f
+    * 感想: 前々から出そうとしている RFC があるので、RFC についての日本語情報が増えるのは大変ありがたいです。あとは作業を進めなければ……。
 * Architecture Decision Record を一年運用してみた (富所 亮 さん)
-  * プロポーザルリンク: https://fortee.jp/phpconodawara-2024/proposal/56218b4f-b724-4199-82f1-67497501a9ef
-  * 感想: 今回最も楽しみにしていた発表の一つです。設計指針の調査・共有等には課題を感じていたので、弊チームでも導入のために動いていこうと思います。
+    * プロポーザルリンク: https://fortee.jp/phpconodawara-2024/proposal/56218b4f-b724-4199-82f1-67497501a9ef
+    * 感想: 今回最も楽しみにしていた発表の一つです。設計指針の調査・共有等には課題を感じていたので、弊チームでも導入のために動いていこうと思います。
 
 # おわりに {#outro}
 

@@ -4,7 +4,7 @@ uuid = "046e4412-bee8-4ffe-9876-6cbeaa0caf6b"
 title = "【HTTP】HTTP/1.1 で同じヘッダを2回送るとどうなるか"
 description = "HTTP/1.1 で同じヘッダを2回送ったときの挙動について仕様を読んでまとめた。"
 tags = [
-  "http",
+    "http",
 ]
 
 [[article.revisions]]

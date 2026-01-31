@@ -4,9 +4,9 @@ uuid = "f4985d54-0907-4449-8101-0fcd382f9e02"
 title = "PHPerKaigi 2022 トークン問題の解説"
 description = "PHPerKaigi 2022 で私が作成した PHPer チャレンジ問題を解説する。"
 tags = [
-  "conference",
-  "php",
-  "phperkaigi",
+    "conference",
+    "php",
+    "phperkaigi",
 ]
 
 [[article.revisions]]

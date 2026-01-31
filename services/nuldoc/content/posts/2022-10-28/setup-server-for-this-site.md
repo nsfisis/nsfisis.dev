@@ -4,7 +4,7 @@ uuid = "673cb872-af2d-41a3-9fb0-60f1afcedb0d"
 title = "【備忘録】 このサイト用の VPS をセットアップしたときのメモ"
 description = "GitHub Pages でホストしていたこのサイトを VPS へ移行したので、そのときにやったことのメモ。99 % 自分用。"
 tags = [
-  "note-to-self",
+    "note-to-self",
 ]
 
 [[article.revisions]]

@@ -5,9 +5,9 @@ event = "PHP カンファレンス香川 2025"
 talkType = "レギュラートーク (30分)"
 link = "/slides/2025-11-24/phpconkagawa-2025/slides.pdf"
 tags = [
-  "conference",
-  "php",
-  "phpconkagawa",
+    "conference",
+    "php",
+    "phpconkagawa",
 ]
 
 [[slide.revisions]]

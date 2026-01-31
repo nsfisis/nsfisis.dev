@@ -35,22 +35,22 @@ mollit anim id est laborum.
 
 * list item 1
 * list item 2
-  * list item 2.a
-  * list item 2.b
+    * list item 2.a
+    * list item 2.b
 * list item 3
 * list item 3
 
 1. list item 1
 1. list item 2
-   1. list item 2.a
-   1. list item 2.b
+    1. list item 2.a
+    1. list item 2.b
 1. list item 3
 1. list item 3
 
 * [ ] list item 1
 * [ ] list item 2
-  * [ ] list item 2.a
-  * [ ] list item 2.b
+    * [ ] list item 2.a
+    * [ ] list item 2.b
 * [ ] list item 3
 * [ ] list item 3
 

@@ -4,8 +4,8 @@ uuid = "ee7289ee-ff2e-439d-b343-7f87504192fd"
 title = "MN-Core Challenge #1 参加レポ"
 description = "2024-08-28 から 2024-09-24 にかけて開催された MN-Core Challenge #1 に参加した。"
 tags = [
-  "code-golf",
-  "mncore-challenge",
+    "code-golf",
+    "mncore-challenge",
 ]
 
 [[article.revisions]]

@@ -20,17 +20,17 @@ remark = "公開"
 LT 等も含めて計 11 回の登壇をおこなった。
 
 * PHP 勉強会@東京での登壇 (計 8 回)
-  *  [第 148 回](/slides/2023-01-18/phpstudy-tokyo-148/)
-  *  [第 149 回](/slides/2023-02-15/phpstudy-tokyo-149/)
-  *  [第 150 回](/slides/2023-03-15/phpstudy-tokyo-150/)
-  *  [第 151 回](/slides/2023-04-12/phpstudy-tokyo-151/)
-  *  [第 153 回](/slides/2023-06-21/phpstudy-tokyo-153/)
-  *  [第 154 回](/slides/2023-07-26/phpstudy-tokyo-154/)
-  *  [第 155 回](/slides/2023-08-24/phpstudy-tokyo-155/)
-  *  [第 157 回](/slides/2023-10-25/phpstudy-tokyo-157/)
+    *  [第 148 回](/slides/2023-01-18/phpstudy-tokyo-148/)
+    *  [第 149 回](/slides/2023-02-15/phpstudy-tokyo-149/)
+    *  [第 150 回](/slides/2023-03-15/phpstudy-tokyo-150/)
+    *  [第 151 回](/slides/2023-04-12/phpstudy-tokyo-151/)
+    *  [第 153 回](/slides/2023-06-21/phpstudy-tokyo-153/)
+    *  [第 154 回](/slides/2023-07-26/phpstudy-tokyo-154/)
+    *  [第 155 回](/slides/2023-08-24/phpstudy-tokyo-155/)
+    *  [第 157 回](/slides/2023-10-25/phpstudy-tokyo-157/)
 * PHPerKaigi 2023 での登壇
-  *  [レギュラートーク](/slides/2023-03-24/phperkaigi-2023/)
-  *  [トークン解説セッション](/slides/2023-03-25/phperkaigi-2023-tokens/)
+    *  [レギュラートーク](/slides/2023-03-24/phperkaigi-2023/)
+    *  [トークン解説セッション](/slides/2023-03-25/phperkaigi-2023-tokens/)
 
 * PHPerKaigi 2023 での当日スタッフ業
 *  [非公式でおこなわれた PHP カンファレンス福岡 2023 の 前夜祭イベントでの登壇](/slides/2023-06-23/phpconfuk-2023-eve/)
@@ -44,7 +44,7 @@ LT 等も含めて計 11 回の登壇をおこなった。
 
 * 社外記事 (このブログ): 8本
 * 社内記事: 34本
-  * 年間で最も記事を書いた人として社内表彰された
+    * 年間で最も記事を書いた人として社内表彰された
 
 # 作ったもの {#coding}
 

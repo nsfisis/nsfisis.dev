@@ -4,9 +4,9 @@ uuid = "087e98f2-743c-48d8-9f67-e9b57e354845"
 title = "【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)"
 description = "composer-patches は BSD patch に対応しておらず、一部のパッチの適用に失敗する。現在ベータ版である v2 では patch コマンドに依存しなくなり、macOS で使うときのストレスが解消される見込み。"
 tags = [
-  "composer",
-  "macos",
-  "php",
+    "composer",
+    "macos",
+    "php",
 ]
 
 [[article.revisions]]

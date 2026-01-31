@@ -4,8 +4,8 @@ uuid = "39d3d137-f18d-4d88-8ef6-7be9cc2f3f0b"
 title = "浮動小数点数の半開区間で単一値を表現する"
 description = "IEEE 754 の nextUp 操作を用いて、浮動小数点数の半開区間で単一値を表現するテクニックを紹介する。"
 tags = [
-  "float",
-  "php",
+    "float",
+    "php",
 ]
 
 [[article.revisions]]

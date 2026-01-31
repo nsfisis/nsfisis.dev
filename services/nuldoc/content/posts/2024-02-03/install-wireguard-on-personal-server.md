@@ -4,8 +4,8 @@ uuid = "210673d0-c19e-4195-a280-968a0729dd41"
 title = "【備忘録】 個人用サーバに WireGuard を導入する"
 description = "個人用サービスのセルフホストに使っているサーバに WireGuard を導入する作業をしたメモ"
 tags = [
-  "note-to-self",
-  "wireguard",
+    "note-to-self",
+    "wireguard",
 ]
 
 [[article.revisions]]

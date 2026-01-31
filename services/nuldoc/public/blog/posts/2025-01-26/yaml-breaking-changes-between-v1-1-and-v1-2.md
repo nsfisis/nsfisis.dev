@@ -4,7 +4,7 @@ uuid = "da2a0cec-74b3-4c5e-b2a2-47fe79ef49f9"
 title = "【YAML】YAML 1.1 と YAML 1.2 の主な破壊的変更"
 description = "データ記述言語 YAML におけるバージョン 1.1 と 1.2 の主な破壊的変更をまとめた。"
 tags = [
-  "yaml",
+    "yaml",
 ]
 
 [[article.revisions]]

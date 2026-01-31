@@ -5,9 +5,9 @@ event = "PHP カンファレンス小田原 2025"
 talkType = "レギュラートーク (20分)"
 link = "/slides/2025-04-12/phpcon-odawara-2025/slides.pdf"
 tags = [
-  "conference",
-  "php",
-  "phpcon-odawara",
+    "conference",
+    "php",
+    "phpcon-odawara",
 ]
 
 [[slide.revisions]]

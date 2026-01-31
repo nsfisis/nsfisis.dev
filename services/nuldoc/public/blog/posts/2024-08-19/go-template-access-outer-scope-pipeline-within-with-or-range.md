@@ -4,7 +4,7 @@ uuid = "eed112e4-3227-4b3f-9991-7e11c288ee2b"
 title = "【Go】 text/template の with や range の内側から外側の \".\" にアクセスする"
 description = "Go言語の text/template における with や range は \".\" を上書きする。これらの内側から外側の \".\" にアクセスする方法を調べた。"
 tags = [
-  "go",
+    "go",
 ]
 
 [[article.revisions]]

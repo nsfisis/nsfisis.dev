@@ -28,12 +28,12 @@ LT 等も含めて計 8 回の登壇をおこなった。
 * [YAPC::Hiroshima 2024 参加](/posts/2024-02-10/yapcjapan-2024-report/)
 * [PHPカンファレンス関西 2024 参加](/posts/2024-02-22/phpkansai-2024-report/)
 * PHPerKaigi 2024
-  * [登壇](/slides/2024-03-08/phperkaigi-2024/)
-  * コアスタッフとして参加
+    * [登壇](/slides/2024-03-08/phperkaigi-2024/)
+    * コアスタッフとして参加
 *  [Ya8 2024 登壇](/slides/2024-03-15/ya8-2024/)
 * PHP カンファレンス小田原 2024
-  * [登壇](/slides/2024-04-13/phpcon-odawara-2024/)
-  * 当日スタッフとして参加
+    * [登壇](/slides/2024-04-13/phpcon-odawara-2024/)
+    * 当日スタッフとして参加
 * [PHP 勉強会@東京 第 163 回 LT で登壇](/slides/2024-04-25/phpstudy-tokyo-163/)
 * [PHP カンファレンス香川 2024 参加](/posts/2024-05-11/phpconkagawa-2024-report/)
 * [ScalaMatsuri 2024 参加](/posts/2024-06-19/scalamatsuri-2024-report/)
@@ -51,7 +51,7 @@ LT 等も含めて計 8 回の登壇をおこなった。
 
 * 社外記事 (このブログ): 15本
 * 社内記事: 22本
-  * 年間で最も記事を書いた人として社内表彰された
+    * 年間で最も記事を書いた人として社内表彰された
 
 # 作ったもの {#coding}
 

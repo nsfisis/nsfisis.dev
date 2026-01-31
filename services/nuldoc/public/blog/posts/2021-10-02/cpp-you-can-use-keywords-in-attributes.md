@@ -4,7 +4,7 @@ uuid = "69863d75-ef21-42db-b743-5958f7c86827"
 title = "【C++】 属性構文の属性名にはキーワードが使える"
 description = "C++ の属性構文の属性名には、キーワードが使える。ネタ記事。"
 tags = [
-  "cpp",
+    "cpp",
 ]
 
 [[article.revisions]]

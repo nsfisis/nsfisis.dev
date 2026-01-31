@@ -5,8 +5,8 @@ event = "PHP 勉強会@東京 第180回"
 talkType = "レギュラートーク (20分)"
 link = "/slides/2025-10-29/phpstudy-tokyo-180/slides.pdf"
 tags = [
-  "php",
-  "phpstudy-tokyo",
+    "php",
+    "phpstudy-tokyo",
 ]
 
 [[slide.revisions]]

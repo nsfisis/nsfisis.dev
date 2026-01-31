@@ -4,7 +4,7 @@ uuid = "78419bf2-a1e6-421f-875b-3d93e777b04f"
 title = "放送大学に入学しました"
 description = "放送大学に入学しました。頑張ります。"
 tags = [
-  "ouj",
+    "ouj",
 ]
 
 [[article.revisions]]

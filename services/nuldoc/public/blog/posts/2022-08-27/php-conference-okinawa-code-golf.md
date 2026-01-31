@@ -4,10 +4,10 @@ uuid = "bb71bb5d-361b-44cb-9753-81d14583d860"
 title = "PHP カンファレンス沖縄で出題されたコードゴルフの問題を解いてみた"
 description = "PHP カンファレンス沖縄の懇親会 LT で出題されたコードゴルフの問題を解いてみた。"
 tags = [
-  "code-golf",
-  "conference",
-  "php",
-  "phpconokinawa",
+    "code-golf",
+    "conference",
+    "php",
+    "phpconokinawa",
 ]
 
 [[article.revisions]]

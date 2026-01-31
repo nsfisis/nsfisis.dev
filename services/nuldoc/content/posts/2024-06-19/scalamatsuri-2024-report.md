@@ -4,9 +4,9 @@ uuid = "8d6f3690-3da3-4235-a81b-b9707cee22ad"
 title = "ScalaMatsuri 2024 参加レポ"
 description = "2024-06-08 から 2024-06-09 にかけて開催された、ScalaMatsuri 2024 に参加した。"
 tags = [
-  "conference",
-  "scala",
-  "scalamatsuri",
+    "conference",
+    "scala",
+    "scalamatsuri",
 ]
 
 [[article.revisions]]
@@ -24,9 +24,9 @@ Day 2 には当日参加できなかったため、day 2 のセッションの�
 特に印象に残ったセッションを、day 1 と day 2 で一つずつ選んだ (タイトルと登壇者名は [公式ホームページの「プログラム」](https://2024.scalamatsuri.org/ja/programs) から引用)。
 
 * [Scala to WebAssembly: 動機と方法](https://2024.scalamatsuri.org/ja/programs/SESSION_DAY_1_02) (Rikito Taniguchi さん)
-  * [最近 WebAssembly の処理系を作った](/posts/2024-03-17/phperkaigi-2024-report/#section--as-speaker) こともあって、気になっていたセッションです。私の処理系は WasmGC proposal を実装していないので動かせないのですが、いつかサポートして動かしてみたいですね。
+    * [最近 WebAssembly の処理系を作った](/posts/2024-03-17/phperkaigi-2024-report/#section--as-speaker) こともあって、気になっていたセッションです。私の処理系は WasmGC proposal を実装していないので動かせないのですが、いつかサポートして動かしてみたいですね。
 * [作って学ぶ Extensible Effects](https://2024.scalamatsuri.org/ja/programs/SESSION_DAY_2_04) (Kory さん・hsjoihs さん)
-  * 今回一番楽しみにしていたセッションです。Day 2 当日は参加できず、後日アーカイブ動画を視聴したのですが、期待を裏切らない濃厚なセッションでした。後日開かれた [NB-Scala レトロスペクティブ (非公式後夜祭)](https://nextbeat.connpass.com/event/315988/) の発表も拝聴したのですが、どちらも非常に面白かったです。
+    * 今回一番楽しみにしていたセッションです。Day 2 当日は参加できず、後日アーカイブ動画を視聴したのですが、期待を裏切らない濃厚なセッションでした。後日開かれた [NB-Scala レトロスペクティブ (非公式後夜祭)](https://nextbeat.connpass.com/event/315988/) の発表も拝聴したのですが、どちらも非常に面白かったです。
 
 # その他感想 {#others}
 

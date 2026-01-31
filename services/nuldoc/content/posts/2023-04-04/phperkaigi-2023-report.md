@@ -4,9 +4,9 @@ uuid = "21ce39f0-d613-45f2-a760-89c368892d77"
 title = "PHPerKaigi 2023 参加レポ"
 description = "2023-03-23 から 2023-03-25 にかけて開催された、PHPerKaigi 2023 に参加した。"
 tags = [
-  "conference",
-  "php",
-  "phperkaigi",
+    "conference",
+    "php",
+    "phperkaigi",
 ]
 
 [[article.revisions]]
@@ -32,13 +32,13 @@ remark = "トークセッションの記事版の執筆を中止"
 これまでとの最大の違いとして、今回はスピーカーとして登壇した。まずはそれについて書く。2つのセッションで登壇した。
 
 * 詳説「参照」：PHP 処理系の実装から参照を理解する
-  *  [プロポーザル](https://fortee.jp/phperkaigi-2023/proposal/95e4dd94-5fc7-40fe-9e1a-230e36404cbe)
-  *  [スライド](/slides/2023-03-24/phperkaigi-2023/)
-  * 解説記事 (執筆中) → 追記: 記事版の執筆は諦めた
+    *  [プロポーザル](https://fortee.jp/phperkaigi-2023/proposal/95e4dd94-5fc7-40fe-9e1a-230e36404cbe)
+    *  [スライド](/slides/2023-03-24/phperkaigi-2023/)
+    * 解説記事 (執筆中) → 追記: 記事版の執筆は諦めた
 * PHPerチャレンジ解説セッション - デジタルサーカス株式会社
-  *  [プロポーザル](https://fortee.jp/phperkaigi-2023/proposal/524c9dca-1d70-4b32-a939-9c73ffe5cb48)
-  *  [スライド](/slides/2023-03-25/phperkaigi-2023-tokens/)
-  * 解説記事 (執筆中) → 追記: 記事版の執筆は諦めた
+    *  [プロポーザル](https://fortee.jp/phperkaigi-2023/proposal/524c9dca-1d70-4b32-a939-9c73ffe5cb48)
+    *  [スライド](/slides/2023-03-25/phperkaigi-2023-tokens/)
+    * 解説記事 (執筆中) → 追記: 記事版の執筆は諦めた
 
 PHPer チャレンジの話については後述する。
 参照については、PHP を書き始めた頃からずっと疑問に思っていたので、仕組みを理解する良い機会となった。

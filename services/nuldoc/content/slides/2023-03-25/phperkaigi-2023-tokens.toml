@@ -5,9 +5,9 @@ event = "PHPerKaigi 2023"
 talkType = "トークン解説セッション"
 link = "/slides/2023-03-25/phperkaigi-2023-tokens/slide.pdf"
 tags = [
-  "conference",
-  "php",
-  "phperkaigi",
+    "conference",
+    "php",
+    "phperkaigi",
 ]
 
 [[slide.revisions]]

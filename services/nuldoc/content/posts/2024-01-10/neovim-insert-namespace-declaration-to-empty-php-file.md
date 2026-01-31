@@ -4,8 +4,8 @@ uuid = "05cb16e1-05bc-4359-bc06-88ac20510740"
 title = "【Neovim】 空の PHP ファイルに namespace 宣言を挿入する"
 description = "Neovim で空の PHP ファイルを開いたとき、ディレクトリの構造に基づいて自動的に namespace 宣言を挿入するようにする。"
 tags = [
-  "neovim",
-  "php",
+    "neovim",
+    "php",
 ]
 
 [[article.revisions]]

@@ -4,7 +4,7 @@ uuid = "e1aff84c-d6d4-4dea-bc45-9c41e6445006"
 title = "【Python】 クロージャとUnboundLocalError: local variable 'x' referenced before assignment"
 description = "Python における UnboundLocalError の理由と対処法。"
 tags = [
-  "python",
+    "python",
 ]
 
 [[article.revisions]]

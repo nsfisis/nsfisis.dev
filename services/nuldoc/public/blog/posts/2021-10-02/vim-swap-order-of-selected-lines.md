@@ -4,7 +4,7 @@ uuid = "665de47e-0ed6-405e-ad30-81c3c4592d45"
 title = "Vimで選択した行の順番を入れ替える"
 description = "Vim で選択した行の順番を入れ替える方法。"
 tags = [
-  "vim",
+    "vim",
 ]
 
 [[article.revisions]]

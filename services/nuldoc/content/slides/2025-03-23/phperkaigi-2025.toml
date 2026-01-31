@@ -5,9 +5,9 @@ event = "PHPerKaigi 2025"
 talkType = "レギュラートーク (40分)"
 link = "/slides/2025-03-23/phperkaigi-2025/slides.pdf"
 tags = [
-  "conference",
-  "php",
-  "phperkaigi",
+    "conference",
+    "php",
+    "phperkaigi",
 ]
 
 [[slide.revisions]]

@@ -4,9 +4,9 @@ uuid = "750be5c8-ca52-4cbd-86fe-5645b06bde95"
 title = "PHPerKaigi 2024 参加レポ"
 description = "2024-03-07 から 2024-03-09 にかけて開催された、PHPerKaigi 2024 に参加した。"
 tags = [
-  "conference",
-  "php",
-  "phperkaigi",
+    "conference",
+    "php",
+    "phperkaigi",
 ]
 
 [[article.revisions]]
@@ -33,9 +33,8 @@ remark = "Wasm ランタイムの進捗について追記"
 昨年に続き、スピーカーとして登壇をおこなった。
 
 * WebAssembly を理解する 〜VM の作成を通して〜
-
-  *  [プロポーザル](https://fortee.jp/phperkaigi-2024/proposal/bc5dc153-17af-4079-8f1b-2660af97e2c8)
-  *  [スライド](/slides/2024-03-08/phperkaigi-2024/)
+    *  [プロポーザル](https://fortee.jp/phperkaigi-2024/proposal/bc5dc153-17af-4079-8f1b-2660af97e2c8)
+    *  [スライド](/slides/2024-03-08/phperkaigi-2024/)
 
 WebAssembly の VM を PHP で実装し、実装に至るまでの道程や WebAssembly の特徴、言語処理系を作る楽しさについて語った。
 タイトルにある「WebAssembly を理解する」という目的が達成できるようなトークだったかと言われると疑問は残るものの、実際に作った人にしかできない話をすることはできたと思う。

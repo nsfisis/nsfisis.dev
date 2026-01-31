@@ -4,10 +4,10 @@ uuid = "2ed2d400-b3f6-48bc-af27-19d9042875a0"
 title = "カヤックさん開催のコードゴルフコンテスト Anybatross に参加して優勝した"
 description = "YAPC::Fukuoka 2025 に際してカヤックさんが開催されていたコードゴルフコンテスト、Anybatross に参加して優勝した。"
 tags = [
-  "code-golf",
-  "perl",
-  "ruby",
-  "yapc",
+    "code-golf",
+    "perl",
+    "ruby",
+    "yapc",
 ]
 
 [[article.revisions]]

@@ -4,7 +4,7 @@ uuid = "44171f75-c312-4c92-9927-3d260e162175"
 title = "【Vim】 autocmd events の BufWrite/BufWritePre の違い"
 description = "Vim の autocmd events における BufWrite/BufWritePre がどう違うのかを調べた結果、違いはないことがわかった。"
 tags = [
-  "vim",
+    "vim",
 ]
 
 [[article.revisions]]
@@ -101,13 +101,13 @@ FileEncoding                    Obsolete.  It still works and is equivalent
 記事タイトルについて言えば、どちらも変わらないので好きな方を使えばよい。あえて言えば、次のようになるだろう。
 
 * `BufAdd`/`BufCreate`
-  * → `BufCreate` は歴史的な理由により ("for historic reasons") 存在しているため、新しい方 (`BufAdd`) を使う
+    * → `BufCreate` は歴史的な理由により ("for historic reasons") 存在しているため、新しい方 (`BufAdd`) を使う
 * `BufRead`/`BufReadPost`
-  * → `BufReadPre` との対称性のため、あるいは `BufWritePost` との対称性のため `BufReadPost` を使う
+    * → `BufReadPre` との対称性のため、あるいは `BufWritePost` との対称性のため `BufReadPost` を使う
 * `BufWrite`/`BufWritePre`
-  * → `BufWritePost` との対称性のため、あるいは `BufReadPre` との対称性のため `BufWritePre` を使う
+    * → `BufWritePost` との対称性のため、あるいは `BufReadPre` との対称性のため `BufWritePre` を使う
 * `FileEncoding`/`EncodingChanged`
-  * → `FileEncoding` は "Obsolete" と明言されているので、`EncodingChanged` を使う
+    * → `FileEncoding` は "Obsolete" と明言されているので、`EncodingChanged` を使う
 
 ところでこの調査で知ったのだが、`BufRead` と `BufWrite`
 は上にある通り発火するタイミングが「後」と「前」で対称性がない。可能なら

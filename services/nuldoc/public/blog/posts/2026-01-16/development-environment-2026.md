@@ -4,7 +4,7 @@ uuid = "8ef2ea79-97b7-4d9e-9ddb-0aa5423e6da9"
 title = "開発環境現状確認 2026"
 description = "2026 年 1 月時点での開発環境まとめ"
 tags = [
-  "note-to-self",
+    "note-to-self",
 ]
 
 [[article.revisions]]

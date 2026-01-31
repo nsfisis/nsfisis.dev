@@ -5,9 +5,9 @@ event = "Ya8 2024"
 talkType = "レギュラートーク (60分)"
 link = "/slides/2024-03-15/ya8-2024/slide.pdf"
 tags = [
-  "conference",
-  "wasm",
-  "ya8",
+    "conference",
+    "wasm",
+    "ya8",
 ]
 
 [[slide.revisions]]

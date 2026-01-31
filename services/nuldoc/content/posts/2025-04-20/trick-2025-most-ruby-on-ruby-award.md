@@ -4,10 +4,10 @@ uuid = "039b3dff-3b75-46b7-a731-9a3a0ff8e21f"
 title = "RubyKaigi 2025 の TRICK で入賞した"
 description = "RubyKaigi 2025 で開催された TRICK において、『最もRuby on Ruby賞』として審査員賞をいただいた。"
 tags = [
-  "conference",
-  "ruby",
-  "rubykaigi",
-  "trick",
+    "conference",
+    "ruby",
+    "rubykaigi",
+    "trick",
 ]
 
 [[article.revisions]]

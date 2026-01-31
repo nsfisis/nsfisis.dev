@@ -4,8 +4,8 @@ uuid = "a4c326a6-5ffe-450c-abf2-45833c5efb6a"
 title = "【GitLab】 GitLab CI/CD 上での bash/sh は pipefail が有効になっている"
 description = "GitLab CI/CD で bash/sh スクリプトを動かすと、pipefail オプションが有効になった状態で実行される。"
 tags = [
-  "ci-cd",
-  "gitlab",
+    "ci-cd",
+    "gitlab",
 ]
 
 [[article.revisions]]

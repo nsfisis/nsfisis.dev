@@ -5,9 +5,9 @@ event = "TechRAMEN 2025 Conference"
 talkType = "40 分"
 link = "/slides/2025-07-26/techramen-25-conf/slides.pdf"
 tags = [
-  "c",
-  "conference",
-  "techramen",
+    "c",
+    "conference",
+    "techramen",
 ]
 
 [[slide.revisions]]

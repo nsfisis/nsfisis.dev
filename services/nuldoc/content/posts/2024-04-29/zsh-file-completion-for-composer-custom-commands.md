@@ -4,9 +4,9 @@ uuid = "9b26c1ed-45c3-4cad-9476-cbf2cf2e4de7"
 title = "【Zsh】 Composer のカスタムコマンドに対する Zsh 補完で引数にファイルを補完させる"
 description = "Zsh の Composer に対する補完はカスタムコマンドやその引数を補完しない。カスタムコマンドの引数としてファイルを補完させる方法を調べた。"
 tags = [
-  "composer",
-  "php",
-  "zsh",
+    "composer",
+    "php",
+    "zsh",
 ]
 
 [[article.revisions]]

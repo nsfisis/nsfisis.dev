@@ -4,8 +4,8 @@ uuid = "0ed1ccc8-d437-481c-8cca-2131ce800cc0"
 title = "PHP の処理系を Emscripten で WebAssembly にコンパイルする"
 description = "PHP の処理系 (php/php-src) を Emscripten で WebAssembly にコンパイルし、任意のコードを隔離された環境で評価できるようにした。"
 tags = [
-  "php",
-  "wasm",
+    "php",
+    "wasm",
 ]
 
 [[article.revisions]]

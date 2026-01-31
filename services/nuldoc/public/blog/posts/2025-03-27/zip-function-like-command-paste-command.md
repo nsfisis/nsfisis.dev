@@ -4,7 +4,7 @@ uuid = "99111377-27e7-427b-9dc5-a23f621fa826"
 title = "zip 関数のようなコマンド paste"
 description = "zip 関数のような動きをする paste コマンドについてのメモ。"
 tags = [
-  "note-to-self",
+    "note-to-self",
 ]
 toc = false
 

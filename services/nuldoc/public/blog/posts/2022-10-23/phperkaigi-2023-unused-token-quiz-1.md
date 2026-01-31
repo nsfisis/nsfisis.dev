@@ -4,8 +4,8 @@ uuid = "46e0d5db-b17e-464c-a723-8c3e01af7d1d"
 title = "PHPerKaigi 2023: ボツになったトークン問題 その 1"
 description = "来年の PHPerKaigi 2023 でデジタルサーカス株式会社から出題予定のトークン問題のうち、ボツになった問題を公開する (その 1)。"
 tags = [
-  "php",
-  "phperkaigi",
+    "php",
+    "phperkaigi",
 ]
 
 [[article.revisions]]

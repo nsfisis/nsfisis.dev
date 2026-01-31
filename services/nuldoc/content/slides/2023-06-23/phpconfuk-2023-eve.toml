@@ -5,8 +5,8 @@ event = "PHP カンファレンス福岡 2023 前夜祭 (非公式)"
 talkType = "レギュラートーク"
 link = "/slides/2023-06-23/phpconfuk-2023-eve/slide.pdf"
 tags = [
-  "php",
-  "phpconfuk",
+    "php",
+    "phpconfuk",
 ]
 
 [[slide.revisions]]
