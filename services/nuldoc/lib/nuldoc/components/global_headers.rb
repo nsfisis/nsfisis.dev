@@ -1,53 +1,65 @@
 module Nuldoc
   module Components
     class DefaultGlobalHeader
-      extend Dom
+      extend DOM::HTML
 
       def self.render(config:)
-        header({ 'class' => 'header' },
-               div({ 'class' => 'site-logo' },
-                   a({ 'href' => "https://#{config.sites.default.fqdn}/" }, 'nsfisis.dev')))
+        header(class: 'header') do
+          div(class: 'site-logo') do
+            a(href: "https://#{config.sites.default.fqdn}/") { text 'nsfisis.dev' }
+          end
+        end
       end
     end
 
     class AboutGlobalHeader
-      extend Dom
+      extend DOM::HTML
 
       def self.render(config:)
-        header({ 'class' => 'header' },
-               div({ 'class' => 'site-logo' },
-                   a({ 'href' => "https://#{config.sites.default.fqdn}/" }, 'nsfisis.dev')))
+        header(class: 'header') do
+          div(class: 'site-logo') do
+            a(href: "https://#{config.sites.default.fqdn}/") { text 'nsfisis.dev' }
+          end
+        end
       end
     end
 
     class BlogGlobalHeader
-      extend Dom
+      extend DOM::HTML
 
       def self.render(config:)
-        header({ 'class' => 'header' },
-               div({ 'class' => 'site-logo' },
-                   a({ 'href' => "https://#{config.sites.default.fqdn}/" }, 'nsfisis.dev')),
-               div({ 'class' => 'site-name' }, config.sites.blog.site_name),
-               nav({ 'class' => 'nav' },
-                   ul({},
-                      li({}, a({ 'href' => "https://#{config.sites.about.fqdn}/" }, 'About')),
-                      li({}, a({ 'href' => '/posts/' }, 'Posts')),
-                      li({}, a({ 'href' => '/tags/' }, 'Tags')))))
+        header(class: 'header') do
+          div(class: 'site-logo') do
+            a(href: "https://#{config.sites.default.fqdn}/") { text 'nsfisis.dev' }
+          end
+          div(class: 'site-name') { text config.sites.blog.site_name }
+          nav(class: 'nav') do
+            ul do
+              li { a(href: "https://#{config.sites.about.fqdn}/") { text 'About' } }
+              li { a(href: '/posts/') { text 'Posts' } }
+              li { a(href: '/tags/') { text 'Tags' } }
+            end
+          end
+        end
       end
     end
 
     class SlidesGlobalHeader
-      extend Dom
+      extend DOM::HTML
 
       def self.render(config:)
-        header({ 'class' => 'header' },
-               div({ 'class' => 'site-logo' },
-                   a({ 'href' => "https://#{config.sites.default.fqdn}/" }, 'nsfisis.dev')),
-               nav({ 'class' => 'nav' },
-                   ul({},
-                      li({}, a({ 'href' => "https://#{config.sites.about.fqdn}/" }, 'About')),
-                      li({}, a({ 'href' => '/slides/' }, 'Slides')),
-                      li({}, a({ 'href' => '/tags/' }, 'Tags')))))
+        header(class: 'header') do
+          div(class: 'site-logo') do
+            a(href: "https://#{config.sites.default.fqdn}/") { text 'nsfisis.dev' }
+          end
+          nav(class: 'nav') do
+            ul do
+              li { a(href: "https://#{config.sites.about.fqdn}/") { text 'About' } }
+              li { a(href: '/slides/') { text 'Slides' } }
+              li { a(href: '/tags/') { text 'Tags' } }
+            end
+          end
+        end
       end
     end
   end

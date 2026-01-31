@@ -1,7 +1,7 @@
 module Nuldoc
   module Pages
     class NotFoundPage
-      extend Dom
+      extend DOM::HTML
 
       def self.render(site:, config:)
         global_header = case site
@@ -19,11 +19,13 @@ module Nuldoc
           meta_title: "Page Not Found｜#{site_entry.site_name}",
           site: site,
           config: config,
-          children: elem('body', { 'class' => 'single' },
-                         global_header.render(config: config),
-                         elem('main', { 'class' => 'main' },
-                              article({}, div({ 'class' => 'not-found' }, '404'))),
-                         Components::GlobalFooter.render(config: config))
+          children: body(class: 'single') do
+            global_header.render(config: config)
+            main(class: 'main') do
+              article { div(class: 'not-found') { text '404' } }
+            end
+            Components::GlobalFooter.render(config: config)
+          end
         )
       end
     end

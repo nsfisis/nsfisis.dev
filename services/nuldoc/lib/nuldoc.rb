@@ -10,6 +10,8 @@ require 'toml-rb'
 require 'webrick'
 
 require_relative 'nuldoc/dom'
+require_relative 'nuldoc/dom/atom_xml'
+require_relative 'nuldoc/dom/html'
 require_relative 'nuldoc/revision'
 require_relative 'nuldoc/config'
 require_relative 'nuldoc/page'

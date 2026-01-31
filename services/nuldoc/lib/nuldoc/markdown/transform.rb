@@ -1,6 +1,6 @@
 module Nuldoc
   class Transform
-    include Dom
+    include DOM::HTML
 
     def self.to_html(doc)
       new(doc).to_html
@@ -89,7 +89,7 @@ module Nuldoc
               break
             end
             nodes.push(text(match[1])) unless match[1].empty?
-            nodes.push(a({ 'href' => match[2], 'class' => 'url' }, text(match[2])))
+            nodes.push(a(href: match[2], class: 'url') { text match[2] })
             rest = match[3]
           end
           nodes
@@ -148,7 +148,7 @@ module Nuldoc
           raise '[nuldoc.tohtml] <h> element must be inside <section>' unless current_section
 
           section_id = current_section.attributes['id']
-          a_element = a({}, *c.children)
+          a_element = a { child(*c.children) }
           a_element.attributes['href'] = "##{section_id}"
           c.children.replace([a_element])
         end
@@ -181,9 +181,10 @@ module Nuldoc
         operation_attr = n.attributes['operation']
         is_edit_block = editat_attr && operation_attr
 
-        label_element = div({ 'class' => 'admonition-label' },
-                            text(is_edit_block ? "#{editat_attr} #{operation_attr}" : 'NOTE'))
-        content_element = div({ 'class' => 'admonition-content' }, *n.children.dup)
+        label_element = div(class: 'admonition-label') do
+          text(is_edit_block ? "#{editat_attr} #{operation_attr}" : 'NOTE')
+        end
+        content_element = div(class: 'admonition-content') { child(*n.children.dup) }
         n.name = 'div'
         add_class(n, 'admonition')
         n.children.replace([label_element, content_element])
@@ -218,14 +219,10 @@ module Nuldoc
         n.attributes.delete('reference')
         n.attributes['class'] = 'footnote'
         n.children.replace([
-                             a(
-                               {
-                                 'id' => "footnoteref--#{reference}",
-                                 'class' => 'footnote',
-                                 'href' => "#footnote--#{reference}"
-                               },
-                               text("[#{footnote_number}]")
-                             )
+                             a(id: "footnoteref--#{reference}", class: 'footnote',
+                               href: "#footnote--#{reference}") do
+                               text "[#{footnote_number}]"
+                             end
                            ])
       end
 
@@ -246,7 +243,7 @@ module Nuldoc
 
         old_children = n.children.dup
         n.children.replace([
-                             a({ 'href' => "#footnoteref--#{id}" }, text("#{footnote_number}. ")),
+                             a(href: "#footnoteref--#{id}") { text "#{footnote_number}. " },
                              *old_children
                            ])
       end
@@ -304,7 +301,7 @@ module Nuldoc
         if filename
           n.attributes.delete('filename')
           n.children.replace([
-                               div({ 'class' => 'filename' }, text(filename)),
+                               div(class: 'filename') { text filename },
                                raw_html(highlighted)
                              ])
         else

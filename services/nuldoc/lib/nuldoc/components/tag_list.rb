@@ -1,14 +1,16 @@
 module Nuldoc
   module Components
     class TagList
-      extend Dom
+      extend DOM::HTML
 
       def self.render(tags:, config:)
-        ul({ 'class' => 'entry-tags' },
-           *tags.map do |slug|
-             li({ 'class' => 'tag' },
-                span({ 'class' => 'tag-inner' }, text(config.tag_label(slug))))
-           end)
+        ul(class: 'entry-tags') do
+          tags.each do |slug|
+            li(class: 'tag') do
+              span(class: 'tag-inner') { text config.tag_label(slug) }
+            end
+          end
+        end
       end
     end
   end

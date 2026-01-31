@@ -1,5 +1,5 @@
 module Nuldoc
-  class HtmlRenderer
+  class HTMLRenderer
     DTD = {
       'a' => { type: :inline },
       'article' => { type: :block },

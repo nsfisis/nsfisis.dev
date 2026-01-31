@@ -1,7 +1,7 @@
 module Nuldoc
   module Parser
     class BlockParser
-      extend Dom
+      extend DOM::HTML
 
       HeaderBlock = Struct.new(:level, :id, :attributes, :heading_element, keyword_init: true)
       FootnoteBlock = Struct.new(:id, :children, keyword_init: true)
@@ -117,13 +117,13 @@ module Nuldoc
           language = match[1].empty? ? nil : match[1]
           meta_string = match[2].strip
 
-          attributes = {}
-          attributes['language'] = language if language
+          attrs = {}
+          attrs[:language] = language if language
 
           if meta_string && !meta_string.empty?
             filename_match = meta_string.match(/filename="([^"]+)"/)
-            attributes['filename'] = filename_match[1] if filename_match
-            attributes['numbered'] = 'true' if meta_string.include?('numbered')
+            attrs[:filename] = filename_match[1] if filename_match
+            attrs[:numbered] = 'true' if meta_string.include?('numbered')
           end
 
           code_lines = []
@@ -137,7 +137,7 @@ module Nuldoc
           end
 
           code = code_lines.join("\n")
-          elem('codeblock', attributes, text(code))
+          elem('codeblock', **attrs) { text code }
         end
 
         def try_note_block(scanner)
@@ -148,13 +148,13 @@ module Nuldoc
           block_type = match[1]
           attr_string = match[2].strip
 
-          attributes = {}
+          attrs = {}
           if block_type == 'edit'
             # Parse {editat="..." operation="..."}
             editat_match = attr_string.match(/editat="([^"]+)"/)
             operation_match = attr_string.match(/operation="([^"]+)"/)
-            attributes['editat'] = editat_match[1] if editat_match
-            attributes['operation'] = operation_match[1] if operation_match
+            attrs[:editat] = editat_match[1] if editat_match
+            attrs[:operation] = operation_match[1] if operation_match
           end
 
           # Collect content until :::
@@ -174,7 +174,7 @@ module Nuldoc
 
           # Convert children - they are block elements already
           child_elements = children.compact.select { |c| c.is_a?(Element) || c.is_a?(Text) || c.is_a?(RawHTML) }
-          elem('note', attributes, *child_elements)
+          elem('note', **attrs) { child(*child_elements) }
         end
 
         def try_heading(scanner)
@@ -188,7 +188,7 @@ module Nuldoc
           text_before, id, attributes = Attributes.parse_trailing_attributes(raw_text)
 
           inline_nodes = InlineParser.parse(text_before.strip)
-          heading_element = elem('h', {}, *inline_nodes)
+          heading_element = elem('h') { child(*inline_nodes) }
 
           HeaderBlock.new(level: level, id: id, attributes: attributes, heading_element: heading_element)
         end
@@ -198,7 +198,7 @@ module Nuldoc
           return nil unless match
 
           scanner.advance
-          elem('hr', {})
+          hr
         end
 
         def try_footnote_def(scanner)
@@ -255,11 +255,10 @@ module Nuldoc
             build_table_row(cells, false, alignment)
           end
 
-          table_children = []
-          table_children << elem('thead', {}, header_row)
-          table_children << elem('tbody', {}, *body_rows) unless body_rows.empty?
-
-          elem('table', {}, *table_children)
+          table do
+            thead { child header_row }
+            tbody { child(*body_rows) } unless body_rows.empty?
+          end
         end
 
         def parse_table_alignment(separator_line)
@@ -287,15 +286,15 @@ module Nuldoc
 
         def build_table_row(cells, is_header, alignment)
           cell_elements = cells.each_with_index.map do |cell_text, i|
-            attributes = {}
+            attrs = {}
             align = alignment[i]
-            attributes['align'] = align if align && align != 'default'
+            attrs[:align] = align if align && align != 'default'
 
             tag = is_header ? 'th' : 'td'
             inline_nodes = InlineParser.parse(cell_text)
-            elem(tag, attributes, *inline_nodes)
+            elem(tag, **attrs) { child(*inline_nodes) }
           end
-          elem('tr', {}, *cell_elements)
+          tr { child(*cell_elements) }
         end
 
         def try_blockquote(scanner)
@@ -312,7 +311,7 @@ module Nuldoc
           children = parse_blocks(inner_scanner)
           child_elements = children.compact.select { |c| c.is_a?(Element) || c.is_a?(Text) || c.is_a?(RawHTML) }
 
-          elem('blockquote', {}, *child_elements)
+          blockquote { child(*child_elements) }
         end
 
         def try_ordered_list(scanner)
@@ -396,14 +395,14 @@ module Nuldoc
           # Determine tight/loose
           is_tight = items.none? { |item| item[:has_blank] }
 
-          attributes = {}
-          attributes['__tight'] = is_tight ? 'true' : 'false'
+          attrs = {}
+          attrs[:__tight] = is_tight ? 'true' : 'false'
 
           # Check for task list items
           is_task_list = false
           if type == :unordered
             is_task_list = items.any? { |item| item[:lines].first&.match?(/^\[[ xX]\]\s/) }
-            attributes['type'] = 'task' if is_task_list
+            attrs[:type] = 'task' if is_task_list
           end
 
           list_items = items.map do |item|
@@ -411,20 +410,20 @@ module Nuldoc
           end
 
           if type == :ordered
-            ol(attributes, *list_items)
+            ol(**attrs) { child(*list_items) }
           else
-            ul(attributes, *list_items)
+            ul(**attrs) { child(*list_items) }
           end
         end
 
         def build_list_item(item, is_task_list)
-          attributes = {}
+          attrs = {}
           content = item[:lines].join("\n")
 
           if is_task_list
             task_match = content.match(/^\[( |[xX])\]\s(.*)$/m)
             if task_match
-              attributes['checked'] = task_match[1] == ' ' ? 'false' : 'true'
+              attrs[:checked] = task_match[1] == ' ' ? 'false' : 'true'
               content = task_match[2]
             end
           end
@@ -435,9 +434,12 @@ module Nuldoc
 
           # If no block-level elements were created, wrap in paragraph
           child_elements = children.compact.select { |c| c.is_a?(Element) || c.is_a?(Text) || c.is_a?(RawHTML) }
-          child_elements = [p({}, *InlineParser.parse(content))] if child_elements.empty?
+          if child_elements.empty?
+            inline_nodes = InlineParser.parse(content)
+            child_elements = [p { child(*inline_nodes) }]
+          end
 
-          li(attributes, *child_elements)
+          li(**attrs) { child(*child_elements) }
         end
 
         def try_html_block(scanner)
@@ -464,24 +466,26 @@ module Nuldoc
               attr_str = inner_match[1]
               inner_content = inner_match[2].strip
 
-              attributes = {}
+              attrs = {}
               attr_str.scan(/([\w-]+)="([^"]*)"/) do |key, value|
-                attributes[key] = value
+                attrs[key.to_sym] = value
               end
 
               if inner_content.empty?
-                div(attributes)
+                div(**attrs)
               else
                 inner_scanner = LineScanner.new(inner_content)
                 children = parse_blocks(inner_scanner)
-                child_elements = children.compact.select { |c| c.is_a?(Element) || c.is_a?(Text) || c.is_a?(RawHTML) }
-                div(attributes, *child_elements)
+                child_elements = children.compact.select do |c|
+                  c.is_a?(Element) || c.is_a?(Text) || c.is_a?(RawHTML)
+                end
+                div(**attrs) { child(*child_elements) }
               end
             else
-              div({ 'class' => 'raw-html' }, raw_html(html_content))
+              div(class: 'raw-html') { raw_html html_content }
             end
           else
-            div({ 'class' => 'raw-html' }, raw_html(html_content))
+            div(class: 'raw-html') { raw_html html_content }
           end
         end
 
@@ -513,7 +517,7 @@ module Nuldoc
 
           text_content = lines.join("\n")
           inline_nodes = InlineParser.parse(text_content)
-          p({}, *inline_nodes)
+          p { child(*inline_nodes) }
         end
 
         # --- Section hierarchy ---
@@ -526,13 +530,13 @@ module Nuldoc
 
           unless footnote_blocks.empty?
             footnote_elements = footnote_blocks.map do |fb|
-              elem('footnote', { 'id' => fb.id }, *fb.children)
+              elem('footnote', id: fb.id) { child(*fb.children) }
             end
-            footnote_section = section({ 'class' => 'footnotes' }, *footnote_elements)
+            footnote_section = section(class: 'footnotes') { child(*footnote_elements) }
             article_content.push(footnote_section)
           end
 
-          elem('__root__', {}, article({}, *article_content))
+          elem('__root__') { article { child(*article_content) } }
         end
 
         def build_section_hierarchy(blocks)
@@ -594,7 +598,10 @@ module Nuldoc
           attributes = section_info[:attributes].dup
           attributes['id'] = section_info[:id] if section_info[:id]
 
-          section(attributes, section_info[:heading], *section_info[:children])
+          section(**attributes.transform_keys(&:to_sym)) do
+            child section_info[:heading]
+            child(*section_info[:children])
+          end
         end
       end
     end

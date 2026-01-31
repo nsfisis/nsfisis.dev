@@ -1,7 +1,7 @@
 module Nuldoc
   module Pages
     class PostListPage
-      extend Dom
+      extend DOM::HTML
 
       def self.render(posts:, config:, current_page:, total_pages:)
         page_title = '投稿一覧'
@@ -16,17 +16,18 @@ module Nuldoc
           meta_atom_feed_href: "https://#{config.sites.blog.fqdn}/posts/atom.xml",
           site: 'blog',
           config: config,
-          children: elem('body', { 'class' => 'list' },
-                         Components::BlogGlobalHeader.render(config: config),
-                         elem('main', { 'class' => 'main' },
-                              header({ 'class' => 'page-header' },
-                                     h1({}, "#{page_title}#{page_info_suffix}")),
-                              Components::Pagination.render(current_page: current_page, total_pages: total_pages,
-                                                            base_path: '/posts/'),
-                              *posts.map { |post| Components::PostPageEntry.render(post: post, config: config) },
-                              Components::Pagination.render(current_page: current_page, total_pages: total_pages,
-                                                            base_path: '/posts/')),
-                         Components::GlobalFooter.render(config: config))
+          children: body(class: 'list') do
+            Components::BlogGlobalHeader.render(config: config)
+            main(class: 'main') do
+              header(class: 'page-header') { h1 { text "#{page_title}#{page_info_suffix}" } }
+              Components::Pagination.render(current_page: current_page, total_pages: total_pages,
+                                            base_path: '/posts/')
+              posts.each { |post| Components::PostPageEntry.render(post: post, config: config) }
+              Components::Pagination.render(current_page: current_page, total_pages: total_pages,
+                                            base_path: '/posts/')
+            end
+            Components::GlobalFooter.render(config: config)
+          end
         )
       end
     end

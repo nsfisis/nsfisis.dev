@@ -1,7 +1,7 @@
 module Nuldoc
   module Parser
     class InlineParser
-      extend Dom
+      extend DOM::HTML
 
       class << self
         INLINE_HTML_TAGS = %w[del mark sub sup ins br].freeze
@@ -80,7 +80,7 @@ module Nuldoc
           url = text[(pos + 1)...close]
           return nil unless url.match?(%r{^https?://\S+$})
 
-          nodes << a({ 'href' => url, 'class' => 'url' }, text(url))
+          nodes << a(href: url, class: 'url') { text url }
           close + 1
         end
 
@@ -103,7 +103,7 @@ module Nuldoc
           # Strip one leading and one trailing space if both present
           content = content[1...-1] if content.length >= 2 && content[0] == ' ' && content[-1] == ' '
 
-          nodes << elem('code', {}, text(content))
+          nodes << code { text content }
           close_pos + tick_count
         end
 
@@ -143,7 +143,7 @@ module Nuldoc
 
             inner = text[(pos + open_tag.length)...close_pos]
             children = parse_inline(inner, 0, inner.length)
-            nodes << elem(tag, {}, *children)
+            nodes << elem(tag) { child(*children) }
             return close_pos + close_tag.length
           end
 
@@ -168,12 +168,12 @@ module Nuldoc
           inner = text[(bracket_close + 2)...paren_close].strip
           url, title = parse_url_title(inner)
 
-          attributes = {}
-          attributes['src'] = url if url
-          attributes['alt'] = alt unless alt.empty?
-          attributes['title'] = title if title
+          attrs = {}
+          attrs[:src] = url if url
+          attrs[:alt] = alt unless alt.empty?
+          attrs[:title] = title if title
 
-          nodes << img(attributes)
+          nodes << img(**attrs)
           paren_close + 1
         end
 
@@ -194,9 +194,9 @@ module Nuldoc
           inner = text[(bracket_close + 2)...paren_close].strip
           url, title = parse_url_title(inner)
 
-          attributes = {}
-          attributes['href'] = url if url
-          attributes['title'] = title if title
+          attrs = {}
+          attrs[:href] = url if url
+          attrs[:title] = title if title
 
           children = parse_inline(link_text, 0, link_text.length)
 
@@ -204,9 +204,9 @@ module Nuldoc
           is_autolink = children.length == 1 &&
                         children[0].kind == :text &&
                         children[0].content == url
-          attributes['class'] = 'url' if is_autolink
+          attrs[:class] = 'url' if is_autolink
 
-          nodes << a(attributes, *children)
+          nodes << a(**attrs) { child(*children) }
           paren_close + 1
         end
 
@@ -221,7 +221,7 @@ module Nuldoc
           return nil if inner.include?('[') || inner.include?(']')
           return nil if inner.empty?
 
-          nodes << elem('footnoteref', { 'reference' => inner })
+          nodes << elem('footnoteref', reference: inner)
           close + 1
         end
 
@@ -233,7 +233,7 @@ module Nuldoc
 
           inner = text[(pos + 2)...close]
           children = parse_inline(inner, 0, inner.length)
-          nodes << elem('strong', {}, *children)
+          nodes << strong { child(*children) }
           close + 2
         end
 
@@ -253,7 +253,7 @@ module Nuldoc
                 return nil if inner.empty?
 
                 children = parse_inline(inner, 0, inner.length)
-                nodes << elem('em', {}, *children)
+                nodes << em { child(*children) }
                 return i + 1
               end
             else
@@ -271,7 +271,7 @@ module Nuldoc
 
           inner = text[(pos + 2)...close]
           children = parse_inline(inner, 0, inner.length)
-          nodes << elem('del', {}, *children)
+          nodes << del { child(*children) }
           close + 2
         end
 

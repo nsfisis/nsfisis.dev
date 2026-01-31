@@ -11,48 +11,52 @@ module Nuldoc
     def kind = :element
   end
 
-  module Dom
+  module DOM
+    CHILDREN_STACK_KEY = :__nuldoc_dom_children_stack
+    private_constant :CHILDREN_STACK_KEY
+
     module_function
 
     def text(content)
-      Text.new(content: content)
+      node = Text.new(content: content)
+      _auto_append(node)
+      node
     end
 
     def raw_html(html)
-      RawHTML.new(html: html)
+      node = RawHTML.new(html: html)
+      _auto_append(node)
+      node
     end
 
-    def elem(name, attributes = {}, *children)
-      Element.new(
+    def child(*nodes)
+      stack = Thread.current[CHILDREN_STACK_KEY]
+      return unless stack && !stack.empty?
+
+      nodes.each do |node|
+        case node
+        when nil, false
+          next
+        when String
+          stack.last.push(Text.new(content: node))
+        when Array
+          node.each { |n| child(n) }
+        else
+          stack.last.push(node)
+        end
+      end
+    end
+
+    def elem(name, **attrs, &)
+      children = _collect_children(&)
+      node = Element.new(
         name: name,
-        attributes: attributes || {},
-        children: flatten_children(children)
+        attributes: attrs.transform_keys(&:to_s),
+        children: children
       )
+      _auto_append(node)
+      node
     end
-
-    def a(attributes = {}, *children) = elem('a', attributes, *children)
-    def article(attributes = {}, *children) = elem('article', attributes, *children)
-    def button(attributes = {}, *children) = elem('button', attributes, *children)
-    def div(attributes = {}, *children) = elem('div', attributes, *children)
-    def footer(attributes = {}, *children) = elem('footer', attributes, *children)
-    def h1(attributes = {}, *children) = elem('h1', attributes, *children)
-    def h2(attributes = {}, *children) = elem('h2', attributes, *children)
-    def h3(attributes = {}, *children) = elem('h3', attributes, *children)
-    def h4(attributes = {}, *children) = elem('h4', attributes, *children)
-    def h5(attributes = {}, *children) = elem('h5', attributes, *children)
-    def h6(attributes = {}, *children) = elem('h6', attributes, *children)
-    def header(attributes = {}, *children) = elem('header', attributes, *children)
-    def img(attributes = {}) = elem('img', attributes)
-    def li(attributes = {}, *children) = elem('li', attributes, *children)
-    def link(attributes = {}) = elem('link', attributes)
-    def meta(attributes = {}) = elem('meta', attributes)
-    def nav(attributes = {}, *children) = elem('nav', attributes, *children)
-    def ol(attributes = {}, *children) = elem('ol', attributes, *children)
-    def p(attributes = {}, *children) = elem('p', attributes, *children)
-    def script(attributes = {}, *children) = elem('script', attributes, *children)
-    def section(attributes = {}, *children) = elem('section', attributes, *children)
-    def span(attributes = {}, *children) = elem('span', attributes, *children)
-    def ul(attributes = {}, *children) = elem('ul', attributes, *children)
 
     def add_class(element, klass)
       classes = element.attributes['class']
@@ -114,23 +118,26 @@ module Nuldoc
 
     private
 
-    def flatten_children(children)
-      result = []
-      children.each do |child|
-        case child
-        when nil, false
-          next
-        when String
-          result.push(text(child))
-        when Array
-          result.concat(flatten_children(child))
-        else
-          result.push(child)
-        end
+    def _collect_children(&block)
+      return [] unless block
+
+      stack = Thread.current[CHILDREN_STACK_KEY] ||= []
+      stack.push([])
+      begin
+        yield
+        stack.last
+      ensure
+        stack.pop
       end
-      result
     end
 
-    module_function :flatten_children
+    def _auto_append(node)
+      stack = Thread.current[CHILDREN_STACK_KEY]
+      return unless stack && !stack.empty?
+
+      stack.last.push(node)
+    end
+
+    module_function :_collect_children, :_auto_append
   end
 end

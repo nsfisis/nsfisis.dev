@@ -1,29 +1,34 @@
 module Nuldoc
   module Components
     class Pagination
-      extend Dom
+      extend DOM::HTML
 
       def self.render(current_page:, total_pages:, base_path:)
-        return div({}) if total_pages <= 1
+        return div if total_pages <= 1
 
         pages = generate_page_numbers(current_page, total_pages)
 
-        nav({ 'class' => 'pagination' },
-            div({ 'class' => 'pagination-prev' },
-                current_page > 1 ? a({ 'href' => page_url_at(base_path, current_page - 1) }, '前へ') : nil),
-            *pages.map do |page|
-              if page == '...'
-                div({ 'class' => 'pagination-elipsis' }, "\u2026")
-              elsif page == current_page
-                div({ 'class' => 'pagination-page pagination-page-current' },
-                    span({}, page.to_s))
-              else
-                div({ 'class' => 'pagination-page' },
-                    a({ 'href' => page_url_at(base_path, page) }, page.to_s))
+        nav(class: 'pagination') do
+          div(class: 'pagination-prev') do
+            a(href: page_url_at(base_path, current_page - 1)) { text '前へ' } if current_page > 1
+          end
+          pages.each do |page|
+            if page == '...'
+              div(class: 'pagination-elipsis') { text "\u2026" }
+            elsif page == current_page
+              div(class: 'pagination-page pagination-page-current') do
+                span { text page.to_s }
               end
-            end,
-            div({ 'class' => 'pagination-next' },
-                current_page < total_pages ? a({ 'href' => page_url_at(base_path, current_page + 1) }, '次へ') : nil))
+            else
+              div(class: 'pagination-page') do
+                a(href: page_url_at(base_path, page)) { text page.to_s }
+              end
+            end
+          end
+          div(class: 'pagination-next') do
+            a(href: page_url_at(base_path, current_page + 1)) { text '次へ' } if current_page < total_pages
+          end
+        end
       end
 
       def self.generate_page_numbers(current_page, total_pages)

@@ -1,5 +1,5 @@
 module Nuldoc
-  class XmlRenderer
+  class XMLRenderer
     BLOCK_ELEMENTS = %w[feed entry author].freeze
 
     def render(root)
