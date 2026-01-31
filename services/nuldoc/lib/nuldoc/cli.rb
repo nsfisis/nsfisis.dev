@@ -5,9 +5,11 @@ module Nuldoc
     class BuildCommand < Dry::CLI::Command
       desc 'Build the site'
 
-      def call(**)
+      option :profile, type: :boolean, default: false, desc: 'Profile each build step'
+
+      def call(**options)
         config = ConfigLoader.load_config(ConfigLoader.default_config_path)
-        Commands::Build.run(config)
+        Commands::Build.run(config, profile: options[:profile])
       end
     end
 

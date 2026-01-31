@@ -14,10 +14,22 @@ module Nuldoc
       @steps[name] = Step.new(name: name, deps: deps, block: block)
     end
 
-    def execute
+    def execute(profile: false)
       results = {}
+      total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC) if profile
       tsort_each do |name|
-        results[name] = @steps[name].block.call(results)
+        if profile
+          start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          results[name] = @steps[name].block.call(results)
+          elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
+          warn format('[profile] %-30<name>s %8.3<ms>f ms', name: name, ms: elapsed * 1000)
+        else
+          results[name] = @steps[name].block.call(results)
+        end
+      end
+      if profile
+        total_elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - total_start
+        warn format('[profile] %-30<name>s %8.3<ms>f ms', name: 'TOTAL', ms: total_elapsed * 1000)
       end
       results
     end

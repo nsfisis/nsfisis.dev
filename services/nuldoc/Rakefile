@@ -6,7 +6,8 @@ RuboCop::RakeTask.new
 desc 'Build the site'
 task :build do
   config = Nuldoc::ConfigLoader.load_config(Nuldoc::ConfigLoader.default_config_path)
-  Nuldoc::Commands::Build.run(config)
+  profile = ENV.key?('PROFILE')
+  Nuldoc::Commands::Build.run(config, profile: profile)
 end
 
 desc 'Start development server'
@@ -19,4 +20,9 @@ desc 'Create new content'
 task :new, [:type] do |_t, args|
   config = Nuldoc::ConfigLoader.load_config(Nuldoc::ConfigLoader.default_config_path)
   Nuldoc::Commands::New.run(config, type: args[:type], date: nil)
+end
+
+desc 'Benchmark the build'
+task :bench do
+  sh 'hyperfine', '--warmup', '1', 'rake build'
 end

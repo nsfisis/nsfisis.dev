@@ -1,12 +1,13 @@
 module Nuldoc
   module Commands
     class Build
-      def self.run(config)
-        new(config).run
+      def self.run(config, profile: false)
+        new(config, profile: profile).run
       end
 
-      def initialize(config)
+      def initialize(config, profile: false)
         @config = config
+        @profile = profile
       end
 
       def run
@@ -35,7 +36,7 @@ module Nuldoc
         pipeline.step(:copy_blog_assets) { copy_blog_asset_files }
         pipeline.step(:copy_slides_assets) { copy_slides_asset_files }
 
-        pipeline.execute
+        pipeline.execute(profile: @profile)
       end
 
       private
