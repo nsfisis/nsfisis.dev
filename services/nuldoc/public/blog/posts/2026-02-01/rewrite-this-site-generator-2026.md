@@ -42,7 +42,7 @@ Ruby on Rails の DHH 氏も同じことを述べているらしい。
 
 Markdown の表現力の乏しさは変わらぬままではあるが、LLM は非構造化データの扱いがすこぶる得意であるので、多少 CommonMark 範囲から逸脱しようが大抵は意図を汲み取ってくれる。
 
-ところで、このブログも Markdown でのアクセスに対応しており、 <https://blog.nsfisis.dev/posts/2026-02-01/rewrite-this-blog-generator-2026.md> のような `.md` を付けた URL へアクセスすると Markdown が返る。また、HTTP で `Accept: text/markdown` を指定すると同じく Markdown が返る。
+ところで、このブログも Markdown でのアクセスに対応しており、 <https://blog.nsfisis.dev/posts/2026-02-01/rewrite-this-site-generator-2026.md> のような `.md` を付けた URL へアクセスすると Markdown が返る。また、HTTP で `Accept: text/markdown` を指定すると同じく Markdown が返る。
 
 
 # 実装 {#implementation}
