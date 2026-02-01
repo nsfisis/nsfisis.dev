@@ -12,7 +12,7 @@ module Nuldoc
       end
 
       def generate
-        html = Pages::TagPage.render(tag_slug: @tag_slug, pages: @pages, site: @site, config: @config)
+        html = Pages::TagPage.new(tag_slug: @tag_slug, pages: @pages, site: @site, config: @config).render
 
         TagPageData.new(
           root: html,

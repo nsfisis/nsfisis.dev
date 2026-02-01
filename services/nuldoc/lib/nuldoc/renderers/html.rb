@@ -87,7 +87,7 @@ module Nuldoc
       when :text
         text_node_to_html(node, _indent_level: indent_level, is_in_pre: is_in_pre)
       when :raw
-        node.html
+        node.content
       when :element
         element_node_to_html(node, indent_level: indent_level, is_in_pre: is_in_pre)
       end

@@ -7,7 +7,7 @@ module Nuldoc
       end
 
       def generate
-        html = Pages::NotFoundPage.render(site: @site, config: @config)
+        html = Pages::NotFoundPage.new(site: @site, config: @config).render
 
         Page.new(
           root: html,

@@ -1,23 +1,26 @@
 module Nuldoc
   module Components
-    class TableOfContents
-      extend DOM::HTML
+    class TableOfContents < DOM::HTMLBuilder
+      def initialize(toc:)
+        super()
+        @toc = toc
+      end
 
-      def self.render(toc:)
+      def build
         nav(class: 'toc') do
           h2 { text '目次' }
-          ul { toc.items.each { |entry| toc_entry_component(entry) } }
+          ul { @toc.items.each { |entry| toc_entry_component(entry) } }
         end
       end
 
-      def self.toc_entry_component(entry)
+      private
+
+      def toc_entry_component(entry)
         li do
           a(href: "##{entry.id}") { text entry.text }
           ul { entry.children.each { |c| toc_entry_component(c) } } if entry.children.length.positive?
         end
       end
-
-      private_class_method :toc_entry_component
     end
   end
 end

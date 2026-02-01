@@ -46,7 +46,7 @@ module Nuldoc
         )
 
         Page.new(
-          root: Pages::AtomPage.render(feed: feed),
+          root: Pages::AtomPage.new(feed: feed).render,
           renderer: :xml,
           site: @site,
           dest_file_path: feed_path,

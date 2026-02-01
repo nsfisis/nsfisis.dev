@@ -15,12 +15,12 @@ module Nuldoc
           page_posts = @posts[page_index * posts_per_page, posts_per_page]
           current_page = page_index + 1
 
-          html = Pages::PostListPage.render(
+          html = Pages::PostListPage.new(
             posts: page_posts,
             config: @config,
             current_page: current_page,
             total_pages: total_pages
-          )
+          ).render
 
           dest_file_path = current_page == 1 ? '/posts/index.html' : "/posts/#{current_page}/index.html"
           href = current_page == 1 ? '/posts/' : "/posts/#{current_page}/"

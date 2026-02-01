@@ -28,7 +28,7 @@ module Nuldoc
       end
 
       def generate
-        html = Pages::PostPage.render(doc: @doc, config: @config)
+        html = Pages::PostPage.new(doc: @doc, config: @config).render
 
         content_dir = File.join(Dir.pwd, @config.locations.content_dir)
         dest_file_path = File.join(

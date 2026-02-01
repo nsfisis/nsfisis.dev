@@ -7,7 +7,7 @@ module Nuldoc
       end
 
       def generate
-        html = Pages::SlideListPage.render(slides: @slides, config: @config)
+        html = Pages::SlideListPage.new(slides: @slides, config: @config).render
 
         Page.new(
           root: html,

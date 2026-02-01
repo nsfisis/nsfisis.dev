@@ -8,7 +8,7 @@ module Nuldoc
       end
 
       def generate
-        html = Pages::TagListPage.render(tags: @tags, site: @site, config: @config)
+        html = Pages::TagListPage.new(tags: @tags, site: @site, config: @config).render
 
         Page.new(
           root: html,

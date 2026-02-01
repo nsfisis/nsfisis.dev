@@ -1,62 +1,18 @@
 module Nuldoc
-  Text = Struct.new(:content, keyword_init: true) do
+  Text = Data.define(:content) do
     def kind = :text
   end
 
-  RawHTML = Struct.new(:html, keyword_init: true) do
+  RawNode = Data.define(:content) do
     def kind = :raw
   end
 
-  Element = Struct.new(:name, :attributes, :children, keyword_init: true) do
+  Element = Data.define(:name, :attributes, :children) do
     def kind = :element
   end
 
   module DOM
-    CHILDREN_STACK_KEY = :__nuldoc_dom_children_stack
-    private_constant :CHILDREN_STACK_KEY
-
     module_function
-
-    def text(content)
-      node = Text.new(content: content)
-      _auto_append(node)
-      node
-    end
-
-    def raw_html(html)
-      node = RawHTML.new(html: html)
-      _auto_append(node)
-      node
-    end
-
-    def child(*nodes)
-      stack = Thread.current[CHILDREN_STACK_KEY]
-      return unless stack && !stack.empty?
-
-      nodes.each do |node|
-        case node
-        when nil, false
-          next
-        when String
-          stack.last.push(Text.new(content: node))
-        when Array
-          node.each { |n| child(n) }
-        else
-          stack.last.push(node)
-        end
-      end
-    end
-
-    def elem(name, **attrs, &)
-      children = _collect_children(&)
-      node = Element.new(
-        name: name,
-        attributes: attrs.transform_keys(&:to_s),
-        children: children
-      )
-      _auto_append(node)
-      node
-    end
 
     def add_class(element, klass)
       classes = element.attributes['class']
@@ -104,6 +60,24 @@ module Nuldoc
       end
     end
 
+    def map_children_recursively(element, &)
+      element.children.map! do |c|
+        c = yield(c)
+        map_children_recursively(c, &) if c.kind == :element
+        c
+      end
+    end
+
+    def map_element_of_type(root, element_name, &)
+      map_children_recursively(root) do |n|
+        if n.kind == :element && n.name == element_name
+          yield(n)
+        else
+          n
+        end
+      end
+    end
+
     def process_text_nodes_in_element(element)
       new_children = []
       element.children.each do |child|
@@ -115,29 +89,5 @@ module Nuldoc
       end
       element.children.replace(new_children)
     end
-
-    private
-
-    def _collect_children(&block)
-      return [] unless block
-
-      stack = Thread.current[CHILDREN_STACK_KEY] ||= []
-      stack.push([])
-      begin
-        yield
-        stack.last
-      ensure
-        stack.pop
-      end
-    end
-
-    def _auto_append(node)
-      stack = Thread.current[CHILDREN_STACK_KEY]
-      return unless stack && !stack.empty?
-
-      stack.last.push(node)
-    end
-
-    module_function :_collect_children, :_auto_append
   end
 end

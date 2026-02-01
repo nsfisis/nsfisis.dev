@@ -23,7 +23,7 @@ module Nuldoc
       when :text
         text_node_to_xml(node)
       when :raw
-        node.html
+        node.content
       when :element
         element_node_to_xml(node, indent_level: indent_level)
       end

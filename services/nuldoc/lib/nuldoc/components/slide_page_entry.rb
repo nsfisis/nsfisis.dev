@@ -1,17 +1,21 @@
 module Nuldoc
   module Components
-    class SlidePageEntry
-      extend DOM::HTML
+    class SlidePageEntry < DOM::HTMLBuilder
+      def initialize(slide:, config:)
+        super()
+        @slide = slide
+        @config = config
+      end
 
-      def self.render(slide:, config:)
-        published = Revision.date_to_string(GeneratorUtils.published_date(slide))
-        updated = Revision.date_to_string(GeneratorUtils.updated_date(slide))
-        has_updates = GeneratorUtils.any_updates?(slide)
+      def build
+        published = Revision.date_to_string(GeneratorUtils.published_date(@slide))
+        updated = Revision.date_to_string(GeneratorUtils.updated_date(@slide))
+        has_updates = GeneratorUtils.any_updates?(@slide)
 
         article(class: 'post-entry') do
-          a(href: slide.href) do
-            header(class: 'entry-header') { h2 { text slide.title } }
-            section(class: 'entry-content') { p { text slide.description } }
+          a(href: @slide.href) do
+            header(class: 'entry-header') { h2 { text @slide.title } }
+            section(class: 'entry-content') { p { text @slide.description } }
             footer(class: 'entry-footer') do
               time(datetime: published) { text published }
               text ' 登壇'
@@ -20,7 +24,7 @@ module Nuldoc
                 time(datetime: updated) { text updated }
                 text ' 更新'
               end
-              TagList.render(tags: slide.tags, config: config) if slide.tags.length.positive?
+              render(TagList, tags: @slide.tags, config: @config) if @slide.tags.length.positive?
             end
           end
         end

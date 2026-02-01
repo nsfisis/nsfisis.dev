@@ -1,12 +1,13 @@
 module Nuldoc
-  class Transform
-    include DOM::HTML
+  class Transform < DOM::HTMLBuilder
+    include DOM
 
     def self.to_html(doc)
       new(doc).to_html
     end
 
     def initialize(doc)
+      super()
       @doc = doc
     end
 
@@ -37,15 +38,15 @@ module Nuldoc
         new_children = []
         current_text = +''
 
-        n.children.each do |child|
-          if child.kind == :text
-            current_text << child.content
+        n.children.each do |c|
+          if c.kind == :text
+            current_text << c.content
           else
             unless current_text.empty?
               new_children.push(text(current_text))
               current_text = +''
             end
-            new_children.push(child)
+            new_children.push(c)
           end
         end
 
@@ -160,23 +161,25 @@ module Nuldoc
     def transform_section_title_element
       section_level = 1
 
-      g = proc do |c|
-        next unless c.kind == :element
+      g = proc do |parent|
+        parent.children.each_with_index do |c, i|
+          next unless c.kind == :element
 
-        if c.name == 'section'
-          section_level += 1
-          c.attributes['__sectionLevel'] = section_level.to_s
+          if c.name == 'section'
+            section_level += 1
+            c.attributes['__sectionLevel'] = section_level.to_s
+          end
+          g.call(c)
+          section_level -= 1 if c.name == 'section'
+          parent.children[i] = c.with(name: "h#{section_level}") if c.name == 'h'
         end
-        for_each_child(c, &g)
-        section_level -= 1 if c.name == 'section'
-        c.name = "h#{section_level}" if c.name == 'h'
       end
 
-      for_each_child(@doc.root, &g)
+      g.call(@doc.root)
     end
 
     def transform_note_element
-      for_each_element_of_type(@doc.root, 'note') do |n|
+      map_element_of_type(@doc.root, 'note') do |n|
         editat_attr = n.attributes['editat']
         operation_attr = n.attributes['operation']
         is_edit_block = editat_attr && operation_attr
@@ -185,9 +188,9 @@ module Nuldoc
           text(is_edit_block ? "#{editat_attr} #{operation_attr}" : 'NOTE')
         end
         content_element = div(class: 'admonition-content') { child(*n.children.dup) }
-        n.name = 'div'
         add_class(n, 'admonition')
         n.children.replace([label_element, content_element])
+        n.with(name: 'div')
       end
     end
 
@@ -205,9 +208,9 @@ module Nuldoc
       footnote_counter = 0
       footnote_map = {}
 
-      for_each_element_of_type(@doc.root, 'footnoteref') do |n|
+      map_element_of_type(@doc.root, 'footnoteref') do |n|
         reference = n.attributes['reference']
-        next unless reference
+        next n unless reference
 
         unless footnote_map.key?(reference)
           footnote_counter += 1
@@ -215,7 +218,6 @@ module Nuldoc
         end
         footnote_number = footnote_map[reference]
 
-        n.name = 'sup'
         n.attributes.delete('reference')
         n.attributes['class'] = 'footnote'
         n.children.replace([
@@ -224,19 +226,18 @@ module Nuldoc
                                text "[#{footnote_number}]"
                              end
                            ])
+        n.with(name: 'sup')
       end
 
-      for_each_element_of_type(@doc.root, 'footnote') do |n|
+      map_element_of_type(@doc.root, 'footnote') do |n|
         id = n.attributes['id']
         unless id && footnote_map.key?(id)
-          n.name = 'span'
           n.children.replace([])
-          next
+          next n.with(name: 'span')
         end
 
         footnote_number = footnote_map[id]
 
-        n.name = 'div'
         n.attributes.delete('id')
         n.attributes['class'] = 'footnote'
         n.attributes['id'] = "footnote--#{id}"
@@ -246,6 +247,7 @@ module Nuldoc
                              a(href: "#footnoteref--#{id}") { text "#{footnote_number}. " },
                              *old_children
                            ])
+        n.with(name: 'div')
       end
     end
 
@@ -257,39 +259,34 @@ module Nuldoc
         is_tight = n.attributes['__tight'] == 'true'
         next unless is_tight
 
-        n.children.each do |child|
-          next unless child.kind == :element && child.name == 'li'
+        n.children.each do |c|
+          next unless c.kind == :element && c.name == 'li'
 
           new_grand_children = []
-          child.children.each do |grand_child|
+          c.children.each do |grand_child|
             if grand_child.kind == :element && grand_child.name == 'p'
               new_grand_children.concat(grand_child.children)
             else
               new_grand_children.push(grand_child)
             end
           end
-          child.children.replace(new_grand_children)
+          c.children.replace(new_grand_children)
         end
       end
     end
 
     def transform_and_highlight_code_block_element
-      for_each_child_recursively(@doc.root) do |n|
-        next unless n.kind == :element && n.name == 'codeblock'
+      map_children_recursively(@doc.root) do |n|
+        next n unless n.kind == :element && n.name == 'codeblock'
 
         language = n.attributes['language'] || 'text'
         filename = n.attributes['filename']
         numbered = n.attributes['numbered']
         source_code_node = n.children[0]
-        source_code = if source_code_node.kind == :text
-                        source_code_node.content.rstrip
-                      else
-                        source_code_node.html.rstrip
-                      end
+        source_code = source_code_node.content.rstrip
 
         highlighted = highlight_code(source_code, language)
 
-        n.name = 'div'
         n.attributes['class'] = 'codeblock'
         n.attributes.delete('language')
 
@@ -302,11 +299,12 @@ module Nuldoc
           n.attributes.delete('filename')
           n.children.replace([
                                div(class: 'filename') { text filename },
-                               raw_html(highlighted)
+                               raw(highlighted)
                              ])
         else
-          n.children.replace([raw_html(highlighted)])
+          n.children.replace([raw(highlighted)])
         end
+        n.with(name: 'div')
       end
     end
 
@@ -351,8 +349,8 @@ module Nuldoc
           next unless section_id
 
           heading_text = ''
-          node.children.each do |child|
-            heading_text = inner_text(child) if child.kind == :element && child.name == 'a'
+          node.children.each do |c|
+            heading_text = inner_text(c) if c.kind == :element && c.name == 'a'
           end
 
           entry = { id: section_id, text: heading_text, level: level, children: [] }
@@ -394,12 +392,12 @@ module Nuldoc
       return root if root.kind == :element && root.name == 'section' && root.children.include?(target)
 
       if root.kind == :element
-        root.children.each do |child|
-          next unless child.kind == :element
+        root.children.each do |c|
+          next unless c.kind == :element
 
-          return child if child.name == 'section' && child.children.include?(target)
+          return c if c.name == 'section' && c.children.include?(target)
 
-          result = find_parent_section(child, target)
+          result = find_parent_section(c, target)
           return result if result
         end
       end

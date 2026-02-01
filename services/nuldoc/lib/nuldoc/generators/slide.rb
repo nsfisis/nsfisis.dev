@@ -11,7 +11,7 @@ module Nuldoc
       end
 
       def generate
-        html = Pages::SlidePage.render(slide: @slide, config: @config)
+        html = Pages::SlidePage.new(slide: @slide, config: @config).render
 
         content_dir = File.join(Dir.pwd, @config.locations.content_dir)
         dest_file_path = File.join(
