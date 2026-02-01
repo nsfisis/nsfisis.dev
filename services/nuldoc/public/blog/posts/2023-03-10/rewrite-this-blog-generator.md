@@ -3,7 +3,9 @@
 uuid = "12512894-05d8-42c6-950e-8f5d60f984d8"
 title = "このブログのジェネレータを書き直した"
 description = "このブログのジェネレータを書き直したので、やったことを書き記しておく。"
-tags = []
+tags = [
+    "note-to-self"
+]
 
 [[article.revisions]]
 date = "2023-03-10"

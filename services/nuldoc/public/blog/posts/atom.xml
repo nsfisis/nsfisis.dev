@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2026-01-16T00:00:00+09:00</updated>
+  <updated>2026-02-01T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:32947eee-f737-4e4c-b3f3-2c847d9b36d2</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-02-01/rewrite-this-site-generator-2026/"></link>
+    <title>このサイトの静的サイトジェネレータを書き直した (2026)</title>
+    <summary>このサイトの静的サイトジェネレータを書き直したので、設計思想を書き記しておく。</summary>
+    <published>2026-02-01T00:00:00+09:00</published>
+    <updated>2026-02-01T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:8ef2ea79-97b7-4d9e-9ddb-0aa5423e6da9</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-01-16/development-environment-2026/"></link>
