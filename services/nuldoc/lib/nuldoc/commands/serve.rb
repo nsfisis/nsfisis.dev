@@ -24,6 +24,18 @@ module Nuldoc
         server.mount_proc '/' do |req, res|
           pathname = req.path
 
+          redirect_dest = redirect_path(site_name, pathname)
+          if redirect_dest
+            res.status = 301
+            res['Location'] = redirect_dest
+            next
+          end
+
+          accept = req['Accept'] || ''
+          if accept.include?('text/markdown') && pathname.match?(%r{\A/posts/\d{4}-\d{2}-\d{2}/[^/]+/\z})
+            pathname = pathname.sub(%r{/\z}, '.md')
+          end
+
           unless resource_path?(pathname) || no_rebuild
             Build.run(@config)
             warn 'rebuild'
@@ -39,7 +51,7 @@ module Nuldoc
 
           if File.exist?(file_path)
             res.body = File.read(file_path)
-            res['Content-Type'] = WEBrick::HTTPUtils.mime_type(file_path, WEBrick::HTTPUtils::DefaultMimeTypes)
+            res['Content-Type'] = custom_mime_type(file_path)
           else
             not_found_path = File.join(root_dir, '404.html')
             res.status = 404
@@ -53,6 +65,33 @@ module Nuldoc
       end
 
       private
+
+      def redirect_path(site_name, pathname)
+        # Canonical path redirects
+        return '/posts/' if pathname.match?(%r{\A/posts/1/?\z})
+        return '/slides/' if pathname.match?(%r{\A/slides/1/?\z})
+
+        # Root redirects
+        if pathname == '/'
+          return '/posts/' if site_name == 'blog'
+          return '/slides/' if site_name == 'slides'
+        end
+
+        nil
+      end
+
+      def custom_mime_type(file_path)
+        case file_path
+        when /atom\.xml\z/
+          'application/atom+xml; charset=utf-8'
+        when /\.mjs\z/
+          'application/javascript; charset=utf-8'
+        when /\.md\z/
+          'text/markdown; charset=utf-8'
+        else
+          WEBrick::HTTPUtils.mime_type(file_path, WEBrick::HTTPUtils::DefaultMimeTypes)
+        end
+      end
 
       def resource_path?(pathname)
         extensions = %w[.css .gif .ico .jpeg .jpg .js .mjs .png .svg]
