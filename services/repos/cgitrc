@@ -10,6 +10,7 @@ readme=:README.txt
 readme=:readme.txt
 readme=:README
 readme=:readme
+repository-sort=age
 root-desc=nsfisis repositories
 root-title=nsfisis repositories
 snapshots=tar.gz tar.zst zip
