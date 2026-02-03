@@ -12,7 +12,7 @@ for repo_path in repos/*; do
         mkdir -p "$repo_path/info/web"
         git -C "$repo_path" for-each-ref \
             --sort=-committerdate \
-            --format='%(committerdate:format:%Y-%m-%d %H:%M:%S)' \
+            --format='%(committerdate:format:%Y-%m-%d %H:%M:%S %z)' \
             refs/ \
         | head -1 > "$repo_path/info/web/last-modified"
     fi
