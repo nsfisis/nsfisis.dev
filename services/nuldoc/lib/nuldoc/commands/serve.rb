@@ -61,6 +61,9 @@ module Nuldoc
         end
 
         trap('INT') { server.shutdown }
+        puts
+        puts "http://#{server.config[:BindAddress]}:#{server.config[:Port]}"
+        puts
         server.start
       end
 
