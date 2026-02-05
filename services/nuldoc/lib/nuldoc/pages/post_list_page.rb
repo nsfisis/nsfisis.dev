@@ -27,16 +27,16 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render(Components::BlogGlobalHeader, config: config)
+              render Components::BlogGlobalHeader, config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text "#{page_title}#{page_info_suffix}" } }
-                render(Components::Pagination, current_page: current_page, total_pages: total_pages,
-                                               base_path: '/posts/')
+                render Components::Pagination, current_page: current_page, total_pages: total_pages,
+                                               base_path: '/posts/'
                 posts.each { |post| render(Components::PostPageEntry, post: post, config: config) }
-                render(Components::Pagination, current_page: current_page, total_pages: total_pages,
-                                               base_path: '/posts/')
+                render Components::Pagination, current_page: current_page, total_pages: total_pages,
+                                               base_path: '/posts/'
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

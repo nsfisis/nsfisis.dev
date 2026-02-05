@@ -28,18 +28,18 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render(global_header, config: config)
+              render global_header, config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text page_title } }
                 pages.each do |page|
                   if page.respond_to?(:event)
-                    render(Components::SlidePageEntry, slide: page, config: config)
+                    render Components::SlidePageEntry, slide: page, config: config
                   else
-                    render(Components::PostPageEntry, post: page, config: config)
+                    render Components::PostPageEntry, post: page, config: config
                   end
                 end
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

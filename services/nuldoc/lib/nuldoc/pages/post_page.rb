@@ -18,7 +18,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
-              render(Components::BlogGlobalHeader, config: config)
+              render Components::BlogGlobalHeader, config: config
               main class: 'main' do
                 article class: 'post-single' do
                   header class: 'post-header' do
@@ -33,7 +33,7 @@ module Nuldoc
                       end
                     end
                   end
-                  render(Components::TableOfContents, toc: doc.toc) if doc.toc && doc.toc.items.length.positive?
+                  render Components::TableOfContents, toc: doc.toc if doc.toc && doc.toc.items.length.positive?
                   div class: 'post-content' do
                     section id: 'changelog' do
                       h2 { a(href: '#changelog') { text '更新履歴' } }
@@ -51,7 +51,7 @@ module Nuldoc
                   end
                 end
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

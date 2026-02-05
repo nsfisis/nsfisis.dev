@@ -24,7 +24,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render(global_header, config: config)
+              render global_header, config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text page_title } }
                 sorted_tags.each do |tag|
@@ -41,7 +41,7 @@ module Nuldoc
                   end
                 end
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

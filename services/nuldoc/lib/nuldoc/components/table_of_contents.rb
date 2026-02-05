@@ -7,7 +7,7 @@ module Nuldoc
       end
 
       def build
-        nav(class: 'toc') do
+        nav class: 'toc' do
           h2 { text '目次' }
           ul { @toc.items.each { |entry| toc_entry_component(entry) } }
         end

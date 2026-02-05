@@ -20,14 +20,14 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render(Components::SlidesGlobalHeader, config: config)
+              render Components::SlidesGlobalHeader, config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text page_title } }
                 sorted.each do |slide|
-                  render(Components::SlidePageEntry, slide: slide, config: config)
+                  render Components::SlidePageEntry, slide: slide, config: config
                 end
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

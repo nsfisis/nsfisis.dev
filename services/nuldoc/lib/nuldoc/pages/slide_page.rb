@@ -18,8 +18,8 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
-              render(Components::StaticStylesheet, site: 'slides', file_name: '/slides.css', config: config)
-              render(Components::SlidesGlobalHeader, config: config)
+              render Components::StaticStylesheet, site: 'slides', file_name: '/slides.css', config: config
+              render Components::SlidesGlobalHeader, config: config
               main class: 'main' do
                 article class: 'post-single' do
                   header class: 'post-header' do
@@ -47,32 +47,32 @@ module Nuldoc
                         end
                       end
                     end
-                    canvas(id: 'slide', 'data-slide-link': slide.slide_link)
+                    canvas id: 'slide', 'data-slide-link': slide.slide_link
                     div class: 'controllers' do
                       div class: 'controllers-buttons' do
                         button id: 'prev', type: 'button' do
                           elem 'svg', width: '20', height: '20', viewBox: '0 0 24 24', fill: 'none',
                                       stroke: 'currentColor', 'stroke-width': '2' do
-                            elem('path', d: 'M15 18l-6-6 6-6')
+                            elem 'path', d: 'M15 18l-6-6 6-6'
                           end
                         end
                         button id: 'next', type: 'button' do
                           elem 'svg', width: '20', height: '20', viewBox: '0 0 24 24', fill: 'none',
                                       stroke: 'currentColor', 'stroke-width': '2' do
-                            elem('path', d: 'M9 18l6-6-6-6')
+                            elem 'path', d: 'M9 18l6-6-6-6'
                           end
                         end
                       end
                     end
-                    render(Components::StaticScript,
+                    render Components::StaticScript,
                            site: 'slides',
                            file_name: '/slide.js',
                            type: 'module',
-                           config: config)
+                           config: config
                   end
                 end
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

@@ -26,11 +26,11 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
-              render(global_header, config: config)
+              render global_header, config: config
               main class: 'main' do
                 article { div(class: 'not-found') { text '404' } }
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

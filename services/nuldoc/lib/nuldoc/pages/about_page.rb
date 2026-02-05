@@ -18,18 +18,18 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
-              render(Components::AboutGlobalHeader, config: config)
+              render Components::AboutGlobalHeader, config: config
               main class: 'main' do
                 article class: 'post-single' do
                   header class: 'post-header' do
                     h1(class: 'post-title') { text 'nsfisis' }
                     div class: 'my-icon' do
-                      div(id: 'myIcon') { img(src: '/favicon.svg') }
-                      render(Components::StaticScript,
+                      div(id: 'myIcon') { img src: '/favicon.svg' }
+                      render Components::StaticScript,
                              site: 'about',
                              file_name: '/my-icon.js',
                              defer: 'true',
-                             config: config)
+                             config: config
                     end
                   end
                   div class: 'post-content' do
@@ -80,7 +80,7 @@ module Nuldoc
                   end
                 end
               end
-              render(Components::GlobalFooter, config: config)
+              render Components::GlobalFooter, config: config
             end
           end
         ).build

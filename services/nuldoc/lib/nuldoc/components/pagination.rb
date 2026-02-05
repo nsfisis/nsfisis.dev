@@ -14,24 +14,24 @@ module Nuldoc
         else
           pages = generate_page_numbers(@current_page, @total_pages)
 
-          nav(class: 'pagination') do
-            div(class: 'pagination-prev') do
+          nav class: 'pagination' do
+            div class: 'pagination-prev' do
               a(href: page_url_at(@base_path, @current_page - 1)) { text '前へ' } if @current_page > 1
             end
             pages.each do |page|
               if page == '...'
                 div(class: 'pagination-elipsis') { text "\u2026" }
               elsif page == @current_page
-                div(class: 'pagination-page pagination-page-current') do
+                div class: 'pagination-page pagination-page-current' do
                   span { text page.to_s }
                 end
               else
-                div(class: 'pagination-page') do
+                div class: 'pagination-page' do
                   a(href: page_url_at(@base_path, page)) { text page.to_s }
                 end
               end
             end
-            div(class: 'pagination-next') do
+            div class: 'pagination-next' do
               a(href: page_url_at(@base_path, @current_page + 1)) { text '次へ' } if @current_page < @total_pages
             end
           end

@@ -7,8 +7,8 @@ module Nuldoc
       end
 
       def build
-        header(class: 'header') do
-          div(class: 'site-logo') do
+        header class: 'header' do
+          div class: 'site-logo' do
             a(href: "https://#{@config.sites.default.fqdn}/") { text 'nsfisis.dev' }
           end
         end
@@ -22,8 +22,8 @@ module Nuldoc
       end
 
       def build
-        header(class: 'header') do
-          div(class: 'site-logo') do
+        header class: 'header' do
+          div class: 'site-logo' do
             a(href: "https://#{@config.sites.default.fqdn}/") { text 'nsfisis.dev' }
           end
         end
@@ -37,12 +37,12 @@ module Nuldoc
       end
 
       def build
-        header(class: 'header') do
-          div(class: 'site-logo') do
+        header class: 'header' do
+          div class: 'site-logo' do
             a(href: "https://#{@config.sites.default.fqdn}/") { text 'nsfisis.dev' }
           end
           div(class: 'site-name') { text @config.sites.blog.site_name }
-          nav(class: 'nav') do
+          nav class: 'nav' do
             ul do
               li { a(href: "https://#{@config.sites.about.fqdn}/") { text 'About' } }
               li { a(href: '/posts/') { text 'Posts' } }
@@ -60,11 +60,11 @@ module Nuldoc
       end
 
       def build
-        header(class: 'header') do
-          div(class: 'site-logo') do
+        header class: 'header' do
+          div class: 'site-logo' do
             a(href: "https://#{@config.sites.default.fqdn}/") { text 'nsfisis.dev' }
           end
-          nav(class: 'nav') do
+          nav class: 'nav' do
             ul do
               li { a(href: "https://#{@config.sites.about.fqdn}/") { text 'About' } }
               li { a(href: '/slides/') { text 'Slides' } }

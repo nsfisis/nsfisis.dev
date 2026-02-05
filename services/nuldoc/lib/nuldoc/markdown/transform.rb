@@ -184,7 +184,7 @@ module Nuldoc
         operation_attr = n.attributes['operation']
         is_edit_block = editat_attr && operation_attr
 
-        label_element = div(class: 'admonition-label') do
+        label_element = div class: 'admonition-label' do
           text(is_edit_block ? "#{editat_attr} #{operation_attr}" : 'NOTE')
         end
         content_element = div(class: 'admonition-content') { child(*n.children.dup) }

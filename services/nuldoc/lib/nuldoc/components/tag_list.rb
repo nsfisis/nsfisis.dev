@@ -8,9 +8,9 @@ module Nuldoc
       end
 
       def build
-        ul(class: 'entry-tags') do
+        ul class: 'entry-tags' do
           @tags.each do |slug|
-            li(class: 'tag') do
+            li class: 'tag' do
               span(class: 'tag-inner') { text @config.tag_label(slug) }
             end
           end
