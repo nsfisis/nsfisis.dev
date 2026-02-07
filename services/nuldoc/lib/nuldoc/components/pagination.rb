@@ -20,7 +20,7 @@ module Nuldoc
             end
             pages.each do |page|
               if page == '...'
-                div(class: 'pagination-elipsis') { text "\u2026" }
+                div(class: 'pagination-ellipsis') { text "\u2026" }
               elsif page == @current_page
                 div class: 'pagination-page pagination-page-current' do
                   span { text page.to_s }
