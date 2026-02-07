@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【Ruby】 then キーワードと case in｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -103,38 +103,36 @@
               使われることは稀だが、Ruby では <code>then</code> がキーワードになっている。次のように使う:
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">cond</span> <span style="color: #cf222e">then</span>
-  <span style="color: #953800">puts</span> <span style="color: #0a3069">"Y"</span>
-<span style="color: #cf222e">else</span>
-  <span style="color: #953800">puts</span> <span style="color: #0a3069">"N"</span>
-<span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">cond</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line">  <span style="color: #953800">puts</span> <span style="color: #0a3069">"Y"</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">else</span>
+</div><div class="codeblock-line">  <span style="color: #953800">puts</span> <span style="color: #0a3069">"N"</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <p>
               このキーワードが現れうる場所はいくつかあり、<code>if</code>、<code>unless</code>、<code>rescue</code>、<code>case</code> 構文がそれに当たる。 上記のように、何か条件を書いた後 <code>then</code> を置き、式がそこで終了していることを示すマーカーとして機能する。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781"># Example:</span>
-
-<span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #cf222e">then</span>
-  <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">end</span>
-
-<span style="color: #cf222e">unless</span> <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #cf222e">then</span>
-  <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">end</span>
-
-<span style="color: #cf222e">begin</span>
-  <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">rescue</span> <span style="color: #cf222e">then</span>
-  <span style="color: #24292f;background-color: #f6f8fa">b</span>
-<span style="color: #cf222e">end</span>
-
-<span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
-<span style="color: #cf222e">when</span> <span style="color: #953800">p</span> <span style="color: #cf222e">then</span>
-  <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781"># Example:</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">unless</span> <span style="color: #24292f;background-color: #f6f8fa">x</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">begin</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">rescue</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">b</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">when</span> <span style="color: #953800">p</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span></div></code></pre>
             </div>
           </section>
           <section id="section--why-then-is-usually-unnecessary">
@@ -143,19 +141,17 @@
               普通 Ruby のコードで <code>then</code> を書くことはない。なぜか。次のコードを実行してみるとわかる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">if</span> <span style="color: #cf222e">true</span> <span style="color: #953800">puts</span> <span style="color: #0a3069">'Hello, World!'</span> <span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #cf222e">true</span> <span style="color: #953800">puts</span> <span style="color: #0a3069">'Hello, World!'</span> <span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <p>
               次のような構文エラーが出力される。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>20:1: syntax error, unexpected local variable or method, expecting `then' or ';' or '\n'
-if true puts 'Hello, World!' end
-        ^~~~
-20:1: syntax error, unexpected `end', expecting end-of-input
-...f true puts 'Hello, World!' end
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">20:1: syntax error, unexpected local variable or method, expecting `then' or ';' or '\n'
+</div><div class="codeblock-line">if true puts 'Hello, World!' end
+</div><div class="codeblock-line">        ^~~~
+</div><div class="codeblock-line">20:1: syntax error, unexpected `end', expecting end-of-input
+</div><div class="codeblock-line">...f true puts 'Hello, World!' end</div></code></pre>
             </div>
             <p>
               二つ目のメッセージは無視して一つ目を読むと、<code>then</code> か <code>;</code> か改行が来るはずのところ変数だかメソッドだかが現れたことによりエラーとなっているようだ。
@@ -164,9 +160,8 @@ if true puts 'Hello, World!' end
               ポイントは改行が <code>then</code> (や <code>;</code>) の代わりとなることである。<code>true</code> の後に改行を入れてみる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">if</span> <span style="color: #cf222e">true</span>
-<span style="color: #953800">puts</span> <span style="color: #0a3069">'Hello, World!'</span> <span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #cf222e">true</span>
+</div><div class="codeblock-line"><span style="color: #953800">puts</span> <span style="color: #0a3069">'Hello, World!'</span> <span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <p>
               無事 Hello, World! と出力されるようになった。
@@ -178,25 +173,22 @@ if true puts 'Hello, World!' end
               なぜ <code>then</code> や <code>;</code> や改行 (以下 「<code>then</code> 等」) が必要なのだろうか。次の例を見てほしい:
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">a</span> <span style="color: #24292f;background-color: #f6f8fa">b</span> <span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">a</span> <span style="color: #24292f;background-color: #f6f8fa">b</span> <span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <p>
               <code>then</code> も <code>;</code> も改行もないのでエラーになるが、これは条件式がどこまで続いているのかわからないためだ。この例は二通りに解釈できる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span>
-<span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">a</span> <span style="color: #cf222e">then</span>
-<span style="color: #24292f;background-color: #f6f8fa">b</span>
-<span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781"># a という変数かメソッドの評価結果が truthy なら b という変数かメソッドを評価</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">a</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">b</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span>
-<span style="color: #6e7781"># その結果が truthy なら何もしない</span>
-<span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">a</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #cf222e">then</span>
-<span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781"># a というメソッドに b という変数かメソッドの評価結果を渡して呼び出し、</span>
+</div><div class="codeblock-line"><span style="color: #6e7781"># その結果が truthy なら何もしない</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">a</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #cf222e">then</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <p>
               <code>then</code> 等はこの曖昧性を排除するためにあり、条件式は <code>if</code> から <code>then</code> 等までの間にある、ということを明確にする。 C系の <code>if</code> 後に来る <code>(</code>/<code>)</code> や、Python の <code>:</code>、Rust/Go/Swift などの <code>{</code> も同じ役割を持つ。
@@ -217,41 +209,39 @@ if true puts 'Hello, World!' end
               <div class="filename">
                 parse.y
               </div>
-              <pre class="highlight" style="background-color:#f5f5f5"><code>p_case_body : keyword_in
-{
-  SET_LEX_STATE(EXPR_BEG|EXPR_LABEL);
-  p-&gt;command_start = FALSE;
-  $&lt;ctxt&gt;1 = p-&gt;ctxt;
-  p-&gt;ctxt.in_kwarg = 1;
-  $&lt;tbl&gt;$ = push_pvtbl(p);
-}
-{
-  $&lt;tbl&gt;$ = push_pktbl(p);
-}
-p_top_expr then
-{
-  pop_pktbl(p, $&lt;tbl&gt;3);
-  pop_pvtbl(p, $&lt;tbl&gt;2);
-  p-&gt;ctxt.in_kwarg = $&lt;ctxt&gt;1.in_kwarg;
-}
-compstmt
-p_cases
-{
-  /*%%%*/
-  $$ = NEW_IN($4, $7, $8, &amp;@$);
-  /*% %*/
-  /*% ripper: in!($4, $7, escape_Qundef($8)) %*/
-}
-;
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">p_case_body : keyword_in
+</div><div class="codeblock-line">{
+</div><div class="codeblock-line">  SET_LEX_STATE(EXPR_BEG|EXPR_LABEL);
+</div><div class="codeblock-line">  p-&gt;command_start = FALSE;
+</div><div class="codeblock-line">  $&lt;ctxt&gt;1 = p-&gt;ctxt;
+</div><div class="codeblock-line">  p-&gt;ctxt.in_kwarg = 1;
+</div><div class="codeblock-line">  $&lt;tbl&gt;$ = push_pvtbl(p);
+</div><div class="codeblock-line">}
+</div><div class="codeblock-line">{
+</div><div class="codeblock-line">  $&lt;tbl&gt;$ = push_pktbl(p);
+</div><div class="codeblock-line">}
+</div><div class="codeblock-line">p_top_expr then
+</div><div class="codeblock-line">{
+</div><div class="codeblock-line">  pop_pktbl(p, $&lt;tbl&gt;3);
+</div><div class="codeblock-line">  pop_pvtbl(p, $&lt;tbl&gt;2);
+</div><div class="codeblock-line">  p-&gt;ctxt.in_kwarg = $&lt;ctxt&gt;1.in_kwarg;
+</div><div class="codeblock-line">}
+</div><div class="codeblock-line">compstmt
+</div><div class="codeblock-line">p_cases
+</div><div class="codeblock-line">{
+</div><div class="codeblock-line">  /*%%%*/
+</div><div class="codeblock-line">  $$ = NEW_IN($4, $7, $8, &amp;@$);
+</div><div class="codeblock-line">  /*% %*/
+</div><div class="codeblock-line">  /*% ripper: in!($4, $7, escape_Qundef($8)) %*/
+</div><div class="codeblock-line">}
+</div><div class="codeblock-line">;</div></code></pre>
             </div>
             <p>
               簡略版:
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>p_case_body : keyword_in p_top_expr then compstmt p_cases
-;
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">p_case_body : keyword_in p_top_expr then compstmt p_cases
+</div><div class="codeblock-line">;</div></code></pre>
             </div>
             <p>
               ここで、<code>keyword_in</code> は文字通り <code>in</code>、<code>p_top_expr</code> はいわゆるパターン、<code>then</code> は <code>then</code> キーワードのことではなく、この記事で <code>then</code> 等と呼んでいるもの、つまり <code>then</code> キーワード、<code>;</code>、改行のいずれかである。
@@ -260,38 +250,36 @@ p_cases
               これにより、<code>case</code> - <code>when</code> による従来の構文と同じように、<code>then</code> 等をパターンの後ろに挿入すればよいことがわかった。つまり次の3通りのいずれかになる:
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">1</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">2</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">b</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">3</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>
-<span style="color: #cf222e">end</span>
-
-<span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">1</span>
-  <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">2</span>
-  <span style="color: #24292f;background-color: #f6f8fa">b</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">3</span>
-  <span style="color: #24292f;background-color: #f6f8fa">c</span>
-<span style="color: #cf222e">end</span>
-
-<span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">2</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">b</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">3</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>
-<span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">1</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">2</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">b</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">3</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">1</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">2</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">b</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">3</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">c</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">2</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">b</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">3</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span></div></code></pre>
             </div>
             <p>
               ところで、<code>p_top_expr</code> には <code>if</code> による guard clause が書けるので、その場合は <code>if</code> - <code>then</code> と似たような見た目になる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
-<span style="color: #cf222e">in</span> <span style="color: #0550ae">0</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">a</span>
-<span style="color: #cf222e">in</span> <span style="color: #24292f;background-color: #f6f8fa">n</span> <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">n</span> <span style="color: #0550ae">&lt;</span> <span style="color: #0550ae">0</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">b</span>
-<span style="color: #cf222e">in</span> <span style="color: #24292f;background-color: #f6f8fa">n</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>
-<span style="color: #cf222e">end</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">case</span> <span style="color: #24292f;background-color: #f6f8fa">x</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #0550ae">0</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">a</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #24292f;background-color: #f6f8fa">n</span> <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">n</span> <span style="color: #0550ae">&lt;</span> <span style="color: #0550ae">0</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">b</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">in</span> <span style="color: #24292f;background-color: #f6f8fa">n</span> <span style="color: #cf222e">then</span> <span style="color: #24292f;background-color: #f6f8fa">c</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">end</span></div></code></pre>
             </div>
           </section>
           <section id="section--outro">

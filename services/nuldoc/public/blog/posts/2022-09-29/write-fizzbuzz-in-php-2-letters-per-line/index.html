@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【PHP】 fizzbuzz を書く。1行あたり2文字で。｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -158,81 +158,80 @@
               特に、C言語でこのような試みをおこなったことがあるかたならそう思うだろう。事実、Cでのこの制約はほとんど無意味に等しい。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">#\
-i\
-n\
-c\
-l\
-u\
-d\
-e\
-&lt;\
-s\
-t\
-d\
-i\
-o\
-.\
-h\
-&gt;\
-</span><span style="color: #6e7781">/*
-*/</span><span style="color: #6e7781">
-</span><span style="color: #24292f;background-color: #f6f8fa">i</span>\
-<span style="color: #24292f;background-color: #f6f8fa">n</span>\
-<span style="color: #24292f;background-color: #f6f8fa">t</span>\
-<span style="color: #6e7781">/*
-*/</span>
-<span style="color: #24292f;background-color: #f6f8fa">m</span>\
-<span style="color: #24292f;background-color: #f6f8fa">a</span>\
-<span style="color: #24292f;background-color: #f6f8fa">i</span>\
-<span style="color: #24292f;background-color: #f6f8fa">n</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
-<span style="color: #24292f;background-color: #f6f8fa">){</span>
-<span style="color: #24292f;background-color: #f6f8fa">f</span>\
-<span style="color: #24292f;background-color: #f6f8fa">o</span>\
-<span style="color: #24292f;background-color: #f6f8fa">r</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
-<span style="color: #24292f;background-color: #f6f8fa">i</span>\
-<span style="color: #24292f;background-color: #f6f8fa">n</span>\
-<span style="color: #24292f;background-color: #f6f8fa">t</span>\
-<span style="color: #6e7781">/*
-*/</span>
-<span style="color: #24292f;background-color: #f6f8fa">i</span><span style="color: #0550ae">=</span>
-<span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #24292f;background-color: #f6f8fa">i</span><span style="color: #0550ae">&lt;</span>
-<span style="color: #0550ae">1</span>\
-<span style="color: #0550ae">0</span>\
-<span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #24292f;background-color: #f6f8fa">i</span>\
-<span style="color: #0550ae">+</span>\
-<span style="color: #0550ae">+</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
-<span style="color: #cf222e">if</span>
-<span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">i</span>
-<span style="color: #0550ae">%</span>\
-<span style="color: #0550ae">15</span>
-<span style="color: #0550ae">==</span>
-<span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
-<span style="color: #24292f;background-color: #f6f8fa">p</span>\
-<span style="color: #24292f;background-color: #f6f8fa">r</span>\
-<span style="color: #24292f;background-color: #f6f8fa">i</span>\
-<span style="color: #24292f;background-color: #f6f8fa">n</span>\
-<span style="color: #24292f;background-color: #f6f8fa">t</span>\
-<span style="color: #24292f;background-color: #f6f8fa">f</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
-<span style="color: #0a3069">"\
-F\
-i\
-z\
-z\
-B\
-u\
-z\
-z\
-%\
-c\
-"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-<span style="color: #0550ae">10</span>
-<span style="color: #24292f;background-color: #f6f8fa">);</span>
-
-<span style="color: #6e7781">/* あとは同じように普通のプログラムを変形するだけなので省略 */</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">#\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">i\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">n\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">c\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">l\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">u\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">d\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">e\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">&lt;\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">s\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">t\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">d\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">i\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">o\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">.\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">h\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">&gt;\</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">/*</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">*/</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">n</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">t</span>\
+</div><div class="codeblock-line"><span style="color: #6e7781">/*</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">*/</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">m</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">a</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">n</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">){</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">f</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">o</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">r</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">n</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">t</span>\
+</div><div class="codeblock-line"><span style="color: #6e7781">/*</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">*/</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span><span style="color: #0550ae">=</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span><span style="color: #0550ae">&lt;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">1</span>\
+</div><div class="codeblock-line"><span style="color: #0550ae">0</span>\
+</div><div class="codeblock-line"><span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span>\
+</div><div class="codeblock-line"><span style="color: #0550ae">+</span>\
+</div><div class="codeblock-line"><span style="color: #0550ae">+</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">if</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">i</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">%</span>\
+</div><div class="codeblock-line"><span style="color: #0550ae">15</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">==</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">p</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">r</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">i</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">n</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">t</span>\
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">f</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">"\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">F\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">i\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">z\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">z\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">B\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">u\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">z\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">z\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">%\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">c\</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">10</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #6e7781">/* あとは同じように普通のプログラムを変形するだけなので省略 */</span></div></code></pre>
             </div>
             <p>
               バックスラッシュを使った行継続がトークンを区切らない、というのがポイントだ。
@@ -274,11 +273,10 @@ c\
               また、2文字だと文字列がまともに書けないのも辛い。<code>&apos;&apos;</code> だけで2文字使うので、「1文字の文字列リテラル」というものを書くことができない。PHP では文字列リテラル中に生の改行が書けるので
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$a</span>
-<span style="color: #0550ae">=</span><span style="color: #0a3069">'
-a'</span>
-<span style="color: #24292f;background-color: #f6f8fa">;;</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$a</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #0a3069">'</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">a'</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">;;</span></div></code></pre>
             </div>
             <p>
               とすると <code>$a</code> は <code>&quot;\na&quot;</code> になるのだが、余計な改行が入ってしまう。
@@ -295,12 +293,11 @@ a'</span>
                 まずは普通に書くとしよう。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
-
-<span style="color: #cf222e">for</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #0550ae">$i</span> <span style="color: #0550ae">&lt;</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #0550ae">$i</span><span style="color: #0550ae">++</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-  <span style="color: #cf222e">echo</span> <span style="color: #24292f;background-color: #f6f8fa">((</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Fizz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Buzz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">?:</span> <span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #24292f;background-color: #f6f8fa">}</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">&lt;?php</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">for</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #0550ae">$i</span> <span style="color: #0550ae">&lt;</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #0550ae">$i</span><span style="color: #0550ae">++</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">  <span style="color: #cf222e">echo</span> <span style="color: #24292f;background-color: #f6f8fa">((</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Fizz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Buzz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">?:</span> <span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">}</span></div></code></pre>
               </div>
               <p>
                 素直に書いた fizzbuzz とは言い難いが、このくらいは普通だということにしておかないと、この先がやっていられないので許してほしい。
@@ -312,15 +309,14 @@ a'</span>
                 <code>for</code> は、3文字もある長いキーワードである。こんなものは使えない。<code>array_</code> 系の関数を使って、適当に置き換えるとしよう。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
-
-<span style="color: #0550ae">$s</span> <span style="color: #0550ae">=</span> <span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-<span style="color: #953800">array_walk</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
-<span style="color: #0550ae">$s</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-<span style="color: #cf222e">fn</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">=&gt;</span>
-<span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(((</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Fizz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Buzz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">?:</span> <span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">),</span>
-<span style="color: #24292f;background-color: #f6f8fa">);</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">&lt;?php</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #0550ae">$s</span> <span style="color: #0550ae">=</span> <span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line"><span style="color: #953800">array_walk</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$s</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">fn</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">=&gt;</span>
+</div><div class="codeblock-line"><span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(((</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Fizz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Buzz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">?:</span> <span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">),</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">);</span></div></code></pre>
               </div>
               <p>
                 <code>array_walk</code> や <code>range</code>、<code>printf</code> といった <code>for</code> よりも長いトークンが現れてしまったが、これは次節で直すことにする。なお、<code>echo</code> は文 (statement) であり式 (expression) ではないので、式である <code>printf</code> に置き換えた。
@@ -332,19 +328,18 @@ a'</span>
                 <code>range</code>、<code>array_walk</code>、<code>printf</code> は長すぎるのでどうにかせねばならない。ここで、PHP の可変関数を使う。可変関数とは、関数名が文字列として入った変数を経由して、関数を呼び出す機能である。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
-
-<span style="color: #0550ae">$r</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'range'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #0550ae">$w</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'array_walk'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #0550ae">$p</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'printf'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-
-<span style="color: #0550ae">$s</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">$r</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-<span style="color: #0550ae">$w</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
-<span style="color: #0550ae">$s</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-<span style="color: #cf222e">fn</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">=&gt;</span>
-<span style="color: #0550ae">$p</span><span style="color: #24292f;background-color: #f6f8fa">(((</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Fizz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Buzz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">?:</span> <span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">),</span>
-<span style="color: #24292f;background-color: #f6f8fa">);</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">&lt;?php</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #0550ae">$r</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'range'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$w</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'array_walk'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$p</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'printf'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #0550ae">$s</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">$r</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">100</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$w</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$s</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">fn</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">=&gt;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$p</span><span style="color: #24292f;background-color: #f6f8fa">(((</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">3</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Fizz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">%</span> <span style="color: #0550ae">5</span> <span style="color: #0550ae">?</span> <span style="color: #0a3069">''</span> <span style="color: #0550ae">:</span> <span style="color: #0a3069">'Buzz'</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">?:</span> <span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">.</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">),</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">);</span></div></code></pre>
               </div>
               <p>
                 これで関数を呼び出している所は短くなった。では、<code>$r</code> や <code>$w</code> や <code>$p</code>、また <code>&apos;Fizz&apos;</code> や <code>&apos;Buzz&apos;</code> はどうやって 1 行 2 文字に収めるのか。次のテクニックへ移ろう。
@@ -366,28 +361,26 @@ a'</span>
                 というルールがない場合、「未定義の定数が評価された場合、その定数の名前が値になる」という PHP 7.x までの仕様が利用できる。例えば、 <code>Fizz</code> という文字列が欲しければ、次のようにする。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$f</span>
-<span style="color: #0550ae">=</span><span style="color: #953800">F</span>
-<span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">i</span>
-<span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">z</span>
-<span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">z</span>
-<span style="color: #24292f;background-color: #f6f8fa">;;</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$f</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #953800">F</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">i</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">z</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">z</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">;;</span></div></code></pre>
               </div>
               <p>
                 こうして簡単に文字列を作れる。なお、この仕様は 7.x 時点でも警告を受けるので、<code>@</code> 演算子を使って抑制してやるとよい。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$f</span>
-<span style="color: #0550ae">=@</span>
-<span style="color: #953800">F</span><span style="color: #0550ae">.</span>
-<span style="color: #0550ae">@</span><span style="color: #24292f;background-color: #f6f8fa">i</span>
-<span style="color: #0550ae">.</span><span style="color: #6e7781">#
-@z</span>
-<span style="color: #0550ae">.</span><span style="color: #6e7781">#
-@z</span>
-<span style="color: #24292f;background-color: #f6f8fa">;;</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$f</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=@</span>
+</div><div class="codeblock-line"><span style="color: #953800">F</span><span style="color: #0550ae">.</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">@</span><span style="color: #24292f;background-color: #f6f8fa">i</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">.</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">@z</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">.</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">@z</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">;;</span></div></code></pre>
               </div>
               <p>
                 むしろ、このことがわかっていたからこそ PHP 8.x での動作を要件に課したところがある。
@@ -402,70 +395,66 @@ a'</span>
                 ずばり、文字列同士のビット演算を使う。PHP では、文字列同士でビット演算 (<code>&amp;</code>、<code>|</code>、<code>^</code>) をした場合、文字列の各バイトごとに指定したビット演算がなされ、それを結合したものが演算結果となる。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$a</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"12345"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #0550ae">$b</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"world"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-
-<span style="color: #6e7781">// $a ^ $b は次のコードと同じ</span>
-<span style="color: #0550ae">$result</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">''</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #cf222e">for</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #0550ae">$i</span> <span style="color: #0550ae">&lt;</span> <span style="color: #953800">min</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">strlen</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$a</span><span style="color: #24292f;background-color: #f6f8fa">),</span> <span style="color: #953800">strlen</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$b</span><span style="color: #24292f;background-color: #f6f8fa">));</span> <span style="color: #0550ae">$i</span><span style="color: #0550ae">++</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-<span style="color: #0550ae">$result</span> <span style="color: #0550ae">.</span><span style="color: #0550ae">=</span> <span style="color: #0550ae">$a</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">^</span> <span style="color: #0550ae">$b</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">];</span>
-<span style="color: #24292f;background-color: #f6f8fa">}</span>
-
-<span style="color: #cf222e">echo</span> <span style="color: #0550ae">$result</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #6e7781">// =&gt; F]AXQ</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$a</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"12345"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$b</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"world"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #6e7781">// $a ^ $b は次のコードと同じ</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$result</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">''</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">for</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$i</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">;</span> <span style="color: #0550ae">$i</span> <span style="color: #0550ae">&lt;</span> <span style="color: #953800">min</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">strlen</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$a</span><span style="color: #24292f;background-color: #f6f8fa">),</span> <span style="color: #953800">strlen</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$b</span><span style="color: #24292f;background-color: #f6f8fa">));</span> <span style="color: #0550ae">$i</span><span style="color: #0550ae">++</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$result</span> <span style="color: #0550ae">.</span><span style="color: #0550ae">=</span> <span style="color: #0550ae">$a</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">]</span> <span style="color: #0550ae">^</span> <span style="color: #0550ae">$b</span><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0550ae">$i</span><span style="color: #24292f;background-color: #f6f8fa">];</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">echo</span> <span style="color: #0550ae">$result</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">// =&gt; F]AXQ</span></div></code></pre>
               </div>
               <p>
                 これを踏まえ、次のコードを見てみよう。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$x</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"x</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">Om</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #0550ae">$y</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">k!</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">o"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #0550ae">$r</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">^</span> <span style="color: #0550ae">$y</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #cf222e">echo</span> <span style="color: #0a3069">"</span><span style="color: #0550ae">$r</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$x</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"x</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">Om</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$y</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">k!</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">o"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$r</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">^</span> <span style="color: #0550ae">$y</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">echo</span> <span style="color: #0a3069">"</span><span style="color: #0550ae">$r</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span></div></code></pre>
               </div>
               <p>
                 実行すると、<code>range</code> が表示される。さて、PHP では文字列リテラル中に生の改行を直接書いてもよいのだった (「主な障害」の節を参照のこと)。書きかえてみよう。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$x</span>
-<span style="color: #0550ae">=</span><span style="color: #0a3069">'x
-Om
-'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #0550ae">$y</span>
-<span style="color: #0550ae">=</span><span style="color: #0a3069">'
-k!
-o'</span>
-<span style="color: #24292f;background-color: #f6f8fa">;</span>
-
-<span style="color: #0550ae">$r</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">^</span> <span style="color: #0550ae">$y</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #cf222e">echo</span> <span style="color: #0a3069">"</span><span style="color: #0550ae">$r</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$x</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #0a3069">'x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">Om</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$y</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #0a3069">'</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">k!</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">o'</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #0550ae">$r</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">^</span> <span style="color: #0550ae">$y</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">echo</span> <span style="color: #0a3069">"</span><span style="color: #0550ae">$r</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span></div></code></pre>
               </div>
               <p>
                 さらに <code>#</code> を使って適当に調整すると、次のようになる。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #0550ae">$x</span>
-<span style="color: #0550ae">=</span><span style="color: #6e7781">#
-'x</span>
-<span style="color: #953800">Om</span>
-<span style="color: #0a3069">';
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #0550ae">!</span>
-<span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #f6f8fa;background-color: #82071e">'</span>
-<span style="color: #24292f;background-color: #f6f8fa">;</span><span style="color: #6e7781">#
-$r</span>
-<span style="color: #0550ae">=</span><span style="color: #6e7781">#
-$x</span>
-<span style="color: #0550ae">^</span><span style="color: #6e7781">#
-$y</span>
-<span style="color: #24292f;background-color: #f6f8fa">;</span><span style="color: #6e7781">#
-</span>
-<span style="color: #cf222e">echo</span> <span style="color: #0a3069">"</span><span style="color: #0550ae">$r</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #0550ae">$x</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">'x</span>
+</div><div class="codeblock-line"><span style="color: #953800">Om</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #f6f8fa;background-color: #82071e">'</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">;</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">$r</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">$x</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">^</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">$y</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">;</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">echo</span> <span style="color: #0a3069">"</span><span style="color: #0550ae">$r</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">;</span></div></code></pre>
               </div>
               <p>
                 1行あたり2文字で、<code>range</code> という文字列を生成することに成功した。他の必要な文字列にも、同様の処理をほどこす。
@@ -481,156 +470,155 @@ $y</span>
               完成したものがこちら。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
-
-<span style="color: #0550ae">$x</span>
-<span style="color: #0550ae">=</span><span style="color: #6e7781">#
-'i</span>
-<span style="color: #953800">S</span><span style="color: #0a3069">'
-;;
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #0550ae">!</span>
-<span style="color: #0a3069">';
-$c
-=#
-$x
-^#
-$y
-;#
-$x
-=#
-'</span><span style="color: #24292f;background-color: #f6f8fa">x</span>
-<span style="color: #953800">Om</span>
-<span style="color: #0a3069">';
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #0550ae">!</span>
-<span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #0a3069">'
-;#
-$r
-=#
-$x
-^#
-$y
-;#
-$x
-=#
-'</span><span style="color: #24292f;background-color: #f6f8fa">k</span>
-<span style="color: #953800">Sk</span>
-<span style="color: #0550ae">~</span><span style="color: #24292f;background-color: #f6f8fa">}</span>
-<span style="color: #953800">Ma</span>
-<span style="color: #0a3069">';
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">x</span><span style="color: #0550ae">!</span>
-<span style="color: #24292f;background-color: #f6f8fa">s</span><span style="color: #0550ae">!</span>
-<span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #0550ae">!</span>
-<span style="color: #0a3069">';
-$w
-=#
-$x
-^#
-$y
-;#
-$x
-=#
-'</span><span style="color: #24292f;background-color: #f6f8fa">z</span>
-<span style="color: #953800">Hd</span>
-<span style="color: #953800">G</span><span style="color: #0a3069">'
-;#
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">x</span><span style="color: #0550ae">!</span>
-<span style="color: #0550ae">~!</span>
-<span style="color: #0a3069">';
-$p
-=#
-$x
-^#
-$y
-;#
-$x
-=#
-'</span><span style="color: #953800">L</span>
-<span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">p</span>
-<span style="color: #0a3069">';
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #0550ae">!</span>
-<span style="color: #0a3069">';
-$f
-=#
-$x
-^#
-$y
-;#
-$x
-=#
-'</span><span style="color: #953800">H</span>
-<span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">p</span>
-<span style="color: #0a3069">';
-$y
-='</span>
-<span style="color: #24292f;background-color: #f6f8fa">_</span><span style="color: #0550ae">!</span>
-<span style="color: #0a3069">';
-$b
-=#
-$x
-^#
-$y
-;#
-$b
-[1
-]=
-$c
-(#
-13
-*9
-);
-$s
-=#
-$r
-(1
-,(
-10
-**
-2)
-);
-$w
-(#
-$s
-,#
-fn
-(#
-$i
-)#
-=&gt;
-$p
-((
-(#
-$i
-%3
-?#
-''
-:#
-$f
-).
-(#
-$i
-%5
-?#
-''
-:#
-$b
-)?
-:#
-$i
-)#
-.'</span>
-<span style="color: #f6f8fa;background-color: #82071e">'</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
-<span style="color: #24292f;background-color: #f6f8fa">);</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">&lt;?php</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #0550ae">$x</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">'i</span>
+</div><div class="codeblock-line"><span style="color: #953800">S</span><span style="color: #0a3069">'</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;;</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">b</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$c</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">^#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">x</span>
+</div><div class="codeblock-line"><span style="color: #953800">Om</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #0a3069">'</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$r</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">^#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">k</span>
+</div><div class="codeblock-line"><span style="color: #953800">Sk</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">~</span><span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line"><span style="color: #953800">Ma</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">x</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">s</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">k</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$w</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">^#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">z</span>
+</div><div class="codeblock-line"><span style="color: #953800">Hd</span>
+</div><div class="codeblock-line"><span style="color: #953800">G</span><span style="color: #0a3069">'</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">x</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">~!</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$p</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">^#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #953800">L</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">p</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$f</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">^#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #953800">H</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">p</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">='</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">_</span><span style="color: #0550ae">!</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">';</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$b</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$x</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">^#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$y</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">;#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$b</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">[1</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">]=</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$c</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">(#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">13</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">*9</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">);</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$s</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$r</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">(1</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">,(</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">10</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">**</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">2)</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">);</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$w</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">(#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$s</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">,#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">fn</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">(#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$i</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">)#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">=&gt;</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$p</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">((</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">(#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$i</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">%3</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">?#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">''</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">:#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$f</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">).</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">(#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$i</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">%5</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">?#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">''</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">:#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$b</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">)?</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">:#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">$i</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">)#</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">.'</span>
+</div><div class="codeblock-line"><span style="color: #f6f8fa;background-color: #82071e">'</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">);</span></div></code></pre>
             </div>
           </section>
           <section id="section--outro">
@@ -648,19 +636,18 @@ $i
               PHP では、バッククォートを使ってシェルを呼び出せる。これは <code>shell_exec</code> 関数と等価である。さて、PHP ではバックスラッシュによる行継続が使えないと書いたが、シェルでは使える (当然だが、呼び出されるシェルに依存する。Bash なら大丈夫だろう。知らんけど)。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
-
-<span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #f6f8fa;background-color: #82071e">`</span>
-<span style="color: #24292f;background-color: #f6f8fa">e</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #24292f;background-color: #f6f8fa">h</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #0550ae">1</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #0550ae">2</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #0550ae">3</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #f6f8fa;background-color: #82071e">`</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">&lt;?php</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #f6f8fa;background-color: #82071e">`</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">e</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">h</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">1</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">2</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">3</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #f6f8fa;background-color: #82071e">`</span><span style="color: #24292f;background-color: #f6f8fa">);</span></div></code></pre>
             </div>
             <p>
               なお、ここでは簡単のため出力に <code>printf</code> をそのまま使っているが、実際には <code>printf</code> という文字列を合成して可変関数で呼び出す。
@@ -682,59 +669,56 @@ $i
               もうこれ以上は不可能だと思っていたのだが、この記事の執筆中に解決する方法を思いついたので載せておく。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">&lt;?php</span>
-
-<span style="color: #0550ae">$c</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'chr'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-
-<span style="color: #f6f8fa;background-color: #82071e">$</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
-<span style="color: #0a3069">'_
-'</span><span style="color: #24292f;background-color: #f6f8fa">}</span>
-<span style="color: #0550ae">=</span><span style="color: #6e7781">#
-$c</span>
-<span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #6e7781">#
-32</span>
-<span style="color: #24292f;background-color: #f6f8fa">)</span><span style="color: #0550ae">.</span>
-<span style="color: #0550ae">$c</span>
-<span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #6e7781">#
-92</span>
-<span style="color: #24292f;background-color: #f6f8fa">);</span>
-
-<span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #f6f8fa;background-color: #82071e">`</span>
-<span style="color: #24292f;background-color: #f6f8fa">e</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #24292f;background-color: #f6f8fa">h</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #f6f8fa;background-color: #82071e">$</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
-<span style="color: #0a3069">'_
-'</span><span style="color: #24292f;background-color: #f6f8fa">}</span>
-<span style="color: #0550ae">1</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #0550ae">2</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #0550ae">3</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
-<span style="color: #f6f8fa;background-color: #82071e">`</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">&lt;?php</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #0550ae">$c</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'chr'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #f6f8fa;background-color: #82071e">$</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'_</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">=</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">$c</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">32</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">)</span><span style="color: #0550ae">.</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">$c</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #6e7781">#</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">92</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #f6f8fa;background-color: #82071e">`</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">e</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">h</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">o</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #f6f8fa;background-color: #82071e">$</span><span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'_</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">1</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">2</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #0550ae">3</span><span style="color: #f6f8fa;background-color: #82071e">\</span>
+</div><div class="codeblock-line"><span style="color: #f6f8fa;background-color: #82071e">`</span><span style="color: #24292f;background-color: #f6f8fa">);</span></div></code></pre>
             </div>
             <p>
               先程と同じく、<code>chr</code> や <code>printf</code> を生成する部分は長くなるので省いた。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>${
-'_
-'}
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">${
+</div><div class="codeblock-line">'_
+</div><div class="codeblock-line">'}</div></code></pre>
             </div>
             <p>
               は変数で、中にはスペースとエスケープが入っている (<code>chr(32) . chr(92)</code>)。シェルに渡されている文字列は次のようになる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>e\
-c\
-h\
-o\
-\
-1\
-2\
-3\
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">e\
+</div><div class="codeblock-line">c\
+</div><div class="codeblock-line">h\
+</div><div class="codeblock-line">o\
+</div><div class="codeblock-line">\
+</div><div class="codeblock-line">1\
+</div><div class="codeblock-line">2\
+</div><div class="codeblock-line">3\</div></code></pre>
             </div>
             <p>
               これは、前掲したコマンドと同じだ。かくして、スペースを陽に書かずにシェルをおおよそ自由に扱えるようになった。Fizzbuzz のワンライナーくらいすぐ書けるだろうから、あとはなんとかなるだろう (試してないけど)。
@@ -746,10 +730,9 @@ o\
               ちなみに、PHP 8.2 からは、この記法で Warning が出るようになるようだ。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>${
-'_
-'}
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">${
+</div><div class="codeblock-line">'_
+</div><div class="codeblock-line">'}</div></code></pre>
             </div>
             <p>
               最新版で警告が出るというのも美しくないので、私としては本編の解法を推す。

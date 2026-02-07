@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>浮動小数点数の半開区間で単一値を表現する｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -152,9 +152,8 @@
               <code>1</code> と <code>p</code> のビット列での表現を見てみよう。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>1 = 0011111111110000000000000000000000000000000000000000000000000000
-p = 0011111111110000000000000000000000000000000000000000000000000001
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">1 = 0011111111110000000000000000000000000000000000000000000000000000
+</div><div class="codeblock-line">p = 0011111111110000000000000000000000000000000000000000000000000001</div></code></pre>
             </div>
             <p>
               <code>p</code> が <code>1</code> よりも一つ分だけ大きいのがわかるだろうか (ここでは <code>binary64</code> の具体的な表現について言及していないのでそうなる保証はないのだが、あくまで雰囲気として)。
@@ -183,39 +182,37 @@ p = 0011111111110000000000000000000000000000000000000000000000000001
               <code>binary64</code> を 64 bit の整数に変換できるなら、他の言語でもほとんど同じ方法で実装できるはずだ。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>    <span style="color: #cf222e">public</span> <span style="color: #cf222e">static</span> <span style="color: #cf222e">function</span> <span style="color: #24292f;background-color: #f6f8fa">nextUp</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #cf222e">float</span> <span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">):</span> <span style="color: #cf222e">float</span>
-    <span style="color: #24292f;background-color: #f6f8fa">{</span>
-        <span style="color: #6e7781">// NaN (Not a Number) なら NaN を返す。</span>
-        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">is_nan</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">))</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-            <span style="color: #cf222e">return</span> <span style="color: #953800">NAN</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-        <span style="color: #24292f;background-color: #f6f8fa">}</span>
-        <span style="color: #6e7781">// 正の無限大なら正の無限大を返す。</span>
-        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">is_infinite</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">&gt;</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-            <span style="color: #cf222e">return</span> <span style="color: #953800">INF</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-        <span style="color: #24292f;background-color: #f6f8fa">}</span>
-        <span style="color: #6e7781">// 0 なら minValue() を返す (後述)。</span>
-        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span> <span style="color: #0550ae">===</span> <span style="color: #0550ae">0.0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-            <span style="color: #cf222e">return</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">minValue</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
-        <span style="color: #24292f;background-color: #f6f8fa">}</span>
-        <span style="color: #6e7781">// binary64 を 64 bit 整数に変換する。</span>
-        <span style="color: #0550ae">$u</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">floatToInt</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-        <span style="color: #6e7781">// 正なら整数に +1 して binary64 に戻す。</span>
-        <span style="color: #6e7781">// 負なら整数に -1 して binary64 に戻す。</span>
-        <span style="color: #cf222e">return</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">&gt;</span> <span style="color: #0550ae">0.0</span> <span style="color: #0550ae">?</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">intToFloat</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$u</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">:</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">intToFloat</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$u</span> <span style="color: #0550ae">-</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-    <span style="color: #24292f;background-color: #f6f8fa">}</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">    <span style="color: #cf222e">public</span> <span style="color: #cf222e">static</span> <span style="color: #cf222e">function</span> <span style="color: #24292f;background-color: #f6f8fa">nextUp</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #cf222e">float</span> <span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">):</span> <span style="color: #cf222e">float</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// NaN (Not a Number) なら NaN を返す。</span>
+</div><div class="codeblock-line">        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">is_nan</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">))</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">            <span style="color: #cf222e">return</span> <span style="color: #953800">NAN</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">        <span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// 正の無限大なら正の無限大を返す。</span>
+</div><div class="codeblock-line">        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #953800">is_infinite</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">&gt;</span> <span style="color: #0550ae">0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">            <span style="color: #cf222e">return</span> <span style="color: #953800">INF</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">        <span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// 0 なら minValue() を返す (後述)。</span>
+</div><div class="codeblock-line">        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span> <span style="color: #0550ae">===</span> <span style="color: #0550ae">0.0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">            <span style="color: #cf222e">return</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">minValue</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
+</div><div class="codeblock-line">        <span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// binary64 を 64 bit 整数に変換する。</span>
+</div><div class="codeblock-line">        <span style="color: #0550ae">$u</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">floatToInt</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// 正なら整数に +1 して binary64 に戻す。</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// 負なら整数に -1 して binary64 に戻す。</span>
+</div><div class="codeblock-line">        <span style="color: #cf222e">return</span> <span style="color: #0550ae">$x</span> <span style="color: #0550ae">&gt;</span> <span style="color: #0550ae">0.0</span> <span style="color: #0550ae">?</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">intToFloat</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$u</span> <span style="color: #0550ae">+</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">:</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">intToFloat</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$u</span> <span style="color: #0550ae">-</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">}</span></div></code></pre>
             </div>
             <p>
               <code>0</code> のときに返している <code>minValue()</code> は次のような値である。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>    <span style="color: #cf222e">public</span> <span style="color: #cf222e">static</span> <span style="color: #cf222e">function</span> <span style="color: #24292f;background-color: #f6f8fa">minValue</span><span style="color: #24292f;background-color: #f6f8fa">():</span> <span style="color: #cf222e">float</span>
-    <span style="color: #24292f;background-color: #f6f8fa">{</span>
-        <span style="color: #6e7781">// 整数の 1 を binary64 と解釈した値を返す。</span>
-        <span style="color: #6e7781">// binary64 で表せる最小の正の非正規化数。</span>
-        <span style="color: #cf222e">return</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">intToFloat</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-    <span style="color: #24292f;background-color: #f6f8fa">}</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">    <span style="color: #cf222e">public</span> <span style="color: #cf222e">static</span> <span style="color: #cf222e">function</span> <span style="color: #24292f;background-color: #f6f8fa">minValue</span><span style="color: #24292f;background-color: #f6f8fa">():</span> <span style="color: #cf222e">float</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// 整数の 1 を binary64 と解釈した値を返す。</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// binary64 で表せる最小の正の非正規化数。</span>
+</div><div class="codeblock-line">        <span style="color: #cf222e">return</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">intToFloat</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">}</span></div></code></pre>
             </div>
           </section>
           <section id="section--outro">

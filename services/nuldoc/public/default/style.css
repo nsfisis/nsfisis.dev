@@ -181,18 +181,18 @@ code {
   font-size: 0.9rem;
 }
 
-.shiki code {
+.codeblock code {
   background-color: unset;
   padding: 0;
 }
 
 /* https://github.com/shikijs/shiki/issues/3 */
-.shiki code {
+.codeblock.numbered code {
   counter-reset: codeblock-line-number;
   counter-increment: codeblock-line-number 0;
 }
 
-.numbered .shiki code .line::before {
+.codeblock.numbered code .codeblock-line::before {
   content: counter(codeblock-line-number);
   counter-increment: codeblock-line-number;
   width: 2rem;
@@ -280,7 +280,7 @@ h1 {
 
 .admonition {
   background-color: #f5f5f5;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #ddd;
   padding: 1rem 1.5rem;
   margin: 1rem 0;
 }
@@ -335,8 +335,8 @@ img {
   gap: 1rem;
   margin: 2rem 0;
   padding: 1rem 0;
-  border-top: 1px solid #d1d1d1;
-  border-bottom: 1px solid #d1d1d1;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .pagination-page {
@@ -368,7 +368,7 @@ img {
   color: #fff;
 }
 
-.pagination-elipsis {
+.pagination-ellipsis {
   color: #999;
 }
 

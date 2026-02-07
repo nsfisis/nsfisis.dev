@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【GitLab】 GitLab CI/CD 上での bash/sh は pipefail が有効になっている｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -116,15 +116,14 @@
                 例:
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #116329">hello-world</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-  <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
-  <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
-  <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">echo</span><span style="color: #0550ae"> </span><span style="color: #0a3069">"Hello,</span><span style="color: #0550ae"> </span><span style="color: #0a3069">World!"'</span>
-  <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
-  <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #116329">hello-world</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">  <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
+</div><div class="codeblock-line">  <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
+</div><div class="codeblock-line">  <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">echo</span><span style="color: #0550ae"> </span><span style="color: #0a3069">"Hello,</span><span style="color: #0550ae"> </span><span style="color: #0a3069">World!"'</span>
+</div><div class="codeblock-line">  <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
+</div><div class="codeblock-line">  <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span></div></code></pre>
               </div>
               <p>
                 ここで、<code>script</code> に指定したコマンドが失敗する (exit status が 0 以外になる) と、即座に実行が停止され、ジョブは失敗する。
@@ -133,15 +132,14 @@
                 では、次のようなケースだとどうなるか。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #116329">hello-world</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-  <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
-  <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
-  <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">exit</span><span style="color: #0550ae"> </span><span style="color: #0a3069">1</span><span style="color: #0550ae"> </span><span style="color: #0a3069">|</span><span style="color: #0550ae"> </span><span style="color: #0a3069">exit</span><span style="color: #0550ae"> </span><span style="color: #0a3069">0'</span>
-  <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
-  <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #116329">hello-world</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">  <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
+</div><div class="codeblock-line">  <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
+</div><div class="codeblock-line">  <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">exit</span><span style="color: #0550ae"> </span><span style="color: #0a3069">1</span><span style="color: #0550ae"> </span><span style="color: #0a3069">|</span><span style="color: #0550ae"> </span><span style="color: #0a3069">exit</span><span style="color: #0550ae"> </span><span style="color: #0a3069">0'</span>
+</div><div class="codeblock-line">  <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
+</div><div class="codeblock-line">  <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span></div></code></pre>
               </div>
               <p>
                 失敗するコマンドをパイプに接続した。通常 Bash では、パイプの最後のコマンドの exit code が全体の exit code になる。
@@ -153,11 +151,10 @@
                 前述したようなケースにおいて、途中で失敗したときに全体を失敗させるには、<code>pipefail</code> オプションを有効にする。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781"># On にする</span>
-<span style="color: #953800">set</span> <span style="color: #116329">-o</span> pipefail
-<span style="color: #6e7781"># Off にする</span>
-<span style="color: #953800">set</span> +o pipefail
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781"># On にする</span>
+</div><div class="codeblock-line"><span style="color: #953800">set</span> <span style="color: #116329">-o</span> pipefail
+</div><div class="codeblock-line"><span style="color: #6e7781"># Off にする</span>
+</div><div class="codeblock-line"><span style="color: #953800">set</span> +o pipefail</div></code></pre>
               </div>
               <p>
                 こうすると、パイプ全体が失敗するようになる。この設定は、デフォルトだと off になっている。
@@ -170,15 +167,14 @@
               次のような GitLab CI/CD ジョブが失敗してしまった。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #116329">hoge</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-  <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
-  <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
-  <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">cat</span><span style="color: #0550ae"> </span><span style="color: #0a3069">hoge.txt</span><span style="color: #0550ae"> </span><span style="color: #0a3069">|</span><span style="color: #0550ae"> </span><span style="color: #0a3069">grep</span><span style="color: #0550ae"> </span><span style="color: #0a3069">piyo</span><span style="color: #0550ae"> </span><span style="color: #0a3069">|</span><span style="color: #0550ae"> </span><span style="color: #0a3069">sed</span><span style="color: #0550ae"> </span><span style="color: #0a3069">-e</span><span style="color: #0550ae"> </span><span style="color: #0a3069">"s/foo/bar/g"'</span>
-  <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
-  <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #116329">hoge</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">  <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
+</div><div class="codeblock-line">  <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
+</div><div class="codeblock-line">  <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">cat</span><span style="color: #0550ae"> </span><span style="color: #0a3069">hoge.txt</span><span style="color: #0550ae"> </span><span style="color: #0a3069">|</span><span style="color: #0550ae"> </span><span style="color: #0a3069">grep</span><span style="color: #0550ae"> </span><span style="color: #0a3069">piyo</span><span style="color: #0550ae"> </span><span style="color: #0a3069">|</span><span style="color: #0550ae"> </span><span style="color: #0a3069">sed</span><span style="color: #0550ae"> </span><span style="color: #0a3069">-e</span><span style="color: #0550ae"> </span><span style="color: #0a3069">"s/foo/bar/g"'</span>
+</div><div class="codeblock-line">  <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
+</div><div class="codeblock-line">  <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span></div></code></pre>
             </div>
             <p>
               <code>grep</code> コマンドは、パターンにマッチする行が一行もなかったとき、exit code 1 を返す。よって、<code>pipefail</code> が on になっていると、このジョブは失敗する。現在の <code>pipefail</code> がどうなっているか確かめるため <code>set +o</code> で全オプションを出力させたところ、<code>pipefail</code> が on になっていた。
@@ -187,21 +183,20 @@
               しかし、先述したように Bash における <code>pipefail</code> のデフォルト値は off のはずだ。実際に、ローカルで <code>alpine:latest</code> を動かしてみたところ、
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>$ docker run --rm alpine:latest sh -c "set +o"
-set +o errexit
-set +o noglob
-set +o ignoreeof
-set +o monitor
-set +o noexec
-set +o xtrace
-set +o verbose
-set +o noclobber
-set +o allexport
-set +o notify
-set +o nounset
-set +o vi
-set +o pipefail
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">$ docker run --rm alpine:latest sh -c "set +o"
+</div><div class="codeblock-line">set +o errexit
+</div><div class="codeblock-line">set +o noglob
+</div><div class="codeblock-line">set +o ignoreeof
+</div><div class="codeblock-line">set +o monitor
+</div><div class="codeblock-line">set +o noexec
+</div><div class="codeblock-line">set +o xtrace
+</div><div class="codeblock-line">set +o verbose
+</div><div class="codeblock-line">set +o noclobber
+</div><div class="codeblock-line">set +o allexport
+</div><div class="codeblock-line">set +o notify
+</div><div class="codeblock-line">set +o nounset
+</div><div class="codeblock-line">set +o vi
+</div><div class="codeblock-line">set +o pipefail</div></code></pre>
             </div>
             <p>
               確かに <code>pipefail</code> は無効になっている。
@@ -216,10 +211,9 @@ set +o pipefail
               <code>.gitlab-ci.yml</code> で明示的には書いていないので、GitLab Runner (GitLab CI/CD のスクリプトを実行するプログラム) が勝手に追加しているに違いない。そう仮説を立てて <a href="https://gitlab.com/gitlab-org/gitlab-runner" rel="noreferrer" target="_blank">GitLab Runner のリポジトリ</a> を調査したところ、 <a href="https://gitlab.com/gitlab-org/gitlab-runner/-/blob/c75da0796a0e3048991dccfdf2784e3d931beda4/shells/bash.go#L276" rel="noreferrer" target="_blank">ソースコード中の以下の箇所</a> で <code>set -o pipefail</code> していることが判明した (コメントは筆者による)。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">// pipefail オプションが存在しない環境にも対応するため、</span>
-<span style="color: #6e7781">// 先に set -o でオプション一覧を表示させたあと、set -o pipefail している</span>
-<span style="color: #24292f;background-color: #f6f8fa">buf</span><span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">WriteString</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"if set -o | grep pipefail &gt; /dev/null; then set -o pipefail; fi; set -o errexit</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">// pipefail オプションが存在しない環境にも対応するため、</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">// 先に set -o でオプション一覧を表示させたあと、set -o pipefail している</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">buf</span><span style="color: #0550ae">.</span><span style="color: #24292f;background-color: #f6f8fa">WriteString</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"if set -o | grep pipefail &gt; /dev/null; then set -o pipefail; fi; set -o errexit</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">)</span></div></code></pre>
             </div>
           </section>
           <section id="section--how-to-solve">
@@ -228,17 +222,16 @@ set +o pipefail
               通常の Bash スクリプトを書く場合と同様に、<code>pipefail</code> が on になっていては困る場所だけ off にしてやればよい。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code> <span style="color: #116329">hoge</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-   <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
-   <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
-   <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-<span style="color: #0a3069">+    - 'set +o pipefail'</span>
-     <span style="color: #0a3069">- 'cat hoge.txt | grep piyo | sed -e "s/foo/bar/g"'</span>
-<span style="color: #0a3069">+    - 'set -o pipefail'</span> <span style="color: #6e7781"># この例の場合、ここで終わりなので戻さなくてもよい</span>
-   <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
-     <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
-   <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"> <span style="color: #116329">hoge</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">   <span style="color: #116329">stage</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">test</span>
+</div><div class="codeblock-line">   <span style="color: #116329">image</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">alpine:latest</span>
+</div><div class="codeblock-line">   <span style="color: #116329">script</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">+    - 'set +o pipefail'</span>
+</div><div class="codeblock-line">     <span style="color: #0a3069">- 'cat hoge.txt | grep piyo | sed -e "s/foo/bar/g"'</span>
+</div><div class="codeblock-line"><span style="color: #0a3069">+    - 'set -o pipefail'</span> <span style="color: #6e7781"># この例の場合、ここで終わりなので戻さなくてもよい</span>
+</div><div class="codeblock-line">   <span style="color: #116329">rules</span><span style="color: #24292f;background-color: #f6f8fa">:</span>
+</div><div class="codeblock-line">     <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #116329">if</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">$CI_MERGE_REQUEST_IID'</span>
+</div><div class="codeblock-line">   <span style="color: #116329">when</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">always</span></div></code></pre>
             </div>
           </section>
           <section id="section--remarks">

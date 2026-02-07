@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>PHP の処理系を Emscripten で WebAssembly にコンパイルする｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -142,19 +142,18 @@
               <div class="filename">
                 index.mjs
               </div>
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">import</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #24292f;background-color: #f6f8fa">readFile</span> <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">from</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">node:fs/promises</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #cf222e">import</span> <span style="color: #24292f;background-color: #f6f8fa">PHPWasm</span> <span style="color: #cf222e">from</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">./php-wasm.mjs</span><span style="color: #0a3069">'</span>
-
-<span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">code</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">await</span> <span style="color: #8250df">readFile</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">'</span><span style="color: #0a3069">/dev/stdin</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #116329">encoding</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">utf-8</span><span style="color: #0a3069">'</span> <span style="color: #24292f;background-color: #f6f8fa">});</span>
-
-<span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #24292f;background-color: #f6f8fa">ccall</span> <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">await</span> <span style="color: #953800">PHPWasm</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
-<span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">result</span> <span style="color: #0550ae">=</span> <span style="color: #8250df">ccall</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
-  <span style="color: #0a3069">'</span><span style="color: #0a3069">php_wasm_run</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-  <span style="color: #0a3069">'</span><span style="color: #0a3069">number</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0a3069">'</span><span style="color: #0a3069">string</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">],</span>
-  <span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">code</span><span style="color: #24292f;background-color: #f6f8fa">],</span>
-<span style="color: #24292f;background-color: #f6f8fa">);</span>
-<span style="color: #24292f;background-color: #f6f8fa">console</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">log</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">`exit code: </span><span style="color: #24292f;background-color: #f6f8fa">${</span><span style="color: #24292f;background-color: #f6f8fa">result</span><span style="color: #24292f;background-color: #f6f8fa">}</span><span style="color: #0a3069">`</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">import</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #24292f;background-color: #f6f8fa">readFile</span> <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">from</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">node:fs/promises</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">import</span> <span style="color: #24292f;background-color: #f6f8fa">PHPWasm</span> <span style="color: #cf222e">from</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">./php-wasm.mjs</span><span style="color: #0a3069">'</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">code</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">await</span> <span style="color: #8250df">readFile</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">'</span><span style="color: #0a3069">/dev/stdin</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #116329">encoding</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #0a3069">'</span><span style="color: #0a3069">utf-8</span><span style="color: #0a3069">'</span> <span style="color: #24292f;background-color: #f6f8fa">});</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #24292f;background-color: #f6f8fa">ccall</span> <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">await</span> <span style="color: #953800">PHPWasm</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">result</span> <span style="color: #0550ae">=</span> <span style="color: #8250df">ccall</span><span style="color: #24292f;background-color: #f6f8fa">(</span>
+</div><div class="codeblock-line">  <span style="color: #0a3069">'</span><span style="color: #0a3069">php_wasm_run</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line">  <span style="color: #0a3069">'</span><span style="color: #0a3069">number</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #0a3069">'</span><span style="color: #0a3069">string</span><span style="color: #0a3069">'</span><span style="color: #24292f;background-color: #f6f8fa">],</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">[</span><span style="color: #24292f;background-color: #f6f8fa">code</span><span style="color: #24292f;background-color: #f6f8fa">],</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">console</span><span style="color: #24292f;background-color: #f6f8fa">.</span><span style="color: #8250df">log</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">`exit code: </span><span style="color: #24292f;background-color: #f6f8fa">${</span><span style="color: #24292f;background-color: #f6f8fa">result</span><span style="color: #24292f;background-color: #f6f8fa">}</span><span style="color: #0a3069">`</span><span style="color: #24292f;background-color: #f6f8fa">);</span></div></code></pre>
             </div>
             <p>
               標準入力から与えたコードを WebAssembly にコンパイルされた PHP 処理系の上で実行している。このような <code>php-wasm.mjs</code> (とそこから呼び出される <code>php-wasm.wasm</code>) を作成する。
@@ -168,31 +167,30 @@
                 先ほどのコードでも使っていたエントリポイントである <code>php_wasm_run</code> を用意する。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">#include</span> <span style="color: #6e7781">&lt;stdio.h&gt;</span><span style="color: #6e7781">
-#include</span> <span style="color: #6e7781">&lt;emscripten.h&gt;</span><span style="color: #6e7781">
-#include</span> <span style="color: #6e7781">&lt;Zend/zend_execute.h&gt;</span><span style="color: #6e7781">
-#include</span> <span style="color: #6e7781">&lt;sapi/embed/php_embed.h&gt;</span><span style="color: #6e7781">
-</span>
-<span style="color: #cf222e">int</span> <span style="color: #24292f;background-color: #f6f8fa">EMSCRIPTEN_KEEPALIVE</span> <span style="color: #8250df">php_wasm_run</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #cf222e">const</span> <span style="color: #cf222e">char</span><span style="color: #0550ae">*</span> <span style="color: #24292f;background-color: #f6f8fa">code</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-    <span style="color: #24292f;background-color: #f6f8fa">zend_result</span> <span style="color: #24292f;background-color: #f6f8fa">result</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-
-    <span style="color: #cf222e">int</span> <span style="color: #24292f;background-color: #f6f8fa">argc</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-    <span style="color: #cf222e">char</span><span style="color: #0550ae">*</span> <span style="color: #24292f;background-color: #f6f8fa">argv</span><span style="color: #24292f;background-color: #f6f8fa">[]</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #0a3069">"php.wasm"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #953800">NULL</span> <span style="color: #24292f;background-color: #f6f8fa">};</span>
-
-    <span style="color: #24292f;background-color: #f6f8fa">PHP_EMBED_START_BLOCK</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">argc</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">argv</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-
-    <span style="color: #24292f;background-color: #f6f8fa">result</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">zend_eval_string_ex</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">code</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #953800">NULL</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">"php.wasm code"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-
-    <span style="color: #24292f;background-color: #f6f8fa">PHP_EMBED_END_BLOCK</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
-
-    <span style="color: #24292f;background-color: #f6f8fa">fprintf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stdout</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-    <span style="color: #24292f;background-color: #f6f8fa">fflush</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stdout</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-    <span style="color: #24292f;background-color: #f6f8fa">fprintf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stderr</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-    <span style="color: #24292f;background-color: #f6f8fa">fflush</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stderr</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
-
-    <span style="color: #cf222e">return</span> <span style="color: #24292f;background-color: #f6f8fa">result</span> <span style="color: #0550ae">==</span> <span style="color: #24292f;background-color: #f6f8fa">SUCCESS</span> <span style="color: #0550ae">?</span> <span style="color: #0550ae">0</span> <span style="color: #0550ae">:</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
-<span style="color: #24292f;background-color: #f6f8fa">}</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">#include</span> <span style="color: #6e7781">&lt;stdio.h&gt;</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">#include</span> <span style="color: #6e7781">&lt;emscripten.h&gt;</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">#include</span> <span style="color: #6e7781">&lt;Zend/zend_execute.h&gt;</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">#include</span> <span style="color: #6e7781">&lt;sapi/embed/php_embed.h&gt;</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">int</span> <span style="color: #24292f;background-color: #f6f8fa">EMSCRIPTEN_KEEPALIVE</span> <span style="color: #8250df">php_wasm_run</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #cf222e">const</span> <span style="color: #cf222e">char</span><span style="color: #0550ae">*</span> <span style="color: #24292f;background-color: #f6f8fa">code</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">zend_result</span> <span style="color: #24292f;background-color: #f6f8fa">result</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">    <span style="color: #cf222e">int</span> <span style="color: #24292f;background-color: #f6f8fa">argc</span> <span style="color: #0550ae">=</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line">    <span style="color: #cf222e">char</span><span style="color: #0550ae">*</span> <span style="color: #24292f;background-color: #f6f8fa">argv</span><span style="color: #24292f;background-color: #f6f8fa">[]</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #0a3069">"php.wasm"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #953800">NULL</span> <span style="color: #24292f;background-color: #f6f8fa">};</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">PHP_EMBED_START_BLOCK</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">argc</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">argv</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">result</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">zend_eval_string_ex</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">code</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #953800">NULL</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">"php.wasm code"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">PHP_EMBED_END_BLOCK</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">fprintf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stdout</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">fflush</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stdout</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">fprintf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stderr</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0a3069">"</span><span style="color: #0a3069">\n</span><span style="color: #0a3069">"</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">fflush</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">stderr</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">    <span style="color: #cf222e">return</span> <span style="color: #24292f;background-color: #f6f8fa">result</span> <span style="color: #0550ae">==</span> <span style="color: #24292f;background-color: #f6f8fa">SUCCESS</span> <span style="color: #0550ae">?</span> <span style="color: #0550ae">0</span> <span style="color: #0550ae">:</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">;</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">}</span></div></code></pre>
               </div>
               <p>
                 ほとんどはただの PHP の公開 API を使ったコードだが、Emscripten 向けの注意点が 2点ある。
@@ -215,16 +213,15 @@
                     デフォルトの出力方法は <code>index.mjs</code> の中で <code>PHPWasm()</code> を呼ぶとき、<code>stdout</code>・<code>stderr</code> というオプションを渡せば変更できる。
                   </p>
                   <div class="codeblock">
-                    <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #24292f;background-color: #f6f8fa">ccall</span> <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">await</span> <span style="color: #953800">PHPWasm</span><span style="color: #24292f;background-color: #f6f8fa">({</span>
-  <span style="color: #116329">stdout</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-    <span style="color: #cf222e">if </span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">c</span> <span style="color: #0550ae">===</span> <span style="color: #0550ae">null</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-      <span style="color: #6e7781">// flush the standard output.</span>
-    <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">else</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-      <span style="color: #6e7781">// output c to the standard output.</span>
-    <span style="color: #24292f;background-color: #f6f8fa">}</span>
-  <span style="color: #24292f;background-color: #f6f8fa">},</span>
-<span style="color: #24292f;background-color: #f6f8fa">});</span>
-</code></pre>
+                    <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">const</span> <span style="color: #24292f;background-color: #f6f8fa">{</span> <span style="color: #24292f;background-color: #f6f8fa">ccall</span> <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">await</span> <span style="color: #953800">PHPWasm</span><span style="color: #24292f;background-color: #f6f8fa">({</span>
+</div><div class="codeblock-line">  <span style="color: #116329">stdout</span><span style="color: #24292f;background-color: #f6f8fa">:</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">c</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #0550ae">=&gt;</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">    <span style="color: #cf222e">if </span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #24292f;background-color: #f6f8fa">c</span> <span style="color: #0550ae">===</span> <span style="color: #0550ae">null</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">      <span style="color: #6e7781">// flush the standard output.</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">}</span> <span style="color: #cf222e">else</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">      <span style="color: #6e7781">// output c to the standard output.</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">}</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">},</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">});</span></div></code></pre>
                   </div>
                   <p>
                     <code>c</code> は <code>null</code> か 1バイト符号つき整数を取り、<code>null</code> が flush 要求を意味する。
@@ -244,52 +241,49 @@
                 まずは <a href="https://hub.docker.com/r/emscripten/emsdk" rel="noreferrer" target="_blank">Emscripten 公式が提供している Docker イメージ</a> を使って、PHP 処理系と先ほど示した C 言語のソースコードを WebAssembly にコンパイルする。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">FROM</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #0a3069">emscripten/emsdk:3.1.46</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #cf222e">AS</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #0a3069">wasm-builder</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">FROM</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #0a3069">emscripten/emsdk:3.1.46</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #cf222e">AS</span><span style="color: #24292f;background-color: #f6f8fa"> </span><span style="color: #0a3069">wasm-builder</span></div></code></pre>
               </div>
               <p>
                 次に、 <a href="https://github.com/php/php-src" rel="noreferrer" target="_blank">php/php-src</a> から PHP 処理系のソースコードを取得し、ビルドに必要な apt パッケージを取ってくる。有効にする拡張を増やしたいなら、ここでインストールするパッケージも増やすことになるだろう。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">RUN </span>git clone <span style="color: #116329">--depth</span><span style="color: #0550ae">=</span>1 <span style="color: #116329">--branch</span><span style="color: #0550ae">=</span>php-8.2.10 https://github.com/php/php-src
-
-<span style="color: #cf222e">RUN </span>apt-get update <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    apt-get <span style="color: #953800">install</span> <span style="color: #116329">-y</span> <span style="color: #116329">--no-install-recommends</span> <span style="color: #0a3069">\
-</span>        autoconf <span style="color: #0a3069">\
-</span>        bison <span style="color: #0a3069">\
-</span>        pkg-config <span style="color: #0a3069">\
-</span>        re2c <span style="color: #0a3069">\
-</span>        <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    :
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">RUN </span>git clone <span style="color: #116329">--depth</span><span style="color: #0550ae">=</span>1 <span style="color: #116329">--branch</span><span style="color: #0550ae">=</span>php-8.2.10 https://github.com/php/php-src
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">RUN </span>apt-get update <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    apt-get <span style="color: #953800">install</span> <span style="color: #116329">-y</span> <span style="color: #116329">--no-install-recommends</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        autoconf <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        bison <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        pkg-config <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        re2c <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    :</div></code></pre>
               </div>
               <p>
                 続けて、Emscripten のツールチェインを用いて PHP 処理系をビルドする。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">RUN </span><span style="color: #953800">cd </span>php-src <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    ./buildconf <span style="color: #116329">--force</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    emconfigure ./configure <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--disable-all</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--disable-mbregex</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--disable-fiber-asm</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--disable-cli</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--disable-cgi</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--disable-phpdbg</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--enable-embed</span><span style="color: #0550ae">=</span>static <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--enable-mbstring</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--without-iconv</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--without-libxml</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--without-pcre-jit</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--without-pdo-sqlite</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">--without-sqlite3</span> <span style="color: #0a3069">\
-</span>        <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    <span style="color: #0550ae">EMCC_CFLAGS</span><span style="color: #0550ae">=</span><span style="color: #0a3069">'-s ERROR_ON_UNDEFINED_SYMBOLS=0'</span> emmake make <span style="color: #116329">-j</span><span style="color: #24292f">$(</span><span style="color: #953800">nproc</span><span style="color: #24292f">)</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    <span style="color: #953800">mv </span>libs/libphp.a .. <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    make clean <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    git clean <span style="color: #116329">-fd</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    :
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">RUN </span><span style="color: #953800">cd </span>php-src <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    ./buildconf <span style="color: #116329">--force</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    emconfigure ./configure <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--disable-all</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--disable-mbregex</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--disable-fiber-asm</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--disable-cli</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--disable-cgi</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--disable-phpdbg</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--enable-embed</span><span style="color: #0550ae">=</span>static <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--enable-mbstring</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--without-iconv</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--without-libxml</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--without-pcre-jit</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--without-pdo-sqlite</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">--without-sqlite3</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #0550ae">EMCC_CFLAGS</span><span style="color: #0550ae">=</span><span style="color: #0a3069">'-s ERROR_ON_UNDEFINED_SYMBOLS=0'</span> emmake make <span style="color: #116329">-j</span><span style="color: #24292f">$(</span><span style="color: #953800">nproc</span><span style="color: #24292f">)</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #953800">mv </span>libs/libphp.a .. <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    make clean <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    git clean <span style="color: #116329">-fd</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    :</div></code></pre>
               </div>
               <p>
                 ここまでと比べると少し複雑なので、それぞれ詳しく見ていこう。
@@ -313,23 +307,22 @@
                 さて、PHP 処理系をライブラリ化できたので、次に先ほど載せた C のソースコードをビルドしていこう。<code>Dockerfile</code> と同じ場所に <code>php-wasm.c</code> という名前で保存し、次のようにする。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">COPY</span><span style="color: #0a3069"> php-wasm.c /src/</span>
-
-<span style="color: #cf222e">RUN </span><span style="color: #953800">cd </span>php-src <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    emcc <span style="color: #0a3069">\
-</span>        <span style="color: #116329">-c</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">-o</span> php-wasm.o <span style="color: #0a3069">\
-</span>        <span style="color: #116329">-I</span> <span style="color: #953800">.</span> <span style="color: #0a3069">\
-</span>        <span style="color: #116329">-I</span> TSRM <span style="color: #0a3069">\
-</span>        <span style="color: #116329">-I</span> Zend <span style="color: #0a3069">\
-</span>        <span style="color: #116329">-I</span> main <span style="color: #0a3069">\
-</span>        ../php-wasm.c <span style="color: #0a3069">\
-</span>        <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    <span style="color: #953800">mv </span>php-wasm.o .. <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    make clean <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    git clean <span style="color: #116329">-fd</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\
-</span>    :
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">COPY</span><span style="color: #0a3069"> php-wasm.c /src/</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">RUN </span><span style="color: #953800">cd </span>php-src <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    emcc <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">-c</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">-o</span> php-wasm.o <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">-I</span> <span style="color: #953800">.</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">-I</span> TSRM <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">-I</span> Zend <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #116329">-I</span> main <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        ../php-wasm.c <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">        <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #953800">mv </span>php-wasm.o .. <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    make clean <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    git clean <span style="color: #116329">-fd</span> <span style="color: #0550ae">&amp;&amp;</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    :</div></code></pre>
               </div>
               <p>
                 <code>emcc</code> は <code>cc</code> (C コンパイラ/リンカ) の Emscripten 版で、<code>-c</code> は「コンパイル」の意。<code>-o</code> や <code>-I</code> は普通の C コンパイラと同様、出力ファイルの指定とインクルードパスの指定である。
@@ -338,19 +331,18 @@
                 <code>libphp.a</code> と <code>php-wasm.o</code> が手に入ったので、これらをリンクして WebAssembly のバイナリとそのラッパである JavaScript ファイルを生成する。これにも <code>emcc</code> コマンドを使う。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">RUN </span>emcc <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">ENVIRONMENT</span><span style="color: #0550ae">=</span>node <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">ERROR_ON_UNDEFINED_SYMBOLS</span><span style="color: #0550ae">=</span>0 <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">EXPORTED_RUNTIME_METHODS</span><span style="color: #0550ae">=</span><span style="color: #0a3069">'["ccall"]'</span> <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">EXPORT_ES6</span><span style="color: #0550ae">=</span>1 <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">INITIAL_MEMORY</span><span style="color: #0550ae">=</span>16777216 <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">INVOKE_RUN</span><span style="color: #0550ae">=</span>0 <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-s</span> <span style="color: #0550ae">MODULARIZE</span><span style="color: #0550ae">=</span>1 <span style="color: #0a3069">\
-</span>    <span style="color: #116329">-o</span> php-wasm.js <span style="color: #0a3069">\
-</span>    php-wasm.o <span style="color: #0a3069">\
-</span>    libphp.a <span style="color: #0a3069">\
-</span>    <span style="color: #24292f;background-color: #f6f8fa">;</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">RUN </span>emcc <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">ENVIRONMENT</span><span style="color: #0550ae">=</span>node <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">ERROR_ON_UNDEFINED_SYMBOLS</span><span style="color: #0550ae">=</span>0 <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">EXPORTED_RUNTIME_METHODS</span><span style="color: #0550ae">=</span><span style="color: #0a3069">'["ccall"]'</span> <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">EXPORT_ES6</span><span style="color: #0550ae">=</span>1 <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">INITIAL_MEMORY</span><span style="color: #0550ae">=</span>16777216 <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">INVOKE_RUN</span><span style="color: #0550ae">=</span>0 <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-s</span> <span style="color: #0550ae">MODULARIZE</span><span style="color: #0550ae">=</span>1 <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #116329">-o</span> php-wasm.js <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    php-wasm.o <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    libphp.a <span style="color: #0a3069">\</span>
+</div><div class="codeblock-line">    <span style="color: #24292f;background-color: #f6f8fa">;</span></div></code></pre>
               </div>
               <p>
                 それぞれのフラグについて解説する。
@@ -383,15 +375,14 @@
                 といっても、Node.js はビルトインで WebAssembly をサポートしているので、ほとんどやることはない。先ほど掲載した JavaScript のコードは、<code>Dockerfile</code> と同じディレクトリに <code>index.mjs</code> で配置すること。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">FROM</span><span style="color: #0a3069"> node:20.7</span>
-
-<span style="color: #cf222e">WORKDIR</span><span style="color: #0a3069"> /app</span>
-<span style="color: #cf222e">COPY</span><span style="color: #0a3069"> --from=wasm-builder /src/php-wasm.js /app/php-wasm.mjs</span>
-<span style="color: #cf222e">COPY</span><span style="color: #0a3069"> --from=wasm-builder /src/php-wasm.wasm /app/php-wasm.wasm</span>
-<span style="color: #cf222e">COPY</span><span style="color: #0a3069"> index.mjs /app/</span>
-
-<span style="color: #cf222e">ENTRYPOINT</span><span style="color: #0a3069"> ["node", "index.mjs"]</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">FROM</span><span style="color: #0a3069"> node:20.7</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">WORKDIR</span><span style="color: #0a3069"> /app</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">COPY</span><span style="color: #0a3069"> --from=wasm-builder /src/php-wasm.js /app/php-wasm.mjs</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">COPY</span><span style="color: #0a3069"> --from=wasm-builder /src/php-wasm.wasm /app/php-wasm.wasm</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">COPY</span><span style="color: #0a3069"> index.mjs /app/</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line"><span style="color: #cf222e">ENTRYPOINT</span><span style="color: #0a3069"> ["node", "index.mjs"]</span></div></code></pre>
               </div>
             </section>
           </section>
@@ -401,13 +392,12 @@
               <code>Dockerfile</code>、<code>php-wasm.c</code>、<code>index.mjs</code> を用意したら、Docker コンテナをビルドして実行する。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>$ docker build -t php-wasm .
-$ echo 'echo "Hello, World!", PHP_EOL;' | docker run --rm -i php-wasm
-Hello, World!
-
-
-exit code: 0
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">$ docker build -t php-wasm .
+</div><div class="codeblock-line">$ echo 'echo "Hello, World!", PHP_EOL;' | docker run --rm -i php-wasm
+</div><div class="codeblock-line">Hello, World!
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">exit code: 0</div></code></pre>
             </div>
           </section>
           <section id="section--outro">

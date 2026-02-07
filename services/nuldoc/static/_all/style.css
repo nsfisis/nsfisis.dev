@@ -181,18 +181,18 @@ code {
   font-size: 0.9rem;
 }
 
-.shiki code {
+.codeblock code {
   background-color: unset;
   padding: 0;
 }
 
 /* https://github.com/shikijs/shiki/issues/3 */
-.shiki code {
+.codeblock.numbered code {
   counter-reset: codeblock-line-number;
   counter-increment: codeblock-line-number 0;
 }
 
-.numbered .shiki code .line::before {
+.codeblock.numbered code .codeblock-line::before {
   content: counter(codeblock-line-number);
   counter-increment: codeblock-line-number;
   width: 2rem;

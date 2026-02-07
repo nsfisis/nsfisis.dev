@@ -312,9 +312,10 @@ module Nuldoc
       lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText.new
       lexer = lexer.new if lexer.is_a?(Class)
       formatter = Rouge::Formatters::HTMLInline.new('github.light')
+      line_formatter = Rouge::Formatters::HTMLLinewise.new(formatter, class: 'codeblock-line')
       tokens = lexer.lex(source)
-      inner_html = formatter.format(tokens)
-      "<pre class=\"highlight\" style=\"background-color:#f5f5f5\"><code>#{inner_html}\n</code></pre>"
+      inner_html = line_formatter.format(tokens)
+      "<pre class=\"highlight\" style=\"background-color:#f5f5f5\"><code>#{inner_html.chomp.sub(/\n<\/div>\z/, '</div>')}</code></pre>"
     end
 
     def generate_table_of_contents

@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>zip 関数のようなコマンド paste｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -80,31 +80,28 @@
               <code>a.txt</code>
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>a1
-a2
-a3
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">a1
+</div><div class="codeblock-line">a2
+</div><div class="codeblock-line">a3</div></code></pre>
             </div>
             <p>
               <code>b.txt</code>
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>b1
-b2
-b3
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">b1
+</div><div class="codeblock-line">b2
+</div><div class="codeblock-line">b3</div></code></pre>
             </div>
             <p>
               <code>ab.txt</code>
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>a1
-b1
-a2
-b2
-a3
-b3
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">a1
+</div><div class="codeblock-line">b1
+</div><div class="codeblock-line">a2
+</div><div class="codeblock-line">b2
+</div><div class="codeblock-line">a3
+</div><div class="codeblock-line">b3</div></code></pre>
             </div>
             <p>
               ちょうど Python や Haskell などにある <code>zip</code> 関数のような動きをさせたい。
@@ -116,9 +113,8 @@ b3
               記事タイトルに書いたように、<code>paste</code> コマンドを使うと実現できる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>$ paste -d '\
-' a.txt b.txt &gt; ab.txt
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">$ paste -d '\
+</div><div class="codeblock-line">' a.txt b.txt &gt; ab.txt</div></code></pre>
             </div>
             <p>
               <code>paste</code> コマンドは複数のファイルを引数に取り、それらを1行ずつ消費しながら <code>-d</code> で指定した文字で区切って出力する。<code>-d</code> は区切り文字の指定で、デフォルトだとタブ区切りになる。
@@ -127,24 +123,22 @@ b3
               ファイル名には <code>-</code> を指定でき、その場合は標準入力から読み込んで出力する。このとき <code>paste - -</code> のように複数回 <code>-</code> を指定すると、指定した回数の行ごとに連結することができる。例えば <code>ab.txt</code> だとこうなる。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>$ paste - - &lt; ab.txt
-a1	b1
-a2	b2
-a3	b3
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">$ paste - - &lt; ab.txt
+</div><div class="codeblock-line">a1	b1
+</div><div class="codeblock-line">a2	b2
+</div><div class="codeblock-line">a3	b3</div></code></pre>
             </div>
             <p>
               これは標準入力を使うとき特有の挙動で、単に同じファイル名を指定してもこうはならない。
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>$ paste ab.txt ab.txt
-a1	a1
-b1	b1
-a2	a2
-b2	b2
-a3	a3
-b3	b3
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">$ paste ab.txt ab.txt
+</div><div class="codeblock-line">a1	a1
+</div><div class="codeblock-line">b1	b1
+</div><div class="codeblock-line">a2	a2
+</div><div class="codeblock-line">b2	b2
+</div><div class="codeblock-line">a3	a3
+</div><div class="codeblock-line">b3	b3</div></code></pre>
             </div>
             <p>
               ときどき便利。

@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【Ruby】 自身を実行している処理系の種類を判定する｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -81,13 +81,12 @@
             上記ページの例から引用する:
           </p>
           <div class="codeblock">
-            <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ruby-1.9.1 <span style="color: #116329">-ve</span> <span style="color: #0a3069">'p RUBY_ENGINE'</span>
-<span style="color: #24292f;background-color: #f6f8fa">ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]
-"ruby"
-</span><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>jruby <span style="color: #116329">-ve</span> <span style="color: #0a3069">'p RUBY_ENGINE'</span>
-<span style="color: #24292f;background-color: #f6f8fa">jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
-"jruby"</span>
-</code></pre>
+            <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>ruby-1.9.1 <span style="color: #116329">-ve</span> <span style="color: #0a3069">'p RUBY_ENGINE'</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">"ruby"</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">$</span><span style="color: #24292f;background-color: #f6f8fa"> </span>jruby <span style="color: #116329">-ve</span> <span style="color: #0a3069">'p RUBY_ENGINE'</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">"jruby"</span></div></code></pre>
           </div>
           <p>
             それぞれの処理系がどのような値を返すかだが、stack overflow に良い質問と回答があった。
@@ -97,17 +96,16 @@
           </p>
           <blockquote>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>| RUBY_ENGINE | Implementation    |
-|:-----------:|:------------------|
-| &lt;undefined&gt; | MRI &lt; 1.9         |
-| 'ruby'      | MRI &gt;= 1.9 or REE |
-| 'jruby'     | JRuby             |
-| 'macruby'   | MacRuby           |
-| 'rbx'       | Rubinius          |
-| 'maglev'    | MagLev            |
-| 'ironruby'  | IronRuby          |
-| 'cardinal'  | Cardinal          |
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">| RUBY_ENGINE | Implementation    |
+</div><div class="codeblock-line">|:-----------:|:------------------|
+</div><div class="codeblock-line">| &lt;undefined&gt; | MRI &lt; 1.9         |
+</div><div class="codeblock-line">| 'ruby'      | MRI &gt;= 1.9 or REE |
+</div><div class="codeblock-line">| 'jruby'     | JRuby             |
+</div><div class="codeblock-line">| 'macruby'   | MacRuby           |
+</div><div class="codeblock-line">| 'rbx'       | Rubinius          |
+</div><div class="codeblock-line">| 'maglev'    | MagLev            |
+</div><div class="codeblock-line">| 'ironruby'  | IronRuby          |
+</div><div class="codeblock-line">| 'cardinal'  | Cardinal          |</div></code></pre>
             </div>
           </blockquote>
           <p>
@@ -123,11 +121,10 @@
             <div class="filename">
               version.h
             </div>
-            <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">/*
- * Ruby engine.
- */</span>
-<span style="color: #6e7781">#define MRUBY_RUBY_ENGINE  "mruby"</span>
-</code></pre>
+            <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">/*</span>
+</div><div class="codeblock-line"><span style="color: #6e7781"> * Ruby engine.</span>
+</div><div class="codeblock-line"><span style="color: #6e7781"> */</span>
+</div><div class="codeblock-line"><span style="color: #6e7781">#define MRUBY_RUBY_ENGINE  "mruby"</span></div></code></pre>
           </div>
         </div>
       </article>

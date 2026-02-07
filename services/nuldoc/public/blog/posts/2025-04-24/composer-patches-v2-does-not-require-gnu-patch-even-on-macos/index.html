@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【Composer】 composer-patches v2 では macOS でも GNU patch のインストールが不要になる (予定)｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -126,9 +126,8 @@
               ワークアラウンドとして、macOS にも GNU patch をインストールしてしまうという方法がある。例:
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>$ brew install gpatch
-$ echo 'PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"' &gt;&gt; ~/.zshrc
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">$ brew install gpatch
+</div><div class="codeblock-line">$ echo 'PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"' &gt;&gt; ~/.zshrc</div></code></pre>
             </div>
             <p>
               GNU patch を Homebrew などの手段でインストールし、BSD patch よりも優先されるパスに配置すれば問題が解消する。

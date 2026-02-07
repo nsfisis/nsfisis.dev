@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>Vimで選択した行の順番を入れ替える｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -102,12 +102,11 @@
           <section id="section--tl-dr">
             <h2><a href="#section--tl-dr">TL; DR</a></h2>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #6e7781">" License: Public Domain</span>
-
-command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
-<span style="color: #0a3069">    \</span> Reverse
-<span style="color: #0a3069">    \</span> <span style="color: #cf222e">keeppatterns</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #6e7781">" License: Public Domain</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> Reverse
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> <span style="color: #cf222e">keeppatterns</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span></div></code></pre>
             </div>
           </section>
           <section id="section--version">
@@ -165,10 +164,9 @@ command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span sty
                 なお、<code>:g/^/m0</code> は全ての行を入れ替えるが、<code>:N,Mg/^/mN-1</code> とすることで N行目から M行目を処理範囲とするよう拡張できる。手でこれを入力するわけにはいかないので、次のようなコマンドを用意する。
               </p>
               <div class="codeblock">
-                <pre class="highlight" style="background-color:#f5f5f5"><code>command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
-<span style="color: #0a3069">    \</span> Reverse
-<span style="color: #0a3069">    \</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> Reverse
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span></div></code></pre>
               </div>
               <p>
                 これは望みの動作をするが、実際に実行してみると全行がハイライトされてしまう。次節で詳細を述べる。
@@ -202,14 +200,13 @@ command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span sty
               前述した <code>:Reverse</code> コマンドの定義を少し変えて、次のようにする:
             </p>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #cf222e">function</span><span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #0550ae">s:reverse_lines</span><span style="color: #24292f;background-color: #f6f8fa">(</span>from<span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #cf222e">to</span><span style="color: #24292f;background-color: #f6f8fa">)</span> abort
-    <span style="color: #953800">execute</span> <span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"%d,%dg/^/m%d"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:from</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:to</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:from</span> <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
-<span style="color: #cf222e">endfunction</span>
-
-command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
-<span style="color: #0a3069">    \</span> Reverse
-<span style="color: #0a3069">    \</span> <span style="color: #cf222e">call</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>SID<span style="color: #24292f;background-color: #f6f8fa">&gt;</span>reverse_lines<span style="color: #24292f;background-color: #f6f8fa">(&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;)</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #cf222e">function</span><span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #0550ae">s:reverse_lines</span><span style="color: #24292f;background-color: #f6f8fa">(</span>from<span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #cf222e">to</span><span style="color: #24292f;background-color: #f6f8fa">)</span> abort
+</div><div class="codeblock-line">    <span style="color: #953800">execute</span> <span style="color: #953800">printf</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">"%d,%dg/^/m%d"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:from</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:to</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #0550ae">a:from</span> <span style="color: #24292f;background-color: #f6f8fa">-</span> <span style="color: #0550ae">1</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
+</div><div class="codeblock-line"><span style="color: #cf222e">endfunction</span>
+</div><div class="codeblock-line">
+</div><div class="codeblock-line">command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> Reverse
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> <span style="color: #cf222e">call</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>SID<span style="color: #24292f;background-color: #f6f8fa">&gt;</span>reverse_lines<span style="color: #24292f;background-color: #f6f8fa">(&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;)</span></div></code></pre>
             </div>
             <p>
               実行しているコマンドが変わったわけではないが、関数呼び出しを経由するようにした。これだけで前述の問題が解決する。
@@ -256,10 +253,9 @@ command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span sty
               </div>
             </div>
             <div class="codeblock">
-              <pre class="highlight" style="background-color:#f5f5f5"><code>command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
-<span style="color: #0a3069">    \</span> Reverse
-<span style="color: #0a3069">    \</span> <span style="color: #cf222e">keeppatterns</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span>
-</code></pre>
+              <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">command<span style="color: #24292f;background-color: #f6f8fa">!</span> <span style="color: #24292f;background-color: #f6f8fa">-</span>bar <span style="color: #24292f;background-color: #f6f8fa">-</span><span style="color: #953800">range</span><span style="color: #24292f;background-color: #f6f8fa">=</span>%
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> Reverse
+</div><div class="codeblock-line"><span style="color: #0a3069">    \</span> <span style="color: #cf222e">keeppatterns</span> <span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;,&lt;</span>line2<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #cf222e">g</span><span style="color: #116329">/^/</span><span style="color: #cf222e">m</span><span style="color: #24292f;background-color: #f6f8fa">&lt;</span>line1<span style="color: #24292f;background-color: #f6f8fa">&gt;</span><span style="color: #0550ae">-1</span></div></code></pre>
             </div>
             <p>
               まさにこのための Exコマンド、<code>:keeppatterns</code> が存在する。<code>:keeppatterns {command}</code> のように使い、読んで字の如く、後ろに続く Exコマンドを「現在の検索パターンを保ったまま」実行する。はるかに分かりやすく意図を表現できる。

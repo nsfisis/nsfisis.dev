@@ -15,7 +15,7 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>【Vim】 autocmd events の BufWrite/BufWritePre の違い｜REPL: Rest-Eat-Program Loop</title>
-    <link rel="stylesheet" href="/style.css?h=81dfc0b483beda175e3e17562faac7c9">
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
   </head>
   <body class="single">
     <header class="header">
@@ -146,9 +146,8 @@
                 <div class="filename">
                   src/autocmd.c
                 </div>
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufAdd"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>      <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFADD</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-<span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufCreate"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>   <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFADD</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufAdd"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>      <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFADD</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufCreate"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>   <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFADD</span><span style="color: #24292f;background-color: #f6f8fa">},</span></div></code></pre>
               </div>
               <p>
                 <a class="url" href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L95-L97</a>
@@ -157,10 +156,9 @@
                 <div class="filename">
                   src/autocmd.c
                 </div>
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufRead"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>     <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFREADPOST</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-<span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufReadCmd"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>  <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFREADCMD</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-<span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufReadPost"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFREADPOST</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufRead"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>     <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFREADPOST</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufReadCmd"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>  <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFREADCMD</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufReadPost"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFREADPOST</span><span style="color: #24292f;background-color: #f6f8fa">},</span></div></code></pre>
               </div>
               <p>
                 <a class="url" href="https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105" rel="noreferrer" target="_blank">https://github.com/vim/vim/blob/8e6be34338f13a6a625f19bcef82019c9adc65f2/src/autocmd.c#L103-L105</a>
@@ -169,10 +167,9 @@
                 <div class="filename">
                   src/autocmd.c
                 </div>
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufWrite"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>    <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFWRITEPRE</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-<span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufWritePost"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>    <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFWRITEPOST</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-<span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufWritePre"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFWRITEPRE</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufWrite"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>    <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFWRITEPRE</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufWritePost"</span><span style="color: #24292f;background-color: #f6f8fa">,</span>    <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFWRITEPOST</span><span style="color: #24292f;background-color: #f6f8fa">},</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">{</span><span style="color: #0a3069">"BufWritePre"</span><span style="color: #24292f;background-color: #f6f8fa">,</span> <span style="color: #24292f;background-color: #f6f8fa">EVENT_BUFWRITEPRE</span><span style="color: #24292f;background-color: #f6f8fa">},</span></div></code></pre>
               </div>
             </section>
             <section id="section--code-reading--neovim">
@@ -187,13 +184,12 @@
                 <div class="filename">
                   src/nvim/auevents.lua
                 </div>
-                <pre class="highlight" style="background-color:#f5f5f5"><code><span style="color: #24292f;background-color: #f6f8fa">aliases</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
-  <span style="color: #24292f;background-color: #f6f8fa">BufCreate</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'BufAdd'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-  <span style="color: #24292f;background-color: #f6f8fa">BufRead</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'BufReadPost'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-  <span style="color: #24292f;background-color: #f6f8fa">BufWrite</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'BufWritePre'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-  <span style="color: #24292f;background-color: #f6f8fa">FileEncoding</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'EncodingChanged'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
-<span style="color: #24292f;background-color: #f6f8fa">},</span>
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">aliases</span> <span style="color: #0550ae">=</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">BufCreate</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'BufAdd'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">BufRead</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'BufReadPost'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">BufWrite</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'BufWritePre'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line">  <span style="color: #24292f;background-color: #f6f8fa">FileEncoding</span> <span style="color: #0550ae">=</span> <span style="color: #0a3069">'EncodingChanged'</span><span style="color: #24292f;background-color: #f6f8fa">,</span>
+</div><div class="codeblock-line"><span style="color: #24292f;background-color: #f6f8fa">},</span></div></code></pre>
               </div>
               <p>
                 ところで、上では取り上げなかった <code>FileEncoding</code> だが、これは <code>:help FileEncoding</code> にしっかりと書いてある。
@@ -202,10 +198,9 @@
                 <div class="filename">
                   :help FileEncoding
                 </div>
-                <pre class="highlight" style="background-color:#f5f5f5"><code>                                                              *FileEncoding*
-FileEncoding                    Obsolete.  It still works and is equivalent
-                                to |EncodingChanged|.
-</code></pre>
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">                                                              *FileEncoding*
+</div><div class="codeblock-line">FileEncoding                    Obsolete.  It still works and is equivalent
+</div><div class="codeblock-line">                                to |EncodingChanged|.</div></code></pre>
               </div>
             </section>
           </section>
