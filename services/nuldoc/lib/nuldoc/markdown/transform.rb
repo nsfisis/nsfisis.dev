@@ -315,7 +315,8 @@ module Nuldoc
       line_formatter = Rouge::Formatters::HTMLLinewise.new(formatter, class: 'codeblock-line')
       tokens = lexer.lex(source)
       inner_html = line_formatter.format(tokens)
-      "<pre class=\"highlight\" style=\"background-color:#f5f5f5\"><code>#{inner_html.chomp.sub(/\n<\/div>\z/, '</div>')}</code></pre>"
+      code = inner_html.chomp.sub(%r{\n</div>\z}, '</div>')
+      "<pre class=\"highlight\" style=\"background-color:#f5f5f5\"><code>#{code}</code></pre>"
     end
 
     def generate_table_of_contents
