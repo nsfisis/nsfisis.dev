@@ -26,7 +26,7 @@ module Nuldoc
 
           redirect_dest = redirect_path(site_name, pathname)
           if redirect_dest
-            res.status = 301
+            res.status = 302
             res['Location'] = redirect_dest
             next
           end

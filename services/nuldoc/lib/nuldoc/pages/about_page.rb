@@ -1,14 +1,16 @@
 module Nuldoc
   module Pages
     class AboutPage
-      def initialize(slides:, config:)
+      def initialize(slides:, staff_records:, config:)
         @slides = slides
+        @staff_records = staff_records
         @config = config
       end
 
       def render
         config = @config
         sorted_slides = @slides.sort_by { |s| GeneratorUtils.published_date(s) }.reverse
+        sorted_staff = @staff_records.sort_by(&:sort_date).reverse
 
         Components::PageLayout.new(
           meta_copyright_year: config.site.copyright_year,
@@ -72,6 +74,23 @@ module Nuldoc
                           li do
                             a href: slide_url do
                               text "#{slide_date}: #{slide.event} (#{slide.talk_type})"
+                            end
+                          end
+                        end
+                      end
+                    end
+                    section do
+                      h2 { text 'カンファレンススタッフ' }
+                      ul do
+                        sorted_staff.each do |record|
+                          li do
+                            if record.date.is_a?(Range)
+                              from_str = Revision.date_to_string(record.date.begin)
+                              to_str = Revision.date_to_string(record.date.end)
+                              text "#{from_str}〜#{to_str}: #{record.event} (#{record.role})"
+                            else
+                              date_str = Revision.date_to_string(record.date)
+                              text "#{date_str}: #{record.event} (#{record.role})"
                             end
                           end
                         end

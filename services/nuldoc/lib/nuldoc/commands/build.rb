@@ -96,7 +96,9 @@ module Nuldoc
       end
 
       def build_about_page(slides)
-        write_page(Generators::About.new(slides, @config).generate)
+        staff_file = File.join(Dir.pwd, @config.locations.content_dir, 'about', 'staff.toml')
+        staff_records = StaffParser.new(staff_file).parse
+        write_page(Generators::About.new(slides, staff_records, @config).generate)
       end
 
       def build_not_found_page(site)

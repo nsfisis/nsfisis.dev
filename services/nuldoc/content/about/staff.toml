@@ -1,0 +1,54 @@
+[[staff]]
+date = { from = "2023-03-23", to = "2023-03-25" }
+event = "PHPerKaigi 2023"
+role = "当日スタッフ"
+
+[[staff]]
+date = { from = "2024-03-07", to = "2024-03-09" }
+event = "PHPerKaigi 2024"
+role = "コアスタッフ"
+
+[[staff]]
+date = "2024-04-13"
+event = "PHP カンファレンス小田原 2024"
+role = "当日スタッフ"
+
+[[staff]]
+date = { from = "2024-08-22", to = "2024-08-24" }
+event = "iOSDC Japan 2024"
+role = "コアスタッフ"
+
+[[staff]]
+date = "2024-12-22"
+event = "PHP カンファレンス 2024"
+role = "当日スタッフ"
+
+[[staff]]
+date = { from = "2025-03-21", to = "2025-03-23" }
+event = "PHPerKaigi 2025"
+role = "コアスタッフ"
+
+[[staff]]
+date = "2025-04-12"
+event = "PHP カンファレンス小田原 2025"
+role = "コアスタッフ"
+
+[[staff]]
+date = { from = "2025-09-19", to = "2025-09-21" }
+event = "iOSDC Japan 2025"
+role = "コアスタッフ"
+
+[[staff]]
+date = { from = "2026-03-20", to = "2026-03-22" }
+event = "PHPerKaigi 2026"
+role = "コアスタッフ"
+
+[[staff]]
+date = "2025-04-11"
+event = "PHP カンファレンス小田原 2026"
+role = "コアスタッフ"
+
+[[staff]]
+date = "2026-10-03"
+event = "PHP カンファレンス愛媛 2026"
+role = "コアスタッフ"
