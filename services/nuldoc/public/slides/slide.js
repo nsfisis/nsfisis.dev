@@ -66,6 +66,18 @@ async function init() {
     queueRenderPage(pageNum);
   });
 
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "h") {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+    } else if (e.key === "ArrowRight" || e.key === "l") {
+      if (pageNum >= doc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+    }
+  });
+
   // TODO: error handling
   doc = await getDocument(url).promise;
   queueRenderPage(pageNum);
