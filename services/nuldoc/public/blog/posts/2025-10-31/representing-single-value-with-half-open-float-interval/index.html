@@ -168,7 +168,7 @@
           <section id="section--nextup-in-php">
             <h2><a href="#section--nextup-in-php">PHP で nextUp を実装する</a></h2>
             <p>
-              プログラミング言語によっては標準ライブラリに <code>nextUp</code> 相当の操作が定められているものもある。PHP には無かったので自作した。
+              プログラミング言語によっては標準ライブラリに <code>nextUp</code> 相当の操作が定められているものもある。今回は PHP で使いたかったのだが、無かったので自作した。
             </p>
             <ul>
               <li>
@@ -179,7 +179,7 @@
               </li>
             </ul>
             <p>
-              <code>binary64</code> を 64 bit の整数に変換できるなら、他の言語でもほとんど同じ方法で実装できるはずだ。
+              <code>binary64</code> とそのビット表現を相互に変換できるなら、他の言語でもほとんど同じ方法で実装できるはずだ。
             </p>
             <div class="codeblock">
               <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">    <span style="color: #cf222e">public</span> <span style="color: #cf222e">static</span> <span style="color: #cf222e">function</span> <span style="color: #24292f;background-color: #f6f8fa">nextUp</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #cf222e">float</span> <span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">):</span> <span style="color: #cf222e">float</span>
@@ -196,7 +196,7 @@
 </div><div class="codeblock-line">        <span style="color: #cf222e">if</span> <span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span> <span style="color: #0550ae">===</span> <span style="color: #0550ae">0.0</span><span style="color: #24292f;background-color: #f6f8fa">)</span> <span style="color: #24292f;background-color: #f6f8fa">{</span>
 </div><div class="codeblock-line">            <span style="color: #cf222e">return</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">minValue</span><span style="color: #24292f;background-color: #f6f8fa">();</span>
 </div><div class="codeblock-line">        <span style="color: #24292f;background-color: #f6f8fa">}</span>
-</div><div class="codeblock-line">        <span style="color: #6e7781">// binary64 を 64 bit 整数に変換する。</span>
+</div><div class="codeblock-line">        <span style="color: #6e7781">// binary64 のビット表現を 64 bit 整数として得る。</span>
 </div><div class="codeblock-line">        <span style="color: #0550ae">$u</span> <span style="color: #0550ae">=</span> <span style="color: #cf222e">self</span><span style="color: #0550ae">::</span><span style="color: #8250df">floatToInt</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0550ae">$x</span><span style="color: #24292f;background-color: #f6f8fa">);</span>
 </div><div class="codeblock-line">        <span style="color: #6e7781">// 正なら整数に +1 して binary64 に戻す。</span>
 </div><div class="codeblock-line">        <span style="color: #6e7781">// 負なら整数に -1 して binary64 に戻す。</span>
