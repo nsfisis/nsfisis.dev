@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2026-02-01T00:00:00+09:00</updated>
+  <updated>2026-04-20T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:3e3c8bac-ea74-42f0-acdb-ea3cd079c134</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-04-20/i-can-eat-glass-it-doesnt-hurt-me/"></link>
+    <title>私はガラスを食べられます。それは私を傷つけません</title>
+    <summary>PHP 処理系のソースコードで見つけた不思議な文言の由来を調べた。</summary>
+    <published>2026-04-20T00:00:00+09:00</published>
+    <updated>2026-04-20T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:32947eee-f737-4e4c-b3f3-2c847d9b36d2</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-02-01/rewrite-this-site-generator-2026/"></link>

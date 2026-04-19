@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2026 nsfisis">
+    <meta name="description" content="PHP 処理系のソースコードで見つけた不思議な文言の由来を調べた。">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="私はガラスを食べられます。それは私を傷つけません｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="PHP 処理系のソースコードで見つけた不思議な文言の由来を調べた。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="Hatena::Bookmark" content="nocomment">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>私はガラスを食べられます。それは私を傷つけません｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=c3724e2d900f13528c82005e79a8ec23">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="https://nsfisis.dev/">nsfisis.dev</a>
+      </div>
+      <div class="site-name">
+        REPL: Rest-Eat-Program Loop
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="https://about.nsfisis.dev/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+          <li>
+            <a href="/tags/">Tags</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">私はガラスを食べられます。それは私を傷つけません</h1>
+        </header>
+        <nav class="toc">
+          <h2>目次</h2>
+          <ul>
+            <li>
+              <a href="#section--intro">はじめに</a>
+            </li>
+            <li>
+              <a href="#section--i-can-eat-glass-project">I Can Eat Glass Project</a>
+            </li>
+            <li>
+              <a href="#section--conclusion">まとめ</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="post-content">
+          <section id="changelog">
+            <h2><a href="#changelog">更新履歴</a></h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2026-04-20">2026-04-20</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              先日 PHP 処理系のソースコードを調査していたとき、ある不思議なファイル名を見つけた。
+            </p>
+            <blockquote>
+              <p>
+                <a href="https://github.com/php/php-src/blob/php-8.5.2/ext/fileinfo/tests/magic%E7%A7%81%E3%81%AF%E3%82%AC%E3%83%A9%E3%82%B9%E3%82%92%E9%A3%9F%E3%81%B9%E3%82%89%E3%82%8C%E3%81%BE%E3%81%99" rel="noreferrer" target="_blank">ext/fileinfo/tests/magic私はガラスを食べられます</a>
+              </p>
+            </blockquote>
+            <p>
+              「私はガラスを食べられます」？
+            </p>
+            <p>
+              PHP v8.5.2 のソースコードでは、以下のファイルにこの文言が含まれるようだ。
+            </p>
+            <ul>
+              <li>
+                <code>ext/bz2/tests/003私はガラスを食べられます.txt.bz2</code>
+              </li>
+              <li>
+                <code>ext/exif/tests/bug34704私はガラスを食べられます.jpg</code>
+              </li>
+              <li>
+                <code>ext/exif/tests/bug68113私はガラスを食べられます.jpg</code>
+              </li>
+              <li>
+                <code>ext/exif/tests/test2私はガラスを食べられます.jpg</code>
+              </li>
+              <li>
+                <code>ext/fileinfo/tests/bug71527私はガラスを食べられます.magic</code>
+              </li>
+              <li>
+                <code>ext/fileinfo/tests/magic私はガラスを食べられます</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/Tuffy私はガラスを食べられます.ttf</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/bug22544私はガラスを食べられます.png</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/bug37346私はガラスを食べられます.gif</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/conv_test私はガラスを食べられます.jpg</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/invalid_neg_size私はガラスを食べられます.gd2</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/libgd00094私はガラスを食べられます.xbm</code>
+              </li>
+              <li>
+                <code>ext/gd/tests/src私はガラスを食べられます.wbmp</code>
+              </li>
+              <li>
+                <code>ext/libxml/tests/bug69753私はガラスを食べられます.xml</code>
+              </li>
+              <li>
+                <code>ext/simplexml/tests/sxe私はガラスを食べられます.xml</code>
+              </li>
+              <li>
+                <code>ext/tidy/tests/005私はガラスを食べられます.html</code>
+              </li>
+              <li>
+                <code>ext/xsl/tests/私はガラスを食べられますstreamsinclude.xsl</code>
+              </li>
+              <li>
+                <code>ext/zip/tests/bug40228私はガラスを食べられます.zip</code>
+              </li>
+              <li>
+                <code>ext/zlib/tests/gzfile-mb私はガラスを食べられます.txt.gz</code>
+              </li>
+            </ul>
+            <p>
+              このフレーズを検索したところ、（<em>慈愛に満ちた Google AI さま</em> によって「ガラスは消化できません。絶対に食べないでください」とのご高説を賜った後、）これが「I Can Eat Glass Project」に由来するものだと判明した。
+            </p>
+          </section>
+          <section id="section--i-can-eat-glass-project">
+            <h2><a href="#section--i-can-eat-glass-project">I Can Eat Glass Project</a></h2>
+            <p>
+              I Can Eat Glass Project は、1996 年頃に Ethan Mollick 氏が公開したウェブページで、さまざまな言語における “I can eat glass, it doesn’t hurt me” というフレーズをまとめたものである。オリジナルのページは削除済みだが、以下などから参照できる。
+            </p>
+            <ul>
+              <li>
+                オリジナルの Web Archive: <a class="url" href="https://web.archive.org/web/20040201212958/http://hcs.harvard.edu/~igp/glass.html" rel="noreferrer" target="_blank">https://web.archive.org/web/20040201212958/http://hcs.harvard.edu/~igp/glass.html</a>
+              </li>
+              <li>
+                現在ホストされているページ: <a class="url" href="https://www.immediategratification.org/i-can-eat-glass" rel="noreferrer" target="_blank">https://www.immediategratification.org/i-can-eat-glass</a>
+              </li>
+              <li>
+                オリジナルを元に文字コードを UTF-8 に変換したもの: <a class="url" href="https://www.columbia.edu/~fdc/utf8.html#glass" rel="noreferrer" target="_blank">https://www.columbia.edu/~fdc/utf8.html#glass</a>
+              </li>
+            </ul>
+            <p>
+              現在ホストされているページの “THE PHILOSOPHY” のセクションには次のようにある。
+            </p>
+            <blockquote>
+              <ul>
+                <li>
+                  The Project is based on the idea that people in a foreign country have an irresistable urge to try to say something in the indigenous tongue. In most cases, however, the best a person can do is “Where is the bathroom?” a phrase that marks them as a tourist. But, if one says “I can eat glass, it doesn’t hurt me,” you will be viewed as an insane native, and treated with dignity and respect.
+                </li>
+                <li>
+                  The Project is a challenge to the human spirit, in much the same way as the Apollo Program or the Panama Canal was, except that it involves much less digging and slightly less spaceflight.
+                </li>
+                <li>
+                  The Project is part of an attempt to procrastinate when I should be doing reading.
+                </li>
+                <li>
+                  The Project is a product of the social framework in which it was created, and thus by studying the Project, you are truly studying Western Civilization.
+                </li>
+                <li>
+                  The Project is the result of high technology in the hands of people who have no idea what to do with it.
+                </li>
+              </ul>
+            </blockquote>
+            <p>
+              （以下筆者による和訳）
+            </p>
+            <blockquote>
+              <ul>
+                <li>
+                  このプロジェクトは、外国にいる人はその国の言葉で何か言いたくなるという抗い難い衝動に駆られるというアイデアに基づく。しかし、ほとんどの場合「トイレはどこですか？」などという観光客であることが丸わかりのフレーズを口にするのが関の山だ。だが、もし「私はガラスを食べられます。それは私を傷つけません」と言ったなら、あなたはイカれた現地人として見なされ、尊敬を集めることだろう。
+                </li>
+                <li>
+                  このプロジェクトは、アポロ計画やパナマ運河がそうであるように、人類の精神への挑戦である。ただし掘削することはほとんどなく、宇宙飛行もあまりおこなわない。
+                </li>
+                <li>
+                  このプロジェクトは、読書をすべきときにそれを先延ばしにする試みの一環である。
+                </li>
+                <li>
+                  このプロジェクトは、それが生み出された社会構造の産物であり、それゆえこのプロジェクトを研究することは西洋文明を真に研究することなのだ。
+                </li>
+                <li>
+                  このプロジェクトは、高度なテクノロジーがそれで何をすればいいのかわかっていない人々の手に渡った結果である。
+                </li>
+              </ul>
+            </blockquote>
+            <p>
+              つまりはジョークである。同ページの先頭にある “MEME” のセクションによれば、このプロジェクトは “one of the first famous Internet memes” (最初期の有名なインターネットミーム) だそうだ。
+            </p>
+            <p>
+              始まりはジョークだったかもしれないが<sup class="footnote"><a class="footnote" href="#footnote--1" id="footnoteref--1">[1]</a></sup>、多くの言語が含まれているのは事実なので、PHP 処理系の多言語対応テストとして使われているようだ。
+            </p>
+            <p>
+              他の大きなソフトウェアでいうと、GTK のテキストレイアウトエンジンである Pango でも利用例があった (<a class="url" href="https://github.com/GNOME/pango/blob/df6f88ed2436027523b40fe61e1a1642a7cd24ca/pango/pango-language-sample-table.h" rel="noreferrer" target="_blank">https://github.com/GNOME/pango/blob/df6f88ed2436027523b40fe61e1a1642a7cd24ca/pango/pango-language-sample-table.h</a>)。
+            </p>
+            <p>
+              ソースコード中のコメントに、”I Can Eat Glass” プロジェクトへの言及がある。
+            </p>
+            <blockquote>
+              <div class="codeblock">
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line"> * GLASS
+</div><div class="codeblock-line"> * 	Kermit project's "I Can Eat Glass" list, also available in pango-view/
+</div><div class="codeblock-line"> * 	http://www.columbia.edu/kermit/utf8.html#glass
+</div><div class="codeblock-line"> * 	Fetched on 2008-08-19, updates on 2020-09-08</div></code></pre>
+              </div>
+            </blockquote>
+            <p>
+              なお、残念ながら（？）日本語では「いろはにほへと」が使われている。
+            </p>
+            <blockquote>
+              <div class="codeblock">
+                <pre class="highlight" style="background-color:#f5f5f5"><code><div class="codeblock-line">LANGUAGE(
+</div><div class="codeblock-line">        ja /* Japanese */,
+</div><div class="codeblock-line">        KERMIT,
+</div><div class="codeblock-line">        "いろはにほへと ちりぬるを 色は匂へど 散りぬるを"
+</div><div class="codeblock-line">        )</div></code></pre>
+              </div>
+            </blockquote>
+            <p>
+              もっと小さなライブラリも含めれば、GitHub 上で検索すると更に多くの例が見つかる。
+            </p>
+          </section>
+          <section id="section--conclusion">
+            <h2><a href="#section--conclusion">まとめ</a></h2>
+            <p>
+              「私はガラスを食べられます」とは、”I Can Eat Glass Project” に由来するもので、多言語対応のテスト用テキストとして用いられている。
+            </p>
+          </section>
+          <section class="footnotes">
+            <div class="footnote" id="footnote--1">
+              <a href="#footnoteref--1">1. </a>
+              <p>
+                大真面目なプロジェクトをジョーク風にしているのか、それとも本当に実用は考えていなかったのか (真にジョークだったのか) はよくわからなかった。
+              </p>
+            </div>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021 nsfisis
+    </footer>
+  </body>
+</html>
