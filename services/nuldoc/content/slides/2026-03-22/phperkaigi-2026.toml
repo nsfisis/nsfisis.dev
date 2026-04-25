@@ -1,0 +1,15 @@
+[slide]
+uuid = "8c9aabac-c055-407b-9b03-b812547b6379"
+title = "PHP を魔改造して学ぶ言語処理系"
+event = "PHPerKaigi 2026"
+talkType = "レギュラートーク (20分)"
+link = "/slides/2026-03-22/phperkaigi-2026/slides.pdf"
+tags = [
+    "conference",
+    "php",
+    "phperkaigi",
+]
+
+[[slide.revisions]]
+date = "2026-03-22"
+remark = "登壇"
