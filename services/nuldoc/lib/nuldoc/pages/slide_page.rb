@@ -47,7 +47,9 @@ module Nuldoc
                         end
                       end
                     end
-                    canvas id: 'slide', 'data-slide-link': slide.slide_link
+                    div class: 'slide-container' do
+                      canvas id: 'slide', 'data-slide-link': slide.slide_link
+                    end
                     div class: 'controllers' do
                       div class: 'controllers-buttons' do
                         button id: 'prev', type: 'button' do

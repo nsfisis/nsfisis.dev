@@ -27,3 +27,12 @@
 .controllers button:hover {
   background: #555;
 }
+
+main {
+  max-width: unset;
+  margin: 2rem;
+}
+
+.slide-container {
+  margin: 0 1rem;
+}

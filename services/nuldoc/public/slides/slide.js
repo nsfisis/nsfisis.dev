@@ -18,7 +18,7 @@ async function init() {
 
     const baseViewport = page.getViewport({ scale: 1.0 });
     const containerWidth = canvas.parentElement.clientWidth;
-    const scale = Math.min(1.0, containerWidth / baseViewport.width);
+    const scale = containerWidth / baseViewport.width;
     const viewport = page.getViewport({ scale });
 
     const outputScale = globalThis.devicePixelRatio || 1;
