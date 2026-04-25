@@ -43,16 +43,17 @@ int main() {
 コンパイラのバージョン
 
 ```
-$ clang++ –version Apple clang version 11.0.0
-(clang-1100.0.33.8) Target: x86_64-apple-darwin19.6.0 Thread model:
-posix InstalledDir:
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+$ clang++ --version
+Apple clang version 11.0.0 (clang-1100.0.33.8)
+Target: x86_64-apple-darwin19.6.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 ```
 
 コンパイルコマンド (C++17 指定)
 
 ```
-$ clang –std=c++17 hoge.cpp
+$ clang --std=c++17 hoge.cpp
 ```
 
 この記事から得られるものはこれ以上ないので以下は蛇足になる。
