@@ -3,7 +3,8 @@
 uuid = "6e9c71fd-bc8d-43ce-99c5-13d9f5b87ed2"
 title = "My First Post"
 description = "これはテスト投稿です。これはテスト投稿です。これはテスト投稿です。"
-tags = []
+tags = [
+]
 
 [[article.revisions]]
 date = "2021-03-05"

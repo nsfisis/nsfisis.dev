@@ -3,7 +3,8 @@
 uuid = "ed36e185-5bfa-42e1-8358-0b1da9b0a063"
 title = "PNG 画像の最小構成エンコーダを実装する"
 description = "PNG 画像として valid な範囲で最大限手抜きしたエンコーダを書く。"
-tags = []
+tags = [
+]
 
 [[article.revisions]]
 date = "2023-04-01"

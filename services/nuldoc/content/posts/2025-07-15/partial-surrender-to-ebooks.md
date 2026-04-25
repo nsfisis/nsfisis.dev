@@ -3,7 +3,8 @@
 uuid = "427a124c-fce3-4a1c-a388-5c9827e34957"
 title = "電子書籍への部分的降伏"
 description = "紙の本から電子書籍へ条件付きの移行を決めた。"
-tags = []
+tags = [
+]
 
 [[article.revisions]]
 date = "2025-07-15"

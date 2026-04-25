@@ -3,7 +3,8 @@
 uuid = "42cf2829-b897-4748-bc22-80dd734a3c09"
 title = "term-banner: ターミナルにバナーを表示するツールを書いた"
 description = "ターミナルに任意の文字のバナーを表示するためのツールを Go で書いた。"
-tags = []
+tags = [
+]
 
 [[article.revisions]]
 date = "2022-04-24"

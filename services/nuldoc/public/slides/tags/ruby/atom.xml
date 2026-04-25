@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:slides.nsfisis.dev,2021:tag-ruby</id>
+  <title>タグ「Ruby」一覧｜nsfisis’ slides</title>
+  <link rel="alternate" href="https://slides.nsfisis.dev/tags/ruby/"></link>
+  <link rel="self" href="https://slides.nsfisis.dev/tags/ruby/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2026-03-21T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:eb9ab6b0-e093-4446-81a2-8dcd65d924b6</id>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-03-21/phperkaigi-2026-book-revue/"></link>
+    <title>Ruby ソースコード完全解説</title>
+    <summary>PHPerKaigi 2026 (PHPer Book Revue)</summary>
+    <published>2026-03-21T00:00:00+09:00</published>
+    <updated>2026-03-21T00:00:00+09:00</updated>
+  </entry>
+</feed>

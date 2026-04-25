@@ -1,0 +1,16 @@
+[slide]
+uuid = "eb9ab6b0-e093-4446-81a2-8dcd65d924b6"
+title = "Ruby ソースコード完全解説"
+event = "PHPerKaigi 2026"
+talkType = "PHPer Book Revue"
+link = "/slides/2026-03-21/phperkaigi-2026-book-revue/slides.pdf"
+tags = [
+    "conference",
+    "php",
+    "phperkaigi",
+    "ruby",
+]
+
+[[slide.revisions]]
+date = "2026-03-21"
+remark = "登壇"

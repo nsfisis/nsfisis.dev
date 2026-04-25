@@ -47,7 +47,7 @@ module Nuldoc
             title = "TODO"
             description = "TODO"
             tags = [
-              "TODO",
+                "TODO",
             ]
 
             [[article.revisions]]
@@ -67,7 +67,7 @@ module Nuldoc
             talkType = "TODO"
             link = "TODO"
             tags = [
-              "TODO",
+                "TODO",
             ]
 
             [[slide.revisions]]
