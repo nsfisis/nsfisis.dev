@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2026-03-22T00:00:00+09:00</updated>
+  <updated>2026-04-11T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:13eca8f0-8e58-45a3-963d-819c80e2c367</id>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-04-11/phpcon-odawara-2026/"></link>
+    <title>Deep Dive into Xdebug</title>
+    <summary>PHP カンファレンス小田原 2026 (レギュラートーク (20分))</summary>
+    <published>2026-04-11T00:00:00+09:00</published>
+    <updated>2026-04-11T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:8c9aabac-c055-407b-9b03-b812547b6379</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-03-22/phperkaigi-2026/"></link>

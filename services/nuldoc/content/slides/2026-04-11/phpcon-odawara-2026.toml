@@ -1,0 +1,16 @@
+[slide]
+uuid = "13eca8f0-8e58-45a3-963d-819c80e2c367"
+title = "Deep Dive into Xdebug"
+event = "PHP カンファレンス小田原 2026"
+talkType = "レギュラートーク (20分)"
+link = "/slides/2026-04-11/phpcon-odawara-2026/slides.pdf"
+tags = [
+    "conference",
+    "php",
+    "phpcon-odawara",
+    "xdebug",
+]
+
+[[slide.revisions]]
+date = "2026-04-11"
+remark = "登壇"
