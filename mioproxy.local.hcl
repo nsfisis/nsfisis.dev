@@ -1,7 +1,7 @@
 user = "ken"
 
 server http {
-    host = "127.0.0.1"
+    hosts = ["127.0.0.1", "::1"]
     port = 8000
 
     proxy default {

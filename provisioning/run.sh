@@ -12,8 +12,8 @@ export LEGO_CONF_EMAIL=nsfisis@gmail.com
 export LEGO_CONF_WEBROOT="${REPO_ROOT}/letsencrypt/webroot"
 export LEGO_CONF_PATH="${REPO_ROOT}/letsencrypt/lego"
 export LEGO_CONF_DOMAINS=nsfisis.dev,about.nsfisis.dev,blog.nsfisis.dev,repos.nsfisis.dev,slides.nsfisis.dev
-export GOLANG_VERSION=1.21.1
-export MIOPROXY_VERSION=v0.3.0
+export GOLANG_VERSION=1.24.13
+export MIOPROXY_VERSION=v0.5.0
 
 mitamae_bin_url="https://github.com/itamae-kitchen/mitamae/releases/download/${MITAMAE_VERSION}/mitamae-${MITAMAE_ARCH}.tar.gz"
 
