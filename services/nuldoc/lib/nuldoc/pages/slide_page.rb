@@ -52,13 +52,15 @@ module Nuldoc
                     end
                     div class: 'controllers' do
                       div class: 'controllers-buttons' do
-                        button id: 'prev', type: 'button' do
+                        button id: 'prev', type: 'button',
+                               'aria-label': '前のページ (←/h)', title: '前のページ (←/h)' do
                           elem 'svg', width: '20', height: '20', viewBox: '0 0 24 24', fill: 'none',
                                       stroke: 'currentColor', 'stroke-width': '2' do
                             elem 'path', d: 'M15 18l-6-6 6-6'
                           end
                         end
-                        button id: 'next', type: 'button' do
+                        button id: 'next', type: 'button',
+                               'aria-label': '次のページ (→/l)', title: '次のページ (→/l)' do
                           elem 'svg', width: '20', height: '20', viewBox: '0 0 24 24', fill: 'none',
                                       stroke: 'currentColor', 'stroke-width': '2' do
                             elem 'path', d: 'M9 18l6-6-6-6'
