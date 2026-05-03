@@ -11,13 +11,13 @@ $ rake build
 Create a new post.
 
 ```
-$ rake new post
+$ rake new[post]
 ```
 
 Create a new slide.
 
 ```
-$ rake new slide
+$ rake new[slide]
 ```
 
 Update PDF.js.
