@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2026-04-20T00:00:00+09:00</updated>
+  <updated>2026-05-31T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:a040f021-20f3-4779-b2c5-a39141e8dd9d</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-05-31/regional-rubykaigi-sekigahara01/"></link>
+    <title>関ケ原Ruby会議01 参戦記</title>
+    <summary>令和八年五月三十一日、かの関ケ原の地にて催されたる関ケ原Ruby会議01に参陣せり。</summary>
+    <published>2026-05-31T00:00:00+09:00</published>
+    <updated>2026-05-31T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:3e3c8bac-ea74-42f0-acdb-ea3cd079c134</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-04-20/i-can-eat-glass-it-doesnt-hurt-me/"></link>
