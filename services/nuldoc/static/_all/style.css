@@ -334,6 +334,10 @@ img {
   align-items: baseline;
 }
 
+.footnotes .footnote:target {
+  background-color: #e0e0e0;
+}
+
 .footnotes .footnote p {
   margin: 0;
 }
