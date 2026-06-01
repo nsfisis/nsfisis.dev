@@ -17,8 +17,8 @@ serve:
 clean:
 	docker compose down
 
-.PHONY: make-repo-list
-make-repo-list:
+.PHONY: repo-list
+repo-list:
 	scripts/make-repo-list.sh
 
 .PHONY: clone-repos

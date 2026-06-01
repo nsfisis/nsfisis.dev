@@ -82,6 +82,13 @@ repo.desc=kioku
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/kioku
 
+repo.url=mini-xdebug
+repo.path=/src/mini-xdebug.git
+repo.name=mini-xdebug
+repo.desc=mini-xdebug
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/mini-xdebug
+
 repo.url=mioproxy
 repo.path=/src/mioproxy.git
 repo.name=mioproxy
@@ -102,6 +109,13 @@ repo.name=nil.ninja
 repo.desc=nil.ninja
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/nil.ninja
+
+repo.url=nilink
+repo.path=/src/nilink.git
+repo.name=nilink
+repo.desc=nilink
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/nilink
 
 repo.url=nsfisis
 repo.path=/src/nsfisis.git
@@ -145,12 +159,26 @@ repo.desc=P4Dcc
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/P4Dcc
 
+repo.url=php-mozart
+repo.path=/src/php-mozart.git
+repo.name=php-mozart
+repo.desc=php-mozart
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/php-mozart
+
 repo.url=php-next-after
 repo.path=/src/php-next-after.git
 repo.name=php-next-after
 repo.desc=php-next-after
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/php-next-after
+
+repo.url=php-shirabe
+repo.path=/src/php-shirabe.git
+repo.name=php-shirabe
+repo.desc=php-shirabe
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/php-shirabe
 
 repo.url=php-waddiwasi
 repo.path=/src/php-waddiwasi.git
@@ -172,6 +200,13 @@ repo.name=phpcon-odawara-2024-slides
 repo.desc=phpcon-odawara-2024-slides
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phpcon-odawara-2024-slides
+
+repo.url=phpcon-odawara-2026-slides
+repo.path=/src/phpcon-odawara-2026-slides.git
+repo.name=phpcon-odawara-2026-slides
+repo.desc=phpcon-odawara-2026-slides
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phpcon-odawara-2026-slides
 
 repo.url=phpconfuk2023-eve-slide
 repo.path=/src/phpconfuk2023-eve-slide.git
@@ -221,6 +256,34 @@ repo.name=phperkaigi-2025-albatross
 repo.desc=phperkaigi-2025-albatross
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phperkaigi-2025-albatross
+
+repo.url=phperkaigi-2026-albatross
+repo.path=/src/phperkaigi-2026-albatross.git
+repo.name=phperkaigi-2026-albatross
+repo.desc=phperkaigi-2026-albatross
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-2026-albatross
+
+repo.url=phperkaigi-2026-book-revue-slides
+repo.path=/src/phperkaigi-2026-book-revue-slides.git
+repo.name=phperkaigi-2026-book-revue-slides
+repo.desc=phperkaigi-2026-book-revue-slides
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-2026-book-revue-slides
+
+repo.url=phperkaigi-2026-brochure-article
+repo.path=/src/phperkaigi-2026-brochure-article.git
+repo.name=phperkaigi-2026-brochure-article
+repo.desc=phperkaigi-2026-brochure-article
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-2026-brochure-article
+
+repo.url=phperkaigi-2026-php-modification-slides
+repo.path=/src/phperkaigi-2026-php-modification-slides.git
+repo.name=phperkaigi-2026-php-modification-slides
+repo.desc=phperkaigi-2026-php-modification-slides
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-2026-php-modification-slides
 
 repo.url=PHPerKaigi2022-tokens
 repo.path=/src/PHPerKaigi2022-tokens.git
@@ -396,6 +459,13 @@ repo.name=reparojson
 repo.desc=reparojson
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/reparojson
+
+repo.url=TaPL-impls
+repo.path=/src/TaPL-impls.git
+repo.name=TaPL-impls
+repo.desc=TaPL-impls
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/TaPL-impls
 
 repo.url=term-banner
 repo.path=/src/term-banner.git
