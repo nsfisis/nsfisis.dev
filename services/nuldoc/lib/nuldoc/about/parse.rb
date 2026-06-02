@@ -12,7 +12,8 @@ module Nuldoc
         StaffRecord.new(
           date: parse_date(entry['date']),
           event: entry['event'],
-          role: entry['role']
+          role: entry['role'],
+          url: entry['url']
         )
       end
     end

@@ -83,14 +83,21 @@ module Nuldoc
                       h2 { text 'カンファレンススタッフ' }
                       ul do
                         sorted_staff.each do |record|
+                          if record.date.is_a?(Range)
+                            from_str = Revision.date_to_string(record.date.begin)
+                            to_str = Revision.date_to_string(record.date.end)
+                            label = "#{from_str}〜#{to_str}: #{record.event} (#{record.role})"
+                          else
+                            date_str = Revision.date_to_string(record.date)
+                            label = "#{date_str}: #{record.event} (#{record.role})"
+                          end
                           li do
-                            if record.date.is_a?(Range)
-                              from_str = Revision.date_to_string(record.date.begin)
-                              to_str = Revision.date_to_string(record.date.end)
-                              text "#{from_str}〜#{to_str}: #{record.event} (#{record.role})"
+                            if record.linkable?
+                              a href: record.url, target: '_blank', rel: 'noreferrer' do
+                                text label
+                              end
                             else
-                              date_str = Revision.date_to_string(record.date)
-                              text "#{date_str}: #{record.event} (#{record.role})"
+                              text label
                             end
                           end
                         end
