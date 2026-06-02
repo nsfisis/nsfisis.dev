@@ -1,3 +1,4 @@
+about-filter=lua:/etc/cgit/filters/about-plain.lua
 case-sensitive-sort=0
 cache-size=1024
 clone-url=https://repos.nsfisis.dev/$CGIT_REPO_URL

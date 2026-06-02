@@ -8,6 +8,7 @@ services:
     volumes:
       - ./cgitrc:/etc/cgitrc:ro
       - ./repos.cgitrc:/etc/repos.cgitrc:ro
+      - ./filters:/etc/cgit/filters:ro
       - ./httpd-cgit.conf:/usr/local/apache2/conf/extra/httpd-cgit.conf:ro
       - ./repos:/src:ro
     restart: always

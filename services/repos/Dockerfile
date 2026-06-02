@@ -15,7 +15,9 @@ RUN apt-get update && \
         build-essential \
         curl \
         git \
+        libluajit-5.1-dev \
         libssl-dev \
+        pkg-config \
         zlib1g-dev
 
 RUN git clone --branch $CGIT_VERSION https://git.zx2c4.com/cgit /cgit
@@ -24,7 +26,7 @@ WORKDIR /cgit
 
 RUN --mount=type=bind,source=./cgit.conf,target=./cgit.conf \
     make get-git && \
-    make NO_LUA=1 && \
+    make LUA_PKGCONFIG=luajit && \
     make install
 
 
@@ -36,6 +38,7 @@ COPY --from=builder /var/www/htdocs/cgit/ /usr/local/apache2/htdocs/cgit
 
 RUN apt-get update && \
     apt-get install -y \
+        libluajit-5.1-2 \
         zstd && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
