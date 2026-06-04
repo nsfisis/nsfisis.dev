@@ -1,0 +1,17 @@
+[slide]
+uuid = "21bc6dee-abec-463c-a62a-fe0052deb7f2"
+title = "最近作っている Rust 製 Composer の進捗"
+event = "PHPerKaigi mini #1"
+talkType = "LT"
+link = "/slides/2026-05-25/phperkaigi-mini-1/slides.pdf"
+tags = [
+    "conference",
+    "php",
+    "phperkaigi",
+    "rust",
+    "composer",
+]
+
+[[slide.revisions]]
+date = "2026-05-25"
+remark = "登壇"

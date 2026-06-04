@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2026-04-11T00:00:00+09:00</updated>
+  <updated>2026-05-25T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:21bc6dee-abec-463c-a62a-fe0052deb7f2</id>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-05-25/phperkaigi-mini-1/"></link>
+    <title>最近作っている Rust 製 Composer の進捗</title>
+    <summary>PHPerKaigi mini #1 (LT)</summary>
+    <published>2026-05-25T00:00:00+09:00</published>
+    <updated>2026-05-25T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:13eca8f0-8e58-45a3-963d-819c80e2c367</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-04-11/phpcon-odawara-2026/"></link>
