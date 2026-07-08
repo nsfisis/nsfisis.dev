@@ -285,6 +285,13 @@ repo.desc=phperkaigi-2026-php-modification-slides
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phperkaigi-2026-php-modification-slides
 
+repo.url=phperkaigi-mini-1-slides
+repo.path=/src/phperkaigi-mini-1-slides.git
+repo.name=phperkaigi-mini-1-slides
+repo.desc=phperkaigi-mini-1-slides
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-mini-1-slides
+
 repo.url=PHPerKaigi2022-tokens
 repo.path=/src/PHPerKaigi2022-tokens.git
 repo.name=PHPerKaigi2022-tokens
