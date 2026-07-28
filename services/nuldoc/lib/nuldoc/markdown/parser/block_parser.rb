@@ -524,8 +524,7 @@ module Nuldoc
       # --- Section hierarchy ---
 
       def build_document(blocks)
-        footnote_blocks = blocks.select { |b| b.is_a?(FootnoteBlock) }
-        non_footnote_blocks = blocks.reject { |b| b.is_a?(FootnoteBlock) }
+        footnote_blocks, non_footnote_blocks = blocks.partition { |b| b.is_a?(FootnoteBlock) }
 
         article_content = build_section_hierarchy(non_footnote_blocks)
 
