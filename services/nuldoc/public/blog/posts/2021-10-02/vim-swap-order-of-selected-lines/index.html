@@ -176,7 +176,7 @@
           <section id="section--problem-of-global-command">
             <h2><a href="#section--problem-of-global-command"><code>:g/^/m0</code> の問題点</a></h2>
             <p>
-              <code>:global</code> コマンドは各行に対してマッチングを行う際、現在の検索パターンを上書きしてしまう。<code>^</code> は行の先頭にマッチするため、結果として全ての行がハイライトされてしまう。<code>&apos;hlsearch&apos;</code> オプションを無効にしている場合その限りではないが、その場合でも直前の検索パターンが失われてしまうと <code>n</code> コマンドなどの際に不便である。
+              <code>:global</code> コマンドは各行に対してマッチングをおこなう際、現在の検索パターンを上書きしてしまう。<code>^</code> は行の先頭にマッチするため、結果として全ての行がハイライトされてしまう。<code>&apos;hlsearch&apos;</code> オプションを無効にしている場合その限りではないが、その場合でも直前の検索パターンが失われてしまうと <code>n</code> コマンドなどの際に不便である。
             </p>
             <blockquote>
               <p>
