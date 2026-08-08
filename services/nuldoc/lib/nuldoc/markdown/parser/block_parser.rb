@@ -289,7 +289,7 @@ module Nuldoc
         cell_elements = cells.each_with_index.map do |cell_text, i|
           attrs = {}
           align = alignment[i]
-          attrs[:align] = align if align && align != 'default'
+          attrs[:class] = "align-#{align}" if align && align != 'default'
 
           tag = is_header ? 'th' : 'td'
           inline_nodes = InlineParser.parse(cell_text)
@@ -403,7 +403,7 @@ module Nuldoc
         is_task_list = false
         if type == :unordered
           is_task_list = items.any? { |item| item[:lines].first&.match?(/^\[[ xX]\]\s/) }
-          attrs[:type] = 'task' if is_task_list
+          attrs[:class] = 'task-list' if is_task_list
         end
 
         list_items = items.map do |item|
@@ -424,7 +424,8 @@ module Nuldoc
         if is_task_list
           task_match = content.match(/^\[( |[xX])\]\s(.*)$/m)
           if task_match
-            attrs[:checked] = task_match[1] == ' ' ? 'false' : 'true'
+            checked = task_match[1] != ' '
+            attrs[:class] = checked ? 'task-list-item task-list-item-checked' : 'task-list-item'
             content = task_match[2]
           end
         end
