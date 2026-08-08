@@ -4,12 +4,125 @@ main {
 }
 
 .slide-container {
+  position: relative;
   margin: 0 1rem;
 }
 
+.slide-stage {
+  /* Variables read by pdf.js setLayerDimensions(). --total-scale-factor is
+     overwritten from JavaScript on every page render. */
+  --total-scale-factor: 1;
+  --scale-round-x: 1px;
+  --scale-round-y: 1px;
+  position: relative;
+  min-height: 6rem;
+}
+
+.slide-stage canvas {
+  display: block;
+}
+
+/* Text layer: selection, copy, in-page search and screen readers */
+
+.textLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: clip;
+  line-height: 1;
+  text-align: initial;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  caret-color: CanvasText;
+}
+
+.textLayer span,
+.textLayer br {
+  position: absolute;
+  margin: 0;
+  color: transparent;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0 0;
+}
+
+.textLayer ::selection {
+  background: rgb(0 0 255 / 25%);
+}
+
+.textLayer br::selection {
+  background: transparent;
+}
+
+/* Annotation layer: makes links inside the slides clickable */
+
+.annotationLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+
+.annotationLayer section {
+  position: absolute;
+  margin: 0;
+  text-align: initial;
+  pointer-events: auto;
+  transform-origin: 0 0;
+}
+
+.annotationLayer .linkAnnotation > a {
+  position: absolute;
+  inset: 0;
+  font-size: 1em;
+  border: none;
+}
+
+.annotationLayer .linkAnnotation > a:hover {
+  background: rgb(255 255 0 / 20%);
+  box-shadow: 0 0 0 2px rgb(255 200 0 / 60%);
+}
+
+/* Loading and error overlay */
+
+.slide-status {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgb(255 255 255 / 90%);
+}
+
+.slide-status[hidden] {
+  display: none;
+}
+
+.slide-status p {
+  margin: 0;
+}
+
+.slide-status[data-state="error"] {
+  color: #a00;
+}
+
+.slide-noscript {
+  margin: 1rem;
+  text-align: center;
+}
+
+/* Controls */
+
 .controllers {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   margin: 1rem 0;
 }
 
@@ -34,4 +147,34 @@ main {
 
 .controllers button:hover {
   background: #555;
+}
+
+.controllers button:disabled {
+  background: #ccc;
+  cursor: default;
+}
+
+.page-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-input {
+  width: 4rem;
+  height: 2rem;
+  padding: 0 0.3rem;
+  border: 1px solid #999;
+  border-radius: 0.3rem;
+  font: inherit;
+  text-align: right;
+}
+
+.page-count {
+  min-width: 2rem;
+}
+
+.slide-download {
+  font-size: 0.9rem;
 }

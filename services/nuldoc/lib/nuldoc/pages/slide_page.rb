@@ -47,8 +47,21 @@ module Nuldoc
                         end
                       end
                     end
-                    div class: 'slide-container' do
-                      canvas id: 'slide', 'data-slide-link': slide.slide_link
+                    div class: 'slide-container', id: 'slide-container',
+                        'data-slide-link': slide.slide_link do
+                      div class: 'slide-stage', id: 'slide-stage' do
+                        canvas id: 'slide'
+                        div class: 'textLayer', id: 'text-layer'
+                        div class: 'annotationLayer', id: 'annotation-layer'
+                      end
+                      div class: 'slide-status', id: 'slide-status',
+                          role: 'status', 'aria-live': 'polite', hidden: 'hidden'
+                    end
+                    noscript do
+                      style { raw '.slide-container,.controllers-buttons{display:none}' }
+                      p class: 'slide-noscript' do
+                        a(href: slide.slide_link) { text 'PDF をダウンロード' }
+                      end
                     end
                     div class: 'controllers' do
                       div class: 'controllers-buttons' do
@@ -59,6 +72,13 @@ module Nuldoc
                             elem 'path', d: 'M15 18l-6-6 6-6'
                           end
                         end
+                        div class: 'page-indicator' do
+                          input id: 'page-input', class: 'page-input', type: 'number',
+                                min: '1', step: '1', value: '1', inputmode: 'numeric',
+                                'aria-label': 'ページ番号'
+                          span(class: 'page-separator') { text '/' }
+                          span(class: 'page-count', id: 'page-count') { text '–' }
+                        end
                         button id: 'next', type: 'button',
                                'aria-label': '次のページ (→/l)', title: '次のページ (→/l)' do
                           elem 'svg', width: '20', height: '20', viewBox: '0 0 24 24', fill: 'none',
@@ -66,6 +86,9 @@ module Nuldoc
                             elem 'path', d: 'M9 18l6-6-6-6'
                           end
                         end
+                      end
+                      a(class: 'slide-download', href: slide.slide_link, download: '') do
+                        text 'PDF をダウンロード'
                       end
                     end
                     render Components::StaticScript,

@@ -15,10 +15,10 @@
     <meta name="Hatena::Bookmark" content="nocomment">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>プログラミングマナー講座 (紅白ぺぱ合戦)｜nsfisis’s slides</title>
-    <link rel="stylesheet" href="/style.css?h=bf289421c09405fa3c89dc8b18742368">
+    <link rel="stylesheet" href="/style.css?h=61618c116e07057fc873f7751f158cd7">
   </head>
   <body class="single">
-    <link rel="stylesheet" href="/slides.css?h=48ccba536579d1291e7c04ae27851b57">
+    <link rel="stylesheet" href="/slides.css?h=d1639dd95e0e0082996901b5bfcf5fd6">
     <header class="header">
       <div class="site-logo">
         <a href="https://nsfisis.dev/">nsfisis.dev</a>
@@ -59,10 +59,26 @@
               </li>
             </ol>
           </section>
-          <div class="slide-container">
-            <canvas data-slide-link="/slides/2024-11-30/cohackpp/slides.pdf" id="slide">
-            </canvas>
+          <div class="slide-container" data-slide-link="/slides/2024-11-30/cohackpp/slides.pdf" id="slide-container">
+            <div class="slide-stage" id="slide-stage">
+              <canvas id="slide">
+              </canvas>
+              <div class="textLayer" id="text-layer">
+              </div>
+              <div class="annotationLayer" id="annotation-layer">
+              </div>
+            </div>
+            <div aria-live="polite" class="slide-status" hidden="hidden" id="slide-status" role="status">
+            </div>
           </div>
+          <noscript>
+            <style>
+              .slide-container,.controllers-buttons{display:none}
+            </style>
+            <p class="slide-noscript">
+              <a href="/slides/2024-11-30/cohackpp/slides.pdf">PDF をダウンロード</a>
+            </p>
+          </noscript>
           <div class="controllers">
             <div class="controllers-buttons">
               <button aria-label="前のページ (←/h)" id="prev" title="前のページ (←/h)" type="button">
@@ -71,6 +87,9 @@
                   </path>
                 </svg>
               </button>
+              <div class="page-indicator">
+                <input aria-label="ページ番号" class="page-input" id="page-input" inputmode="numeric" min="1" step="1" type="number" value="1"><span class="page-separator">/</span><span class="page-count" id="page-count">–</span>
+              </div>
               <button aria-label="次のページ (→/l)" id="next" title="次のページ (→/l)" type="button">
                 <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20">
                   <path d="M9 18l6-6-6-6">
@@ -78,8 +97,9 @@
                 </svg>
               </button>
             </div>
+            <a class="slide-download" download="" href="/slides/2024-11-30/cohackpp/slides.pdf">PDF をダウンロード</a>
           </div>
-          <script src="/slide.js?h=dcdc1524058e7cb08242f930fa849473" type="module">
+          <script src="/slide.js?h=4c869c1409da703e66a0d73294863232" type="module">
           </script>
         </div>
       </article>
