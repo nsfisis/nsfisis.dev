@@ -312,7 +312,7 @@ module Nuldoc
       lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText.new
       lexer = lexer.new if lexer.is_a?(Class)
       formatter = Rouge::Formatters::HTMLInline.new('github.light')
-      line_formatter = Rouge::Formatters::HTMLLinewise.new(formatter, class: 'codeblock-line')
+      line_formatter = Rouge::Formatters::HTMLLinewise.new(formatter, class: 'codeblock-line', tag_name: 'span')
       tokens = lexer.lex(source)
       inner_html = line_formatter.format(tokens)
       code = inner_html.chomp.sub(%r{\n</div>\z}, '</div>')
