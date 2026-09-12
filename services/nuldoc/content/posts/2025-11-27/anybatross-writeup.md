@@ -23,6 +23,8 @@ remark = "公開"
 
 このコンテストは何度か開催されており、[前々回](https://perlbatross.kayac.com/contest/2024hiroshima) に参加したときは総合 2 位だった (前回開催は不参加)。
 
+カヤックさん公式の解説記事: <https://techblog.kayac.com/anybatross2025-editorial>
+
 # Hole 1 {#hole-1}
 
 ## 回答 (45 byte) {#answer}
@@ -137,9 +139,10 @@ puts$**?,,s
 > (中略)
 > 今回はチート抑止みたいなところの意図でperlコマンドを実行する方式になったので、ちゃんとshebangを書けば効くようになっていたのでした。
 
-Shebang が使えるのなら、Ruby にも Perl に由来するオプションがいくつかあるので、似たような手段で短縮できるのではないか？
+Shebang が使えるのなら、似たような手段で短縮できるのではないか？
 
-`ruby` で `-p` を付けると、以下のようなコードを書いたかのように動作する。
+Ruby にも Perl 由来のオプションがいくつか存在する。
+`ruby` コマンドに `-p` を付けると、以下のようなコードを書いたかのように動作する。
 
 ```ruby
 while gets
