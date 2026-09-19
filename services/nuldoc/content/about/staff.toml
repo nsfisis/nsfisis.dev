@@ -59,6 +59,12 @@ role = "コアスタッフ"
 url = "https://phpcon-odawara.jp/ja/2026/"
 
 [[staff]]
+date = { from = "2026-09-11", to = "2026-09-13" }
+event = "iOSDC Japan 2026"
+role = "コアスタッフ"
+url = "https://iosdc.jp/2026/"
+
+[[staff]]
 date = "2026-10-03"
 event = "PHP カンファレンス愛媛 2026"
 role = "コアスタッフ"
