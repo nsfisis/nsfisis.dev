@@ -14,7 +14,7 @@ module Nuldoc
 
   LocationsConfig = Data.define(:content_dir, :dest_dir, :static_dir)
 
-  SiteConfig = Data.define(:author, :copyright_year)
+  SiteConfig = Data.define(:author, :copyright_year, :current_year)
 
   SiteEntry = Data.define(:fqdn, :site_name, :posts_per_page)
 
@@ -36,7 +36,8 @@ module Nuldoc
 
       site = SiteConfig.new(
         author: raw.dig('site', 'author'),
-        copyright_year: raw.dig('site', 'copyrightYear')
+        copyright_year: raw.dig('site', 'copyrightYear'),
+        current_year: Time.now.year
       )
 
       sites = SitesConfig.new(

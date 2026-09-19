@@ -7,7 +7,8 @@ module Nuldoc
       end
 
       def build
-        footer(class: 'footer') { text "&copy; #{@config.site.copyright_year} #{@config.site.author}" }
+        site = @config.site
+        footer(class: 'footer') { text "&copy; #{site.copyright_year}-#{site.current_year} #{site.author}" }
       end
     end
   end
