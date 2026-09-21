@@ -1,0 +1,1 @@
+../../../../content/posts/2025-04-24/composer-patches-v2-does-not-require-gnu-patch-even-on-macos.md

@@ -1,0 +1,1 @@
+../../../../content/posts/2024-06-19/scalamatsuri-2024-report.md

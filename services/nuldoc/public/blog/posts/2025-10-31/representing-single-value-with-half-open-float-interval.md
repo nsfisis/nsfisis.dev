@@ -1,0 +1,1 @@
+../../../../content/posts/2025-10-31/representing-single-value-with-half-open-float-interval.md

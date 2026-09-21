@@ -1,0 +1,1 @@
+../../../../content/posts/2021-03-05/my-first-post.md

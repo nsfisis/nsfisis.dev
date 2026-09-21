@@ -1,0 +1,1 @@
+../../../../content/posts/2026-05-31/regional-rubykaigi-sekigahara01.md

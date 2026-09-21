@@ -1,0 +1,1 @@
+../../../../content/posts/2021-10-02/ruby-detect-running-implementation.md

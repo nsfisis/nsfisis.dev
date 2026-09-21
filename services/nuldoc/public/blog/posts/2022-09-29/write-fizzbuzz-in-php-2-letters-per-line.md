@@ -1,0 +1,1 @@
+../../../../content/posts/2022-09-29/write-fizzbuzz-in-php-2-letters-per-line.md

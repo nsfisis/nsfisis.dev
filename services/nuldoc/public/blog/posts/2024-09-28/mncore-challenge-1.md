@@ -1,0 +1,1 @@
+../../../../content/posts/2024-09-28/mncore-challenge-1.md

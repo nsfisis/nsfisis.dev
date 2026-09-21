@@ -1,0 +1,1 @@
+../../../../content/posts/2021-10-02/vim-swap-order-of-selected-lines.md

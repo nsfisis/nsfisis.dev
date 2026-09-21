@@ -1,0 +1,1 @@
+../../../../content/posts/2025-12-06/archive-dynamic-site-with-wget.md

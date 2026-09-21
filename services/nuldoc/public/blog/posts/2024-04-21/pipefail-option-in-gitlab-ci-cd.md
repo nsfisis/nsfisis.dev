@@ -1,0 +1,1 @@
+../../../../content/posts/2024-04-21/pipefail-option-in-gitlab-ci-cd.md

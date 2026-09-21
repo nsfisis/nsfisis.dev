@@ -1,0 +1,1 @@
+../../../../content/posts/2024-02-03/install-wireguard-on-personal-server.md

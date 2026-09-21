@@ -1,0 +1,1 @@
+../../../../content/posts/2022-04-24/term-banner-write-tool-showing-banner-in-terminal.md

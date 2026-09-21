@@ -1,0 +1,1 @@
+../../../../content/posts/2024-01-10/neovim-insert-namespace-declaration-to-empty-php-file.md

@@ -1,0 +1,1 @@
+../../../../content/posts/2021-10-02/vim-difference-between-autocmd-bufwrite-and-bufwritepre.md

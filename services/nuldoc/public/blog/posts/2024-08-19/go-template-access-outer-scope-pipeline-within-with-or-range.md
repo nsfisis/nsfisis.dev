@@ -1,0 +1,1 @@
+../../../../content/posts/2024-08-19/go-template-access-outer-scope-pipeline-within-with-or-range.md

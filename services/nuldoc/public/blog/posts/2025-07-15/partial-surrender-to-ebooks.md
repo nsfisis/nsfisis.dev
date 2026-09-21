@@ -1,0 +1,1 @@
+../../../../content/posts/2025-07-15/partial-surrender-to-ebooks.md

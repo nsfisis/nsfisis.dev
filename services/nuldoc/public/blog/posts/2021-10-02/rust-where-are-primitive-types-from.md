@@ -1,0 +1,1 @@
+../../../../content/posts/2021-10-02/rust-where-are-primitive-types-from.md

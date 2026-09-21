@@ -1,0 +1,1 @@
+../../../../content/posts/2025-05-05/make-tiny-self-hosted-c-compiler.md

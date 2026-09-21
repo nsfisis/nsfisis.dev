@@ -1,0 +1,1 @@
+../../../../content/posts/2022-08-27/php-conference-okinawa-code-golf.md

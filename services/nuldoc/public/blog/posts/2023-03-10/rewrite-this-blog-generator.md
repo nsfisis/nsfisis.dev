@@ -1,0 +1,1 @@
+../../../../content/posts/2023-03-10/rewrite-this-blog-generator.md

@@ -1,0 +1,1 @@
+../../../../content/posts/2022-05-01/phperkaigi-2022.md
