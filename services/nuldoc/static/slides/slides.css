@@ -16,6 +16,21 @@ main {
   --scale-round-y: 1px;
   position: relative;
   min-height: 6rem;
+  /* Cross-fade the stage on a page move; see paintPage() in slide.js. */
+  view-transition-name: slide-stage;
+}
+
+/* Only the stage is captured: snapshotting the whole page for a page move
+   would cost more and animate nothing. */
+:root {
+  view-transition-name: none;
+}
+
+::view-transition-group(slide-stage),
+::view-transition-old(slide-stage),
+::view-transition-new(slide-stage) {
+  animation-duration: 180ms;
+  animation-timing-function: ease;
 }
 
 .slide-stage canvas {

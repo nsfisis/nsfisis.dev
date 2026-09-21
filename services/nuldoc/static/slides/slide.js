@@ -41,6 +41,7 @@ async function init() {
   let renderToken = 0;
   let textLayer = null;
   let stageWidth = 0;
+  const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)");
   // `${pageNumber}@${width}` -> { image, layers }. Both are promises.
   const cache = new Map();
 
@@ -149,14 +150,16 @@ async function init() {
     ctx.drawImage(source, 0, 0);
   };
 
-  const renderOverlays = async (entry, viewport, token) => {
+  const clearOverlays = () => {
     if (textLayer !== null) {
       textLayer.cancel();
       textLayer = null;
     }
     textLayerDiv.replaceChildren();
     annotationLayerDiv.replaceChildren();
+  };
 
+  const renderOverlays = async (entry, viewport, token) => {
     const { page, textContent, annotations } = await entry.layers;
     if (token !== renderToken) return;
 
@@ -183,7 +186,23 @@ async function init() {
     }).render({ annotations, renderForms: false });
   };
 
-  const renderPage = async (num) => {
+  // Cross-fade the stage between pages. Falls back to an instant swap where
+  // view transitions are unsupported or unwanted.
+  const paintPage = (paint, animate) => {
+    if (
+      !animate || reduceMotion.matches ||
+      typeof document.startViewTransition !== "function"
+    ) {
+      paint();
+      return null;
+    }
+    const transition = document.startViewTransition(paint);
+    // A quick second move skips this one; nothing here waits on `ready`.
+    transition.ready.catch(() => {});
+    return transition;
+  };
+
+  const renderPage = async (num, { animate = false } = {}) => {
     // No measurable width (e.g. hidden); leave it to the ResizeObserver re-render.
     if (stageWidth === 0) return;
 
@@ -200,8 +219,14 @@ async function init() {
 
       globalThis.clearTimeout(indicator);
       hideStatus();
-      stage.style.setProperty("--total-scale-factor", image.totalScaleFactor);
-      drawImage(image);
+      clearOverlays();
+      const transition = paintPage(() => {
+        stage.style.setProperty("--total-scale-factor", image.totalScaleFactor);
+        drawImage(image);
+      }, animate);
+      // Let the transition snapshot the new page before the layers land on it.
+      if (transition !== null) await transition.updateCallbackDone;
+      if (token !== renderToken) return;
       await renderOverlays(entry, image.viewport, token);
     } catch (e) {
       if (token !== renderToken) return;
@@ -233,10 +258,12 @@ async function init() {
 
   const goToPage = (num, { updateHash = true } = {}) => {
     if (doc === null || !Number.isFinite(num)) return;
-    pageNum = Math.min(Math.max(Math.trunc(num), 1), doc.numPages);
+    const target = Math.min(Math.max(Math.trunc(num), 1), doc.numPages);
+    const changed = target !== pageNum;
+    pageNum = target;
     syncControls();
     if (updateHash) writeHash(pageNum);
-    renderPage(pageNum);
+    renderPage(pageNum, { animate: changed });
   };
 
   const linkService = {
