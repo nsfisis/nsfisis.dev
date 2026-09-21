@@ -2,6 +2,7 @@ require 'date'
 require 'digest'
 require 'English'
 require 'fileutils'
+require 'pathname'
 require 'securerandom'
 
 require 'dry/cli'

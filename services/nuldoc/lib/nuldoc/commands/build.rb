@@ -19,7 +19,7 @@ module Nuldoc
         pipeline.step(:build_blog_tag_list, deps: [:build_blog_tags]) do |r|
           build_tag_list_page(r[:build_blog_tags], 'blog')
         end
-        pipeline.step(:copy_post_sources, deps: [:build_posts]) { |r| copy_post_source_files(r[:build_posts]) }
+        pipeline.step(:link_post_sources, deps: [:build_posts]) { |r| link_post_source_files(r[:build_posts]) }
 
         pipeline.step(:build_slides) { build_slide_pages }
         pipeline.step(:build_slide_list, deps: [:build_slides]) { |r| build_slide_list_page(r[:build_slides]) }
@@ -28,13 +28,13 @@ module Nuldoc
           build_tag_list_page(r[:build_slide_tags], 'slides')
         end
         pipeline.step(:build_about, deps: [:build_slides]) { |r| build_about_page(r[:build_slides]) }
-        pipeline.step(:copy_slides_files, deps: [:build_slides]) { |r| copy_slides_files(r[:build_slides]) }
+        pipeline.step(:link_slides_files, deps: [:build_slides]) { |r| link_slides_files(r[:build_slides]) }
 
         pipeline.step(:build_home) { build_home_page }
         pipeline.step(:build_not_found) { %w[default about blog slides].each { |site| build_not_found_page(site) } }
         pipeline.step(:copy_static) { copy_static_files }
-        pipeline.step(:copy_blog_assets) { copy_blog_asset_files }
-        pipeline.step(:copy_slides_assets) { copy_slides_asset_files }
+        pipeline.step(:link_blog_assets) { link_blog_asset_files }
+        pipeline.step(:link_slides_assets) { link_slides_asset_files }
 
         pipeline.execute(profile: @profile)
       end
@@ -164,19 +164,18 @@ module Nuldoc
         end
       end
 
-      def copy_slides_files(slides)
+      def link_slides_files(slides)
         content_dir = File.join(Dir.pwd, @config.locations.content_dir)
         dest_dir = File.join(Dir.pwd, @config.locations.dest_dir)
 
         slides.each do |slide|
           src = File.join(content_dir, slide.slide_link)
           dst = File.join(dest_dir, 'slides', slide.slide_link)
-          FileUtils.mkdir_p(File.dirname(dst))
-          FileUtils.cp(src, dst)
+          link_file(src, dst)
         end
       end
 
-      def copy_blog_asset_files
+      def link_blog_asset_files
         content_dir = File.join(Dir.pwd, @config.locations.content_dir, 'posts')
         dest_dir = File.join(Dir.pwd, @config.locations.dest_dir, 'blog')
 
@@ -186,12 +185,11 @@ module Nuldoc
 
           relative = path.sub("#{content_dir}/", '')
           dst = File.join(dest_dir, 'posts', relative)
-          FileUtils.mkdir_p(File.dirname(dst))
-          FileUtils.cp(path, dst)
+          link_file(path, dst)
         end
       end
 
-      def copy_slides_asset_files
+      def link_slides_asset_files
         content_dir = File.join(Dir.pwd, @config.locations.content_dir, 'slides')
         dest_dir = File.join(Dir.pwd, @config.locations.dest_dir, 'slides')
 
@@ -201,8 +199,7 @@ module Nuldoc
 
           relative = path.sub("#{content_dir}/", '')
           dst = File.join(dest_dir, 'slides', relative)
-          FileUtils.mkdir_p(File.dirname(dst))
-          FileUtils.cp(path, dst)
+          link_file(path, dst)
         end
       end
 
@@ -212,7 +209,7 @@ module Nuldoc
         File.write(dest_file_path, Renderer.new.render(page.root, page.renderer))
       end
 
-      def copy_post_source_files(posts)
+      def link_post_source_files(posts)
         content_dir = File.join(Dir.pwd, @config.locations.content_dir)
         dest_dir = File.join(Dir.pwd, @config.locations.dest_dir, 'blog')
 
@@ -220,9 +217,14 @@ module Nuldoc
           src = post.source_file_path
           relative = src.sub("#{content_dir}/", '')
           dst = File.join(dest_dir, relative)
-          FileUtils.mkdir_p(File.dirname(dst))
-          FileUtils.cp(src, dst)
+          link_file(src, dst)
         end
+      end
+
+      def link_file(src, dst)
+        FileUtils.mkdir_p(File.dirname(dst))
+        relative_src = Pathname.new(src).relative_path_from(Pathname.new(File.dirname(dst)))
+        FileUtils.ln_s(relative_src, dst, force: true)
       end
     end
   end
