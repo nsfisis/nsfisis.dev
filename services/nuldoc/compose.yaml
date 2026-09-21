@@ -5,6 +5,7 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./public:/srv/public:ro
       - ./content:/srv/content:ro
+      - ./static:/srv/static:ro
     ports:
       - '127.0.0.1:8001:80'
     environment:

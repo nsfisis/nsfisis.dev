@@ -32,7 +32,7 @@ module Nuldoc
 
         pipeline.step(:build_home) { build_home_page }
         pipeline.step(:build_not_found) { %w[default about blog slides].each { |site| build_not_found_page(site) } }
-        pipeline.step(:copy_static) { copy_static_files }
+        pipeline.step(:link_static) { link_static_files }
         pipeline.step(:link_blog_assets) { link_blog_asset_files }
         pipeline.step(:link_slides_assets) { link_slides_asset_files }
 
@@ -144,7 +144,7 @@ module Nuldoc
         end
       end
 
-      def copy_static_files
+      def link_static_files
         static_dir = File.join(Dir.pwd, @config.locations.static_dir)
 
         %w[default about blog slides].each do |site|
@@ -153,13 +153,13 @@ module Nuldoc
           Dir.glob(File.join(static_dir, '_all', '*')).each do |entry|
             next unless File.file?(entry)
 
-            FileUtils.cp(entry, File.join(dest_dir, File.basename(entry)))
+            link_file(entry, File.join(dest_dir, File.basename(entry)))
           end
 
           Dir.glob(File.join(static_dir, site, '*')).each do |entry|
             next unless File.file?(entry)
 
-            FileUtils.cp(entry, File.join(dest_dir, File.basename(entry)))
+            link_file(entry, File.join(dest_dir, File.basename(entry)))
           end
         end
       end
