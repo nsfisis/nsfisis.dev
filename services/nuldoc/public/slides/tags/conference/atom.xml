@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2026-07-27T00:00:00+09:00</updated>
+  <updated>2026-10-03T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:39670e1c-d515-409c-b9b8-6bde48d24cfe</id>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-10-03/phpcon-ehime-2026/"></link>
+    <title>壊れたシンタックスハイライトを直して世界に色を塗る</title>
+    <summary>PHP カンファレンス愛媛 2026 (LT)</summary>
+    <published>2026-10-03T00:00:00+09:00</published>
+    <updated>2026-10-03T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:7ecf6669-6995-4a8a-899c-7fae5aa0ba3e</id>
     <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-07-27/phperkaigi-mini-3/"></link>

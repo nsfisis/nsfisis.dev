@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:slides.nsfisis.dev,2021:tag-phpcon-ehime</id>
+  <title>タグ「PHP カンファレンス愛媛」一覧｜nsfisis’s slides</title>
+  <link rel="alternate" href="https://slides.nsfisis.dev/tags/phpcon-ehime/"></link>
+  <link rel="self" href="https://slides.nsfisis.dev/tags/phpcon-ehime/atom.xml"></link>
+  <author>
+    <name>nsfisis</name>
+  </author>
+  <updated>2026-10-03T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:39670e1c-d515-409c-b9b8-6bde48d24cfe</id>
+    <link rel="alternate" href="https://slides.nsfisis.dev/slides/2026-10-03/phpcon-ehime-2026/"></link>
+    <title>壊れたシンタックスハイライトを直して世界に色を塗る</title>
+    <summary>PHP カンファレンス愛媛 2026 (LT)</summary>
+    <published>2026-10-03T00:00:00+09:00</published>
+    <updated>2026-10-03T00:00:00+09:00</updated>
+  </entry>
+</feed>

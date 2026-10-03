@@ -1,0 +1,15 @@
+[slide]
+uuid = "39670e1c-d515-409c-b9b8-6bde48d24cfe"
+title = "壊れたシンタックスハイライトを直して世界に色を塗る"
+event = "PHP カンファレンス愛媛 2026"
+talkType = "LT"
+link = "/slides/2026-10-03/phpcon-ehime-2026/slides.pdf"
+tags = [
+    "conference",
+    "php",
+    "phpcon-ehime",
+]
+
+[[slide.revisions]]
+date = "2026-10-03"
+remark = "登壇"
