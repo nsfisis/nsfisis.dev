@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-10-31T00:00:00+09:00</updated>
+  <updated>2026-10-07T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:9cc3b68c-f2a0-47c2-a64c-4ae37d8c32fd</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-10-07/phpcon-ehime-2026-report/"></link>
+    <title>PHP カンファレンス愛媛 2026 参加レポ</title>
+    <summary>2026-10-03 に開催された、PHP カンファレンス愛媛 2026 に参加した。</summary>
+    <published>2026-10-07T00:00:00+09:00</published>
+    <updated>2026-10-07T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:39d3d137-f18d-4d88-8ef6-7be9cc2f3f0b</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-10-31/representing-single-value-with-half-open-float-interval/"></link>

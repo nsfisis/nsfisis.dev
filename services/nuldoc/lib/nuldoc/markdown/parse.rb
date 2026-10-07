@@ -37,7 +37,7 @@ module Nuldoc
         is_toc_enabled: meta['article']['toc'] != false
       )
 
-      Transform.to_html(doc)
+      Transform.to_html(doc, content_dir)
     rescue StandardError => e
       raise e.class, "#{e.message} in #{@file_path}"
     end

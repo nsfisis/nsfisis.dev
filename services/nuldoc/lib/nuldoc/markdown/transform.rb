@@ -2,13 +2,14 @@ module Nuldoc
   class Transform < DOM::HTMLBuilder
     include DOM
 
-    def self.to_html(doc)
-      new(doc).to_html
+    def self.to_html(doc, content_dir)
+      new(doc, content_dir).to_html
     end
 
-    def initialize(doc)
+    def initialize(doc, content_dir)
       super()
       @doc = doc
+      @content_dir = content_dir
     end
 
     def to_html
@@ -20,6 +21,7 @@ module Nuldoc
       transform_section_title_element
       transform_note_element
       add_attributes_to_external_link_element
+      transform_image_srcset
       traverse_footnotes
       remove_unnecessary_paragraph_node
       transform_and_highlight_code_block_element
@@ -201,6 +203,30 @@ module Nuldoc
 
         n.attributes['target'] = '_blank'
         n.attributes['rel'] = 'noreferrer'
+      end
+    end
+
+    # Expands <img src="a.*.b"> into srcset, using files named like "a.800w.b".
+    def transform_image_srcset
+      for_each_element_of_type(@doc.root, 'img') do |n|
+        src = n.attributes['src'] || ''
+        match = %r{\A(/.*\.)\*(\.[^./*]+)\z}.match(src)
+        next unless match
+
+        prefix = match[1]
+        suffix = match[2]
+        candidates = Dir.glob(File.join(@content_dir, src)).map do |path|
+          descriptor = File.basename(path).delete_prefix(File.basename(prefix)).delete_suffix(suffix)
+          raise "[nuldoc.tohtml] Invalid image variant: #{path}" unless descriptor.match?(/\A\d+w\z/)
+
+          [descriptor.to_i, "#{prefix}#{descriptor}#{suffix}"]
+        end
+        raise "[nuldoc.tohtml] No image variants found: #{src}" if candidates.empty?
+
+        candidates.sort!
+        n.attributes['src'] = candidates.first[1]
+        n.attributes['srcset'] = candidates.map { |width, url| "#{url} #{width}w" }.join(', ')
+        n.attributes['sizes'] = '(max-width: 800px) 100vw, 800px'
       end
     end
 
