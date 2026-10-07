@@ -187,6 +187,13 @@ repo.desc=php-waddiwasi
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/php-waddiwasi
 
+repo.url=phpcon-ehime-2026-slides
+repo.path=/src/phpcon-ehime-2026-slides.git
+repo.name=phpcon-ehime-2026-slides
+repo.desc=phpcon-ehime-2026-slides
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phpcon-ehime-2026-slides
+
 repo.url=phpcon-nagoya-2025-slides
 repo.path=/src/phpcon-nagoya-2025-slides.git
 repo.name=phpcon-nagoya-2025-slides
