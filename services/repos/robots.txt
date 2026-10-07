@@ -1,0 +1,17 @@
+User-agent: *
+
+Disallow: /*/blame/
+Disallow: /*/blob/
+Disallow: /*/commit/
+Disallow: /*/diff/
+Disallow: /*/log/
+Disallow: /*/patch/
+Disallow: /*/plain/
+Disallow: /*/rawdiff/
+Disallow: /*/snapshot/
+Disallow: /*/tree/
+
+# Per-branch/per-commit variants of repository pages
+Disallow: /*/*?
+
+Allow: /

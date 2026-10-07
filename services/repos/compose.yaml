@@ -10,5 +10,6 @@ services:
       - ./repos.cgitrc:/etc/repos.cgitrc:ro
       - ./filters:/etc/cgit/filters:ro
       - ./httpd-cgit.conf:/usr/local/apache2/conf/extra/httpd-cgit.conf:ro
+      - ./robots.txt:/usr/local/apache2/htdocs/cgit/static/robots.txt:ro
       - ./repos:/src:ro
     restart: always
