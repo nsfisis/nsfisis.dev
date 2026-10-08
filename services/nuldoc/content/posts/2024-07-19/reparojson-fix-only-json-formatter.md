@@ -11,9 +11,18 @@ tags = [
 [[article.revisions]]
 date = "2024-07-19"
 remark = "公開"
+
+[[article.revisions]]
+date = "2026-10-09"
+remark = "v1.0.0 のリリース記事へのリンクを追加し、設定例が古くなっている旨を追記"
 ---
 :::note
 この記事は [Vim 駅伝](https://vim-jp.org/ekiden/) #218 の記事です。
+:::
+
+:::edit{editat="2026-10-09" operation="追記"}
+v1.0.0 をリリースした。いくつか破壊的変更もあり、この記事の設定の一部もそのままでは動かなくなっている。
+詳しくは [reparojson v1.0.0 をリリースした](/posts/2026-10-09/reparojson-v1/)を参照のこと。
 :::
 
 # 欲しかったもの {#intro}
@@ -58,6 +67,12 @@ $ echo '{ "foo": 1, "bar": 2, }' | reparojson
 Neovim で JSON ファイルを保存したときに、上記のツールを自動で走らせるように設定する。
 
 ここでは、 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) と [efm-langserver](https://github.com/mattn/efm-langserver) を用いた設定例を紹介する。
+
+:::edit{editat="2026-10-09" operation="追記"}
+以下の設定例は v0.x 向けのもので古くなっている。
+v1.0.0 では `-q` フラグが削除されたため、このままでは動作しない。
+v1.0.0 向けの設定例は [reparojson v1.0.0 をリリースした](/posts/2026-10-09/reparojson-v1/#section--integration-with-neovim)を参照のこと。
+:::
 
 ```lua
    local lspconfig = require('lspconfig')

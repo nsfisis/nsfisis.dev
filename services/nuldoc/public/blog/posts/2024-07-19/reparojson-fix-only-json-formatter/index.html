@@ -76,6 +76,9 @@
               <li class="revision">
                 <time datetime="2024-07-19">2024-07-19</time>: 公開
               </li>
+              <li class="revision">
+                <time datetime="2026-10-09">2026-10-09</time>: v1.0.0 のリリース記事へのリンクを追加し、設定例が古くなっている旨を追記
+              </li>
             </ol>
           </section>
           <div class="admonition">
@@ -85,6 +88,16 @@
             <div class="admonition-content">
               <p>
                 この記事は <a href="https://vim-jp.org/ekiden/" rel="noreferrer" target="_blank">Vim 駅伝</a> #218 の記事です。
+              </p>
+            </div>
+          </div>
+          <div class="admonition" editat="2026-10-09" operation="追記">
+            <div class="admonition-label">
+              2026-10-09 追記
+            </div>
+            <div class="admonition-content">
+              <p>
+                v1.0.0 をリリースした。いくつか破壊的変更もあり、この記事の設定の一部もそのままでは動かなくなっている。詳しくは <a href="/posts/2026-10-09/reparojson-v1/">reparojson v1.0.0 をリリースした</a>を参照のこと。
               </p>
             </div>
           </div>
@@ -148,6 +161,16 @@
             <p>
               ここでは、 <a href="https://github.com/neovim/nvim-lspconfig" rel="noreferrer" target="_blank">nvim-lspconfig</a> と <a href="https://github.com/mattn/efm-langserver" rel="noreferrer" target="_blank">efm-langserver</a> を用いた設定例を紹介する。
             </p>
+            <div class="admonition" editat="2026-10-09" operation="追記">
+              <div class="admonition-label">
+                2026-10-09 追記
+              </div>
+              <div class="admonition-content">
+                <p>
+                  以下の設定例は v0.x 向けのもので古くなっている。v1.0.0 では <code>-q</code> フラグが削除されたため、このままでは動作しない。v1.0.0 向けの設定例は <a href="/posts/2026-10-09/reparojson-v1/#section--integration-with-neovim">reparojson v1.0.0 をリリースした</a>を参照のこと。
+                </p>
+              </div>
+            </div>
             <div class="codeblock">
               <pre class="highlight" style="background-color:#f5f5f5"><code><span class="codeblock-line">   <span style="color: #cf222e">local</span> <span style="color: #24292f;background-color: #f6f8fa">lspconfig</span> <span style="color: #0550ae">=</span> <span style="color: #953800">require</span><span style="color: #24292f;background-color: #f6f8fa">(</span><span style="color: #0a3069">'lspconfig'</span><span style="color: #24292f;background-color: #f6f8fa">)</span>
 </span><span class="codeblock-line">
