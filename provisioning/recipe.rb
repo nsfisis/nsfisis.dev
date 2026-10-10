@@ -107,4 +107,39 @@ service 'lego-renew.timer' do
   action [:enable, :start]
 end
 
+file '/etc/systemd/system/repos-fetch.service' do
+  content <<~EOS
+    [Unit]
+    Description=Repos Fetch
+    Wants=network-online.target
+    After=network-online.target
+
+    [Service]
+    Type=oneshot
+    ExecStart=make fetch-repos
+    User=ken
+    Group=ken
+    WorkingDirectory=#{REPO_ROOT}/services/repos
+  EOS
+end
+
+file '/etc/systemd/system/repos-fetch.timer' do
+  content <<~EOS
+    [Unit]
+    Description=Repos Fetch Timer
+
+    [Timer]
+    Persistent=true
+    OnCalendar=*-*-* 3:45
+    RandomizedDelaySec=30m
+
+    [Install]
+    WantedBy=timers.target
+  EOS
+end
+
+service 'repos-fetch.timer' do
+  action [:enable, :start]
+end
+
 # ken  ALL=(ALL:ALL) NOPASSWD:  /usr/bin/systemctl status mioproxy, /usr/bin/systemctl start mioproxy, /usr/bin/systemctl stop mioproxy, /usr/bin/systemctl restart mioproxy
