@@ -88,6 +88,29 @@ body > footer {
   color: #fff;
 }
 
+.global-nav ul {
+  flex-wrap: wrap;
+}
+
+.global-nav ul li {
+  font-size: 0.95rem;
+  margin: 0 0.75rem;
+}
+
+.global-nav ul li a[aria-current] {
+  border-bottom: 2px solid #fff;
+}
+
+.local-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #555;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }

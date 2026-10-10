@@ -15,7 +15,6 @@ module Nuldoc
         tag_label = config.tag_label(@tag_slug)
         page_title = "タグ「#{tag_label}」一覧"
 
-        global_header = site == 'blog' ? Components::BlogGlobalHeader : Components::SlidesGlobalHeader
         site_entry = config.site_entry(site)
 
         Components::PageLayout.new(
@@ -28,7 +27,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render global_header, config: config
+              render Components::GlobalHeader, site: site, config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text page_title } }
                 pages.each do |page|

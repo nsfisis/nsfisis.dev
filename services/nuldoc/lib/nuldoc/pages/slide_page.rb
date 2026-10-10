@@ -19,7 +19,7 @@ module Nuldoc
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
               render Components::StaticStylesheet, site: 'slides', file_name: '/slides.css', config: config
-              render Components::SlidesGlobalHeader, config: config
+              render Components::GlobalHeader, site: 'slides', config: config
               main class: 'main' do
                 article class: 'post-single' do
                   header class: 'post-header' do

@@ -11,7 +11,6 @@ module Nuldoc
         site = @site
         config = @config
         page_title = 'タグ一覧'
-        global_header = site == 'blog' ? Components::BlogGlobalHeader : Components::SlidesGlobalHeader
         site_entry = config.site_entry(site)
 
         sorted_tags = @tags.sort_by(&:tag_slug)
@@ -24,7 +23,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render global_header, config: config
+              render Components::GlobalHeader, site: site, config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text page_title } }
                 sorted_tags.each do |tag|

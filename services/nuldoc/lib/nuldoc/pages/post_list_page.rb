@@ -27,7 +27,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'list' do
-              render Components::BlogGlobalHeader, config: config
+              render Components::GlobalHeader, site: 'blog', config: config
               main class: 'main' do
                 header(class: 'page-header') { h1 { text "#{page_title}#{page_info_suffix}" } }
                 render Components::Pagination, current_page: current_page, total_pages: total_pages,

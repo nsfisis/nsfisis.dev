@@ -18,7 +18,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
-              render Components::BlogGlobalHeader, config: config
+              render Components::GlobalHeader, site: 'blog', config: config
               main class: 'main' do
                 article class: 'post-single' do
                   header class: 'post-header' do

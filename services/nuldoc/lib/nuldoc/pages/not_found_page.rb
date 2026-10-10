@@ -9,13 +9,6 @@ module Nuldoc
       def render
         site = @site
         config = @config
-        global_header = case site
-                        when 'about' then Components::AboutGlobalHeader
-                        when 'blog' then Components::BlogGlobalHeader
-                        when 'slides' then Components::SlidesGlobalHeader
-                        else Components::DefaultGlobalHeader
-                        end
-
         site_entry = config.site_entry(site)
 
         Components::PageLayout.new(
@@ -26,7 +19,7 @@ module Nuldoc
           config: config,
           children: DOM::HTMLBuilder.new.build do
             body class: 'single' do
-              render global_header, config: config
+              render Components::GlobalHeader, site: site, config: config
               main class: 'main' do
                 article { div(class: 'not-found') { text '404' } }
               end
