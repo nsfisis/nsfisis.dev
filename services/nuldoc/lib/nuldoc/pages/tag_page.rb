@@ -30,7 +30,10 @@ module Nuldoc
             body class: 'list' do
               render global_header, config: config
               main class: 'main' do
-                header(class: 'page-header') { h1 { text page_title } }
+                header class: 'page-header' do
+                  h1 { text page_title }
+                  p { a(href: '/tags/') { text 'タグ一覧' } }
+                end
                 pages.each do |page|
                   if page.respond_to?(:event)
                     render Components::SlidePageEntry, slide: page, config: config

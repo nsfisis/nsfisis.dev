@@ -46,7 +46,6 @@ module Nuldoc
             ul do
               li { a(href: "https://#{@config.sites.about.fqdn}/") { text 'About' } }
               li { a(href: '/posts/') { text 'Posts' } }
-              li { a(href: '/tags/') { text 'Tags' } }
             end
           end
         end
@@ -68,7 +67,6 @@ module Nuldoc
             ul do
               li { a(href: "https://#{@config.sites.about.fqdn}/") { text 'About' } }
               li { a(href: '/slides/') { text 'Slides' } }
-              li { a(href: '/tags/') { text 'Tags' } }
             end
           end
         end
