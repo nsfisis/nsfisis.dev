@@ -24,7 +24,6 @@ module Nuldoc
                 time(datetime: updated) { text updated }
                 text ' 更新'
               end
-              render TagList, tags: @post.tags, config: @config if @post.tags.length.positive?
             end
           end
         end

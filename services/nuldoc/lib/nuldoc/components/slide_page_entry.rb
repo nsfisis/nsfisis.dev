@@ -24,7 +24,6 @@ module Nuldoc
                 time(datetime: updated) { text updated }
                 text ' 更新'
               end
-              render TagList, tags: @slide.tags, config: @config if @slide.tags.length.positive?
             end
           end
         end
