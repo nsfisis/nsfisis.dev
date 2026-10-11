@@ -13,7 +13,6 @@ module Nuldoc
             a(href: "https://#{@config.sites.default.fqdn}/") { text 'nsfisis.dev' }
           end
           global_nav
-          local_nav
         end
       end
 
@@ -28,7 +27,7 @@ module Nuldoc
           ['repos', 'Repos', "https://repos.#{sites.default.fqdn}/"]
         ]
 
-        nav class: 'nav global-nav', 'aria-label': 'サイト全体' do
+        nav class: 'nav' do
           ul do
             items.each do |site, label, href|
               li do
@@ -37,25 +36,6 @@ module Nuldoc
                 else
                   a(href: href) { text label }
                 end
-              end
-            end
-          end
-        end
-      end
-
-      def local_nav
-        items = case @site
-                when 'blog' then [['Posts', '/posts/'], ['Tags', '/tags/']]
-                when 'slides' then [['Slides', '/slides/'], ['Tags', '/tags/']]
-                else return
-                end
-
-        div class: 'local-header' do
-          div(class: 'site-name') { text @config.site_entry(@site).site_name }
-          nav class: 'nav local-nav', 'aria-label': 'サイト内' do
-            ul do
-              items.each do |label, href|
-                li { a(href: href) { text label } }
               end
             end
           end
