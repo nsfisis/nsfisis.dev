@@ -254,7 +254,11 @@ module Nuldoc
               return nil if inner.empty?
 
               children = parse_inline(inner, 0, inner.length)
-              nodes << em { child(*children) }
+              # TODO: This is an ad-hoc heuristic to render English emphasis in
+              # italic instead of emphasis dots. Remove it once inline elements
+              # can have an explicit lang attribute.
+              attrs = inner.ascii_only? ? { lang: 'en' } : {}
+              nodes << em(**attrs) { child(*children) }
               return i + 1
             end
           else

@@ -63,7 +63,7 @@ mollit anim id est laborum.
 puts "Hello, World!"
 ```
 
-**emph** *strong*
+**strong** *emph*
 
 <mark>highlighted</mark>
 

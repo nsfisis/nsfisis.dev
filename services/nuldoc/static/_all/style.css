@@ -167,6 +167,16 @@ blockquote {
   content: "# ";
 }
 
+em {
+  font-style: normal;
+  text-emphasis: filled dot;
+}
+
+em:lang(en) {
+  font-style: italic;
+  text-emphasis: none;
+}
+
 code {
   background-color: #f5f5f5;
   padding: 2px 5px;
