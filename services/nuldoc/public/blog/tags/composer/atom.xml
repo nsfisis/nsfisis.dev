@@ -7,7 +7,15 @@
   <author>
     <name>nsfisis</name>
   </author>
-  <updated>2025-04-24T00:00:00+09:00</updated>
+  <updated>2026-10-13T00:00:00+09:00</updated>
+  <entry>
+    <id>urn:uuid:e9803289-570a-490d-8c56-588b661ea929</id>
+    <link rel="alternate" href="https://blog.nsfisis.dev/posts/2026-10-13/shirabe-v0-1-0/"></link>
+    <title>Rust 製の Composer を作っている</title>
+    <summary>PHP のパッケージマネージャである Composer を Rust へ移植する、Shirabe というプロジェクトを進めている。このたび Shirabe v0.1.0 をリリースした。</summary>
+    <published>2026-10-13T00:00:00+09:00</published>
+    <updated>2026-10-13T00:00:00+09:00</updated>
+  </entry>
   <entry>
     <id>urn:uuid:087e98f2-743c-48d8-9f67-e9b57e354845</id>
     <link rel="alternate" href="https://blog.nsfisis.dev/posts/2025-04-24/composer-patches-v2-does-not-require-gnu-patch-even-on-macos/"></link>

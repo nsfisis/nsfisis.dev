@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="nsfisis">
+    <meta name="copyright" content="&copy; 2026 nsfisis">
+    <meta name="description" content="PHP のパッケージマネージャである Composer を Rust へ移植する、Shirabe というプロジェクトを進めている。このたび Shirabe v0.1.0 をリリースした。">
+    <meta name="keywords" content="Composer,PHP,Rust">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rust 製の Composer を作っている｜REPL: Rest-Eat-Program Loop">
+    <meta property="og:description" content="PHP のパッケージマネージャである Composer を Rust へ移植する、Shirabe というプロジェクトを進めている。このたび Shirabe v0.1.0 をリリースした。">
+    <meta property="og:site_name" content="REPL: Rest-Eat-Program Loop">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="Hatena::Bookmark" content="nocomment">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Rust 製の Composer を作っている｜REPL: Rest-Eat-Program Loop</title>
+    <link rel="stylesheet" href="/style.css?h=10b9f0516a275c028a9ce0e04a299513">
+  </head>
+  <body class="single">
+    <header class="header">
+      <div class="site-logo">
+        <a href="https://nsfisis.dev/">nsfisis.dev</a>
+      </div>
+      <div class="site-name">
+        REPL: Rest-Eat-Program Loop
+      </div>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="https://about.nsfisis.dev/">About</a>
+          </li>
+          <li>
+            <a href="/posts/">Posts</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <article class="post-single">
+        <header class="post-header">
+          <h1 class="post-title">Rust 製の Composer を作っている</h1>
+          <ul class="post-tags">
+            <li class="tag">
+              <a class="tag-inner" href="/tags/composer/">Composer</a>
+            </li>
+            <li class="tag">
+              <a class="tag-inner" href="/tags/php/">PHP</a>
+            </li>
+            <li class="tag">
+              <a class="tag-inner" href="/tags/rust/">Rust</a>
+            </li>
+          </ul>
+        </header>
+        <nav class="toc">
+          <h2>目次</h2>
+          <ul>
+            <li>
+              <a href="#section--intro">はじめに</a>
+            </li>
+            <li>
+              <a href="#section--why">なぜ作るのか</a>
+            </li>
+            <li>
+              <a href="#section--current-status">現状</a>
+            </li>
+            <li>
+              <a href="#section--compatibility">互換性</a>
+            </li>
+            <li>
+              <a href="#section--performance">パフォーマンス</a>
+            </li>
+            <li>
+              <a href="#section--php-rpc">PHP 処理系との連携</a>
+            </li>
+            <li>
+              <a href="#section--how-to-try">試すには</a>
+            </li>
+            <li>
+              <a href="#section--conclusion">まとめ</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="post-content">
+          <section id="changelog">
+            <h2><a href="#changelog">更新履歴</a></h2>
+            <ol>
+              <li class="revision">
+                <time datetime="2026-10-13">2026-10-13</time>: 公開
+              </li>
+            </ol>
+          </section>
+          <section id="section--intro">
+            <h2><a href="#section--intro">はじめに</a></h2>
+            <p>
+              <img alt="Shirabe のロゴ" src="/posts/2026-10-13/shirabe-v0-1-0/logo.svg">
+            </p>
+            <p>
+              PHP のパッケージマネージャである <a href="https://github.com/composer/composer" rel="noreferrer" target="_blank">Composer</a> を Rust へ移植する、<a href="https://github.com/nsfisis/php-shirabe" rel="noreferrer" target="_blank">Shirabe</a> というプロジェクトを進めている。昨日 v0.1.0 をリリースしたので、現状について記しておく。
+            </p>
+            <p>
+              なお、この記事の内容の一部は <a href="/slides/2026-05-25/phperkaigi-mini-1/">PHPerKaigi mini #1</a> および <a href="/slides/2026-07-27/phperkaigi-mini-3/">PHPerKaigi mini #3</a> の LT で発表したものである。
+            </p>
+          </section>
+          <section id="section--why">
+            <h2><a href="#section--why">なぜ作るのか</a></h2>
+            <p>
+              ここ数年、JavaScript や Python、Ruby といった言語で、その言語のツールチェインをその言語以外で (主に高速化のために) 書き直すという動きが広がっている。PHP にも、<a href="https://github.com/carthage-software/mago" rel="noreferrer" target="_blank">Mago</a> というプロジェクトがある。PHP の formatter、linter、static analyzer などをまとめて Rust で書き直したものだ。
+            </p>
+            <p>
+              では Composer は置き換えないのか。<a href="https://mago.carthage.software/1.56.2/en/faq/#will-mago-implement-a-composer-alternative" rel="noreferrer" target="_blank">Mago の FAQ</a> にはこうある。
+            </p>
+            <blockquote>
+              <p>
+                <strong>Will Mago implement a Composer alternative?</strong>
+              </p>
+              <p>
+                No. Composer is a fantastic tool, and most of its work is I/O-bound. A Rust rewrite would not gain much speed, would fragment the ecosystem, and would make it very difficult to support Composer’s PHP-based plugin architecture.
+              </p>
+            </blockquote>
+            <p>
+              もっともらしく聞こえるが、後ろ 2 つの理由については Mago の中で自家撞着を起こしているように思われる (formatter や static analyzer も程度の差こそあれ “fragment the ecosystem” や “make it very difficult to support PHP-based plugin architecture” だと言える)。畢竟、「IO 律速であり、Rust にしたところで大して速くはならない」というのが大本の理由だろう。極端な話、書き直して 10 倍速くなることが見込まれるなら、エコシステムが分断されようがプラグインの実装が難しかろうが推し進めるはずなのだ。
+            </p>
+            <p>
+              ではこの主張は本当か。その検証が Shirabe の目的である。
+            </p>
+          </section>
+          <section id="section--current-status">
+            <h2><a href="#section--current-status">現状</a></h2>
+            <p>
+              現時点で実現できていることとできていないことは以下のとおり:
+            </p>
+            <ul>
+              <li>
+                ほとんどのコマンドはおおよそ動作する
+                <ul>
+                  <li>
+                    create-project して require して update して、くらいのことはできる。<code>composer.lock</code> や <code>vendor</code> は Composer が生成するそれと一致する
+                  </li>
+                  <li>
+                    例外として、<code>self-update</code> は意図的に無効化している。ある程度安定するまで提供しない予定
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Plugin API のサポートは限定的だが、ある程度は実装されている
+                <ul>
+                  <li>
+                    実在の Composer plugin だと <a href="https://github.com/phpstan/extension-installer" rel="noreferrer" target="_blank">phpstan/extension-installer</a> は動く
+                  </li>
+                </ul>
+              </li>
+              <li>
+                対応プラットフォームは Linux のみ。macOS と Windows は未対応
+                <ul>
+                  <li>
+                    Windows はビルドが通らないはずだが、macOS はもしかしたら動くかも。試してはいない
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section id="section--compatibility">
+            <h2><a href="#section--compatibility">互換性</a></h2>
+            <p>
+              このプロジェクトで重視しているのは互換性だ。Composer を別の言語で書き直そうというプロジェクトは、Shirabe が世界で唯一というわけではない。しかし、それらのプロジェクトの大半は、(plugin API を差し引いたとしても) 互換性を論じられるようなレベルには達しておらず、Composer が提供する全コマンドを実装しているプロジェクトすら他にない (上述のとおり Shirabe でも <code>self-update</code> は実装していないが、しばらく見逃してほしい)。
+            </p>
+            <p>
+              Shirabe では、drop-in replacement 可能なレベルの互換性を目指している。Composer を<em>参考にしつつ</em>新たなパッケージマネージャを開発するのではなく、Composer を<em>そっくりそのまま</em>移植するというのがこのプロジェクトの基本方針だ。
+            </p>
+            <p>
+              互換性を担保するため、Shirabe では Composer のテストをそのまま移植している。Fixture ファイルについても原則本家のものをそのまま利用する。v0.1.0 時点で <code>crates/shirabe</code> には 1,322 件のテストがあるが、そのうち通っていないのは 59 件である。
+            </p>
+          </section>
+          <section id="section--performance">
+            <h2><a href="#section--performance">パフォーマンス</a></h2>
+            <p>
+              さて、肝心のパフォーマンスだが、今のところ約 1.2-1.4 倍といったところだ。
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    コマンド
+                  </th>
+                  <th class="align-right">
+                    Shirabe
+                  </th>
+                  <th class="align-right">
+                    Composer
+                  </th>
+                  <th class="align-right">
+                    速度比率
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code>require --no-install monolog/monolog</code>
+                  </td>
+                  <td class="align-right">
+                    535.4 ms ± 190.5 ms
+                  </td>
+                  <td class="align-right">
+                    742.4 ms ± 149.4 ms
+                  </td>
+                  <td class="align-right">
+                    x1.4
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>require --no-install laravel/framework</code>
+                  </td>
+                  <td class="align-right">
+                    2.456 s ± 0.361 s
+                  </td>
+                  <td class="align-right">
+                    3.041 s ± 0.399 s
+                  </td>
+                  <td class="align-right">
+                    x1.2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>install laravel/laravel</code>
+                  </td>
+                  <td class="align-right">
+                    1.850 s ± 0.081 s
+                  </td>
+                  <td class="align-right">
+                    2.561 s ± 0.151 s
+                  </td>
+                  <td class="align-right">
+                    x1.4
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>create-project laravel/laravel</code>
+                  </td>
+                  <td class="align-right">
+                    4.500 s ± 0.297 s
+                  </td>
+                  <td class="align-right">
+                    5.980 s ± 0.446 s
+                  </td>
+                  <td class="align-right">
+                    x1.3
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              (キャッシュが温まった状態で 10 or 20 回走らせた平均 ± 標準偏差)
+            </p>
+            <p>
+              なお、Composer 側には HTTP/3 を無効化するパッチを当てている。Composer は libcurl が HTTP/3 をサポートしている場合、リクエスト先のサーバが対応しているかどうかを確認せずに HTTP/3 で接続を試みる。しかし、デファクトスタンダードなパッケージリポジトリである <code>repo.packagist.org</code> は HTTP/3 に対応していないため、毎回 HTTP/2 へフォールバックする。環境によって多少変動はあるものの、これには 100 ms から数 100 ms ほどのペナルティがある。この挙動については <a href="https://github.com/composer/composer/issues/12987" rel="noreferrer" target="_blank">composer/composer#12987</a> で本家に報告し、Composer 2.11 でリリースされる予定だが、Shirabe 0.1.0 の移植元バージョンである Composer 2.9.7 はこの挙動のままなので、比較をフェアにするために無効化のパッチを当てている。
+            </p>
+            <p>
+              そのため、実際には上記の数字よりもやや速く感じるはずだ。
+            </p>
+            <p>
+              とはいえ、率直に言ってこれでは足りない。まったく足りない。最低でも一般的なケースで 2 倍は速くする必要があると考えている。
+            </p>
+          </section>
+          <section id="section--php-rpc">
+            <h2><a href="#section--php-rpc">PHP 処理系との連携</a></h2>
+            <p>
+              Composer との互換性を考えるなら、移植を Rust だけで完結させることはできない。Platform requirements の判定や <code>composer.json</code> の <code>scripts</code>、plugin API の実現には、どうしても本物の PHP 処理系が必要になる。
+            </p>
+            <p>
+              Shirabe では、PHP コマンドを子プロセスとして起動し、独自の RPC プロトコルを介してやりとりをおこなう。Plugin API もこの機構を利用して実現されている。まだ RPC 経由で呼べないクラスも多数あり、実際に動く Composer plugin はそう多くはないが、100 % 互換を目指して実装を進めている。
+            </p>
+          </section>
+          <section id="section--how-to-try">
+            <h2><a href="#section--how-to-try">試すには</a></h2>
+            <p>
+              ビルド済みのバイナリは配布していないので、手元で動かしたい場合は Rust のツールチェーンを用意してソースコードからビルドする必要がある。
+            </p>
+            <div class="codeblock">
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span class="codeblock-line">$ git clone https://github.com/nsfisis/php-shirabe
+</span><span class="codeblock-line">$ cd php-shirabe
+</span><span class="codeblock-line">$ git submodule update --init
+</span><span class="codeblock-line">$ composer install --no-dev --working-dir=composer
+</span><span class="codeblock-line">$ cargo build --release
+</span><span class="codeblock-line">
+</span><span class="codeblock-line">$ target/release/shirabe --version
+</span><span class="codeblock-line">Shirabe version 0.1.0 (based on Composer 2.9.7) 2026-10-12 05:34:21
+</span><span class="codeblock-line">PHP version &lt;your PHP version&gt; (&lt;your PHP binary path&gt;)
+</span><span class="codeblock-line">Run the "diagnose" command to get more detailed diagnostics output.
+</span></code></pre>
+            </div>
+            <p>
+              Nix が使えるなら以下でビルドできる。
+            </p>
+            <div class="codeblock">
+              <pre class="highlight" style="background-color:#f5f5f5"><code><span class="codeblock-line">$ git clone https://github.com/nsfisis/php-shirabe
+</span><span class="codeblock-line">$ cd php-shirabe
+</span><span class="codeblock-line">$ nix build
+</span><span class="codeblock-line">
+</span><span class="codeblock-line">$ result/bin/shirabe --version
+</span><span class="codeblock-line">Shirabe version 0.1.0 (based on Composer 2.9.7) 2026-10-12 05:34:21
+</span><span class="codeblock-line">PHP version &lt;your PHP version&gt; (&lt;your PHP binary path&gt;)
+</span><span class="codeblock-line">Run the "diagnose" command to get more detailed diagnostics output.
+</span></code></pre>
+            </div>
+            <p>
+              手元の <code>composer.json</code> で走らせてみて、Composer と結果が違ったりエラーになったりするようなら <a href="https://github.com/nsfisis/php-shirabe/issues" rel="noreferrer" target="_blank">GitHub issues</a> に投げてほしい。
+            </p>
+          </section>
+          <section id="section--conclusion">
+            <h2><a href="#section--conclusion">まとめ</a></h2>
+            <p>
+              Composer の Rust 移植プロジェクト、Shirabe の v0.1.0 をリリースした。Linux で plugin を使っていないプロジェクトであれば、<code>install</code> や <code>update</code> をそのまま動かせる。
+            </p>
+            <p>
+              速度については速くても 1.4 倍程度で、到底満足できるレベルではない。互換性についても、まだ 100 % 互換を名乗るのは誇大と言ってよいだろう。
+            </p>
+            <p>
+              速度と互換性の双方を高めていき、実用レベルに育てていきたい。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2021-2026 nsfisis
+    </footer>
+  </body>
+</html>
