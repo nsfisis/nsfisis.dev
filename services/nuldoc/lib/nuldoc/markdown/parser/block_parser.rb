@@ -289,7 +289,7 @@ module Nuldoc
         cell_elements = cells.each_with_index.map do |cell_text, i|
           attrs = {}
           align = alignment[i]
-          attrs[:class] = "align-#{align}" if align && align != 'default'
+          attrs[:class] = "align-#{align}" if !is_header && align && align != 'default'
 
           tag = is_header ? 'th' : 'td'
           inline_nodes = InlineParser.parse(cell_text)

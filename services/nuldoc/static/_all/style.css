@@ -205,6 +205,21 @@ code {
   color: #777;
 }
 
+table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 0.3rem 0.8rem;
+}
+
+th {
+  background-color: #e0e0e0;
+  text-align: center;
+}
+
 li.revision {
   list-style: inside;
 }
