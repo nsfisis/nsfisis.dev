@@ -30,4 +30,21 @@ module Nuldoc
       end
     end
   end
+
+  class PodcastParser
+    def initialize(file_path)
+      @file_path = file_path
+    end
+
+    def parse
+      data = TomlRB.load_file(@file_path)
+      (data['podcast'] || []).map do |entry|
+        PodcastRecord.new(
+          date: Revision.string_to_date(entry['date']),
+          title: entry['title'],
+          url: entry['url']
+        )
+      end
+    end
+  end
 end

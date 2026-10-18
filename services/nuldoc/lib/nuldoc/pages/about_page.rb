@@ -1,9 +1,10 @@
 module Nuldoc
   module Pages
     class AboutPage
-      def initialize(slides:, staff_records:, config:)
+      def initialize(slides:, staff_records:, podcast_records:, config:)
         @slides = slides
         @staff_records = staff_records
+        @podcast_records = podcast_records
         @config = config
       end
 
@@ -11,6 +12,7 @@ module Nuldoc
         config = @config
         sorted_slides = @slides.sort_by { |s| GeneratorUtils.published_date(s) }.reverse
         sorted_staff = @staff_records.sort_by(&:sort_date).reverse
+        sorted_podcasts = @podcast_records.sort_by(&:date).reverse
 
         Components::PageLayout.new(
           meta_copyright_year: config.site.copyright_year,
@@ -74,6 +76,19 @@ module Nuldoc
                           li do
                             a href: slide_url do
                               text "#{slide_date}: #{slide.event} (#{slide.talk_type})"
+                            end
+                          end
+                        end
+                      end
+                    end
+                    section do
+                      h2 { text 'ポッドキャスト出演' }
+                      ul do
+                        sorted_podcasts.each do |record|
+                          date_str = Revision.date_to_string(record.date)
+                          li do
+                            a href: record.url, target: '_blank', rel: 'noreferrer' do
+                              text "#{date_str}: #{record.title}"
                             end
                           end
                         end

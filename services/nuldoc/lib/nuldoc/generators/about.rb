@@ -1,14 +1,20 @@
 module Nuldoc
   module Generators
     class About
-      def initialize(slides, staff_records, config)
+      def initialize(slides, staff_records, podcast_records, config)
         @slides = slides
         @staff_records = staff_records
+        @podcast_records = podcast_records
         @config = config
       end
 
       def generate
-        html = Pages::AboutPage.new(slides: @slides, staff_records: @staff_records, config: @config).render
+        html = Pages::AboutPage.new(
+          slides: @slides,
+          staff_records: @staff_records,
+          podcast_records: @podcast_records,
+          config: @config
+        ).render
 
         Page.new(
           root: html,
