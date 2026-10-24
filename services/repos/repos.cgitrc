@@ -103,12 +103,12 @@ repo.desc=mncore-challenge
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/mncore-challenge
 
-repo.url=nil.ninja
-repo.path=/src/nil.ninja.git
-repo.name=nil.ninja
-repo.desc=nil.ninja
+repo.url=my-slides-template
+repo.path=/src/my-slides-template.git
+repo.name=my-slides-template
+repo.desc=my-slides-template
 repo.owner=nsfisis
-repo.homepage=https://github.com/nsfisis/nil.ninja
+repo.homepage=https://github.com/nsfisis/my-slides-template
 
 repo.url=nilink
 repo.path=/src/nilink.git
@@ -431,13 +431,6 @@ repo.name=phpstudy-180-slides
 repo.desc=phpstudy-180-slides
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phpstudy-180-slides
-
-repo.url=phpstudy-N-slides-template
-repo.path=/src/phpstudy-N-slides-template.git
-repo.name=phpstudy-N-slides-template
-repo.desc=phpstudy-N-slides-template
-repo.owner=nsfisis
-repo.homepage=https://github.com/nsfisis/phpstudy-N-slides-template
 
 repo.url=pong-wars-quine.rb
 repo.path=/src/pong-wars-quine.rb.git
