@@ -47,4 +47,22 @@ module Nuldoc
       end
     end
   end
+
+  class JobParser
+    def initialize(file_path)
+      @file_path = file_path
+    end
+
+    def parse
+      data = TomlRB.load_file(@file_path)
+      (data['job'] || []).map do |entry|
+        JobRecord.new(
+          from: entry['date']['from'],
+          to: entry['date']['to'],
+          company: entry['company'],
+          url: entry['url']
+        )
+      end
+    end
+  end
 end

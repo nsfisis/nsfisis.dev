@@ -1,10 +1,11 @@
 module Nuldoc
   module Generators
     class About
-      def initialize(slides, staff_records, podcast_records, config)
+      def initialize(slides, staff_records, podcast_records, job_records, config)
         @slides = slides
         @staff_records = staff_records
         @podcast_records = podcast_records
+        @job_records = job_records
         @config = config
       end
 
@@ -13,6 +14,7 @@ module Nuldoc
           slides: @slides,
           staff_records: @staff_records,
           podcast_records: @podcast_records,
+          job_records: @job_records,
           config: @config
         ).render
 

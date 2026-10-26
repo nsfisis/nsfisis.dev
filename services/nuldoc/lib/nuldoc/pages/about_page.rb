@@ -1,10 +1,11 @@
 module Nuldoc
   module Pages
     class AboutPage
-      def initialize(slides:, staff_records:, podcast_records:, config:)
+      def initialize(slides:, staff_records:, podcast_records:, job_records:, config:)
         @slides = slides
         @staff_records = staff_records
         @podcast_records = podcast_records
+        @job_records = job_records
         @config = config
       end
 
@@ -13,6 +14,7 @@ module Nuldoc
         sorted_slides = @slides.sort_by { |s| GeneratorUtils.published_date(s) }.reverse
         sorted_staff = @staff_records.sort_by(&:sort_date).reverse
         sorted_podcasts = @podcast_records.sort_by(&:date).reverse
+        sorted_jobs = @job_records.sort_by(&:from).reverse
 
         Components::PageLayout.new(
           meta_copyright_year: config.site.copyright_year,
@@ -59,10 +61,12 @@ module Nuldoc
                     section do
                       h2 { text '仕事' }
                       ul do
-                        li do
-                          text '2021-01～現在: '
-                          a href: 'https://www.dgcircus.com/', target: '_blank', rel: 'noreferrer' do
-                            text 'デジタルサーカス株式会社'
+                        sorted_jobs.each do |record|
+                          li do
+                            text "#{record.from}～#{record.to || '現在'}: "
+                            a href: record.url, target: '_blank', rel: 'noreferrer' do
+                              text record.company
+                            end
                           end
                         end
                       end

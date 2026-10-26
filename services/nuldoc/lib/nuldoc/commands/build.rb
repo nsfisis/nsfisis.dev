@@ -100,7 +100,9 @@ module Nuldoc
         staff_records = StaffParser.new(staff_file).parse
         podcast_file = File.join(Dir.pwd, @config.locations.content_dir, 'about', 'podcast.toml')
         podcast_records = PodcastParser.new(podcast_file).parse
-        write_page(Generators::About.new(slides, staff_records, podcast_records, @config).generate)
+        job_file = File.join(Dir.pwd, @config.locations.content_dir, 'about', 'job.toml')
+        job_records = JobParser.new(job_file).parse
+        write_page(Generators::About.new(slides, staff_records, podcast_records, job_records, @config).generate)
       end
 
       def build_not_found_page(site)
