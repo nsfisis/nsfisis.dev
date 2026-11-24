@@ -110,6 +110,13 @@ repo.desc=my-slides-template
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/my-slides-template
 
+repo.url=nil.ninja
+repo.path=/src/nil.ninja.git
+repo.name=nil.ninja
+repo.desc=nil.ninja
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/nil.ninja
+
 repo.url=nilink
 repo.path=/src/nilink.git
 repo.name=nilink
@@ -270,6 +277,13 @@ repo.name=phperkaigi-2026-albatross
 repo.desc=phperkaigi-2026-albatross
 repo.owner=nsfisis
 repo.homepage=https://github.com/nsfisis/phperkaigi-2026-albatross
+
+repo.url=phperkaigi-2026-albatross-archive
+repo.path=/src/phperkaigi-2026-albatross-archive.git
+repo.name=phperkaigi-2026-albatross-archive
+repo.desc=phperkaigi-2026-albatross-archive
+repo.owner=nsfisis
+repo.homepage=https://github.com/nsfisis/phperkaigi-2026-albatross-archive
 
 repo.url=phperkaigi-2026-book-revue-slides
 repo.path=/src/phperkaigi-2026-book-revue-slides.git
